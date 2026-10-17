@@ -1,0 +1,222 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowRight, Info } from "lucide-react";
+import { useState } from "react";
+import { routes } from "@/lib/site";
+import {
+  interestOptions,
+  normaliseContact,
+  validateContact,
+  type ContactInput,
+  type FieldErrors,
+} from "@/lib/forms/validation";
+import {
+  Field,
+  Honeypot,
+  StatusMessage,
+  SubmitButton,
+  SuccessPanel,
+  fieldA11y,
+  inputClasses,
+  useFormSubmit,
+} from "./fields";
+import { cx } from "@/components/ui/primitives";
+
+const empty: ContactInput = { interest: "", name: "", company: "", designation: "", email: "", phone: "", level: "" };
+
+export function ContactForm({ initialInterest }: { initialInterest?: string }) {
+  const [values, setValues] = useState<ContactInput>({
+    ...empty,
+    interest: interestOptions.some((o) => o.value === initialInterest) ? initialInterest! : "",
+  });
+  const [errors, setErrors] = useState<FieldErrors<ContactInput>>({});
+  const [touched, setTouched] = useState(false);
+  const { status, submit, serverErrors, markStarted } = useFormSubmit("/api/contact");
+
+  const allErrors = { ...serverErrors, ...errors } as FieldErrors<ContactInput>;
+  const gaSelected = values.interest === "growth-architecture";
+
+  const set = (key: keyof ContactInput) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    markStarted();
+    const next = { ...values, [key]: e.target.value };
+    setValues(next);
+    if (touched) setErrors(validateContact(normaliseContact(next)));
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setTouched(true);
+    const found = validateContact(normaliseContact(values));
+    setErrors(found);
+    const firstKey = Object.keys(found)[0];
+    if (firstKey) {
+      const target = firstKey === "interest" ? `interest-${values.interest || interestOptions[0].value}` : firstKey;
+      document.getElementById(target)?.focus();
+      return;
+    }
+    await submit({ ...values });
+  };
+
+  if (status.state === "success") {
+    return (
+      <SuccessPanel title="Thank you — your message has been sent.">
+        <p>
+          We&apos;ve received your note about {interestOptions.find((o) => o.value === values.interest)?.label}. The
+          Level141 team will review it and reply to <strong className="text-ink">{values.email}</strong>.
+        </p>
+      </SuccessPanel>
+    );
+  }
+
+  return (
+    <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-8" aria-describedby="form-required-note">
+      <p id="form-required-note" className="text-sm text-muted">
+        Fields marked <span className="text-gold-ink">*</span> are required.
+      </p>
+
+      <fieldset aria-describedby={allErrors.interest ? "interest-error" : undefined}>
+        <legend className="text-sm font-medium text-ink">
+          I am interested in<span aria-hidden className="ml-1 text-gold-ink">*</span>
+        </legend>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {interestOptions.map((o) => {
+            const checked = values.interest === o.value;
+            return (
+              <label
+                key={o.value}
+                htmlFor={`interest-${o.value}`}
+                className={cx(
+                  "relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border bg-white px-4 py-3 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-gold/35",
+                  checked ? "border-ink" : "border-ink/15 hover:border-ink/35",
+                )}
+              >
+                <input
+                  type="radio"
+                  id={`interest-${o.value}`}
+                  name="interest"
+                  value={o.value}
+                  checked={checked}
+                  onChange={set("interest")}
+                  className="size-4 accent-[#0d0d0d]"
+                />
+                <span className="text-[0.95rem]">{o.label}</span>
+                {o.value === "growth-architecture" ? (
+                  <span className="ml-auto rounded-full bg-paper-2 px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.1em] text-muted">
+                    Waitlist
+                  </span>
+                ) : null}
+              </label>
+            );
+          })}
+        </div>
+        {gaSelected ? (
+          <div className="mt-4 flex gap-3 rounded-xl border border-gold-ink/25 bg-gold/15 p-4 text-sm leading-relaxed text-ink">
+            <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-gold-ink" />
+            <p>
+              Growth Architecture™ is not yet open for engagements. You can register your organization&apos;s interest
+              and we&apos;ll be in touch when it becomes available.{" "}
+              <Link href={routes.waitlist} className="font-medium underline underline-offset-4">
+                Join the Growth Architecture waitlist →
+              </Link>
+            </p>
+          </div>
+        ) : allErrors.interest ? (
+          <p id="interest-error" className="mt-2 text-sm text-error">
+            {allErrors.interest}
+          </p>
+        ) : null}
+      </fieldset>
+
+      <div className="grid gap-6 sm:grid-cols-2">
+        <Field id="name" label="Name" required error={allErrors.name}>
+          <input
+            {...fieldA11y("name", allErrors.name)}
+            type="text"
+            autoComplete="name"
+            required
+            value={values.name}
+            onChange={set("name")}
+            className={inputClasses(allErrors.name)}
+          />
+        </Field>
+        <Field id="company" label="Company" error={allErrors.company}>
+          <input
+            {...fieldA11y("company", allErrors.company)}
+            type="text"
+            autoComplete="organization"
+            value={values.company}
+            onChange={set("company")}
+            className={inputClasses(allErrors.company)}
+          />
+        </Field>
+        <Field id="designation" label="Designation" error={allErrors.designation}>
+          <input
+            {...fieldA11y("designation", allErrors.designation)}
+            type="text"
+            autoComplete="organization-title"
+            value={values.designation}
+            onChange={set("designation")}
+            className={inputClasses(allErrors.designation)}
+          />
+        </Field>
+        <Field id="email" label="Email" required error={allErrors.email}>
+          <input
+            {...fieldA11y("email", allErrors.email)}
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            required
+            value={values.email}
+            onChange={set("email")}
+            className={inputClasses(allErrors.email)}
+          />
+        </Field>
+        <Field id="phone" label="Phone" hint="Include your country code." error={allErrors.phone} className="sm:col-span-2">
+          <input
+            {...fieldA11y("phone", allErrors.phone, "Include your country code.")}
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            value={values.phone}
+            onChange={set("phone")}
+            className={inputClasses(allErrors.phone)}
+          />
+        </Field>
+        <Field id="level" label="What level are you trying to reach?" required error={allErrors.level} className="sm:col-span-2">
+          <textarea
+            {...fieldA11y("level", allErrors.level)}
+            rows={5}
+            required
+            value={values.level}
+            onChange={set("level")}
+            className={cx(inputClasses(allErrors.level), "resize-y")}
+          />
+        </Field>
+      </div>
+
+      <Honeypot />
+      <StatusMessage status={status} />
+
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        {gaSelected ? (
+          <Link
+            href={routes.waitlist}
+            className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-ink px-8 text-base font-medium text-paper transition-colors hover:bg-ink-3 sm:w-auto"
+          >
+            Go to the waitlist
+            <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        ) : (
+          <SubmitButton submitting={status.state === "submitting"}>
+            Start the Conversation
+            <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+          </SubmitButton>
+        )}
+        <p className="max-w-xs text-xs leading-relaxed text-muted">
+          Your details are used only to respond to this enquiry.
+        </p>
+      </div>
+    </form>
+  );
+}

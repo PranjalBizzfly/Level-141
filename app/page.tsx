@@ -1,0 +1,573 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { BracketClose, BracketOpen, LogoSymbol } from "@/components/brand/Logo";
+import { GrowthChainDiagram, ProcessTimeline } from "@/components/diagrams/Diagrams";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { HomeHero } from "@/components/sections/HomeHero";
+import {
+  BracketFrame,
+  ButtonLink,
+  DotList,
+  Eyebrow,
+  Reveal,
+  Section,
+  SectionHeader,
+} from "@/components/ui/primitives";
+import {
+  activityList,
+  beliefPairs,
+  gaAudience,
+  gaDimensions,
+  insightCategories,
+  levelProcess,
+  transformationFrame,
+  whatWeDo,
+  whyLevel141,
+  pbaAudience,
+  vibe,
+} from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
+import { routes, site } from "@/lib/site";
+
+export const metadata = {
+  ...pageMetadata({
+    title: "Growth Architecture for People & Organizations",
+    description: site.description,
+    path: "/",
+  }),
+  title: { absolute: "Level141 — Growth Architecture for People & Organizations" },
+};
+
+const frameworks = [
+  {
+    id: "lq",
+    name: "LQ™",
+    full: "Level Quotient",
+    line: "First, know your level.",
+    body: "Before recommending what should change, we establish where you currently stand. Because you cannot architect the next level without understanding the current one.",
+  },
+  {
+    id: "igf",
+    name: "IGF™",
+    full: "Integrated Growth Framework",
+    line: "Connect the growth engine.",
+    body: "Growth rarely comes from one function. IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment between them.",
+  },
+  {
+    id: "brands",
+    name: "BRANDS™",
+    full: "Six dimensions of growth",
+    line: "Branding · Conversion Readiness · Awareness · Nurture · Discover & Trust · Scale",
+    body: "The market-facing levers of growth, architected together rather than managed as separate campaigns.",
+  },
+  {
+    id: "peak",
+    name: "PEAK™",
+    full: "From presence to momentum",
+    line: "Presence → Equity → Authority → Kinetic Growth",
+    body: "How a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum.",
+  },
+];
+
+export default function HomePage() {
+  return (
+    <>
+      <HomeHero />
+
+      {/* ---------------------------------------------------- Noise vs architecture */}
+      <Section id="architecture" tone="paper" labelledBy="noise-title">
+        <div className="container-x grid gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <Reveal>
+              <Eyebrow index="01" className="text-gold-ink">
+                Growth doesn&apos;t need more noise
+              </Eyebrow>
+              <h2 id="noise-title" className="display mt-6 text-[2.6rem] sm:text-6xl lg:text-[4.75rem]">
+                It needs <span className="serif-accent">architecture.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={120} className="mt-10 max-w-lg space-y-5 text-lg leading-relaxed text-muted">
+              <p>Most businesses don&apos;t have a shortage of activity. Yet growth can still feel fragmented.</p>
+              <p>
+                Because more activity doesn&apos;t necessarily create more growth. When positioning, visibility, trust,
+                sales, communication and strategy operate independently, businesses work harder without necessarily
+                moving further.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="lg:col-span-6">
+            <Reveal className="rounded-[2rem] border border-ink/10 bg-[#fbfaf7] p-7 sm:p-10">
+              <p className="eyebrow text-muted">They have</p>
+              <ul className="mt-6 flex flex-wrap gap-2.5" aria-label="Typical growth activities">
+                {activityList.map((a, i) => (
+                  <li
+                    key={a}
+                    className="rounded-full border border-ink/12 px-4 py-2 text-[0.95rem] text-ink/70"
+                    style={{ transform: `rotate(${[-2, 1.5, -1, 2, -1.5, 1, -2.5, 1.5][i]}deg)` }}
+                  >
+                    {a.replace(".", "")}
+                  </li>
+                ))}
+              </ul>
+              <div className="my-8 flex items-center gap-4 text-gold-ink" aria-hidden>
+                <span className="h-px flex-1 bg-ink/10" />
+                <LogoSymbol className="size-6 text-ink" />
+                <span className="h-px flex-1 bg-ink/10" />
+              </div>
+              <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">Level141 connects the pieces.</p>
+              <p className="mt-4 leading-relaxed text-muted">
+                We look at growth as one integrated architecture—then identify what needs to change for you to reach
+                your next level.
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Two architectures */}
+      <Section id="two-architectures" tone="paper-2" labelledBy="two-title">
+        <div className="container-x">
+          <SectionHeader
+            id="two-title"
+            index="02"
+            eyebrow="Two ambitions. Two architectures."
+            title={
+              <>
+                Growth begins either with the <span className="serif-accent">person</span> or the{" "}
+                <span className="serif-accent">organization.</span>
+              </>
+            }
+            intro="Level141 has built dedicated architectures for both."
+          />
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-2">
+            {/* Personal Brand Architecture — active */}
+            <Reveal as="article" className="on-dark flex flex-col rounded-[2rem] bg-ink p-8 text-paper sm:p-12">
+              <div className="flex items-center justify-between gap-4">
+                <span className="eyebrow text-paper/40">01</span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-xs text-gold">
+                  <span className="size-1.5 rounded-full bg-gold" aria-hidden /> Now available
+                </span>
+              </div>
+              <h3 className="mt-10 text-3xl tracking-[-0.025em] sm:text-4xl">Personal Brand Architecture™</h3>
+              <p className="serif-accent mt-4 text-2xl text-gold-soft">
+                Your achievements built your reputation. What will build your next level?
+              </p>
+              <p className="mt-6 leading-relaxed text-paper/65">
+                At Level141, we believe a powerful personal brand is not simply about visibility. It&apos;s about
+                aligning who you are, what you stand for, the impact you create and where you want to go. That&apos;s
+                why we architect personal brands through our proprietary VIBE™ Framework.
+              </p>
+              <dl className="mt-10 grid grid-cols-4 border-y border-paper/12">
+                {vibe.map((v) => (
+                  <div key={v.letter} className="border-r border-paper/12 py-5 text-center last:border-r-0">
+                    <dt className="serif-accent text-4xl leading-none text-gold">{v.letter}</dt>
+                    <dd className="mt-2 text-[0.68rem] uppercase tracking-[0.14em] text-paper/55">{v.name}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:items-center sm:gap-8">
+                <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
+                  Start Your Personal Brand Assessment
+                </ButtonLink>
+                <ButtonLink href={routes.personalBrand} variant="ghost-light">
+                  Discover VIBE™
+                </ButtonLink>
+              </div>
+            </Reveal>
+
+            {/* Growth Architecture — waitlist */}
+            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-[#fbfaf7] p-8 sm:p-12">
+              <div className="flex items-center justify-between gap-4">
+                <span className="eyebrow text-muted">02</span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
+                  <span className="size-1.5 rounded-full border border-muted" aria-hidden /> Coming later · Waitlist open
+                </span>
+              </div>
+              <h3 className="mt-10 text-3xl tracking-[-0.025em] sm:text-4xl">Growth Architecture™</h3>
+              <p className="serif-accent mt-4 text-2xl text-gold-ink">
+                Your business doesn&apos;t need more disconnected growth initiatives. It needs them working together.
+              </p>
+              <p className="mt-6 leading-relaxed text-muted">
+                For growth-stage businesses, SMEs, portfolio companies and established organizations that have the
+                ambition and capability to reach a significantly higher level.
+              </p>
+              <ul className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-3">
+                {gaDimensions.map((d) => (
+                  <li key={d.name} className="bg-[#fbfaf7] px-4 py-4 text-sm">
+                    {d.name}.
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:items-center sm:gap-8">
+                <ButtonLink href={routes.waitlist} variant="solid">
+                  Join the Waitlist
+                </ButtonLink>
+                <ButtonLink href={routes.growth} variant="ghost">
+                  Explore Growth Architecture
+                </ButtonLink>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- The difference */}
+      <Section tone="ink" labelledBy="difference-title">
+        <div aria-hidden className="grid-lines absolute inset-0 opacity-70" />
+        <div className="container-x relative">
+          <SectionHeader
+            id="difference-title"
+            dark
+            index="03"
+            eyebrow="The Level141 difference"
+            title={
+              <>
+                Most businesses manage growth in departments.{" "}
+                <span className="serif-accent text-gold">We see one architecture.</span>
+              </>
+            }
+            intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
+          />
+          <div className="mt-16 lg:mt-20">
+            <GrowthChainDiagram />
+          </div>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Growth system */}
+      <Section tone="paper" labelledBy="system-title">
+        <div className="container-x">
+          <SectionHeader
+            id="system-title"
+            index="04"
+            eyebrow="The Level141 Growth System"
+            title={
+              <>
+                Growth. <span className="serif-accent">Architected.</span>
+              </>
+            }
+            intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
+          />
+          <ol className="mt-16 border-t border-ink/12">
+            {frameworks.map((f, i) => (
+              <Reveal as="li" key={f.id} delay={i * 80} className="border-b border-ink/12">
+                <Link
+                  href={`${routes.how}#${f.id}`}
+                  className="group grid gap-4 py-8 transition-colors sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-10"
+                >
+                  <span className="text-4xl tracking-[-0.03em] transition-colors group-hover:text-gold-ink sm:text-5xl lg:col-span-3">
+                    {f.name}
+                  </span>
+                  <span className="lg:col-span-4">
+                    <span className="eyebrow block text-muted">{f.full}</span>
+                    <span className="mt-2 block text-lg font-medium">{f.line}</span>
+                  </span>
+                  <span className="leading-relaxed text-muted lg:col-span-4">{f.body}</span>
+                  <ArrowUpRight
+                    aria-hidden
+                    className="hidden size-6 justify-self-end text-ink/30 transition-[color,transform] duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-ink lg:col-span-1 lg:block"
+                  />
+                </Link>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- How Level141 works */}
+      <Section tone="white" labelledBy="works-title">
+        <div className="container-x">
+          <SectionHeader
+            id="works-title"
+            index="05"
+            eyebrow="How Level141 works"
+            title={
+              <>
+                We don&apos;t start with deliverables. We start with the{" "}
+                <span className="serif-accent">level you&apos;re trying to reach.</span>
+              </>
+            }
+            intro={
+              <>
+                <p>The starting point is the growth problem. Only then do we architect the solution.</p>
+                <ButtonLink href={routes.how} variant="ghost" className="mt-6">
+                  How we architect growth
+                </ButtonLink>
+              </>
+            }
+          />
+          <ProcessTimeline steps={levelProcess} className="mt-16 lg:mt-24" />
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- What we actually sell */}
+      <Section tone="ink" labelledBy="sell-title">
+        <div className="container-x grid gap-14 lg:grid-cols-12">
+          <Reveal className="lg:col-span-6">
+            <Eyebrow index="06" className="text-gold">
+              What we actually sell
+            </Eyebrow>
+            <h2 id="sell-title" className="mt-8 space-y-1 text-[2.4rem] leading-[1.05] tracking-[-0.035em] sm:text-6xl">
+              <span className="block text-paper/30 line-through decoration-2">Not marketing.</span>
+              <span className="block text-paper/30 line-through decoration-2">Not consulting.</span>
+              <span className="block text-paper/30 line-through decoration-2">Not another strategy deck.</span>
+              <span className="serif-accent block pt-3 text-gold">Growth Architecture.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={100} className="lg:col-span-5 lg:col-start-8">
+            <p className="text-2xl leading-snug tracking-[-0.02em]">Level141 sits between strategy and execution.</p>
+            <ul className="mt-8 grid gap-2 sm:grid-cols-2">
+              {whatWeDo.map((w) => (
+                <li key={w} className="rounded-xl border border-paper/15 px-4 py-3 text-paper/85">
+                  {w}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 leading-relaxed text-paper/65">
+              Execution may involve internal teams, specialist partners, agencies or existing vendors. Our responsibility
+              is bigger:
+            </p>
+            <p className="mt-4 text-xl leading-snug text-gold-soft">
+              Making sure everything is moving toward the same growth outcome.
+            </p>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Who it's for */}
+      <Section tone="paper" labelledBy="for-title">
+        <div className="container-x">
+          <SectionHeader
+            id="for-title"
+            index="07"
+            eyebrow="Who we architect for"
+            title={
+              <>
+                For ambition that has <span className="serif-accent">outgrown</span> its current architecture.
+              </>
+            }
+          />
+          <div className="mt-16 grid gap-6 md:grid-cols-2">
+            <Reveal className="rounded-[2rem] border border-ink/12 p-8 sm:p-10">
+              <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
+              <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
+                For people whose capability is bigger than their current visibility.
+              </p>
+              <p className="eyebrow mt-8 text-muted">Ideal for:</p>
+              <DotList items={pbaAudience} className="mt-4 grid gap-x-6 sm:grid-cols-2 sm:space-y-0 sm:gap-y-3" />
+              <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
+                Your personal brand shouldn&apos;t simply document what you&apos;ve done. It should position you for
+                what you want to do next.
+              </p>
+              <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6">
+                Build My Personal Brand
+              </ButtonLink>
+            </Reveal>
+            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-8 sm:p-10">
+              <p className="eyebrow text-gold-ink">Growth Architecture</p>
+              <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
+                For organizations whose ambition has outgrown their current growth system.
+              </p>
+              <p className="eyebrow mt-8 text-muted">Ideal for:</p>
+              <DotList items={gaAudience} className="mt-4" />
+              <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
+                When ambition changes, the architecture supporting it must change too.
+              </p>
+              <ButtonLink href={routes.waitlist} variant="ghost" className="mt-6">
+                Register your organization&apos;s interest
+              </ButtonLink>
+            </Reveal>
+          </div>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Why Level141 */}
+      <Section tone="white" labelledBy="why-title">
+        <div className="container-x">
+          <SectionHeader
+            id="why-title"
+            index="08"
+            eyebrow="Why Level141?"
+            title={
+              <>
+                Growth Architecture, <span className="serif-accent">not fragmented consulting.</span>
+              </>
+            }
+          />
+          <ol className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+            {whyLevel141.map((w, i) => (
+              <Reveal as="li" key={w.title} delay={i * 60} className="bg-[#fbfaf7] p-8 sm:p-10">
+                <span className="eyebrow tabular-nums text-gold-ink">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-8 text-2xl tracking-[-0.02em]">{w.title}</h3>
+                <p className="mt-4 leading-relaxed text-muted">{w.body}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Belief */}
+      <Section tone="ink" labelledBy="belief-title">
+        <div className="container-x">
+          <div className="grid gap-14 lg:grid-cols-12">
+            <Reveal className="lg:col-span-5">
+              <Eyebrow index="09" className="text-gold">
+                The Level141 belief
+              </Eyebrow>
+              <h2 id="belief-title" className="display mt-6 text-[2.6rem] sm:text-6xl">
+                Growth isn&apos;t a collection of activities.{" "}
+                <span className="serif-accent text-gold">It&apos;s a system.</span>
+              </h2>
+            </Reveal>
+            <ul className="divide-y divide-paper/10 border-y border-paper/10 lg:col-span-7">
+              {beliefPairs.map((b, i) => (
+                <Reveal as="li" key={b} delay={i * 70} className="flex items-baseline gap-6 py-5 text-lg text-paper/80 sm:text-xl">
+                  <span className="eyebrow w-6 shrink-0 tabular-nums text-paper/30">{String(i + 1).padStart(2, "0")}</span>
+                  {b}
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+          <Reveal className="mt-16 lg:mt-24">
+            <BracketFrame size="lg" className="mx-auto max-w-3xl text-center">
+              <p className="text-3xl leading-tight tracking-[-0.025em] sm:text-5xl">
+                Growth happens when the pieces work together.{" "}
+                <span className="serif-accent text-gold">That&apos;s what we architect.</span>
+              </p>
+            </BracketFrame>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Results framework */}
+      <Section tone="paper" labelledBy="results-title">
+        <div className="container-x">
+          <SectionHeader
+            id="results-title"
+            index="10"
+            eyebrow="Results"
+            title={
+              <>
+                Don&apos;t show what you did. <span className="serif-accent">Show what changed.</span>
+              </>
+            }
+            intro="Every Level141 engagement should eventually be presented around transformation."
+          />
+          <ol className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+            {transformationFrame.map((t, i) => (
+              <Reveal
+                as="li"
+                key={t.label}
+                delay={i * 80}
+                className={
+                  "rounded-2xl border border-ink/12 p-6 lg:rounded-none lg:border-l-0 lg:first:rounded-l-2xl lg:first:border-l lg:last:rounded-r-2xl " +
+                  (i === 4 ? "on-dark bg-ink text-paper" : "bg-[#fbfaf7]")
+                }
+              >
+                <span className={"eyebrow tabular-nums " + (i === 4 ? "text-gold" : "text-muted")}>{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-8 text-xl tracking-[-0.015em]">{t.label}</h3>
+                <p className={"mt-2 text-sm leading-relaxed " + (i === 4 ? "text-paper/70" : "text-muted")}>{t.question}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- About teaser */}
+      <Section tone="paper-2" labelledBy="why141-title">
+        <div className="container-x grid gap-14 lg:grid-cols-12 lg:items-center">
+          <Reveal className="relative lg:col-span-5">
+            <div className="relative mx-auto aspect-square max-w-sm">
+              <BracketClose className="absolute right-0 top-0 size-1/3 text-ink" />
+              <BracketOpen className="absolute bottom-0 left-0 size-1/3 text-ink" />
+              <p
+                aria-hidden
+                className="absolute inset-0 grid place-items-center text-[7rem] font-light tracking-[-0.06em] sm:text-[9rem]"
+              >
+                141
+              </p>
+            </div>
+          </Reveal>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <Reveal>
+              <Eyebrow index="11" className="text-gold-ink">
+                About Level141
+              </Eyebrow>
+              <h2 id="why141-title" className="display mt-6 text-[2.6rem] sm:text-6xl">
+                Why <span className="serif-accent">141?</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={120} className="mt-8 space-y-5 text-lg leading-relaxed text-muted">
+              <p className="text-ink">
+                Because growth is never really about reaching a final destination. Every level changes what becomes
+                possible next.
+              </p>
+              <p>
+                We work with ambitious people and organizations to understand where they are, define where they want to
+                go and architect the interconnected systems required to get there.
+              </p>
+              <p className="text-base">Level141 is part of the 1XL ecosystem, headquartered in Dubai.</p>
+            </Reveal>
+            <Reveal delay={200} className="mt-10">
+              <ButtonLink href={routes.about} variant="outline">
+                About Level141
+              </ButtonLink>
+            </Reveal>
+          </div>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Insights preview */}
+      <Section tone="paper" labelledBy="insights-title">
+        <div className="container-x">
+          <SectionHeader
+            id="insights-title"
+            index="12"
+            eyebrow="Insights"
+            title={
+              <>
+                The <span className="serif-accent">Next Level.</span>
+              </>
+            }
+            intro={
+              <>
+                <p>Ideas for people and organizations that refuse to remain where they are.</p>
+                <ButtonLink href={routes.insights} variant="ghost" className="mt-6">
+                  Explore Insights
+                </ButtonLink>
+              </>
+            }
+          />
+          <ul className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+            {insightCategories.map((c, i) => (
+              <Reveal as="li" key={c.slug} delay={i * 60} className="bg-paper p-8 sm:p-10">
+                <p className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</p>
+                <h3 className="mt-8 text-2xl tracking-[-0.02em]">{c.name}</h3>
+                <p className="mt-3 leading-relaxed text-muted">{c.body}</p>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      <CtaBand
+        eyebrow="Find your level"
+        title={
+          <>
+            You&apos;ve reached this level. <span className="serif-accent text-gold">What&apos;s your next?</span>
+          </>
+        }
+        body={
+          <p>
+            Whether you&apos;re building your personal authority or preparing an organization for its next stage of
+            growth, the first step isn&apos;t another campaign. It&apos;s understanding your current level.
+          </p>
+        }
+        primary={{ label: "Start Your Level141 Assessment", href: routes.contact }}
+        secondary={{ label: "How we architect growth", href: routes.how }}
+      />
+    </>
+  );
+}

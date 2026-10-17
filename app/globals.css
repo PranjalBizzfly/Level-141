@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Level141 design tokens
+   Ink + paper from logos 1–6; champagne (#DEBB93) from the logo-3 swatch.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #0d0d0d;
+  --color-ink-2: #161514;
+  --color-ink-3: #22201e;
+  --color-paper: #f5f2ec;
+  --color-paper-2: #ece6db;
+  --color-stone: #d9d2c5;
+  --color-muted: #5c5750;
+  --color-muted-dark: #a59e93;
+  --color-gold: #debb93;
+  --color-gold-soft: #efdcc4;
+  --color-gold-ink: #7a5a32;
+  --color-error: #a3321f;
+  --color-error-dark: #f19a87;
+  --color-success: #2f6b46;
+
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+
+  --ease-architect: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-rise: rise 0.9s var(--ease-architect) both;
+  --animate-fade: fade 1.2s var(--ease-architect) both;
+  --animate-draw: draw 1.6s var(--ease-architect) both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-gold);
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Wide-tracked uppercase label, echoing the LEVEL 141 wordmark. */
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  .display {
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+  .serif-accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .container-x {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-x { padding-inline: 2rem; }
+  }
+  @media (min-width: 1024px) {
+    .container-x { padding-inline: 3.5rem; }
+  }
+  .rule {
+    height: 1px;
+    background: currentColor;
+    opacity: 0.14;
+  }
+  /* Subtle architectural grid used behind dark sections. */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+  .grid-lines-ink {
+    background-image:
+      linear-gradient(to right, rgb(13 13 13 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(13 13 13 / 0.05) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s var(--ease-architect);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reveal-on-scroll. Content is only hidden when JS has marked the document
+   (html.js) AND the visitor has not requested reduced motion, so content is
+   always readable without JavaScript. A failsafe in RevealObserver reveals
+   everything if the observer never fires.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.9s var(--ease-architect),
+      transform 0.9s var(--ease-architect);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js [data-reveal="fade"] {
+    transform: none;
+  }
+  html.js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  html.js [data-reveal-line] {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.4s var(--ease-architect);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js [data-reveal-line].is-visible {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
