@@ -1,15 +1,16 @@
-import { clientKey, deliver, json, looksLikeSpam, rateLimited, readJson } from "@/lib/forms/server";
+import { clientKey, deliver, json, looksLikeSpam, rateLimited, rateLimitedResponse, readJson } from "@/lib/forms/server";
 import { formatPhone, interestOptions, normaliseContact, validateContact } from "@/lib/forms/validation";
 
 export async function POST(req: Request) {
-  const body = await readJson(req);
-  if (!body) return json({ ok: false, code: "bad_request", message: "Invalid request." }, 400);
+  const parsed = await readJson(req);
+  if ("error" in parsed) return parsed.error;
+  const { body } = parsed;
 
   // Silently accept obvious bots without delivering anything.
   if (looksLikeSpam(body)) return json({ ok: true });
 
   if (rateLimited(`contact:${clientKey(req)}`))
-    return json({ ok: false, code: "rate_limited", message: "Too many submissions. Please try again later." }, 429);
+    return rateLimitedResponse();
 
   const input = normaliseContact(body);
   const errors = validateContact(input);

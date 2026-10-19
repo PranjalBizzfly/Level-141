@@ -102,16 +102,52 @@ export function looksLikeSpam(body: Record<string, unknown>) {
   return honeypot || tooFast;
 }
 
-export function json(body: SubmitResponse, status = 200) {
-  return NextResponse.json(body, { status });
+export function json(body: SubmitResponse, status = 200, headers?: HeadersInit) {
+  return NextResponse.json(body, { status, headers });
 }
 
-export async function readJson(req: Request): Promise<Record<string, unknown> | null> {
-  if (!req.headers.get("content-type")?.includes("application/json")) return null;
+/** 429 with a Retry-After hint matching the limiter window. */
+export function rateLimitedResponse() {
+  return json(
+    { ok: false, code: "rate_limited", message: "Too many submissions. Please try again later." },
+    429,
+    { "Retry-After": String(Math.ceil(WINDOW_MS / 1000)) },
+  );
+}
+
+/** Form payloads are tiny; anything bigger is refused before parsing. */
+export const MAX_BODY_BYTES = 16 * 1024;
+
+/**
+ * Reads a JSON object body. On failure returns the HTTP response to send:
+ * 415 for a non-JSON media type, 413 for an oversized payload, 400 for
+ * malformed JSON or a non-object body.
+ */
+export async function readJson(
+  req: Request,
+): Promise<{ body: Record<string, unknown> } | { error: ReturnType<typeof json> }> {
+  if (!req.headers.get("content-type")?.toLowerCase().includes("application/json"))
+    return {
+      error: json({ ok: false, code: "unsupported_media_type", message: "Send the request as application/json." }, 415),
+    };
+
+  const tooLarge = () =>
+    json({ ok: false, code: "payload_too_large", message: "The request is too large." }, 413);
+  if (Number(req.headers.get("content-length") ?? 0) > MAX_BODY_BYTES) return { error: tooLarge() };
+
+  let text: string;
   try {
-    const body = await req.json();
-    return body && typeof body === "object" && !Array.isArray(body) ? (body as Record<string, unknown>) : null;
+    text = await req.text();
   } catch {
-    return null;
+    return { error: json({ ok: false, code: "bad_request", message: "Invalid request." }, 400) };
   }
+  if (new TextEncoder().encode(text).length > MAX_BODY_BYTES) return { error: tooLarge() };
+
+  try {
+    const body: unknown = JSON.parse(text);
+    if (body && typeof body === "object" && !Array.isArray(body)) return { body: body as Record<string, unknown> };
+  } catch {
+    /* fall through */
+  }
+  return { error: json({ ok: false, code: "bad_request", message: "Invalid request." }, 400) };
 }

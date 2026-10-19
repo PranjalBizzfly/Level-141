@@ -153,4 +153,10 @@ export const MIN_FILL_MS = 2500;
 export type SubmitResponse =
   | { ok: true }
   | { ok: false; code: "validation"; errors: Record<string, string> }
-  | { ok: false; code: "not_configured" | "delivery_failed" | "rate_limited" | "bad_request"; message: string };
+  | { ok: false; code:
+        | "not_configured"
+        | "delivery_failed"
+        | "rate_limited"
+        | "bad_request"
+        | "unsupported_media_type"
+        | "payload_too_large"; message: string };
