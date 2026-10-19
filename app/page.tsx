@@ -181,7 +181,7 @@ export default function HomePage() {
                   </div>
                 ))}
               </dl>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5">
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 lg:max-[1439px]:flex-col lg:max-[1439px]:items-start [&>a]:gap-2 [&>a]:px-4">
                 <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
                   Start Your Personal Brand Assessment
                 </ButtonLink>
@@ -221,7 +221,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5">
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 lg:max-[1439px]:flex-col lg:max-[1439px]:items-start [&>a]:gap-2 [&>a]:px-4">
                 <ButtonLink href={routes.waitlist} variant="solid">
                   Join the Waitlist
                 </ButtonLink>
@@ -358,17 +358,11 @@ export default function HomePage() {
                 <p className="eyebrow mt-5 text-paper-muted">Level141 first identifies:</p>
               </div>
               <ol className="border-t border-line-dark-strong">
-                {startingQuestions.map((q, i) => (
+                {startingQuestions.map((q) => (
                   <li
                     key={q}
                     className="group/q -mx-3 flex min-h-14 cursor-default items-center gap-4 rounded-xl border-b border-line-dark px-3 py-3 text-lg transition-colors duration-300 hover:bg-paper/[0.06]"
                   >
-                    <span
-                      aria-hidden
-                      className="grid size-8 shrink-0 place-items-center rounded-full border border-gold/50 text-xs tabular-nums text-gold transition-[transform,border-color,font-weight] duration-300 group-hover/q:scale-110 group-hover/q:border-current group-hover/q:font-semibold"
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                     <span className="flex-1">{q}</span>
                     <ArrowRight
                       aria-hidden
