@@ -3,7 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-const SELECTOR = "[data-reveal]:not(.is-visible), [data-reveal-line]:not(.is-visible)";
+const SELECTOR =
+  "[data-reveal]:not(.is-visible), [data-reveal-line]:not(.is-visible), [data-seq]:not(.is-visible)";
 
 /**
  * Adds `.is-visible` to [data-reveal] elements as they enter the viewport.
@@ -36,11 +37,19 @@ export function RevealObserver() {
     );
     els.forEach((el) => io.observe(el));
 
-    // Failsafe: anything still hidden after 4s (e.g. printing, odd viewports) is shown.
-    const failsafe = window.setTimeout(revealAll, 4000);
+    // Failsafe: anything in view or already scrolled past that is still hidden
+    // after 4s is shown. Content further down keeps its scroll animation.
+    const revealPassed = () =>
+      els.forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-visible");
+      });
+    const failsafe = window.setTimeout(revealPassed, 4000);
+    // Printing needs every section visible.
+    window.addEventListener("beforeprint", revealAll);
     return () => {
       io.disconnect();
       window.clearTimeout(failsafe);
+      window.removeEventListener("beforeprint", revealAll);
     };
   }, [pathname]);
 

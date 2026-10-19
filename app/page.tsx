@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { BracketClose, BracketOpen, LogoSymbol } from "@/components/brand/Logo";
+import { Photo } from "@/components/ui/Photo";
+import { Mark141 } from "@/components/brand/Mark141";
 import { GrowthChainDiagram, ProcessTimeline } from "@/components/diagrams/Diagrams";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { HomeHero } from "@/components/sections/HomeHero";
@@ -58,7 +59,7 @@ const frameworks = [
     name: "BRANDS™",
     full: "Six dimensions of growth",
     line: "Branding · Conversion Readiness · Awareness · Nurture · Discover & Trust · Scale",
-    body: "The market-facing levers of growth, architected together rather than managed as separate campaigns.",
+    body: "BRANDS™ ensures that the major market-facing growth levers are not managed as separate campaigns.",
   },
   {
     id: "peak",
@@ -86,7 +87,7 @@ export default function HomePage() {
                 It needs <span className="serif-accent">architecture.</span>
               </h2>
             </Reveal>
-            <Reveal delay={120} className="mt-10 max-w-lg space-y-5 text-lg leading-relaxed text-muted">
+            <Reveal delay={120} className="mt-8 max-w-lg space-y-5 text-lg leading-relaxed text-muted">
               <p>Most businesses don&apos;t have a shortage of activity. Yet growth can still feel fragmented.</p>
               <p>
                 Because more activity doesn&apos;t necessarily create more growth. When positioning, visibility, trust,
@@ -97,24 +98,25 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-6">
-            <Reveal className="rounded-[2rem] border border-ink/10 bg-[#fbfaf7] p-7 sm:p-10">
+            <Reveal className="rounded-[2rem] border border-ink/10 bg-surface p-6 sm:p-10">
               <p className="eyebrow text-muted">They have</p>
               <ul className="mt-6 flex flex-wrap gap-2.5" aria-label="Typical growth activities">
-                {activityList.map((a, i) => (
+                {activityList.map((a) => (
                   <li
                     key={a}
-                    className="rounded-full border border-ink/12 px-4 py-2 text-[0.95rem] text-ink/70"
-                    style={{ transform: `rotate(${[-2, 1.5, -1, 2, -1.5, 1, -2.5, 1.5][i]}deg)` }}
+                    className="rounded-full border border-line-strong px-4 py-2 text-[0.95rem] text-ink/80"
                   >
                     {a.replace(".", "")}
                   </li>
                 ))}
               </ul>
-              <div className="my-8 flex items-center gap-4 text-gold-ink" aria-hidden>
-                <span className="h-px flex-1 bg-ink/10" />
-                <LogoSymbol className="size-6 text-ink" />
-                <span className="h-px flex-1 bg-ink/10" />
-              </div>
+              {/* Fragmented activity → one integrated architecture ("Level141 connects the pieces"). */}
+              <Photo
+                src="/images/home-fragmented-to-integrated-muted.webp"
+                alt="Modular oak and travertine blocks transitioning from fragmented pieces into an integrated interlocking architectural structure"
+                className="my-8 aspect-[16/9] !rounded-2xl"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+              />
               <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">Level141 connects the pieces.</p>
               <p className="mt-4 leading-relaxed text-muted">
                 We look at growth as one integrated architecture—then identify what needs to change for you to reach
@@ -141,11 +143,21 @@ export default function HomePage() {
             intro="Level141 has built dedicated architectures for both."
           />
 
-          <div className="mt-16 grid gap-6 lg:grid-cols-2">
+          <div className="mt-12 grid gap-4 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-2">
             {/* Personal Brand Architecture — active */}
-            <Reveal as="article" className="on-dark flex flex-col rounded-[2rem] bg-ink p-8 text-paper sm:p-12">
+            <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
+              {/* "Growth begins either with the person…" */}
+              <Photo
+                src="/images/home-person-notebook.webp"
+                alt="A leader's hands writing strategic narrative notes in a notebook at an oak desk by a window"
+                className="mb-8 aspect-[16/9] !rounded-2xl sm:mb-10"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                position="45% center"
+              />
               <div className="flex items-center justify-between gap-4">
-                <span className="eyebrow text-paper/40">01</span>
+                <span aria-hidden className="eyebrow text-paper-muted">
+                  01
+                </span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-xs text-gold">
                   <span className="size-1.5 rounded-full bg-gold" aria-hidden /> Now available
                 </span>
@@ -163,7 +175,7 @@ export default function HomePage() {
                 {vibe.map((v) => (
                   <div key={v.letter} className="border-r border-paper/12 py-5 text-center last:border-r-0">
                     <dt className="serif-accent text-4xl leading-none text-gold">{v.letter}</dt>
-                    <dd className="mt-2 text-[0.68rem] uppercase tracking-[0.14em] text-paper/55">{v.name}</dd>
+                    <dd className="mt-2 text-[0.75rem] uppercase tracking-[0.1em] text-paper-muted">{v.name}</dd>
                   </div>
                 ))}
               </dl>
@@ -178,7 +190,15 @@ export default function HomePage() {
             </Reveal>
 
             {/* Growth Architecture — waitlist */}
-            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-[#fbfaf7] p-8 sm:p-12">
+            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-6 sm:p-10">
+              {/* "…or the organization." */}
+              <Photo
+                src="/images/home-team-table.webp"
+                alt="Executive leadership team collaborating around a walnut conference table reviewing an integrated business architecture diagram"
+                className="mb-8 aspect-[16/9] !rounded-2xl sm:mb-10"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                position="center"
+              />
               <div className="flex items-center justify-between gap-4">
                 <span className="eyebrow text-muted">02</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
@@ -195,7 +215,7 @@ export default function HomePage() {
               </p>
               <ul className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-3">
                 {gaDimensions.map((d) => (
-                  <li key={d.name} className="bg-[#fbfaf7] px-4 py-4 text-sm">
+                  <li key={d.name} className="bg-surface px-4 py-4 text-sm">
                     {d.name}.
                   </li>
                 ))}
@@ -230,7 +250,7 @@ export default function HomePage() {
             }
             intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
           />
-          <div className="mt-16 lg:mt-20">
+          <div className="mt-12 sm:mt-14 lg:mt-16">
             <GrowthChainDiagram />
           </div>
         </div>
@@ -250,12 +270,12 @@ export default function HomePage() {
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <ol className="mt-16 border-t border-ink/12">
+          <ol className="mt-12 border-t border-ink/12 sm:mt-14 lg:mt-16">
             {frameworks.map((f, i) => (
               <Reveal as="li" key={f.id} delay={i * 80} className="border-b border-ink/12">
                 <Link
                   href={`${routes.how}#${f.id}`}
-                  className="group grid gap-4 py-8 transition-colors sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-10"
+                  className="group relative grid gap-4 py-8 transition-colors before:absolute before:inset-x-0 before:bottom-[-1px] before:h-px before:origin-left before:scale-x-0 before:bg-gold-ink before:transition-transform before:duration-500 hover:before:scale-x-100 focus-visible:before:scale-x-100 sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-10"
                 >
                   <span className="text-4xl tracking-[-0.03em] transition-colors group-hover:text-gold-ink sm:text-5xl lg:col-span-3">
                     {f.name}
@@ -298,7 +318,16 @@ export default function HomePage() {
               </>
             }
           />
-          <ProcessTimeline steps={levelProcess} className="mt-16 lg:mt-24" />
+          {/* "The starting point is the growth problem. Only then do we architect the solution." */}
+          <Reveal className="mt-12 sm:mt-14 lg:mt-16">
+            <Photo
+              src="/images/home-cards-grid-muted.webp"
+              alt="Strategist's hands organizing architectural framework cards into a structured grid on a warm walnut desk in natural morning sunlight"
+              className="aspect-[16/9] lg:aspect-[21/8]"
+              sizes="(min-width: 1408px) 1300px, 100vw"
+            />
+          </Reveal>
+          <ProcessTimeline steps={levelProcess} className="mt-12 sm:mt-14 lg:mt-16" />
         </div>
       </Section>
 
@@ -310,9 +339,9 @@ export default function HomePage() {
               What we actually sell
             </Eyebrow>
             <h2 id="sell-title" className="mt-8 space-y-1 text-[2.4rem] leading-[1.05] tracking-[-0.035em] sm:text-6xl">
-              <span className="block text-paper/30 line-through decoration-2">Not marketing.</span>
-              <span className="block text-paper/30 line-through decoration-2">Not consulting.</span>
-              <span className="block text-paper/30 line-through decoration-2">Not another strategy deck.</span>
+              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not marketing.</span>
+              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not consulting.</span>
+              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not another strategy deck.</span>
               <span className="serif-accent block pt-3 text-gold">Growth Architecture.</span>
             </h2>
           </Reveal>
@@ -345,37 +374,39 @@ export default function HomePage() {
             eyebrow="Who we architect for"
             title={
               <>
-                For ambition that has <span className="serif-accent">outgrown</span> its current architecture.
+                When ambition changes, the architecture supporting it <span className="serif-accent">must change too.</span>
               </>
             }
           />
-          <div className="mt-16 grid gap-6 md:grid-cols-2">
-            <Reveal className="rounded-[2rem] border border-ink/12 p-8 sm:p-10">
+          <div className="mt-12 grid gap-4 sm:mt-14 sm:gap-6 md:grid-cols-2 lg:mt-16">
+            {/* Both cards share six subgrid rows from md, so headline, list, closing line
+                and link align across the pair. */}
+            <Reveal className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
                 For people whose capability is bigger than their current visibility.
               </p>
               <p className="eyebrow mt-8 text-muted">Ideal for:</p>
-              <DotList items={pbaAudience} className="mt-4 grid gap-x-6 sm:grid-cols-2 sm:space-y-0 sm:gap-y-3" />
+              <DotList items={pbaAudience} className="mt-4 grid gap-x-6 self-start lg:grid-cols-2 lg:space-y-0 lg:gap-y-3" />
               <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
                 Your personal brand shouldn&apos;t simply document what you&apos;ve done. It should position you for
                 what you want to do next.
               </p>
-              <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6">
+              <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6 justify-self-start">
                 Build My Personal Brand
               </ButtonLink>
             </Reveal>
-            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-8 sm:p-10">
+            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Growth Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
                 For organizations whose ambition has outgrown their current growth system.
               </p>
               <p className="eyebrow mt-8 text-muted">Ideal for:</p>
-              <DotList items={gaAudience} className="mt-4" />
+              <DotList items={gaAudience} className="mt-4 self-start" />
               <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
                 When ambition changes, the architecture supporting it must change too.
               </p>
-              <ButtonLink href={routes.waitlist} variant="ghost" className="mt-6">
+              <ButtonLink href={routes.waitlist} variant="ghost" className="mt-6 justify-self-start">
                 Register your organization&apos;s interest
               </ButtonLink>
             </Reveal>
@@ -396,9 +427,9 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-12 grid gap-px overflow-hidden sm:mt-14 lg:mt-16 rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
             {whyLevel141.map((w, i) => (
-              <Reveal as="li" key={w.title} delay={i * 60} className="bg-[#fbfaf7] p-8 sm:p-10">
+              <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-surface p-6 sm:p-8">
                 <span className="eyebrow tabular-nums text-gold-ink">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-8 text-2xl tracking-[-0.02em]">{w.title}</h3>
                 <p className="mt-4 leading-relaxed text-muted">{w.body}</p>
@@ -424,13 +455,13 @@ export default function HomePage() {
             <ul className="divide-y divide-paper/10 border-y border-paper/10 lg:col-span-7">
               {beliefPairs.map((b, i) => (
                 <Reveal as="li" key={b} delay={i * 70} className="flex items-baseline gap-6 py-5 text-lg text-paper/80 sm:text-xl">
-                  <span className="eyebrow w-6 shrink-0 tabular-nums text-paper/30">{String(i + 1).padStart(2, "0")}</span>
+                  <span aria-hidden className="eyebrow w-6 shrink-0 tabular-nums text-paper-muted">{String(i + 1).padStart(2, "0")}</span>
                   {b}
                 </Reveal>
               ))}
             </ul>
           </div>
-          <Reveal className="mt-16 lg:mt-24">
+          <Reveal className="mt-16 lg:mt-20">
             <BracketFrame size="lg" className="mx-auto max-w-3xl text-center">
               <p className="text-3xl leading-tight tracking-[-0.025em] sm:text-5xl">
                 Growth happens when the pieces work together.{" "}
@@ -455,7 +486,7 @@ export default function HomePage() {
             }
             intro="Every Level141 engagement should eventually be presented around transformation."
           />
-          <ol className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+          <ol className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:mt-16 lg:grid-cols-5 lg:gap-0">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"
@@ -463,7 +494,7 @@ export default function HomePage() {
                 delay={i * 80}
                 className={
                   "rounded-2xl border border-ink/12 p-6 lg:rounded-none lg:border-l-0 lg:first:rounded-l-2xl lg:first:border-l lg:last:rounded-r-2xl " +
-                  (i === 4 ? "on-dark bg-ink text-paper" : "bg-[#fbfaf7]")
+                  (i === 4 ? "on-dark bg-ink text-paper sm:col-span-2 lg:col-span-1" : "bg-surface")
                 }
               >
                 <span className={"eyebrow tabular-nums " + (i === 4 ? "text-gold" : "text-muted")}>{String(i + 1).padStart(2, "0")}</span>
@@ -479,16 +510,12 @@ export default function HomePage() {
       <Section tone="paper-2" labelledBy="why141-title">
         <div className="container-x grid gap-14 lg:grid-cols-12 lg:items-center">
           <Reveal className="relative lg:col-span-5">
-            <div className="relative mx-auto aspect-square max-w-sm">
-              <BracketClose className="absolute right-0 top-0 size-1/3 text-ink" />
-              <BracketOpen className="absolute bottom-0 left-0 size-1/3 text-ink" />
-              <p
-                aria-hidden
-                className="absolute inset-0 grid place-items-center text-[7rem] font-light tracking-[-0.06em] sm:text-[9rem]"
-              >
-                141
-              </p>
-            </div>
+            <Mark141
+              className="mx-auto w-full max-w-sm"
+              textClassName="text-[7rem] sm:text-[9rem]"
+              closeClassName="text-ink"
+              openClassName="text-ink"
+            />
           </Reveal>
           <div className="lg:col-span-6 lg:col-start-7">
             <Reveal>
@@ -540,9 +567,9 @@ export default function HomePage() {
               </>
             }
           />
-          <ul className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid gap-px overflow-hidden sm:mt-14 lg:mt-16 rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
             {insightCategories.map((c, i) => (
-              <Reveal as="li" key={c.slug} delay={i * 60} className="bg-paper p-8 sm:p-10">
+              <Reveal as="li" key={c.slug} delay={i * 60} className="bg-paper p-6 sm:p-8">
                 <p className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</p>
                 <h3 className="mt-8 text-2xl tracking-[-0.02em]">{c.name}</h3>
                 <p className="mt-3 leading-relaxed text-muted">{c.body}</p>

@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* ---------------------------------------------------------------------------
-   Level141 design tokens
-   Ink + paper from logos 1–6; champagne (#DEBB93) from the logo-3 swatch.
+   Level141 design tokens — monochrome, matched to the official logo files
+     Light: pure white #FFFFFF with the black logo and black type.
+     Dark:  pure black #000000 with the white logo and white type.
+   Greys are used only for borders, grid lines and secondary text. Values are
+   variables so the site re-themes from one place. `ink`/`paper` are the
+   foreground/background of the page; former "dark" sections are re-scoped
+   below so each theme stays single-toned. The `gold` names are kept as the
+   accent role and resolve to black (light) or white (dark).
 --------------------------------------------------------------------------- */
 @theme {
-  --color-ink: #0d0d0d;
-  --color-ink-2: #161514;
-  --color-ink-3: #22201e;
-  --color-paper: #f5f2ec;
-  --color-paper-2: #ece6db;
-  --color-stone: #d9d2c5;
-  --color-muted: #5c5750;
-  --color-muted-dark: #a59e93;
-  --color-gold: #debb93;
-  --color-gold-soft: #efdcc4;
-  --color-gold-ink: #7a5a32;
-  --color-error: #a3321f;
-  --color-error-dark: #f19a87;
-  --color-success: #2f6b46;
+  --color-ink: #000000;
+  --color-ink-2: #141414;
+  --color-ink-3: #262626;
+  --color-paper: #ffffff;
+  --color-paper-2: #f5f5f5;
+  /* Raised card surface. */
+  --color-surface: #ffffff;
+  --color-stone: #e5e5e5;
+  /* 7:1 on white. */
+  --color-muted: #595959;
+  --color-muted-dark: #a3a3a3;
+  /* Secondary text on re-scoped surfaces (≥4.5:1 in both themes). */
+  --color-paper-muted: #595959;
+  /* Borders: the whole of each theme is one tone, so every border shares
+     one hue — black hairlines here, white hairlines in dark mode. */
+  --color-line: rgb(0 0 0 / 0.12);
+  --color-line-strong: rgb(0 0 0 / 0.24);
+  --color-line-dark: rgb(0 0 0 / 0.12);
+  --color-line-dark-strong: rgb(0 0 0 / 0.24);
+  --color-gold: #000000;
+  --color-gold-soft: #262626;
+  --color-gold-ink: #000000;
+  --color-error: #b42318;
+  --color-error-dark: #b42318;
+  --color-success: #1f6b3d;
 
-  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
 
   --ease-architect: cubic-bezier(0.22, 1, 0.36, 1);
@@ -28,6 +47,21 @@
   --animate-rise: rise 0.9s var(--ease-architect) both;
   --animate-fade: fade 1.2s var(--ease-architect) both;
   --animate-draw: draw 1.6s var(--ease-architect) both;
+  --animate-slide-from-right: slide-from-right 0.32s var(--ease-architect) both;
+  --animate-slide-from-left: slide-from-left 0.32s var(--ease-architect) both;
+
+  @keyframes draw-stroke {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes slide-from-right {
+    from { opacity: 0; transform: translateX(24px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slide-from-left {
+    from { opacity: 0; transform: translateX(-24px); }
+    to { opacity: 1; transform: none; }
+  }
 
   @keyframes rise {
     from { opacity: 0; transform: translateY(18px); }
@@ -43,24 +77,123 @@
   }
 }
 
+/* (`body > header` = the site header only; section headings also use <header>.)
+   Light theme: sections that were dark become a whisper of grey, with black
+   type and the black logo, so the whole page stays white and monochrome. */
+:root:not([data-theme="dark"]) :is(body > header, body > footer, .on-dark) {
+  --color-ink: #f7f7f7;
+  --color-ink-2: #ffffff;
+  --color-ink-3: #ececec;
+  --color-paper: #000000;
+  --color-paper-muted: #595959;
+}
+:root:not([data-theme="dark"]) body > header {
+  --color-ink: #ffffff;
+}
+
+/* Dark theme: pure black canvas, white type, white logo. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #000000;
+  --color-paper-2: #0f0f0f;
+  /* Shade ladder: #000 hero & bands → #0a0a0a / #0f0f0f alternating sections
+     → #1a1a1a cards → #242424 raised. Each step reads on the one below. */
+  --color-surface: #1a1a1a;
+  --color-stone: #2e2e2e;
+  --color-ink: #ffffff;
+  --color-ink-2: #ededed;
+  --color-ink-3: #d4d4d4;
+  /* 8.6:1 on black, 7.5:1 on cards. */
+  --color-muted: #a8a8a8;
+  --color-paper-muted: #a8a8a8;
+  /* White hairlines, strong enough to read on black and on cards. */
+  --color-line: rgb(255 255 255 / 0.16);
+  --color-line-strong: rgb(255 255 255 / 0.3);
+  --color-line-dark: rgb(255 255 255 / 0.16);
+  --color-line-dark-strong: rgb(255 255 255 / 0.3);
+  --color-gold: #ffffff;
+  --color-gold-soft: #d4d4d4;
+  --color-gold-ink: #ffffff;
+  --color-error: #f97066;
+  --color-error-dark: #f97066;
+  --color-success: #75e0a7;
+}
+/* Former dark sections: pure black like the canvas, edged with a grey
+   hairline; cards inside sit just above it. */
+[data-theme="dark"] :is(body > header, body > footer, .on-dark) {
+  --color-ink: #000000;
+  --color-ink-2: #1a1a1a;
+  --color-ink-3: #242424;
+  --color-paper: #ffffff;
+}
+[data-theme="dark"] body > header {
+  --color-ink: #000000;
+}
+/* Highlighted cards and pills (dark-styled elements that are not whole
+   sections) sit one step above the regular cards, so they always read. */
+[data-theme="dark"] .on-dark:not(section, header, footer) {
+  --color-ink: #2a2a2a;
+  --color-ink-2: #333333;
+}
+:root:not([data-theme="dark"]) .on-dark:not(section, header, footer) {
+  --color-ink: #ededed;
+}
+/* Sections using the card tone sit one shade above black, not at card level. */
+[data-theme="dark"] section[class~="bg-surface"] {
+  background-color: #0a0a0a;
+}
+[data-theme="dark"] section:is([class~="bg-paper"], [class~="bg-paper-2"], [class~="bg-surface"]) {
+  border-top: 1px solid var(--color-line);
+}
+:is(section, footer)[class~="bg-ink"] {
+  border-top: 1px solid var(--color-line-dark);
+}
+
+/* Solid accent fills always carry the opposite colour. */
+:is([class~="bg-gold"], [class~="bg-gold-soft"], [class*="hover:bg-gold"]:hover, .is-visible [class*="in-[.is-visible]:bg-gold"]) {
+  --color-ink: #ffffff;
+}
+[data-theme="dark"] :is([class~="bg-gold"], [class~="bg-gold-soft"], [class*="hover:bg-gold"]:hover, .is-visible [class*="in-[.is-visible]:bg-gold"]) {
+  --color-ink: #000000;
+}
+
+@layer base {
+  a, button, input, select, textarea, summary, [role="tab"] {
+    transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+    transition-duration: 0.3s;
+    transition-timing-function: var(--ease-architect);
+  }
+  svg {
+    transition: color 0.3s var(--ease-architect), opacity 0.3s var(--ease-architect);
+  }
+}
+
 @layer base {
   html {
+    background: var(--color-paper);
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5.5rem;
   }
   body {
     background: var(--color-paper);
     color: var(--color-ink);
+    transition: background-color 0.4s var(--ease-architect), color 0.4s var(--ease-architect);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "liga", "kern";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    line-height: 1.65;
+    letter-spacing: -0.005em;
   }
   ::selection {
-    background: var(--color-gold);
-    color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--color-ink) 28%, transparent) transparent;
   }
   :focus-visible {
     outline: 2px solid var(--color-gold-ink);
@@ -81,15 +214,17 @@
 @layer components {
   /* Wide-tracked uppercase label, echoing the LEVEL 141 wordmark. */
   .eyebrow {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
   }
+  /* Large, light and tightly set: the editorial register of the brand.
+     Serif accents inside keep their own weight. */
   .display {
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 0.98;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 0.97;
   }
   .serif-accent {
     font-family: var(--font-serif);
@@ -109,6 +244,32 @@
   @media (min-width: 1024px) {
     .container-x { padding-inline: 3.5rem; }
   }
+  /* Comfortable measure for running text (~65 characters). */
+  .measure {
+    max-width: 38rem;
+  }
+  /* Surfaces stay clean and flat in both themes. */
+  .grain {
+    background-image: none;
+  }
+  /* Interactive card: gold-tinted border, small lift, arrow nudge. */
+  .card-interactive {
+    transition:
+      border-color 0.35s var(--ease-architect),
+      transform 0.35s var(--ease-architect),
+      background-color 0.35s var(--ease-architect);
+  }
+  .card-interactive:hover,
+  .card-interactive:focus-visible,
+  .card-interactive:focus-within {
+    border-color: var(--color-gold-ink);
+    transform: translateY(-2px);
+  }
+  .on-dark .card-interactive:hover,
+  .on-dark .card-interactive:focus-visible,
+  .on-dark .card-interactive:focus-within {
+    border-color: var(--color-gold);
+  }
   .rule {
     height: 1px;
     background: currentColor;
@@ -117,14 +278,14 @@
   /* Subtle architectural grid used behind dark sections. */
   .grid-lines {
     background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+      linear-gradient(to right, color-mix(in oklab, var(--color-paper) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--color-paper) 7%, transparent) 1px, transparent 1px);
     background-size: 96px 96px;
   }
   .grid-lines-ink {
     background-image:
-      linear-gradient(to right, rgb(13 13 13 / 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(13 13 13 / 0.05) 1px, transparent 1px);
+      linear-gradient(to right, color-mix(in oklab, var(--color-ink) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--color-ink) 7%, transparent) 1px, transparent 1px);
     background-size: 96px 96px;
   }
   .link-underline {
@@ -173,7 +334,59 @@
   }
 }
 
+/* Sequenced diagrams: [data-seq] children animate in order once the parent is revealed. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-seq] [data-step] {
+    opacity: 0.25;
+    transform: translateY(8px);
+    transition:
+      opacity 0.6s var(--ease-architect),
+      transform 0.6s var(--ease-architect),
+      border-color 0.6s var(--ease-architect),
+      background-color 0.6s var(--ease-architect);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+  html.js [data-seq].is-visible [data-step] {
+    opacity: 1;
+    transform: none;
+  }
+  html.js [data-seq] [data-seq-line] {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.3s var(--ease-architect) 0.15s;
+  }
+  html.js [data-seq] [data-seq-line="y"] {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  html.js [data-seq].is-visible [data-seq-line] {
+    transform: none;
+  }
+  html.js [data-seq] [data-draw] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.9s var(--ease-architect);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  html.js [data-seq].is-visible [data-draw] {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Native View Transitions (progressive enhancement; see ViewTransitions.tsx). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+  animation-timing-function: var(--ease-architect);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

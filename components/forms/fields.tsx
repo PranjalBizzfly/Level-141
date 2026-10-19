@@ -1,9 +1,10 @@
 "use client";
 
-import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { AlertCircle, ChevronDown, Loader2 } from "lucide-react";
 import { useCallback, useRef, useState, type ReactNode } from "react";
 import { cx } from "@/components/ui/primitives";
-import { HONEYPOT_FIELD, type SubmitResponse } from "@/lib/forms/validation";
+import { countries, DEFAULT_COUNTRY, findCountry } from "@/lib/forms/countries";
+import { HONEYPOT_FIELD, type FieldErrors, type SubmitResponse } from "@/lib/forms/validation";
 
 /* ----------------------------------------------------------- Submission */
 
@@ -64,14 +65,14 @@ export function useFormSubmit(endpoint: string) {
 /* --------------------------------------------------------------- Fields */
 
 const inputBase =
-  "block w-full rounded-xl border bg-white px-4 py-3.5 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
+  "block w-full rounded-xl border bg-surface px-4 py-3.5 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
 
 export function inputClasses(error?: string) {
   return cx(
     inputBase,
     error
       ? "border-error focus:border-error focus:ring-error/15"
-      : "border-ink/15 hover:border-ink/30 focus:border-ink focus:ring-gold/35",
+      : "border-line-strong hover:border-ink/40 focus:border-gold-ink focus:ring-gold/40",
   );
 }
 
@@ -94,7 +95,7 @@ export function Field({
 }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="flex items-baseline justify-between gap-3 text-sm font-medium text-ink">
+      <label htmlFor={id} className="flex items-baseline gap-2 text-sm font-medium text-ink">
         <span>
           {label}
           {required ? (
@@ -117,6 +118,98 @@ export function Field({
           {error}
         </p>
       ) : null}
+    </div>
+  );
+}
+
+/**
+ * Shows each field's error only once the visitor has left that field (or
+ * tried to submit), then keeps it live while they correct it.
+ */
+export function useVisibleErrors<T>(live: FieldErrors<T>, server: Record<string, string>) {
+  const [seen, setSeen] = useState<Set<string>>(() => new Set());
+  const [submitted, setSubmitted] = useState(false);
+  const blur = useCallback((key: keyof T & string) => () => setSeen((s) => (s.has(key) ? s : new Set(s).add(key))), []);
+  const visible = {} as FieldErrors<T>;
+  for (const key of Object.keys(live) as Array<keyof T & string>) {
+    if (submitted || seen.has(key)) visible[key] = live[key];
+  }
+  return { errors: { ...server, ...visible } as FieldErrors<T>, blur, markSubmitted: () => setSubmitted(true) };
+}
+
+/** Live character count under a long-text field, warning near the limit. */
+export function CharCount({ id, value, max }: { id: string; value: string; max: number }) {
+  const n = value.length;
+  return (
+    <p id={`${id}-count`} aria-live="polite" className={cx("mt-1.5 text-right text-xs tabular-nums", n > max ? "text-error" : n > max * 0.9 ? "text-ink" : "text-muted")}>
+      {n.toLocaleString()} / {max.toLocaleString()}
+    </p>
+  );
+}
+
+/**
+ * Phone number with a country-code picker. The native <select> sits invisibly
+ * over a compact "AE +971" display so it stays fully accessible and uses the
+ * platform picker on mobile, while the visible control stays narrow.
+ */
+export function PhoneInput({
+  id,
+  country,
+  value,
+  error,
+  hint,
+  onCountryChange,
+  onChange,
+  onBlur,
+}: {
+  id: string;
+  country: string;
+  value: string;
+  error?: string;
+  hint?: string;
+  onCountryChange: (iso: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: () => void;
+}) {
+  const selected = findCountry(country) ?? findCountry(DEFAULT_COUNTRY)!;
+  const ring = error
+    ? "border-error focus-within:border-error focus-within:ring-error/15"
+    : "border-line-strong hover:border-ink/40 focus-within:border-gold-ink focus-within:ring-gold/40";
+  return (
+    <div className={cx("flex overflow-hidden rounded-xl border bg-surface transition-[border-color,box-shadow] duration-200 focus-within:ring-4", ring)}>
+      <div className="relative flex shrink-0 items-center gap-1.5 border-r border-line pl-4 pr-3 text-base">
+        <span aria-hidden className="text-sm font-medium tracking-[0.04em] text-muted">{selected.iso}</span>
+        <span aria-hidden className="tabular-nums">+{selected.dial}</span>
+        <ChevronDown aria-hidden className="size-4 text-muted" />
+        <select
+          id={`${id}-country`}
+          name={`${id}Country`}
+          aria-label="Country code"
+          autoComplete="tel-country-code"
+          value={selected.iso}
+          onChange={(e) => onCountryChange(e.target.value)}
+          onBlur={onBlur}
+          className="absolute inset-0 cursor-pointer opacity-0"
+        >
+          {countries.map((c) => (
+            <option key={c.iso} value={c.iso}>
+              {c.name} (+{c.dial})
+            </option>
+          ))}
+        </select>
+      </div>
+      <input
+        {...fieldA11y(id, error, hint)}
+        type="tel"
+        inputMode="tel"
+        autoComplete="tel-national"
+        placeholder={"0".repeat(selected.max).replace(/(\d{2})(\d{3})(\d+)/, "$1 $2 $3")}
+        maxLength={24}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        className="min-w-0 flex-1 bg-transparent px-4 py-3.5 text-base text-ink placeholder:text-muted/50 focus:outline-none"
+      />
     </div>
   );
 }
@@ -160,7 +253,7 @@ export function StatusMessage({ status }: { status: FormStatus }) {
   return (
     <div aria-live="polite" role="status" className="min-h-0">
       {status.state === "error" ? (
-        <p className="flex items-start gap-3 rounded-xl border border-error/30 bg-error/5 px-4 py-3 text-sm text-error">
+        <p className="flex items-start gap-3 rounded-xl border border-error/30 bg-error/5 p-4 text-sm text-error">
           <AlertCircle aria-hidden className="mt-0.5 size-4 shrink-0" />
           {status.message}
         </p>
@@ -179,9 +272,12 @@ export function SuccessPanel({ title, children }: { title: string; children: Rea
       }}
       tabIndex={-1}
       role="status"
-      className="animate-rise rounded-3xl border border-success/25 bg-white p-8 outline-none sm:p-10"
+      className="animate-rise rounded-[2rem] border border-success/25 bg-surface p-6 outline-none sm:p-10"
     >
-      <CheckCircle2 aria-hidden className="size-8 text-success" />
+      <svg aria-hidden viewBox="0 0 32 32" className="size-10 text-success" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <circle cx="16" cy="16" r="14" pathLength={1} className="motion-safe:animate-[draw-stroke_0.7s_var(--ease-architect)_both] [stroke-dasharray:1]" />
+        <path d="M10 16.5l4 4 8-9" pathLength={1} className="motion-safe:animate-[draw-stroke_0.5s_var(--ease-architect)_0.45s_both] [stroke-dasharray:1]" />
+      </svg>
       <h3 className="mt-5 text-2xl tracking-[-0.02em]">{title}</h3>
       <div className="mt-3 leading-relaxed text-muted">{children}</div>
     </div>

@@ -6,11 +6,18 @@ import { cx } from "@/components/ui/primitives";
 
 /**
  * Interactive VIBE™ framework: four dimensions as an accessible tab set.
- * Arrow keys move between dimensions; every panel is server-rendered so the
- * content is present even before hydration.
+ * Laid out as a specification sheet — an equal four-column tab strip above a
+ * single framed panel divided into headline, question, detail and outcomes
+ * zones. Arrow keys move between dimensions; every panel is server-rendered
+ * so the content is present even before hydration.
  */
 export function VibeExplorer() {
   const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState<"forward" | "back">("forward");
+  const select = (i: number) => {
+    setDirection(i >= active ? "forward" : "back");
+    setActive(i);
+  };
   const tabs = useRef<Array<HTMLButtonElement | null>>([]);
   const uid = useId();
 
@@ -22,17 +29,18 @@ export function VibeExplorer() {
     else if (e.key === "End") next = vibe.length - 1;
     else return;
     e.preventDefault();
-    setActive(next);
+    select(next);
     tabs.current[next]?.focus();
   };
 
   return (
-    <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+    <div>
+      {/* Tab strip: four equal columns, the active one marked by a solid top rule. */}
       <div
         role="tablist"
         aria-label="VIBE™ dimensions"
-        aria-orientation="vertical"
-        className="grid grid-cols-4 gap-2 lg:col-span-5 lg:grid-cols-1 lg:gap-0 lg:border-t lg:border-paper/15"
+        aria-orientation="horizontal"
+        className="grid grid-cols-4 gap-2 sm:gap-3 lg:gap-4"
       >
         {vibe.map((d, i) => {
           const selected = i === active;
@@ -47,47 +55,56 @@ export function VibeExplorer() {
               aria-selected={selected}
               aria-controls={`${uid}-panel-${i}`}
               tabIndex={selected ? 0 : -1}
-              onClick={() => setActive(i)}
+              onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
               className={cx(
-                "group relative flex flex-col items-center gap-2 rounded-2xl border px-2 py-4 text-left transition-colors duration-500 lg:flex-row lg:items-center lg:gap-6 lg:rounded-none lg:border-0 lg:border-b lg:border-paper/15 lg:px-0 lg:py-7",
-                selected ? "border-gold/60 bg-paper/[0.04] lg:bg-transparent" : "border-paper/10 hover:border-paper/30",
+                "group relative flex min-h-11 flex-col items-center gap-2 overflow-hidden rounded-2xl border px-2 pb-4 pt-5 text-center transition-colors duration-500 sm:items-start sm:px-5 sm:pb-5 sm:text-left lg:px-7 lg:pb-7 lg:pt-7",
+                selected
+                  ? "border-paper/25 bg-ink-2"
+                  : "border-paper/10 hover:border-paper/25 hover:bg-ink-2/50",
               )}
             >
               <span
                 aria-hidden
                 className={cx(
-                  "serif-accent text-5xl leading-none transition-colors duration-500 sm:text-6xl lg:w-20 lg:text-8xl",
-                  selected ? "text-gold" : "text-paper/30 group-hover:text-paper/60",
+                  "absolute inset-x-0 top-0 h-0.5 origin-left bg-gold transition-transform duration-700 ease-[var(--ease-architect)]",
+                  selected ? "scale-x-100" : "scale-x-0",
                 )}
-              >
-                {d.letter}
-              </span>
-              <span className="flex flex-col items-center lg:items-start">
-                <span
-                  className={cx(
-                    "text-[0.7rem] font-medium uppercase tracking-[0.14em] sm:text-xs lg:text-xl lg:normal-case lg:tracking-[-0.01em]",
-                    selected ? "text-paper" : "text-paper/60",
-                  )}
-                >
-                  <span className="lg:hidden">{d.name.split(" ")[0]}</span>
-                  <span className="hidden lg:inline">{d.name}</span>
-                </span>
-                {d.tag !== d.name ? <span className="mt-1 hidden text-sm text-paper/45 lg:block">{d.tag}</span> : null}
+              />
+              <span aria-hidden className="eyebrow hidden tabular-nums text-paper-muted sm:block">
+                {String(i + 1).padStart(2, "0")}
               </span>
               <span
                 aria-hidden
                 className={cx(
-                  "absolute bottom-[-1px] left-0 hidden h-px bg-gold transition-[width] duration-700 ease-[var(--ease-architect)] lg:block",
-                  selected ? "w-full" : "w-0",
+                  "serif-accent text-4xl leading-none transition-colors duration-500 sm:mt-4 sm:text-6xl lg:text-7xl",
+                  selected ? "text-gold" : "text-paper/40 group-hover:text-paper/70",
                 )}
-              />
+              >
+                {d.letter}
+              </span>
+              <span className="flex flex-col sm:mt-4">
+                <span
+                  className={cx(
+                    "text-[0.75rem] font-medium uppercase tracking-[0.12em] sm:text-base sm:normal-case sm:tracking-[-0.01em] lg:text-lg",
+                    selected ? "text-paper" : "text-paper-muted",
+                  )}
+                >
+                  <span className="sm:hidden">{d.name.split(" ")[0]}</span>
+                  <span className="hidden sm:inline">{d.name}</span>
+                </span>
+                {d.tag !== d.name ? (
+                  <span className="mt-1 hidden text-sm leading-snug text-paper-muted lg:block">{d.tag}</span>
+                ) : null}
+              </span>
             </button>
           );
         })}
       </div>
 
-      <div className="lg:col-span-7">
+      {/* Panel: editorial composition — story and scope on the left, a single
+          feature card for the strategic question on the right. No table rules. */}
+      <div className="mt-12 sm:mt-14 lg:mt-16">
         {vibe.map((d, i) => (
           <div
             key={d.letter}
@@ -96,36 +113,49 @@ export function VibeExplorer() {
             aria-labelledby={`${uid}-tab-${i}`}
             hidden={i !== active}
             tabIndex={0}
-            className="animate-rise outline-none"
+            className={cx(
+              "grid gap-10 outline-none lg:grid-cols-12 lg:gap-16",
+              direction === "forward" ? "animate-slide-from-right" : "animate-slide-from-left",
+            )}
           >
-            <p className="eyebrow text-gold">
-              {d.letter} — {d.full}
-            </p>
-            <h3 className="mt-5 text-3xl leading-tight tracking-[-0.025em] sm:text-4xl">{d.headline}</h3>
-            <p className="mt-6 text-lg leading-relaxed text-paper/75">{d.body}</p>
+            <div className="lg:col-span-7">
+              <p className="eyebrow text-gold">
+                {d.letter} — {d.full}
+              </p>
+              <h3 className="mt-5 text-3xl leading-tight tracking-[-0.025em] sm:text-[2.75rem] sm:leading-[1.1]">
+                {d.headline}
+              </h3>
+              <p className="measure mt-6 text-lg leading-relaxed text-paper/75">{d.body}</p>
 
-            <div className="mt-10 grid gap-8 border-t border-paper/15 pt-8 sm:grid-cols-2">
-              <div>
-                <p className="eyebrow text-paper/50">The strategic question</p>
-                <p className="serif-accent mt-3 text-2xl text-gold-soft">“{d.question}”</p>
-                <p className="mt-5 text-sm leading-relaxed text-paper/60">{d.detail}</p>
-              </div>
-              <div>
-                <p className="eyebrow text-paper/50">What we architect</p>
-                <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-paper/80">
-                  {d.focus.map((f) => (
-                    <li key={f} className="flex gap-3">
-                      <span aria-hidden className="mt-[0.65em] h-px w-3 shrink-0 bg-gold" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p className="eyebrow mt-12 text-paper-muted">What we architect</p>
+              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+                {d.focus.map((f) => (
+                  <li
+                    key={f}
+                    className="flex items-center gap-3 rounded-xl border border-paper/12 px-4 py-3 text-[0.9375rem] leading-snug text-paper/85 transition-colors duration-300 hover:border-paper/35"
+                  >
+                    <span aria-hidden className="h-px w-3 shrink-0 bg-gold" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="mt-8 rounded-2xl border border-paper/10 bg-paper/[0.03] px-6 py-5 text-sm leading-relaxed text-paper/70">
-              <span className="eyebrow mr-3 text-gold">Outcomes</span>
-              {d.outcomes}
-            </p>
+
+            <aside className="relative overflow-hidden rounded-[2rem] bg-ink-2 p-7 sm:p-10 lg:col-span-5 lg:self-center">
+              <span
+                aria-hidden
+                className="serif-accent pointer-events-none absolute -right-4 -top-10 select-none text-[14rem] leading-none text-paper/[0.06] sm:text-[18rem]"
+              >
+                {d.letter}
+              </span>
+              <p className="eyebrow relative text-paper-muted">The strategic question</p>
+              <p className="serif-accent relative mt-5 text-3xl leading-snug text-gold-soft sm:text-4xl">“{d.question}”</p>
+              <p className="relative mt-6 leading-relaxed text-paper/70">{d.detail}</p>
+              <div className="relative mt-8 border-t border-paper/12 pt-6">
+                <p className="eyebrow text-gold">Outcomes</p>
+                <p className="mt-3 text-lg leading-snug tracking-[-0.01em] text-paper">{d.outcomes}</p>
+              </div>
+            </aside>
           </div>
         ))}
       </div>

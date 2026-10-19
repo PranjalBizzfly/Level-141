@@ -1,4 +1,7 @@
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
+).replace(/\/$/, "");
 
 export const site = {
   name: "Level141",
@@ -11,7 +14,7 @@ export const site = {
   primaryCta: { label: "Find Your Level", href: "/start-your-next-level" },
 } as const;
 
-export type NavItem = { label: string; href: string; short?: string };
+export type NavItem = { label: string; href: string };
 
 export const routes = {
   home: "/",
@@ -27,12 +30,12 @@ export const routes = {
 /** Primary navigation, in the order given by the LEVEL141 WEBSITE document. */
 export const mainNav: NavItem[] = [
   { label: "Home", href: routes.home },
-  { label: "Personal Brand Architecture", short: "Personal Brand", href: routes.personalBrand },
-  { label: "Growth Architecture", short: "Growth", href: routes.growth },
-  { label: "How We Architect Growth", short: "How We Work", href: routes.how },
+  { label: "Personal Brand Architecture", href: routes.personalBrand },
+  { label: "Growth Architecture", href: routes.growth },
+  { label: "How We Architect Growth", href: routes.how },
   { label: "Insights", href: routes.insights },
   { label: "About", href: routes.about },
-  { label: "Start Your Next Level", short: "Contact", href: routes.contact },
+  { label: "Start Your Next Level", href: routes.contact },
 ];
 
 export const footerNav = {

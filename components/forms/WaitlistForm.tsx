@@ -2,9 +2,10 @@
 
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { normaliseWaitlist, validateWaitlist, type FieldErrors, type WaitlistInput } from "@/lib/forms/validation";
+import { limits, normaliseWaitlist, validateWaitlist, type WaitlistInput } from "@/lib/forms/validation";
 import { cx } from "@/components/ui/primitives";
 import {
+  CharCount,
   Field,
   Honeypot,
   StatusMessage,
@@ -13,6 +14,7 @@ import {
   fieldA11y,
   inputClasses,
   useFormSubmit,
+  useVisibleErrors,
 } from "./fields";
 
 const empty: WaitlistInput = { name: "", email: "", company: "", designation: "", note: "" };
@@ -20,24 +22,19 @@ const empty: WaitlistInput = { name: "", email: "", company: "", designation: ""
 /** Growth Architecture™ waitlist. Registers interest only — it does not book or start an engagement. */
 export function WaitlistForm() {
   const [values, setValues] = useState<WaitlistInput>(empty);
-  const [errors, setErrors] = useState<FieldErrors<WaitlistInput>>({});
-  const [touched, setTouched] = useState(false);
   const { status, submit, serverErrors, markStarted } = useFormSubmit("/api/waitlist");
-  const allErrors = { ...serverErrors, ...errors } as FieldErrors<WaitlistInput>;
+  const live = validateWaitlist(normaliseWaitlist(values));
+  const { errors: allErrors, blur, markSubmitted } = useVisibleErrors<WaitlistInput>(live, serverErrors);
 
   const set = (key: keyof WaitlistInput) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     markStarted();
-    const next = { ...values, [key]: e.target.value };
-    setValues(next);
-    if (touched) setErrors(validateWaitlist(normaliseWaitlist(next)));
+    setValues((v) => ({ ...v, [key]: e.target.value }));
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTouched(true);
-    const found = validateWaitlist(normaliseWaitlist(values));
-    setErrors(found);
-    const first = Object.keys(found)[0];
+    markSubmitted();
+    const first = Object.keys(live)[0];
     if (first) {
       document.getElementById(`wl-${first}`)?.focus();
       return;
@@ -66,8 +63,10 @@ export function WaitlistForm() {
             type="text"
             autoComplete="name"
             required
+            maxLength={limits.name}
             value={values.name}
             onChange={set("name")}
+            onBlur={blur("name")}
             className={inputClasses(allErrors.name)}
           />
         </Field>
@@ -77,9 +76,13 @@ export function WaitlistForm() {
             type="email"
             inputMode="email"
             autoComplete="email"
+            autoCapitalize="none"
+            spellCheck={false}
             required
+            maxLength={limits.email}
             value={values.email}
             onChange={set("email")}
+            onBlur={blur("email")}
             className={inputClasses(allErrors.email)}
           />
         </Field>
@@ -89,8 +92,10 @@ export function WaitlistForm() {
             type="text"
             autoComplete="organization"
             required
+            maxLength={limits.short}
             value={values.company}
             onChange={set("company")}
+            onBlur={blur("company")}
             className={inputClasses(allErrors.company)}
           />
         </Field>
@@ -99,19 +104,25 @@ export function WaitlistForm() {
             {...fieldA11y("wl-designation", allErrors.designation)}
             type="text"
             autoComplete="organization-title"
+            maxLength={limits.short}
             value={values.designation}
             onChange={set("designation")}
+            onBlur={blur("designation")}
             className={inputClasses(allErrors.designation)}
           />
         </Field>
         <Field id="wl-note" label="What is your organization's next level?" error={allErrors.note} className="sm:col-span-2">
           <textarea
             {...fieldA11y("wl-note", allErrors.note)}
+            aria-describedby={[allErrors.note ? "wl-note-error" : null, "wl-note-count"].filter(Boolean).join(" ")}
             rows={4}
+            maxLength={limits.long}
             value={values.note}
             onChange={set("note")}
+            onBlur={blur("note")}
             className={cx(inputClasses(allErrors.note), "resize-y")}
           />
+          <CharCount id="wl-note" value={values.note} max={limits.long} />
         </Field>
       </div>
       <Honeypot />
@@ -121,7 +132,7 @@ export function WaitlistForm() {
           Join the Waitlist
           <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
         </SubmitButton>
-        <p className="max-w-xs text-xs leading-relaxed text-muted">
+        <p className="max-w-xs text-sm leading-relaxed text-muted">
           Registering interest is not a booking or an engagement. We&apos;ll only use your details to contact you about
           availability.
         </p>

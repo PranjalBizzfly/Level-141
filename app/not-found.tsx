@@ -4,18 +4,18 @@ import { routes } from "@/lib/site";
 
 export default function NotFound() {
   return (
-    <section className="on-dark relative flex min-h-[80vh] items-center bg-ink pb-20 pt-36 text-paper">
+    <section className="on-dark relative flex min-h-[80vh] items-center bg-ink pb-16 pt-32 sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-44 text-paper">
       <div aria-hidden className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
       <div className="container-x relative">
-        <div className="relative inline-block px-10 py-8">
-          <BracketClose className="absolute right-0 top-0 size-8 text-gold" />
-          <BracketOpen className="absolute bottom-0 left-0 size-8 text-gold" />
+        <div className="relative inline-block px-6 py-8 sm:px-14 sm:py-14">
+          <BracketClose className="absolute right-0 top-0 size-6 text-gold sm:size-8" />
+          <BracketOpen className="absolute bottom-0 left-0 size-6 text-paper/40 sm:size-8" />
           <p className="eyebrow text-gold">404 · Page not found</p>
-          <h1 className="display mt-6 text-5xl sm:text-7xl">
+          <h1 className="display mt-6 text-[2.5rem] sm:text-6xl lg:text-7xl">
             This level <span className="serif-accent text-gold">doesn&apos;t exist.</span>
           </h1>
         </div>
-        <p className="mt-8 max-w-lg text-lg text-paper/65">The page you&apos;re looking for may have moved. Let&apos;s get you back on track.</p>
+        <p className="mt-8 max-w-lg text-base sm:text-lg text-paper/75">The page you&apos;re looking for may have moved. Let&apos;s get you back on track.</p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
           <ButtonLink href={routes.home} variant="gold">
             Back to home

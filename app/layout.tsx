@@ -1,14 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Geist, Instrument_Serif } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ScrollToggle } from "@/components/layout/ScrollToggle";
+import { themeScript } from "@/lib/theme";
 import { RevealObserver } from "@/components/motion/RevealObserver";
+import { ViewTransitions } from "@/components/motion/ViewTransitions";
+import { Interactions } from "@/components/motion/Interactions";
 import { site, siteUrl } from "@/lib/site";
 import "./globals.css";
+import "./motion.css";
 
-const interTight = Inter_Tight({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter-tight",
+  variable: "--font-geist",
   display: "swap",
 });
 
@@ -41,7 +46,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0d0d0d",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -60,10 +68,20 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${interTight.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${geist.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
       <head>
-        {/* Marks JS as available so reveal animations may hide content until in view. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/*
+          Marks JS as available so reveal animations may hide content until in view.
+          Also opens every page on its hero, strictly: no scroll restoration on reload, and
+          a #section in the address is dropped before the browser can jump to it.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('js');try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(history.state,'',location.pathname+location.search);window.scrollTo(0,0)}catch(e){}",
+          }}
+        />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         <Header />
@@ -71,7 +89,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <ScrollToggle />
         <RevealObserver />
+        <ViewTransitions />
+        <Interactions />
+        <div aria-hidden className="scroll-progress" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

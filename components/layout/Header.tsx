@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { LogoLockup } from "@/components/brand/Logo";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { cx } from "@/components/ui/primitives";
 import { mainNav, routes, site } from "@/lib/site";
 
@@ -68,6 +69,7 @@ export function Header() {
 
   return (
     <header
+      data-solid={scrolled || open || pathname === routes.contact ? "" : undefined}
       className={cx(
         "on-dark fixed inset-x-0 top-0 z-50 text-paper transition-[background-color,border-color,backdrop-filter] duration-500",
         scrolled || open || pathname === routes.contact
@@ -81,13 +83,18 @@ export function Header() {
       >
         Skip to content
       </a>
-      <div className="container-x flex h-[4.5rem] items-center justify-between gap-6 lg:h-20">
-        <Link href="/" aria-label="Level141 — Home" className="relative z-10 shrink-0 py-2">
+      <div
+        className={cx(
+          "container-x flex items-center justify-between gap-6 transition-[height] duration-300 ease-[var(--ease-architect)]",
+          scrolled ? "h-14 sm:h-16" : "h-14 sm:h-[4.5rem] lg:h-20",
+        )}
+      >
+        <Link href="/" aria-label="Level141 — Home" className="relative z-10 flex min-h-11 shrink-0 items-center">
           <LogoLockup className="h-[1.15rem] w-auto sm:h-5" title="Level141" />
         </Link>
 
         <nav aria-label="Primary" className="hidden xl:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-0.5 2xl:gap-1">
             {mainNav.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -96,14 +103,13 @@ export function Header() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cx(
-                      "relative block rounded-full px-3 py-2 text-[0.82rem] tracking-[0.01em] transition-colors duration-300",
-                      active ? "text-gold" : "text-paper/75 hover:text-paper",
+                      "relative block whitespace-nowrap rounded-full px-1.5 py-2 text-[0.8rem] tracking-[0.005em] transition-colors duration-300 2xl:px-3.5 2xl:text-[0.875rem]",
+                      active ? "text-paper" : "text-paper-muted hover:text-paper",
                     )}
                   >
-                    <span className="2xl:hidden">{item.short ?? item.label}</span>
-                    <span className="hidden 2xl:inline">{item.label}</span>
+                    {item.label}
                     {active ? (
-                      <span aria-hidden className="absolute inset-x-3 -bottom-0.5 h-px bg-gold" />
+                      <span aria-hidden className="absolute inset-x-2 -bottom-1 h-0.5 rounded-full bg-gold 2xl:inset-x-3" />
                     ) : null}
                   </Link>
                 </li>
@@ -112,10 +118,11 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <ThemeToggle className="relative z-10 shrink-0" />
           <Link
             href={site.primaryCta.href}
-            className="group hidden min-h-11 items-center gap-2 rounded-full bg-gold px-5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-gold-soft sm:inline-flex"
+            className="group hidden min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gold px-5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-gold-soft sm:inline-flex xl:hidden 2xl:inline-flex"
           >
             {site.primaryCta.label}
             <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -127,7 +134,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="relative z-10 grid size-11 place-items-center rounded-full border border-paper/20 transition-colors hover:border-gold xl:hidden"
+            className="relative z-10 grid size-10 place-items-center sm:size-11 rounded-full border border-paper/20 transition-colors hover:border-gold xl:hidden"
           >
             {open ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
           </button>
@@ -138,7 +145,10 @@ export function Header() {
         id="mobile-menu"
         ref={panelRef}
         hidden={!open}
-        className="absolute inset-x-0 top-full h-[calc(100dvh-4.5rem)] overflow-y-auto bg-ink lg:h-[calc(100dvh-5rem)] xl:hidden"
+        className={cx(
+          "absolute inset-x-0 top-full overflow-y-auto bg-ink xl:hidden",
+          scrolled ? "h-[calc(100dvh-3.5rem)] sm:h-[calc(100dvh-4rem)]" : "h-[calc(100dvh-3.5rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)]",
+        )}
       >
         <nav aria-label="Mobile" className="container-x flex min-h-full flex-col justify-between pb-10 pt-6">
           <ul className="divide-y divide-paper/10 border-y border-paper/10">
@@ -154,7 +164,7 @@ export function Header() {
                       active ? "text-gold" : "text-paper hover:text-gold",
                     )}
                   >
-                    <span className="eyebrow w-6 text-paper/40 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="eyebrow w-6 text-paper-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                     {item.label}
                   </Link>
                 </li>
@@ -169,7 +179,7 @@ export function Header() {
               {site.primaryCta.label}
               <ArrowRight aria-hidden className="size-5" />
             </Link>
-            <p className="eyebrow mt-8 text-paper/45">{site.brandLine}</p>
+            <p className="eyebrow mt-8 text-paper-muted">{site.brandLine}</p>
           </div>
         </nav>
       </div>

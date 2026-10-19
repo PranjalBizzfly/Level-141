@@ -4,54 +4,68 @@ import Link from "next/link";
 import { ArrowRight, Info } from "lucide-react";
 import { useState } from "react";
 import { routes } from "@/lib/site";
+import { DEFAULT_COUNTRY } from "@/lib/forms/countries";
 import {
   interestOptions,
+  limits,
   normaliseContact,
   validateContact,
   type ContactInput,
-  type FieldErrors,
 } from "@/lib/forms/validation";
 import {
+  CharCount,
   Field,
   Honeypot,
+  PhoneInput,
   StatusMessage,
   SubmitButton,
   SuccessPanel,
   fieldA11y,
   inputClasses,
   useFormSubmit,
+  useVisibleErrors,
 } from "./fields";
 import { cx } from "@/components/ui/primitives";
 
-const empty: ContactInput = { interest: "", name: "", company: "", designation: "", email: "", phone: "", level: "" };
+const empty: ContactInput = {
+  interest: "",
+  name: "",
+  company: "",
+  designation: "",
+  email: "",
+  phoneCountry: DEFAULT_COUNTRY,
+  phone: "",
+  level: "",
+};
 
 export function ContactForm({ initialInterest }: { initialInterest?: string }) {
   const [values, setValues] = useState<ContactInput>({
     ...empty,
     interest: interestOptions.some((o) => o.value === initialInterest) ? initialInterest! : "",
   });
-  const [errors, setErrors] = useState<FieldErrors<ContactInput>>({});
-  const [touched, setTouched] = useState(false);
   const { status, submit, serverErrors, markStarted } = useFormSubmit("/api/contact");
-
-  const allErrors = { ...serverErrors, ...errors } as FieldErrors<ContactInput>;
+  const live = validateContact(normaliseContact(values));
+  const { errors: allErrors, blur, markSubmitted } = useVisibleErrors<ContactInput>(live, serverErrors);
   const gaSelected = values.interest === "growth-architecture";
 
-  const set = (key: keyof ContactInput) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const update = (key: keyof ContactInput, value: string) => {
     markStarted();
-    const next = { ...values, [key]: e.target.value };
-    setValues(next);
-    if (touched) setErrors(validateContact(normaliseContact(next)));
+    setValues((v) => ({ ...v, [key]: value }));
   };
+  const set = (key: keyof ContactInput) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    update(key, e.target.value);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTouched(true);
-    const found = validateContact(normaliseContact(values));
-    setErrors(found);
-    const firstKey = Object.keys(found)[0];
+    markSubmitted();
+    const firstKey = Object.keys(live)[0];
     if (firstKey) {
-      const target = firstKey === "interest" ? `interest-${values.interest || interestOptions[0].value}` : firstKey;
+      const target =
+        firstKey === "interest"
+          ? `interest-${values.interest || interestOptions[0].value}`
+          : firstKey === "phoneCountry"
+            ? "phone-country"
+            : firstKey;
       document.getElementById(target)?.focus();
       return;
     }
@@ -70,7 +84,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
   }
 
   return (
-    <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-8" aria-describedby="form-required-note">
+    <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-8 sm:space-y-10" aria-describedby="form-required-note">
       <p id="form-required-note" className="text-sm text-muted">
         Fields marked <span className="text-gold-ink">*</span> are required.
       </p>
@@ -87,8 +101,8 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                 key={o.value}
                 htmlFor={`interest-${o.value}`}
                 className={cx(
-                  "relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border bg-white px-4 py-3 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-gold/35",
-                  checked ? "border-ink" : "border-ink/15 hover:border-ink/35",
+                  "relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border bg-surface px-4 py-3 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-gold/35",
+                  checked ? "border-gold-ink bg-ink/5" : "border-line-strong hover:border-ink/40",
                 )}
               >
                 <input
@@ -98,11 +112,11 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                   value={o.value}
                   checked={checked}
                   onChange={set("interest")}
-                  className="size-4 accent-[#0d0d0d]"
+                  className="size-4 accent-gold-ink"
                 />
                 <span className="text-[0.95rem]">{o.label}</span>
                 {o.value === "growth-architecture" ? (
-                  <span className="ml-auto rounded-full bg-paper-2 px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.1em] text-muted">
+                  <span className="ml-auto rounded-full bg-paper-2 px-2.5 py-1 text-[0.75rem] uppercase tracking-[0.08em] text-muted">
                     Waitlist
                   </span>
                 ) : null}
@@ -111,7 +125,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
           })}
         </div>
         {gaSelected ? (
-          <div className="mt-4 flex gap-3 rounded-xl border border-gold-ink/25 bg-gold/15 p-4 text-sm leading-relaxed text-ink">
+          <div className="mt-4 flex gap-3 rounded-xl border border-gold-ink/25 bg-ink/5 p-4 text-sm leading-relaxed text-ink">
             <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-gold-ink" />
             <p>
               Growth Architecture™ is not yet open for engagements. You can register your organization&apos;s interest
@@ -128,15 +142,17 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
         ) : null}
       </fieldset>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
         <Field id="name" label="Name" required error={allErrors.name}>
           <input
             {...fieldA11y("name", allErrors.name)}
             type="text"
             autoComplete="name"
             required
+            maxLength={limits.name}
             value={values.name}
             onChange={set("name")}
+            onBlur={blur("name")}
             className={inputClasses(allErrors.name)}
           />
         </Field>
@@ -145,8 +161,10 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
             {...fieldA11y("company", allErrors.company)}
             type="text"
             autoComplete="organization"
+            maxLength={limits.short}
             value={values.company}
             onChange={set("company")}
+            onBlur={blur("company")}
             className={inputClasses(allErrors.company)}
           />
         </Field>
@@ -155,8 +173,10 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
             {...fieldA11y("designation", allErrors.designation)}
             type="text"
             autoComplete="organization-title"
+            maxLength={limits.short}
             value={values.designation}
             onChange={set("designation")}
+            onBlur={blur("designation")}
             className={inputClasses(allErrors.designation)}
           />
         </Field>
@@ -166,32 +186,47 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
             type="email"
             inputMode="email"
             autoComplete="email"
+            autoCapitalize="none"
+            spellCheck={false}
             required
+            maxLength={limits.email}
             value={values.email}
             onChange={set("email")}
+            onBlur={blur("email")}
             className={inputClasses(allErrors.email)}
           />
         </Field>
-        <Field id="phone" label="Phone" hint="Include your country code." error={allErrors.phone} className="sm:col-span-2">
-          <input
-            {...fieldA11y("phone", allErrors.phone, "Include your country code.")}
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
+        <Field
+          id="phone"
+          label="Phone"
+          hint="Choose your country code, then enter your number."
+          error={allErrors.phone ?? allErrors.phoneCountry}
+          className="sm:col-span-2"
+        >
+          <PhoneInput
+            id="phone"
+            country={values.phoneCountry}
             value={values.phone}
+            error={allErrors.phone ?? allErrors.phoneCountry}
+            hint="Choose your country code, then enter your number."
+            onCountryChange={(iso) => update("phoneCountry", iso)}
             onChange={set("phone")}
-            className={inputClasses(allErrors.phone)}
+            onBlur={blur("phone")}
           />
         </Field>
         <Field id="level" label="What level are you trying to reach?" required error={allErrors.level} className="sm:col-span-2">
           <textarea
             {...fieldA11y("level", allErrors.level)}
+            aria-describedby={[allErrors.level ? "level-error" : null, "level-count"].filter(Boolean).join(" ")}
             rows={5}
             required
+            maxLength={limits.long}
             value={values.level}
             onChange={set("level")}
+            onBlur={blur("level")}
             className={cx(inputClasses(allErrors.level), "resize-y")}
           />
+          <CharCount id="level" value={values.level} max={limits.long} />
         </Field>
       </div>
 

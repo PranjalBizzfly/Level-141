@@ -1,6 +1,8 @@
-import { BracketClose, BracketOpen, LogoSymbol } from "@/components/brand/Logo";
+import { BracketClose, LogoSymbol } from "@/components/brand/Logo";
+import { Mark141 } from "@/components/brand/Mark141";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader } from "@/components/ui/primitives";
+import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, cx } from "@/components/ui/primitives";
+import { Photo } from "@/components/ui/Photo";
 import { principles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
@@ -16,6 +18,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        image="/images/about-atrium-levels-muted.webp"
         eyebrow="About Level141"
         title={
           <>
@@ -29,20 +32,20 @@ export default function AboutPage() {
           </p>
         }
         aside={
-          <div aria-hidden className="relative mx-auto aspect-square w-48 sm:w-64 lg:w-full lg:max-w-xs">
-            <BracketClose className="absolute right-0 top-0 size-1/3 text-gold" />
-            <BracketOpen className="absolute bottom-0 left-0 size-1/3 text-paper/40" />
-            <p className="absolute inset-0 grid place-items-center text-6xl font-light tracking-[-0.06em] sm:text-7xl">141</p>
-          </div>
+          <Mark141
+            className="mx-auto w-48 sm:w-64 lg:w-full lg:max-w-xs"
+            textClassName="text-6xl sm:text-7xl"
+            openClassName="text-paper/40"
+          />
         }
       />
 
       {/* ---------------------------------------------------------- Belief */}
       <Section tone="paper" labelledBy="belief-title">
-        <div className="container-x grid gap-14 lg:grid-cols-12">
+        <div className="container-x grid gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-6">
             <p className="eyebrow text-gold-ink">A simple belief</p>
-            <h2 id="belief-title" className="display mt-6 text-[2.4rem] sm:text-5xl lg:text-6xl">
+            <h2 id="belief-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
               Businesses need clarity about what their <span className="serif-accent">next level requires.</span>
             </h2>
           </Reveal>
@@ -69,17 +72,17 @@ export default function AboutPage() {
         <div className="container-x relative">
           <Reveal className="mx-auto max-w-5xl text-center">
             <p className="eyebrow text-gold">Our purpose</p>
-            <h2 id="purpose-title" className="display mt-8 text-[2.6rem] sm:text-6xl lg:text-[5.5rem]">
+            <h2 id="purpose-title" className="display mt-6 text-[2.5rem] sm:mt-8 sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
               Architect the next level <span className="serif-accent text-gold">of growth.</span>
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-16 grid max-w-5xl gap-px overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
+          <ul className="mx-auto mt-12 grid max-w-5xl gap-px sm:mt-14 lg:mt-16 overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
             {[
               ["For people.", "Founders, leaders, investors and experts whose capability is bigger than their current visibility."],
               ["For businesses.", "Organizations whose ambition has outgrown their current growth system."],
               ["For ideas", "with the potential to become significantly bigger than they are today."],
             ].map(([title, body], i) => (
-              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-8 sm:p-10">
+              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-6 sm:p-8 lg:p-10">
                 <p className="text-2xl tracking-[-0.02em]">{title}</p>
                 <p className="mt-3 leading-relaxed text-paper/60">{body}</p>
               </Reveal>
@@ -100,13 +103,29 @@ export default function AboutPage() {
               </>
             }
           />
-          <ol className="mt-16 grid gap-6 md:grid-cols-2">
+          <ol className="mt-12 grid gap-4 sm:mt-14 sm:gap-6 md:grid-cols-2 lg:mt-16">
             {principles.map((p, i) => (
-              <Reveal as="li" key={p.name} delay={i * 80} className="group relative rounded-[2rem] bg-[#fbfaf7] p-8 sm:p-12">
-                <span className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-10 text-3xl tracking-[-0.025em]">{p.name}</h3>
-                <p className="mt-4 text-lg leading-relaxed text-muted">{p.body}</p>
-                <BracketClose className="absolute right-8 top-8 size-5 text-ink/15 transition-colors duration-500 group-hover:text-gold-ink" />
+              <Reveal
+                as="li"
+                key={p.name}
+                delay={i * 80}
+                className={cx(
+                  "relative flex flex-col rounded-[2rem] p-6 sm:p-10 lg:p-12 md:min-h-[20rem]",
+                  i === 0 || i === 3 ? "on-dark bg-ink text-paper" : "border border-line bg-surface",
+                )}
+              >
+                <span
+                  aria-hidden
+                  className={cx("serif-accent text-6xl leading-none", i === 0 || i === 3 ? "text-gold" : "text-gold-ink")}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-auto pt-12 text-3xl tracking-[-0.025em]">{p.name}</h3>
+                <p className={cx("mt-4 text-lg leading-relaxed", i === 0 || i === 3 ? "text-paper/80" : "text-muted")}>{p.body}</p>
+                <BracketClose
+                  aria-hidden
+                  className={cx("absolute right-6 top-6 size-5 sm:right-8 sm:top-8", i === 0 || i === 3 ? "text-gold/60" : "text-gold-ink/50")}
+                />
               </Reveal>
             ))}
           </ol>
@@ -115,10 +134,10 @@ export default function AboutPage() {
 
       {/* ---------------------------------------------------------- Two architectures */}
       <Section tone="paper" labelledBy="offer-title">
-        <div className="container-x grid gap-14 lg:grid-cols-12">
+        <div className="container-x grid gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-gold-ink">What we do</p>
-            <h2 id="offer-title" className="display mt-6 text-[2.4rem] sm:text-5xl">
+            <h2 id="offer-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
               Two architectures, <span className="serif-accent">kept distinct.</span>
             </h2>
             <p className="mt-8 text-lg leading-relaxed text-muted">
@@ -127,8 +146,8 @@ export default function AboutPage() {
               credibility, influence and opportunity so that growth becomes deliberate, governed and measurable.
             </p>
           </Reveal>
-          <div className="grid gap-6 lg:col-span-6 lg:col-start-7">
-            <Reveal className="on-dark rounded-[2rem] bg-ink p-8 text-paper sm:p-10">
+          <div className="grid gap-4 sm:gap-6 lg:col-span-6 lg:col-start-7">
+            <Reveal className="on-dark rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
               <div className="flex items-center justify-between">
                 <p className="eyebrow text-gold">For people · VIBE™</p>
                 <span className="text-xs text-gold">Now available</span>
@@ -142,7 +161,7 @@ export default function AboutPage() {
                 Explore
               </ButtonLink>
             </Reveal>
-            <Reveal delay={100} className="rounded-[2rem] border border-ink/12 p-8 sm:p-10">
+            <Reveal delay={100} className="rounded-[2rem] border border-ink/12 p-6 sm:p-10">
               <div className="flex items-center justify-between">
                 <p className="eyebrow text-gold-ink">For organizations · PEAK™</p>
                 <span className="text-xs text-muted">Waitlist</span>
@@ -162,17 +181,25 @@ export default function AboutPage() {
       {/* ---------------------------------------------------------- Ecosystem */}
       <Section tone="white" labelledBy="ecosystem-title" className="!py-16 sm:!py-20">
         <div className="container-x">
-          <Reveal>
-            <BracketFrame tone="ink" size="md" className="grid gap-8 md:grid-cols-12 md:items-center">
-              <LogoSymbol className="size-14 text-ink md:col-span-1" title="Level141 symbol" />
-              <div className="md:col-span-7">
-                <h2 id="ecosystem-title" className="text-2xl tracking-[-0.02em] sm:text-3xl">
+          <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-12">
+            <Reveal className="md:col-span-5">
+              <Photo
+                src="/images/about-meeting-room.webp"
+                alt="An empty modern meeting room with a long table and chairs, a hazy city skyline in warm daylight beyond the windows"
+                className="aspect-[4/3]"
+                sizes="(min-width: 768px) 40vw, 100vw"
+              />
+            </Reveal>
+            <Reveal delay={120} className="md:col-span-7">
+              <BracketFrame tone="ink" size="md">
+                <LogoSymbol className="size-12 text-ink" title="Level141 symbol" />
+                <h2 id="ecosystem-title" className="mt-6 text-2xl tracking-[-0.02em] sm:text-3xl">
                   Part of the 1XL ecosystem, headquartered in Dubai.
                 </h2>
-              </div>
-              <p className="eyebrow text-muted md:col-span-4 md:text-right">Level141 — Growth by Design.</p>
-            </BracketFrame>
-          </Reveal>
+                <p className="eyebrow mt-6 text-muted">Level141 — Growth by Design.</p>
+              </BracketFrame>
+            </Reveal>
+          </div>
         </div>
       </Section>
 

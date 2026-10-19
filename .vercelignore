@@ -1,0 +1,8 @@
+.extract
+node_modules
+.next
+Docs
+.env*
+!.env.example
+
+private

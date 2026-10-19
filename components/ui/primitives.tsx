@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
+import { HeroBackdrop } from "@/components/ui/Photo";
 
 export function cx(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -16,13 +17,16 @@ type RevealProps = {
   className?: string;
   children: ReactNode;
   id?: string;
+  /** Soft cursor-following glow (dark surfaces, fine pointers only). */
+  spotlight?: boolean;
 };
 
-export function Reveal({ as: Tag = "div", delay = 0, variant = "rise", className, children, id }: RevealProps) {
+export function Reveal({ as: Tag = "div", delay = 0, variant = "rise", className, children, id, spotlight }: RevealProps) {
   return (
     <Tag
       id={id}
       data-reveal={variant}
+      data-spotlight={spotlight ? "" : undefined}
       className={className}
       style={delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined}
     >
@@ -56,7 +60,11 @@ type ButtonLinkProps = Omit<ComponentProps<typeof Link>, "className"> & {
 export function ButtonLink({ variant = "solid", className, children, external, ...props }: ButtonLinkProps) {
   const Icon = external ? ArrowUpRight : ArrowRight;
   return (
-    <Link className={cx(buttonBase, buttonStyles[variant], className)} {...props}>
+    <Link
+      data-magnetic={variant === "gold" || variant === "solid" ? "" : undefined}
+      className={cx(buttonBase, buttonStyles[variant], className)}
+      {...props}
+    >
       <span className={variant.startsWith("ghost") ? "link-underline" : undefined}>{children}</span>
       <Icon
         aria-hidden
@@ -71,8 +79,13 @@ export function ButtonLink({ variant = "solid", className, children, external, .
 export function Eyebrow({ children, className, index }: { children: ReactNode; className?: string; index?: string }) {
   return (
     <p className={cx("eyebrow flex items-center gap-3", className)}>
-      {index ? <span className="tabular-nums opacity-60">{index}</span> : null}
-      {index ? <span aria-hidden className="h-px w-8 bg-current opacity-40" /> : null}
+      {/* Section index is decorative; the heading order carries the structure. */}
+      {index ? (
+        <span aria-hidden className="tabular-nums">
+          {index}
+        </span>
+      ) : null}
+      {index ? <span aria-hidden className="h-px w-8 bg-current opacity-50" /> : null}
       <span>{children}</span>
     </p>
   );
@@ -87,15 +100,15 @@ type SectionProps = {
 };
 
 const tones = {
-  paper: "bg-paper text-ink",
-  "paper-2": "bg-paper-2 text-ink",
-  white: "bg-[#fbfaf7] text-ink",
+  paper: "grain bg-paper text-ink",
+  "paper-2": "grain bg-paper-2 text-ink",
+  white: "grain bg-surface text-ink",
   ink: "on-dark bg-ink text-paper",
 };
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-20 sm:py-28 lg:py-36", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-20 sm:py-24 lg:py-32", tones[tone], className)}>
       {children}
     </section>
   );
@@ -117,7 +130,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
   return (
     <header
       className={cx(
-        align === "split" ? "grid gap-8 lg:grid-cols-12 lg:gap-12" : "max-w-4xl",
+        align === "split" ? "grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12" : "max-w-4xl",
         className,
       )}
     >
@@ -125,17 +138,19 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         <Eyebrow index={index} className={dark ? "text-gold" : "text-gold-ink"}>
           {eyebrow}
         </Eyebrow>
-        <h2 id={id} className="display mt-6 text-[2.35rem] sm:text-5xl lg:text-[4rem]">
-          {title}
+        <h2 id={id} className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-[3.75rem]">
+          <span data-mask className="block">
+            {title}
+          </span>
         </h2>
       </Reveal>
       {intro ? (
         <Reveal
           delay={120}
           className={cx(
-            "text-lg leading-relaxed",
-            dark ? "text-paper/70" : "text-muted",
-            align === "split" ? "lg:col-span-5 lg:self-end" : "mt-8 max-w-2xl",
+            "measure text-base leading-relaxed sm:text-lg",
+            dark ? "text-paper/75" : "text-muted",
+            align === "split" ? "lg:col-span-5 lg:self-end" : "mt-8",
           )}
         >
           {intro}
@@ -182,30 +197,37 @@ export function PageHero({
   intro,
   children,
   aside,
+  image,
+  imageColour,
 }: {
   eyebrow: string;
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
   aside?: ReactNode;
+  /** Optional decorative backdrop photo (see HeroBackdrop). */
+  image?: string;
+  /** True when `image` is a muted-colour photo. */
+  imageColour?: boolean;
 }) {
   return (
-    <section className="on-dark relative overflow-hidden bg-ink pb-20 pt-36 text-paper sm:pb-28 sm:pt-44 lg:pb-32 lg:pt-52">
+    <section className="on-dark relative isolate overflow-hidden bg-ink pb-16 pt-32 text-paper sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-44">
+      {image ? <HeroBackdrop src={image} colour={imageColour} /> : null}
       <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
-      <div className="container-x relative grid gap-14 lg:grid-cols-12 lg:items-end">
-        <div className={aside ? "lg:col-span-8" : "lg:col-span-10"}>
+      <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
+        <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>
           <p className="eyebrow animate-fade text-gold">{eyebrow}</p>
-          <h1 className="display mt-7 animate-rise text-[2.75rem] [animation-delay:80ms] sm:text-6xl lg:text-[5.5rem]">
+          <h1 className="display mt-6 animate-rise text-[2.6rem] [animation-delay:80ms] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem]">
             {title}
           </h1>
           {intro ? (
-            <div className="mt-8 max-w-2xl animate-rise text-lg leading-relaxed text-paper/70 [animation-delay:200ms] sm:text-xl">
+            <div className="mt-6 max-w-2xl animate-rise text-lg leading-relaxed text-paper/75 sm:mt-8 [animation-delay:200ms] sm:text-xl">
               {intro}
             </div>
           ) : null}
           {children ? <div className="mt-10 animate-rise [animation-delay:320ms]">{children}</div> : null}
         </div>
-        {aside ? <div className="animate-fade [animation-delay:400ms] lg:col-span-4">{aside}</div> : null}
+        {aside ? <div className="animate-fade [animation-delay:400ms] lg:col-span-5 lg:pl-6 xl:col-span-4 xl:col-start-9 xl:pl-0">{aside}</div> : null}
       </div>
     </section>
   );

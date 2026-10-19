@@ -1,5 +1,7 @@
 /** Shared validation for the contact form and the Growth Architecture waitlist (client + server). */
 
+import { DEFAULT_COUNTRY, findCountry, nationalDigits } from "./countries";
+
 export const interestOptions = [
   { value: "personal-brand-architecture", label: "Personal Brand Architecture™" },
   { value: "growth-architecture", label: "Growth Architecture™" },
@@ -15,6 +17,7 @@ export type ContactInput = {
   company: string;
   designation: string;
   email: string;
+  phoneCountry: string;
   phone: string;
   level: string;
 };
@@ -29,15 +32,40 @@ export type WaitlistInput = {
 
 export type FieldErrors<T> = Partial<Record<keyof T, string>>;
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const PHONE_RE = /^[+()\-.\s\d]{7,24}$/;
+/**
+ * Practical email check: a valid local part, a domain made of labels that
+ * don't start or end with a hyphen, and an alphabetic top-level domain.
+ */
+const EMAIL_RE =
+  /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/i;
+/** Letters (any script), spaces, apostrophes, hyphens and full stops. */
+const NAME_RE = /^[\p{L}\p{M}][\p{L}\p{M}\s.'’-]*$/u;
+/** Must contain at least one letter or digit, e.g. company or job title. */
+const HAS_WORD_RE = /[\p{L}\p{N}]/u;
 
-export const limits = { short: 120, email: 254, long: 2000 } as const;
+export const limits = { name: 80, short: 120, email: 254, long: 2000, minName: 2, minLevel: 20 } as const;
 
-const clean = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+const clean = (v: unknown) => (typeof v === "string" ? v.trim().replace(/\s+/g, " ") : "");
+const cleanMultiline = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 
 function checkLength(errors: Record<string, string>, key: string, value: string, max: number) {
   if (value.length > max && !errors[key]) errors[key] = `Please keep this under ${max} characters.`;
+}
+
+function checkName(e: Record<string, string>, v: string) {
+  if (!v) e.name = "Please enter your name.";
+  else if (v.length < limits.minName) e.name = "Please enter your full name.";
+  else if (!NAME_RE.test(v)) e.name = "Names can contain letters, spaces, apostrophes, hyphens and full stops only.";
+}
+
+function checkEmail(e: Record<string, string>, v: string) {
+  if (!v) e.email = "Please enter your email address.";
+  else if (!EMAIL_RE.test(v) || v.includes(".."))
+    e.email = "Please enter a valid email address, e.g. name@company.com.";
+}
+
+function checkOptionalText(e: Record<string, string>, key: string, v: string, label: string) {
+  if (v && (v.length < 2 || !HAS_WORD_RE.test(v))) e[key] = `Please enter a valid ${label}, or leave this blank.`;
 }
 
 export function normaliseContact(raw: Record<string, unknown>): ContactInput {
@@ -47,8 +75,9 @@ export function normaliseContact(raw: Record<string, unknown>): ContactInput {
     company: clean(raw.company),
     designation: clean(raw.designation),
     email: clean(raw.email).toLowerCase(),
+    phoneCountry: clean(raw.phoneCountry).toUpperCase() || DEFAULT_COUNTRY,
     phone: clean(raw.phone),
-    level: clean(raw.level),
+    level: cleanMultiline(raw.level),
   };
 }
 
@@ -57,16 +86,40 @@ export function validateContact(v: ContactInput): FieldErrors<ContactInput> {
   if (!interestOptions.some((o) => o.value === v.interest)) e.interest = "Please choose what you are interested in.";
   else if (v.interest === "growth-architecture")
     e.interest = "Growth Architecture™ is not yet open for engagements — please join the waitlist instead.";
-  if (!v.name) e.name = "Please enter your name.";
-  if (!v.email) e.email = "Please enter your email address.";
-  else if (!EMAIL_RE.test(v.email)) e.email = "Please enter a valid email address, e.g. name@company.com.";
-  if (v.phone && !PHONE_RE.test(v.phone)) e.phone = "Please enter a valid phone number, including country code.";
+  checkName(e, v.name);
+  checkOptionalText(e, "company", v.company, "company name");
+  checkOptionalText(e, "designation", v.designation, "designation");
+  checkEmail(e, v.email);
+
+  // Phone is optional; when given it must suit the chosen country's numbering plan.
+  const country = findCountry(v.phoneCountry);
+  if (!country) e.phoneCountry = "Please choose a country code.";
+  if (v.phone) {
+    const digits = nationalDigits(v.phone, country);
+    if (!/^\d+$/.test(digits)) e.phone = "Please use digits only — the country code is selected separately.";
+    else if (country && (digits.length < country.min || digits.length > country.max))
+      e.phone =
+        country.min === country.max
+          ? `${country.name} numbers have ${country.min} digits after +${country.dial}.`
+          : `${country.name} numbers have ${country.min}–${country.max} digits after +${country.dial}.`;
+  }
+
   if (!v.level) e.level = "Tell us a little about the level you're trying to reach.";
-  else if (v.level.length < 10) e.level = "Please add a little more detail (at least 10 characters).";
-  for (const k of ["name", "company", "designation", "phone"] as const) checkLength(e, k, v[k], limits.short);
+  else if (v.level.length < limits.minLevel)
+    e.level = `Please add a little more detail (at least ${limits.minLevel} characters).`;
+
+  checkLength(e, "name", v.name, limits.name);
+  for (const k of ["company", "designation"] as const) checkLength(e, k, v[k], limits.short);
   checkLength(e, "email", v.email, limits.email);
   checkLength(e, "level", v.level, limits.long);
   return e as FieldErrors<ContactInput>;
+}
+
+/** "+971 50 123 4567"-style display for delivery, from a validated input. */
+export function formatPhone(v: Pick<ContactInput, "phone" | "phoneCountry">): string {
+  if (!v.phone) return "";
+  const country = findCountry(v.phoneCountry);
+  return country ? `+${country.dial} ${nationalDigits(v.phone, country)}` : v.phone;
 }
 
 export function normaliseWaitlist(raw: Record<string, unknown>): WaitlistInput {
@@ -75,17 +128,19 @@ export function normaliseWaitlist(raw: Record<string, unknown>): WaitlistInput {
     email: clean(raw.email).toLowerCase(),
     company: clean(raw.company),
     designation: clean(raw.designation),
-    note: clean(raw.note),
+    note: cleanMultiline(raw.note),
   };
 }
 
 export function validateWaitlist(v: WaitlistInput): FieldErrors<WaitlistInput> {
   const e: Record<string, string> = {};
-  if (!v.name) e.name = "Please enter your name.";
-  if (!v.email) e.email = "Please enter your email address.";
-  else if (!EMAIL_RE.test(v.email)) e.email = "Please enter a valid email address, e.g. name@company.com.";
+  checkName(e, v.name);
+  checkEmail(e, v.email);
   if (!v.company) e.company = "Please enter your organization's name.";
-  for (const k of ["name", "company", "designation"] as const) checkLength(e, k, v[k], limits.short);
+  else if (v.company.length < 2 || !HAS_WORD_RE.test(v.company)) e.company = "Please enter a valid organization name.";
+  checkOptionalText(e, "designation", v.designation, "designation");
+  checkLength(e, "name", v.name, limits.name);
+  for (const k of ["company", "designation"] as const) checkLength(e, k, v[k], limits.short);
   checkLength(e, "email", v.email, limits.email);
   checkLength(e, "note", v.note, limits.long);
   return e as FieldErrors<WaitlistInput>;

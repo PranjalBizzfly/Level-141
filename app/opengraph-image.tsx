@@ -18,8 +18,8 @@ export default async function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0d0d0d",
-          color: "#f5f2ec",
+          background: "#000000",
+          color: "#FFFFFF",
           padding: "72px 80px",
         }}
       >
@@ -27,11 +27,11 @@ export default async function OpengraphImage() {
         <img src={logo} width={420} height={66} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 76, letterSpacing: -3, lineHeight: 1.02 }}>Growth Architecture</div>
-          <div style={{ fontSize: 76, letterSpacing: -3, lineHeight: 1.02, color: "#DEBB93" }}>
+          <div style={{ fontSize: 76, letterSpacing: -3, lineHeight: 1.02, color: "#FFFFFF" }}>
             for People &amp; Organizations.
           </div>
         </div>
-        <div style={{ fontSize: 22, letterSpacing: 6, textTransform: "uppercase", color: "#a59e93" }}>
+        <div style={{ fontSize: 22, letterSpacing: 6, textTransform: "uppercase", color: "#A3A3A3" }}>
           Level141 — Growth by Design
         </div>
       </div>

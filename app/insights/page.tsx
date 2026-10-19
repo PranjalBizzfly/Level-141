@@ -38,7 +38,7 @@ export default function InsightsPage() {
           {articles.length ? (
             <>
               <SectionHeader id="latest-title" eyebrow="Latest" title="Recent perspectives" />
-              <ul className="mt-14 divide-y divide-ink/10 border-y border-ink/10">
+              <ul className="mt-12 divide-y sm:mt-14 lg:mt-16 divide-ink/10 border-y border-ink/10">
                 {articles.map((a) => (
                   <li key={a.slug}>
                     <Link href={`${routes.insights}/${a.slug}`} className="group grid gap-3 py-8 lg:grid-cols-12 lg:gap-10">
@@ -59,7 +59,7 @@ export default function InsightsPage() {
             <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
               <Reveal className="lg:col-span-7">
                 <p className="eyebrow text-gold-ink">Perspectives in preparation</p>
-                <h2 id="latest-title" className="display mt-6 text-[2.4rem] sm:text-5xl">
+                <h2 id="latest-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
                   The first essays are <span className="serif-accent">being written.</span>
                 </h2>
                 <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">
@@ -74,7 +74,7 @@ export default function InsightsPage() {
                   </p>
                   <Link
                     href={routes.contact}
-                    className="link-underline mt-4 inline-flex items-center gap-2 font-medium"
+                    className="link-underline mt-4 inline-flex min-h-11 items-center gap-2 font-medium"
                   >
                     Start the conversation <ArrowUpRight aria-hidden className="size-4" />
                   </Link>
@@ -98,18 +98,27 @@ export default function InsightsPage() {
               </>
             }
           />
-          <ol className="mt-16 border-t border-paper/12">
+          <ol className="mt-12 border-t sm:mt-14 lg:mt-16 border-line-dark">
             {insightCategories.map((c, i) => (
               <Reveal
                 as="li"
                 key={c.slug}
                 id={c.slug}
                 delay={i * 60}
-                className="grid scroll-mt-28 gap-3 border-b border-paper/12 py-8 sm:grid-cols-12 sm:gap-8 sm:py-10"
+                className="relative grid scroll-mt-28 items-baseline gap-x-6 gap-y-3 py-8 sm:grid-cols-12 sm:gap-x-8 sm:py-12"
               >
-                <span className="eyebrow tabular-nums text-paper/35 sm:col-span-1">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="text-3xl tracking-[-0.025em] sm:col-span-5 lg:text-4xl">{c.name}</h3>
-                <p className="text-lg leading-relaxed text-paper/65 sm:col-span-6">{c.body}</p>
+                <span
+                  aria-hidden
+                  className="serif-accent text-5xl leading-none text-gold tabular-nums sm:col-span-2 lg:text-6xl"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-[1.75rem] tracking-[-0.025em] sm:col-span-10 sm:text-3xl lg:col-span-5 lg:text-[2.6rem]">{c.name}</h3>
+                <p className="measure text-lg leading-relaxed text-paper/75 sm:col-span-10 sm:col-start-3 lg:col-span-5 lg:col-start-auto">
+                  {c.body}
+                </p>
+                <span aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-line-dark" />
+                <span aria-hidden data-reveal-line className="absolute bottom-0 left-0 h-px w-1/4 bg-gold" />
               </Reveal>
             ))}
           </ol>
@@ -127,16 +136,16 @@ export default function InsightsPage() {
                 Good architecture begins with <span className="serif-accent">better questions.</span>
               </>
             }
-            intro="A few of the questions Level141 asks at the start of every engagement. They're worth asking yourself."
+            intro="Questions drawn from the Level141 discovery process. They're worth asking yourself."
           />
-          <div className="mt-16 grid gap-6 lg:grid-cols-2">
+          <div className="mt-12 grid gap-4 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-2">
             {(
               [
                 ["For leaders and founders", questionsWeAsk.people],
                 ["For organizations", questionsWeAsk.organizations],
               ] as const
             ).map(([label, qs], col) => (
-              <Reveal key={label} delay={col * 120} className="rounded-[2rem] bg-[#fbfaf7] p-8 sm:p-10">
+              <Reveal key={label} delay={col * 120} className="rounded-[2rem] bg-surface p-6 sm:p-10">
                 <p className="eyebrow text-gold-ink">{label}</p>
                 <ul className="mt-6 divide-y divide-ink/10">
                   {qs.map((q) => (

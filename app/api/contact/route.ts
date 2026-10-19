@@ -1,5 +1,5 @@
 import { clientKey, deliver, json, looksLikeSpam, rateLimited, readJson } from "@/lib/forms/server";
-import { interestOptions, normaliseContact, validateContact } from "@/lib/forms/validation";
+import { formatPhone, interestOptions, normaliseContact, validateContact } from "@/lib/forms/validation";
 
 export async function POST(req: Request) {
   const body = await readJson(req);
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       Company: input.company,
       Designation: input.designation,
       Email: input.email,
-      Phone: input.phone,
+      Phone: formatPhone(input),
       "What level are you trying to reach?": input.level,
     },
   });
