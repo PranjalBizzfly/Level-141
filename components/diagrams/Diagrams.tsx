@@ -187,15 +187,22 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
 /* ---------------------------------------------------------- BRANDS™ */
 
 /** Links hover/focus on a lever row to its letter on the ring (and back), with pure CSS. */
-const brandsLinkCss = brandsLevers
-  .map(
-    (l) =>
-      `.brands:has([data-lever-item="${l.letter}"]:is(:hover,:focus-within)) [data-lever-node="${l.letter}"],` +
-      `.brands:has([data-lever-node="${l.letter}"]:hover) [data-lever-item="${l.letter}"]{border-color:var(--brands-accent);}` +
-      `.brands:has([data-lever-node="${l.letter}"]:hover) [data-lever-item="${l.letter}"]{box-shadow:inset 0 0 0 1px var(--brands-accent);}` +
-      `.brands:has([data-lever-item="${l.letter}"]:is(:hover,:focus-within)) [data-lever-node="${l.letter}"]{scale:1.08;}`,
-  )
-  .join("");
+const brandsLinkCss =
+  // Each node stays centred on the ring; global hover lifts must never override this.
+  `.brands .brands-node{translate:-50% -50% !important;transition:translate .45s var(--ease-architect),scale .45s var(--ease-architect),border-color .3s;}` +
+  // Out: the hovered lever (or its card) moves outward from the centre, the same for all six.
+  `@media (prefers-reduced-motion:reduce){.brands .brands-node{transition:border-color .3s;}}` +
+  brandsLevers
+    .map((l) => {
+      const out = `translate:calc(-50% + var(--ox) * 18px) calc(-50% + var(--oy) * 18px) !important;scale:1.08;border-color:var(--brands-accent);`;
+      return (
+        `.brands [data-lever-node="${l.letter}"]:hover,` +
+        `.brands:has([data-lever-item="${l.letter}"]:is(:hover,:focus-within)) [data-lever-node="${l.letter}"]{${out}}` +
+        `@media (prefers-reduced-motion:reduce){.brands [data-lever-node="${l.letter}"]:hover,.brands:has([data-lever-item="${l.letter}"]:is(:hover,:focus-within)) [data-lever-node="${l.letter}"]{translate:-50% -50% !important;scale:1;}}` +
+        `.brands:has([data-lever-node="${l.letter}"]:hover) [data-lever-item="${l.letter}"]{box-shadow:inset 0 0 0 1px var(--brands-accent);}`
+      );
+    })
+    .join("");
 
 /**
  * Six levers arranged around the cross-cutting foundation (Customer & Market),
@@ -260,10 +267,18 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
                 key={l.letter}
                 data-lever-node={l.letter}
                 className={cx(
-                  "absolute grid size-[22%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border text-center transition-[border-color,scale] duration-300",
+                  "brands-node absolute grid size-[22%] place-items-center rounded-full border text-center",
                   dark ? "border-line-dark-strong bg-ink-2" : "border-line-strong bg-surface",
                 )}
-                style={{ left: `${50 + Math.cos(a) * 37.5}%`, top: `${50 + Math.sin(a) * 37.5}%` }}
+                style={
+                  {
+                    left: `${50 + Math.cos(a) * 37.5}%`,
+                    top: `${50 + Math.sin(a) * 37.5}%`,
+                    // Unit vector pointing away from the centre, for the hover move.
+                    "--ox": Math.cos(a).toFixed(3),
+                    "--oy": Math.sin(a).toFixed(3),
+                  } as CSSProperties
+                }
               >
                 <span data-step style={step(i)} className={cx("serif-accent text-3xl leading-none sm:text-5xl", dark ? "text-gold" : "text-gold-ink")}>
                   {l.letter}
