@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Geist, Poppins } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollToggle } from "@/components/layout/ScrollToggle";
@@ -8,22 +8,33 @@ import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ViewTransitions } from "@/components/motion/ViewTransitions";
 import { Interactions } from "@/components/motion/Interactions";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { Cursor } from "@/components/motion/Cursor";
+import { SplitReveal } from "@/components/motion/SplitReveal";
 import { site, siteUrl } from "@/lib/site";
+import { Mark141 } from "@/components/brand/Mark141";
 import "./globals.css";
 import "./motion.css";
+import "./reference-motion.css";
 import "./glass.css";
+import "lenis/dist/lenis.css";
 
+/**
+ * Brand typography (Docs/level 141 Brand guidelines.pdf):
+ * - Geist — the logo / primary brand font, used for display headlines.
+ * - Poppins — secondary typography, used for body and interface text.
+ * Both in the approved weights only: Normal, Medium, Semi-Bold, Bold.
+ */
 const geist = Geist({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-geist",
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -70,7 +81,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${geist.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         {/*
           Marks JS as available so reveal animations may hide content until in view.
@@ -80,12 +91,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "document.documentElement.classList.add('js');try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(history.state,'',location.pathname+location.search);window.scrollTo(0,0)}catch(e){}",
+              "document.documentElement.classList.add('js');try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(history.state,'',location.pathname+location.search);window.scrollTo(0,0)}catch(e){}try{if(!sessionStorage.getItem('l141-intro')){document.documentElement.classList.add('l141-intro');sessionStorage.setItem('l141-intro','1')}}catch(e){}",
           }}
         />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
+        {/* Intro loader (first page of a visit only; pure CSS, see motion.css §13). */}
+        <div aria-hidden className="l141-loader">
+          <Mark141 className="w-28 sm:w-36" textClassName="text-4xl sm:text-5xl" closeClassName="text-white" openClassName="text-white/50" />
+        </div>
         <Header />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
@@ -96,6 +111,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ViewTransitions />
         <Interactions />
         <SmoothScroll />
+        <Cursor />
+        <SplitReveal />
         <div aria-hidden className="scroll-progress" />
         <script
           type="application/ld+json"

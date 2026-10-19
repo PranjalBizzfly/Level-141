@@ -43,35 +43,35 @@ export const levelProcess = [
   {
     n: "01",
     name: "Assess",
-    line: "Understand the current level.",
+    line: "Understand the current level",
     body: "We examine the person, organization, market, positioning, growth infrastructure and existing performance signals.",
     question: "Where are you really?",
   },
   {
     n: "02",
     name: "Architect",
-    line: "Design the next level.",
+    line: "Design the next level",
     body: "We establish the positioning, priorities, growth architecture, systems and roadmap required to move forward.",
     question: "Where should you go?",
   },
   {
     n: "03",
     name: "Activate",
-    line: "Turn architecture into coordinated action.",
+    line: "Turn architecture into coordinated action",
     body: "The strategy is translated into clearly defined initiatives, ownership, priorities and execution requirements.",
     question: "What needs to happen?",
   },
   {
     n: "04",
     name: "Govern",
-    line: "Keep growth aligned.",
+    line: "Keep growth aligned",
     body: "Growth initiatives require measurement, accountability and course correction. Level141 establishes the governance structure required to keep the architecture working.",
     question: "Is everything moving together?",
   },
   {
     n: "05",
     name: "Level Up",
-    line: "Measure progress. Identify the next constraint. Move again.",
+    line: "Measure progress. Identify the next constraint. Move again",
     body: "Growth isn't a destination. Every new level creates another possibility.",
     question: "What's your next level?",
   },
@@ -145,14 +145,14 @@ export const brandsLevers = [
   {
     letter: "B",
     name: "Branding",
-    line: "Build the foundation.",
+    line: "Build the foundation",
     role: "Clarifies who the organization is, why it matters and why it is different.",
     components: "Purpose, proposition, category, differentiation, messaging, offer architecture and brand consistency.",
   },
   {
     letter: "R",
     name: "Conversion Readiness",
-    line: "Prepare attention to become opportunity.",
+    line: "Prepare attention to become opportunity",
     role: "Ensures attention can become action and revenue.",
     components:
       "Journeys, websites/landing environments, proof, CTAs, lead capture, sales readiness, handoff and conversion friction.",
@@ -160,14 +160,14 @@ export const brandsLevers = [
   {
     letter: "A",
     name: "Awareness",
-    line: "Become visible to the right market.",
+    line: "Become visible to the right market",
     role: "Creates qualified first-touch visibility among priority audiences.",
     components: "Paid, earned, owned, partnerships, events, communities, social and targeted reach.",
   },
   {
     letter: "N",
     name: "Nurture",
-    line: "Build relationships before the decision.",
+    line: "Build relationships before the decision",
     role: "Moves prospects from awareness and interest toward confidence and action.",
     components:
       "CRM logic, segmentation, content journeys, follow-up, remarketing, email, education and sales enablement.",
@@ -175,7 +175,7 @@ export const brandsLevers = [
   {
     letter: "D",
     name: "Discover & Trust",
-    line: "Become easier to find, understand and believe.",
+    line: "Become easier to find, understand and believe",
     role: "Makes the organization easy to find and credible to validate.",
     components:
       "Search, reviews, reputation, proof, media, case studies, authority assets, listings and trust signals.",
@@ -183,7 +183,7 @@ export const brandsLevers = [
   {
     letter: "S",
     name: "Scale",
-    line: "Create systems capable of supporting growth.",
+    line: "Create systems capable of supporting growth",
     role: "Integrates demand, pipeline, optimization and governance for repeatable growth.",
     components:
       "Lead/demand architecture, KPI system, experimentation, budget logic, partner governance, feedback loops and scale roadmap.",
@@ -255,7 +255,7 @@ export const vibe = [
     name: "Vision",
     full: "Visionary Leadership",
     tag: "Visionary Leadership",
-    headline: "Be recognised for where you're going, not just where you've been.",
+    headline: "Be recognised for where you're going, not just where you've been",
     body: "We architect your leadership positioning, future vision, personal narrative and thought leadership to establish what you stand for and the direction you represent.",
     question: "What should I stand for and lead?",
     detail:
@@ -277,7 +277,7 @@ export const vibe = [
     name: "Impact",
     full: "Impact",
     tag: "Professional, Personal, Social & Spiritual",
-    headline: "Your influence should mean more than your visibility.",
+    headline: "Your influence should mean more than your visibility",
     body: "We identify and articulate the impact you create across four dimensions: professional, personal, social and spiritual. Because authentic authority is built through meaningful contributions, values and demonstrated influence.",
     question: "What meaningful difference do I create?",
     detail:
@@ -296,7 +296,7 @@ export const vibe = [
     name: "Business Growth",
     full: "Business Growth",
     tag: "Business Growth",
-    headline: "Turn personal authority into meaningful opportunities.",
+    headline: "Turn personal authority into meaningful opportunities",
     body: "We align your positioning, credibility, relationships and visibility with your commercial ambitions. From strategic partnerships and business development to investor relationships, speaking engagements and new opportunities, your personal brand becomes a strategic growth asset.",
     question: "How does authority create opportunity?",
     detail:
@@ -319,7 +319,7 @@ export const vibe = [
     name: "Evolution",
     full: "Evolution",
     tag: "Evolution",
-    headline: "Your personal brand should grow as you grow.",
+    headline: "Your personal brand should grow as you grow",
     body: "We architect a personal brand capable of evolving with your ambitions, achievements, responsibilities and aspirations. Because the person you are becoming matters as much as the person you are today.",
     question: "Who must I become next?",
     detail:
@@ -523,7 +523,7 @@ export const gaTriggers = [
 export const gaGapSteps = [
   { name: "Current State", q: "What is true today?", out: "Evidence-based LQ™ baseline." },
   { name: "Next Level", q: "What specific business state are we trying to reach?", out: "Target outcomes and strategic definition." },
-  { name: "Gap", q: "What prevents movement from current to next?", out: "Pprioritized constraints, dependencies and opportunities." },
+  { name: "Gap", q: "What prevents movement from current to next?", out: "Prioritized constraints, dependencies and opportunities." },
   { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK™ / BRANDS™ blueprint." },
   { name: "Activation", q: "What must happen first, by whom and in what sequence?", out: "90-day and phased roadmap." },
   { name: "Measurement", q: "How will we know the system is moving?", out: "Leading, pipeline and outcome KPIs." },

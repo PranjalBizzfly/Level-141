@@ -55,7 +55,7 @@ export function WaitlistForm() {
 
   if (status.state === "success") {
     return (
-      <SuccessPanel title="You're on the Growth Architecture™ waitlist.">
+      <SuccessPanel title="You're on the Growth Architecture™ waitlist">
         <p>
           We&apos;ve registered interest for <strong className="text-ink">{values.company}</strong>. We&apos;ll contact{" "}
           <strong className="text-ink">{values.email}</strong> when Growth Architecture™ opens. Registering interest does

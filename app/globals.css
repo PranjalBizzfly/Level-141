@@ -16,13 +16,15 @@
   --color-ink: #000000;
   --color-ink-2: #141414;
   --color-ink-3: #262626;
+  /* Brand palette (guidelines): #FFFFFF and #000000; greys are tints for lines
+     and secondary text only. */
   --color-paper: #ffffff;
   --color-paper-2: #f5f5f5;
   /* Raised card surface. */
   --color-surface: #ffffff;
-  --color-stone: #e5e5e5;
+  --color-stone: #cccccc;
   /* 7:1 on white. */
-  --color-muted: #595959;
+  --color-muted: #4c4c4c;
   --color-muted-dark: #a3a3a3;
   /* Secondary text on re-scoped surfaces (≥4.5:1 in both themes). */
   --color-paper-muted: #595959;
@@ -39,8 +41,10 @@
   --color-error-dark: #b42318;
   --color-success: #1f6b3d;
 
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  /* Display role: Geist, the brand (logo) typeface. */
+  --font-serif: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
 
   --ease-architect: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -172,7 +176,8 @@
   html {
     background: var(--color-paper);
     -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
+    /* Smooth scrolling is handled by Lenis (SmoothScroll.tsx); native smooth
+       scroll-behavior would fight it, so jump links use Lenis or scroll natively. */
     scroll-padding-top: 5.5rem;
   }
   body {
@@ -184,7 +189,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    line-height: 1.65;
+    line-height: 1.5;
     letter-spacing: -0.005em;
   }
   ::selection {
@@ -213,24 +218,27 @@
 
 @layer components {
   /* Wide-tracked uppercase label, echoing the LEVEL 141 wordmark. */
+  /* Labels in quiet sentence case (no wide-tracked capitals), as on the reference. */
   .eyebrow {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 1.3;
   }
-  /* Large, light and tightly set: the editorial register of the brand.
-     Serif accents inside keep their own weight. */
+  /* Display headlines in Geist (brand typeface), Medium weight per guidelines. */
   .display {
-    font-weight: 300;
-    letter-spacing: -0.04em;
-    line-height: 0.97;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
   }
+  /* Accent words: same face and weight, set in a lighter tone of the current
+     colour (two-tone headline). No italics — the guidelines approve Normal,
+     Medium, Semi-Bold and Bold only. */
   .serif-accent {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: inherit;
   }
   .container-x {
     width: 100%;
@@ -393,4 +401,19 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Two-tone accent: lighter tone of the inherited colour (overrides colour
+   utilities on accent spans so every accent reads consistently). ~4.6:1 on
+   white/black at display sizes. */
+.serif-accent {
+  color: color-mix(in oklab, currentColor 55%, transparent) !important;
+}
+
+/* Header over the open full-screen menu: always white on black (both themes). */
+body > header[data-menu-open] {
+  --color-ink: #000000 !important;
+  --color-paper: #ffffff !important;
+  --color-paper-muted: #a3a3a3 !important;
+  background: transparent !important;
 }

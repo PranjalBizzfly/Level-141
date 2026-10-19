@@ -6,9 +6,9 @@ import { cx } from "@/components/ui/primitives";
 
 /**
  * Interactive VIBE™ framework: four dimensions as an accessible tab set.
- * Laid out as a specification sheet — an equal four-column tab strip above a
- * single framed panel divided into headline, question, detail and outcomes
- * zones. Arrow keys move between dimensions; every panel is server-rendered
+ * Laid out as four hairline columns, the selected dimension's letter lifted a
+ * level, above a single open panel: story and scope left, the strategic
+ * question right. Arrow keys move between dimensions; every panel is server-rendered
  * so the content is present even before hydration.
  */
 export function VibeExplorer() {
@@ -40,7 +40,7 @@ export function VibeExplorer() {
         role="tablist"
         aria-label="VIBE™ dimensions"
         aria-orientation="horizontal"
-        className="grid grid-cols-4 gap-2 sm:gap-3 lg:gap-4"
+        className="grid grid-cols-4"
       >
         {vibe.map((d, i) => {
           const selected = i === active;
@@ -59,10 +59,8 @@ export function VibeExplorer() {
               onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
               className={cx(
-                "group relative flex min-h-11 flex-col items-center gap-2 overflow-hidden rounded-2xl border px-2 pb-4 pt-5 text-center transition-colors duration-500 sm:items-start sm:px-5 sm:pb-5 sm:text-left lg:px-7 lg:pb-7 lg:pt-7",
-                selected
-                  ? "border-paper/25 bg-ink-2"
-                  : "border-paper/10 hover:border-paper/25 hover:bg-ink-2/50",
+                "group relative flex min-h-11 flex-col items-center gap-2 overflow-hidden border-l border-paper/25 px-2 pb-4 pt-5 text-center transition-opacity duration-500 sm:min-h-[15rem] sm:items-start sm:px-4 sm:pb-2 sm:text-left lg:min-h-[18rem] lg:px-5",
+                selected ? "opacity-100" : "opacity-45 hover:opacity-80",
               )}
             >
               <span
@@ -78,13 +76,13 @@ export function VibeExplorer() {
               <span
                 aria-hidden
                 className={cx(
-                  "serif-accent text-4xl leading-none transition-colors duration-500 sm:mt-4 sm:text-6xl lg:text-7xl",
-                  selected ? "text-gold" : "text-paper/40 group-hover:text-paper/70",
+                  "font-display order-last text-4xl leading-[0.85] tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-architect)] sm:mt-auto sm:text-7xl lg:text-[6.5rem]",
+                  selected ? "-translate-y-3" : "translate-y-0",
                 )}
               >
                 {d.letter}
               </span>
-              <span className="flex flex-col sm:mt-4">
+              <span className="flex flex-col sm:mt-2">
                 <span
                   className={cx(
                     "text-[0.75rem] font-medium uppercase tracking-[0.12em] sm:text-base sm:normal-case sm:tracking-[-0.01em] lg:text-lg",
@@ -105,7 +103,7 @@ export function VibeExplorer() {
 
       {/* Panel: editorial composition — story and scope on the left, a single
           feature card for the strategic question on the right. No table rules. */}
-      <div className="mt-12 sm:mt-14 lg:mt-16">
+      <div className="mt-14 sm:mt-16 lg:mt-24">
         {vibe.map((d, i) => (
           <div
             key={d.letter}
@@ -129,11 +127,11 @@ export function VibeExplorer() {
               <p className="measure mt-6 text-lg leading-relaxed text-paper/75">{d.body}</p>
 
               <p className="eyebrow mt-12 text-paper-muted">Architecture focus</p>
-              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+              <ul className="mt-5 grid gap-x-8 sm:grid-cols-2">
                 {d.focus.map((f) => (
                   <li
                     key={f}
-                    className="flex items-center gap-3 rounded-xl border border-paper/12 px-4 py-3 text-[0.9375rem] leading-snug text-paper/85 transition-colors duration-300 hover:border-paper/35"
+                    className="flex items-center gap-3 border-t border-paper/15 py-3 text-[0.9375rem] leading-snug text-paper/85"
                   >
                     <span aria-hidden className="h-px w-3 shrink-0 bg-gold" />
                     {f}
@@ -142,10 +140,10 @@ export function VibeExplorer() {
               </ul>
             </div>
 
-            <aside className="relative overflow-hidden rounded-[2rem] bg-ink-2 p-7 sm:p-10 lg:col-span-5 lg:self-center">
+            <aside className="relative overflow-hidden border-t border-paper/25 pt-8 lg:col-span-5 lg:self-start">
               <span
                 aria-hidden
-                className="serif-accent pointer-events-none absolute -right-4 -top-10 select-none text-[14rem] leading-none text-paper/[0.06] sm:text-[18rem]"
+                className="font-display pointer-events-none absolute -right-2 -top-6 select-none text-[12rem] font-medium leading-none text-paper/[0.05] sm:text-[15rem]"
               >
                 {d.letter}
               </span>

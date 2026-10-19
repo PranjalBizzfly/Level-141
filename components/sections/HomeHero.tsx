@@ -1,80 +1,62 @@
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
-import { HeroBackdrop } from "@/components/ui/Photo";
 import { ButtonLink } from "@/components/ui/primitives";
+import { MediaSlot } from "@/components/ui/MediaSlot";
 import { site } from "@/lib/site";
 
 const built = ["A career.", "A reputation.", "A business.", "A company."];
 
 /**
- * Home hero. The right-hand visual reads as a building section: the four
- * things a visitor has already built are stacked as floors, with the
- * unbuilt "next level" outlined above them.
+ * Home hero after the luxury reference: one modest, centred statement in a
+ * large quiet field, the documented supporting copy beneath it, then a
+ * full-width media frame.
  */
 export function HomeHero() {
   return (
-    <section className="on-dark relative isolate overflow-hidden bg-ink text-paper" aria-labelledby="hero-title">
-      <HeroBackdrop src="/images/home-hero-staircase-muted.webp" />
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_30%,transparent)]" />
-      <div className="container-x grid gap-12 pb-16 pt-28 sm:gap-16 sm:pb-20 sm:pt-36 lg:min-h-[100svh] lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-24 lg:pt-36">
-        <div className="lg:col-span-7">
-          <p className="eyebrow animate-fade text-gold">Growth Architecture for People &amp; Organizations</p>
-          <h1
-            id="hero-title"
-            className="display relative mt-8 inline-block py-[0.12em] pl-[0.16em] pr-[0.3em] text-[2.75rem] min-[400px]:text-[3.25rem] sm:text-[4.5rem] lg:text-[5rem] xl:text-[6rem] 2xl:text-[7rem]"
-          >
-            {/* Corner brackets from the Level141 symbol frame the headline block. */}
-            <BracketClose className="absolute right-0 top-0 size-[0.2em] animate-fade text-gold [animation-delay:300ms]" />
-            <BracketOpen className="absolute bottom-0 left-0 size-[0.2em] animate-fade text-paper/40 [animation-delay:300ms]" />
-            <span className="block animate-rise [animation-delay:60ms]">What&apos;s Your</span>
-            <span className="block animate-rise [animation-delay:160ms]">
-              <span className="serif-accent text-gold">Level</span>?
-            </span>
-          </h1>
-          <div className="mt-8 max-w-xl animate-rise space-y-5 text-lg leading-relaxed text-paper/75 [animation-delay:280ms] sm:text-xl">
-            <p>
-              You&apos;ve built something.<span className="sr-only"> A career. A reputation. A business. A company.</span> But where you are today doesn&apos;t have to define where you go next.
-            </p>
-            <p className="text-paper">
-              Level141 architects the next level of growth for people and organizations.
-            </p>
-            <p className="text-base text-paper-muted sm:text-lg">
-              Through clarity, positioning, visibility, credibility, authority and structured growth systems, we turn
-              ambition into an architecture for growth.
-            </p>
-          </div>
-          <div className="mt-12 flex animate-rise flex-col gap-4 [animation-delay:400ms] sm:flex-row sm:items-center sm:gap-8">
-            <ButtonLink href={site.primaryCta.href} variant="gold">
-              {site.primaryCta.label}
-            </ButtonLink>
-            <ButtonLink href="#two-architectures" variant="ghost-light">
-              Explore Level141
-            </ButtonLink>
-          </div>
+    <section className="relative bg-paper text-ink" aria-labelledby="hero-title">
+      <div className="container-x flex flex-col items-center pb-12 pt-36 text-center sm:pb-14 sm:pt-44 lg:pt-48">
+        <h1
+          id="hero-title"
+          data-split="load"
+          className="display relative inline-block px-[0.35em] py-[0.2em] text-[clamp(2.5rem,5.2vw,4.75rem)]"
+        >
+          {/* The two brackets of the Level141 symbol lock around the statement. */}
+          <BracketClose className="absolute right-0 top-0 size-[0.3em] bracket-in-close text-ink" />
+          <BracketOpen className="absolute bottom-0 left-0 size-[0.3em] bracket-in-open text-ink/35" />
+          What&apos;s Your <span className="serif-accent">Level</span>?
+        </h1>
+
+        <div className="mt-10 max-w-xl animate-rise space-y-3 text-muted [animation-delay:500ms]">
+          <p>
+            You&apos;ve built something. {built.join(" ")} But where you are today doesn&apos;t have to define where you go
+            next.
+          </p>
+          <p className="text-ink">Level141 architects the next level of growth for people and organizations.</p>
         </div>
 
-        <div className="hero-depth lg:col-span-5" aria-hidden>
-          <div className="relative mx-auto max-w-md animate-fade [animation-delay:350ms] lg:ml-auto">
-            <div className="relative rounded-[1.5rem] border border-line-dark-strong bg-ink-2 px-5 py-5 sm:px-7 sm:py-8 lg:rounded-[1.75rem]">
-              <BracketClose className="absolute -right-px -top-px size-7 text-gold" />
-              <p className="eyebrow text-gold">Next level</p>
-              <p className="serif-accent mt-2 text-2xl text-paper sm:mt-3 sm:text-3xl">Where you go next.</p>
-            </div>
-            <div className="mx-auto h-6 w-px bg-line-dark-strong sm:h-10" />
-            <ol className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.5rem] border border-line-dark-strong bg-line-dark lg:grid-cols-1 lg:rounded-[1.75rem]">
-              {[...built].reverse().map((b, i) => (
-                <li
-                  key={b}
-                  className="flex animate-rise items-center justify-between gap-2 bg-ink-2 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-7 lg:py-5"
-                  style={{ animationDelay: `${380 + (built.length - i) * 80}ms` }}
-                >
-                  <span className="text-base tracking-[-0.01em] text-paper/90 sm:text-lg">{b}</span>
-                  <span className="eyebrow tabular-nums text-paper-muted">L{String(built.length - i).padStart(2, "0")}</span>
-                </li>
-              ))}
-            </ol>
-            <p className="eyebrow mt-5 text-center text-paper-muted">You&apos;ve built something.</p>
-          </div>
+        <div className="mt-10 flex animate-rise flex-col items-center gap-3 [animation-delay:650ms] sm:flex-row">
+          <ButtonLink href={site.primaryCta.href} variant="solid">
+            {site.primaryCta.label}
+          </ButtonLink>
+          <ButtonLink href="#two-architectures" variant="ghost">
+            Explore Level141
+          </ButtonLink>
         </div>
+      </div>
+
+      {/* Full-width media frame (reference: hero film beneath the statement). */}
+      {/* Reference: one large, centred media frame beneath the statement. */}
+      <div className="container-x pb-20 sm:pb-28">
+        <MediaSlot
+          src="/images/home-hero-staircase-muted.webp"
+          alt="A staircase rising into light"
+          label="Hero film or image — growth to the next level"
+          className="mx-auto aspect-[4/3] max-w-5xl sm:aspect-[16/9]"
+          priority
+        />
+        <p className="mx-auto mt-5 max-w-5xl text-sm text-muted">
+          Through clarity, positioning, visibility, credibility, authority and structured growth systems, we turn ambition
+          into an architecture for growth.
+        </p>
       </div>
     </section>
   );

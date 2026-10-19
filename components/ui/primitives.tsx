@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
-import { HeroBackdrop } from "@/components/ui/Photo";
+import { MediaSlot } from "@/components/ui/MediaSlot";
 
 export function cx(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -108,7 +108,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-14 sm:py-16 lg:py-20", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-24 sm:py-32 lg:py-44", tones[tone], className)}>
       {children}
     </section>
   );
@@ -138,8 +138,8 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         <Eyebrow index={index} className={dark ? "text-gold" : "text-gold-ink"}>
           {eyebrow}
         </Eyebrow>
-        <h2 id={id} className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-[3.75rem]">
-          <span data-mask className="block">
+        <h2 id={id} className="display mt-5 text-[2rem] sm:mt-6 sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.625rem]">
+          <span data-split className="block">
             {title}
           </span>
         </h2>
@@ -198,7 +198,6 @@ export function PageHero({
   children,
   aside,
   image,
-  imageColour,
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -211,23 +210,26 @@ export function PageHero({
   imageColour?: boolean;
 }) {
   return (
-    <section className="on-dark relative isolate overflow-hidden bg-ink pb-16 pt-32 text-paper sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-44">
-      {image ? <HeroBackdrop src={image} colour={imageColour} /> : null}
-      <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
-      <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
-        <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>
-          <p className="eyebrow animate-fade text-gold">{eyebrow}</p>
-          <h1 className="display mt-6 animate-rise text-[2.6rem] [animation-delay:80ms] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem]">
-            {title}
-          </h1>
-          {intro ? (
-            <div className="mt-6 max-w-2xl animate-rise text-lg leading-relaxed text-paper/75 sm:mt-8 [animation-delay:200ms] sm:text-xl">
-              {intro}
-            </div>
-          ) : null}
-          {children ? <div className="mt-10 animate-rise [animation-delay:320ms]">{children}</div> : null}
-        </div>
-        {aside ? <div className="animate-fade [animation-delay:400ms] lg:col-span-5 lg:pl-6 xl:col-span-4 xl:col-start-9 xl:pl-0">{aside}</div> : null}
+    <section className="on-dark relative bg-ink text-paper">
+      {/* Reference layout: a centred eyebrow, title and intro in a quiet field, the
+          page's actions, then a full-width media frame. The aside follows below. */}
+      <div className="container-x flex flex-col items-center pb-14 pt-36 text-center sm:pb-16 sm:pt-44 lg:pt-48">
+        <p className="eyebrow animate-fade text-paper-muted">{eyebrow}</p>
+        <h1 data-split="load" className="display mt-6 max-w-[20ch] text-[clamp(2.25rem,4.4vw,4.25rem)] sm:mt-8">
+          {title}
+        </h1>
+        {intro ? <div className="mt-8 max-w-xl animate-rise text-paper/75 [animation-delay:400ms]">{intro}</div> : null}
+        {children ? <div className="mt-10 flex animate-rise justify-center [animation-delay:520ms]">{children}</div> : null}
+      </div>
+      <div className="container-x pb-20 sm:pb-28">
+        <MediaSlot
+          src={image}
+          label={`Page film or image — ${eyebrow}`}
+          className="aspect-[16/10] sm:aspect-[16/7]"
+          sizes="(min-width: 1408px) 1300px, 100vw"
+          priority
+        />
+        {aside ? <div className="mx-auto mt-14 max-w-xl animate-fade [animation-delay:400ms]">{aside}</div> : null}
       </div>
     </section>
   );

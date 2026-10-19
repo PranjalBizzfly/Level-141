@@ -34,7 +34,7 @@ export function FrameworkNav() {
   return (
     <div className="sticky top-16 z-40 h-0">
       <nav aria-label="Frameworks on this page" className="container-x flex justify-center pt-3">
-        <ul className="on-dark flex max-w-full gap-1 overflow-x-auto overscroll-x-contain rounded-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border border-line-dark-strong bg-ink/90 p-1 text-paper shadow-[0_8px_30px_rgb(0_0_0/0.18)] backdrop-blur-md">
+        <ul data-lenis-prevent className="on-dark flex max-w-full gap-1 overflow-x-auto overscroll-x-contain rounded-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border border-line-dark-strong bg-ink/90 p-1 text-paper shadow-[0_8px_30px_rgb(0_0_0/0.18)] backdrop-blur-md">
           {items.map((item) => {
             const active = current === item.id;
             return (

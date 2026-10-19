@@ -41,50 +41,21 @@ export function Footer() {
   return (
     <footer
       aria-labelledby="footer-heading"
-      className="relative isolate overflow-hidden bg-[#eef0f3] px-2 pb-2 pt-2 sm:px-3 sm:pb-3 sm:pt-3 lg:px-4 lg:pb-4 lg:pt-4 dark:bg-[#09090a]"
+      className="relative isolate overflow-hidden bg-white px-2 pb-2 pt-2 sm:px-3 sm:pb-3 sm:pt-3 lg:px-4 lg:pb-4 lg:pt-4 dark:bg-black"
     >
       <h2 id="footer-heading" className="sr-only">
         Site footer
       </h2>
 
-      {/* Light behind the glass */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-[10%] top-[18%] h-[26rem] w-[26rem] rounded-full bg-[#debb93]/45 blur-[90px] dark:bg-[#debb93]/[0.14]" />
-        <div className="absolute right-[-6%] top-[8%] h-[30rem] w-[30rem] rounded-full bg-[#c9d3e3]/70 blur-[100px] dark:bg-[#5d6b82]/25" />
-        <div className="absolute bottom-[-20%] left-[38%] h-[22rem] w-[34rem] rounded-full bg-white blur-[90px] dark:bg-white/[0.05]" />
-      </div>
-
       <div
-        className={[
-          "group/panel relative mx-auto w-full overflow-hidden rounded-[2rem] sm:rounded-[2.5rem]",
-          "transition-shadow duration-700 ease-[var(--ease-architect)]",
-          "bg-white/40 backdrop-blur-2xl backdrop-saturate-150 dark:bg-white/[0.045]",
-          "ring-1 ring-white/90 dark:ring-white/[0.14]",
-          "shadow-[inset_0_1px_0_rgb(255_255_255/1),inset_0_0_0_1px_rgb(255_255_255/0.35),inset_0_-1px_0_rgb(15_15_20/0.06),0_30px_70px_-28px_rgb(15_15_25/0.30),0_8px_20px_-10px_rgb(15_15_25/0.12)]",
-          "dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.18),inset_0_-1px_0_rgb(0_0_0/0.6),0_40px_80px_-30px_rgb(0_0_0/0.9)]",
-          // deeper glass shadow on hover (fine pointers only)
-          "[@media(hover:hover)]:hover:shadow-[inset_0_1px_0_rgb(255_255_255/1),inset_0_0_0_1px_rgb(255_255_255/0.45),inset_0_-1px_0_rgb(15_15_20/0.06),0_40px_90px_-30px_rgb(15_15_25/0.38),0_10px_24px_-10px_rgb(15_15_25/0.16)]",
-        ].join(" ")}
+        className="relative mx-auto w-full border-t border-black/15 dark:border-white/15"
       >
-        {/* Light sweep across the glass on hover, matching the buttons. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_35%,rgb(255_255_255/0.55)_50%,transparent_65%)] bg-[length:260%_100%] bg-[position:130%_0] bg-no-repeat opacity-0 motion-reduce:hidden [@media(hover:hover)]:group-hover/panel:bg-[position:-30%_0] [@media(hover:hover)]:group-hover/panel:opacity-100 [@media(hover:hover)]:group-hover/panel:transition-[background-position,opacity] [@media(hover:hover)]:group-hover/panel:duration-[1400ms] dark:bg-[linear-gradient(110deg,transparent_35%,rgb(255_255_255/0.08)_50%,transparent_65%)]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent dark:via-white/40"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgb(255_255_255/0.55)_0%,transparent_32%,transparent_68%,rgb(255_255_255/0.25)_100%)] dark:opacity-[0.12]"
-        />
 
         <div className="relative px-6 pb-8 pt-10 sm:px-12 sm:pb-10 sm:pt-14 lg:px-20 lg:pt-16 2xl:px-28">
           {/* Closing statement */}
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <p className="display text-[2.15rem] leading-[1.03] text-[#0d0d0e] sm:text-5xl lg:col-span-8 lg:text-[3.6rem] dark:text-white">
-              Growth Architecture For <span className="serif-accent">People &amp; Organizations.</span>
+              Growth Architecture For <span className="serif-accent">People &amp; Organizations</span>
             </p>
             <div className="flex flex-col items-start gap-4 lg:col-span-4 lg:items-end">
               <Link
@@ -112,9 +83,9 @@ export function Footer() {
               <Link
                 href="/"
                 aria-label="Level141 — Home"
-                className="inline-flex min-h-11 items-center text-[#0d0d0e] dark:text-white"
+                className="inline-flex min-h-11 items-center text-black dark:text-white"
               >
-                <LogoLockup className="h-6 w-auto" />
+                <LogoLockup className="h-[30px] w-auto sm:h-9" />
               </Link>
               <p className="mt-5 max-w-xs leading-relaxed text-[#4d4e54] dark:text-[#a9aab0]">
                 Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}.

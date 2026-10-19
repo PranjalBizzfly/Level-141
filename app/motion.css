@@ -154,3 +154,303 @@
     transform: scaleX(1);
   }
 }
+
+/* 7. Logo-bracket entrance (hero): the two brackets of the Level141 mark slide
+      in from opposite corners and lock around the headline — the mark is never
+      redrawn, only its two existing parts move. */
+@media (prefers-reduced-motion: no-preference) {
+  .bracket-in-close {
+    animation: l141-bracket-close 1.4s var(--ease-architect) 0.35s both;
+  }
+  .bracket-in-open {
+    animation: l141-bracket-open 1.4s var(--ease-architect) 0.35s both;
+  }
+}
+@keyframes l141-bracket-close {
+  from {
+    opacity: 0;
+    translate: 0.6em -0.6em;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes l141-bracket-open {
+  from {
+    opacity: 0;
+    translate: -0.6em 0.6em;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* 8. Scroll-linked statements (ScrubText): words fill from faint to solid. */
+.scrub-text[data-scrub="on"] [data-word] {
+  opacity: clamp(0.16, calc(var(--p, 0) - var(--i)), 1);
+  transition: opacity 0.25s linear;
+}
+
+/* 9. Images wipe open from the bottom as they enter, with a slow settle. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-wipe] {
+      animation: l141-wipe linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 85%;
+    }
+    [data-wipe] img {
+      animation: l141-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+    /* 10. Hero photography drifts slowly as the hero scrolls away. */
+    [data-parallax] {
+      animation: l141-parallax linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+@keyframes l141-wipe {
+  from {
+    clip-path: inset(100% 0 0 0 round 2rem);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 2rem);
+  }
+}
+@keyframes l141-settle {
+  from {
+    scale: 1.14;
+  }
+  to {
+    scale: 1;
+  }
+}
+@keyframes l141-parallax {
+  to {
+    translate: 0 18%;
+  }
+}
+
+/* 11. Cursor companion (see components/motion/Cursor.tsx). */
+.l141-cursor {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .l141-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 70;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, var(--color-ink) 45%, transparent);
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      width 0.4s var(--ease-architect),
+      height 0.4s var(--ease-architect),
+      margin 0.4s var(--ease-architect),
+      background-color 0.4s var(--ease-architect),
+      border-color 0.4s var(--ease-architect),
+      opacity 0.3s;
+  }
+  .l141-cursor span {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-paper);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .l141-cursor[data-visible="true"] {
+    opacity: 1;
+  }
+  .l141-cursor[data-state="hover"] {
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+    border-color: transparent;
+    background-color: color-mix(in oklab, var(--color-ink) 10%, transparent);
+  }
+  .l141-cursor[data-state="view"] {
+    width: 84px;
+    height: 84px;
+    margin: -42px 0 0 -42px;
+    border-color: transparent;
+    background-color: var(--color-ink);
+  }
+  .l141-cursor[data-state="view"] span {
+    opacity: 1;
+  }
+}
+
+/* 12. Word-split headline reveal (SplitReveal.tsx): each word rises out of its
+       own mask in a short stagger. Hero headlines ([data-split="load"]) play on
+       load; others play when their reveal block becomes visible. */
+.sw {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.sw > span {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Matches the reference: yPercent 100 → 0 with fade, 1.7s, power4.out, stagger 0.05. */
+  [data-split][data-split-done] .sw > span {
+    translate: 0 100%;
+    opacity: 0;
+    transition:
+      translate 1.7s var(--ease-architect),
+      opacity 1.7s var(--ease-architect);
+    transition-delay: calc(var(--w, 0) * 50ms + 80ms);
+  }
+  [data-split="load"][data-split-done] .sw > span {
+    animation: l141-word-rise 1.7s var(--ease-architect) both;
+    animation-delay: calc(var(--w, 0) * 50ms + 150ms);
+    translate: 0 0;
+    opacity: 1;
+    transition: none;
+  }
+  .is-visible [data-split][data-split-done] .sw > span,
+  [data-split].is-visible[data-split-done] .sw > span {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes l141-word-rise {
+  from {
+    translate: 0 100%;
+    opacity: 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+/* 13. Intro loader — first page of a visit only (html.l141-intro is set by the
+       head script). Brackets slide in from opposite corners to frame "141",
+       then the curtain lifts. Pure CSS: it can never trap the page. */
+.l141-loader {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.l141-intro .l141-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background: #000;
+    color: #fff;
+    pointer-events: none;
+    animation: l141-loader-out 0.9s var(--ease-architect) 1.5s forwards;
+  }
+  html.l141-intro .l141-loader svg:first-of-type {
+    animation: l141-bracket-close 1s var(--ease-architect) 0.1s both;
+  }
+  html.l141-intro .l141-loader svg:last-of-type {
+    animation: l141-bracket-open 1s var(--ease-architect) 0.1s both;
+  }
+  html.l141-intro .l141-loader span span {
+    animation: l141-loader-mark 0.9s var(--ease-architect) 0.45s both;
+  }
+  /* Hero words wait for the curtain. */
+  html.l141-intro [data-split="load"][data-split-done] .sw > span {
+    animation-delay: calc(var(--w, 0) * 50ms + 1.75s);
+  }
+  html.l141-intro .bracket-in-close,
+  html.l141-intro .bracket-in-open {
+    animation-delay: 1.9s;
+  }
+}
+@keyframes l141-loader-out {
+  to {
+    translate: 0 -100%;
+    visibility: hidden;
+  }
+}
+@keyframes l141-loader-mark {
+  from {
+    opacity: 0;
+    translate: 0 30%;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* 14. Page transitions (Barba-style): the new page wipes up over the old one. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: l141-vt-old 0.7s var(--ease-architect) both;
+  }
+  ::view-transition-new(root) {
+    animation: l141-vt-new 0.7s var(--ease-architect) both;
+  }
+}
+@keyframes l141-vt-old {
+  to {
+    opacity: 0.4;
+    scale: 0.97;
+  }
+}
+@keyframes l141-vt-new {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* 15. Hero headlines wait for the word split (no flash of unsplit text), with a
+       CSS failsafe that shows them after 1.5s whatever happens. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-split="load"]:not([data-split-done]) {
+    animation: l141-failsafe-show 0s linear 1.5s both;
+  }
+}
+@keyframes l141-failsafe-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 16. (Removed: stacking-section scale/dim — it read as broken grey boxes.) */
+
+/* 17. Text roll on hover (reference: yPercent 100, .5s, power1.inOut): the
+       label slides up and an identical copy rolls in from below. */
+.roll {
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 1.3;
+  vertical-align: top;
+}
+.roll > span {
+  display: inline-block;
+  text-shadow: 0 1.3em currentColor;
+  transition: translate 0.5s cubic-bezier(0.45, 0, 0.55, 1);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :is(a, button):hover .roll > span,
+  .roll:hover > span {
+    translate: 0 -1.3em;
+  }
+}

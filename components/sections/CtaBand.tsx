@@ -32,8 +32,8 @@ export function CtaBand({
         <div className="container-x relative grid gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-7">
             <p className="eyebrow text-gold">{eyebrow}</p>
-            <h2 className="display mt-6 text-[2.6rem] sm:text-6xl lg:text-[4.25rem] xl:text-[5rem]">
-              <span data-mask className="block">
+            <h2 className="display mt-6 text-[2.25rem] sm:text-[2.75rem] lg:text-[3.5rem] xl:text-[4.5rem]">
+              <span data-split className="block">
                 {title}
               </span>
             </h2>
@@ -54,8 +54,8 @@ export function CtaBand({
         <div className="container-x relative">
           <Reveal className="max-w-5xl">
             <p className="eyebrow text-gold">{eyebrow}</p>
-            <h2 className="display mt-6 text-[2.6rem] sm:text-6xl lg:text-[4.75rem] xl:text-[5.25rem]">
-              <span data-mask className="block">
+            <h2 className="display mt-6 text-[2.25rem] sm:text-[2.75rem] lg:text-[3.5rem] xl:text-[4.5rem]">
+              <span data-split className="block">
                 {title}
               </span>
             </h2>

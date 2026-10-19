@@ -26,10 +26,10 @@ export function ScrollToggle() {
 
   const go = () => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({
-      top: pastHalf ? 0 : document.documentElement.scrollHeight,
-      behavior: reduce ? "auto" : "smooth",
-    });
+    const top = pastHalf ? 0 : document.documentElement.scrollHeight;
+    // Use the smooth scroller when it is running; otherwise scroll natively.
+    if (window.__lenis) window.__lenis.scrollTo(top, { duration: 1.4 });
+    else window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
   };
 
   return (
@@ -42,6 +42,7 @@ export function ScrollToggle() {
         "fixed bottom-5 right-5 z-40 grid size-12 place-items-center glass-control rounded-full border border-line-strong text-ink",
         "transition-[background-color,color,border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-paper",
         "sm:bottom-8 sm:right-8",
+        "scroll-toggle",
       )}
     >
       <Icon aria-hidden className="size-5" />

@@ -1,0 +1,124 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/ui/primitives";
+
+/**
+ * Page patterns taken from the reference recordings:
+ * - RefIntro: small label, a modest two-line headline, an optional pill
+ *   (COLLINS "Programs — Eleven ways we help brands…").
+ * - RefRows: name left, line right, hairlines; whole row inverts to solid
+ *   black on hover and carries an arrow when it links (COLLINS 0:23).
+ * - RefStatement: one centred line in a large quiet field (COLLINS hero).
+ */
+
+export function RefSection({ id, children, tone = "paper" }: { id?: string; children: ReactNode; tone?: "paper" | "ink" }) {
+  return (
+    <section
+      id={id}
+      className={
+        "relative py-20 sm:py-28 lg:py-32 " + (tone === "ink" ? "on-dark bg-ink text-paper" : "bg-paper text-ink")
+      }
+    >
+      <div className="container-x">{children}</div>
+    </section>
+  );
+}
+
+export function RefIntro({
+  label,
+  title,
+  text,
+  action,
+  id,
+}: {
+  label: string;
+  title: ReactNode;
+  /** Optional short supporting paragraph under the headline. */
+  text?: ReactNode;
+  action?: { label: string; href: string };
+  id?: string;
+}) {
+  return (
+    <Reveal className="max-w-xl">
+      <p className="text-sm text-muted">{label}</p>
+      <h2 id={id} className="font-display mt-3 text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">
+        {title}
+      </h2>
+      {text ? <div className="mt-5 text-muted">{text}</div> : null}
+      {action ? (
+        <Link
+          href={action.href}
+          className="mt-6 inline-flex min-h-10 items-center rounded-full bg-gold px-5 text-[0.8125rem] font-medium text-ink"
+        >
+          {action.label}
+        </Link>
+      ) : null}
+    </Reveal>
+  );
+}
+
+export type RefRow = { name: ReactNode; line: ReactNode; extra?: ReactNode; href?: string; key: string; id?: string };
+
+const colClass = { 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" } as const;
+
+export function RefRows({
+  rows,
+  className = "",
+  columns,
+}: {
+  rows: readonly RefRow[];
+  className?: string;
+  /** Short name-only lists can flow into columns (an index). */
+  columns?: 2 | 3 | 4;
+}) {
+  return (
+    <ul
+      className={
+        "mt-14 border-t border-line sm:mt-16 " + (columns ? `grid gap-x-10 ${colClass[columns]} ` : "") + className
+      }
+    >
+      {rows.map((r) => {
+        const inner = (
+          <>
+            <span
+              className={
+                "text-[1.05rem] font-medium " + (!r.line ? "sm:col-span-11" : r.extra ? "sm:col-span-3" : "sm:col-span-4")
+              }
+            >
+              {r.name}
+            </span>
+            {r.line ? <span className={"text-muted " + (r.extra ? "sm:col-span-4" : "sm:col-span-7")}>{r.line}</span> : null}
+            {r.extra ? <span className="sm:col-span-4">{r.extra}</span> : null}
+            <span className="hidden justify-self-end sm:col-span-1 sm:block">
+              {r.href ? <ArrowRight aria-hidden className="size-4" /> : null}
+            </span>
+          </>
+        );
+        const cls = "row-invert grid gap-1 py-5 sm:grid-cols-12 sm:items-baseline sm:gap-6";
+        return (
+          <li key={r.key} id={r.id} className="scroll-mt-28 border-b border-line">
+            {r.href ? (
+              <Link href={r.href} className={cls}>
+                {inner}
+              </Link>
+            ) : (
+              <div className={cls}>{inner}</div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+export function RefStatement({ children, sub }: { children: ReactNode; sub?: ReactNode }) {
+  return (
+    <Reveal variant="fade" className="flex flex-col items-center py-8 text-center sm:py-12">
+      <h2 data-split className="display max-w-[22ch] text-[clamp(2rem,4vw,3.75rem)]">
+        {children}
+      </h2>
+      {sub ? <div className="mt-8 max-w-xl text-muted">{sub}</div> : null}
+    </Reveal>
+  );
+}

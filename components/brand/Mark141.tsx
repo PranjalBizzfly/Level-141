@@ -25,7 +25,7 @@ export function Mark141({
       <span className="absolute inset-0 flex items-center justify-center">
         <span
           className={cx(
-            "block font-light leading-none tracking-[-0.06em] [margin-right:-0.06em] [text-box:trim-both_cap_alphabetic]",
+            "block font-display font-medium leading-none tracking-[-0.06em] [margin-right:-0.06em] [text-box:trim-both_cap_alphabetic]",
             textClassName,
           )}
         >

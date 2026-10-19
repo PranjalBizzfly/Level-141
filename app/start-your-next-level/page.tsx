@@ -35,7 +35,7 @@ export default async function ContactPage({ searchParams }: Props) {
           <div className="relative">
             <p className="eyebrow animate-fade text-gold">Start your next level</p>
             <h1 id="contact-title" className="display mt-5 animate-rise text-[2.5rem] sm:mt-7 sm:text-6xl lg:text-[4.5rem]">
-              Let&apos;s architect <span className="serif-accent text-gold">what&apos;s next.</span>
+              Let&apos;s architect <span className="serif-accent text-gold">what&apos;s next</span>
             </h1>
             <p className="mt-5 max-w-md animate-rise text-base leading-relaxed text-paper/75 [animation-delay:150ms] sm:mt-8 sm:text-lg">
               Whether you&apos;re building your personal authority or preparing an organization for its next stage of
@@ -63,7 +63,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 <li key={s.n} className="flex gap-4">
                   <span className="eyebrow mt-1 tabular-nums text-gold">{s.n}</span>
                   <span>
-                    <span className="font-medium">{s.name}.</span>{" "}
+                    <span className="font-medium">{s.name}</span> —{" "}
                     <span className="text-paper-muted">{s.line}</span>
                   </span>
                 </li>

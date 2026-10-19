@@ -58,6 +58,65 @@ export function LogoSymbol({ className, title }: MarkProps) {
   );
 }
 
+/**
+ * Lockup with its parts grouped (symbol / LEVEL / 141) so the halves can part
+ * on hover (.logo-split). Paths are the official ones, unmodified.
+ */
+export function LogoLockupSplit({ className, title = "Level141" }: MarkProps) {
+  return (
+    <Svg viewBox="276.87 480.52 726.27 113.63" className={className} title={title}>
+      <g className="lk-symbol">
+        <path d={LOCKUP_D[0]} />
+      </g>
+      <g className="lk-level">
+        {LOCKUP_D.slice(1, 6).map((d) => (
+          <path key={d.slice(0, 16)} d={d} />
+        ))}
+      </g>
+      <rect className="lk-gap" x="801" y="503" width="5" height="70" />
+      <g className="lk-141">
+        {LOCKUP_D.slice(6).map((d) => (
+          <path key={d.slice(0, 16)} d={d} />
+        ))}
+      </g>
+    </Svg>
+  );
+}
+
+/** Glyph boxes (x, width) inside the lockup, for single-letter use. */
+const GLYPHS = [
+  [454.19, 44.84],
+  [517.3, 46.42],
+  [582.09, 64.0],
+  [664.06, 46.42],
+  [734.09, 44.84],
+  [835.62, 37.24],
+  [890.73, 50.86],
+  [964.9, 37.24],
+] as const;
+
+/** One official letterform of the wordmark (0–4 = L E V E L, 5–7 = 1 4 1). */
+export function LogoGlyph({ index, className }: { index: number; className?: string }) {
+  const [x, w] = GLYPHS[index];
+  return (
+    <Svg viewBox={`${x} 501.27 ${w} 72.13`} className={className}>
+      <path d={LOCKUP_D[index + 1]} />
+    </Svg>
+  );
+}
+
+/** "LEVEL" or "141" alone, from the official wordmark. */
+export function LogoWordHalf({ part, className }: { part: "level" | "141"; className?: string }) {
+  const level = part === "level";
+  return (
+    <Svg viewBox={level ? "453.19 501.27 326.74 72.13" : "834.62 501.27 168.51 72.13"} className={className}>
+      {(level ? LOCKUP_D.slice(1, 6) : LOCKUP_D.slice(6)).map((d) => (
+        <path key={d.slice(0, 16)} d={d} />
+      ))}
+    </Svg>
+  );
+}
+
 /** Logo 5 / 6 — wordmark only (shares glyphs with the lockup). */
 export function LogoWordmark({ className, title = "Level141" }: MarkProps) {
   return (

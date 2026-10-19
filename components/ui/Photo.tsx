@@ -24,7 +24,7 @@ export function Photo({
   position?: string;
 }) {
   return (
-    <div className={cx("relative overflow-hidden rounded-[2rem] bg-ink-2", className)}>
+    <div data-wipe className={cx("relative overflow-hidden rounded-[2rem] bg-ink-2", className)}>
       <Image
         src={src}
         alt={alt}
@@ -57,6 +57,7 @@ export function HeroBackdrop({
   return (
     <div
       aria-hidden
+      data-parallax
       className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-full [mask-image:linear-gradient(to_left,black_35%,transparent_95%)] lg:w-[62%]"
     >
       <Image
