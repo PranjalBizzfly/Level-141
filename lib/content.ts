@@ -436,7 +436,7 @@ export const pbaVoices = [
 ] as const;
 
 export const pbaModules = [
-  { name: "LQ™ diagnostic assessment", purpose: "Establish current-state reality and gap to ambition." },
+  { name: "Personal Brand Diagnostic", purpose: "Establish current-state reality and gap to ambition." },
   { name: "Visionary Leadership Architecture", purpose: "Define what the individual should stand for." },
   { name: "Presence & Profile System", purpose: "Translate strategy into a coherent market-facing identity." },
   { name: "Thought Leadership Architecture", purpose: "Turn expertise into repeatable intellectual authority." },

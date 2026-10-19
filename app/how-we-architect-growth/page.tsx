@@ -373,6 +373,7 @@ export default function HowPage() {
                 Don&apos;t show what you did. <span className="serif-accent">Show what changed.</span>
               </>
             }
+            intro="Every Level141 engagement should eventually be presented around transformation."
           />
           <ol className="mt-10 sm:mt-12 lg:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
             {transformationFrame.map((t, i) => (
