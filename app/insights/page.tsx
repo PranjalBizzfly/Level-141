@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { BracketFrame, PageHero, Reveal, Section, SectionHeader } from "@/components/ui/primitives";
+import { PageHero, Reveal, Section, SectionHeader } from "@/components/ui/primitives";
 import { insightCategories, questionsWeAsk } from "@/lib/content";
 import { getPublishedInsights } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
@@ -32,73 +31,41 @@ export default function InsightsPage() {
         intro={<p>Ideas for people and organizations that refuse to remain where they are.</p>}
       />
 
-      {/* ---------------------------------------------------------- Articles or honest empty state */}
-      <Section tone="paper" labelledBy="latest-title">
-        <div className="container-x">
-          {articles.length ? (
-            <>
-              <SectionHeader id="latest-title" eyebrow="Latest" title="Recent perspectives" />
-              <ul className="mt-12 divide-y sm:mt-14 lg:mt-16 divide-ink/10 border-y border-ink/10">
-                {articles.map((a) => (
-                  <li key={a.slug}>
-                    <Link href={`${routes.insights}/${a.slug}`} className="group grid gap-3 py-8 lg:grid-cols-12 lg:gap-10">
-                      <span className="eyebrow text-gold-ink lg:col-span-3">{categoryName(a.category)}</span>
-                      <span className="lg:col-span-7">
-                        <span className="block text-2xl tracking-[-0.02em] group-hover:text-gold-ink">{a.title}</span>
-                        <span className="mt-2 block leading-relaxed text-muted">{a.summary}</span>
-                      </span>
-                      <time dateTime={a.publishedAt} className="text-sm text-muted lg:col-span-2 lg:text-right">
-                        {dateFmt.format(new Date(a.publishedAt))}
-                      </time>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : (
-            <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-              <Reveal className="lg:col-span-7">
-                <p className="eyebrow text-gold-ink">Perspectives in preparation</p>
-                <h2 id="latest-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
-                  The first essays are <span className="serif-accent">being written.</span>
-                </h2>
-                <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">
-                  Level141 Insights will publish across the six themes below. Nothing has been published yet — rather than
-                  fill this page with placeholders, we&apos;ll add each piece when it&apos;s ready.
-                </p>
-              </Reveal>
-              <Reveal delay={120} className="lg:col-span-4 lg:col-start-9">
-                <BracketFrame tone="ink" size="md">
-                  <p className="text-lg leading-relaxed">
-                    Have a question about your next level in the meantime?
-                  </p>
-                  <Link
-                    href={routes.contact}
-                    className="link-underline mt-4 inline-flex min-h-11 items-center gap-2 font-medium"
-                  >
-                    Start the conversation <ArrowUpRight aria-hidden className="size-4" />
+      {/* ---------------------------------------------------------- Articles (shown only once real, approved articles exist) */}
+      {articles.length ? (
+        <Section tone="paper" labelledBy="latest-title">
+          <div className="container-x">
+            <h2 id="latest-title" className="sr-only">
+              Insights
+            </h2>
+            <ul className="divide-y divide-ink/10 border-y border-ink/10">
+              {articles.map((a) => (
+                <li key={a.slug}>
+                  <Link href={`${routes.insights}/${a.slug}`} className="group grid gap-3 py-8 lg:grid-cols-12 lg:gap-10">
+                    <span className="eyebrow text-gold-ink lg:col-span-3">{categoryName(a.category)}</span>
+                    <span className="lg:col-span-7">
+                      <span className="block text-2xl tracking-[-0.02em] group-hover:text-gold-ink">{a.title}</span>
+                      <span className="mt-2 block leading-relaxed text-muted">{a.summary}</span>
+                    </span>
+                    <time dateTime={a.publishedAt} className="text-sm text-muted lg:col-span-2 lg:text-right">
+                      {dateFmt.format(new Date(a.publishedAt))}
+                    </time>
                   </Link>
-                </BracketFrame>
-              </Reveal>
-            </div>
-          )}
-        </div>
-      </Section>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
 
       {/* ---------------------------------------------------------- Categories */}
       <Section tone="ink" labelledBy="themes-title">
         <div className="container-x">
-          <SectionHeader
-            id="themes-title"
-            dark
-            eyebrow="What we write about"
-            title={
-              <>
-                Six themes. <span className="serif-accent text-gold">One question: what&apos;s next?</span>
-              </>
-            }
-          />
-          <ol className="mt-12 border-t sm:mt-14 lg:mt-16 border-line-dark">
+          {/* Source: Website Structure, INSIGHTS content categories (no public heading in the document). */}
+          <h2 id="themes-title" className="sr-only">
+            Insights categories
+          </h2>
+          <ol className="border-t border-line-dark">
             {insightCategories.map((c, i) => (
               <Reveal
                 as="li"
@@ -130,19 +97,18 @@ export default function InsightsPage() {
         <div className="container-x">
           <SectionHeader
             id="questions-title"
-            eyebrow="Questions we keep asking"
+            eyebrow="Insights"
             title={
               <>
-                Good architecture begins with <span className="serif-accent">better questions.</span>
+                Discovery <span className="serif-accent">Questions.</span>
               </>
             }
-            intro="Questions drawn from the Level141 discovery process. They're worth asking yourself."
           />
-          <div className="mt-12 grid gap-4 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 lg:mt-12 lg:grid-cols-2">
             {(
               [
-                ["For leaders and founders", questionsWeAsk.people],
-                ["For organizations", questionsWeAsk.organizations],
+                ["Personal Brand Architecture™", questionsWeAsk.people],
+                ["Growth Architecture™", questionsWeAsk.organizations],
               ] as const
             ).map(([label, qs], col) => (
               <Reveal key={label} delay={col * 120} className="rounded-[2rem] bg-surface p-6 sm:p-10">
@@ -164,10 +130,17 @@ export default function InsightsPage() {
         eyebrow="Find your level"
         title={
           <>
-            Ready to answer them <span className="serif-accent text-gold">together?</span>
+            You&apos;ve reached this level. <span className="serif-accent text-gold">What&apos;s your next?</span>
           </>
         }
-        primary={{ label: "Start Your Next Level", href: routes.contact }}
+        body={
+          <p>
+            Whether you&apos;re building your personal authority or preparing an organization for its next stage of
+            growth, the first step isn&apos;t another campaign. It&apos;s understanding your current level.
+          </p>
+        }
+        closingLine="Find Your Level."
+        primary={{ label: "Start Your Level141 Assessment", href: routes.contact }}
         secondary={{ label: "How we architect growth", href: routes.how }}
       />
     </>

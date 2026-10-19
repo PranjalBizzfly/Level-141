@@ -146,7 +146,7 @@ export const brandsLevers = [
     letter: "B",
     name: "Branding",
     line: "Build the foundation.",
-    role: "Clarifies who the organisation is, why it matters and why it is different.",
+    role: "Clarifies who the organization is, why it matters and why it is different.",
     components: "Purpose, proposition, category, differentiation, messaging, offer architecture and brand consistency.",
   },
   {
@@ -176,7 +176,7 @@ export const brandsLevers = [
     letter: "D",
     name: "Discover & Trust",
     line: "Become easier to find, understand and believe.",
-    role: "Makes the organisation easy to find and credible to validate.",
+    role: "Makes the organization easy to find and credible to validate.",
     components:
       "Search, reviews, reputation, proof, media, case studies, authority assets, listings and trust signals.",
   },
@@ -184,7 +184,7 @@ export const brandsLevers = [
     letter: "S",
     name: "Scale",
     line: "Create systems capable of supporting growth.",
-    role: "Integrates demand, pipeline, optimisation and governance for repeatable growth.",
+    role: "Integrates demand, pipeline, optimization and governance for repeatable growth.",
     components:
       "Lead/demand architecture, KPI system, experimentation, budget logic, partner governance, feedback loops and scale roadmap.",
   },
@@ -196,7 +196,7 @@ export const peakStages = [
     name: "Presence",
     question: "Are we visible, understandable and accessible to the right market?",
     focus: "Positioning, market presence, channels, discoverability, consistency and conversion readiness.",
-    outcome: "Right audiences can find, understand and engage with the organisation.",
+    outcome: "Right audiences can find, understand and engage with the organization.",
   },
   {
     letter: "E",
@@ -218,16 +218,16 @@ export const peakStages = [
     name: "Kinetic Growth",
     question: "How does the system create sustained forward movement?",
     focus:
-      "Demand, nurture, conversion, sales integration, referrals, expansion, optimisation and scalable governance.",
+      "Demand, nurture, conversion, sales integration, referrals, expansion, optimization and scalable governance.",
     outcome: "Repeatable pipeline, improved conversion, stronger economics and scalable growth.",
   },
 ] as const;
 
 export const lqDomains = [
-  { name: "Business & ambition", q: "Where is the organisation now? What does 'next level' mean in revenue, market, customer, authority or scale terms?" },
+  { name: "Business & ambition", q: "Where is the organization now? What does 'next level' mean in revenue, market, customer, authority or scale terms?" },
   { name: "Brand & positioning", q: "Is the value proposition clear, differentiated and consistently expressed?" },
   { name: "Customer & market", q: "Is the ICP explicit? Are needs, buying triggers, objections and segments understood?" },
-  { name: "Presence", q: "Can priority audiences find and understand the organisation across relevant touchpoints?" },
+  { name: "Presence", q: "Can priority audiences find and understand the organization across relevant touchpoints?" },
   { name: "Conversion readiness", q: "Do journeys, offers, proof, CTAs, landing environments and sales handoffs convert interest?" },
   { name: "Awareness & demand", q: "Is there a balanced system for paid, earned, owned, partner and community demand?" },
   { name: "Nurture", q: "Are prospects educated, qualified and progressed systematically?" },
@@ -281,7 +281,7 @@ export const vibe = [
     body: "We identify and articulate the impact you create across four dimensions: professional, personal, social and spiritual. Because authentic authority is built through meaningful contributions, values and demonstrated influence.",
     question: "What meaningful difference do I create?",
     detail:
-      "Impact converts claims into credibility. It documents how the individual affects organisations, industries, communities and people, ensuring the personal brand is anchored in proof rather than promotion.",
+      "Impact converts claims into credibility. It documents how the individual affects organizations, industries, communities and people, ensuring the personal brand is anchored in proof rather than promotion.",
     focus: [
       "Professional impact: business outcomes, transformations, innovation, teams, customers, industries and institutions",
       "Social impact: community contribution, mentoring, ecosystem development, philanthropy, advocacy or knowledge sharing where genuine",
@@ -383,24 +383,60 @@ export const pbaPains = [
   { pain: "Fragmented narrative", looks: "Bio, interviews, social profiles, speeches and company story communicate different messages.", cost: "Trust and memorability are diluted." },
   { pain: "Content without authority", looks: "Frequent posting without an intellectual territory or point of view.", cost: "Activity rises but influence does not." },
   { pain: "Reputation trapped in a network", looks: "Credibility exists mainly among people who already know the individual.", cost: "Growth is constrained by existing circles." },
-  { pain: "Founder-company dependency", looks: "The founder and organisation either compete for attention or are disconnected.", cost: "Lost trust-transfer and commercial leverage." },
+  { pain: "Founder-company dependency", looks: "The founder and organization either compete for attention or are disconnected.", cost: "Lost trust-transfer and commercial leverage." },
   { pain: "Vanity-led measurement", looks: "Followers, impressions and likes dominate reporting.", cost: "Teams cannot prove strategic or commercial value." },
   { pain: "No opportunity system", looks: "Media, speaking, partnerships, advisory, investor and business opportunities happen randomly.", cost: "Personal brand does not reliably create growth." },
   { pain: "Static identity", looks: "Brand remains tied to an old title, company or phase of life.", cost: "Future ambition is constrained by past perception." },
 ] as const;
 
+/** Source: Personal Brand Architecture bible §10, Pain → Solution → Impact Map (all four columns). */
 export const pbaVoices = [
-  { quote: "People do not know what I really do.", answer: "Leadership positioning + expertise territories." },
-  { quote: "My profiles do not reflect my level.", answer: "Presence/profile architecture." },
-  { quote: "I post, but it does not build authority.", answer: "Thought-leadership architecture." },
-  { quote: "My achievements are scattered.", answer: "Impact + evidence architecture." },
-  { quote: "Opportunities come randomly.", answer: "Opportunity + network architecture." },
-  { quote: "My personal brand does not help my company.", answer: "Founder-company trust-transfer architecture." },
-  { quote: "I am known for my past role.", answer: "Evolution roadmap." },
+  {
+    quote: "People do not know what I really do.",
+    answer: "Leadership positioning + expertise territories.",
+    effect: "Sharper market understanding.",
+    impact: "Stronger recall and category association.",
+  },
+  {
+    quote: "My profiles do not reflect my level.",
+    answer: "Presence/profile architecture.",
+    effect: "Coherent first impression.",
+    impact: "Higher trust and executive credibility.",
+  },
+  {
+    quote: "I post, but it does not build authority.",
+    answer: "Thought-leadership architecture.",
+    effect: "Content gains purpose and intellectual consistency.",
+    impact: "Recognized expertise rather than generic visibility.",
+  },
+  {
+    quote: "My achievements are scattered.",
+    answer: "Impact + evidence architecture.",
+    effect: "Proof becomes accessible and structured.",
+    impact: "Claims become credible and defensible.",
+  },
+  {
+    quote: "Opportunities come randomly.",
+    answer: "Opportunity + network architecture.",
+    effect: "Clear target pathways and calls to action.",
+    impact: "More intentional inbound and relationship-led growth.",
+  },
+  {
+    quote: "My personal brand does not help my company.",
+    answer: "Founder-company trust-transfer architecture.",
+    effect: "Alignment between founder authority and corporate goals.",
+    impact: "Commercial leverage and stronger stakeholder confidence.",
+  },
+  {
+    quote: "I am known for my past role.",
+    answer: "Evolution roadmap.",
+    effect: "Future identity becomes explicit.",
+    impact: "Relevance for the next career/business chapter.",
+  },
 ] as const;
 
 export const pbaModules = [
-  { name: "Personal Brand Diagnostic", purpose: "Establish current-state reality and gap to ambition." },
+  { name: "LQ™ diagnostic assessment", purpose: "Establish current-state reality and gap to ambition." },
   { name: "Visionary Leadership Architecture", purpose: "Define what the individual should stand for." },
   { name: "Presence & Profile System", purpose: "Translate strategy into a coherent market-facing identity." },
   { name: "Thought Leadership Architecture", purpose: "Turn expertise into repeatable intellectual authority." },
@@ -465,7 +501,7 @@ export const gaOperatingLogic = [
   "Next Level",
   "Growth Gap",
   "PEAK™ Architecture",
-  "B.R.A.N.D.S.™ Growth Levers",
+  "BRANDS™ Growth Levers",
   "Governed Activation",
   "Measurement",
   "Scale",
@@ -487,8 +523,8 @@ export const gaTriggers = [
 export const gaGapSteps = [
   { name: "Current State", q: "What is true today?", out: "Evidence-based LQ™ baseline." },
   { name: "Next Level", q: "What specific business state are we trying to reach?", out: "Target outcomes and strategic definition." },
-  { name: "Gap", q: "What prevents movement from current to next?", out: "Prioritised constraints, dependencies and opportunities." },
-  { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK™ / B.R.A.N.D.S. blueprint." },
+  { name: "Gap", q: "What prevents movement from current to next?", out: "Pprioritized constraints, dependencies and opportunities." },
+  { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK™ / BRANDS™ blueprint." },
   { name: "Activation", q: "What must happen first, by whom and in what sequence?", out: "90-day and phased roadmap." },
   { name: "Measurement", q: "How will we know the system is moving?", out: "Leading, pipeline and outcome KPIs." },
   { name: "Governance", q: "How will decisions, execution and corrections be managed?", out: "Operating cadence, ownership and review model." },
@@ -545,6 +581,6 @@ export const questionsWeAsk = {
     "What has stopped the company from reaching it already?",
     "Where does the funnel lose the most value today?",
     "What creates trust before a buyer speaks to sales?",
-    "If demand doubled next month, could the organisation convert and fulfil it?",
+    "If demand doubled next month, could the organization convert and fulfil it?",
   ],
 } as const;

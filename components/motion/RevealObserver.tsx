@@ -33,7 +33,9 @@ export function RevealObserver() {
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      // Reveal just before content enters the viewport, so a section is never
+      // blank on screen while its animation runs.
+      { rootMargin: "0px 0px 12% 0px", threshold: 0.01 },
     );
     els.forEach((el) => io.observe(el));
 

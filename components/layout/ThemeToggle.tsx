@@ -35,7 +35,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={label}
       title={label}
       className={cx(
-        "relative grid size-10 place-items-center rounded-full border sm:size-11 border-paper/20 text-paper transition-colors duration-300 hover:border-gold hover:text-gold",
+        "relative grid size-11 place-items-center rounded-full border border-paper/20 text-paper transition-colors duration-300 hover:border-gold hover:text-gold",
         className,
       )}
     >

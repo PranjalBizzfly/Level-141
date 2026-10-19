@@ -7,9 +7,11 @@ import { themeScript } from "@/lib/theme";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ViewTransitions } from "@/components/motion/ViewTransitions";
 import { Interactions } from "@/components/motion/Interactions";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { site, siteUrl } from "@/lib/site";
 import "./globals.css";
 import "./motion.css";
+import "./glass.css";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -93,6 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RevealObserver />
         <ViewTransitions />
         <Interactions />
+        <SmoothScroll />
         <div aria-hidden className="scroll-progress" />
         <script
           type="application/ld+json"

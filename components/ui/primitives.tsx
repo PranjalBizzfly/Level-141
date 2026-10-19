@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
-import { HeroBackdrop } from "@/components/ui/Photo";
 
 export function cx(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -44,12 +43,12 @@ const buttonStyles: Record<ButtonVariant, string> = {
   gold: "bg-gold text-ink hover:bg-gold-soft",
   outline: "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper",
   "outline-light": "border border-paper/30 text-paper hover:border-gold hover:bg-gold hover:text-ink",
-  ghost: "px-0! text-ink",
-  "ghost-light": "px-0! text-paper",
+  ghost: "border border-line-strong text-ink hover:border-ink",
+  "ghost-light": "border border-paper/25 text-paper hover:border-paper/60",
 };
 
 export const buttonBase =
-  "group inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-6 text-[0.95rem] font-medium tracking-[-0.005em] transition-[background-color,color,border-color] duration-300 ease-[var(--ease-architect)]";
+  "group inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-6 text-center text-[0.95rem] sm:whitespace-nowrap font-medium tracking-[-0.005em] transition-[background-color,color,border-color] duration-300 ease-[var(--ease-architect)]";
 
 type ButtonLinkProps = Omit<ComponentProps<typeof Link>, "className"> & {
   variant?: ButtonVariant;
@@ -65,7 +64,7 @@ export function ButtonLink({ variant = "solid", className, children, external, .
       className={cx(buttonBase, buttonStyles[variant], className)}
       {...props}
     >
-      <span className={variant.startsWith("ghost") ? "link-underline" : undefined}>{children}</span>
+      <span>{children}</span>
       <Icon
         aria-hidden
         className="size-4 shrink-0 transition-transform duration-300 ease-[var(--ease-architect)] group-hover:translate-x-1"
@@ -85,7 +84,7 @@ export function Eyebrow({ children, className, index }: { children: ReactNode; c
           {index}
         </span>
       ) : null}
-      {index ? <span aria-hidden className="h-px w-8 bg-current opacity-50" /> : null}
+      {index ? <span aria-hidden data-rule className="h-px w-8 bg-current opacity-50" /> : null}
       <span>{children}</span>
     </p>
   );
@@ -108,7 +107,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-20 sm:py-24 lg:py-32", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-14 sm:py-16 lg:py-20", tones[tone], className)}>
       {children}
     </section>
   );
@@ -197,22 +196,15 @@ export function PageHero({
   intro,
   children,
   aside,
-  image,
-  imageColour,
 }: {
   eyebrow: string;
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
   aside?: ReactNode;
-  /** Optional decorative backdrop photo (see HeroBackdrop). */
-  image?: string;
-  /** True when `image` is a muted-colour photo. */
-  imageColour?: boolean;
 }) {
   return (
     <section className="on-dark relative isolate overflow-hidden bg-ink pb-16 pt-32 text-paper sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-44">
-      {image ? <HeroBackdrop src={image} colour={imageColour} /> : null}
       <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
       <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>

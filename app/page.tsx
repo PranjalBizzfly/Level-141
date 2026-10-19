@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Photo } from "@/components/ui/Photo";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { LogoSymbol } from "@/components/brand/Logo";
 import { Mark141 } from "@/components/brand/Mark141";
 import { GrowthChainDiagram, ProcessTimeline } from "@/components/diagrams/Diagrams";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -21,6 +21,8 @@ import {
   gaDimensions,
   insightCategories,
   levelProcess,
+  mayBeNecessary,
+  startingQuestions,
   transformationFrame,
   whatWeDo,
   whyLevel141,
@@ -110,13 +112,11 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              {/* Fragmented activity → one integrated architecture ("Level141 connects the pieces"). */}
-              <Photo
-                src="/images/home-fragmented-to-integrated-muted.webp"
-                alt="Modular oak and travertine blocks transitioning from fragmented pieces into an integrated interlocking architectural structure"
-                className="my-8 aspect-[16/9] !rounded-2xl"
-                sizes="(min-width: 1024px) 40vw, 100vw"
-              />
+              <div className="my-8 flex items-center gap-4 text-gold-ink" aria-hidden>
+                <span className="h-px flex-1 bg-ink/10" />
+                <LogoSymbol className="size-6 text-ink" />
+                <span className="h-px flex-1 bg-ink/10" />
+              </div>
               <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">Level141 connects the pieces.</p>
               <p className="mt-4 leading-relaxed text-muted">
                 We look at growth as one integrated architecture—then identify what needs to change for you to reach
@@ -143,17 +143,9 @@ export default function HomePage() {
             intro="Level141 has built dedicated architectures for both."
           />
 
-          <div className="mt-12 grid gap-4 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 lg:mt-12 lg:grid-cols-2">
             {/* Personal Brand Architecture — active */}
             <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
-              {/* "Growth begins either with the person…" */}
-              <Photo
-                src="/images/home-person-notebook.webp"
-                alt="A leader's hands writing strategic narrative notes in a notebook at an oak desk by a window"
-                className="mb-8 aspect-[16/9] !rounded-2xl sm:mb-10"
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                position="45% center"
-              />
               <div className="flex items-center justify-between gap-4">
                 <span aria-hidden className="eyebrow text-paper-muted">
                   01
@@ -179,26 +171,18 @@ export default function HomePage() {
                   </div>
                 ))}
               </dl>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:items-center sm:gap-8">
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5">
                 <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
                   Start Your Personal Brand Assessment
                 </ButtonLink>
                 <ButtonLink href={routes.personalBrand} variant="ghost-light">
-                  Discover VIBE™
+                  Discover Your VIBE™
                 </ButtonLink>
               </div>
             </Reveal>
 
             {/* Growth Architecture — waitlist */}
             <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-6 sm:p-10">
-              {/* "…or the organization." */}
-              <Photo
-                src="/images/home-team-table.webp"
-                alt="Executive leadership team collaborating around a walnut conference table reviewing an integrated business architecture diagram"
-                className="mb-8 aspect-[16/9] !rounded-2xl sm:mb-10"
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                position="center"
-              />
               <div className="flex items-center justify-between gap-4">
                 <span className="eyebrow text-muted">02</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
@@ -220,7 +204,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:items-center sm:gap-8">
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5">
                 <ButtonLink href={routes.waitlist} variant="solid">
                   Join the Waitlist
                 </ButtonLink>
@@ -250,7 +234,7 @@ export default function HomePage() {
             }
             intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
           />
-          <div className="mt-12 sm:mt-14 lg:mt-16">
+          <div className="mt-10 sm:mt-12 lg:mt-12">
             <GrowthChainDiagram />
           </div>
         </div>
@@ -270,7 +254,7 @@ export default function HomePage() {
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <ol className="mt-12 border-t border-ink/12 sm:mt-14 lg:mt-16">
+          <ol className="mt-10 border-t border-ink/12 sm:mt-12 lg:mt-12">
             {frameworks.map((f, i) => (
               <Reveal as="li" key={f.id} delay={i * 80} className="border-b border-ink/12">
                 <Link
@@ -302,32 +286,87 @@ export default function HomePage() {
           <SectionHeader
             id="works-title"
             index="05"
-            eyebrow="How Level141 works"
+            eyebrow="We don't start with deliverables"
             title={
               <>
-                We don&apos;t start with deliverables. We start with the{" "}
-                <span className="serif-accent">level you&apos;re trying to reach.</span>
+                We start with the <span className="serif-accent">level you&apos;re trying to reach.</span>
               </>
             }
             intro={
-              <>
-                <p>The starting point is the growth problem. Only then do we architect the solution.</p>
-                <ButtonLink href={routes.how} variant="ghost" className="mt-6">
+              <div className="flex lg:justify-end">
+                <ButtonLink href={routes.how} variant="ghost">
                   How we architect growth
                 </ButtonLink>
-              </>
+              </div>
             }
           />
-          {/* "The starting point is the growth problem. Only then do we architect the solution." */}
-          <Reveal className="mt-12 sm:mt-14 lg:mt-16">
-            <Photo
-              src="/images/home-cards-grid-muted.webp"
-              alt="Strategist's hands organizing architectural framework cards into a structured grid on a warm walnut desk in natural morning sunlight"
-              className="aspect-[16/9] lg:aspect-[21/8]"
-              sizes="(min-width: 1408px) 1300px, 100vw"
-            />
-          </Reveal>
-          <ProcessTimeline steps={levelProcess} className="mt-12 sm:mt-14 lg:mt-16" />
+
+          {/* Source: Website Structure, "WE DON'T START WITH DELIVERABLES." — in document order.
+              Two matched panels on a shared subgrid so their lists and closing lines align. */}
+          <div className="mt-10 grid gap-6 sm:mt-12 lg:mt-12 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
+            <Reveal className="grid rounded-[2rem] border border-line bg-surface p-7 sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
+              <div className="flex items-end pb-6">
+                <p className="eyebrow text-muted">Deliverables</p>
+              </div>
+              <ul className="border-t border-line-strong">
+                {mayBeNecessary.map((m) => (
+                  <li
+                    key={m}
+                    className="group/item flex min-h-14 cursor-default items-center justify-between gap-4 border-b border-line py-3 text-lg tracking-[-0.01em] text-muted transition-colors duration-300 hover:text-ink"
+                  >
+                    <span className="bg-[linear-gradient(var(--color-gold-ink),var(--color-gold-ink))] bg-[length:0%_1.5px] bg-[position:0_55%] bg-no-repeat transition-[background-size] duration-500 ease-[var(--ease-architect)] group-hover/item:bg-[length:100%_1.5px]">
+                      {m} may be necessary.
+                    </span>
+                    <span aria-hidden className="hidden shrink-0 text-sm text-gold-ink opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 sm:inline">
+                      not the start
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">But none of those should be the starting point.</p>
+            </Reveal>
+
+            {/* Bridge arrow between the panels */}
+            <div aria-hidden className="hidden items-center justify-center lg:row-span-3 lg:flex">
+              <span className="grid size-12 place-items-center rounded-full border border-line-strong bg-surface text-gold-ink">
+                <ArrowRight className="size-5" />
+              </span>
+            </div>
+
+            <Reveal delay={120} className="on-dark grid rounded-[2rem] bg-ink p-7 text-paper sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
+              <div className="pb-6">
+                <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
+                  The starting point is the <span className="serif-accent text-gold">growth problem.</span>
+                </p>
+                <p className="eyebrow mt-5 text-paper-muted">Level141 first identifies:</p>
+              </div>
+              <ol className="border-t border-line-dark-strong">
+                {startingQuestions.map((q, i) => (
+                  <li
+                    key={q}
+                    className="group/q -mx-3 flex min-h-14 cursor-default items-center gap-4 rounded-xl border-b border-line-dark px-3 py-3 text-lg transition-colors duration-300 hover:bg-paper/[0.06]"
+                  >
+                    <span
+                      aria-hidden
+                      className="grid size-8 shrink-0 place-items-center rounded-full border border-gold/50 text-xs tabular-nums text-gold transition-[transform,border-color,font-weight] duration-300 group-hover/q:scale-110 group-hover/q:border-current group-hover/q:font-semibold"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1">{q}</span>
+                    <ArrowRight
+                      aria-hidden
+                      className="size-4 -translate-x-2 text-gold opacity-0 transition-[opacity,transform] duration-300 group-hover/q:translate-x-0 group-hover/q:opacity-100"
+                    />
+                  </li>
+                ))}
+              </ol>
+              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">Only then do we architect the solution.</p>
+            </Reveal>
+          </div>
+
+          {/* Source: Website Structure, "HOW LEVEL141 WORKS". */}
+          <Eyebrow className="mt-12 text-gold-ink sm:mt-14">How Level141 works</Eyebrow>
+          <ProcessTimeline steps={levelProcess} className="mt-8 sm:mt-10" />
         </div>
       </Section>
 
@@ -371,17 +410,17 @@ export default function HomePage() {
           <SectionHeader
             id="for-title"
             index="07"
-            eyebrow="Who we architect for"
+            eyebrow="Ideal for"
             title={
               <>
                 When ambition changes, the architecture supporting it <span className="serif-accent">must change too.</span>
               </>
             }
           />
-          <div className="mt-12 grid gap-4 sm:mt-14 sm:gap-6 md:grid-cols-2 lg:mt-16">
+          <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-2 lg:mt-12">
             {/* Both cards share six subgrid rows from md, so headline, list, closing line
                 and link align across the pair. */}
-            <Reveal className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:grid-rows-subgrid md:gap-0">
+            <Reveal className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
                 For people whose capability is bigger than their current visibility.
@@ -392,11 +431,11 @@ export default function HomePage() {
                 Your personal brand shouldn&apos;t simply document what you&apos;ve done. It should position you for
                 what you want to do next.
               </p>
-              <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6 justify-self-start">
+              <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6 max-w-full justify-self-start sm:whitespace-normal">
                 Build My Personal Brand
               </ButtonLink>
             </Reveal>
-            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:grid-rows-subgrid md:gap-0">
+            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Growth Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
                 For organizations whose ambition has outgrown their current growth system.
@@ -406,7 +445,7 @@ export default function HomePage() {
               <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
                 When ambition changes, the architecture supporting it must change too.
               </p>
-              <ButtonLink href={routes.waitlist} variant="ghost" className="mt-6 justify-self-start">
+              <ButtonLink href={routes.waitlist} variant="ghost" className="mt-6 max-w-full justify-self-start sm:whitespace-normal">
                 Register your organization&apos;s interest
               </ButtonLink>
             </Reveal>
@@ -427,7 +466,7 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-12 grid gap-px overflow-hidden sm:mt-14 lg:mt-16 rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-10 grid gap-px overflow-hidden sm:mt-12 lg:mt-12 rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
             {whyLevel141.map((w, i) => (
               <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-surface p-6 sm:p-8">
                 <span className="eyebrow tabular-nums text-gold-ink">{String(i + 1).padStart(2, "0")}</span>
@@ -461,7 +500,7 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <Reveal className="mt-16 lg:mt-20">
+          <Reveal className="mt-12 lg:mt-14">
             <BracketFrame size="lg" className="mx-auto max-w-3xl text-center">
               <p className="text-3xl leading-tight tracking-[-0.025em] sm:text-5xl">
                 Growth happens when the pieces work together.{" "}
@@ -484,9 +523,8 @@ export default function HomePage() {
                 Don&apos;t show what you did. <span className="serif-accent">Show what changed.</span>
               </>
             }
-            intro="Every Level141 engagement should eventually be presented around transformation."
           />
-          <ol className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:mt-16 lg:grid-cols-5 lg:gap-0">
+          <ol className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:mt-12 lg:grid-cols-5 lg:gap-0">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"
@@ -567,7 +605,7 @@ export default function HomePage() {
               </>
             }
           />
-          <ul className="mt-12 grid gap-px overflow-hidden sm:mt-14 lg:mt-16 rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-px overflow-hidden sm:mt-12 lg:mt-12 rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
             {insightCategories.map((c, i) => (
               <Reveal as="li" key={c.slug} delay={i * 60} className="bg-paper p-6 sm:p-8">
                 <p className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</p>
@@ -592,6 +630,7 @@ export default function HomePage() {
             growth, the first step isn&apos;t another campaign. It&apos;s understanding your current level.
           </p>
         }
+        closingLine="Find Your Level."
         primary={{ label: "Start Your Level141 Assessment", href: routes.contact }}
         secondary={{ label: "How we architect growth", href: routes.how }}
       />

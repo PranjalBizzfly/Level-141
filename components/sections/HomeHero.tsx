@@ -1,6 +1,5 @@
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { ButtonLink } from "@/components/ui/primitives";
-import { HeroBackdrop } from "@/components/ui/Photo";
 import { site } from "@/lib/site";
 
 const built = ["A career.", "A reputation.", "A business.", "A company."];
@@ -13,7 +12,6 @@ const built = ["A career.", "A reputation.", "A business.", "A company."];
 export function HomeHero() {
   return (
     <section className="on-dark relative isolate overflow-hidden bg-ink text-paper" aria-labelledby="hero-title">
-      <HeroBackdrop src="/images/home-hero-staircase-muted.webp" />
       <div aria-hidden className="grid-lines absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_30%,transparent)]" />
       <div className="container-x grid gap-12 pb-16 pt-28 sm:gap-16 sm:pb-20 sm:pt-36 lg:min-h-[100svh] lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-24 lg:pt-36">
         <div className="lg:col-span-7">
@@ -76,12 +74,6 @@ export function HomeHero() {
           </div>
         </div>
       </div>
-      <a
-        href="#architecture"
-        className="eyebrow absolute bottom-6 left-1/2 hidden -translate-x-1/2 px-3 py-3 text-paper-muted transition-colors hover:text-gold lg:block"
-      >
-        Scroll
-      </a>
     </section>
   );
 }

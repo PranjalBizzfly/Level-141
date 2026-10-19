@@ -39,7 +39,7 @@ export function ScrollToggle() {
       aria-label={label}
       title={label}
       className={cx(
-        "fixed bottom-5 right-5 z-40 grid size-12 place-items-center rounded-full border border-line-strong bg-paper text-ink",
+        "fixed bottom-5 right-5 z-40 grid size-12 place-items-center glass-control rounded-full border border-line-strong text-ink",
         "transition-[background-color,color,border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-paper",
         "sm:bottom-8 sm:right-8",
       )}

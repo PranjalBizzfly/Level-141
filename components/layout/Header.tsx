@@ -134,52 +134,61 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="relative z-10 grid size-10 place-items-center sm:size-11 rounded-full border border-paper/20 transition-colors hover:border-gold xl:hidden"
+            className="relative z-10 grid size-11 place-items-center rounded-full border border-paper/20 transition-colors hover:border-gold xl:hidden"
           >
             {open ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
           </button>
         </div>
       </div>
 
+      {/* Light backdrop behind the floating menu; tapping it closes the menu. */}
+      {open ? (
+        <div
+          aria-hidden
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 -z-10 animate-fade bg-black/25 [animation-duration:0.3s] xl:hidden"
+        />
+      ) : null}
+
       <div
         id="mobile-menu"
         ref={panelRef}
         hidden={!open}
         className={cx(
-          "absolute inset-x-0 top-full overflow-y-auto bg-ink xl:hidden",
-          scrolled ? "h-[calc(100dvh-3.5rem)] sm:h-[calc(100dvh-4rem)]" : "h-[calc(100dvh-3.5rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)]",
+          // Floating card under the bar: inset on phones, a right-anchored card on tablets.
+          "absolute inset-x-3 top-full mt-2 flex animate-rise flex-col overflow-hidden rounded-3xl bg-ink shadow-[0_24px_64px_-24px_rgb(0_0_0/0.55)] ring-1 ring-paper/12 [animation-duration:0.35s] sm:left-auto sm:right-8 sm:w-96 xl:hidden",
+          scrolled ? "max-h-[calc(100dvh-4.5rem)] sm:max-h-[calc(100dvh-5rem)]" : "max-h-[calc(100dvh-4.5rem)] sm:max-h-[calc(100dvh-5.5rem)]",
         )}
       >
-        <nav aria-label="Mobile" className="container-x flex min-h-full flex-col justify-between pb-10 pt-6">
-          <ul className="divide-y divide-paper/10 border-y border-paper/10">
-            {mainNav.map((item, i) => {
+        <nav aria-label="Mobile" className="flex min-h-0 flex-col">
+          <ul className="min-h-0 overflow-y-auto overscroll-contain px-3 pt-2">
+            {mainNav.map((item) => {
               const active = isActive(pathname, item.href);
               return (
-                <li key={item.href} className="animate-rise" style={{ animationDelay: `${i * 45}ms` }}>
+                <li key={item.href} className="border-b border-paper/10 last:border-0">
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cx(
-                      "flex items-baseline gap-5 py-4 text-2xl tracking-[-0.02em] transition-colors sm:text-3xl",
-                      active ? "text-gold" : "text-paper hover:text-gold",
+                      "flex min-h-12 items-center justify-between gap-3 rounded-xl px-3 text-[0.95rem] font-medium tracking-[-0.005em] transition-colors",
+                      active ? "text-paper" : "text-paper/85 hover:bg-paper/5 hover:text-paper",
                     )}
                   >
-                    <span className="eyebrow w-6 text-paper-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                     {item.label}
+                    {active ? <span aria-hidden className="size-1.5 rounded-full bg-gold" /> : null}
                   </Link>
                 </li>
               );
             })}
           </ul>
-          <div className="mt-10 animate-fade [animation-delay:300ms]">
+          <div className="border-t border-paper/10 p-3">
             <Link
               href={site.primaryCta.href}
-              className="flex min-h-14 items-center justify-between rounded-full bg-gold px-6 text-lg font-medium text-ink"
+              className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold px-6 text-sm font-medium text-ink"
             >
               {site.primaryCta.label}
-              <ArrowRight aria-hidden className="size-5" />
+              <ArrowRight aria-hidden className="size-4" />
             </Link>
-            <p className="eyebrow mt-8 text-paper-muted">{site.brandLine}</p>
           </div>
         </nav>
       </div>

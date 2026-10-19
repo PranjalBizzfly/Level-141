@@ -10,12 +10,10 @@ export default function NotFound() {
         <div className="relative inline-block px-6 py-8 sm:px-14 sm:py-14">
           <BracketClose className="absolute right-0 top-0 size-6 text-gold sm:size-8" />
           <BracketOpen className="absolute bottom-0 left-0 size-6 text-paper/40 sm:size-8" />
-          <p className="eyebrow text-gold">404 · Page not found</p>
-          <h1 className="display mt-6 text-[2.5rem] sm:text-6xl lg:text-7xl">
-            This level <span className="serif-accent text-gold">doesn&apos;t exist.</span>
-          </h1>
+          <p className="eyebrow text-gold">404</p>
+          {/* Functional page: no brand copy beyond the documented CTA below. */}
+          <h1 className="display mt-6 text-[2.5rem] sm:text-6xl lg:text-7xl">Page not found.</h1>
         </div>
-        <p className="mt-8 max-w-lg text-base sm:text-lg text-paper/75">The page you&apos;re looking for may have moved. Let&apos;s get you back on track.</p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
           <ButtonLink href={routes.home} variant="gold">
             Back to home

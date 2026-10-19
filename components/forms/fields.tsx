@@ -27,8 +27,14 @@ export function useFormSubmit(endpoint: string) {
     if (!startedAt.current) startedAt.current = Date.now();
   }, []);
 
+  // Blocks a second submission while one is in flight (e.g. a fast double
+  // click before the disabled button has re-rendered).
+  const inFlight = useRef(false);
+
   const submit = useCallback(
     async (payload: Record<string, string>) => {
+      if (inFlight.current) return false;
+      inFlight.current = true;
       setStatus({ state: "submitting" });
       setServerErrors({});
       try {
@@ -54,6 +60,8 @@ export function useFormSubmit(endpoint: string) {
       } catch {
         setStatus({ state: "error", message: "We couldn't reach the server. Check your connection and try again." });
       }
+      // Failed attempts can be retried; a success keeps the lock (the form is replaced).
+      inFlight.current = false;
       return false;
     },
     [endpoint],

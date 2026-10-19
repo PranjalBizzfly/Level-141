@@ -1,0 +1,294 @@
+/* ---------------------------------------------------------------------------
+   Level141 crystal-glass layer
+   Optical-glass surfaces built only from CSS: a translucent body, a luminous
+   top edge, a fine outline, layered depth and a light reflection that sweeps
+   across as the panel scrolls. Backdrop blur affects only what is behind a
+   panel — text itself is never blurred, faded or glowing.
+
+   Applied selectively to existing surfaces (cards, highlighted panels, the
+   framework nav pill, the scrolled header and the scroll button) so no page
+   markup or content changes. Form controls, focus rings and hairline grids
+   are excluded so their states stay exact.
+--------------------------------------------------------------------------- */
+
+:root {
+  /* Light theme: white glass on a white page is invisible, so the glass body
+     carries a faint cool-silver tint; the bright white edge, scroll sheen and
+     hover sweep then read clearly against it. */
+  --glass-tint-1: rgb(232 235 239 / 0.82);
+  --glass-tint-2: rgb(247 248 250 / 0.6);
+  --glass-edge: rgb(255 255 255 / 1);
+  --glass-border: rgb(0 0 0 / 0.1);
+  --glass-shadow:
+    0 1px 2px rgb(0 0 0 / 0.05),
+    0 12px 28px -14px rgb(0 0 0 / 0.16),
+    0 44px 88px -48px rgb(0 0 0 / 0.28);
+  --glass-sheen: rgb(255 255 255 / 0.95);
+  --ambient-a: rgb(0 0 0 / 0.06);
+  --ambient-b: rgb(120 124 130 / 0.1);
+}
+[data-theme="dark"] {
+  --glass-tint-1: rgb(255 255 255 / 0.075);
+  --glass-tint-2: rgb(255 255 255 / 0.02);
+  --glass-edge: rgb(255 255 255 / 0.2);
+  --glass-border: rgb(255 255 255 / 0.09);
+  --glass-shadow:
+    0 1px 1px rgb(0 0 0 / 0.5),
+    0 24px 48px -24px rgb(0 0 0 / 0.85);
+  --glass-sheen: rgb(255 255 255 / 0.09);
+  --ambient-a: rgb(255 255 255 / 0.05);
+  --ambient-b: rgb(197 199 202 / 0.05);
+}
+
+/* Highlighted panels (formerly solid "dark" cards) are smoked glass: a little
+   denser than standard glass so they still read as the emphasised item. */
+.on-dark:not(section, header, footer, body > *) {
+  --glass-tint-1: rgb(0 0 0 / 0.07);
+  --glass-tint-2: rgb(0 0 0 / 0.025);
+  --glass-edge: rgb(255 255 255 / 0.9);
+  --glass-sheen: rgb(255 255 255 / 0.55);
+}
+[data-theme="dark"] .on-dark:not(section, header, footer, body > *) {
+  --glass-tint-1: rgb(255 255 255 / 0.13);
+  --glass-tint-2: rgb(255 255 255 / 0.045);
+  --glass-edge: rgb(255 255 255 / 0.28);
+  --glass-sheen: rgb(255 255 255 / 0.12);
+}
+
+/* The glass surface. */
+:is(
+    .glass,
+    :not(section, input, textarea, select)[class~="bg-surface"],
+    [class~="bg-ink-2"],
+    .on-dark:not(section, header, footer, body > *),
+    :not(section, input, textarea, select)[class*="rounded-[2rem]"][class~="border"],
+    :not(section, input, textarea, select)[class*="rounded-3xl"][class~="border"],
+    :not(section, input, textarea, select)[class*="rounded-2xl"][class~="border"],
+    :not(input, textarea, select)[class*="rounded-xl"][class~="border"],
+    [class*="rounded-full"][class~="border"]
+  ):not([class*="gap-px"] > *, [class*="ring-"], [class*="focus-within"], [class*="bg-error"], [class*="in-["], [class~="bg-gold"]) {
+  background-color: transparent;
+  background-image:
+    linear-gradient(112deg, transparent 0 38%, var(--glass-sheen) 50%, transparent 62% 100%),
+    linear-gradient(160deg, var(--glass-tint-1), var(--glass-tint-2));
+  background-size: 260% 100%, 100% 100%;
+  background-position: 115% 0, 0 0;
+  background-repeat: no-repeat;
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge),
+    inset 0 0 0 1px var(--glass-border),
+    var(--glass-shadow);
+}
+
+/* Glass header once the page scrolls: a clear pane with a hairline edge. */
+body > header[data-solid] {
+  background-color: color-mix(in oklab, var(--color-ink) 74%, transparent);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  backdrop-filter: blur(24px) saturate(1.8);
+  box-shadow:
+    inset 0 -1px 0 var(--glass-border),
+    0 12px 32px -24px rgb(0 0 0 / 0.35);
+}
+
+/* Glass control (scroll button): inverts to solid on hover for clarity. */
+.glass-control {
+  background-color: color-mix(in oklab, var(--color-paper) 70%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge),
+    var(--glass-shadow);
+}
+.glass-control:hover {
+  background-color: var(--color-ink);
+}
+
+/* Primary buttons: a crisp optical highlight on the solid fill. */
+:is(a, button)[class~="bg-gold"] {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 10px 24px -14px rgb(0 0 0 / 0.55);
+}
+
+/* Ambient silver light behind the page on large screens, so glass has
+   something to refract. Fixed attachment keeps the light field continuous
+   from one section to the next. */
+@media (min-width: 1024px) and (hover: hover) {
+  main > section,
+  main > div > section {
+    background-image:
+      radial-gradient(42rem 32rem at 12% 18%, var(--ambient-a), transparent 70%),
+      radial-gradient(38rem 30rem at 88% 62%, var(--ambient-b), transparent 70%);
+    background-attachment: fixed;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll choreography (progressive: only where supported and motion allowed)
+--------------------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Light sweeps across each glass panel as it travels through the view. */
+    :is(
+        .glass,
+        :not(section, input, textarea, select)[class~="bg-surface"],
+        [class~="bg-ink-2"],
+        .on-dark:not(section, header, footer, body > *),
+        :not(section, input, textarea, select)[class*="rounded-[2rem]"][class~="border"],
+        :not(section, input, textarea, select)[class*="rounded-3xl"][class~="border"],
+        :not(section, input, textarea, select)[class*="rounded-2xl"][class~="border"],
+        :not(input, textarea, select)[class*="rounded-xl"][class~="border"],
+        [class*="rounded-full"][class~="border"]
+      ):not([class*="gap-px"] > *, [class*="ring-"], [class*="focus-within"], [class*="bg-error"], [class*="in-["], [class~="bg-gold"]) {
+      animation: l141-sheen linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    /* Section headings drift up slightly as their section arrives. */
+    main section > .container-x > header,
+    main section > .container-x > div > header {
+      animation: l141-heading-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+  }
+}
+
+@keyframes l141-sheen {
+  from {
+    background-position: 115% 0, 0 0;
+  }
+  to {
+    background-position: -15% 0, 0 0;
+  }
+}
+@keyframes l141-heading-drift {
+  from {
+    translate: 0 28px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+/* Glass panels arrive with depth: a short rise and a slight tilt settling
+   flat. Text is never blurred; it is fully crisp the moment it lands. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js
+    [data-reveal]:is(
+      :not(section)[class~="bg-surface"],
+      [class~="bg-ink-2"],
+      .on-dark:not(section, header, footer, body > *)
+    ) {
+    transform: perspective(1200px) translateY(44px) rotateX(7deg) scale(0.985);
+    transform-origin: 50% 0;
+  }
+  html.js
+    [data-reveal].is-visible:is(
+      :not(section)[class~="bg-surface"],
+      [class~="bg-ink-2"],
+      .on-dark:not(section, header, footer, body > *)
+    ) {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Interaction: light sweep, lift and press on every glass card, chip and
+   button. The sweep is a ::after layer *behind* the content (isolation keeps
+   it above the surface but below the text), so text is never washed over.
+--------------------------------------------------------------------------- */
+:root {
+  --glass-sweep: rgb(255 255 255 / 0.95);
+}
+[data-theme="dark"] {
+  --glass-sweep: rgb(255 255 255 / 0.13);
+}
+
+:is(
+    .glass,
+    .glass-control,
+    :not(section, input, textarea, select)[class~="bg-surface"],
+    [class~="bg-ink-2"],
+    .on-dark:not(section, header, footer, body > *),
+    :not(section, input, textarea, select)[class*="rounded-[2rem]"][class~="border"],
+    :not(section, input, textarea, select)[class*="rounded-3xl"][class~="border"],
+    :not(section, input, textarea, select)[class*="rounded-2xl"][class~="border"],
+    :not(input, textarea, select)[class*="rounded-xl"][class~="border"],
+    [class*="rounded-full"][class~="border"],
+    :is(a, button):is([class~="bg-gold"], [class~="bg-ink"], [type="submit"])
+  ):not([class*="gap-px"] > *, [class*="ring-"], [class*="focus-within"], [class*="bg-error"], [class*="in-["]) {
+  isolation: isolate;
+
+  &:not([class*="absolute"], [class*="fixed"], [class*="sticky"]) {
+    position: relative;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 30%, var(--glass-sweep) 50%, transparent 70%) no-repeat;
+    background-size: 260% 100%;
+    background-position: 130% 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(
+      .glass,
+      .glass-control,
+      :not(section, input, textarea, select)[class~="bg-surface"],
+      [class~="bg-ink-2"],
+      .on-dark:not(section, header, footer, body > *),
+      :not(section, input, textarea, select)[class*="rounded-[2rem]"][class~="border"],
+      :not(section, input, textarea, select)[class*="rounded-3xl"][class~="border"],
+      :not(section, input, textarea, select)[class*="rounded-2xl"][class~="border"],
+      :not(input, textarea, select)[class*="rounded-xl"][class~="border"],
+      [class*="rounded-full"][class~="border"],
+      :is(a, button):is([class~="bg-gold"], [class~="bg-ink"], [type="submit"])
+    ):not([class*="gap-px"] > *, [class*="ring-"], [class*="focus-within"], [class*="bg-error"], [class*="in-["]) {
+    /* Keep the reveal timings from motion.css and add the interaction ones. */
+    transition:
+      opacity 1s var(--ease-architect) var(--reveal-delay, 0ms),
+      transform 1.1s var(--ease-architect) var(--reveal-delay, 0ms),
+      clip-path 1s var(--ease-architect) var(--reveal-delay, 0ms),
+      translate 0.5s var(--ease-architect),
+      scale 0.2s var(--ease-architect),
+      box-shadow 0.5s var(--ease-architect),
+      background-color 0.3s var(--ease-architect),
+      border-color 0.3s var(--ease-architect),
+      color 0.3s var(--ease-architect);
+
+    &::after {
+      transition: background-position 0s;
+    }
+    &:hover::after {
+      background-position: -30% 0;
+      transition: background-position 1s var(--ease-architect);
+    }
+
+    /* Cards and panels lift onto deeper glass shadow. */
+    &:is([class*="rounded-[2rem]"], [class*="rounded-3xl"], [class*="rounded-2xl"], [class~="bg-surface"], [class~="bg-ink-2"], .on-dark):hover {
+      translate: 0 -4px;
+      box-shadow:
+        inset 0 1px 0 var(--glass-edge),
+        inset 0 0 0 1px var(--glass-border),
+        0 2px 4px rgb(0 0 0 / 0.04),
+        0 28px 56px -28px rgb(0 0 0 / 0.32);
+    }
+    /* Buttons and chips rise a hair and press in on click. */
+    &:is([class*="rounded-full"], [class*="rounded-xl"]):hover {
+      translate: 0 -1px;
+    }
+    &:is(a, button):active {
+      scale: 0.97;
+    }
+  }
+}

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { Reveal } from "@/components/ui/primitives";
-import { HeroBackdrop } from "@/components/ui/Photo";
 import { levelProcess } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
@@ -29,8 +28,6 @@ export default async function ContactPage({ searchParams }: Props) {
       <div className="grid lg:min-h-screen lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
         {/* Intro */}
         <div className="on-dark relative isolate overflow-hidden bg-ink px-5 pb-10 pt-32 text-paper sm:px-8 sm:pb-12 sm:pt-40 lg:col-span-5 lg:row-start-1 lg:px-14 lg:pb-0 lg:pt-44">
-          {/* "Let's architect what's next." — a corridor opening into light. */}
-          <HeroBackdrop src="/images/contact-corridor-warm.webp" position="58% center" colour />
           <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
           <div className="relative">
             <p className="eyebrow animate-fade text-gold">Start your next level</p>
@@ -38,8 +35,8 @@ export default async function ContactPage({ searchParams }: Props) {
               Let&apos;s architect <span className="serif-accent text-gold">what&apos;s next.</span>
             </h1>
             <p className="mt-5 max-w-md animate-rise text-base leading-relaxed text-paper/75 [animation-delay:150ms] sm:mt-8 sm:text-lg">
-              The first step isn&apos;t another campaign. It&apos;s understanding your current level — where you are, where
-              you&apos;re trying to go, and what&apos;s stopping you.
+              Whether you&apos;re building your personal authority or preparing an organization for its next stage of
+              growth, the first step isn&apos;t another campaign. It&apos;s understanding your current level.
             </p>
           </div>
         </div>
@@ -47,8 +44,8 @@ export default async function ContactPage({ searchParams }: Props) {
         {/* Form */}
         <div className="px-5 py-12 sm:px-8 sm:py-16 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1 lg:px-16 lg:pb-24 lg:pt-44 xl:px-24">
           <Reveal className="mx-auto max-w-2xl">
-            <h2 className="text-2xl tracking-[-0.02em] sm:text-3xl">Tell us about the level you&apos;re trying to reach.</h2>
-            <div className="mt-8 sm:mt-10">
+            <h2 className="sr-only">Contact form</h2>
+            <div>
               <ContactForm initialInterest={initialInterest} />
             </div>
           </Reveal>
@@ -57,7 +54,7 @@ export default async function ContactPage({ searchParams }: Props) {
         {/* Supporting information */}
         <div className="on-dark bg-ink px-5 py-12 text-paper sm:px-8 lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:px-14 lg:pb-20 lg:pt-14">
           <div className="animate-fade [animation-delay:300ms]">
-            <p className="eyebrow text-paper-muted">What happens next</p>
+            <p className="eyebrow text-paper-muted">How Level141 works</p>
             <ol className="mt-5 space-y-4">
               {levelProcess.slice(0, 3).map((s) => (
                 <li key={s.n} className="flex gap-4">
@@ -83,7 +80,7 @@ export default async function ContactPage({ searchParams }: Props) {
             </Link>
             .
           </div>
-          <p className="mt-10 text-sm text-paper-muted">Level141 · Part of the 1XL ecosystem · Headquartered in Dubai</p>
+          <p className="mt-10 text-sm text-paper-muted">Level141 is part of the 1XL ecosystem, headquartered in Dubai.</p>
         </div>
       </div>
     </section>

@@ -22,13 +22,11 @@ export const metadata = pageMetadata({
   path: routes.how,
 });
 
-const igfDrivers = ["Positioning", "Visibility", "Trust", "Sales", "Communication", "Strategy"];
 
 export default function HowPage() {
   return (
     <>
       <PageHero
-        image="/images/how-strategy-table-muted.webp"
         eyebrow="How we architect growth"
         title={
           <>
@@ -109,7 +107,7 @@ export default function HowPage() {
             }
             intro="Growth isn't a destination. Every new level creates another possibility."
           />
-          <ol className="mt-12 sm:mt-14 lg:mt-16 border-t border-ink/12">
+          <ol className="mt-10 sm:mt-12 lg:mt-12 border-t border-ink/12">
             {levelProcess.map((s, i) => (
               <Reveal
                 as="li"
@@ -152,7 +150,7 @@ export default function HowPage() {
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <Reveal className="mt-12 sm:mt-14 lg:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-4">
+          <Reveal className="mt-10 sm:mt-12 lg:mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-4">
             {[
               ["LQ™", "Know your level", "#lq"],
               ["IGF™", "Connect the growth engine", "#igf"],
@@ -171,7 +169,7 @@ export default function HowPage() {
       {/* LQ */}
       <div className="relative">
         <FrameworkNav />
-      <Section id="lq" tone="ink" labelledBy="lq-title" className="scroll-mt-12 !pt-16 sm:!pt-20 lg:!pt-24">
+      <Section id="lq" tone="ink" labelledBy="lq-title" className="scroll-mt-12 !pt-12 sm:!pt-14 lg:!pt-16">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
@@ -188,7 +186,7 @@ export default function HowPage() {
                   Because you cannot architect the next level without understanding the current one.
                 </p>
                 <p className="mt-5 text-sm leading-relaxed text-paper-muted">
-                  For people, LQ™ is assessed across the four VIBE™ dimensions. For organisations, the LQ™ Growth Audit
+                  For people, LQ™ is assessed across the four VIBE™ dimensions. For organizations, the LQ™ Growth Audit
                   examines the domains shown here.
                 </p>
               </Reveal>
@@ -241,63 +239,22 @@ export default function HowPage() {
               <h2 id="igf-title" className="display mt-6 text-[2.25rem] sm:text-5xl">
                 Connect the <span className="serif-accent">growth engine.</span>
               </h2>
-              <p className="mt-8 text-lg leading-relaxed text-muted">
-                Growth rarely comes from one function. IGF™ looks across the interconnected drivers influencing
-                organizational growth and creates alignment between them.
+            </Reveal>
+          </div>
+          {/* Source: Website Structure, IGF™ — Integrated Growth Framework. The documents
+              do not name IGF™'s drivers, so none are shown. */}
+          <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
+            <BracketFrame tone="ink" size="lg" className="space-y-6">
+              <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">Growth rarely comes from one function.</p>
+              <p className="text-lg leading-relaxed text-muted">
+                IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment
+                between them.
               </p>
-              <p className="mt-5 text-lg leading-relaxed">
+              <p className="text-lg leading-relaxed">
                 Instead of optimizing individual activities, we architect how the entire growth ecosystem works
                 together.
               </p>
-            </Reveal>
-          </div>
-          <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
-            <figure className="flex flex-col">
-              <figcaption className="order-last mt-6 text-center text-sm leading-relaxed text-muted">
-                When positioning, visibility, trust, sales, communication and strategy operate independently, businesses
-                work harder without necessarily moving further.
-              </figcaption>
-              <div aria-hidden className="relative mx-auto aspect-square w-full max-w-md">
-                <svg viewBox="0 0 400 400" className="absolute inset-0 size-full text-ink">
-                  {igfDrivers.map((_, i) =>
-                    igfDrivers.map((__, j) => {
-                      if (j <= i) return null;
-                      const a = (Math.PI / 3) * i - Math.PI / 2;
-                      const b = (Math.PI / 3) * j - Math.PI / 2;
-                      return (
-                        <line
-                          key={`${i}-${j}`}
-                          x1={200 + Math.cos(a) * 150}
-                          y1={200 + Math.sin(a) * 150}
-                          x2={200 + Math.cos(b) * 150}
-                          y2={200 + Math.sin(b) * 150}
-                          stroke="currentColor"
-                          strokeOpacity={0.12}
-                        />
-                      );
-                    }),
-                  )}
-                  <circle cx="200" cy="200" r="150" fill="none" stroke="var(--color-gold-ink)" strokeOpacity="0.4" strokeDasharray="3 6" />
-                </svg>
-                {igfDrivers.map((d, i) => {
-                  const a = (Math.PI / 3) * i - Math.PI / 2;
-                  return (
-                    <span
-                      key={d}
-                      className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink/15 bg-surface px-3 py-2 text-xs sm:px-4 sm:text-sm"
-                      style={{ left: `${50 + Math.cos(a) * 37.5}%`, top: `${50 + Math.sin(a) * 37.5}%` }}
-                    >
-                      {d}
-                    </span>
-                  );
-                })}
-                <span className="absolute left-1/2 top-1/2 grid size-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-ink text-center text-sm text-paper sm:size-28">
-                  One
-                  <br />
-                  architecture
-                </span>
-              </div>
-            </figure>
+            </BracketFrame>
           </Reveal>
         </div>
       </Section>
@@ -316,7 +273,7 @@ export default function HowPage() {
             }
             intro="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
           />
-          <div className="mt-12 sm:mt-14 lg:mt-16">
+          <div className="mt-10 sm:mt-12 lg:mt-12">
             <BrandsSystem />
           </div>
         </div>
@@ -335,26 +292,9 @@ export default function HowPage() {
             }
             intro="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
-          <div className="mt-12 sm:mt-14 lg:mt-16">
+          <div className="mt-10 sm:mt-12 lg:mt-12">
             <PeakAscent dark={false} />
           </div>
-          <Reveal className="mt-12 sm:mt-14 lg:mt-16 grid gap-6 rounded-[2rem] border border-ink/12 bg-surface p-6 sm:p-10 md:grid-cols-2">
-            <div>
-              <p className="eyebrow text-gold-ink">For people</p>
-              <p className="mt-3 text-2xl tracking-[-0.02em]">VIBE™</p>
-              <p className="mt-2 leading-relaxed text-muted">
-                The framework for personal brands, used in Personal Brand Architecture™.
-              </p>
-            </div>
-            <div>
-              <p className="eyebrow text-gold-ink">For organisations</p>
-              <p className="mt-3 text-2xl tracking-[-0.02em]">PEAK™</p>
-              <p className="mt-2 leading-relaxed text-muted">
-                The framework for organisational growth, used in Growth Architecture™. The two may interact where a
-                founder&apos;s brand supports an organisation, but they are never used interchangeably.
-              </p>
-            </div>
-          </Reveal>
         </div>
       </Section>
       </div>
@@ -410,7 +350,7 @@ export default function HowPage() {
               </>
             }
           />
-          <ol className="mt-12 sm:mt-14 lg:mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-10 sm:mt-12 lg:mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
             {whyLevel141.map((w, i) => (
               <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-ink p-6 sm:p-8 lg:p-10">
                 <span className="eyebrow tabular-nums text-gold">{String(i + 1).padStart(2, "0")}</span>
@@ -433,9 +373,8 @@ export default function HowPage() {
                 Don&apos;t show what you did. <span className="serif-accent">Show what changed.</span>
               </>
             }
-            intro="Every Level141 engagement should eventually be presented around transformation."
           />
-          <ol className="mt-12 sm:mt-14 lg:mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+          <ol className="mt-10 sm:mt-12 lg:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"

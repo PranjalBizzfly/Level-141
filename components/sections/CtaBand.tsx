@@ -11,15 +11,18 @@ export function CtaBand({
   body,
   primary,
   secondary,
+  closingLine,
 }: {
   eyebrow: string;
   title: ReactNode;
   body?: ReactNode;
   primary: Cta;
   secondary?: Cta;
+  /** Optional line shown directly above the actions (e.g. "Find Your Level."). */
+  closingLine?: string;
 }) {
   return (
-    <section className="on-dark relative overflow-hidden border-t border-paper/10 bg-ink py-20 text-paper sm:py-24 lg:py-32">
+    <section className="on-dark relative overflow-hidden border-t border-paper/10 bg-ink py-14 text-paper sm:py-16 lg:py-20">
       <div aria-hidden className="grid-lines absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
       <BracketClose className="pointer-events-none absolute right-5 top-6 size-12 text-paper/20 sm:top-10 sm:right-10 sm:size-14 lg:right-14 lg:top-12 lg:size-16" />
       <BracketOpen className="pointer-events-none absolute bottom-6 left-5 size-12 text-paper/20 sm:bottom-10 sm:left-10 sm:size-14 lg:bottom-12 lg:left-14 lg:size-16" />
@@ -39,7 +42,10 @@ export function CtaBand({
             delay={120}
             className="flex flex-col justify-between gap-8 border-t border-line-dark pt-8 sm:gap-10 sm:pt-10 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0 xl:pl-14"
           >
-            <div className="max-w-xl text-lg leading-relaxed text-paper/70">{body}</div>
+            <div className="max-w-xl text-lg leading-relaxed text-paper/70">
+              {body}
+              {closingLine ? <p className="mt-6 text-xl font-medium tracking-[-0.01em] text-paper">{closingLine}</p> : null}
+            </div>
             <Actions primary={primary} secondary={secondary} stackOnLg />
           </Reveal>
         </div>

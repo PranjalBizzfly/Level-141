@@ -6,7 +6,7 @@ export const siteUrl = (
 export const site = {
   name: "Level141",
   tagline: "Growth Architecture for People & Organizations.",
-  brandLine: "Level141 — Growth by Design.",
+  brandLine: "Level141 — Growth By Design.",
   description:
     "Level141 architects the next level of growth for people and organizations — through clarity, positioning, visibility, credibility, authority and structured growth systems.",
   headquarters: "Dubai",
@@ -42,10 +42,10 @@ export const footerNav = {
   explore: [
     { label: "Personal Brand Architecture™", href: routes.personalBrand },
     { label: "Growth Architecture™", href: routes.growth },
-    { label: "How We Work", href: routes.how },
+    { label: "How We Architect Growth", href: routes.how },
     { label: "Insights", href: routes.insights },
     { label: "About", href: routes.about },
-    { label: "Contact", href: routes.contact },
+    { label: "Start Your Next Level", href: routes.contact },
   ],
   frameworks: [
     { label: "LQ™", href: `${routes.how}#lq` },

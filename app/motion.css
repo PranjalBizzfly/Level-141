@@ -10,11 +10,11 @@
 @media (prefers-reduced-motion: no-preference) {
   html.js [data-reveal] {
     transform: translateY(48px);
-    filter: blur(6px);
+    /* No blur: text stays razor-sharp throughout the reveal. */
     transition:
       opacity 1s var(--ease-architect),
       transform 1.1s var(--ease-architect),
-      filter 1s var(--ease-architect);
+      clip-path 1s var(--ease-architect);
     transition-delay: var(--reveal-delay, 0ms);
   }
   html.js [data-reveal="fade"] {
@@ -22,7 +22,7 @@
   }
   html.js [data-reveal].is-visible {
     transform: none;
-    filter: none;
+
   }
   /* Cards and rows that reveal together cascade one after another. */
   html.js :is(ul, ol, dl) > [data-reveal]:nth-child(2) { --reveal-delay: 70ms; }
@@ -105,7 +105,7 @@
   }
 }
 
-/* 4. Spotlight: a soft champagne glow follows the pointer on dark cards. */
+/* 4. Spotlight: a soft neutral light follows the pointer on dark cards. */
 [data-spotlight] {
   position: relative;
   isolation: isolate;
@@ -116,7 +116,7 @@
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(222 187 147 / 0.13), transparent 65%);
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / 0.1), transparent 65%);
   opacity: 0;
   transition: opacity 0.4s var(--ease-architect);
   pointer-events: none;
@@ -140,5 +140,17 @@
 @media (prefers-reduced-motion: reduce) {
   [data-magnetic] {
     translate: none;
+  }
+}
+
+/* 6. Section label rule draws in from the left as its section arrives. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] [data-rule] {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.1s var(--ease-architect) 0.3s;
+  }
+  html.js [data-reveal].is-visible [data-rule] {
+    transform: scaleX(1);
   }
 }

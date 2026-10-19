@@ -50,6 +50,7 @@ export function VibeExplorer() {
               ref={(el) => {
                 tabs.current[i] = el;
               }}
+              type="button"
               role="tab"
               id={`${uid}-tab-${i}`}
               aria-selected={selected}
@@ -127,7 +128,7 @@ export function VibeExplorer() {
               </h3>
               <p className="measure mt-6 text-lg leading-relaxed text-paper/75">{d.body}</p>
 
-              <p className="eyebrow mt-12 text-paper-muted">What we architect</p>
+              <p className="eyebrow mt-12 text-paper-muted">Architecture focus</p>
               <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
                 {d.focus.map((f) => (
                   <li
@@ -148,11 +149,11 @@ export function VibeExplorer() {
               >
                 {d.letter}
               </span>
-              <p className="eyebrow relative text-paper-muted">The strategic question</p>
+              <p className="eyebrow relative text-paper-muted">Strategic question</p>
               <p className="serif-accent relative mt-5 text-3xl leading-snug text-gold-soft sm:text-4xl">“{d.question}”</p>
               <p className="relative mt-6 leading-relaxed text-paper/70">{d.detail}</p>
               <div className="relative mt-8 border-t border-paper/12 pt-6">
-                <p className="eyebrow text-gold">Outcomes</p>
+                <p className="eyebrow text-gold">Illustrative outcomes</p>
                 <p className="mt-3 text-lg leading-snug tracking-[-0.01em] text-paper">{d.outcomes}</p>
               </div>
             </aside>

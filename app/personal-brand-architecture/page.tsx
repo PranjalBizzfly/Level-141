@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import { VibeExplorer } from "@/components/diagrams/VibeExplorer";
 import { ProcessTimeline } from "@/components/diagrams/Diagrams";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -10,7 +9,6 @@ import {
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
-import { Photo } from "@/components/ui/Photo";
 import {
   pbaAudience,
   pbaIsNot,
@@ -38,9 +36,7 @@ export default function PersonalBrandPage() {
   return (
     <>
       <PageHero
-        image="/images/pba-hero-speaker.webp"
-        imageColour
-        eyebrow="Personal Brand Architecture™ · Now available"
+        eyebrow="Personal Brand Architecture™"
         title={
           <>
             Your achievements built your reputation.{" "}
@@ -114,7 +110,7 @@ export default function PersonalBrandPage() {
         <div className="container-x">
           <SectionHeader
             id="problem-title"
-            eyebrow="The problem"
+            eyebrow="The Market Problem"
             title={
               <>
                 Many accomplished leaders have <span className="serif-accent">more value than visibility.</span>
@@ -123,7 +119,7 @@ export default function PersonalBrandPage() {
             intro="Others have visibility without a coherent reputation system. Their expertise sits across years of work, disconnected profiles, speeches, media mentions, relationships and achievements. The market therefore sees fragments rather than a clear leadership proposition."
           />
 
-          <div className="mt-12 sm:mt-14 lg:mt-16 overflow-hidden rounded-[2rem] border border-ink/10 bg-surface">
+          <div className="mt-10 sm:mt-12 lg:mt-12 overflow-hidden rounded-[2rem] border border-ink/10 bg-surface">
             <div className="hidden grid-cols-12 gap-6 border-b border-ink/10 px-8 py-4 text-muted md:grid">
               <p className="eyebrow col-span-3">Pain</p>
               <p className="eyebrow col-span-5">What it looks like</p>
@@ -186,7 +182,7 @@ export default function PersonalBrandPage() {
             }
             intro="VIBE™ answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
           />
-          <div className="mt-12 sm:mt-14 lg:mt-16">
+          <div className="mt-10 sm:mt-12 lg:mt-12">
             <VibeExplorer />
           </div>
           <Reveal className="mt-14 border-t border-paper/12 pt-10 text-center sm:mt-16">
@@ -203,21 +199,21 @@ export default function PersonalBrandPage() {
         <div className="container-x">
           <SectionHeader
             id="process-title"
-            eyebrow="The process"
+            eyebrow="Personal Brand Architecture™"
             title={
               <>
                 How we architect <span className="serif-accent">your VIBE™.</span>
               </>
             }
-            intro="Five stages, beginning and ending with your LQ™ — so progress is measured against where you started."
           />
-          <ProcessTimeline steps={vibeStages} className="mt-12 sm:mt-14 lg:mt-16" />
+          <ProcessTimeline steps={vibeStages} className="mt-10 sm:mt-12 lg:mt-12" />
           <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-ink/10 bg-paper p-6 sm:flex-row sm:items-center sm:p-10">
             <p className="max-w-xl text-lg leading-relaxed">
-              <span className="font-medium">Begin with Discover Your Level.</span>{" "}
+              {/* Source: Website Structure, "01 — Discover Your Level". */}
+              <span className="font-medium">01 — Discover Your Level</span>{" "}
               <span className="text-muted">
-                The LQ™ diagnostic assessment establishes your current personal brand position across all four VIBE™
-                dimensions.
+                We begin with an LQ™ diagnostic assessment across the four VIBE™ dimensions to understand your current
+                personal brand position.
               </span>
             </p>
             <ButtonLink href={assessmentHref}>Start Your Personal Brand Assessment</ButtonLink>
@@ -231,7 +227,7 @@ export default function PersonalBrandPage() {
           {/* 1 — Header: headline left, intro right. */}
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
             <Reveal className="lg:col-span-7">
-              <p className="eyebrow text-gold-ink">Who it&apos;s for</p>
+              <p className="eyebrow text-gold-ink">Ideal for</p>
               <h2 id="for-title" className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-[3.75rem]">
                 For people whose capability is bigger than their{" "}
                 <span className="serif-accent">current visibility.</span>
@@ -246,18 +242,8 @@ export default function PersonalBrandPage() {
             </Reveal>
           </div>
 
-          {/* Editorial portrait illustrating the leader behind the architecture */}
-          <Reveal className="mt-12 sm:mt-14 lg:mt-16">
-            <Photo
-              src="/images/pba-leader-skyline.webp"
-              alt="Accomplished senior executive leader standing thoughtfully beside floor-to-ceiling windows in an architectural office overlooking the city skyline"
-              className="aspect-[16/9] lg:aspect-[21/9]"
-              sizes="(min-width: 1408px) 1300px, 100vw"
-            />
-          </Reveal>
-
           {/* 2 — Audience: a typographic index, not chips. */}
-          <Reveal as="ul" className="mt-12 grid grid-cols-2 border-t border-line-strong sm:mt-14 sm:grid-cols-4 lg:mt-16">
+          <Reveal as="ul" className="mt-10 grid grid-cols-2 border-t border-line-strong sm:mt-12 sm:grid-cols-4 lg:mt-12">
             {pbaAudience.map((a, n) => (
               <li
                 key={a}
@@ -270,18 +256,26 @@ export default function PersonalBrandPage() {
               </li>
             ))}
           </Reveal>
+          {/* Source: Website Structure, PERSONAL BRAND ARCHITECTURE "Ideal for" closing lines. */}
+          <Reveal>
+            <p className="mt-8 max-w-3xl text-2xl leading-snug tracking-[-0.02em] sm:mt-10 sm:text-3xl">
+              Your personal brand shouldn&apos;t simply document what you&apos;ve done.{" "}
+              <span className="serif-accent">It should position you for what you want to do next.</span>
+            </p>
+          </Reveal>
 
           {/* 3 — Fit comparison: two open columns split by a single hairline. */}
-          <div className="mt-16 grid gap-12 sm:mt-20 md:grid-cols-2 md:gap-0 md:divide-x md:divide-line">
+          <div className="mt-16 grid gap-12 sm:mt-14 md:grid-cols-2 md:gap-0 md:divide-x md:divide-line">
             <Reveal className="md:pr-12 lg:pr-16">
               <h3 className="text-3xl tracking-[-0.025em] sm:text-4xl">
-                A strong <span className="serif-accent">fit.</span>
+                Qualification <span className="serif-accent">signals.</span>
               </h3>
               <ol className="mt-8 space-y-6">
                 {[
                   "Has demonstrable expertise, achievements, leadership experience or a credible body of work.",
                   "Has a defined ambition: growth, investment, influence, career transition, market leadership, board/advisory roles or legacy.",
                   "Is willing to articulate viewpoints and participate in the architecture process.",
+                  "Understands that authority requires consistency and cannot be outsourced entirely.",
                   "Values strategic reputation and business outcomes more than short-term follower acquisition.",
                 ].map((item, n) => (
                   <li key={item} className="grid grid-cols-[2.5rem_1fr] text-lg leading-relaxed">
@@ -324,10 +318,13 @@ export default function PersonalBrandPage() {
             }
           />
           {/* Pain → intervention, read as paired rows rather than a grid of boxes. */}
-          <div className="mt-12 sm:mt-14 lg:mt-16">
-            <div aria-hidden className="hidden grid-cols-12 gap-8 border-b border-line-dark-strong pb-4 md:grid">
-              <p className="eyebrow col-span-6 col-start-2 text-paper-muted">Client pain</p>
-              <p className="eyebrow col-span-4 col-start-9 text-paper-muted">Level141 intervention</p>
+          <div className="mt-10 sm:mt-12 lg:mt-12">
+            {/* Source: Personal Brand Architecture bible §10 — all four documented columns. */}
+            <div aria-hidden className="hidden grid-cols-12 gap-6 border-b border-line-dark-strong pb-4 lg:grid">
+              <p className="eyebrow col-span-4 col-start-2 text-paper-muted">Client pain</p>
+              <p className="eyebrow col-span-2 text-paper-muted">Level141 intervention</p>
+              <p className="eyebrow col-span-2 text-paper-muted">Immediate effect</p>
+              <p className="eyebrow col-span-3 text-paper-muted">Strategic impact</p>
             </div>
             {/* Spotlight list: on hover-capable screens the other rows recede. */}
             <ol className="group/list">
@@ -336,21 +333,30 @@ export default function PersonalBrandPage() {
                   as="li"
                   key={v.quote}
                   delay={i * 50}
-                  className="group grid grid-cols-[2.5rem_1fr] gap-x-3 gap-y-3 border-b border-line-dark py-7 transition-opacity duration-500 sm:py-9 md:grid-cols-12 md:items-center md:gap-8 [@media(hover:hover)]:md:group-hover/list:opacity-35 [@media(hover:hover)]:md:hover:opacity-100!"
+                  className="group grid grid-cols-[2.5rem_1fr] gap-x-3 gap-y-5 border-b border-line-dark py-7 transition-opacity duration-500 sm:py-9 lg:grid-cols-12 lg:items-baseline lg:gap-6 [@media(hover:hover)]:lg:group-hover/list:opacity-35 [@media(hover:hover)]:lg:hover:opacity-100!"
                 >
-                  <span aria-hidden className="eyebrow row-span-2 pt-[0.6em] tabular-nums text-paper-muted md:col-span-1 md:row-span-1 md:pt-0">
+                  <span aria-hidden className="eyebrow row-span-2 pt-[0.6em] tabular-nums text-paper-muted lg:col-span-1 lg:row-span-1 lg:pt-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="serif-accent text-[1.75rem] leading-snug text-paper sm:text-3xl md:col-span-6 lg:text-[2.35rem]">
+                  <p className="serif-accent text-[1.75rem] leading-snug text-paper sm:text-3xl lg:col-span-4 lg:text-[2rem]">
                     “{v.quote}”
                   </p>
-                  <span aria-hidden className="hidden items-center md:col-span-1 md:flex">
-                    <span className="h-px w-4 bg-paper/30 transition-[width,background-color] duration-500 ease-[var(--ease-architect)] group-hover:w-8 group-hover:bg-gold" />
-                    <ArrowRight className="-ml-1.5 size-4 text-paper/30 transition-colors duration-500 group-hover:text-gold" />
-                  </span>
-                  <p className="text-paper/75 transition-colors duration-500 group-hover:text-paper md:col-span-4 md:text-lg">
-                    {v.answer}
-                  </p>
+                  <dl className="grid gap-4 sm:grid-cols-3 lg:col-span-7 lg:grid-cols-7 lg:gap-6">
+                    <div className="lg:col-span-2">
+                      <dt className="eyebrow text-paper-muted lg:sr-only">Level141 intervention</dt>
+                      <dd className="mt-1.5 font-medium text-paper lg:mt-0">{v.answer}</dd>
+                    </div>
+                    <div className="lg:col-span-2">
+                      <dt className="eyebrow text-paper-muted lg:sr-only">Immediate effect</dt>
+                      <dd className="mt-1.5 text-paper/75 lg:mt-0">{v.effect}</dd>
+                    </div>
+                    <div className="lg:col-span-3">
+                      <dt className="eyebrow text-paper-muted lg:sr-only">Strategic impact</dt>
+                      <dd className="mt-1.5 text-paper/75 transition-colors duration-500 group-hover:text-paper lg:mt-0">
+                        {v.impact}
+                      </dd>
+                    </div>
+                  </dl>
                 </Reveal>
               ))}
             </ol>
@@ -377,14 +383,15 @@ export default function PersonalBrandPage() {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <Reveal>
-                <p className="eyebrow text-gold-ink">The architecture</p>
+                <p className="eyebrow text-gold-ink">Personal Brand Architecture™</p>
                 <h2 id="modules-title" className="display mt-6 text-[2.25rem] sm:text-5xl">
-                  Seven modules. <span className="serif-accent">One system.</span>
+                  Product Architecture <span className="serif-accent">&amp; Modules.</span>
                 </h2>
                 <p className="mt-8 leading-relaxed text-muted">
                   Level141&apos;s role is architecture, strategic direction, governance and measurement. Where execution
-                  partners, internal teams or specialist vendors are required, the architecture defines the brief,
-                  standards, dependencies, review mechanism and success criteria.
+                  partners, internal teams or specialist vendors are required, the architecture should define the brief,
+                  standards, dependencies, review mechanism and success criteria. The product should not collapse into
+                  undifferentiated execution.
                 </p>
               </Reveal>
             </div>
@@ -444,16 +451,21 @@ export default function PersonalBrandPage() {
           </div>
 
           {/* Measurement: a contrasting panel, statement left, scorecard right. */}
-          <div className="on-dark mt-20 grid gap-10 rounded-[2rem] bg-ink p-6 text-paper sm:mt-24 sm:p-10 lg:grid-cols-12 lg:gap-16 lg:p-14">
+          <div className="on-dark mt-12 grid gap-10 rounded-[2rem] bg-ink p-6 text-paper sm:mt-14 sm:p-10 lg:grid-cols-12 lg:gap-16 lg:p-14">
             <Reveal className="lg:col-span-5">
-              <p className="eyebrow text-gold">How success is measured</p>
+              <p className="eyebrow text-gold">Measurement &amp; Success System</p>
               <h3 className="mt-5 text-3xl leading-tight tracking-[-0.025em] sm:text-4xl">
-                Visibility metrics are useful signals. <span className="serif-accent">They are not the outcome.</span>
+                Visibility metrics are useful signals, <span className="serif-accent">but they are not the product outcome.</span>
               </h3>
-              <p className="mt-6 leading-relaxed text-paper/70">
-                Success is measured through a balanced scorecard, reviewed monthly, quarterly, half-yearly and annually
-                against your next-stage ambition.
-              </p>
+              <p className="mt-6 leading-relaxed text-paper/70">Success should be measured through a balanced scorecard.</p>
+              {/* Source: Personal Brand Architecture bible §11, Recommended Reporting Rhythm. */}
+              <p className="eyebrow mt-8 text-paper-muted">Recommended Reporting Rhythm</p>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-paper/75">
+                <li>Monthly: activity, signal and opportunity review.</li>
+                <li>Quarterly: strategic VIBE™ review and corrective actions.</li>
+                <li>Half-yearly: reputation, positioning and stakeholder perception review.</li>
+                <li>Annually: full evolution reset against next-stage ambition.</li>
+              </ul>
             </Reveal>
             <dl className="grid gap-x-10 border-t border-line-dark sm:grid-cols-2 lg:col-span-7">
               {pbaMeasures.map((m, i) => (
