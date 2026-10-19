@@ -1,5 +1,5 @@
 import { clientKey, deliver, json, looksLikeSpam, rateLimited, rateLimitedResponse, readJson } from "@/lib/forms/server";
-import { normaliseWaitlist, validateWaitlist } from "@/lib/forms/validation";
+import { formatPhone, normaliseWaitlist, validateWaitlist } from "@/lib/forms/validation";
 
 /** Growth Architecture™ waitlist — registers interest only; no engagement or booking is created. */
 export async function POST(req: Request) {
@@ -26,6 +26,7 @@ export async function POST(req: Request) {
       Email: input.email,
       Organization: input.company,
       Designation: input.designation,
+      Phone: formatPhone(input),
       "What is your organization's next level?": input.note,
     },
   });

@@ -4,10 +4,12 @@ import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { limits, normaliseWaitlist, validateWaitlist, type WaitlistInput } from "@/lib/forms/validation";
 import { cx } from "@/components/ui/primitives";
+import { DEFAULT_COUNTRY } from "@/lib/forms/countries";
 import {
   CharCount,
   Field,
   Honeypot,
+  PhoneInput,
   StatusMessage,
   SubmitButton,
   SuccessPanel,
@@ -17,7 +19,15 @@ import {
   useVisibleErrors,
 } from "./fields";
 
-const empty: WaitlistInput = { name: "", email: "", company: "", designation: "", note: "" };
+const empty: WaitlistInput = {
+  name: "",
+  email: "",
+  company: "",
+  designation: "",
+  phoneCountry: DEFAULT_COUNTRY,
+  phone: "",
+  note: "",
+};
 
 /** Growth Architecture™ waitlist. Registers interest only — it does not book or start an engagement. */
 export function WaitlistForm() {
@@ -36,7 +46,8 @@ export function WaitlistForm() {
     markSubmitted();
     const first = Object.keys(live)[0];
     if (first) {
-      document.getElementById(`wl-${first}`)?.focus();
+      const target = first === "phoneCountry" ? "wl-phone-country" : `wl-${first}`;
+      document.getElementById(target)?.focus();
       return;
     }
     await submit({ ...values });
@@ -56,7 +67,7 @@ export function WaitlistForm() {
 
   return (
     <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-6">
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 sm:grid-cols-2">
         <Field id="wl-name" label="Name" required error={allErrors.name}>
           <input
             {...fieldA11y("wl-name", allErrors.name)}
@@ -109,6 +120,27 @@ export function WaitlistForm() {
             onChange={set("designation")}
             onBlur={blur("designation")}
             className={inputClasses(allErrors.designation)}
+          />
+        </Field>
+        <Field
+          id="wl-phone"
+          label="Phone"
+          hint="Choose your country code, then enter your number."
+          error={allErrors.phone ?? allErrors.phoneCountry}
+          className="sm:col-span-2"
+        >
+          <PhoneInput
+            id="wl-phone"
+            country={values.phoneCountry}
+            value={values.phone}
+            error={allErrors.phone ?? allErrors.phoneCountry}
+            hint="Choose your country code, then enter your number."
+            onCountryChange={(iso) => {
+              markStarted();
+              setValues((v) => ({ ...v, phoneCountry: iso }));
+            }}
+            onChange={set("phone")}
+            onBlur={blur("phone")}
           />
         </Field>
         <Field id="wl-note" label="What is your organization's next level?" error={allErrors.note} className="sm:col-span-2">

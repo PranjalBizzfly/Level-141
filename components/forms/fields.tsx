@@ -1,9 +1,10 @@
 "use client";
 
-import { AlertCircle, ChevronDown, Loader2 } from "lucide-react";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { useCallback, useRef, useState, type ReactNode } from "react";
 import { cx } from "@/components/ui/primitives";
-import { countries, DEFAULT_COUNTRY, findCountry } from "@/lib/forms/countries";
+import { DEFAULT_COUNTRY, findCountry } from "@/lib/forms/countries";
+import { CountryPicker } from "./CountryPicker";
 import { HONEYPOT_FIELD, type FieldErrors, type SubmitResponse } from "@/lib/forms/validation";
 
 /* ----------------------------------------------------------- Submission */
@@ -156,9 +157,7 @@ export function CharCount({ id, value, max }: { id: string; value: string; max: 
 }
 
 /**
- * Phone number with a country-code picker. The native <select> sits invisibly
- * over a compact "AE +971" display so it stays fully accessible and uses the
- * platform picker on mobile, while the visible control stays narrow.
+ * Phone number with a searchable country-code picker (see CountryPicker).
  */
 export function PhoneInput({
   id,
@@ -184,28 +183,8 @@ export function PhoneInput({
     ? "border-error focus-within:border-error focus-within:ring-error/15"
     : "border-line-strong hover:border-ink/40 focus-within:border-gold-ink focus-within:ring-gold/40";
   return (
-    <div className={cx("flex overflow-hidden rounded-xl border bg-surface transition-[border-color,box-shadow] duration-200 focus-within:ring-4", ring)}>
-      <div className="relative flex shrink-0 items-center gap-1.5 border-r border-line pl-4 pr-3 text-base">
-        <span aria-hidden className="text-sm font-medium tracking-[0.04em] text-muted">{selected.iso}</span>
-        <span aria-hidden className="tabular-nums">+{selected.dial}</span>
-        <ChevronDown aria-hidden className="size-4 text-muted" />
-        <select
-          id={`${id}-country`}
-          name={`${id}Country`}
-          aria-label="Country code"
-          autoComplete="tel-country-code"
-          value={selected.iso}
-          onChange={(e) => onCountryChange(e.target.value)}
-          onBlur={onBlur}
-          className="absolute inset-0 cursor-pointer opacity-0"
-        >
-          {countries.map((c) => (
-            <option key={c.iso} value={c.iso}>
-              {c.name} (+{c.dial})
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className={cx("flex rounded-xl border bg-surface transition-[border-color,box-shadow] duration-200 focus-within:ring-4", ring)}>
+      <CountryPicker id={id} value={selected.iso} onChange={onCountryChange} onBlur={onBlur} />
       <input
         {...fieldA11y(id, error, hint)}
         type="tel"
@@ -216,7 +195,7 @@ export function PhoneInput({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className="min-w-0 flex-1 bg-transparent px-4 py-3.5 text-base text-ink placeholder:text-muted/50 focus:outline-none"
+        className="min-w-0 flex-1 rounded-r-xl bg-transparent px-4 py-3.5 text-base text-ink placeholder:text-muted/50 focus:outline-none"
       />
     </div>
   );

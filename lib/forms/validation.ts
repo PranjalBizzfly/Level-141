@@ -27,6 +27,8 @@ export type WaitlistInput = {
   email: string;
   company: string;
   designation: string;
+  phoneCountry: string;
+  phone: string;
   note: string;
 };
 
@@ -64,6 +66,20 @@ function checkEmail(e: Record<string, string>, v: string) {
     e.email = "Please enter a valid email address, e.g. name@company.com.";
 }
 
+/** Phone is optional; when given it must suit the chosen country's numbering plan. */
+function checkPhone(e: Record<string, string>, v: { phone: string; phoneCountry: string }) {
+  const country = findCountry(v.phoneCountry);
+  if (!country) e.phoneCountry = "Please choose a country code.";
+  if (!v.phone) return;
+  const digits = nationalDigits(v.phone, country);
+  if (!/^\d+$/.test(digits)) e.phone = "Please use digits only — the country code is selected separately.";
+  else if (country && (digits.length < country.min || digits.length > country.max))
+    e.phone =
+      country.min === country.max
+        ? `${country.name} numbers have ${country.min} digits after +${country.dial}.`
+        : `${country.name} numbers have ${country.min}–${country.max} digits after +${country.dial}.`;
+}
+
 function checkOptionalText(e: Record<string, string>, key: string, v: string, label: string) {
   if (v && (v.length < 2 || !HAS_WORD_RE.test(v))) e[key] = `Please enter a valid ${label}, or leave this blank.`;
 }
@@ -91,18 +107,7 @@ export function validateContact(v: ContactInput): FieldErrors<ContactInput> {
   checkOptionalText(e, "designation", v.designation, "designation");
   checkEmail(e, v.email);
 
-  // Phone is optional; when given it must suit the chosen country's numbering plan.
-  const country = findCountry(v.phoneCountry);
-  if (!country) e.phoneCountry = "Please choose a country code.";
-  if (v.phone) {
-    const digits = nationalDigits(v.phone, country);
-    if (!/^\d+$/.test(digits)) e.phone = "Please use digits only — the country code is selected separately.";
-    else if (country && (digits.length < country.min || digits.length > country.max))
-      e.phone =
-        country.min === country.max
-          ? `${country.name} numbers have ${country.min} digits after +${country.dial}.`
-          : `${country.name} numbers have ${country.min}–${country.max} digits after +${country.dial}.`;
-  }
+  checkPhone(e, v);
 
   if (!v.level) e.level = "Tell us a little about the level you're trying to reach.";
   else if (v.level.length < limits.minLevel)
@@ -116,7 +121,7 @@ export function validateContact(v: ContactInput): FieldErrors<ContactInput> {
 }
 
 /** "+971 50 123 4567"-style display for delivery, from a validated input. */
-export function formatPhone(v: Pick<ContactInput, "phone" | "phoneCountry">): string {
+export function formatPhone(v: { phone: string; phoneCountry: string }): string {
   if (!v.phone) return "";
   const country = findCountry(v.phoneCountry);
   return country ? `+${country.dial} ${nationalDigits(v.phone, country)}` : v.phone;
@@ -128,6 +133,8 @@ export function normaliseWaitlist(raw: Record<string, unknown>): WaitlistInput {
     email: clean(raw.email).toLowerCase(),
     company: clean(raw.company),
     designation: clean(raw.designation),
+    phoneCountry: clean(raw.phoneCountry).toUpperCase() || DEFAULT_COUNTRY,
+    phone: clean(raw.phone),
     note: cleanMultiline(raw.note),
   };
 }
@@ -139,6 +146,7 @@ export function validateWaitlist(v: WaitlistInput): FieldErrors<WaitlistInput> {
   if (!v.company) e.company = "Please enter your organization's name.";
   else if (v.company.length < 2 || !HAS_WORD_RE.test(v.company)) e.company = "Please enter a valid organization name.";
   checkOptionalText(e, "designation", v.designation, "designation");
+  checkPhone(e, v);
   checkLength(e, "name", v.name, limits.name);
   for (const k of ["company", "designation"] as const) checkLength(e, k, v[k], limits.short);
   checkLength(e, "email", v.email, limits.email);

@@ -71,7 +71,7 @@ export default function GrowthArchitecturePage() {
 
       {/* ---------------------------------------------------------- Problem */}
       <Section tone="paper" labelledBy="integration-title">
-        <div className="container-x grid gap-14 lg:grid-cols-12">
+        <div className="container-x grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-12">
           <Reveal className="lg:col-span-6">
             <p className="eyebrow text-gold-ink">The business problem</p>
             <h2 id="integration-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
@@ -320,7 +320,7 @@ export default function GrowthArchitecturePage() {
 
       {/* ---------------------------------------------------------- Waitlist */}
       <section id="waitlist" aria-labelledby="waitlist-title" className="relative bg-paper-2 py-14 sm:py-16 lg:py-20">
-        <div className="container-x grid gap-14 lg:grid-cols-12">
+        <div className="container-x grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Reveal>
               <p className="eyebrow text-gold-ink">Growth Architecture™ waitlist</p>
