@@ -113,7 +113,11 @@ export function CountryPicker({
       </button>
 
       {open ? (
-        <div className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-[min(20rem,calc(100vw-3rem))] overflow-hidden rounded-xl border border-line-strong bg-surface shadow-[0_20px_40px_-16px_rgb(0_0_0/0.35)]">
+        <div
+          // Solid panel: explicit background so the glass styles never make it see-through.
+          className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-[min(20rem,calc(100vw-3rem))] overflow-hidden rounded-[0.75rem] shadow-[0_0_0_1px_var(--color-line-strong),0_24px_48px_-16px_rgb(0_0_0/0.45)]"
+          style={{ backgroundColor: "var(--color-surface)", backdropFilter: "none" }}
+        >
           <div className="flex items-center gap-2 border-b border-line px-3">
             <Search aria-hidden className="size-4 shrink-0 text-muted" />
             <input

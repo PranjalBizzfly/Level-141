@@ -183,7 +183,7 @@ export function PhoneInput({
     ? "border-error focus-within:border-error focus-within:ring-error/15"
     : "border-line-strong hover:border-ink/40 focus-within:border-gold-ink focus-within:ring-gold/40";
   return (
-    <div className={cx("flex rounded-xl border bg-surface transition-[border-color,box-shadow] duration-200 focus-within:ring-4", ring)}>
+    <div className={cx("relative z-20 flex rounded-xl border bg-surface transition-[border-color,box-shadow] duration-200 focus-within:z-40 focus-within:ring-4", ring)}>
       <CountryPicker id={id} value={selected.iso} onChange={onCountryChange} onBlur={onBlur} />
       <input
         {...fieldA11y(id, error, hint)}
