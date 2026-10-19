@@ -2,6 +2,7 @@ import { BracketClose, LogoSymbol } from "@/components/brand/Logo";
 import { Mark141 } from "@/components/brand/Mark141";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, cx } from "@/components/ui/primitives";
+import { Photo } from "@/components/ui/Photo";
 import { principles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
@@ -17,6 +18,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        image="/images/about-atrium-levels-muted.webp"
         eyebrow="About Level141"
         title={
           <>
@@ -180,8 +182,16 @@ export default function AboutPage() {
 
       {/* ---------------------------------------------------------- Ecosystem */}
       <Section tone="white" labelledBy="ecosystem-title" className="!py-10 sm:!py-12">
-        <div className="container-x">
-          <Reveal>
+        <div className="container-x grid gap-8 md:grid-cols-12 md:items-center md:gap-12">
+          <Reveal className="md:col-span-4">
+            <Photo
+              src="/images/about-meeting-room.webp"
+              alt="An empty modern meeting room with a long table and chairs, a hazy city skyline in warm daylight beyond the windows"
+              className="aspect-[4/3]"
+              sizes="(min-width: 768px) 35vw, 100vw"
+            />
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-8">
             <BracketFrame tone="ink" size="md" className="grid gap-8 md:grid-cols-12 md:items-center">
               <LogoSymbol className="size-14 text-ink md:col-span-1" title="Level141 symbol" />
               <div className="md:col-span-7">

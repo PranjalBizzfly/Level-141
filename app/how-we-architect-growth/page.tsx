@@ -27,6 +27,7 @@ export default function HowPage() {
   return (
     <>
       <PageHero
+        image="/images/how-strategy-table-muted.webp"
         eyebrow="How we architect growth"
         title={
           <>

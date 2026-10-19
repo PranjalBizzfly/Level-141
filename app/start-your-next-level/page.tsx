@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeroBackdrop } from "@/components/ui/Photo";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { Reveal } from "@/components/ui/primitives";
@@ -28,6 +29,8 @@ export default async function ContactPage({ searchParams }: Props) {
       <div className="grid lg:min-h-screen lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
         {/* Intro */}
         <div className="on-dark relative isolate overflow-hidden bg-ink px-5 pb-10 pt-32 text-paper sm:px-8 sm:pb-12 sm:pt-40 lg:col-span-5 lg:row-start-1 lg:px-14 lg:pb-0 lg:pt-44">
+          {/* "Let's architect what's next." — a corridor opening into light. */}
+          <HeroBackdrop src="/images/contact-corridor-warm.webp" position="58% center" colour />
           <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
           <div className="relative">
             <p className="eyebrow animate-fade text-gold">Start your next level</p>

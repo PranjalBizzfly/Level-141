@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
+import { HeroBackdrop } from "@/components/ui/Photo";
 
 export function cx(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -196,15 +197,22 @@ export function PageHero({
   intro,
   children,
   aside,
+  image,
+  imageColour,
 }: {
   eyebrow: string;
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
   aside?: ReactNode;
+  /** Optional decorative backdrop photo (see HeroBackdrop). */
+  image?: string;
+  /** True when `image` is a muted-colour photo. */
+  imageColour?: boolean;
 }) {
   return (
     <section className="on-dark relative isolate overflow-hidden bg-ink pb-16 pt-32 text-paper sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-44">
+      {image ? <HeroBackdrop src={image} colour={imageColour} /> : null}
       <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
       <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>

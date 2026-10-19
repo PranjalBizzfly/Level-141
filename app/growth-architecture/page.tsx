@@ -2,6 +2,7 @@ import { Clock } from "lucide-react";
 import { BrandsSystem, FlowChain, PeakAscent } from "@/components/diagrams/Diagrams";
 import { WaitlistForm } from "@/components/forms/WaitlistForm";
 import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader } from "@/components/ui/primitives";
+import { Photo } from "@/components/ui/Photo";
 import {
   gaAudience,
   gaDimensions,
@@ -42,6 +43,7 @@ export default function GrowthArchitecturePage() {
   return (
     <>
       <PageHero
+        image="/images/ga-hero-structural-node-muted.webp"
         eyebrow="Growth Architecture™ · Coming later · Waitlist open"
         title={
           <>
@@ -190,6 +192,15 @@ export default function GrowthArchitecturePage() {
             }
             intro="The central deliverable is a pprioritized bridge between Current Level and Next Level."
           />
+          <Reveal className="mt-10 sm:mt-12">
+            <Photo
+              src="/images/ga-prioritised-bridge-muted.webp"
+              alt="Illuminated architectural skybridge with warm oak decking and champagne bronze railings connecting two levels in a modern headquarters"
+              className="aspect-[16/9] lg:aspect-[21/8]"
+              sizes="(min-width: 1408px) 1300px, 100vw"
+              position="center 65%"
+            />
+          </Reveal>
           {/* The bridge as a sequence of paired rows: step, the question it answers, what it delivers. */}
           <ol className="group/list mt-10 border-t border-line-strong sm:mt-12 lg:mt-12">
             {gaGapSteps.map((s, i) => (

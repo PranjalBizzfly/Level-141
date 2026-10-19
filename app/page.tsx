@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
-import { LogoSymbol } from "@/components/brand/Logo";
 import { Mark141 } from "@/components/brand/Mark141";
 import { GrowthChainDiagram, ProcessTimeline } from "@/components/diagrams/Diagrams";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { HomeHero } from "@/components/sections/HomeHero";
+import { Photo } from "@/components/ui/Photo";
 import {
   BracketFrame,
   ButtonLink,
@@ -112,11 +112,13 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <div className="my-8 flex items-center gap-4 text-gold-ink" aria-hidden>
-                <span className="h-px flex-1 bg-ink/10" />
-                <LogoSymbol className="size-6 text-ink" />
-                <span className="h-px flex-1 bg-ink/10" />
-              </div>
+              {/* Fragmented activity → one integrated architecture ("Level141 connects the pieces"). */}
+              <Photo
+                src="/images/home-fragmented-to-integrated-muted.webp"
+                alt="Modular oak and travertine blocks transitioning from fragmented pieces into an integrated interlocking architectural structure"
+                className="my-8 aspect-[16/9] !rounded-2xl"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+              />
               <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">Level141 connects the pieces.</p>
               <p className="mt-4 leading-relaxed text-muted">
                 We look at growth as one integrated architecture—then identify what needs to change for you to reach
@@ -146,6 +148,14 @@ export default function HomePage() {
           <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 lg:mt-12 lg:grid-cols-2">
             {/* Personal Brand Architecture — active */}
             <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
+              {/* "Growth begins either with the person…" */}
+              <Photo
+                src="/images/home-person-notebook.webp"
+                alt="A leader's hands writing strategic narrative notes in a notebook at an oak desk by a window"
+                className="mb-8 aspect-[16/9] !rounded-2xl sm:mb-10"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                position="45% center"
+              />
               <div className="flex items-center justify-between gap-4">
                 <span aria-hidden className="eyebrow text-paper-muted">
                   01
@@ -183,6 +193,13 @@ export default function HomePage() {
 
             {/* Growth Architecture — waitlist */}
             <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-6 sm:p-10">
+              {/* "…or the organization." */}
+              <Photo
+                src="/images/home-team-table.webp"
+                alt="Executive leadership team collaborating around a walnut conference table reviewing an integrated business architecture diagram"
+                className="mb-8 aspect-[16/9] !rounded-2xl sm:mb-10"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+              />
               <div className="flex items-center justify-between gap-4">
                 <span className="eyebrow text-muted">02</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
@@ -363,6 +380,16 @@ export default function HomePage() {
               <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">Only then do we architect the solution.</p>
             </Reveal>
           </div>
+
+          {/* "The starting point is the growth problem. Only then do we architect the solution." */}
+          <Reveal className="mt-10 sm:mt-12">
+            <Photo
+              src="/images/home-cards-grid-muted.webp"
+              alt="Strategist's hands organizing architectural framework cards into a structured grid on a warm walnut desk in natural morning sunlight"
+              className="aspect-[16/9] lg:aspect-[21/8]"
+              sizes="(min-width: 1408px) 1300px, 100vw"
+            />
+          </Reveal>
 
           {/* Source: Website Structure, "HOW LEVEL141 WORKS". */}
           <Eyebrow className="mt-12 text-gold-ink sm:mt-14">How Level141 works</Eyebrow>

@@ -1,3 +1,4 @@
+import { Photo } from "@/components/ui/Photo";
 import { VibeExplorer } from "@/components/diagrams/VibeExplorer";
 import { ProcessTimeline } from "@/components/diagrams/Diagrams";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -36,6 +37,8 @@ export default function PersonalBrandPage() {
   return (
     <>
       <PageHero
+        image="/images/pba-hero-speaker.webp"
+        imageColour
         eyebrow="Personal Brand Architecture™"
         title={
           <>
@@ -241,6 +244,16 @@ export default function PersonalBrandPage() {
               </p>
             </Reveal>
           </div>
+
+          {/* Editorial portrait illustrating the leader behind the architecture */}
+          <Reveal className="mt-10 sm:mt-12">
+            <Photo
+              src="/images/pba-leader-skyline.webp"
+              alt="Accomplished senior executive leader standing thoughtfully beside floor-to-ceiling windows in an architectural office overlooking the city skyline"
+              className="aspect-[16/9] lg:aspect-[21/9]"
+              sizes="(min-width: 1408px) 1300px, 100vw"
+            />
+          </Reveal>
 
           {/* 2 — Audience: a typographic index, not chips. */}
           <Reveal as="ul" className="mt-10 grid grid-cols-2 border-t border-line-strong sm:mt-12 sm:grid-cols-4 lg:mt-12">
