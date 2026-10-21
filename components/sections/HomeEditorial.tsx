@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { usePinProgress, useReducedMotion, useScrollFrame } from "./HomeInteractive";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * Editorial, full-screen home sections (black and white, image-led):
@@ -242,7 +243,7 @@ export function WhySplit({
               >
                 <Image
                   src={x.image}
-                  alt=""
+                  alt={altFor(x.image)}
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
                   className="object-cover grayscale"
@@ -399,9 +400,9 @@ export function InsightGallery({
           >
             <Image
               src={it.image}
-              alt=""
+              alt={altFor(it.image)}
               fill
-              sizes="(min-width: 768px) 30vw, 80vw"
+              sizes={i === 0 ? "(min-width: 768px) 46vw, 86vw" : "(min-width: 768px) 30vw, 80vw"}
               className="object-cover opacity-70 grayscale transition-[scale,opacity] duration-700 ease-out group-hover:scale-[1.06] group-hover:opacity-85"
             />
             <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />

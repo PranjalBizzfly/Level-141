@@ -1,5 +1,6 @@
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { ButtonLink } from "@/components/ui/primitives";
+import { altFor } from "@/lib/image-alts";
 import { MediaSlot } from "@/components/ui/MediaSlot";
 import { site } from "@/lib/site";
 
@@ -49,8 +50,8 @@ export function HomeHero() {
       <div className="container-x pb-20 sm:pb-28">
         <div data-rise>
           <MediaSlot
-            src="/a1344a9a-db17-46db-96f9-8e11bea28008.png"
-            alt="A man on a terrace looking out over the Dubai skyline"
+            src="/images/home-hero-terrace-skyline.webp"
+            alt={altFor("/images/home-hero-terrace-skyline.webp")}
             label="Hero film or image — growth to the next level"
             className="aspect-[4/3] sm:aspect-[16/8] lg:aspect-[21/9]"
             priority

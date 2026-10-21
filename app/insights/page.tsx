@@ -18,6 +18,7 @@ const storyImages = [
   "/images/how-strategy-table-muted.webp",
 ];
 import { routes } from "@/lib/site";
+import { altFor } from "@/lib/image-alts";
 
 export const metadata = pageMetadata({
   title: "Insights — The Next Level",
@@ -81,7 +82,7 @@ export default function InsightsPage() {
                       <div className={`relative overflow-hidden bg-white/5 ${i === 0 ? "aspect-[16/7]" : "aspect-[4/3]"}`}>
                         <Image
                           src={images[i % images.length]}
-                          alt=""
+                          alt={altFor(images[i % images.length])}
                           fill
                           sizes="(min-width:1024px) 60vw, 100vw"
                           className="object-cover grayscale"

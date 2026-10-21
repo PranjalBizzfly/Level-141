@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef, useState, type ReactNode } from "react";
 import { usePinProgress, useReducedMotion, useScrollFrame } from "./HomeInteractive";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * Premium section designs for the inner pages (black and white, editorial,
@@ -61,12 +62,12 @@ export function CinemaHero({
     <section ref={ref} className="photo-tone relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
       <Image
         src={image}
-        alt=""
+        alt={altFor(image)}
         fill
         priority
         sizes="100vw"
         className="object-cover grayscale"
-        style={{ scale: `${1.12 - 0.12 * (1 - p)}`, translate: `0 ${p * 12}%` }}
+        style={{ scale: `${1.05 - 0.05 * (1 - p)}`, translate: `0 ${p * 8}%` }}
       />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
       <div className="container-x relative grid gap-10 pb-12 pt-40 sm:pb-16 lg:grid-cols-12 lg:items-end lg:gap-8" style={{ opacity: 1 - p * 1.2 }}>
@@ -338,7 +339,7 @@ export function FullBleed({ image, alt, caption }: { image: string; alt: string;
   }, !reduced);
   return (
     <figure ref={ref} className="photo-tone relative h-[clamp(22rem,85svh,56rem)] overflow-hidden bg-black">
-      <Image src={image} alt={alt} fill sizes="100vw" className="object-cover grayscale" style={{ scale: `${1.18 - 0.18 * p}` }} />
+      <Image src={image} alt={alt} fill sizes="100vw" className="object-cover grayscale" style={{ scale: `${1.06 - 0.06 * p}` }} />
       {caption ? (
         <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent">
           <div className="container-x pb-8 pt-24 text-sm text-white/75">{caption}</div>

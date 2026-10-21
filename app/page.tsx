@@ -21,6 +21,7 @@ import {
   whatWeDo,
   whyLevel141,
 } from "@/lib/content";
+import { altFor } from "@/lib/image-alts";
 import { pageMetadata } from "@/lib/seo";
 import { routes, site } from "@/lib/site";
 
@@ -143,7 +144,7 @@ export default function HomePage() {
             <div className="mt-16 sm:mt-24" data-rise>
               <MediaSlot
                 src="/images/home-team-table-muted.webp"
-                alt="A team around one table working on a shared plan"
+                alt={altFor("/images/home-team-table-muted.webp")}
                 label="Film or image — growth as one architecture"
                 className="aspect-[16/10] sm:aspect-[16/7]"
               />

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { usePinProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * How we architect growth — this page's own layouts (see .extract/ANIMATION-REGISTRY.md).
@@ -67,7 +68,7 @@ export function PortalHero({
           >
             <Image
               src={image}
-              alt=""
+              alt={altFor(image)}
               fill
               priority
               sizes="100vw"
@@ -183,7 +184,7 @@ function QCard({ item, i, n }: { item: { name: string; image: string }; i: numbe
   return (
     <article className="flex aspect-[3/4.4] flex-col overflow-hidden rounded-[1.25rem] border border-line-strong bg-paper shadow-[0_24px_60px_-30px_rgb(0_0_0/0.45)]">
       <div className="photo-tone relative h-[52%] bg-black">
-        <Image src={item.image} alt="" fill sizes="15rem" className="object-cover opacity-85 grayscale" />
+        <Image src={item.image} alt={altFor(item.image)} fill sizes="15rem" className="object-cover opacity-85 grayscale" />
         <span aria-hidden className="absolute left-3 top-3 text-xs tabular-nums text-white/80">
           {n2(i)} / {String(n).padStart(2, "0")}
         </span>

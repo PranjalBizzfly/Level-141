@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { altFor } from "@/lib/image-alts";
 const cx = (...p: Array<string | false | undefined>) => p.filter(Boolean).join(" ");
 
 /**
@@ -62,7 +63,7 @@ export function HeroBackdrop({
     >
       <Image
         src={src}
-        alt=""
+        alt={altFor(src)}
         fill
         priority
         sizes="(min-width: 1024px) 62vw, 100vw"

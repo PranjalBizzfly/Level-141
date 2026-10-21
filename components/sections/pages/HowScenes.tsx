@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { usePinProgress, useReducedMotion } from "../HomeInteractive";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * How we architect growth — two scenes (each used once site-wide, see
@@ -48,7 +49,7 @@ export function QuestionDeal({
               style={{ "--i": i, "--off": i - (n - 1) / 2 } as CSSProperties}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <Image src={q.image} alt="" fill sizes="(min-width: 1024px) 20vw, 50vw" className="object-cover" />
+                <Image src={q.image} alt={altFor(q.image)} fill sizes="(min-width: 1024px) 20vw, 50vw" className="object-cover" />
                 <span className="absolute left-4 top-4 rounded-full bg-black/70 px-2.5 py-1 text-xs tabular-nums text-white">
                   {n2(i)} / {String(n).padStart(2, "0")}
                 </span>

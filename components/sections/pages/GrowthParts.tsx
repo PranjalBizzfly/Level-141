@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * Growth Architecture page sections. Each animation here is used once on the
@@ -63,7 +64,7 @@ export function CurtainHero({
   const ease = "transition-transform duration-[1400ms] ease-[cubic-bezier(.77,0,.18,1)]";
   return (
     <section className="photo-tone relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
-      <Image src={image} alt="" fill priority sizes="100vw" className="object-cover grayscale" />
+      <Image src={image} alt={altFor(image)} fill priority sizes="100vw" className="object-cover grayscale" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/25" />
       {/* the two panels part from the centre */}
       <div aria-hidden className={"absolute inset-y-0 left-0 z-10 w-1/2 bg-black " + ease} style={{ transform: shown ? "translateX(-101%)" : "none" }} />
@@ -375,7 +376,7 @@ export function PillDetails({
             <p className="mt-5 max-w-md text-white/70">{cur.body}</p>
           </div>
           <div className="photo-tone relative min-h-52 sm:col-span-2">
-            <Image key={cur.image} src={cur.image} alt="" fill sizes="(min-width: 640px) 40vw, 100vw" className="animate-fade object-cover grayscale" />
+            <Image key={cur.image} src={cur.image} alt={altFor(cur.image)} fill sizes="(min-width: 640px) 40vw, 100vw" className="animate-fade object-cover grayscale" />
           </div>
         </div>
       </div>

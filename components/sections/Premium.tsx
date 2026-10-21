@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * Premium patterns from the reference audit (black and white, each used once
@@ -44,7 +45,7 @@ export function StoriesList({
           <Image
             key={it.id}
             src={it.image}
-            alt=""
+            alt={altFor(it.image)}
             fill
             sizes="100vw"
             className="stories-bg object-cover"
@@ -173,7 +174,7 @@ export function FloatingDepth() {
           className={"float-photo absolute aspect-[4/5] overflow-hidden rounded-[1rem] " + f.cls}
           style={{ "--depth": f.depth, filter: f.blur ? `blur(${f.blur}px) grayscale(1)` : undefined, opacity: 0.5 - f.depth * 0.15 } as CSSProperties}
         >
-          <Image src={f.src} alt="" fill sizes="30vw" className="object-cover" />
+          <Image src={f.src} alt={altFor(f.src)} fill sizes="30vw" className="object-cover" />
         </div>
       ))}
     </div>

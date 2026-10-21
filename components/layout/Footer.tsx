@@ -52,7 +52,7 @@ export function Footer() {
         className="relative mx-auto w-full border-t border-black/15 dark:border-white/15"
       >
 
-        <div className="relative px-6 pb-8 pt-10 sm:px-12 sm:pb-10 sm:pt-14 lg:px-20 lg:pt-16 2xl:px-28">
+        <div className="relative px-6 pb-8 pt-8 sm:px-12 sm:pb-10 sm:pt-10 lg:px-20 lg:pt-10 2xl:px-28">
           {/* Giant stacked menu, the current page lit (COLLINS footer). */}
           <FooterBigNav />
 

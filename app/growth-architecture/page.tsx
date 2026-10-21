@@ -24,6 +24,7 @@ import {
   gaTriggers,
   peakStages,
 } from "@/lib/content";
+import { altFor } from "@/lib/image-alts";
 import { pageMetadata } from "@/lib/seo";
 import { DetailsPanel, RuleQuote } from "@/components/sections/Premium";
 import { routes } from "@/lib/site";
@@ -180,7 +181,7 @@ export default function GrowthArchitecturePage() {
 
         {/* Image break */}
         <section>
-          <PanImage image="/images/ga-prioritised-bridge-muted.webp" alt="A bridge connecting a lower level to a higher one" />
+          <PanImage image="/images/ga-prioritised-bridge-muted.webp" alt={altFor("/images/ga-prioritised-bridge-muted.webp")} />
         </section>
 
         {/* Growth gap — the bridge, one stage at a time */}

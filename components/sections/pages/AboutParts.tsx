@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { usePinProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * About page layouts (each used once site-wide, see .extract/ANIMATION-REGISTRY.md).
@@ -70,7 +71,7 @@ export function CounterHero({
         className="absolute inset-0 -z-10"
         style={{ clipPath: `inset(${(1 - p) * 50}% ${(1 - p) * 50}% round 0)`, opacity: 0.35 + 0.65 * p }}
       >
-        <Image src={image} alt="" fill priority sizes="100vw" className="object-cover grayscale" />
+        <Image src={image} alt={altFor(image)} fill priority sizes="100vw" className="object-cover grayscale" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
       </div>
       <p
@@ -227,7 +228,7 @@ export function SplitPanels({
             >
               <Image
                 src={it.image}
-                alt=""
+                alt={altFor(it.image)}
                 fill
                 sizes="(min-width: 768px) 70vw, 100vw"
                 className="object-cover grayscale transition-transform duration-1000 group-hover:scale-105 motion-reduce:transition-none"
@@ -291,7 +292,7 @@ export function ParallaxStrips({ image, alt, caption }: { image: string; alt: st
             }}
           >
             <div className="absolute inset-y-0" style={{ left: `${-i * 100}%`, width: `${n * 100}%` }}>
-              <Image src={image} alt="" fill sizes="100vw" className="object-cover grayscale" />
+              <Image src={image} alt={altFor(image)} fill sizes="100vw" className="object-cover grayscale" />
             </div>
           </div>
         ))}

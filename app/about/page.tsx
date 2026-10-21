@@ -11,6 +11,7 @@ import {
 import { Layers } from "@/components/sections/HomeInteractive";
 import { ButtonLink } from "@/components/ui/primitives";
 import { principles } from "@/lib/content";
+import { altFor } from "@/lib/image-alts";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
 
@@ -139,7 +140,7 @@ export default function AboutPage() {
         <section>
           <ParallaxStrips
             image="/images/about-dubai-terrace.webp"
-            alt="A modern terrace overlooking the Dubai skyline"
+            alt={altFor("/images/about-dubai-terrace.webp")}
             caption={
               <span className="flex flex-col justify-between gap-2 sm:flex-row">
                 <span>Part of the 1XL ecosystem, headquartered in Dubai</span>

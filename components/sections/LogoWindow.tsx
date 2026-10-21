@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { LogoWordHalf } from "@/components/brand/Logo";
+import { altFor } from "@/lib/image-alts";
 
 /**
  * "Next level" logo intro, driven by scroll.
@@ -132,7 +133,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
                 <Image
                   key={src}
                   src={src}
-                  alt=""
+                  alt={altFor(src)}
                   fill
                   sizes="(min-width: 1024px) 20vw, 40vw"
                   className={"object-cover grayscale transition-opacity duration-500 " + (i === shown ? "opacity-100" : "opacity-0")}

@@ -16,7 +16,7 @@ const items = [
 export function FooterBigNav() {
   const pathname = usePathname();
   return (
-    <nav aria-label="Main pages" className="footer-bignav pb-14 sm:pb-20">
+    <nav aria-label="Main pages" className="footer-bignav pb-8 sm:pb-10">
       <ul>
         {items.map((it) => {
           const on = pathname === it.href;
@@ -26,7 +26,7 @@ export function FooterBigNav() {
                 href={it.href}
                 aria-current={on ? "page" : undefined}
                 className={
-                  "inline-block font-display text-[clamp(2rem,5.6vw,5rem)] font-medium leading-[1.04] tracking-[-0.045em] " +
+                  "inline-block font-display text-[clamp(2rem,5.6vw,5rem)] font-medium leading-[1] tracking-[-0.045em] " +
                   (on ? "text-black dark:text-white" : "text-black/45 hover:text-black dark:text-white/45 dark:hover:text-white")
                 }
               >

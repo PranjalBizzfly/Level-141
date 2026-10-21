@@ -24,6 +24,7 @@ import {
   pbaVoices,
   vibeStages,
 } from "@/lib/content";
+import { altFor } from "@/lib/image-alts";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
 
@@ -163,7 +164,7 @@ export default function PersonalBrandPage() {
 
         {/* Image break */}
         <section>
-          <FullBleed image="/images/pba-leader-skyline.webp" alt="A leader standing by floor-to-ceiling windows overlooking a city" />
+          <FullBleed image="/images/pba-leader-skyline.webp" alt={altFor("/images/pba-leader-skyline.webp")} />
         </section>
 
         {/* Ideal for */}

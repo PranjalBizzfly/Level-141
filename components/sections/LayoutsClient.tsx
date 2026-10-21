@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { altFor } from "@/lib/image-alts";
 
 /* ---------------------------------------------------------------- BigList */
 
@@ -75,7 +76,7 @@ export function BigList({ items }: {
             <Image
               key={it.key}
               src={it.image}
-              alt=""
+              alt={altFor(it.image)}
               fill
               sizes="20rem"
               className={"object-cover grayscale transition-opacity duration-300 " + (active === i ? "opacity-100" : "opacity-0")}

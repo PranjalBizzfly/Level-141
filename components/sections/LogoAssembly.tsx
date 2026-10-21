@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { LogoGlyph } from "@/components/brand/Logo";
+import { altFor } from "@/lib/image-alts";
 
 /** Per-column start offsets: each column travels a different distance. */
 const from = ["62%", "28%", "78%", "40%", "56%"];
@@ -74,7 +75,7 @@ export function LogoAssembly() {
               <div className="panel-window relative my-[9%] flex-1 overflow-hidden">
                 <Image
                   src={imgs[i]}
-                  alt=""
+                  alt={altFor(imgs[i])}
                   fill
                   sizes="20vw"
                   className="object-cover grayscale"
