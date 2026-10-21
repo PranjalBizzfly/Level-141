@@ -67,7 +67,7 @@ export function BigList({ items }: {
       {/* Pointer-following photograph (decorative). */}
       <div
         aria-hidden
-        className="biglist-photo pointer-events-none absolute left-0 top-0 z-10 hidden aspect-[4/5] w-[min(22vw,20rem)] overflow-hidden rounded-[1rem] [@media(hover:hover)]:block"
+        className="biglist-photo pointer-events-none absolute left-0 top-0 z-10 hidden aspect-[4/5] w-[min(22vw,20rem)] overflow-hidden rounded-[1.25rem] [@media(hover:hover)]:block"
         data-show={active !== null && items[active]?.image ? "" : undefined}
         style={{ translate: `calc(${pos.x}px - 50%) calc(${pos.y}px - 60%)` }}
       >
@@ -138,7 +138,7 @@ function TiltCard({ children, className, index }: { children: ReactNode; classNa
       onPointerLeave={() => setT({ x: 0, y: 0 })}
     >
       <div
-        className={"tilt-card flex h-full min-h-[17rem] flex-col justify-between rounded-[1.5rem] border p-7 sm:p-8 " + className}
+        className={"tilt-card flex h-full min-h-[17rem] flex-col justify-between rounded-[1.25rem] border p-7 sm:p-8 " + className}
         style={{ "--rx": `${(-t.y * 10).toFixed(2)}deg`, "--ry": `${(t.x * 12).toFixed(2)}deg` } as CSSProperties}
       >
         {children}

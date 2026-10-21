@@ -36,7 +36,12 @@ export const metadata = pageMetadata({
   path: routes.growth,
 });
 
-/** Decorative photographs (black and white) behind each trigger card, in order. */
+/**
+ * Growth Architecture — editorial redesign on the Personal Brand Architecture
+ * model: curtain hero, a line-by-line statement, a spotlight grid, the signature
+ * diagrams, a drawn bridge, triggers that open in place and a contribution staircase.
+ * Waitlist status is unchanged pending client confirmation.
+ */
 const triggerImages = [
   "/images/home-hero-staircase-muted.webp",
   "/images/about-atrium-levels-muted.webp",
@@ -50,12 +55,6 @@ const triggerImages = [
   "/images/home-fragmented-to-integrated-muted.webp",
 ];
 
-/**
- * Growth Architecture — editorial redesign on the Personal Brand Architecture
- * model: curtain hero, a line-by-line statement, a spotlight grid, the signature
- * diagrams, a drawn bridge, triggers that open in place and a contribution staircase.
- * Waitlist status is unchanged pending client confirmation.
- */
 export default function GrowthArchitecturePage() {
   return (
     <>
@@ -74,7 +73,7 @@ export default function GrowthArchitecturePage() {
               We diagnose where your organization is, define where it needs to go, and architect the integrated growth
               system that bridges the gap.
             </p>
-            <p className="mt-4 text-sm text-white/55">
+            <p className="mt-4 text-base text-white/75">
               Not yet open for engagements. Organizations can register their interest now and will be contacted when it
               becomes available.
             </p>
@@ -190,7 +189,7 @@ export default function GrowthArchitecturePage() {
             label="Growth gap architecture"
             title={
               <>
-                Not a list of recommendations. <span className="text-muted">A prioritized bridge</span>
+                Not a list of recommendations. A prioritized bridge
               </>
             }
             text="The central deliverable is a prioritized bridge between Current Level and Next Level."
@@ -211,9 +210,11 @@ export default function GrowthArchitecturePage() {
             text="The best-fit client has a real business, a credible offer, leadership ambition and sufficient organizational or financial capacity to act on the architecture."
           />
           <Ticker label="Who Growth Architecture™ is for" items={gaAudience} />
-          <RuleQuote>
-            When ambition changes, the architecture supporting it <span className="text-muted">must change too</span>
-          </RuleQuote>
+          <div className="pb-16 sm:pb-24">
+            <RuleQuote>
+              When ambition changes, the architecture supporting it <span className="text-muted">must change too</span>
+            </RuleQuote>
+          </div>
         </RefSection>
 
         {/* Triggers — a gallery of photographed cards */}
@@ -235,7 +236,7 @@ export default function GrowthArchitecturePage() {
             label="Business impact model"
             title={
               <>
-                A chain of <span className="text-white/50">contribution</span>
+                A chain of contribution
               </>
             }
             steps={gaImpactChain}
@@ -271,7 +272,7 @@ export default function GrowthArchitecturePage() {
                   { label: "Frameworks", value: "LQ™ · PEAK™ · BRANDS™" },
                 ]}
               />
-              <Reveal className="mt-10 border-t border-line pt-6 text-sm">
+              <Reveal className="mt-10 border-t border-line pt-6 text-base sm:text-lg">
                 <p>
                   Building your personal authority as a founder or leader?{" "}
                   <span className="text-muted">Personal Brand Architecture™ is available now.</span>

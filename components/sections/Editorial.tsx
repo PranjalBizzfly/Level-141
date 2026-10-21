@@ -20,18 +20,17 @@ import { altFor } from "@/lib/image-alts";
  * in the DOM. Reduced motion: nothing pins; everything is shown.
  */
 
-const n2 = (i: number) => String(i + 1).padStart(2, "0");
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   if (!label && !title) return null;
   return (
-    <div className="max-w-2xl">
-      {label ? <p className={"text-sm " + (dark ? "text-white/55" : "text-muted")}>{label}</p> : null}
+    <div className="max-w-3xl">
+      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
       {title ? (
-        <h2 className="font-display mt-3 text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em]">{title}</h2>
+        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
       ) : null}
-      {text ? <div className={"mt-5 max-w-xl " + (dark ? "text-white/65" : "text-muted")}>{text}</div> : null}
+      {text ? <div className={"mt-6 max-w-xl text-base leading-relaxed sm:text-lg " + (dark ? "text-white/80" : "text-muted")}>{text}</div> : null}
     </div>
   );
 }
@@ -85,7 +84,7 @@ export function CinemaHero({
           {children ? <div className="mt-8 [&>div]:!items-start">{children}</div> : null}
         </div>
       </div>
-      <div aria-hidden className="relative flex justify-center pb-6 text-[0.65rem] uppercase tracking-[0.3em] text-white/60">
+      <div aria-hidden className="relative flex justify-center pb-6 text-sm uppercase tracking-[0.3em] text-white/60">
         <span className="flex flex-col items-center gap-2">
           Scroll
           <span className="relative h-8 w-px overflow-hidden bg-white/20">
@@ -128,7 +127,7 @@ export function QuoteStage({
               <li key={x.quote}>
                 <p className="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] font-medium leading-[1.1]">“{x.quote}”</p>
                 <div className="mt-4 text-lg">{x.answer}</div>
-                {x.note ? <div className="mt-2 text-white/60">{x.note}</div> : null}
+                {x.note ? <div className="mt-2 text-white/75">{x.note}</div> : null}
               </li>
             ))}
           </ol>
@@ -141,12 +140,12 @@ export function QuoteStage({
   return (
     <div ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 70}lvh` }}>
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
-        <div className="container-x flex flex-1 flex-col pb-10 pt-24 sm:pt-28">
+        <div className="container-x flex flex-1 flex-col justify-center pb-10 pt-24 sm:pt-28">
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-            <Head label={label} title={title} dark />
+            <Head label={label} title={title} text={text} dark />
             {action ? <div className="shrink-0">{action}</div> : null}
           </div>
-          <div className="relative flex flex-1 flex-col justify-center">
+          <div className="relative mt-10 flex flex-col sm:mt-14">
             <span aria-hidden className="pointer-events-none absolute -left-2 top-1/2 -translate-y-[70%] font-display text-[clamp(10rem,30vw,26rem)] leading-none text-white/[0.06]">
               “
             </span>
@@ -154,12 +153,11 @@ export function QuoteStage({
               <p className="font-display text-[clamp(1.7rem,4.4vw,4.2rem)] font-medium leading-[1.05] tracking-[-0.035em]">“{it.quote}”</p>
               <div className="mt-8 grid gap-6 border-t border-white/15 pt-6 sm:grid-cols-2 sm:gap-10">
                 <div className="text-lg sm:text-xl">{it.answer}</div>
-                {it.note ? <div className="text-white/60">{it.note}</div> : null}
+                {it.note ? <div className="text-base leading-relaxed text-white/80 sm:text-lg">{it.note}</div> : null}
               </div>
             </div>
           </div>
-          <div aria-hidden className="flex items-center gap-4">
-            <span className="font-display text-sm tabular-nums text-white/60">{n2(active)}</span>
+          <div aria-hidden className="mt-10 flex items-center gap-4 sm:mt-14">
             <span className="flex flex-1 gap-1.5">
               {items.map((_, i) => (
                 <span key={i} className="h-[2px] flex-1 bg-white/15">
@@ -167,7 +165,6 @@ export function QuoteStage({
                 </span>
               ))}
             </span>
-            <span className="font-display text-sm tabular-nums text-white/40">{String(n).padStart(2, "0")}</span>
           </div>
         </div>
       </div>
@@ -197,8 +194,7 @@ export function Ledger({
             {/* A black band rises through the row on hover; the text inverts above it. */}
             <span aria-hidden className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-y-100" />
             <div className="relative grid gap-3 px-1 py-7 transition-colors duration-500 group-hover:text-paper sm:px-4 sm:py-9 lg:grid-cols-12 lg:items-baseline lg:gap-8">
-              <span className="text-sm tabular-nums opacity-60 lg:col-span-1">{n2(i)}</span>
-              <h3 className="font-display text-[clamp(1.6rem,3.2vw,2.75rem)] font-medium leading-[1.05] tracking-[-0.035em] lg:col-span-5">{it.name}</h3>
+              <h3 className="font-display text-[clamp(1.6rem,3.2vw,2.75rem)] font-medium leading-[1.05] tracking-[-0.035em] lg:col-span-6">{it.name}</h3>
               <div className="opacity-75 lg:col-span-5 lg:col-start-8 sm:text-lg">
                 {it.body}
                 {it.meta ? <div className="mt-3 text-sm opacity-80">{it.meta}</div> : null}
@@ -235,18 +231,18 @@ export function FlipTiles({
         <Head label={label} title={title} text={text} dark={dark} />
         <ul className={"mt-12 grid gap-3 sm:mt-16 " + grid}>
           {items.map((it, i) => (
-            <FlipTile key={i} index={i} item={it} dark={dark} />
+            <FlipTile key={i} item={it} />
           ))}
         </ul>
-        <p className={"mt-6 text-sm " + (dark ? "text-white/60" : "text-muted")}>Hover or tap a tile to turn it over.</p>
+        <p className={"mt-6 text-sm " + (dark ? "text-white/70" : "text-muted")}>Hover or tap a tile to turn it over.</p>
       </div>
     </div>
   );
 }
 
-function FlipTile({ item, index, dark }: { item: { name: ReactNode; back: ReactNode; foot?: ReactNode }; index: number; dark?: boolean }) {
+function FlipTile({ item }: { item: { name: ReactNode; back: ReactNode; foot?: ReactNode } }) {
   const [on, setOn] = useState(false);
-  const face = "absolute inset-0 flex flex-col justify-between rounded-[1.5rem] p-6 [backface-visibility:hidden] sm:p-8";
+  const face = "absolute inset-0 flex flex-col justify-between rounded-[1.25rem] p-6 [backface-visibility:hidden] sm:p-8";
   return (
     <li className="[perspective:1400px]">
       <button
@@ -258,15 +254,15 @@ function FlipTile({ item, index, dark }: { item: { name: ReactNode; back: ReactN
         className="relative block h-[clamp(15rem,30vh,19rem)] w-full text-left transition-transform duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] [transform-style:preserve-3d]"
         style={{ transform: on ? "rotateY(180deg)" : "none" }}
       >
-        <span className={face + " border " + (dark ? "border-white/15 bg-white/[0.04]" : "border-current/15 bg-paper")}>
-          <span className="flex justify-between text-sm tabular-nums opacity-55">
-            <span>{n2(index)}</span>
-            <span aria-hidden>↻</span>
+        {/* Front: a complete card — the measure set large, a hairline and the turn cue beneath it. */}
+        <span className={face + " true-tone border border-white/20 bg-black text-white"}>
+          <span className="font-display text-[clamp(1.75rem,2.8vw,2.5rem)] font-medium leading-[1.04] tracking-[-0.035em]">{item.name}</span>
+          <span aria-hidden className="flex items-center justify-between border-t border-current/15 pt-4 text-lg opacity-80">
+            <span className="h-px w-10 bg-current" />
+            <span>↻</span>
           </span>
-          <span className="font-display text-[clamp(1.4rem,2.2vw,1.9rem)] font-medium leading-[1.08] tracking-[-0.03em]">{item.name}</span>
         </span>
-        <span className={face + " [transform:rotateY(180deg)] " + (dark ? "bg-white text-black" : "bg-ink text-paper")}>
-          <span className="text-sm tabular-nums opacity-60">{n2(index)}</span>
+        <span className={face + " justify-end [transform:rotateY(180deg)] true-tone border border-black/15 bg-white text-black"}>
           <span>
             <span className="block text-[1.02rem] leading-relaxed">{item.back}</span>
             {item.foot ? <span className="mt-4 block border-t border-current/25 pt-3 text-sm opacity-80">{item.foot}</span> : null}
@@ -279,7 +275,7 @@ function FlipTile({ item, index, dark }: { item: { name: ReactNode; back: ReactN
 
 /* ---------------------------------------------------------- CompareSlider */
 
-export function CompareSlider({ before, after }: { before: ReactNode; after: ReactNode }) {
+export function CompareSlider({ before, after, dark }: { before: ReactNode; after: ReactNode; dark?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [x, setX] = useState(50);
   const move = (clientX: number) => {
@@ -287,16 +283,17 @@ export function CompareSlider({ before, after }: { before: ReactNode; after: Rea
     if (r) setX(Math.min(92, Math.max(8, ((clientX - r.left) / r.width) * 100)));
   };
   return (
+    <div className={dark ? "bg-black text-white" : undefined}>
     <div className="container-x py-20 sm:py-20">
       <div
         ref={ref}
-        className="relative h-[clamp(26rem,70svh,38rem)] touch-pan-y select-none overflow-hidden rounded-[1.75rem] border border-current/15"
+        className="relative h-[clamp(26rem,70svh,38rem)] touch-pan-y select-none overflow-hidden rounded-[1.25rem] border border-current/15"
         onPointerMove={(e) => e.buttons === 1 && move(e.clientX)}
         onPointerDown={(e) => move(e.clientX)}
       >
         <div className="absolute inset-0 flex flex-col justify-between bg-paper p-7 text-ink sm:p-12">
-          <p className="font-display text-[clamp(3rem,8vw,7rem)] font-medium leading-none tracking-[-0.05em] opacity-40">Before</p>
-          <p className="max-w-md text-lg opacity-75">{before}</p>
+          <p className="font-display text-[clamp(3rem,8vw,7rem)] font-medium leading-none tracking-[-0.05em] opacity-60">Before</p>
+          <p className="max-w-md text-lg opacity-80">{before}</p>
         </div>
         <div className="absolute inset-0 flex flex-col items-end justify-between bg-ink p-7 text-right text-paper sm:p-12" style={{ clipPath: `inset(0 0 0 ${x}%)` }}>
           <p className="font-display text-[clamp(3rem,8vw,7rem)] font-medium leading-none tracking-[-0.05em]">After</p>
@@ -320,7 +317,8 @@ export function CompareSlider({ before, after }: { before: ReactNode; after: Rea
           ⇆
         </span>
       </div>
-      <p className="mt-4 text-sm text-muted">Drag to compare.</p>
+      <p className={"mt-4 text-sm " + (dark ? "text-white/70" : "text-muted")}>Drag to compare.</p>
+    </div>
     </div>
   );
 }

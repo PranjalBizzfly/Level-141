@@ -145,7 +145,7 @@ export function RuleQuote({ children, cite }: { children: ReactNode; cite?: Reac
 
 export function DetailsPanel({ rows }: { rows: readonly { label: string; value: ReactNode }[] }) {
   return (
-    <dl className="mt-10 grid gap-px overflow-hidden rounded-[1.5rem] bg-white/15 text-white [background:rgb(255_255_255/0.14)]">
+    <dl className="mt-10 grid gap-px overflow-hidden rounded-[1.25rem] bg-white/15 text-white [background:rgb(255_255_255/0.14)]">
       {rows.map((r) => (
         <div key={r.label} className="grid gap-2 bg-black p-6 sm:grid-cols-[8rem_1fr] sm:p-7 dark:bg-black">
           <dt className="text-sm text-white/55">{r.label}</dt>
@@ -171,7 +171,7 @@ export function FloatingDepth() {
       {FLOATS.map((f) => (
         <div
           key={f.src}
-          className={"float-photo absolute aspect-[4/5] overflow-hidden rounded-[1rem] " + f.cls}
+          className={"float-photo absolute aspect-[4/5] overflow-hidden rounded-[1.25rem] " + f.cls}
           style={{ "--depth": f.depth, filter: f.blur ? `blur(${f.blur}px) grayscale(1)` : undefined, opacity: 0.5 - f.depth * 0.15 } as CSSProperties}
         >
           <Image src={f.src} alt={altFor(f.src)} fill sizes="30vw" className="object-cover" />

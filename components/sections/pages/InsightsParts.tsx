@@ -28,20 +28,20 @@ export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: Re
   const shift = reduced ? 0 : Math.max(arrived ? 0 : 1, p * 0.8);
   const settle = p === 0 ? "translate 1.2s cubic-bezier(.2,.8,.2,1), opacity 1.2s ease-out" : "none";
   return (
-    <section ref={ref} className="relative flex min-h-[68svh] sm:min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
-      <div className="container-x relative pb-12 pt-40 sm:pb-16">
-        <p className="text-sm uppercase tracking-[0.22em] text-white/60">{eyebrow}</p>
-        <h1 className="font-display mt-6 text-[clamp(3rem,11vw,10rem)] font-medium leading-[0.92] tracking-[-0.045em]">
+    <section ref={ref} className="relative flex min-h-[50svh] flex-col justify-end overflow-hidden bg-black text-white sm:min-h-[62svh]">
+      <div className="container-x relative pb-12 pt-36 sm:pb-14 sm:pt-40">
+        <p className="text-[0.95rem] font-medium text-white/70">{eyebrow}</p>
+        <h1 className="font-display mt-5 text-[clamp(3rem,8.5vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.045em]">
           {lines.map((line, i) => {
             const dir = i % 2 === 0 ? -1 : 1;
             const outlined = i % 2 === 1;
             return (
               <span
                 key={i}
-                className={`block will-change-transform ${outlined ? "text-right" : ""}`}
+                className={`block will-change-transform ${outlined ? "sm:pl-[0.6em]" : ""}`}
                 style={{
-                  translate: `${dir * shift * 30}% 0`,
-                  opacity: reduced ? 1 : 1 - shift * 0.9,
+                  translate: `${dir * shift * 8}% 0`,
+                  opacity: reduced ? 1 : 1 - shift * 0.45,
                   transition: reduced ? undefined : settle,
                   ...(outlined ? { WebkitTextStroke: "1.5px var(--color-white)", WebkitTextFillColor: "transparent" } : null),
                 }}
@@ -51,7 +51,7 @@ export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: Re
             );
           })}
         </h1>
-        <div className="mt-10 max-w-md border-t border-white/20 pt-6 text-white/75 [&_p]:leading-relaxed sm:ml-auto">{intro}</div>
+        <div className="mt-8 max-w-xl border-t border-white/20 pt-6 text-[1.0625rem] text-white/85 sm:text-lg [&_p]:leading-relaxed">{intro}</div>
       </div>
     </section>
   );
@@ -111,9 +111,11 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
 
   return (
     <div className="container-x py-20 sm:py-20">
-      <p className="text-sm uppercase tracking-[0.22em] text-ink/55">{label}</p>
-      <h2 className="font-display mt-4 text-[clamp(2.2rem,5vw,4.5rem)] font-medium leading-[0.98] tracking-[-0.04em]">{title}</h2>
-      <div role="tablist" aria-label={label} onKeyDown={onKey} className="mt-10 flex flex-wrap gap-2 border-b border-ink/15 pb-4">
+      <div className="max-w-3xl">
+        <p className="text-[0.95rem] font-medium text-muted">{label}</p>
+        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+      </div>
+      <div role="tablist" aria-label={label} onKeyDown={onKey} className="mt-10 flex flex-wrap gap-3">
         {tabs.map((t, i) => (
           <button
             key={t}
@@ -127,8 +129,8 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
             aria-controls="ins-panel"
             tabIndex={active === i ? 0 : -1}
             onClick={() => select(i)}
-            className={`min-h-11 rounded-full border px-4 py-2 text-sm transition-colors ${
-              active === i ? "border-ink bg-ink text-paper" : "border-ink/20 text-ink/70 hover:border-ink hover:text-ink"
+            className={`min-h-12 rounded-full border px-6 py-2.5 text-[0.95rem] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/20 ${
+              active === i ? "border-ink bg-ink text-paper" : "border-ink/25 text-ink/80 hover:border-ink hover:text-ink"
             }`}
           >
             {t}
@@ -136,9 +138,8 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
         ))}
       </div>
       <div id="ins-panel" role="tabpanel" aria-labelledby={`ins-tab-${active}`} tabIndex={0} className="mt-8 focus-visible:outline-none">
-        <ul className="grid gap-px overflow-hidden border border-ink/15 bg-ink/15 md:grid-cols-2">
+        <ul className="grid gap-4 md:grid-cols-2">
           {visible.map((q) => {
-            const n = items.indexOf(q);
             const key = `${q.kicker}:${q.name}`;
             return (
               <li
@@ -147,12 +148,9 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
                   if (el) itemRefs.current.set(key, el);
                   else itemRefs.current.delete(key);
                 }}
-                className="flex flex-col gap-6 bg-paper p-6 sm:p-8"
+                className="flex flex-col gap-6 rounded-[1.25rem] border border-current/15 p-6 sm:p-8"
               >
-                <span className="flex items-baseline justify-between gap-4 text-xs uppercase tracking-[0.18em] text-ink/60">
-                  <span>{q.kicker}</span>
-                  <span aria-hidden className="tabular-nums">{String(n + 1).padStart(2, "0")}</span>
-                </span>
+                <span className="text-sm font-medium text-muted">{q.kicker}</span>
                 <span className="font-display text-xl leading-snug tracking-[-0.02em] sm:text-2xl">{q.name}</span>
               </li>
             );
@@ -160,5 +158,36 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
         </ul>
       </div>
     </div>
+  );
+}
+
+/**
+ * CategoryIndex — the categories as a large, static typographic index. Each
+ * row keeps its #slug anchor (with scroll margin) for /insights#slug links.
+ * Nothing hides or dims while reading; hover only nudges the name.
+ */
+export function CategoryIndex({ items }: { items: readonly { id: string; name: ReactNode; body: ReactNode }[] }) {
+  return (
+    <section aria-labelledby="ins-cat-title" className="bg-paper text-ink">
+      <div className="container-x py-20 sm:py-28">
+        <h2 id="ins-cat-title" className="sr-only">
+          Insight categories
+        </h2>
+        <ul className="border-t border-ink/15">
+          {items.map((it) => (
+            <li
+              key={it.id}
+              id={it.id}
+              className="group grid scroll-mt-28 gap-4 border-b border-ink/15 py-10 sm:py-12 md:grid-cols-12 md:items-baseline md:gap-8"
+            >
+              <h3 className="font-display text-[clamp(2.1rem,5vw,4.5rem)] font-medium leading-none tracking-[-0.045em] transition-transform duration-500 ease-out motion-safe:group-hover:translate-x-2 md:col-span-7">
+                {it.name}
+              </h3>
+              <p className="max-w-md text-[1.0625rem] leading-relaxed text-ink/85 sm:text-lg md:col-span-5">{it.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }

@@ -240,16 +240,18 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
               const e = 1 - Math.pow(1 - k, 3);
               return (
                 // The slot shows faintly where each card will land, so the deck reads as a set.
-                <li key={t} className="rounded-[1.25rem] border border-dashed border-current/15 [transform-style:preserve-3d] sm:rounded-[1.5rem]">
+                <li key={t} className="[transform-style:preserve-3d]">
                   <div
-                    className="deck-card flex h-full min-h-[clamp(7.5rem,20vh,13rem)] flex-col justify-between rounded-[1.25rem] border border-current/15 bg-[color-mix(in_oklab,currentColor_4%,var(--color-ink))] p-4 sm:rounded-[1.5rem] sm:p-7"
+                    className="deck-card flex h-full min-h-[clamp(7.5rem,20vh,13rem)] flex-col justify-between rounded-[1.25rem] border border-current/15 bg-[color-mix(in_oklab,currentColor_6%,transparent)] p-4 sm:rounded-[1.25rem] sm:p-7"
                     style={{
-                      transform: reduced ? undefined : `rotateY(${(1 - e) * -100}deg) translateZ(${(1 - e) * -120}px)`,
-                      opacity: reduced ? 1 : Math.min(1, e * 1.6),
+                      // Every card is always on the table: it waits slightly turned and quiet,
+                      // then turns to face you as it is reached — never an empty slot.
+                      transform: reduced ? undefined : `rotateY(${(1 - e) * -18}deg) translateZ(${(1 - e) * -40}px)`,
+                      opacity: reduced ? 1 : 0.85 + 0.15 * e,
                       transformOrigin: "0% 50%",
                     }}
                   >
-                    <span aria-hidden className="text-xs tabular-nums opacity-55 sm:text-sm">{n2(i)}</span>
+                    <span aria-hidden className="text-sm tabular-nums opacity-55 sm:text-sm">{n2(i)}</span>
                     <h3 className="font-display text-[clamp(1rem,2.2vw,1.85rem)] font-medium leading-[1.12] tracking-[-0.03em]">{t}</h3>
                   </div>
                 </li>

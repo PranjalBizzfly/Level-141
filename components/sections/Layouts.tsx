@@ -65,7 +65,7 @@ export function StackCards({ items }: {
         <li key={i} className="stack-slot" style={vars({ "--i": i, "--n": items.length })}>
           <div
             className={
-              "stack-card relative grid min-h-[min(68svh,34rem)] gap-8 overflow-hidden rounded-[1.75rem] p-7 sm:p-12 lg:grid-cols-12 lg:p-16 " +
+              "stack-card relative grid min-h-[min(68svh,34rem)] gap-8 overflow-hidden rounded-[1.25rem] p-7 sm:p-12 lg:grid-cols-12 lg:p-16 " +
               (i % 2
                 ? "border border-white/15 bg-black text-white dark:border-black/10 dark:bg-white dark:text-black"
                 : "border border-black/10 bg-white text-black dark:border-white/15 dark:bg-black dark:text-white")
@@ -181,7 +181,7 @@ export function Bento({ items }: {
         <li
           key={i}
           className={
-            "bento-card rounded-[1.5rem] border " +
+            "bento-card rounded-[1.25rem] border " +
             card +
             (i === 0 ? " sm:col-span-2 lg:row-span-2" : "") +
             (i === items.length - 1 ? bentoTail(items.length) : "") +
@@ -294,11 +294,11 @@ export function Lanes({ items }: {
 export function Compare({ before, after }: { before: ReactNode; after: ReactNode }) {
   return (
     <div className="grid gap-3 lg:grid-cols-2">
-      <div className="flex min-h-[22rem] flex-col justify-between rounded-[1.75rem] border border-black/12 bg-white p-8 text-black sm:p-12 dark:border-white/15 dark:bg-black dark:text-white">
+      <div className="flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] border border-black/12 bg-white p-8 text-black sm:p-12 dark:border-white/15 dark:bg-black dark:text-white">
         <p className="font-display text-[clamp(3rem,7vw,6rem)] font-medium leading-none tracking-[-0.05em] opacity-50">Before</p>
         <p className="mt-10 max-w-md text-lg opacity-75">{before}</p>
       </div>
-      <div className="compare-after flex min-h-[22rem] flex-col justify-between rounded-[1.75rem] bg-black p-8 text-white sm:p-12 dark:bg-white dark:text-black">
+      <div className="compare-after flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] bg-black p-8 text-white sm:p-12 dark:bg-white dark:text-black">
         <p className="font-display text-[clamp(3rem,7vw,6rem)] font-medium leading-none tracking-[-0.05em]">After</p>
         <p className="mt-10 max-w-md text-lg">{after}</p>
       </div>
@@ -327,7 +327,7 @@ export function Shelf({
         {/* Focusable so the row can be scrolled from the keyboard on small screens. */}
         <ol tabIndex={0} aria-label={label} className="shelf-track flex gap-4 outline-none focus-visible:ring-2 focus-visible:ring-current sm:gap-5">
           {items.map((it, i) => (
-            <li key={i} className={"shelf-card flex w-[78vw] shrink-0 flex-col justify-between rounded-[1.5rem] border p-7 sm:w-[24rem] sm:p-9 " + card}>
+            <li key={i} className={"shelf-card flex w-[78vw] shrink-0 flex-col justify-between rounded-[1.25rem] border p-7 sm:w-[24rem] sm:p-9 " + card}>
               <span className="text-sm tabular-nums opacity-60">{it.kicker ?? n2(i)}</span>
               <div className="mt-16">
                 <h3 className="font-display text-[1.75rem] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[2rem]">{it.name}</h3>

@@ -2,21 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Layers } from "@/components/sections/HomeInteractive";
-import { FilterTabs, TypeHero } from "@/components/sections/pages/InsightsParts";
+import { CategoryIndex, FilterTabs, TypeHero } from "@/components/sections/pages/InsightsParts";
 import { insightCategories, questionsWeAsk } from "@/lib/content";
 import { getPublishedInsights } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
-import { StoriesList } from "@/components/sections/Premium";
-
-/** Photographs behind the categories (decorative, greyscale). */
-const storyImages = [
-  "/images/home-strategist-compass.webp",
-  "/images/pba-hero-speaker.webp",
-  "/images/about-atrium-levels-muted.webp",
-  "/images/home-cards-grid-muted.webp",
-  "/images/pba-leader-skyline.webp",
-  "/images/how-strategy-table-muted.webp",
-];
 import { routes } from "@/lib/site";
 import { altFor } from "@/lib/image-alts";
 
@@ -29,16 +18,16 @@ export const metadata = pageMetadata({
 
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
-/** Decorative black-and-white photographs, cycled across article cards. */
+/**
+ * Black-and-white photographs for the first five article cards only (never
+ * repeated; the page carries at most five photos). Later articles are text-only.
+ */
 const images = [
   "/images/home-person-notebook.webp",
-  "/images/about-meeting-room.webp",
   "/images/home-strategist-compass.webp",
   "/images/how-strategy-table-muted.webp",
   "/images/pba-leader-skyline.webp",
-  "/images/home-team-table-muted.webp",
   "/images/about-dubai-terrace.webp",
-  "/images/ga-prioritised-bridge-muted.webp",
 ];
 
 /**
@@ -79,16 +68,18 @@ export default function InsightsPage() {
                 {articles.map((a, i) => (
                   <li key={a.slug} className={i === 0 ? "md:col-span-2 lg:col-span-3" : undefined}>
                     <Link href={`${routes.insights}/${a.slug}`} className="group block">
-                      <div className={`relative overflow-hidden bg-white/5 ${i === 0 ? "aspect-[16/7]" : "aspect-[4/3]"}`}>
-                        <Image
-                          src={images[i % images.length]}
-                          alt={altFor(images[i % images.length])}
-                          fill
-                          sizes="(min-width:1024px) 60vw, 100vw"
-                          className="object-cover grayscale"
-                        />
-                      </div>
-                      <p className="mt-6 text-xs uppercase tracking-[0.18em] text-white/55">
+                      {images[i] ? (
+                        <div className={`relative mb-6 overflow-hidden rounded-[1.25rem] ${i === 0 ? "aspect-[16/7]" : "aspect-[4/3]"}`}>
+                          <Image
+                            src={images[i]}
+                            alt={altFor(images[i])}
+                            fill
+                            sizes="(min-width:1024px) 60vw, 100vw"
+                            className="object-cover grayscale"
+                          />
+                        </div>
+                      ) : null}
+                      <p className="text-sm font-medium text-white/70">
                         {categoryName(a.category)} ·{" "}
                         <time dateTime={a.publishedAt}>{dateFmt.format(new Date(a.publishedAt))}</time>
                       </p>
@@ -99,7 +90,7 @@ export default function InsightsPage() {
                       >
                         {a.title}
                       </h3>
-                      <p className="mt-3 max-w-2xl leading-relaxed text-white/70">{a.summary}</p>
+                      <p className="mt-3 max-w-2xl leading-relaxed text-white/75">{a.summary}</p>
                     </Link>
                   </li>
                 ))}
@@ -109,9 +100,7 @@ export default function InsightsPage() {
         ) : null}
 
         {/* Categories — a static typographic index; each keeps its anchor for /insights#slug links */}
-        <StoriesList
-          items={insightCategories.map((c, i) => ({ id: c.slug, name: c.name, body: c.body, image: storyImages[i % storyImages.length] }))}
-        />
+        <CategoryIndex items={insightCategories.map((c) => ({ id: c.slug, name: c.name, body: c.body }))} />
 
         {/* Discovery questions — filtered by practice */}
         <section className="bg-paper text-ink">

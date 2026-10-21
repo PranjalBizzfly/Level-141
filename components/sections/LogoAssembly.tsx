@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { LogoGlyph } from "@/components/brand/Logo";
+import { LogoGlyph, LogoWordmark } from "@/components/brand/Logo";
 import { altFor } from "@/lib/image-alts";
 
 /** Per-column start offsets: each column travels a different distance. */
@@ -11,10 +11,8 @@ const from = ["62%", "28%", "78%", "40%", "56%"];
 /** Bottom row: 141 sits under the last three columns (as BA sits under AC). */
 const bottom = [null, null, 5, 6, 7] as const;
 
-const sets = [
-  ["/images/pba-hero-speaker.webp", "/images/home-strategist-compass.webp", "/images/about-dubai-terrace.webp", "/images/home-team-table.webp", "/images/pba-leader-skyline.webp"],
-  ["/images/about-meeting-room.webp", "/images/home-person-notebook.webp", "/images/about-atrium-levels-muted.webp", "/images/contact-corridor-warm.webp", "/images/how-strategy-table-muted.webp"],
-];
+/** One photograph sliced across the five windows, so no photo repeats on the About page. */
+const photo = "/images/home-strategist-compass.webp";
 
 /**
  * Level staircase: each official letterform sits in its own tall white panel
@@ -28,7 +26,6 @@ export function LogoAssembly() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
-  const [set, setSet] = useState(0);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -48,21 +45,25 @@ export function LogoAssembly() {
     const t = window.setTimeout(
       () => {
         if (open) setOpen(false);
-        else {
-          setSet((s) => (s + 1) % sets.length);
-          setOpen(true);
-        }
+        else setOpen(true);
       },
       open ? 2600 : 1300,
     );
     return () => window.clearTimeout(t);
   }, [visible, open]);
 
-  const imgs = sets[set];
-
   return (
     <section aria-label="Level141" className="overflow-hidden bg-black py-20 sm:py-20 lg:py-36">
-      <div ref={ref} data-open={open ? "" : undefined} className="container-x">
+      {/* Mobile: the wordmark set whole on one panel, the photograph revealed beneath it. */}
+      <div className="container-x sm:hidden">
+        <div className="rounded-[1.25rem] bg-white p-6 text-black">
+          <LogoWordmark className="h-auto w-full" />
+          <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-[0.75rem]">
+            <Image src={photo} alt={altFor(photo)} fill sizes="90vw" className="object-cover grayscale" />
+          </div>
+        </div>
+      </div>
+      <div ref={ref} data-open={open ? "" : undefined} className="container-x max-sm:hidden">
         <div className="mx-auto grid max-w-4xl grid-cols-5 items-end gap-2 pt-[14%] sm:gap-3">
           {from.map((f, i) => (
             <div
@@ -74,11 +75,12 @@ export function LogoAssembly() {
               <LogoGlyph index={i} className="w-auto shrink-0 self-start text-black [height:46cqw]" />
               <div className="panel-window relative my-[9%] flex-1 overflow-hidden">
                 <Image
-                  src={imgs[i]}
-                  alt={altFor(imgs[i])}
+                  src={photo}
+                  alt={altFor(photo)}
                   fill
                   sizes="20vw"
                   className="object-cover grayscale"
+                  style={{ objectPosition: `${i * 25}% 50%` }}
                 />
               </div>
               {bottom[i] !== null ? (

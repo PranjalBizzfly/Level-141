@@ -26,12 +26,12 @@ function scrollToStep(track: HTMLElement | null, i: number, n: number) {
 
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   return (
-    <div className="max-w-2xl">
-      {label ? <p className={"text-sm " + (dark ? "text-white/55" : "text-muted")}>{label}</p> : null}
+    <div className="max-w-3xl">
+      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
       {title ? (
-        <h2 className="font-display mt-3 text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em]">{title}</h2>
+        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
       ) : null}
-      {text ? <div className={"mt-5 max-w-xl " + (dark ? "text-white/65" : "text-muted")}>{text}</div> : null}
+      {text ? <div className={"mt-6 max-w-xl text-[1.0625rem] leading-relaxed sm:text-lg " + (dark ? "text-white/85" : "text-ink/80")}>{text}</div> : null}
     </div>
   );
 }
@@ -130,9 +130,9 @@ export function QuestionFan({
         <div className="container-x">
           <Head label={label} title={title} text={text} />
           <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {items.map((x, i) => (
+            {items.map((x) => (
               <li key={x.name}>
-                <QCard item={x} i={i} n={n} />
+                <QCard item={x} />
               </li>
             ))}
           </ol>
@@ -165,13 +165,13 @@ export function QuestionFan({
                   zIndex: i,
                 }}
               >
-                <QCard item={x} i={i} n={n} />
+                <QCard item={x} />
               </li>
             );
           })}
         </ol>
         {text ? (
-          <div className="container-x pb-8 text-muted" style={{ opacity: clamp((p - 0.6) / 0.3) }}>
+          <div className="container-x pb-8 text-[1.0625rem] text-ink/80 sm:text-lg" style={{ opacity: clamp((p - 0.6) / 0.3) }}>
             {text}
           </div>
         ) : null}
@@ -180,15 +180,11 @@ export function QuestionFan({
   );
 }
 
-function QCard({ item, i, n }: { item: { name: string; image: string }; i: number; n: number }) {
+function QCard({ item }: { item: { name: string; image: string } }) {
   return (
-    <article className="flex aspect-[3/4.4] flex-col overflow-hidden rounded-[1.25rem] border border-line-strong bg-paper shadow-[0_24px_60px_-30px_rgb(0_0_0/0.45)]">
+    <article className="flex aspect-[3/4.4] flex-col overflow-hidden rounded-[1.25rem] border border-current/15 bg-paper shadow-[0_24px_60px_-30px_rgb(0_0_0/0.45)]">
       <div className="photo-tone relative h-[52%] bg-black">
-        <Image src={item.image} alt={altFor(item.image)} fill sizes="15rem" className="object-cover opacity-85 grayscale" />
-        <span aria-hidden className="absolute left-3 top-3 text-xs tabular-nums text-white/80">
-          {n2(i)} / {String(n).padStart(2, "0")}
-        </span>
-      </div>
+        <Image src={item.image} alt={altFor(item.image)} fill sizes="15rem" className="object-cover opacity-85 grayscale" />      </div>
       <h3 className="font-display flex flex-1 items-end p-4 text-[clamp(1rem,1.6vw,1.35rem)] font-medium leading-[1.12] tracking-[-0.02em]">
         {item.name}
       </h3>
@@ -218,12 +214,12 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
                 <span className="text-sm tabular-nums text-white/60">{n2(i)}</span>
                 <h3 className="font-display mt-2 text-[1.6rem] font-medium tracking-[-0.03em]">{s.name}</h3>
                 <p className="mt-3 text-white">{s.line}</p>
-                <p className="mt-2 text-white/65">{s.body}</p>
-                <p className="mt-2 italic text-white/80">{s.question}</p>
+                <p className="mt-2 text-[1.0625rem] text-white/85 sm:text-lg">{s.body}</p>
+                <p className="mt-2 text-white/85">{s.question}</p>
               </li>
             ))}
           </ol>
-          {foot ? <p className="mt-12 text-white/70">{foot}</p> : null}
+          {foot ? <p className="mt-12 text-white/85">{foot}</p> : null}
         </div>
       </div>
     );
@@ -254,34 +250,34 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
                   type="button"
                   onClick={() => scrollToStep(ref.current, i, n)}
                   aria-current={on ? "step" : undefined}
-                  className="absolute flex min-h-10 -translate-x-1/2 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border px-3 text-xs sm:text-sm"
+                  className="absolute flex min-h-10 -translate-x-1/2 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border px-3.5 text-[0.95rem] font-medium sm:text-base"
                   style={{
                     left: `${50 + 50 * Math.cos(a)}%`,
                     top: `${50 + 50 * Math.sin(a)}%`,
                     background: on ? "var(--color-white)" : "var(--color-black)",
-                    color: on ? "var(--color-black)" : "color-mix(in oklab, var(--color-white) 70%, transparent)",
-                    borderColor: on ? "var(--color-white)" : "color-mix(in oklab, var(--color-white) 25%, transparent)",
+                    color: on ? "var(--color-black)" : "color-mix(in oklab, var(--color-white) 92%, transparent)",
+                    borderColor: on ? "var(--color-white)" : "color-mix(in oklab, var(--color-white) 40%, transparent)",
                   }}
                 >
-                  <span className="tabular-nums opacity-60">{n2(i)}</span>
+                  <span className="tabular-nums opacity-80">{n2(i)}</span>
                   {x.name}
                 </button>
               );
             })}
             <div className="absolute inset-[22%] flex flex-col items-center justify-center text-center">
-              <p className="text-xs tabular-nums text-white/60">
+              <p className="text-sm tabular-nums text-white/80">
                 {n2(active)} / {String(n).padStart(2, "0")}
               </p>
-              <p key={active} className="font-display mt-2 text-[clamp(0.95rem,2vw,1.6rem)] italic leading-tight tracking-[-0.02em] text-white">
+              <p key={active} className="font-display mt-2 text-[clamp(1rem,2vw,1.6rem)] leading-tight tracking-[-0.02em] text-white">
                 {s.question}
               </p>
             </div>
           </div>
           <div className="min-h-[9.5rem] lg:col-span-6" aria-live="polite">
             <h3 className="font-display text-[clamp(1.6rem,3.6vw,3.4rem)] font-medium leading-[1.02] tracking-[-0.04em]">{s.name}</h3>
-            <p className="mt-3 text-white sm:text-lg">{s.line}</p>
-            <p className="mt-2 max-w-lg text-sm text-white/65 sm:text-base">{s.body}</p>
-            {foot && active === n - 1 ? <p className="mt-5 border-t border-white/15 pt-4 text-sm text-white/80">{foot}</p> : null}
+            <p className="mt-3 text-[1.0625rem] text-white sm:text-lg">{s.line}</p>
+            <p className="mt-2 max-w-lg text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{s.body}</p>
+            {foot && active === n - 1 ? <p className="mt-5 border-t border-white/15 pt-4 text-base text-white/85">{foot}</p> : null}
           </div>
         </div>
       </div>
@@ -304,32 +300,31 @@ export function ExpandRows({
   items: readonly { name: string; body: string; href: string }[];
 }) {
   return (
-    <div className="bg-black py-20 text-white sm:py-20 lg:py-24">
+    <div className="bg-paper py-20 text-ink sm:py-20 lg:py-24">
       <div className="container-x">
-        <Head label={label} title={title} text={text} dark />
-        <ul className="mt-14 border-t border-white/20">
-          {items.map((x, i) => (
+        <Head label={label} title={title} text={text} />
+        <ul className="mt-14 border-t border-current/15">
+          {items.map((x) => (
             <li key={x.href}>
               <a
                 href={x.href}
-                className="group relative block overflow-hidden border-b border-white/20 py-6 outline-none transition-[padding] duration-500 ease-out hover:py-10 focus-visible:py-10 motion-reduce:transition-none sm:py-8"
+                className="group relative block overflow-hidden border-b border-current/15 py-6 outline-none transition-[padding] duration-500 ease-out hover:py-10 focus-visible:py-10 motion-reduce:transition-none sm:py-8"
               >
                 <span
                   aria-hidden
-                  className="absolute inset-0 origin-bottom scale-y-0 bg-white/[0.06] transition-transform duration-500 ease-out group-hover:scale-y-100 group-focus-visible:scale-y-100 motion-reduce:transition-none"
+                  className="absolute inset-0 origin-bottom scale-y-0 bg-ink/[0.04] transition-transform duration-500 ease-out group-hover:scale-y-100 group-focus-visible:scale-y-100 motion-reduce:transition-none"
                 />
                 <span className="relative flex items-baseline gap-4 sm:gap-8">
-                  <span className="w-8 text-sm tabular-nums text-white/60">{n2(i)}</span>
                   <span className="font-display flex-1 text-[clamp(2rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.045em]">
                     {x.name}
                   </span>
-                  <span aria-hidden className="text-xl text-white/60 transition-transform duration-500 group-hover:translate-x-1 group-hover:text-white">
+                  <span aria-hidden className="text-xl text-muted transition-transform duration-500 group-hover:translate-x-1 group-hover:text-ink">
                     →
                   </span>
                 </span>
                 <span className="relative grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr] motion-reduce:grid-rows-[1fr] motion-reduce:transition-none [@media(hover:none)]:grid-rows-[1fr]">
                   <span className="overflow-hidden">
-                    <span className="block pl-12 pt-4 text-white/70 sm:pl-16 sm:text-lg">{x.body}</span>
+                    <span className="block pt-4 text-muted sm:text-lg">{x.body}</span>
                   </span>
                 </span>
               </a>
@@ -362,15 +357,15 @@ export function ScaleStatement({ text, accent, sub }: { text: string; accent: st
         <div ref={ref}>
           <p
             className="font-display origin-top-left text-[clamp(2rem,5.4vw,5rem)] font-medium leading-[1] tracking-[-0.045em]"
-            style={{ scale: `${1 + 0.9 * (1 - e)}`, opacity: 0.35 + 0.65 * e }}
+            style={{ scale: `${1 + 0.35 * (1 - e)}`, opacity: 0.6 + 0.4 * e }}
           >
-            {text} <span className="serif-accent text-white/55">{accent}</span>
+            {text} <span className="serif-accent">{accent}</span>
           </p>
         </div>
         {sub ? (
           <div
-            className="mt-12 grid max-w-2xl gap-4 text-white/70 sm:text-lg lg:ml-auto"
-            style={{ opacity: clamp((e - 0.6) / 0.4) }}
+            className="mt-12 grid max-w-2xl gap-4 text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg lg:ml-auto"
+            style={{ opacity: 0.75 + 0.25 * clamp((e - 0.6) / 0.4) }}
           >
             {sub}
           </div>
@@ -451,7 +446,7 @@ export function VerticalTabs({
                   onClick={() => setActive(i)}
                   className={
                     "relative flex min-h-14 w-full items-center gap-4 border-b border-line-strong py-4 pl-4 text-left transition-colors duration-300 " +
-                    (on ? "text-ink" : "text-muted hover:text-ink")
+                    (on ? "text-ink" : "text-ink/75 hover:text-ink")
                   }
                 >
                   <span
@@ -459,7 +454,6 @@ export function VerticalTabs({
                     className="absolute inset-y-0 left-0 w-[3px] origin-top bg-ink transition-transform duration-500"
                     style={{ transform: `scaleY(${on ? 1 : 0})` }}
                   />
-                  <span className="w-6 text-sm tabular-nums">{n2(i)}</span>
                   <span className="font-display text-[1.2rem] font-medium tracking-[-0.02em] sm:text-[1.4rem]">{x.name}</span>
                 </button>
               );
@@ -471,14 +465,11 @@ export function VerticalTabs({
             role="tabpanel"
             aria-labelledby={`why-tab-${active}`}
             tabIndex={0}
-            className="relative flex min-h-[18rem] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-ink p-7 text-paper sm:p-10 lg:col-span-7 lg:min-h-[26rem]"
+            className="relative flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[1.25rem] bg-ink p-7 text-paper sm:p-10 lg:col-span-7 lg:min-h-[26rem]"
           >
-            <span aria-hidden className="font-display text-[clamp(4.5rem,11vw,9rem)] leading-[0.8] tracking-[-0.06em] text-paper/15">
-              {n2(active)}
-            </span>
             <div>
               <h3 className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.03em]">{it.name}</h3>
-              <p className="mt-4 max-w-xl text-paper/70 sm:text-lg">{it.body}</p>
+              <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-paper/90 sm:text-lg">{it.body}</p>
             </div>
           </div>
         </div>
@@ -489,15 +480,14 @@ export function VerticalTabs({
 
 /* ------------------------------------------------------- Static layouts */
 
-/** What may be necessary — a quiet, numbered register on hairlines. */
+/** What may be necessary — a quiet register on hairlines. */
 export function NecessaryList({ items }: { items: readonly string[] }) {
   return (
-    <ol className="mt-14 grid border-t border-current/20 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((m, i) => (
-        <li key={m} className="flex items-baseline gap-5 border-b border-current/20 py-6 sm:pr-8">
-          <span className="w-7 shrink-0 text-sm tabular-nums opacity-60">{n2(i)}</span>
+    <ol className="mt-14 grid border-t border-current/15 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((m) => (
+        <li key={m} className="flex items-baseline gap-5 border-b border-current/15 py-6 sm:pr-8">
           <p className="font-display text-[clamp(1.4rem,2.4vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
-            {m} <span className="font-sans text-base font-normal tracking-normal opacity-55">may be necessary</span>
+            {m} <span className="font-sans text-base font-normal tracking-normal opacity-70">may be necessary</span>
           </p>
         </li>
       ))}
@@ -508,7 +498,7 @@ export function NecessaryList({ items }: { items: readonly string[] }) {
 /** The six BRANDS™ levers as a still, architectural grid. */
 export function BrandsGrid({ items }: { items: readonly { letter: string; name: string; list: string[] }[] }) {
   return (
-    <ol className="mt-14 grid gap-px overflow-hidden rounded-[1.5rem] border border-line-strong bg-line-strong sm:grid-cols-2 lg:grid-cols-3">
+    <ol className="mt-14 grid gap-px overflow-hidden rounded-[1.25rem] border border-line-strong bg-line-strong sm:grid-cols-2 lg:grid-cols-3">
       {items.map((l) => (
         <li key={l.letter} className="flex flex-col bg-paper p-6 sm:p-8">
           <div className="flex items-start justify-between gap-4">
@@ -520,7 +510,7 @@ export function BrandsGrid({ items }: { items: readonly { letter: string; name: 
             </span>
             <h3 className="font-display max-w-[12ch] text-right text-[1.3rem] font-medium leading-[1.1] tracking-[-0.02em]">{l.name}</h3>
           </div>
-          <ul className="mt-8 border-t border-line pt-4 text-sm text-muted">
+          <ul className="mt-8 border-t border-line pt-4 text-[0.95rem] text-ink/80">
             {l.list.map((x) => (
               <li key={x} className="flex gap-3 py-1">
                 <span aria-hidden className="mt-[0.6em] h-px w-3 shrink-0 bg-current" />

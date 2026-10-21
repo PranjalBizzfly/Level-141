@@ -1,51 +1,65 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
 import { cx } from "@/components/ui/primitives";
 
-// Past the halfway point the button jumps back to the top; before it, to the bottom.
-function subscribe(onChange: () => void) {
-  window.addEventListener("scroll", onChange, { passive: true });
-  window.addEventListener("resize", onChange);
-  return () => {
-    window.removeEventListener("scroll", onChange);
-    window.removeEventListener("resize", onChange);
-  };
-}
-const getPastHalf = () => {
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  return max > 0 && window.scrollY > max / 2;
-};
-const getServerPastHalf = () => false;
-
+/**
+ * Back to top — shown only when it is wanted: after the first screen, while
+ * the visitor is scrolling back up, and not over the footer. The rest of the
+ * time it stays out of the way instead of sitting on top of the content.
+ */
 export function ScrollToggle() {
-  const pastHalf = useSyncExternalStore(subscribe, getPastHalf, getServerPastHalf);
-  const label = pastHalf ? "Back to top" : "Go to bottom";
-  const Icon = pastHalf ? ArrowUp : ArrowDown;
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    let last = window.scrollY;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const goingUp = y < last - 2;
+      const goingDown = y > last + 2;
+      if (y < window.innerHeight || y > max - 160) setShow(false);
+      else if (goingUp) setShow(true);
+      else if (goingDown) setShow(false);
+      last = y;
+    };
+    const on = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", on, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", on);
+    };
+  }, []);
 
   const go = () => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const top = pastHalf ? 0 : document.documentElement.scrollHeight;
     // Use the smooth scroller when it is running; otherwise scroll natively.
-    if (window.__lenis) window.__lenis.scrollTo(top, { duration: 1.4 });
-    else window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+    if (window.__lenis) window.__lenis.scrollTo(0, { duration: 1.4 });
+    else window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   };
 
   return (
     <button
       type="button"
       onClick={go}
-      aria-label={label}
-      title={label}
+      aria-label="Back to top"
+      title="Back to top"
+      tabIndex={show ? 0 : -1}
+      aria-hidden={!show}
       className={cx(
-        "fixed bottom-5 right-5 z-40 grid size-12 place-items-center glass-control rounded-full border border-line-strong text-ink",
-        "transition-[background-color,color,border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-paper",
+        "fixed bottom-5 right-5 z-40 grid size-11 place-items-center glass-control rounded-full border border-line-strong text-ink",
+        "transition-[opacity,transform,background-color,color,border-color] duration-300 hover:border-ink hover:bg-ink hover:text-paper",
         "sm:bottom-8 sm:right-8",
+        show ? "opacity-100" : "pointer-events-none translate-y-3 opacity-0",
         "scroll-toggle",
       )}
     >
-      <Icon aria-hidden className="size-5" />
+      <ArrowUp aria-hidden className="size-5" />
     </button>
   );
 }

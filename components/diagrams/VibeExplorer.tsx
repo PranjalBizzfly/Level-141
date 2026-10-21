@@ -77,7 +77,7 @@ export function VibeExplorer() {
                 aria-hidden
                 className={cx(
                   "vibe-letter font-display order-last text-4xl leading-[0.85] tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-architect)] sm:mt-auto sm:text-7xl lg:text-[6.5rem]",
-                  selected ? "text-paper sm:-translate-y-3" : "translate-y-0 text-paper/30",
+                  selected ? "text-paper sm:-translate-y-3" : "translate-y-0 text-paper/55",
                 )}
               >
                 {d.letter}
@@ -85,7 +85,7 @@ export function VibeExplorer() {
               <span className="flex flex-col sm:mt-2">
                 <span
                   className={cx(
-                    "text-[0.75rem] font-medium uppercase tracking-[0.12em] sm:text-base sm:normal-case sm:tracking-[-0.01em] lg:text-lg",
+                    "text-sm font-medium uppercase tracking-[0.12em] sm:text-base sm:normal-case sm:tracking-[-0.01em] lg:text-lg",
                     selected ? "text-paper" : "text-paper-muted",
                   )}
                 >

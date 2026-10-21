@@ -84,13 +84,13 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
   }
 
   return (
-    <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-8 sm:space-y-10" aria-describedby="form-required-note">
+    <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-10 sm:space-y-12" aria-describedby="form-required-note">
       <p id="form-required-note" className="text-sm text-muted">
         Fields marked <span className="text-gold-ink">*</span> are required.
       </p>
 
       <fieldset aria-describedby={allErrors.interest ? "interest-error" : undefined}>
-        <legend className="text-sm font-medium text-ink">
+        <legend className="text-[0.95rem] font-medium text-ink">
           I am interested in<span aria-hidden className="ml-1 text-gold-ink">*</span>
         </legend>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -101,8 +101,8 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                 key={o.value}
                 htmlFor={`interest-${o.value}`}
                 className={cx(
-                  "relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border bg-surface px-4 py-3 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-gold/35",
-                  checked ? "border-gold-ink bg-ink/5" : "border-line-strong hover:border-ink/40",
+                  "relative flex min-h-[3.75rem] cursor-pointer items-center gap-3 rounded-xl border bg-surface px-5 py-3.5 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ink/15",
+                  checked ? "border-ink bg-ink/5" : "border-line-strong hover:border-ink/40",
                 )}
               >
                 <input
@@ -112,11 +112,11 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                   value={o.value}
                   checked={checked}
                   onChange={set("interest")}
-                  className="size-4 accent-gold-ink"
+                  className="size-[1.125rem] accent-ink"
                 />
                 <span className="text-[0.95rem]">{o.label}</span>
                 {o.value === "growth-architecture" ? (
-                  <span className="ml-auto rounded-full bg-paper-2 px-2.5 py-1 text-[0.75rem] uppercase tracking-[0.08em] text-muted">
+                  <span className="ml-auto rounded-full bg-paper-2 px-2.5 py-1 text-sm text-muted">
                     Waitlist
                   </span>
                 ) : null}
@@ -142,7 +142,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
         ) : null}
       </fieldset>
 
-      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
+      <div className="grid gap-x-6 gap-y-7 sm:grid-cols-2 sm:gap-y-8">
         <Field id="name" label="Name" required error={allErrors.name}>
           <input
             {...fieldA11y("name", allErrors.name)}
@@ -237,7 +237,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
         {gaSelected ? (
           <Link
             href={routes.waitlist}
-            className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-ink px-8 text-base font-medium text-paper transition-colors hover:bg-ink-3 sm:w-auto"
+            className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-ink px-8 text-base font-medium text-paper transition-colors hover:bg-ink-3 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/25 focus-visible:ring-offset-2 sm:w-auto"
           >
             Go to the waitlist
             <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
@@ -248,7 +248,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
             <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
           </SubmitButton>
         )}
-        <p className="max-w-xs text-xs leading-relaxed text-muted">
+        <p className="max-w-xs text-sm leading-relaxed text-muted">
           Your details are used only to respond to this enquiry.
         </p>
       </div>

@@ -118,7 +118,7 @@ export default function PersonalBrandPage() {
             label="The Market Problem"
             title={
               <>
-                Many accomplished leaders have <span className="text-muted">more value than visibility</span>
+                Many accomplished leaders have more value than visibility
               </>
             }
             text="Others have visibility without a coherent reputation system. The market therefore sees fragments rather than a clear leadership proposition."
@@ -204,7 +204,7 @@ export default function PersonalBrandPage() {
             label="Pain → Solution → Impact"
             title={
               <>
-                Client pain. <span className="text-white/50">Level141 intervention</span>
+                Client pain. Level141 intervention
               </>
             }
             text="Personal Brand Architecture™ starts by locating the gap between your actual value and the market's current perception of it."
@@ -220,6 +220,7 @@ export default function PersonalBrandPage() {
         {/* Modules — on a 3D ring that turns with the scroll */}
         <section>
           <Ring3D
+            dark={false}
             label="Personal Brand Architecture™"
             title="Product Architecture & Modules"
             text="Level141's role is architecture, strategic direction, governance and measurement. Where execution partners, internal teams or specialist vendors are required, the architecture should define the brief, standards, dependencies, review mechanism and success criteria. The product should not collapse into undifferentiated execution."
@@ -233,7 +234,7 @@ export default function PersonalBrandPage() {
             label="Guiding principles"
             title={
               <>
-                Truth before theatre. <span className="text-muted">Authority before vanity</span>
+                Truth before theatre. Authority before vanity
               </>
             }
             items={pbaPrinciples.map((p) => ({ name: p.name, body: p.body }))}
@@ -257,8 +258,9 @@ export default function PersonalBrandPage() {
         </section>
 
         {/* Before / after */}
-        <section className="bg-paper text-ink">
+        <section>
           <CompareSlider
+            dark
             before="Valuable but fragmented expertise, inconsistent positioning, disconnected visibility and unpredictable opportunity."
             after="A clearly positioned leader with an evidence-backed narrative, coherent presence, recognizable intellectual territory, trusted impact, deliberate opportunity pathways and a roadmap for continuous evolution."
           />

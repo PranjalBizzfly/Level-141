@@ -46,7 +46,7 @@ const jump = [
   ["Why Level141", "#why"],
 ] as const;
 
-/** Decorative black-and-white photographs beside each starting question, in order. */
+/** How We Architect Growth — editorial redesign; each section plays its own arrival. */
 const questionImages = [
   "/images/home-person-notebook.webp",
   "/images/home-strategist-compass.webp",
@@ -55,7 +55,6 @@ const questionImages = [
   "/images/home-hero-staircase-muted.webp",
 ];
 
-/** How We Architect Growth — editorial redesign; each section plays its own arrival. */
 export default function HowPage() {
   return (
     <>
@@ -75,7 +74,7 @@ export default function HowPage() {
             <a
               key={href}
               href={href}
-              className="inline-flex min-h-10 items-center rounded-full border border-white/35 px-4 text-sm text-white/85 hover:border-white hover:text-white"
+              className="inline-flex min-h-12 items-center rounded-full border border-white/35 px-5 text-[0.95rem] text-white/85 hover:border-white hover:text-white"
             >
               {label}
             </a>
@@ -156,7 +155,7 @@ export default function HowPage() {
                   <p className="mt-3 text-ink">
                     Because you cannot architect the next level without understanding the current one.
                   </p>
-                  <p className="mt-3 text-sm">
+                  <p className="mt-3">
                     For people, LQ™ is assessed across the four VIBE™ dimensions. For organizations, the LQ™ Growth Audit
                     examines the domains below.
                   </p>
@@ -203,7 +202,11 @@ export default function HowPage() {
                       Six dimensions <span className="serif-accent">of growth</span>
                     </>
                   }
-                  text="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
+                  text={
+                    <span className="block text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">
+                      Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover &amp; Trust and Scale complete a system that is architected together — never as separate campaigns.
+                    </span>
+                  }
                 />
               }
               items={brandsLevers.map((l) => ({ letter: l.letter, name: l.name, line: l.line, role: l.role, list: splitList(l.components) }))}
@@ -211,7 +214,7 @@ export default function HowPage() {
           </div>
 
           {/* PEAK */}
-          <RefSection id="peak" tone="ink">
+          <RefSection id="peak">
             <RefIntro
               label="PEAK™"
               title={
@@ -222,7 +225,7 @@ export default function HowPage() {
               text="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
             />
             <div className="mt-14 sm:mt-16">
-              <PeakAscent />
+              <PeakAscent dark={false} />
             </div>
           </RefSection>
         </div>
@@ -250,8 +253,7 @@ export default function HowPage() {
             label="Why Level141?"
             title={
               <>
-                Growth Architecture, <span className="text-muted">not fragmented consulting</span>
-              </>
+Growth Architecture, not fragmented consulting</>
             }
             items={whyLevel141.map((w) => ({ name: w.title, body: w.body }))}
           />
@@ -267,7 +269,10 @@ export default function HowPage() {
               </>
             }
           />
-          <Timeline items={transformationFrame.map((t) => ({ name: t.label, body: t.question }))} />
+          <Timeline items={transformationFrame.map((t) => ({
+              name: t.label,
+              body: <span className="block text-[1.0625rem] leading-relaxed text-paper/85 sm:text-lg">{t.question}</span>,
+            }))} />
           <Reveal className="mt-10 flex flex-wrap gap-3">
             <RefIntroLink href={routes.personalBrand}>Personal Brand Architecture™</RefIntroLink>
             <RefIntroLink href={routes.growth}>Growth Architecture™</RefIntroLink>
@@ -294,7 +299,7 @@ function RefIntroLink({ href, children }: { href: string; children: React.ReactN
   return (
     <a
       href={href}
-      className="inline-flex min-h-10 items-center rounded-full border border-line-dark-strong px-5 text-sm font-medium text-paper/85 hover:text-paper"
+      className="inline-flex min-h-12 items-center rounded-full border border-line-dark-strong px-5 text-[0.95rem] font-medium text-paper/85 hover:text-paper"
     >
       {children}
     </a>

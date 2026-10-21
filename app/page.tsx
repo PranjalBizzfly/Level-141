@@ -66,7 +66,7 @@ const whyImages = [
   "/images/home-fragmented-to-integrated-muted.webp",
   "/images/about-atrium-levels-muted.webp",
   "/images/how-strategy-table-muted.webp",
-  "/images/about-meeting-room.webp",
+  "/images/home-team-table.webp",
   "/images/home-hero-staircase-muted.webp",
   "/images/home-strategist-compass.webp",
 ];
@@ -74,7 +74,7 @@ const insightImages = [
   "/images/ga-hero-structural-node-muted.webp",
   "/images/pba-hero-speaker.webp",
   "/images/ga-prioritised-bridge-muted.webp",
-  "/images/home-cards-grid-muted.webp",
+  "/images/contact-corridor-warm.webp",
   "/images/pba-leader-skyline.webp",
   "/images/home-person-notebook.webp",
 ];

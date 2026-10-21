@@ -24,10 +24,10 @@ const clamp = (v: number) => Math.min(1, Math.max(0, v));
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   if (!label && !title) return null;
   return (
-    <div className="max-w-2xl">
-      {label ? <p className={"text-sm " + (dark ? "text-white/55" : "text-muted")}>{label}</p> : null}
-      {title ? <h2 className="font-display mt-3 text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em]">{title}</h2> : null}
-      {text ? <div className={"mt-5 max-w-xl " + (dark ? "text-white/65" : "text-muted")}>{text}</div> : null}
+    <div className="max-w-3xl">
+      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
+      {title ? <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2> : null}
+      {text ? <div className={"mt-6 max-w-xl text-base leading-relaxed sm:text-lg " + (dark ? "text-white/80" : "text-muted")}>{text}</div> : null}
     </div>
   );
 }
@@ -71,7 +71,7 @@ export function OutlineFill({ text, accent, sub }: { text: string; accent?: stri
             </>
           ) : null}
         </p>
-        {sub ? <div className="mt-10 max-w-2xl text-white/65 [&_p+p]:mt-4">{sub}</div> : null}
+        {sub ? <div className="mt-10 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg [&_p+p]:mt-4">{sub}</div> : null}
       </div>
     </div>
   );
@@ -103,7 +103,7 @@ export function SpotlightText({ text, accent, sub }: { text: string; accent?: st
           onPointerLeave={() => setPt(null)}
         >
           {/* Readable base; the bright copy above is lit only where the pointer is (fully lit when not pointing). */}
-          <p className={cls + (pt ? " text-white/25" : " text-white")}>{body}</p>
+          <p className={cls + (pt ? " text-white/60" : " text-white")}>{body}</p>
           {pt ? (
             <p
               aria-hidden
@@ -117,7 +117,7 @@ export function SpotlightText({ text, accent, sub }: { text: string; accent?: st
             </p>
           ) : null}
         </div>
-        {sub ? <div className="mt-10 text-sm uppercase tracking-[0.22em] text-white/55">{sub}</div> : null}
+        {sub ? <div className="mt-10 text-sm uppercase tracking-[0.22em] text-white/70">{sub}</div> : null}
       </div>
     </div>
   );
@@ -168,10 +168,9 @@ export function ScanRows({
               return (
                 <li key={it.name} className="border-b border-current/15">
                   <div className="grid gap-x-6 py-6 sm:grid-cols-12 sm:py-8">
-                    <span className="text-sm tabular-nums text-muted sm:col-span-1">{n2(i)}</span>
                     <h3
-                      className="font-display text-[clamp(1.6rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em] transition-opacity duration-500 sm:col-span-6"
-                      style={{ opacity: on ? 1 : 0.32 }}
+                      className="font-display text-[clamp(1.6rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em] transition-opacity duration-500 sm:col-span-7"
+                      style={{ opacity: on ? 1 : 0.6 }}
                     >
                       {it.name}
                     </h3>
@@ -217,7 +216,7 @@ export function PeelStack({
           <ol className="mt-12 grid gap-10 sm:grid-cols-2">
             {items.map((x, i) => (
               <li key={x.name}>
-                <span className="text-sm tabular-nums text-white/55">{x.n ?? n2(i)}</span>
+                <span className="text-sm tabular-nums text-white/70">{x.n ?? n2(i)}</span>
                 <h3 className="font-display mt-2 text-[1.9rem] font-medium tracking-[-0.03em]">{x.name}</h3>
                 <p className="mt-3 text-white/65">{x.body}</p>
               </li>
@@ -247,7 +246,7 @@ export function PeelStack({
               <article
                 key={x.name}
                 aria-hidden={k >= 1 || undefined}
-                className="absolute inset-x-0 top-0 mx-auto flex h-full max-w-6xl origin-top flex-col justify-between rounded-[1.75rem] border border-white/15 bg-black p-7 sm:p-12"
+                className="absolute inset-x-0 top-0 mx-auto flex h-full max-w-6xl origin-top flex-col justify-between rounded-[1.25rem] border border-white/15 bg-black p-7 sm:p-12"
                 style={{
                   zIndex: n - i,
                   transform: `translateY(${Math.min(depth, 3) * 14}px) scale(${1 - Math.min(depth, 3) * 0.03}) rotateX(${e * 100}deg)`,
@@ -257,7 +256,7 @@ export function PeelStack({
                 <span className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.8] tracking-[-0.06em] text-white/90">{x.n ?? n2(i)}</span>
                 <div className="max-w-2xl">
                   <h3 className="font-display text-[clamp(2rem,4.6vw,4rem)] font-medium leading-[1] tracking-[-0.04em]">{x.name}</h3>
-                  <p className="mt-5 text-white/65 sm:text-lg">{x.body}</p>
+                  <p className="mt-5 text-white/75 sm:text-lg">{x.body}</p>
                 </div>
               </article>
             );
@@ -300,10 +299,6 @@ export function Checklist({ label, title, items }: { label?: string; title?: Rea
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <Head label={label} title={title} />
-            <p aria-hidden className="font-display mt-8 text-[clamp(3.5rem,8vw,7rem)] leading-[0.85] tracking-[-0.06em]">
-              {String(done).padStart(2, "0")}
-              <span className="text-[0.35em] text-muted">/{String(items.length).padStart(2, "0")}</span>
-            </p>
           </div>
         </div>
         <ol ref={list} className="lg:col-span-7 lg:col-start-6">
@@ -312,7 +307,7 @@ export function Checklist({ label, title, items }: { label?: string; title?: Rea
             return (
               <li key={t} data-i={i} className="flex gap-5 border-b border-current/15 py-7 first:border-t sm:gap-7 sm:py-9">
                 <svg aria-hidden viewBox="0 0 40 40" className="mt-1 size-9 shrink-0 sm:size-11">
-                  <circle cx="20" cy="20" r="19" fill={on ? "currentColor" : "none"} stroke="currentColor" strokeOpacity={on ? 1 : 0.25} className="transition-[fill,stroke-opacity] duration-500" />
+                  <circle cx="20" cy="20" r="19" fill={on ? "currentColor" : "none"} stroke="currentColor" strokeOpacity={on ? 1 : 0.4} className="transition-[fill,stroke-opacity] duration-500" />
                   <path
                     d="M12 20.5l5.5 5.5L28.5 14"
                     fill="none"
@@ -325,7 +320,7 @@ export function Checklist({ label, title, items }: { label?: string; title?: Rea
                     style={{ transition: "stroke-dashoffset 600ms cubic-bezier(0.2,0.8,0.2,1) 150ms" }}
                   />
                 </svg>
-                <p className="font-display text-[clamp(1.3rem,2.4vw,2rem)] font-medium leading-[1.2] tracking-[-0.025em] transition-opacity duration-500" style={{ opacity: on ? 1 : 0.4 }}>
+                <p className="font-display text-[clamp(1.3rem,2.4vw,2rem)] font-medium leading-[1.2] tracking-[-0.025em] transition-opacity duration-500" style={{ opacity: on ? 1 : 0.65 }}>
                   {t}
                 </p>
               </li>
@@ -344,30 +339,35 @@ export function Ring3D({
   title,
   text,
   items,
+  dark = true,
 }: {
   label?: string;
   title?: ReactNode;
   text?: ReactNode;
   items: readonly { name: string; body: string }[];
+  /** Black stage (default) or paper stage. */
+  dark?: boolean;
 }) {
   const reduced = useReducedMotion();
   const [ref, p] = usePinProgress(!reduced);
   const n = items.length;
+  const fg = dark ? "var(--color-white)" : "var(--color-ink)";
+  const bg = dark ? "var(--color-black)" : "var(--color-paper)";
+  const shell = dark ? "bg-black text-white" : "bg-paper text-ink";
   const step = 360 / n;
   const turn = p * step * (n - 1);
   const front = Math.round(turn / step) % n;
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-20">
+      <div className={shell + " py-20 sm:py-20"}>
         <div className="container-x">
-          <Head label={label} title={title} text={text} dark />
+          <Head label={label} title={title} text={text} dark={dark} />
           <ol className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {items.map((x, i) => (
-              <li key={x.name} className="rounded-[1.25rem] border border-white/15 p-6">
-                <span className="text-sm tabular-nums text-white/60">{n2(i)}</span>
-                <h3 className="font-display mt-6 text-[1.4rem] font-medium tracking-[-0.03em]">{x.name}</h3>
-                <p className="mt-3 text-white/65">{x.body}</p>
+            {items.map((x) => (
+              <li key={x.name} className="rounded-[1.25rem] border border-current/15 p-6">
+                <h3 className="font-display text-[1.4rem] font-medium tracking-[-0.03em]">{x.name}</h3>
+                <p className="mt-3 opacity-75">{x.body}</p>
               </li>
             ))}
           </ol>
@@ -377,10 +377,10 @@ export function Ring3D({
   }
 
   return (
-    <div ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 35}lvh` }}>
+    <div ref={ref} className={shell} style={{ height: `${100 + n * 35}lvh` }}>
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden pt-24 sm:pt-28">
         <div className="container-x">
-          <Head label={label} title={title} text={text} dark />
+          <Head label={label} title={title} text={text} dark={dark} />
         </div>
         {/* The ring: --w is a card's width, the radius fits n cards edge to edge. */}
         <div
@@ -391,20 +391,17 @@ export function Ring3D({
             {items.map((x, i) => (
               <li
                 key={x.name}
-                className="absolute inset-0 flex flex-col justify-between rounded-[1.25rem] border p-5 transition-[background-color,border-color,color] duration-500 [backface-visibility:hidden] sm:p-6"
+                className="absolute inset-0 flex flex-col justify-end rounded-[1.25rem] border p-5 transition-[background-color,border-color,color] duration-500 [backface-visibility:hidden] sm:p-6"
                 style={{
                   transform: `rotateY(${i * step}deg) translateZ(var(--r))`,
-                  background: i === front ? "var(--color-white)" : "var(--color-black)",
-                  color: i === front ? "var(--color-black)" : "var(--color-white)",
-                  borderColor: i === front ? "var(--color-white)" : "color-mix(in oklab, var(--color-white) 15%, transparent)",
+                  background: i === front ? fg : bg,
+                  color: i === front ? bg : fg,
+                  borderColor: i === front ? fg : `color-mix(in oklab, ${fg} 15%, transparent)`,
                 }}
               >
-                <span className="text-sm tabular-nums opacity-55">
-                  {n2(i)} / {String(n).padStart(2, "0")}
-                </span>
                 <span>
                   <span className="block font-display text-[1.35rem] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[1.5rem]">{x.name}</span>
-                  <span className="mt-3 block text-[0.92rem] opacity-70">{x.body}</span>
+                  <span className="mt-3 block text-[0.95rem] opacity-80">{x.body}</span>
                 </span>
               </li>
             ))}
@@ -450,7 +447,7 @@ export function CadenceGrid({
                   onBlur={() => setHover(null)}
                   className="grid w-full gap-4 py-6 text-left sm:grid-cols-12 sm:items-center sm:py-8"
                 >
-                  <span className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-medium tracking-[-0.035em] transition-opacity duration-500 sm:col-span-3" style={{ opacity: on ? 1 : 0.35 }}>
+                  <span className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-medium tracking-[-0.035em] transition-opacity duration-500 sm:col-span-3" style={{ opacity: on ? 1 : 0.6 }}>
                     {k}
                   </span>
                   <span className="text-muted sm:col-span-4">{v}</span>
@@ -461,10 +458,10 @@ export function CadenceGrid({
                       return (
                         <span
                           key={m}
-                          className="h-8 rounded-[4px] border border-current/15 transition-[background-color,transform] duration-500"
+                          className="h-8 rounded-[4px] border border-current/25 transition-[background-color,transform] duration-500"
                           style={{
-                            background: lit ? "var(--color-ink)" : "transparent",
-                            transform: lit ? "scaleY(1)" : "scaleY(0.6)",
+                            background: lit ? "var(--color-ink)" : "color-mix(in oklab, var(--color-ink) 8%, transparent)",
+                            transform: lit ? "scaleY(1)" : "scaleY(0.7)",
                             transitionDelay: lit ? `${m * 35}ms` : "0ms",
                           }}
                         />

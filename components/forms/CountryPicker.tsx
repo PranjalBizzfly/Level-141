@@ -105,7 +105,7 @@ export function CountryPicker({
             openList();
           }
         }}
-        className="flex min-h-12 items-center gap-1.5 rounded-l-xl border-r border-line pl-4 pr-3 text-base focus:outline-none"
+        className="flex min-h-[3.5rem] items-center gap-1.5 rounded-l-xl border-r border-line pl-4 pr-3 text-base focus:outline-none"
       >
         <span className="text-sm font-medium tracking-[0.04em] text-muted">{selected.iso}</span>
         <span className="tabular-nums">+{selected.dial}</span>
@@ -158,7 +158,7 @@ export function CountryPicker({
                     i === active ? "bg-ink/[0.06] text-ink" : "text-ink/85",
                   )}
                 >
-                  <span className="w-7 text-xs font-medium tracking-[0.04em] text-muted">{c.iso}</span>
+                  <span className="w-7 text-sm font-medium tracking-[0.04em] text-muted">{c.iso}</span>
                   <span className="flex-1 truncate">{c.name}</span>
                   <span className="tabular-nums text-muted">+{c.dial}</span>
                   {c.iso === selected.iso ? <Check aria-hidden className="size-4 text-ink" /> : null}

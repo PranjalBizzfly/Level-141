@@ -27,6 +27,11 @@
      (clip, unlike hidden, keeps sticky sections working). */
   .layers--flat {
     overflow: clip;
+    /* No sinking sheets here, so no black depth: arrivals open over the page ground. */
+    background: var(--color-paper);
+  }
+  .layers--flat > .layer {
+    background: transparent;
   }
   .layers--flat > .layer {
     position: relative;
@@ -416,4 +421,39 @@
 @keyframes l141-count {
   from { opacity: 0; transform: translateY(-0.25em); }
   to { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   One hover language across the site (pointer devices, motion allowed):
+   arrows nudge where they point, linked cards lift, plain text links draw an
+   underline, and anything pressable gives a slight press.
+--------------------------------------------------------------------------- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  main a[href] :is(.lucide-arrow-right, .lucide-arrow-up-right) {
+    transition: translate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  main a[href]:hover .lucide-arrow-right {
+    translate: 4px 0;
+  }
+  main a[href]:hover .lucide-arrow-up-right {
+    translate: 3px -3px;
+  }
+  main a[href].rounded-\[1\.25rem\] {
+    transition: translate 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+  }
+  main a[href].rounded-\[1\.25rem\]:hover {
+    translate: 0 -4px;
+    box-shadow: 0 22px 44px -28px rgb(0 0 0 / 0.45);
+  }
+  main :is(p, li) > a[href]:not([class]) {
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 1px;
+    transition: background-size 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  main :is(p, li) > a[href]:not([class]):hover {
+    background-size: 100% 1px;
+  }
+  main :is(a[href], button):active {
+    scale: 0.985;
+  }
 }

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FooterBigNav } from "@/components/layout/FooterBigNav";
 import { ArrowRight } from "lucide-react";
 import { BracketClose, BracketOpen, LogoLockup } from "@/components/brand/Logo";
 import { footerNav, routes, site } from "@/lib/site";
@@ -53,9 +52,6 @@ export function Footer() {
       >
 
         <div className="relative px-6 pb-8 pt-8 sm:px-12 sm:pb-10 sm:pt-10 lg:px-20 lg:pt-10 2xl:px-28">
-          {/* Giant stacked menu, the current page lit (COLLINS footer). */}
-          <FooterBigNav />
-
           {/* Closing statement */}
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <p className="display text-[2.15rem] leading-[1.03] text-black sm:text-5xl lg:col-span-8 lg:text-[3.6rem] dark:text-white">

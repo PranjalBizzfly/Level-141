@@ -66,8 +66,8 @@ export function WaitlistForm() {
   }
 
   return (
-    <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-6">
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 sm:grid-cols-2">
+    <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-10">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-7 sm:grid-cols-2 sm:gap-y-8">
         <Field id="wl-name" label="Name" required error={allErrors.name}>
           <input
             {...fieldA11y("wl-name", allErrors.name)}

@@ -7,19 +7,19 @@ import { site } from "@/lib/site";
 const built = ["A career.", "A reputation.", "A business.", "A company."];
 
 /**
- * Home hero after the luxury reference: the question set as one large
- * statement across the page, locked between the two brackets of the Level141
- * symbol; the documented supporting copy and the actions on a quiet editorial
- * row beneath it; then a wide media frame that rises as the page scrolls.
+ * Home hero as one composed first screen: the question set large across the
+ * page, locked between the two brackets of the Level141 symbol; the documented
+ * copy and the actions on one editorial row; then the photograph filling the
+ * rest of the screen — nothing cut off at the fold.
  */
 export function HomeHero() {
   return (
-    <section className="recede relative overflow-x-clip bg-paper text-ink" aria-labelledby="hero-title">
-      <div className="container-x pb-14 pt-32 sm:pb-16 sm:pt-40 lg:pt-44">
+    <section className="recede relative flex min-h-[100svh] flex-col overflow-x-clip bg-paper text-ink" aria-labelledby="hero-title">
+      <div className="container-x pt-28 sm:pt-32 lg:pt-36">
         <h1
           id="hero-title"
           data-split="load"
-          className="display relative mx-auto block w-fit px-[0.3em] py-[0.18em] text-center text-[clamp(3rem,10.4vw,10.5rem)] leading-[0.92] tracking-[-0.045em]"
+          className="display relative mx-auto block w-fit px-[0.3em] py-[0.18em] text-center text-[clamp(3rem,9.6vw,9.75rem)] leading-[0.92] tracking-[-0.045em]"
         >
           {/* The two brackets of the Level141 symbol lock around the statement. */}
           <BracketClose className="absolute right-0 top-0 size-[0.22em] bracket-in-close text-ink" />
@@ -27,15 +27,19 @@ export function HomeHero() {
           What&apos;s Your <span className="serif-accent">Level</span>?
         </h1>
 
-        <div className="mt-14 grid animate-rise gap-8 [animation-delay:500ms] sm:mt-20 lg:grid-cols-12 lg:items-end">
-          <div className="max-w-xl space-y-3 text-muted lg:col-span-6">
+        <div className="mt-10 grid animate-rise gap-8 [animation-delay:500ms] sm:mt-14 lg:grid-cols-12 lg:items-end">
+          <div className="max-w-2xl space-y-3 text-muted sm:text-lg lg:col-span-7">
             <p>
               You&apos;ve built something. {built.join(" ")} But where you are today doesn&apos;t have to define where you
               go next.
             </p>
             <p className="text-ink">Level141 architects the next level of growth for people and organizations</p>
+            <p>
+              Through clarity, positioning, visibility, credibility, authority and structured growth systems, we turn
+              ambition into an architecture for growth.
+            </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:col-start-8 lg:justify-end">
+          <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end">
             <ButtonLink href={site.primaryCta.href} variant="solid">
               {site.primaryCta.label}
             </ButtonLink>
@@ -46,21 +50,17 @@ export function HomeHero() {
         </div>
       </div>
 
-      {/* One wide media frame beneath the statement; it rises into place on scroll. */}
-      <div className="container-x pb-20 sm:pb-28">
-        <div data-rise>
+      {/* The photograph fills the rest of the first screen (and keeps a generous size on short screens). */}
+      <div className="container-x flex flex-1 flex-col pb-6 pt-10 sm:pb-8 sm:pt-12">
+        <div data-rise className="flex flex-1">
           <MediaSlot
             src="/images/home-hero-terrace-skyline.webp"
             alt={altFor("/images/home-hero-terrace-skyline.webp")}
             label="Hero film or image — growth to the next level"
-            className="aspect-[4/3] sm:aspect-[16/8] lg:aspect-[21/9]"
+            className="min-h-[clamp(16rem,42svh,34rem)] w-full flex-1"
             priority
           />
         </div>
-        <p className="mt-5 max-w-3xl text-sm text-muted">
-          Through clarity, positioning, visibility, credibility, authority and structured growth systems, we turn ambition
-          into an architecture for growth.
-        </p>
       </div>
     </section>
   );

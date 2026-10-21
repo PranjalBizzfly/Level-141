@@ -55,16 +55,16 @@ export function RefIntro({
   id?: string;
 }) {
   return (
-    <Reveal className="max-w-xl">
-      <p className="text-sm text-muted">{label}</p>
-      <h2 id={id} className="font-display mt-3 text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">
+    <Reveal className="max-w-3xl">
+      <p className="text-[0.95rem] font-medium text-muted">{label}</p>
+      <h2 id={id} className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">
         {title}
       </h2>
-      {text ? <div className="mt-5 text-muted">{text}</div> : null}
+      {text ? <div className="mt-6 max-w-xl text-muted sm:text-lg">{text}</div> : null}
       {action ? (
         <Link
           href={action.href}
-          className="mt-6 inline-flex min-h-10 items-center rounded-full bg-gold px-5 text-[0.8125rem] font-medium text-ink"
+          className="mt-8 inline-flex min-h-12 items-center rounded-full bg-gold px-6 text-[0.95rem] font-medium text-ink"
         >
           {action.label}
         </Link>

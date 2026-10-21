@@ -122,15 +122,6 @@
   .page-curtain { display: none; }
 }
 
-/* Footer: giant stacked menu, current page lit. */
-.footer-bignav a {
-  transition: color 0.5s var(--ease-architect), translate 0.6s var(--ease-architect);
-}
-.footer-bignav a:hover,
-.footer-bignav a:focus-visible {
-  translate: 0.5rem 0;
-}
-
 /* QuestionDeal: cards are dealt from one fanned deck into a flat row. */
 @supports (animation-timeline: view()) {
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {

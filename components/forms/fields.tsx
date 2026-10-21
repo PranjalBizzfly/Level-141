@@ -74,14 +74,14 @@ export function useFormSubmit(endpoint: string) {
 /* --------------------------------------------------------------- Fields */
 
 const inputBase =
-  "block w-full rounded-xl border bg-surface px-4 py-3.5 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
+  "block min-h-[3.5rem] w-full rounded-xl border bg-surface px-5 py-4 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
 
 export function inputClasses(error?: string) {
   return cx(
     inputBase,
     error
       ? "border-error focus:border-error focus:ring-error/15"
-      : "border-line-strong hover:border-ink/40 focus:border-gold-ink focus:ring-gold/40",
+      : "border-line-strong hover:border-ink/40 focus:border-ink focus:ring-ink/15",
   );
 }
 
@@ -104,7 +104,7 @@ export function Field({
 }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="flex items-baseline gap-2 text-sm font-medium text-ink">
+      <label htmlFor={id} className="flex items-baseline gap-2 text-[0.95rem] font-medium text-ink">
         <span>
           {label}
           {required ? (
@@ -113,14 +113,14 @@ export function Field({
             </span>
           ) : null}
         </span>
-        {!required ? <span className="text-xs font-normal text-muted">Optional</span> : null}
+        {!required ? <span className="text-sm font-normal text-muted">Optional</span> : null}
       </label>
       {hint ? (
         <p id={`${id}-hint`} className="mt-1 text-sm text-muted">
           {hint}
         </p>
       ) : null}
-      <div className="mt-2">{children}</div>
+      <div className="mt-2.5">{children}</div>
       {error ? (
         <p id={`${id}-error`} className="mt-2 flex items-start gap-2 text-sm text-error">
           <AlertCircle aria-hidden className="mt-0.5 size-4 shrink-0" />
@@ -150,7 +150,7 @@ export function useVisibleErrors<T>(live: FieldErrors<T>, server: Record<string,
 export function CharCount({ id, value, max }: { id: string; value: string; max: number }) {
   const n = value.length;
   return (
-    <p id={`${id}-count`} aria-live="polite" className={cx("mt-1.5 text-right text-xs tabular-nums", n > max ? "text-error" : n > max * 0.9 ? "text-ink" : "text-muted")}>
+    <p id={`${id}-count`} aria-live="polite" className={cx("mt-1.5 text-right text-sm tabular-nums", n > max ? "text-error" : n > max * 0.9 ? "text-ink" : "text-muted")}>
       {n.toLocaleString()} / {max.toLocaleString()}
     </p>
   );
@@ -181,7 +181,7 @@ export function PhoneInput({
   const selected = findCountry(country) ?? findCountry(DEFAULT_COUNTRY)!;
   const ring = error
     ? "border-error focus-within:border-error focus-within:ring-error/15"
-    : "border-line-strong hover:border-ink/40 focus-within:border-gold-ink focus-within:ring-gold/40";
+    : "border-line-strong hover:border-ink/40 focus-within:border-ink focus-within:ring-ink/15";
   return (
     <div className={cx("relative z-20 flex rounded-xl border bg-surface transition-[border-color,box-shadow] duration-200 focus-within:z-40 focus-within:ring-4", ring)}>
       <CountryPicker id={id} value={selected.iso} onChange={onCountryChange} onBlur={onBlur} />
@@ -195,7 +195,7 @@ export function PhoneInput({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className="min-w-0 flex-1 rounded-r-xl bg-transparent px-4 py-3.5 text-base text-ink placeholder:text-muted/50 focus:outline-none"
+        className="min-h-[3.5rem] min-w-0 flex-1 rounded-r-xl bg-transparent px-5 py-4 text-base text-ink placeholder:text-muted/50 focus:outline-none"
       />
     </div>
   );
@@ -228,7 +228,7 @@ export function SubmitButton({ submitting, children }: { submitting: boolean; ch
       type="submit"
       disabled={submitting}
       aria-disabled={submitting}
-      className="group inline-flex min-h-14 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-full bg-ink px-8 text-base font-medium text-paper transition-colors duration-300 hover:bg-ink-3 disabled:cursor-progress disabled:opacity-70 sm:w-auto"
+      className="group inline-flex min-h-14 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-full bg-ink px-8 text-base font-medium text-paper transition-colors duration-300 hover:bg-ink-3 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/25 focus-visible:ring-offset-2 disabled:cursor-progress disabled:opacity-70 sm:w-auto"
     >
       {submitting ? <Loader2 aria-hidden className="size-4 animate-spin" /> : null}
       {submitting ? "Sending…" : children}
@@ -259,7 +259,7 @@ export function SuccessPanel({ title, children }: { title: string; children: Rea
       }}
       tabIndex={-1}
       role="status"
-      className="animate-rise rounded-[2rem] border border-success/25 bg-surface p-6 outline-none sm:p-10"
+      className="animate-rise rounded-[1.25rem] border border-success/25 bg-surface p-6 outline-none sm:p-10"
     >
       <svg aria-hidden viewBox="0 0 32 32" className="size-10 text-success" fill="none" stroke="currentColor" strokeWidth="1.75">
         <circle cx="16" cy="16" r="14" pathLength={1} className="motion-safe:animate-[draw-stroke_0.7s_var(--ease-architect)_both] [stroke-dasharray:1]" />

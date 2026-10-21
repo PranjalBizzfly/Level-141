@@ -19,16 +19,14 @@ import { altFor } from "@/lib/image-alts";
  */
 
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
-const n2 = (i: number) => String(i + 1).padStart(2, "0");
-
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   return (
-    <div className="max-w-2xl">
-      {label ? <p className={"text-sm " + (dark ? "text-white/55" : "text-muted")}>{label}</p> : null}
+    <div className="max-w-3xl">
+      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
       {title ? (
-        <h2 className="font-display mt-3 text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em]">{title}</h2>
+        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
       ) : null}
-      {text ? <div className={"mt-5 max-w-xl " + (dark ? "text-white/65" : "text-muted")}>{text}</div> : null}
+      {text ? <div className={"mt-6 max-w-xl text-base sm:text-lg " + (dark ? "text-white/80" : "text-muted")}>{text}</div> : null}
     </div>
   );
 }
@@ -98,16 +96,17 @@ export function SplitStatement({ left, right, sub }: { left: string; right: stri
   const reduced = useReducedMotion();
   const [ref, prog] = usePinProgress(!reduced);
   const p = reduced ? 1 : clamp(prog / 0.6);
-  const off = (1 - p) * 60;
+  // Short travel so both halves stay inside the viewport mid-animation.
+  const off = (1 - p) * 8;
   const body = (
     <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
       <h2 className="font-display text-[clamp(2rem,6vw,5.4rem)] font-medium leading-[1.02] tracking-[-0.045em]">
-        <span className="block" style={{ transform: `translateX(${-off}vw)`, opacity: 0.2 + 0.8 * p }}>
+        <span className="block" style={{ transform: `translateX(${-off}vw)`, opacity: 0.55 + 0.45 * p }}>
           {left}
         </span>
         <span
           className="serif-accent block text-right"
-          style={{ transform: `translateX(${off}vw)`, opacity: 0.2 + 0.8 * p }}
+          style={{ transform: `translateX(${off}vw)`, opacity: 0.55 + 0.45 * p }}
         >
           {right}
         </span>
@@ -119,8 +118,8 @@ export function SplitStatement({ left, right, sub }: { left: string; right: stri
       />
       {sub ? (
         <div
-          className="mt-10 ml-auto max-w-xl space-y-4 text-white/65"
-          style={{ opacity: reduced ? 1 : clamp((prog - 0.55) / 0.25) }}
+          className="mt-10 ml-auto max-w-xl space-y-4 text-base text-white/85 sm:text-lg"
+          style={{ opacity: reduced ? 1 : 0.55 + 0.45 * clamp((prog - 0.45) / 0.25) }}
         >
           {sub}
         </div>
@@ -148,9 +147,9 @@ export function Triptych({
 }) {
   const [open, setOpen] = useState(items.length - 1);
   return (
-    <div className="bg-black py-16 text-white sm:py-24">
+    <div className="bg-paper py-16 text-ink sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <Head label={label} title={title} dark />
+        <Head label={label} title={title} />
         <div className="mt-14 flex flex-col gap-2 md:h-[30rem] md:flex-row">
           {items.map((it, i) => {
             const on = open === i;
@@ -163,13 +162,12 @@ export function Triptych({
                 onFocus={() => setOpen(i)}
                 onClick={() => setOpen(i)}
                 className={
-                  "group relative flex min-w-0 flex-col justify-between overflow-hidden border border-white/15 p-6 text-left outline-none transition-[flex-grow,background-color] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none sm:p-8 " +
-                  (on ? "bg-white text-black md:grow-[3]" : "bg-black md:grow")
+                  "group relative flex min-w-0 flex-col justify-end overflow-hidden rounded-[1.25rem] border p-6 text-left outline-none transition-[flex-grow,background-color,color] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 motion-reduce:transition-none sm:p-8 " +
+                  (on ? "border-ink bg-ink text-paper md:grow-[3]" : "border-current/15 bg-paper md:grow")
                 }
                 style={{ flexBasis: 0 }}
               >
-                <span className={"text-sm tabular-nums " + (on ? "text-black/60" : "text-white/60")}>{n2(i)}</span>
-                <span className="mt-10 block">
+                <span className="block">
                   <span className="font-display block text-[clamp(1.8rem,3.4vw,3rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                     {it.lead}
                   </span>
@@ -177,7 +175,7 @@ export function Triptych({
                     <span
                       className={
                         "block max-w-md overflow-hidden text-lg transition-[max-height,opacity] duration-700 motion-reduce:transition-none " +
-                        (on ? "mt-4 max-h-40 opacity-100 text-black/70" : "max-h-0 opacity-0")
+                        (on ? "mt-4 max-h-40 opacity-100 text-paper/85" : "max-h-0 opacity-0")
                       }
                     >
                       {it.rest}
@@ -235,8 +233,7 @@ export function SplitPanels({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
               <div className="relative p-6 sm:p-10">
-                <span className="text-sm text-white/55">{n2(i)}</span>
-                <h3 className="font-display mt-2 text-[clamp(1.6rem,3vw,2.8rem)] font-medium leading-[1.04] tracking-[-0.035em]">
+                <h3 className="font-display text-[clamp(1.6rem,3vw,2.8rem)] font-medium leading-[1.04] tracking-[-0.035em]">
                   {it.name}
                 </h3>
                 <div
@@ -246,7 +243,7 @@ export function SplitPanels({
                   }
                 >
                   <div className="overflow-hidden">
-                    <p className="mt-4 max-w-md text-white/75">{it.body}</p>
+                    <p className="mt-4 max-w-md text-base text-white/85 sm:text-lg">{it.body}</p>
                     <ArrowUpRight className="mt-6 size-6" aria-hidden />
                   </div>
                 </div>
@@ -278,7 +275,7 @@ export function ParallaxStrips({ image, alt, caption }: { image: string; alt: st
   const k = reduced ? 0 : d;
   const n = STRIP_SPEED.length;
   return (
-    <figure className="bg-black py-16 text-white sm:py-24">
+    <figure className="bg-paper py-16 text-ink sm:py-24">
       <div ref={ref} role="img" aria-label={alt} className="relative h-[75svh] w-full overflow-hidden">
         {STRIP_SPEED.map((s, i) => (
           <div
@@ -298,7 +295,7 @@ export function ParallaxStrips({ image, alt, caption }: { image: string; alt: st
         ))}
       </div>
       {caption ? (
-        <figcaption className="mx-auto mt-6 max-w-7xl px-5 text-sm text-white/60 sm:px-8">{caption}</figcaption>
+        <figcaption className="mx-auto mt-6 max-w-7xl px-5 text-[0.95rem] text-muted sm:px-8">{caption}</figcaption>
       ) : null}
     </figure>
   );
@@ -318,25 +315,24 @@ export function PrinciplesGrid({
   return (
     <div className="bg-paper py-16 text-ink sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <Head label={label} title={title} />
-        <ol className="mt-14 grid border-t border-ink/15 md:grid-cols-2">
-          {items.map((it, i) => (
-            <li
-              key={it.name}
-              className="grid grid-cols-[auto_1fr] gap-x-6 border-b border-ink/15 py-10 md:px-8 md:odd:border-r md:odd:pl-0 md:even:pr-0"
-            >
-              <span className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-none tracking-[-0.05em] tabular-nums text-ink/45">
-                {n2(i)}
-              </span>
-              <div>
-                <h3 className="font-display text-[clamp(1.3rem,2.2vw,1.9rem)] font-medium leading-[1.1] tracking-[-0.03em]">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <Head label={label} title={title} />
+          </div>
+          <ul className="border-t border-ink/15">
+            {items.map((it) => (
+              <li
+                key={it.name}
+                className="grid gap-3 border-b border-ink/15 py-8 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-8 sm:py-10"
+              >
+                <h3 className="font-display text-[clamp(1.4rem,2.3vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
                   {it.name}
                 </h3>
-                <p className="mt-3 max-w-sm text-muted">{it.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+                <p className="text-muted sm:text-lg">{it.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

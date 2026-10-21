@@ -29,12 +29,12 @@ function useEnterProgress<T extends HTMLElement>(reduced: boolean, start = 0.9, 
 
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   return (
-    <div className="max-w-2xl">
-      {label ? <p className={"text-sm " + (dark ? "text-white/55" : "text-muted")}>{label}</p> : null}
+    <div className="max-w-3xl">
+      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
       {title ? (
-        <h2 className="font-display mt-3 text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em]">{title}</h2>
+        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
       ) : null}
-      {text ? <div className={"mt-5 max-w-xl " + (dark ? "text-white/65" : "text-muted")}>{text}</div> : null}
+      {text ? <div className={"mt-6 max-w-xl sm:text-lg " + (dark ? "text-white/75" : "text-muted")}>{text}</div> : null}
     </div>
   );
 }
@@ -123,7 +123,7 @@ export function LineStatement({ lines, accent, sub }: { lines: readonly string[]
           })}
         </p>
         {sub ? (
-          <div className="mt-10 max-w-2xl text-white/65 transition-opacity duration-700 [&_p+p]:mt-4" style={{ opacity: p > 0.9 ? 1 : 0.15 }}>
+          <div className="mt-10 max-w-2xl text-base text-white/80 transition-opacity sm:text-lg duration-700 [&_p+p]:mt-4" style={{ opacity: p > 0.9 ? 1 : 0.75 }}>
             {sub}
           </div>
         ) : null}
@@ -163,12 +163,12 @@ export function SpotlightGrid({
         onPointerLeave={() => grid.current?.style.setProperty("--on", "0")}
         className="group/spot mt-12 grid gap-3 [--on:0] sm:mt-16 sm:grid-cols-2 lg:grid-cols-3"
       >
-        {items.map((it, i) => (
+        {items.map((it) => (
           <li
             key={it.name}
             data-spot
             tabIndex={0}
-            className="relative rounded-2xl bg-line/60 p-px outline-none [--x:50%] [--y:50%] focus-visible:ring-2 focus-visible:ring-ink"
+            className="relative rounded-[1.25rem] bg-line/60 p-px outline-none [--x:50%] [--y:50%] focus-visible:ring-2 focus-visible:ring-ink"
             style={{
               backgroundImage:
                 "radial-gradient(260px circle at var(--x) var(--y), rgb(10 10 10 / calc(var(--on) * 0.9)), transparent 70%)",
@@ -181,8 +181,7 @@ export function SpotlightGrid({
                   "radial-gradient(320px circle at var(--x) var(--y), rgb(10 10 10 / calc(var(--on) * 0.05)), transparent 70%)",
               }}
             >
-              <span className="text-xs tabular-nums text-muted">{n2(i)}</span>
-              <h3 className="font-display mt-10 text-[1.6rem] font-medium leading-tight tracking-[-0.02em]">{it.name}</h3>
+              <h3 className="font-display text-[1.6rem] font-medium leading-tight tracking-[-0.02em]">{it.name}</h3>
               <p className="mt-3 text-muted">{it.body}</p>
             </div>
           </li>
@@ -213,7 +212,7 @@ export function Bridge({
       <div className="container-x">
         <Head label={label} title={title} text={text} dark />
         <div ref={ref} className="mt-14 sm:mt-20">
-          <svg aria-hidden viewBox="0 0 1000 160" preserveAspectRatio="none" className="hidden h-28 w-full md:block">
+          <svg aria-hidden viewBox="0 0 1000 160" preserveAspectRatio="none" className="hidden h-28 w-full lg:block">
             <path d="M0 150 Q500 -40 1000 150" fill="none" stroke="currentColor" strokeOpacity={0.15} strokeWidth="1" vectorEffect="non-scaling-stroke" />
             <path
               d="M0 150 Q500 -40 1000 150"
@@ -226,7 +225,7 @@ export function Bridge({
               strokeDashoffset={1 - p}
             />
           </svg>
-          <ol className="grid gap-px md:grid-cols-7 md:gap-3">
+          <ol className="grid gap-px lg:grid-cols-7 lg:gap-3">
             {items.map((s, i) => {
               const on = p >= (i + 0.5) / n;
               // pillar height follows the arc: tallest in the middle
@@ -235,19 +234,20 @@ export function Bridge({
               return (
                 <li
                   key={s.name}
-                  className="flex gap-5 border-l border-white/15 py-5 pl-5 transition-[opacity,transform] duration-700 md:flex-col md:gap-0 md:border-l-0 md:py-0 md:pl-0"
-                  style={{ opacity: on ? 1 : 0.2, transform: on ? "none" : "translateY(16px)" }}
+                  className="flex gap-5 border-l border-white/15 py-5 pl-5 transition-[opacity,transform] duration-700 lg:flex-col lg:gap-0 lg:border-l-0 lg:py-0 lg:pl-0"
+                  style={{ opacity: on ? 1 : 0.6, transform: on ? "none" : "translateY(8px)" }}
                 >
-                  <span
-                    aria-hidden
-                    className="hidden w-px origin-top bg-white transition-transform duration-700 md:block md:self-center"
-                    style={{ height: `${2 + h * 3}rem`, transform: `scaleY(${on ? 1 : 0})` }}
-                  />
-                  <span className="text-xs tabular-nums text-white/60 md:mt-4">{n2(i)}</span>
-                  <div className="md:mt-2">
-                    <h3 className="font-display text-xl font-medium tracking-[-0.02em]">{s.name}</h3>
-                    <p className="mt-2 text-sm text-white/65">{s.body}</p>
-                    <p className="mt-3 text-xs uppercase tracking-[0.12em] text-white/60">{s.meta}</p>
+                  <span aria-hidden className="relative hidden w-px bg-white/25 lg:block lg:self-center" style={{ height: `${2 + h * 3}rem` }}>
+                    <span
+                      className="absolute inset-0 origin-top bg-white transition-transform duration-700"
+                      style={{ transform: `scaleY(${on ? 1 : 0})` }}
+                    />
+                  </span>
+                  <span className="text-base tabular-nums text-white/75 lg:mt-4">{n2(i)}</span>
+                  <div className="lg:mt-2">
+                    <h3 className="font-display text-[1.4rem] font-medium leading-tight tracking-[-0.02em]">{s.name}</h3>
+                    <p className="mt-2 text-base text-white/80">{s.body}</p>
+                    <p className="mt-3 text-sm uppercase tracking-[0.12em] text-white/75">{s.meta}</p>
                   </div>
                 </li>
               );
@@ -275,14 +275,14 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
     return (
       <ul aria-label={label} className="mt-12 divide-y divide-line border-y border-line">
         {items.map((t) => (
-          <li key={t} className="font-display py-4 text-[clamp(1.4rem,3vw,2.2rem)] font-medium tracking-[-0.03em]">{t}</li>
+          <li key={t} className="font-display py-5 text-[clamp(2rem,5vw,4rem)] font-medium tracking-[-0.03em]">{t}</li>
         ))}
       </ul>
     );
   }
   return (
     <div
-      className="mt-12 border-y border-ink py-6 sm:py-8"
+      className="mt-16 border-y border-ink py-10 sm:py-14"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -291,11 +291,8 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
       <ul className="sr-only" aria-label={label}>
         {items.map((t) => <li key={t}>{t}</li>)}
       </ul>
-      <div aria-hidden className="flex items-start gap-4 sm:gap-8">
-        <span className="pt-2 text-xs tabular-nums text-muted">
-          {n2(i)} / {n2(items.length - 1)}
-        </span>
-        <div className="relative h-[2.3em] min-w-0 flex-1 overflow-hidden font-display text-[clamp(1.35rem,4.2vw,3.6rem)] font-medium leading-[1.1] tracking-[-0.035em]">
+      <div aria-hidden className="flex items-start">
+        <div className="relative h-[3.2em] min-w-0 flex-1 overflow-hidden font-display text-[clamp(2.1rem,5vw,4.75rem)] font-medium leading-[1.05] sm:h-[2.2em] tracking-[-0.035em]">
           {items.map((t, k) => {
             const d = k - i;
             return (
@@ -310,7 +307,7 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
           })}
         </div>
       </div>
-      <div className="mt-6 flex gap-1.5" role="group" aria-label={label}>
+      <div className="mt-8 flex gap-1.5" role="group" aria-label={label}>
         {items.map((t, k) => (
           <button
             key={t}
@@ -408,22 +405,24 @@ export function Staircase({
           {steps.map((s, i) => {
             const local = clamp(p * n - i);
             return (
-              <li key={s} className="relative" style={{ marginLeft: `${(i / (n - 1)) * 45}%` }}>
+              <li key={s} className="relative ml-[calc(var(--s)*18%)] sm:ml-[calc(var(--s)*45%)]" style={{ ["--s" as string]: i / (n - 1) }}>
                 {/* riser + tread, drawn as the page scrolls */}
+                <span aria-hidden className="absolute bottom-0 left-0 h-full w-px bg-white/25" />
+                <span aria-hidden className="absolute left-0 top-0 h-px w-full bg-white/25" />
                 <span aria-hidden className="absolute bottom-0 left-0 h-full w-px origin-bottom bg-white" style={{ transform: `scaleY(${clamp(local * 2)})` }} />
                 <span aria-hidden className="absolute left-0 top-0 h-px w-full origin-left bg-white" style={{ transform: `scaleX(${clamp(local * 2 - 1)})` }} />
                 <p
-                  className="font-display py-3 pl-4 text-[clamp(1.05rem,2.2vw,1.7rem)] font-medium tracking-[-0.02em] transition-[opacity,transform] duration-500 sm:py-4"
-                  style={{ opacity: local > 0.6 ? 1 : 0.15, transform: local > 0.6 ? "none" : "translateY(-12px)" }}
+                  className="font-display py-3 pl-4 text-[clamp(1.35rem,2.6vw,2.15rem)] leading-tight font-medium tracking-[-0.02em] transition-[opacity,transform] duration-500 sm:py-4"
+                  style={{ opacity: local > 0.6 ? 1 : 0.6, transform: local > 0.6 ? "none" : "translateY(-6px)" }}
                 >
-                  <span className="mr-3 text-xs tabular-nums text-white/60">{n2(i)}</span>
+                  <span className="mr-3 text-base tabular-nums text-white/75">{n2(i)}</span>
                   {s}
                 </p>
               </li>
             );
           })}
         </ol>
-        {foot ? <p className="mt-14 max-w-2xl text-white/65">{foot}</p> : null}
+        {foot ? <p className="mt-14 max-w-2xl text-base text-white/80 sm:text-lg">{foot}</p> : null}
       </div>
     </div>
   );
@@ -439,7 +438,7 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
     <div className="container-x py-20 sm:py-20">
       <div
         className={
-          "rounded-3xl p-7 transition-colors duration-700 sm:p-14 " + (isAfter ? "bg-black text-white" : "bg-paper text-ink ring-1 ring-line")
+          "true-tone rounded-[1.25rem] p-7 transition-colors duration-700 sm:p-14 " + (isAfter ? "bg-black text-white" : "bg-paper text-ink ring-1 ring-line")
         }
       >
         <div role="group" aria-label="Before / After" className={"inline-flex rounded-full border p-1 " + (isAfter ? "border-white/25" : "border-line")}>
@@ -452,7 +451,7 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
                 aria-pressed={on}
                 onClick={() => setAfter(l === "After")}
                 className={
-                  "min-h-10 rounded-full px-5 text-sm transition-colors duration-500 outline-none focus-visible:ring-2 focus-visible:ring-current " +
+                  "min-h-12 rounded-full px-6 text-[0.95rem] transition-colors duration-500 outline-none focus-visible:ring-2 focus-visible:ring-current " +
                   (on ? (isAfter ? "bg-white text-black" : "bg-black text-white") : "opacity-60 hover:opacity-100")
                 }
               >
@@ -505,10 +504,10 @@ export function PeakStatic({ stages }: { stages: readonly { letter: string; name
     <ol className="grid border-t border-current/20 sm:grid-cols-2 lg:grid-cols-4">
       {stages.map((s, i) => (
         <li key={s.letter} className="border-b border-current/20 py-8 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0">
-          <span className="text-xs tabular-nums opacity-60">{n2(i)}</span>
+          <span className="text-sm tabular-nums opacity-60">{n2(i)}</span>
           <p aria-hidden className="font-display mt-4 text-[clamp(5rem,11vw,9.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
           <h3 className="font-display mt-6 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
-          <p className="mt-3 text-sm opacity-75">{s.question}</p>
+          <p className="mt-3 text-base opacity-80 sm:text-lg">{s.question}</p>
         </li>
       ))}
     </ol>

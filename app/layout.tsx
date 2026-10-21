@@ -9,7 +9,6 @@ import { ViewTransitions } from "@/components/motion/ViewTransitions";
 import { PageCurtain } from "@/components/layout/PageCurtain";
 import { Interactions } from "@/components/motion/Interactions";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { Cursor } from "@/components/motion/Cursor";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { site, siteUrl } from "@/lib/site";
 import { Mark141 } from "@/components/brand/Mark141";
@@ -116,7 +115,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PageCurtain />
         <Interactions />
         <SmoothScroll />
-        <Cursor />
         <SplitReveal />
         <div aria-hidden className="scroll-progress" />
         <script

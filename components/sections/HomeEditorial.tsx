@@ -97,7 +97,7 @@ export function Relay({
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
             <div className="max-w-md">
               <p className="text-sm text-white/55">{label}</p>
-              <h2 className="font-display mt-3 text-[1.25rem] font-medium leading-[1.2] tracking-[-0.02em] sm:text-[1.6rem]">{title}</h2>
+              <h2 className="font-display mt-3 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
             </div>
             <p aria-hidden className="font-display text-sm tabular-nums text-white/55">
               {n2(active)} <span className="text-white/30">/ {String(n).padStart(2, "0")}</span>
@@ -158,7 +158,7 @@ export function Relay({
                   />
                   <span
                     className={
-                      "text-[0.7rem] uppercase tracking-[0.18em] transition-colors duration-500 sm:text-xs " +
+                      "text-sm uppercase tracking-[0.18em] transition-colors duration-500 sm:text-sm " +
                       (i === active ? "text-white" : "hidden text-white/40 md:inline")
                     }
                   >
@@ -170,7 +170,7 @@ export function Relay({
           </div>
           {foot ? (
             <div
-              className="mt-8 max-w-md text-sm text-white/60 transition-opacity duration-700 sm:text-base"
+              className="mt-8 max-w-lg text-base text-white/75 transition-opacity duration-700 sm:text-lg"
               style={{ opacity: active === n - 1 ? 1 : 0.35 }}
             >
               {foot}
@@ -268,7 +268,7 @@ export function WhySplit({
         <div className="flex flex-col justify-between px-5 pb-6 pt-6 sm:px-10 sm:pb-10 md:pt-28 lg:px-16">
           <div>
             <p className="text-sm text-muted">{label}</p>
-            <h2 className="font-display mt-2 max-w-md text-[1.15rem] font-medium leading-[1.2] tracking-[-0.02em] sm:text-[1.5rem]">{title}</h2>
+            <h2 className="font-display mt-2 max-w-lg text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
           </div>
           {/* Reasons stacked in one cell, flipping over on their horizontal axis
               like a split-flap board as the scroll moves past each one. */}
@@ -324,7 +324,7 @@ export function WhySplit({
                     >
                       {x.name.replace(/\.$/, "")}
                     </span>
-                    <span aria-hidden className="relative tabular-nums text-xs text-ink" style={{ opacity: on ? 1 : 0 }}>
+                    <span aria-hidden className="relative tabular-nums text-sm text-ink" style={{ opacity: on ? 1 : 0 }}>
                       {Math.round(f * 100)}%
                     </span>
                     <span
@@ -337,7 +337,7 @@ export function WhySplit({
                     >
                       <span className="w-6 tabular-nums">{n2(i)}</span>
                       <span className="flex-1">{x.name.replace(/\.$/, "")}</span>
-                      <span className="tabular-nums text-xs">{Math.round(f * 100)}%</span>
+                      <span className="tabular-nums text-sm">{Math.round(f * 100)}%</span>
                     </span>
                   </button>
                 </li>
@@ -396,7 +396,7 @@ export function InsightGallery({
         >
           <Link
             href={it.href}
-            className="photo-tone group relative flex h-[min(62lvh,34rem)] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-black p-6 text-white sm:p-8"
+            className="photo-tone group relative flex h-[min(62lvh,34rem)] flex-col justify-between overflow-hidden rounded-[1.25rem] bg-black p-6 text-white sm:p-8"
           >
             <Image
               src={it.image}
@@ -406,12 +406,7 @@ export function InsightGallery({
               className="object-cover opacity-70 grayscale transition-[scale,opacity] duration-700 ease-out group-hover:scale-[1.06] group-hover:opacity-85"
             />
             <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
-            <span className="relative flex items-center justify-between text-sm text-white/70">
-              <span>Insights</span>
-              <span className="tabular-nums">
-                {n2(i)} / {String(items.length).padStart(2, "0")}
-              </span>
-            </span>
+            <span className="relative text-sm text-white/80">Insights</span>
             <span className="relative">
               <span
                 className={

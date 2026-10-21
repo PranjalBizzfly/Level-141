@@ -45,7 +45,7 @@ export function QuestionDeal({
           {items.map((q, i) => (
             <li
               key={q.name}
-              className="photo-tone deal-card flex flex-col overflow-hidden rounded-[1.25rem] border border-white/15 bg-black"
+              className="photo-tone deal-card flex flex-col overflow-hidden rounded-[1.25rem] border border-white/15 bg-black text-white"
               style={{ "--i": i, "--off": i - (n - 1) / 2 } as CSSProperties}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -90,8 +90,8 @@ export function BrandsSpell({
               <li key={it.letter}>
                 <p aria-hidden className="font-display text-[4rem] font-medium leading-none">{it.letter}</p>
                 <h3 className="font-display mt-3 text-2xl font-medium">{it.name}</h3>
-                <p className="mt-2 text-white/70">{it.role}</p>
-                <p className="mt-3 text-sm text-white/60">{it.list.join(" · ")}</p>
+                <p className="mt-2 text-[1.0625rem] text-white/85">{it.role}</p>
+                <p className="mt-3 text-[0.95rem] text-white/80">{it.list.join(" · ")}</p>
               </li>
             ))}
           </ol>
@@ -158,14 +158,11 @@ export function BrandsSpell({
                 data-on={i === active ? "" : undefined}
               >
                 <div className="lg:col-span-5">
-                  <p className="text-sm tabular-nums text-white/55">
-                    {n2(i)} / {String(n).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-display mt-2 text-[clamp(1.9rem,3.4vw,3rem)] font-medium leading-[1] tracking-[-0.035em]">{it.name}</h3>
+                  <h3 className="font-display text-[clamp(1.9rem,3.4vw,3rem)] font-medium leading-[1] tracking-[-0.035em]">{it.name}</h3>
                   <p className="mt-3 text-lg text-white/80">{it.line}</p>
                 </div>
                 <div className="lg:col-span-6 lg:col-start-7">
-                  <p className="text-white/75">{it.role}</p>
+                  <p className="text-[1.0625rem] text-white/85 sm:text-lg">{it.role}</p>
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {it.list.map((c) => (
                       <li key={c} className="rounded-full border border-white/25 px-3 py-1 text-sm">
