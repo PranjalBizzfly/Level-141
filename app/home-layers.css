@@ -1,0 +1,419 @@
+/*
+ * Home: sections stacked as sheets (components/sections/HomeInteractive.tsx).
+ * Each layer is sticky so it holds once its end is on screen, and the next
+ * slides over it. The script writes --in (0 → 1, arriving) and --out
+ * (0 → 1, being covered). Each arrival has its own pattern; every one ends
+ * flat, full-bleed and fully readable. Reduced motion: ordinary flow.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .layers {
+    /* Depth behind the sheets while they turn or recede. */
+    background: #000;
+  }
+  .layer {
+    position: sticky;
+    isolation: isolate;
+    /* Black behind each sheet: as a covered sheet sinks back, the dark shows round it. */
+    background: #000;
+    /* Eased arrival. */
+    --e: calc(1 - (1 - var(--in, 1)) * (1 - var(--in, 1)));
+    will-change: transform;
+    /* The arriving sheet casts a soft shadow on the one beneath, fading as it lands. */
+    box-shadow: 0 -40px 90px -30px rgb(0 0 0 / calc((1 - var(--in, 1)) * 0.55));
+  }
+  /* Inner pages: sections scroll in normal flow (no sticky, no sheet sliding);
+     only their arrival patterns play. No shadow: there is no sheet beneath. */
+  /* A turning or sliding arrival must never paint over the hero above the stack
+     (clip, unlike hidden, keeps sticky sections working). */
+  .layers--flat {
+    overflow: clip;
+  }
+  .layers--flat > .layer {
+    position: relative;
+    box-shadow: none;
+    will-change: auto;
+  }
+  /* Once landed, a sheet is never clipped (shapes have a finite size; tall sheets reach past them). */
+  .layer[data-landed] {
+    clip-path: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+  /* Sheets without their own ground get the page's. */
+  .layer > :not(section):not(header) {
+    background: var(--color-paper);
+  }
+  /* The covered sheet sinks back into the dark (centred on what is on screen)
+     while its content fades and drifts up, as the next one comes over it. */
+  .layer > * {
+    scale: calc(1 - var(--out, 0) * 0.07);
+    transform-origin: 50% calc(100% - 50lvh);
+  }
+  .layer > section > * {
+    opacity: calc(1 - var(--out, 0) * 0.85);
+    translate: 0 calc(var(--out, 0) * -6vh);
+  }
+
+  /* Tilt: lies back in 3D and swings up flat, hinged at its top edge. */
+  .layer[data-pattern="tilt"] {
+    transform-origin: 50% 0;
+    transform: perspective(1400px) rotateX(calc((1 - var(--in, 1)) * 34deg));
+  }
+  /* Curtain: wipes across from the left edge. */
+  .layer[data-pattern="curtain"] {
+    clip-path: inset(0 calc((1 - var(--e)) * 100%) 0 0);
+  }
+  /* Depth: the sheet before it shrinks back into the dark as it arrives. */
+  .layer:has(+ .layer[data-pattern="depth"]) {
+    transform-origin: 50% calc(100% - 50lvh);
+    transform: scale(calc(1 - var(--out, 0) * 0.14));
+  }
+  /* Doors: opens from the centre line outwards. */
+  .layer[data-pattern="doors"] {
+    clip-path: inset(0 calc((1 - var(--e)) * 50%));
+  }
+  /* Turn: arrives rotated in 3D, like a page turning into place. */
+  .layer[data-pattern="turn"] {
+    transform-origin: 0 0;
+    transform: perspective(1600px) rotateY(calc((1 - var(--in, 1)) * -32deg)) rotateX(calc((1 - var(--in, 1)) * 14deg));
+  }
+  /* Zoom: comes up from the distance to full size. */
+  .layer[data-pattern="zoom"] {
+    transform-origin: 50% 0;
+    transform: scale(calc(0.8 + 0.2 * var(--e)));
+  }
+  /* Swing: hinged on its right edge, swings in like a door. */
+  .layer[data-pattern="swing"] {
+    transform-origin: 100% 0;
+    transform: perspective(1600px) rotateY(calc((1 - var(--in, 1)) * 30deg));
+  }
+  /* Fold: hinged at the top, folds down toward you. */
+  .layer[data-pattern="fold"] {
+    transform-origin: 50% 0;
+    transform: perspective(1200px) rotateX(calc((1 - var(--in, 1)) * -38deg));
+  }
+  /* Wipe: wipes across from the right edge. */
+  .layer[data-pattern="wipe"] {
+    clip-path: inset(0 0 0 calc((1 - var(--e)) * 100%));
+  }
+  /* Iris: opens as a circle from near its top centre. */
+  .layer[data-pattern="iris"] {
+    /* Squared, so the circle stays a visible shape for most of the arrival. */
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 140lvh) at 50% 35lvh);
+  }
+  /* Diagonal: a slanted edge sweeps across. */
+  .layer[data-pattern="diagonal"] {
+    --x: calc(var(--in, 1) * var(--in, 1) * 140vw);
+    clip-path: polygon(0 0, var(--x) 0, calc(var(--x) - 40vw) 100lvh, calc(var(--x) - 40vw) 100%, 0 100%);
+  }
+  /* Spin: turns in from a slight angle as it grows. */
+  .layer[data-pattern="spin"] {
+    transform-origin: 0 0;
+    transform: rotate(calc((1 - var(--in, 1)) * -7deg)) scale(calc(0.88 + 0.12 * var(--e)));
+  }
+  /* Skew: arrives slanted and straightens. */
+  .layer[data-pattern="skew"] {
+    transform-origin: 0 0;
+    transform: skewY(calc((1 - var(--in, 1)) * -6deg));
+  }
+  /* Corner: opens as a quarter circle from the top-right corner. */
+  .layer[data-pattern="corner"] {
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 170vmax) at 100% 0);
+  }
+  /* Split: opens from a horizontal line across the middle of the screen. */
+  .layer[data-pattern="split"] {
+    --g: calc((1 - var(--e)) * 50lvh);
+    clip-path: polygon(
+      0 var(--g),
+      100% var(--g),
+      100% calc(100lvh - var(--g) + var(--e) * (100% - 100lvh)),
+      0 calc(100lvh - var(--g) + var(--e) * (100% - 100lvh))
+    );
+  }
+  /* ---- Further patterns: every section on the site has its own. ---- */
+  /* Rise: climbs from lower down while tipping up flat. */
+  .layer[data-pattern="rise"] {
+    transform-origin: 50% 0;
+    transform: translateY(calc((1 - var(--in, 1)) * 22lvh)) perspective(1600px) rotateX(calc((1 - var(--in, 1)) * 12deg));
+  }
+  /* Flip-up: hinged at the bottom of the screen, stands up toward you. */
+  .layer[data-pattern="flipup"] {
+    transform-origin: 50% 100lvh;
+    transform: perspective(1400px) rotateX(calc((1 - var(--in, 1)) * -55deg));
+  }
+  /* Hinge: swings in on its left edge. */
+  .layer[data-pattern="hinge"] {
+    transform-origin: 0 0;
+    transform: perspective(1600px) rotateY(calc((1 - var(--in, 1)) * -34deg));
+  }
+  /* Roll: tipped down at the right, rolls level. */
+  .layer[data-pattern="roll"] {
+    transform-origin: 100% 0;
+    transform: rotate(calc((1 - var(--in, 1)) * 6deg));
+  }
+  /* Drift: glides in from the left. */
+  .layer[data-pattern="drift"] {
+    transform: translateX(calc((1 - var(--e)) * -60vw));
+  }
+  /* Drift right: glides in from the right. */
+  .layer[data-pattern="driftr"] {
+    transform: translateX(calc((1 - var(--e)) * 60vw));
+  }
+  /* Telescope: extends out of the centre of the screen. */
+  .layer[data-pattern="telescope"] {
+    transform-origin: 50% 50lvh;
+    transform: scale(calc(0.55 + 0.45 * var(--e)));
+  }
+  /* Lens: a circle opens at the centre while the image settles from close up. */
+  .layer[data-pattern="lens"] {
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 130lvh) at 50% 50lvh);
+    transform-origin: 50% 50lvh;
+    transform: scale(calc(1.15 - 0.15 * var(--e)));
+  }
+  /* Iris left: a circle opens from the left edge. */
+  .layer[data-pattern="irisl"] {
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 170vmax) at 0 50lvh);
+  }
+  /* Iris low: a circle opens from the bottom of the screen. */
+  .layer[data-pattern="irisb"] {
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 170vmax) at 50% 100lvh);
+  }
+  /* Diamond: opens as a diamond from the centre. */
+  .layer[data-pattern="diamond"] {
+    --d: calc(var(--in, 1) * var(--in, 1) * 160vmax);
+    clip-path: polygon(
+      50% calc(50lvh - var(--d)),
+      calc(50% + var(--d)) 50lvh,
+      calc(50% + var(--d)) 100%,
+      calc(50% - var(--d)) 100%,
+      calc(50% - var(--d)) 50lvh
+    );
+  }
+  /* Chevron: a pointed edge rises through the screen. */
+  .layer[data-pattern="chevron"] {
+    /* Travels past the top, so the shoulders clear the screen too. */
+    --y: calc(100lvh - var(--e) * 125lvh);
+    clip-path: polygon(0 calc(var(--y) + 25lvh), 50% var(--y), 100% calc(var(--y) + 25lvh), 100% 100%, 0 100%);
+  }
+  /* Slant: a slanted edge sweeps in from the right. */
+  .layer[data-pattern="slant"] {
+    --x: calc(100vw - var(--in, 1) * var(--in, 1) * 140vw);
+    clip-path: polygon(var(--x) 0, 100% 0, 100% 100%, calc(var(--x) + 40vw) 100%, calc(var(--x) + 40vw) 100lvh);
+  }
+  /* Corner (top-left): opens as a quarter circle from the top-left. */
+  .layer[data-pattern="cornertl"] {
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 170vmax) at 0 0);
+  }
+  /* Corner (bottom-left). */
+  .layer[data-pattern="cornerbl"] {
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 170vmax) at 0 100lvh);
+  }
+  /* Corner (bottom-right). */
+  .layer[data-pattern="cornerbr"] {
+    clip-path: circle(calc(var(--in, 1) * var(--in, 1) * 170vmax) at 100% 100lvh);
+  }
+  /* Frame: a rounded inset panel widens to full bleed. */
+  .layer[data-pattern="frame"] {
+    clip-path: inset(0 calc((1 - var(--e)) * 14vw) 0 calc((1 - var(--e)) * 14vw) round calc((1 - var(--e)) * 3rem));
+  }
+  /* Frame 3D: the rounded panel also tips up flat as it widens. */
+  .layer[data-pattern="frame3d"] {
+    clip-path: inset(0 calc((1 - var(--e)) * 10vw) 0 calc((1 - var(--e)) * 10vw) round calc((1 - var(--e)) * 2.5rem));
+    transform-origin: 50% 0;
+    transform: perspective(1500px) rotateX(calc((1 - var(--in, 1)) * 20deg));
+  }
+  /* Cube: turns in like the next face of a cube, from the right. */
+  .layer[data-pattern="cube"] {
+    transform-origin: 0 50lvh;
+    transform: perspective(1400px) rotateY(calc((1 - var(--in, 1)) * -70deg));
+  }
+  /* Cube up: the next face turns up from below. */
+  .layer[data-pattern="cubeup"] {
+    transform-origin: 50% 0;
+    transform: perspective(1400px) rotateX(calc((1 - var(--in, 1)) * 62deg));
+  }
+  /* Spiral: turns and grows out of the centre. */
+  .layer[data-pattern="spiral"] {
+    transform-origin: 50% 50lvh;
+    transform: rotate(calc((1 - var(--in, 1)) * 12deg)) scale(calc(0.65 + 0.35 * var(--e)));
+  }
+  /* Tumble: tips back and twists as it lands. */
+  .layer[data-pattern="tumble"] {
+    transform-origin: 0 0;
+    transform: perspective(1500px) rotateX(calc((1 - var(--in, 1)) * 24deg)) rotateZ(calc((1 - var(--in, 1)) * -5deg));
+  }
+  /* Shear: leans sideways and straightens. */
+  .layer[data-pattern="shear"] {
+    transform-origin: 0 0;
+    transform: skewX(calc((1 - var(--in, 1)) * -10deg));
+  }
+  /* Squeeze: starts compressed and expands downward. */
+  .layer[data-pattern="squeeze"] {
+    transform-origin: 50% 0;
+    transform: scaleY(calc(0.6 + 0.4 * var(--e)));
+  }
+  /* Stretch: starts narrow and widens to full. */
+  .layer[data-pattern="stretch"] {
+    transform-origin: 50% 0;
+    transform: scaleX(calc(0.7 + 0.3 * var(--e)));
+  }
+  /* Peel: a triangle opens from the top-left corner across the screen. */
+  .layer[data-pattern="peel"] {
+    --p: calc(var(--in, 1) * var(--in, 1) * 250vmax);
+    /* Below the screen the edge turns straight down, so the sheet ends fully open. */
+    clip-path: polygon(0 0, var(--p) 0, calc(var(--p) - 100lvh) 100lvh, calc(var(--p) - 100lvh) 100%, 0 100%);
+  }
+  /* Focus: arrives from too close and draws back into place. */
+  .layer[data-pattern="focus"] {
+    transform-origin: 50% 0;
+    transform: scale(calc(1.3 - 0.3 * var(--e)));
+  }
+  /* Pivot: turns on its centre line, like a revolving door. */
+  .layer[data-pattern="pivot"] {
+    transform-origin: 50% 0;
+    transform: perspective(1600px) rotateY(calc((1 - var(--in, 1)) * 48deg));
+  }
+  /* Lean: tips in from the top-right corner in two axes. */
+  .layer[data-pattern="lean"] {
+    transform-origin: 100% 0;
+    transform: perspective(1600px) rotateX(calc((1 - var(--in, 1)) * -18deg)) rotateY(calc((1 - var(--in, 1)) * 22deg));
+  }
+  /* Orbit: swings round from behind, far back in depth. */
+  .layer[data-pattern="orbit"] {
+    transform-origin: 50% 50lvh;
+    transform: perspective(1600px) translateZ(calc((1 - var(--in, 1)) * -500px)) rotateY(calc((1 - var(--in, 1)) * -40deg));
+  }
+  /* Box: a rectangle opens from the centre of the screen. */
+  .layer[data-pattern="box"] {
+    --b: calc((1 - var(--e)) * 50%);
+    --h: calc((1 - var(--e)) * 50lvh);
+    clip-path: polygon(
+      var(--b) var(--h),
+      calc(100% - var(--b)) var(--h),
+      calc(100% - var(--b)) calc(100lvh - var(--h) + var(--e) * (100% - 100lvh)),
+      var(--b) calc(100lvh - var(--h) + var(--e) * (100% - 100lvh))
+    );
+  }
+  /* Sweep: swings up like the arm of a fan, pivoting far off to the lower left. */
+  .layer[data-pattern="sweep"] {
+    transform-origin: -40vw 100lvh;
+    transform: rotate(calc((1 - var(--in, 1)) * 18deg));
+  }
+
+  /* Blinds: horizontal slats open together, like venetian blinds. */
+  .layer[data-pattern="blinds"] {
+    --s: calc(var(--e) * 72px);
+    -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 var(--s), transparent var(--s) 72px);
+    mask-image: repeating-linear-gradient(to bottom, #000 0 var(--s), transparent var(--s) 72px);
+  }
+  /* Louvre: vertical slats open together. */
+  .layer[data-pattern="louvre"] {
+    --s: calc(var(--e) * 96px);
+    -webkit-mask-image: repeating-linear-gradient(to right, #000 0 var(--s), transparent var(--s) 96px);
+    mask-image: repeating-linear-gradient(to right, #000 0 var(--s), transparent var(--s) 96px);
+  }
+  /* Bloom: a soft-edged circle blooms open from the centre of the screen. */
+  .layer[data-pattern="bloom"] {
+    --r: calc(var(--in, 1) * var(--in, 1) * 160vmax);
+    -webkit-mask-image: radial-gradient(circle at 50% 50lvh, #000 var(--r), transparent calc(var(--r) + 30vmax));
+    mask-image: radial-gradient(circle at 50% 50lvh, #000 var(--r), transparent calc(var(--r) + 30vmax));
+  }
+  /* Mist: a soft edge rises up the screen, like mist clearing. */
+  .layer[data-pattern="mist"] {
+    --m: calc(100lvh - var(--e) * 140lvh);
+    -webkit-mask-image: linear-gradient(to bottom, transparent var(--m), #000 calc(var(--m) + 40lvh));
+    mask-image: linear-gradient(to bottom, transparent var(--m), #000 calc(var(--m) + 40lvh));
+  }
+  /* Mist left: a soft edge sweeps across from the left. */
+  .layer[data-pattern="mistl"] {
+    --m: calc(var(--e) * 140vw);
+    -webkit-mask-image: linear-gradient(to right, #000 calc(var(--m) - 40vw), transparent var(--m));
+    mask-image: linear-gradient(to right, #000 calc(var(--m) - 40vw), transparent var(--m));
+  }
+  /* Heel: lifts from its lower-left corner and settles level. */
+  .layer[data-pattern="heel"] {
+    transform-origin: 0 100lvh;
+    transform: rotate(calc((1 - var(--in, 1)) * -8deg));
+  }
+  /* Recline: leans back from the bottom of the screen and sits up. */
+  .layer[data-pattern="recline"] {
+    transform-origin: 50% 100lvh;
+    transform: perspective(1300px) rotateX(calc((1 - var(--in, 1)) * 30deg)) translateZ(calc((1 - var(--in, 1)) * -160px));
+  }
+  /* Swoop: glides in from the left while turning to face you. */
+  .layer[data-pattern="swoop"] {
+    transform-origin: 0 50lvh;
+    transform: perspective(1600px) translateX(calc((1 - var(--e)) * -35vw)) rotateY(calc((1 - var(--in, 1)) * 28deg));
+  }
+  /* Swoop right: glides in from the right while turning to face you. */
+  .layer[data-pattern="swoopr"] {
+    transform-origin: 100% 50lvh;
+    transform: perspective(1600px) translateX(calc((1 - var(--e)) * 35vw)) rotateY(calc((1 - var(--in, 1)) * -28deg));
+  }
+  /* Vortex: spins out of a point at the centre. */
+  .layer[data-pattern="vortex"] {
+    transform-origin: 50% 50lvh;
+    transform: rotate(calc((1 - var(--in, 1)) * -24deg)) scale(calc(0.4 + 0.6 * var(--e)));
+  }
+  /* Float: drifts up from lower down, small, and settles to full size. */
+  .layer[data-pattern="float"] {
+    transform-origin: 50% 0;
+    transform: translateY(calc((1 - var(--e)) * 30lvh)) scale(calc(0.9 + 0.1 * var(--e)));
+  }
+  /* Arrow: a pointed edge sweeps in from the left. */
+  .layer[data-pattern="arrow"] {
+    --x: calc(var(--e) * 135vw - 25vw);
+    clip-path: polygon(0 0, var(--x) 0, calc(var(--x) + 25vw) 50lvh, var(--x) 100lvh, var(--x) 100%, 0 100%);
+  }
+
+  /* Reveal: its top edge is held back, then released upward. */
+  .layer[data-pattern="reveal"] {
+    clip-path: inset(calc((1 - var(--e)) * 55lvh) 0 0 0);
+  }
+}
+
+/* Inside the stack, a section holds still while the next arrives, so a
+   scroll-linked (view timeline) headline reveal would stop half-done: grey
+   and clipped. The layer's own arrival already brings it in, so headlines
+   are shown whole. */
+.layers:not(.layers--flat) .reveal-mask {
+  animation: none !important;
+  clip-path: none !important;
+  translate: none !important;
+  opacity: 1 !important;
+}
+
+/* Editorial home sections (HomeEditorial.tsx): each new step arrives from
+   below, out of a soft blur. */
+@media (prefers-reduced-motion: no-preference) {
+  .relay-in {
+    animation: l141-relay 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+@keyframes l141-relay {
+  from { opacity: 0; transform: translateY(0.6em); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+/* What the word hands on to: drawn in outline, the next link not yet reached. */
+.relay-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(255 255 255 / 0.75);
+}
+/* Too fine at phone size: set it solid and quieter instead. */
+@media (max-width: 639.98px) {
+  .relay-outline {
+    color: rgb(255 255 255 / 0.5);
+    -webkit-text-stroke: 0;
+  }
+}
+
+/* Why Level141 counter: each number drops in as it changes. */
+@media (prefers-reduced-motion: no-preference) {
+  .why-count {
+    animation: l141-count 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+@keyframes l141-count {
+  from { opacity: 0; transform: translateY(-0.25em); }
+  to { opacity: 1; transform: none; }
+}

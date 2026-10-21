@@ -60,7 +60,7 @@ export function VibeExplorer() {
               onKeyDown={(e) => onKeyDown(e, i)}
               className={cx(
                 "group relative flex min-h-11 flex-col items-center gap-2 overflow-hidden border-l border-paper/25 px-2 pb-4 pt-5 text-center transition-opacity duration-500 sm:min-h-[15rem] sm:items-start sm:px-4 sm:pb-2 sm:text-left lg:min-h-[18rem] lg:px-5",
-                selected ? "opacity-100" : "opacity-45 hover:opacity-80",
+                selected ? "" : "hover:[&_.vibe-letter]:text-paper/70",
               )}
             >
               <span
@@ -76,8 +76,8 @@ export function VibeExplorer() {
               <span
                 aria-hidden
                 className={cx(
-                  "font-display order-last text-4xl leading-[0.85] tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-architect)] sm:mt-auto sm:text-7xl lg:text-[6.5rem]",
-                  selected ? "-translate-y-3" : "translate-y-0",
+                  "vibe-letter font-display order-last text-4xl leading-[0.85] tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-architect)] sm:mt-auto sm:text-7xl lg:text-[6.5rem]",
+                  selected ? "text-paper sm:-translate-y-3" : "translate-y-0 text-paper/30",
                 )}
               >
                 {d.letter}
@@ -140,7 +140,7 @@ export function VibeExplorer() {
               </ul>
             </div>
 
-            <aside className="relative overflow-hidden border-t border-paper/25 pt-8 lg:col-span-5 lg:self-start">
+            <div className="relative overflow-hidden border-t border-paper/25 pt-8 lg:col-span-5 lg:self-start">
               <span
                 aria-hidden
                 className="font-display pointer-events-none absolute -right-2 -top-6 select-none text-[12rem] font-medium leading-none text-paper/[0.05] sm:text-[15rem]"
@@ -154,7 +154,7 @@ export function VibeExplorer() {
                 <p className="eyebrow text-gold">Illustrative outcomes</p>
                 <p className="mt-3 text-lg leading-snug tracking-[-0.01em] text-paper">{d.outcomes}</p>
               </div>
-            </aside>
+            </div>
           </div>
         ))}
       </div>

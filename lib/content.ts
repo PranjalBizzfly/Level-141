@@ -18,23 +18,23 @@ export const growthChain = [
 ] as const;
 
 export const activityList = [
-  "Marketing.",
-  "Sales teams.",
-  "Social media.",
-  "Content.",
-  "Agencies.",
-  "Consultants.",
-  "Technology.",
-  "Ideas.",
+  "Marketing",
+  "Sales teams",
+  "Social media",
+  "Content",
+  "Agencies",
+  "Consultants",
+  "Technology",
+  "Ideas",
 ] as const;
 
 export const beliefPairs = [
-  "A great brand with poor conversion won't scale.",
-  "Strong marketing without trust wastes attention.",
-  "Visibility without positioning creates noise.",
-  "Sales without nurture creates pressure.",
-  "Strategy without governance becomes PowerPoint.",
-  "Execution without architecture becomes activity.",
+  "A great brand with poor conversion won't scale",
+  "Strong marketing without trust wastes attention",
+  "Visibility without positioning creates noise",
+  "Sales without nurture creates pressure",
+  "Strategy without governance becomes PowerPoint",
+  "Execution without architecture becomes activity",
 ] as const;
 
 /* -------------------------------------------------------- Level141 process */
@@ -239,12 +239,12 @@ export const lqDomains = [
 ] as const;
 
 export const lqOutputs = [
-  "Current Level scorecard and narrative diagnosis.",
-  "Critical growth constraints and dependencies.",
-  "Priority gap heatmap.",
-  "Next-Level definition and target outcomes.",
-  "90-day, 6-month and 12-month intervention priorities.",
-  "Measurement baseline and governance requirements.",
+  "Current Level scorecard and narrative diagnosis",
+  "Critical growth constraints and dependencies",
+  "Priority gap heatmap",
+  "Next-Level definition and target outcomes",
+  "90-day, 6-month and 12-month intervention priorities",
+  "Measurement baseline and governance requirements",
 ] as const;
 
 /* ----------------------------------------- Personal Brand Architecture™ */
@@ -455,13 +455,13 @@ export const pbaPrinciples = [
 ] as const;
 
 export const pbaIsNot = [
-  "Not social media management.",
-  "Not follower building as the primary objective.",
-  "Not a cosmetic profile makeover.",
-  "Not fabricated influence or manufactured credentials.",
-  "Not a PR-only engagement.",
-  "Not content volume without strategic purpose.",
-  "Not guaranteed fame, virality or media placement.",
+  "Not social media management",
+  "Not follower building as the primary objective",
+  "Not a cosmetic profile makeover",
+  "Not fabricated influence or manufactured credentials",
+  "Not a PR-only engagement",
+  "Not content volume without strategic purpose",
+  "Not guaranteed fame, virality or media placement",
 ] as const;
 
 export const pbaMeasures = [
@@ -521,13 +521,13 @@ export const gaTriggers = [
 ] as const;
 
 export const gaGapSteps = [
-  { name: "Current State", q: "What is true today?", out: "Evidence-based LQ™ baseline." },
-  { name: "Next Level", q: "What specific business state are we trying to reach?", out: "Target outcomes and strategic definition." },
-  { name: "Gap", q: "What prevents movement from current to next?", out: "Prioritized constraints, dependencies and opportunities." },
-  { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK™ / BRANDS™ blueprint." },
-  { name: "Activation", q: "What must happen first, by whom and in what sequence?", out: "90-day and phased roadmap." },
-  { name: "Measurement", q: "How will we know the system is moving?", out: "Leading, pipeline and outcome KPIs." },
-  { name: "Governance", q: "How will decisions, execution and corrections be managed?", out: "Operating cadence, ownership and review model." },
+  { name: "Current State", q: "What is true today?", out: "Evidence-based LQ™ baseline" },
+  { name: "Next Level", q: "What specific business state are we trying to reach?", out: "Target outcomes and strategic definition" },
+  { name: "Gap", q: "What prevents movement from current to next?", out: "Prioritized constraints, dependencies and opportunities" },
+  { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK™ / BRANDS™ blueprint" },
+  { name: "Activation", q: "What must happen first, by whom and in what sequence?", out: "90-day and phased roadmap" },
+  { name: "Measurement", q: "How will we know the system is moving?", out: "Leading, pipeline and outcome KPIs" },
+  { name: "Governance", q: "How will decisions, execution and corrections be managed?", out: "Operating cadence, ownership and review model" },
 ] as const;
 
 export const gaImpactChain = [

@@ -30,8 +30,7 @@ export default async function ContactPage({ searchParams }: Props) {
         {/* Intro */}
         <div className="on-dark relative isolate overflow-hidden bg-ink px-5 pb-10 pt-32 text-paper sm:px-8 sm:pb-12 sm:pt-40 lg:col-span-5 lg:row-start-1 lg:px-14 lg:pb-0 lg:pt-44">
           {/* "Let's architect what's next." — a corridor opening into light. */}
-          <HeroBackdrop src="/images/contact-corridor-warm.webp" position="58% center" colour />
-          <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+          <HeroBackdrop src="/images/contact-corridor-warm.webp" position="58% center" />
           <div className="relative">
             <p className="eyebrow animate-fade text-gold">Start your next level</p>
             <h1 id="contact-title" className="display mt-5 animate-rise text-[2.5rem] sm:mt-7 sm:text-6xl lg:text-[4.5rem]">

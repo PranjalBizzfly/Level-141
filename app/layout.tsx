@@ -15,6 +15,8 @@ import { Mark141 } from "@/components/brand/Mark141";
 import "./globals.css";
 import "./motion.css";
 import "./reference-motion.css";
+import "./layouts.css";
+import "./home-layers.css";
 import "./glass.css";
 import "lenis/dist/lenis.css";
 
@@ -102,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Mark141 className="w-28 sm:w-36" textClassName="text-4xl sm:text-5xl" closeClassName="text-white" openClassName="text-white/50" />
         </div>
         <Header />
-        <main id="main" tabIndex={-1} className="outline-none">
+        <main id="main" tabIndex={-1} className="overflow-x-clip outline-none">
           {children}
         </main>
         <Footer />

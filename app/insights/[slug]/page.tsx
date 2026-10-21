@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { Layers } from "@/components/sections/HomeInteractive";
 import { BracketFrame } from "@/components/ui/primitives";
 import { insightCategories } from "@/lib/content";
 import { getInsight, getPublishedInsights } from "@/lib/insights";
@@ -31,6 +32,8 @@ export default async function InsightArticle({ params }: Props) {
 
   return (
     <article>
+      {/* The article body arrives over the header as a sheet (its own 3D pattern). */}
+      <Layers page="article">
       <header className="on-dark bg-ink pb-16 pt-32 text-paper sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-44">
         <div className="container-x max-w-4xl">
           <Link href={routes.insights} className="-my-3 inline-flex min-h-11 items-center gap-2 text-sm text-paper/60 hover:text-gold">
@@ -75,6 +78,7 @@ export default async function InsightArticle({ params }: Props) {
           })}
         </div>
       </div>
+      </Layers>
     </article>
   );
 }

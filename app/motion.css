@@ -189,8 +189,12 @@
 
 /* 8. Scroll-linked statements (ScrubText): words fill from faint to solid. */
 .scrub-text[data-scrub="on"] [data-word] {
-  opacity: clamp(0.16, calc(var(--p, 0) - var(--i)), 1);
+  opacity: clamp(0.45, calc(var(--p, 0) - var(--i)), 1);
   transition: opacity 0.25s linear;
+}
+/* The grey accent words start brighter so they stay legible before filling. */
+.scrub-text[data-scrub="on"] .serif-accent [data-word] {
+  opacity: clamp(0.85, calc(var(--p, 0) - var(--i)), 1);
 }
 
 /* 9. Images wipe open from the bottom as they enter, with a slow settle. */
@@ -453,4 +457,56 @@
   .roll:hover > span {
     translate: 0 -1.3em;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Stacking transition after the LEVEL 141 intro (home only).
+   The intro keeps its stage pinned for one last screen. The next section
+   (.stack-under) overlaps that screen, pinned on top of it but clipped to
+   nothing; as the visitor scrolls, it opens out of the centre of the stage,
+   where the logo window is, until it fills the screen. Then both scroll on
+   together, so the section simply continues. LogoWindow writes --open
+   (0 → 1). The spacer keeps page length aligned with the intro's track.
+   Reduced motion: normal flow.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .stack-under {
+    position: relative;
+    z-index: 20;
+    /* Starts over the intro's last two screens: one to open in, one to leave together. */
+    margin-top: -200lvh;
+    /* The wrapper is transparent over the intro: only the (clipped) section takes pointer input. */
+    pointer-events: none;
+    /* Eased opening (smoothstep). */
+    --e: calc(var(--open, 1) * var(--open, 1) * (3 - 2 * var(--open, 1)));
+  }
+  .stack-under__inner {
+    position: sticky;
+    top: 0;
+    min-height: 100lvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--color-paper);
+    pointer-events: auto;
+    /* Clipped to a point at the logo window (--ox/--oy), opening to the full screen. Straight edges. */
+    clip-path: inset(
+      calc((1 - var(--e)) * var(--oy, 50%))
+      calc((1 - var(--e)) * (100% - var(--ox, 50%)))
+      calc((1 - var(--e)) * (100% - var(--oy, 50%)))
+      calc((1 - var(--e)) * var(--ox, 50%))
+    );
+  }
+  .stack-under__spacer {
+    height: 100lvh;
+  }
+}
+
+/* Scroll cue on the pinned logo intro (LogoWindow). */
+@keyframes l141-cue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class*="l141-cue"] { animation: none !important; }
 }

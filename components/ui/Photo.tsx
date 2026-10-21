@@ -41,8 +41,8 @@ export function Photo({
 /**
  * Decorative hero backdrop on the right of a hero, fading out behind the
  * headline. All site photography is muted-tone, so it is shown with a normal
- * blend (soft in light mode, stronger in dark mode); `colour={false}` restores
- * the faint multiplied treatment for a pure black-and-white image.
+ * blend (soft in light mode, stronger in dark mode), always in greyscale to
+ * keep to the black-and-white palette; `colour={false}` gives a fainter wash.
  */
 export function HeroBackdrop({
   src,
@@ -67,7 +67,7 @@ export function HeroBackdrop({
         priority
         sizes="(min-width: 1024px) 62vw, 100vw"
         className={cx(
-          "object-cover",
+          "object-cover grayscale",
           colour
             ? "opacity-55 dark:opacity-75"
             : "opacity-35 dark:opacity-65",

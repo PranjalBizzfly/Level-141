@@ -1,8 +1,15 @@
 import { LogoAssembly } from "@/components/sections/LogoAssembly";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { RefIntro, RefRows, RefSection, RefStatement } from "@/components/sections/Ref";
-import { MediaSlot } from "@/components/ui/MediaSlot";
-import { PageHero, Reveal } from "@/components/ui/primitives";
+import {
+  CounterHero,
+  ParallaxStrips,
+  PrinciplesGrid,
+  SplitPanels,
+  SplitStatement,
+  Triptych,
+} from "@/components/sections/pages/AboutParts";
+import { Layers } from "@/components/sections/HomeInteractive";
+import { ButtonLink } from "@/components/ui/primitives";
 import { principles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
@@ -14,11 +21,11 @@ export const metadata = pageMetadata({
   path: routes.about,
 });
 
-/** About — rebuilt on the reference structure, opening with the logo assembly. */
+/** About — editorial redesign: cinematic hero, logo assembly, then one distinct layout per section. */
 export default function AboutPage() {
   return (
     <>
-      <PageHero
+      <CounterHero
         image="/images/about-atrium-levels-muted.webp"
         eyebrow="About Level141"
         title={
@@ -32,118 +39,116 @@ export default function AboutPage() {
             next.
           </p>
         }
-      />
-
-      {/* The wordmark assembles letter by letter (MACBA-style). */}
-      <LogoAssembly />
-
-      {/* A simple belief */}
-      <RefSection>
-        <RefStatement
-          sub={
-            <>
-              <p>
-                Level141 was created around a simple belief: businesses don&apos;t necessarily need more agencies,
-                consultants, campaigns or activity.
-              </p>
-              <p className="mt-4">
-                We work with ambitious people and organizations to understand where they are, define where they want to go
-                and architect the interconnected systems required to get there.
-              </p>
-              <p className="mt-4 text-ink">We call it: Growth Architecture</p>
-            </>
-          }
-        >
-          Businesses need clarity about what their <span className="serif-accent">next level requires</span>
-        </RefStatement>
-      </RefSection>
-
-      {/* Our purpose */}
-      <RefSection tone="ink">
-        <RefIntro
-          label="Our purpose"
-          title={
-            <>
-              Architect the next level <span className="serif-accent">of growth</span>
-            </>
-          }
-        />
-        <RefRows
-          rows={[
-            { key: "people", name: "For people", line: "" },
-            { key: "businesses", name: "For businesses", line: "" },
-            {
-              key: "ideas",
-              name: "For ideas",
-              line: "With the potential to become significantly bigger than they are today",
-            },
-          ]}
-        />
-      </RefSection>
-
-      {/* Our principles */}
-      <RefSection>
-        <RefIntro
-          label="About Level141"
-          title={
-            <>
-              Our <span className="serif-accent">principles</span>
-            </>
-          }
-        />
-        <RefRows
-          rows={principles.map((p, i) => ({
-            key: p.name,
-            name: `${String(i + 1).padStart(2, "0")} — ${p.name}`,
-            line: p.body,
-          }))}
-        />
-      </RefSection>
-
-      {/* Two ambitions */}
-      <RefSection>
-        <RefIntro
-          label="Two ambitions. Two architectures"
-          title={
-            <>
-              Level141 has built dedicated architectures <span className="serif-accent">for both</span>
-            </>
-          }
-          text="Level141 is a Growth Architecture company. It does not treat branding, visibility, authority, lead generation or positioning as isolated activities. It architects the system that connects identity, credibility, influence and opportunity so that growth becomes deliberate, governed and measurable."
-        />
-        <RefRows
-          rows={[
-            {
-              key: "pba",
-              name: "Personal Brand Architecture™",
-              line: "Converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset.",
-              href: routes.personalBrand,
-            },
-            {
-              key: "ga",
-              name: "Growth Architecture™",
-              line: "One integrated architecture connecting every critical growth lever to measurable business outcomes.",
-              href: routes.growth,
-            },
-          ]}
-        />
-      </RefSection>
-
-      {/* Ecosystem */}
-      <div className="container-x">
-        <div data-rise>
-          <MediaSlot
-            src="/images/about-dubai-terrace.webp"
-            alt="A modern terrace overlooking the Dubai skyline"
-            label="Film or image — headquartered in Dubai"
-            className="aspect-[4/3] sm:aspect-[16/7]"
-          />
+      >
+        <div className="flex flex-col items-start gap-3">
+          <ButtonLink href={routes.contact} className="!bg-white !text-black hover:!bg-white/85">
+            Start Your Level141 Assessment
+          </ButtonLink>
+          <ButtonLink href={routes.how} variant="ghost-light" className="!border-white/35 !text-white hover:!border-white">
+            How we architect growth
+          </ButtonLink>
         </div>
-        <Reveal className="flex flex-col justify-between gap-2 py-8 text-sm text-muted sm:flex-row">
-          <p className="text-ink">Part of the 1XL ecosystem, headquartered in Dubai</p>
-          <p>Level141 — Growth By Design</p>
-        </Reveal>
-      </div>
+      </CounterHero>
+
+      {/* Sections stack as sheets, each arriving with its own pattern. */}
+      <Layers page="about">
+        {/* The wordmark assembles letter by letter. */}
+        <section>
+          <LogoAssembly />
+        </section>
+
+        {/* A simple belief — a statement on black */}
+        <section>
+          <SplitStatement
+            left="Businesses need clarity about what their"
+            right="next level requires"
+            sub={
+              <>
+                <p>
+                  Level141 was created around a simple belief: businesses don&apos;t necessarily need more agencies,
+                  consultants, campaigns or activity.
+                </p>
+                <p>
+                  We work with ambitious people and organizations to understand where they are, define where they want to go
+                  and architect the interconnected systems required to get there.
+                </p>
+                <p className="text-white">We call it: Growth Architecture</p>
+              </>
+            }
+          />
+        </section>
+
+        {/* Our purpose — a relay, one phrase at a time */}
+        <section>
+          <Triptych
+            label="Our purpose"
+            title={
+              <>
+                Architect the next level <span className="serif-accent">of growth</span>
+              </>
+            }
+            items={[
+              { lead: "For people" },
+              { lead: "For businesses" },
+              { lead: "For ideas", rest: "with the potential to become significantly bigger than they are today" },
+            ]}
+          />
+        </section>
+
+        {/* Our principles — a ledger */}
+        <section>
+          <PrinciplesGrid
+            label="About Level141"
+            title={
+              <>
+                Our <span className="serif-accent">principles</span>
+              </>
+            }
+            items={principles.map((p) => ({ name: p.name, body: p.body }))}
+          />
+        </section>
+
+        {/* Two ambitions — a gliding gallery of the two architectures */}
+        <section>
+          <SplitPanels
+            label="Two ambitions. Two architectures"
+            title={
+              <>
+                Level141 has built dedicated architectures <span className="serif-accent">for both</span>
+              </>
+            }
+            text="Level141 is a Growth Architecture company. It does not treat branding, visibility, authority, lead generation or positioning as isolated activities. It architects the system that connects identity, credibility, influence and opportunity so that growth becomes deliberate, governed and measurable."
+            items={[
+              {
+                name: "Personal Brand Architecture™",
+                body: "Converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset.",
+                href: routes.personalBrand,
+                image: "/images/pba-leader-skyline.webp",
+              },
+              {
+                name: "Growth Architecture™",
+                body: "One integrated architecture connecting every critical growth lever to measurable business outcomes.",
+                href: routes.growth,
+                image: "/images/ga-prioritised-bridge-muted.webp",
+              },
+            ]}
+          />
+        </section>
+
+        {/* Ecosystem — full-bleed Dubai photograph */}
+        <section>
+          <ParallaxStrips
+            image="/images/about-dubai-terrace.webp"
+            alt="A modern terrace overlooking the Dubai skyline"
+            caption={
+              <span className="flex flex-col justify-between gap-2 sm:flex-row">
+                <span>Part of the 1XL ecosystem, headquartered in Dubai</span>
+                <span>Level141 — Growth By Design</span>
+              </span>
+            }
+          />
+        </section>
+      </Layers>
 
       <CtaBand
         eyebrow="Find your level"

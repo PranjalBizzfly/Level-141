@@ -12,12 +12,27 @@ import { Reveal } from "@/components/ui/primitives";
  * - RefStatement: one centred line in a large quiet field (COLLINS hero).
  */
 
-export function RefSection({ id, children, tone = "paper" }: { id?: string; children: ReactNode; tone?: "paper" | "ink" }) {
+/** How a section arrives (app/layouts.css). Use each at most once per page. */
+export type Enter = "rise" | "doors" | "expand" | "zoom" | "iris";
+
+export function RefSection({
+  id,
+  children,
+  tone = "paper",
+  enter,
+}: {
+  id?: string;
+  children: ReactNode;
+  tone?: "paper" | "ink";
+  enter?: Enter;
+}) {
   return (
     <section
       id={id}
       className={
-        "relative py-20 sm:py-28 lg:py-32 " + (tone === "ink" ? "on-dark bg-ink text-paper" : "bg-paper text-ink")
+        "relative py-20 sm:py-28 lg:py-32 " +
+        (tone === "ink" ? "on-dark bg-ink text-paper" : "bg-paper text-ink") +
+        (enter ? ` enter-${enter}` : "")
       }
     >
       <div className="container-x">{children}</div>
@@ -112,10 +127,25 @@ export function RefRows({
   );
 }
 
-export function RefStatement({ children, sub }: { children: ReactNode; sub?: ReactNode }) {
+/**
+ * reveal: "words" fades the headline in word by word; "mask" unveils it from
+ * its baseline. Use a different one for a second statement on the same page.
+ */
+export function RefStatement({
+  children,
+  sub,
+  reveal = "words",
+}: {
+  children: ReactNode;
+  sub?: ReactNode;
+  reveal?: "words" | "mask";
+}) {
   return (
     <Reveal variant="fade" className="flex flex-col items-center py-8 text-center sm:py-12">
-      <h2 data-split className="display max-w-[22ch] text-[clamp(2rem,4vw,3.75rem)]">
+      <h2
+        data-split={reveal === "words" ? "" : undefined}
+        className={"display max-w-[22ch] text-[clamp(2rem,4vw,3.75rem)]" + (reveal === "mask" ? " reveal-mask" : "")}
+      >
         {children}
       </h2>
       {sub ? <div className="mt-8 max-w-xl text-muted">{sub}</div> : null}

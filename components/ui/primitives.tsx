@@ -210,25 +210,30 @@ export function PageHero({
   imageColour?: boolean;
 }) {
   return (
-    <section className="on-dark relative bg-ink text-paper">
+    <section className="recede on-dark relative bg-ink text-paper">
       {/* Reference layout: a centred eyebrow, title and intro in a quiet field, the
           page's actions, then a full-width media frame. The aside follows below. */}
       <div className="container-x flex flex-col items-center pb-14 pt-36 text-center sm:pb-16 sm:pt-44 lg:pt-48">
         <p className="eyebrow animate-fade text-paper-muted">{eyebrow}</p>
-        <h1 data-split="load" className="display mt-6 max-w-[20ch] text-[clamp(2.25rem,4.4vw,4.25rem)] sm:mt-8">
+        <h1 data-split="load" className="display mt-6 max-w-[18ch] text-[clamp(2.5rem,5.6vw,5.75rem)] leading-[0.98] sm:mt-8">
           {title}
         </h1>
         {intro ? <div className="mt-8 max-w-xl animate-rise text-paper/75 [animation-delay:400ms]">{intro}</div> : null}
         {children ? <div className="mt-10 flex animate-rise justify-center [animation-delay:520ms]">{children}</div> : null}
       </div>
-      <div className="container-x pb-20 sm:pb-28">
-        <MediaSlot
-          src={image}
-          label={`Page film or image — ${eyebrow}`}
-          className="aspect-[16/10] sm:aspect-[16/7]"
-          sizes="(min-width: 1408px) 1300px, 100vw"
-          priority
-        />
+      {/* Media only when the page has it — an empty placeholder never ships. */}
+      <div className={cx("container-x", image || aside ? "pb-20 sm:pb-28" : "pb-8")}>
+        {image ? (
+          <div data-rise>
+            <MediaSlot
+              src={image}
+              label={`Page film or image — ${eyebrow}`}
+              className="aspect-[16/10] sm:aspect-[16/7]"
+              sizes="(min-width: 1408px) 1300px, 100vw"
+              priority
+            />
+          </div>
+        ) : null}
         {aside ? <div className="mx-auto mt-14 max-w-xl animate-fade [animation-delay:400ms]">{aside}</div> : null}
       </div>
     </section>

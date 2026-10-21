@@ -1,0 +1,523 @@
+/*
+ * Level141 — section layouts (components/sections/Layouts*.tsx) and the
+ * section-to-section transitions. Everything here is progressive: without
+ * scroll-driven animation support, or with reduced motion, each layout is
+ * simply shown in its final, fully readable state.
+ */
+
+/* ------------------------------------------------ Section transitions (3D) */
+
+/* 3D tilts are briefly wider than the screen while they flatten; clip them
+   horizontally (clip, unlike hidden, keeps sticky layouts working). */
+#main {
+  overflow-x: clip;
+}
+
+/* Section entrances — each page uses each one at most once, so no two
+   sections arrive the same way. All are scroll-linked and finish fully open;
+   none starts from blank (every start state still shows the section). */
+
+/* Rise (3D): a rounded sheet tilts up from below and flattens (Mucho). */
+.enter-rise {
+  position: relative;
+  z-index: 1;
+  margin-top: -2rem;
+  border-radius: 2rem 2rem 0 0;
+  transform-origin: 50% 100%;
+}
+/* Leaving a hero, it settles back and away (COLLINS hero wrapper). */
+.recede {
+  transform-origin: 50% 100%;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .enter-rise,
+    .enter-doors,
+    .enter-expand,
+    .enter-zoom,
+    .enter-iris {
+      animation: l141-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 75%;
+    }
+    .enter-doors { animation-name: l141-doors; }
+    .enter-expand { animation-name: l141-expand; animation-range: entry 0% cover 45%; }
+    .enter-zoom { animation-name: l141-zoom; }
+    .enter-iris { animation-name: l141-iris; animation-range: entry 0% cover 50%; }
+    .recede {
+      animation: l141-recede linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+@keyframes l141-rise {
+  from { transform: perspective(1400px) rotateX(14deg) translateY(5rem) scale(0.96); }
+  to { transform: none; }
+}
+/* Doors: the section opens from the centre outwards. */
+@keyframes l141-doors {
+  from { clip-path: inset(0 32% 0 32%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+/* Expand: a framed, rounded panel widens to full bleed. */
+@keyframes l141-expand {
+  from { clip-path: inset(0 7% 0 7% round 2.5rem); }
+  to { clip-path: inset(0 0 0 0 round 0); }
+}
+/* Zoom: settles from a scaled-down card into the page. */
+@keyframes l141-zoom {
+  from { scale: 0.86; border-radius: 3rem; opacity: 0.6; }
+  to { scale: 1; border-radius: 0; opacity: 1; }
+}
+/* Iris: opens from a circle centred on the section. */
+@keyframes l141-iris {
+  from { clip-path: circle(28% at 50% 45%); }
+  to { clip-path: circle(110% at 50% 45%); }
+}
+@keyframes l141-recede {
+  to { transform: scale(0.93); opacity: 0.35; border-radius: 2rem; }
+}
+
+/* ------------------------------------------------------------ StickyIndex */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .si-item {
+      animation: l141-si linear both;
+      animation-timeline: view();
+      animation-range: cover 10% cover 90%;
+    }
+  }
+}
+@keyframes l141-si {
+  0%,
+  100% {
+    opacity: 0.55;
+    translate: 0 0;
+  }
+  35%,
+  60% {
+    opacity: 1;
+    translate: 0.75rem 0;
+  }
+}
+
+/* ------------------------------------------------------------- StackCards */
+
+.stack > li {
+  position: sticky;
+  top: calc(5.5rem + var(--i) * 1.1rem);
+  padding-bottom: 1.25rem;
+}
+.stack-card {
+  transform-origin: 50% 0%;
+}
+@supports (animation-timeline: view()) and (timeline-scope: --a) {
+  @media (prefers-reduced-motion: no-preference) {
+    .stack {
+      timeline-scope: --stk1, --stk2, --stk3, --stk4, --stk5, --stk6, --stk7, --stk8;
+    }
+    .stack > li:nth-child(2) { view-timeline: --stk1 block; }
+    .stack > li:nth-child(3) { view-timeline: --stk2 block; }
+    .stack > li:nth-child(4) { view-timeline: --stk3 block; }
+    .stack > li:nth-child(5) { view-timeline: --stk4 block; }
+    .stack > li:nth-child(6) { view-timeline: --stk5 block; }
+    .stack > li:nth-child(7) { view-timeline: --stk6 block; }
+    .stack > li:nth-child(8) { view-timeline: --stk7 block; }
+    .stack > li:nth-child(9) { view-timeline: --stk8 block; }
+    /* Each card recedes while the next one arrives over it. */
+    .stack > li .stack-card {
+      animation: l141-recede-card linear both;
+      animation-range: entry 0% entry 100%;
+    }
+    .stack > li:nth-child(1) .stack-card { animation-timeline: --stk1; }
+    .stack > li:nth-child(2) .stack-card { animation-timeline: --stk2; }
+    .stack > li:nth-child(3) .stack-card { animation-timeline: --stk3; }
+    .stack > li:nth-child(4) .stack-card { animation-timeline: --stk4; }
+    .stack > li:nth-child(5) .stack-card { animation-timeline: --stk5; }
+    .stack > li:nth-child(6) .stack-card { animation-timeline: --stk6; }
+    .stack > li:nth-child(7) .stack-card { animation-timeline: --stk7; }
+    .stack > li:nth-child(8) .stack-card { animation-timeline: --stk8; }
+    .stack > li:last-child .stack-card { animation: none; }
+  }
+}
+@keyframes l141-recede-card {
+  to {
+    transform: perspective(1400px) rotateX(11deg) scale(0.9);
+    filter: brightness(0.72);
+  }
+}
+
+/* ---------------------------------------------------------------- Cascade */
+
+.cascade-line {
+  padding-left: calc(var(--step) * 0.2);
+}
+@media (max-width: 639.98px) {
+  .cascade-line {
+    padding-left: calc(var(--step) * 0.12);
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cascade-inner {
+      animation: l141-step linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+  }
+}
+@keyframes l141-step {
+  from {
+    opacity: 0.1;
+    translate: -2.5rem 0.6em;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* ----------------------------------------------------------------- Strike */
+
+/* The strike is a background on the inline text, cloned per line fragment,
+   so statements that wrap are struck on every line. */
+.strike-text {
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 58% / var(--strike, 100%) 0.07em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  opacity: 0.4;
+}
+@property --strike {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .strike-text {
+      animation: l141-strike linear both;
+      animation-timeline: view();
+      animation-range: entry 60% cover 40%;
+    }
+  }
+}
+@keyframes l141-strike {
+  from {
+    --strike: 0%;
+    opacity: 1;
+  }
+  to {
+    --strike: 100%;
+    opacity: 0.4;
+  }
+}
+
+/* ---------------------------------------------------------------- Marquee */
+
+.marquee-rev {
+  margin-left: -30%;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .marquee-row {
+      animation: l141-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    .marquee-rev {
+      animation-name: l141-drift-rev;
+    }
+  }
+}
+@keyframes l141-drift {
+  from {
+    translate: 5% 0;
+  }
+  to {
+    translate: -30% 0;
+  }
+}
+@keyframes l141-drift-rev {
+  from {
+    translate: -5% 0;
+  }
+  to {
+    translate: 25% 0;
+  }
+}
+
+/* ----------------------------------------- Bento / Tilt (each its own entrance) */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Bento: each tile is unmasked upward, like a panel being revealed. */
+    .bento-card {
+      animation: l141-unmask linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    /* Tilt grid: cards swing in on the vertical axis, column by column. */
+    .tilt-wrap {
+      animation: l141-swing linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+    .tilt-wrap:nth-child(3n + 2) { animation-range: entry 8% cover 40%; }
+    .tilt-wrap:nth-child(3n + 3) { animation-range: entry 16% cover 45%; }
+  }
+}
+@keyframes l141-unmask {
+  from { clip-path: inset(100% 0 0 0 round 1.5rem); translate: 0 1.5rem; }
+  to { clip-path: inset(0 0 0 0 round 1.5rem); translate: 0 0; }
+}
+@keyframes l141-swing {
+  from { opacity: 0.25; transform: perspective(1200px) rotateY(-32deg) translateX(2.5rem); }
+  to { opacity: 1; transform: none; }
+}
+
+.tilt-card {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition:
+    transform 0.5s var(--ease-architect),
+    box-shadow 0.5s var(--ease-architect);
+  will-change: transform;
+}
+.tilt-wrap:hover .tilt-card {
+  transition-duration: 0.12s;
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.35);
+}
+
+/* --------------------------------------------------------------- Timeline */
+
+.timeline-fill {
+  transform-origin: 0 0;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-fill {
+      animation: l141-fill-y linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 60%;
+    }
+    @media (min-width: 1024px) {
+      .timeline-fill {
+        animation-name: l141-fill-x;
+      }
+    }
+  }
+}
+@keyframes l141-fill-y {
+  from {
+    scale: 1 0;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+@keyframes l141-fill-x {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+
+/* ------------------------------------------------------- Lanes / Compare */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .lane {
+      animation: l141-lane linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 35%;
+    }
+    .lane[data-side="r"] {
+      animation-name: l141-lane-r;
+    }
+    .compare-after {
+      animation: l141-wipe-across linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+  }
+}
+@keyframes l141-wipe-across {
+  from {
+    clip-path: inset(0 0 0 70% round 1.75rem);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 1.75rem);
+  }
+}
+@keyframes l141-lane {
+  from {
+    opacity: 0.15;
+    translate: -3rem 0;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes l141-lane-r {
+  from {
+    opacity: 0.15;
+    translate: 3rem 0;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* ------------------------------------------------------------------ Shelf */
+
+.shelf-track {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 3rem var(--gutter, 1.25rem) 2rem;
+  margin-inline: calc(var(--gutter, 1.25rem) * -1);
+  scrollbar-width: none;
+}
+.shelf-card {
+  scroll-snap-align: start;
+  min-height: 22rem;
+}
+@supports (animation-timeline: view()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .shelf {
+      height: calc(100svh + var(--count) * 22rem);
+      view-timeline: --shelf block;
+    }
+    .shelf-pin {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      perspective: 1600px;
+    }
+    .shelf-track {
+      overflow: visible;
+      margin: 0;
+      padding: 0 0 0 max(4.5rem, calc((100vw - 82rem) / 2));
+      animation: l141-shelf linear both;
+      animation-timeline: --shelf;
+      animation-range: contain 0% contain 100%;
+    }
+    .shelf-card {
+      min-height: 26rem;
+      transform: rotateY(-14deg);
+      transform-origin: 0 50%;
+      transition: transform 0.6s var(--ease-architect);
+    }
+    .shelf-card:hover {
+      transform: rotateY(0deg) translateZ(30px);
+    }
+  }
+}
+@keyframes l141-shelf {
+  from {
+    translate: 8vw 0;
+  }
+  to {
+    translate: calc(-100% + 92vw) 0;
+  }
+}
+
+/* ---------------------------------------------------------------- BigList */
+
+.biglist ul > li {
+  border-top: 1px solid color-mix(in oklab, currentColor 16%, transparent);
+}
+.biglist ul > li:last-child {
+  border-bottom: 1px solid color-mix(in oklab, currentColor 16%, transparent);
+}
+.biglist-item {
+  transition:
+    opacity 0.4s ease,
+    translate 0.6s var(--ease-architect);
+}
+.biglist ul[data-active] > li:not([data-on]) .biglist-item {
+  opacity: 0.25;
+}
+.biglist ul > li[data-on] .biglist-item {
+  translate: 1.25rem 0;
+}
+.biglist-arrow {
+  transition: rotate 0.5s var(--ease-architect);
+}
+.biglist li[data-on] .biglist-arrow {
+  rotate: 45deg;
+}
+.biglist-photo {
+  opacity: 0;
+  scale: 0.6;
+  rotate: -6deg;
+  transition:
+    opacity 0.35s ease,
+    scale 0.5s var(--ease-architect),
+    rotate 0.5s var(--ease-architect),
+    translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.biglist-photo[data-show] {
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none !important;
+  }
+  .biglist-item,
+  .biglist-photo,
+  .shelf-card {
+    transition: none !important;
+  }
+}
+
+.shelf {
+  --gutter: 1.25rem;
+}
+@media (min-width: 640px) {
+  .shelf {
+    --gutter: 2rem;
+  }
+}
+
+/* Statement mask: the headline is unveiled from its baseline upward
+   (the alternative to the word fade for a second statement on a page). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-mask {
+      animation: l141-mask linear both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 40%;
+    }
+  }
+}
+@keyframes l141-mask {
+  from {
+    clip-path: inset(0 0 55% 0);
+    translate: 0 0.35em;
+    opacity: 0.35;
+  }
+  to {
+    clip-path: inset(0 0 -10% 0);
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+/* Brand palette is black and white: every photograph and film is shown in
+   greyscale, so warm-toned images never tint the page. Zero specificity, so
+   any image's own filter utilities still apply. */
+:where(img, video) {
+  filter: grayscale(1);
+}
