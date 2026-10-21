@@ -35,3 +35,7 @@ npm-debug.log*
 /.pw
 /.tools
 /.next-qa
+
+# Client originals (site uses optimised copies in public/images)
+/public/Website Pictures/
+/public/*.mp4

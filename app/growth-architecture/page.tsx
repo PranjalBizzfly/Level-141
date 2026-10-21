@@ -44,15 +44,15 @@ export const metadata = pageMetadata({
  */
 const triggerImages = [
   "/images/home-hero-staircase-muted.webp",
-  "/images/about-atrium-levels-muted.webp",
+  "/images/client-walk-through-crowd.webp",
   "/images/home-strategist-compass.webp",
   "/images/about-dubai-terrace.webp",
   "/images/how-strategy-table-muted.webp",
   "/images/home-team-table-muted.webp",
   "/images/home-person-notebook.webp",
   "/images/home-cards-grid-muted.webp",
-  "/images/about-meeting-room.webp",
-  "/images/home-fragmented-to-integrated-muted.webp",
+  "/images/client-ceo-portrait.webp",
+  "/images/client-executive-in-motion.webp",
 ];
 
 export default function GrowthArchitecturePage() {

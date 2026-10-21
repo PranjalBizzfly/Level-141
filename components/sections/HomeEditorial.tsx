@@ -9,8 +9,8 @@ import { altFor } from "@/lib/image-alts";
 
 /**
  * Editorial, full-screen home sections (black and white, image-led):
- * - Relay: the growth chain as one huge word at a time, each handing over to the next.
- * - WhySplit: a photograph per reason beside the reason set large, with an index.
+ * - Relay: the growth chain as an isometric tower of floors on a Leadership foundation.
+ * - WhySplit: a 3D cube, one face per reason, beside the full index of reasons.
  * - InsightGallery: tall photo cards gliding sideways as you scroll down.
  * All text stays in the DOM; reduced motion shows everything without pinning.
  */
@@ -22,6 +22,7 @@ const clamp = (v: number) => Math.min(1, Math.max(0, v));
 const DRUM_STEP = 32;
 const DRUM_R = 0.875 / Math.tan(((DRUM_STEP / 2) * Math.PI) / 180);
 
+
 const MQ = "(min-width: 768px)";
 const subscribeMQ = (cb: () => void) => {
   const m = window.matchMedia(MQ);
@@ -30,17 +31,6 @@ const subscribeMQ = (cb: () => void) => {
 };
 function useWide() {
   return useSyncExternalStore(subscribeMQ, () => window.matchMedia(MQ).matches, () => true);
-}
-
-/** Scroll the page so a pinned track shows step i of n. */
-function scrollToStep(track: HTMLElement | null, i: number, n: number) {
-  if (!track) return;
-  const r = track.getBoundingClientRect();
-  const run = r.height - window.innerHeight;
-  const y = window.scrollY + r.top + run * ((i + 0.5) / n);
-  const lenis = (window as unknown as { __lenis?: { scrollTo: (y: number) => void } }).__lenis;
-  if (lenis) lenis.scrollTo(y);
-  else window.scrollTo({ top: y, behavior: "smooth" });
 }
 
 /* ------------------------------------------------------------------ Relay */
@@ -184,6 +174,16 @@ export function Relay({
 
 /* --------------------------------------------------------------- WhySplit */
 
+/** Cube turns that bring each face to the front (six reasons, six faces). */
+const CUBE_FACES = ["rotateY(0deg)", "rotateY(90deg)", "rotateY(180deg)", "rotateY(-90deg)", "rotateX(90deg)", "rotateX(-90deg)"];
+const CUBE_TURNS = ["rotateX(0deg) rotateY(0deg)", "rotateX(0deg) rotateY(-90deg)", "rotateX(0deg) rotateY(-180deg)", "rotateX(0deg) rotateY(90deg)", "rotateX(-90deg) rotateY(0deg)", "rotateX(90deg) rotateY(0deg)"];
+
+/**
+ * Why Level141 as a 3D cube beside the full index: each reason is one face
+ * of the cube, photographed and numbered. Pointing at, tapping or tabbing to
+ * a reason turns the cube to its face. Every reason is set in full in the
+ * list, so nothing has to be scrolled through.
+ */
 export function WhySplit({
   label,
   title,
@@ -193,165 +193,70 @@ export function WhySplit({
   title: ReactNode;
   items: readonly { name: string; body: string; image: string }[];
 }) {
-  const reduced = useReducedMotion();
-  const [ref, p] = usePinProgress(!reduced);
-  const n = items.length;
-  const active = Math.min(n - 1, Math.floor(p * n * 0.999));
-  // Each reason holds for most of its stretch, then turns over in the last third.
-  const seg = p * n;
-  const turn = (i: number) => clamp((seg - i - 0.62) / 0.38);
-  const fp = Math.min(n - 1, Math.floor(seg) + turn(Math.floor(seg)));
-
-  if (reduced) {
-    return (
-      <div className="container-x py-20 sm:py-20">
-        <p className="text-sm text-muted">{label}</p>
-        <h2 className="font-display mt-3 max-w-xl text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">{title}</h2>
-        <ol className="mt-12 grid gap-10 sm:grid-cols-2">
-          {items.map((x, i) => (
-            <li key={x.name}>
-              <span className="text-sm tabular-nums text-muted">{n2(i)}</span>
-              <h3 className="font-display mt-2 text-[1.75rem] font-medium leading-[1.1] tracking-[-0.03em]">{x.name.replace(/\.$/, "")}</h3>
-              <p className="mt-3 text-muted">{x.body}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    );
-  }
-
+  const [active, setActive] = useState(0);
+  const faces = items.slice(0, CUBE_FACES.length);
   return (
-    <div ref={ref} style={{ height: `${100 + n * 60}lvh` }}>
-      <div className="sticky top-0 grid h-[100lvh] grid-rows-[38%_1fr] md:grid-cols-2 md:grid-rows-1">
-        {/* The photograph for the reason being read, with its numeral. */}
-        {/* Photographs stacked like pages: as a reason is finished, its photograph
-            turns away on its left edge (3D), revealing the next one beneath. */}
-        <div className="photo-tone relative overflow-hidden bg-black [perspective:1800px]">
-          {items.map((x, i) => {
-            const t = turn(i);
-            const gone = i < n - 1 && t >= 1;
-            return (
-              <div
-                key={x.image + i}
-                aria-hidden
-                className="absolute inset-0 origin-left [backface-visibility:hidden] [transform-style:preserve-3d]"
-                style={{
-                  zIndex: n - i,
-                  transform: i < n - 1 ? `rotateY(${-t * 105}deg)` : undefined,
-                  visibility: gone ? "hidden" : "visible",
-                }}
-              >
-                <Image
-                  src={x.image}
-                  alt={altFor(x.image)}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover grayscale"
-                  style={{ opacity: 0.85, scale: String(1.06 - Math.min(1, Math.max(0, seg - i + 0.4)) * 0.06) }}
-                />
-                {/* The page darkens as it turns away from the light. */}
-                <span className="absolute inset-0 bg-black" style={{ opacity: t * 0.75 }} />
-              </div>
-            );
-          })}
-          <div aria-hidden className="absolute inset-0 z-30 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          <p
-            aria-hidden
-            key={active}
-            className="why-count absolute bottom-4 left-5 z-30 font-display text-[clamp(4.5rem,13vw,13rem)] leading-[0.8] tracking-[-0.06em] text-white sm:bottom-8 sm:left-10"
-          >
-            {n2(active)}
-          </p>
+    <div className="container-x py-20 sm:py-28">
+      <div className="max-w-xl">
+        <p className="text-sm text-muted">{label}</p>
+        <h2 className="font-display mt-3 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
+      </div>
+
+      <div className="mt-12 grid items-start gap-12 sm:mt-16 md:grid-cols-12 md:gap-14">
+        <div className="md:sticky md:top-[max(6rem,calc(50lvh-17rem))] md:col-span-5">
+          <div className="cube-scene" aria-hidden>
+            <div className="cube" style={{ transform: `rotateX(-16deg) rotateY(24deg) ${CUBE_TURNS[Math.min(active, CUBE_TURNS.length - 1)]}` }}>
+              {faces.map((x, i) => (
+                <div key={x.image + i} className="cube-face photo-tone" style={{ transform: `${CUBE_FACES[i]} translateZ(calc(var(--cube) / 2))` }}>
+                  <Image src={x.image} alt="" fill sizes="(min-width: 768px) 22rem, 70vw" className="object-cover grayscale" />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                  {/* Only the face turned to the front carries its numeral, so no
+                      label is ever read sideways or upside down. */}
+                  <span
+                    className="font-display absolute bottom-4 left-5 text-[calc(var(--cube)*0.32)] leading-[0.8] tracking-[-0.06em] text-white transition-opacity duration-500"
+                    style={{ opacity: i === active ? 1 : 0 }}
+                  >
+                    {n2(i)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* The reason, set large, and the index of all of them. */}
-        <div className="flex flex-col justify-between px-5 pb-6 pt-6 sm:px-10 sm:pb-10 md:pt-28 lg:px-16">
-          <div>
-            <p className="text-sm text-muted">{label}</p>
-            <h2 className="font-display mt-2 max-w-lg text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
-          </div>
-          {/* Reasons stacked in one cell, flipping over on their horizontal axis
-              like a split-flap board as the scroll moves past each one. */}
-          <div className="my-6 grid [perspective:1200px]">
-            {items.map((x, i) => {
-              const d = i - fp;
-              return (
-                <div
-                  key={x.name}
-                  aria-hidden={i !== active}
-                  className="col-start-1 row-start-1 origin-[50%_50%_-2rem] [backface-visibility:hidden]"
-                  style={{
-                    transform: `rotateX(${Math.max(-90, Math.min(90, -d * 90))}deg)`,
-                    // Each reason clears before the next arrives, so they never overlap.
-                    opacity: clamp(1 - Math.abs(d) * 2),
-                    visibility: Math.abs(d) >= 1 ? "hidden" : "visible",
-                  }}
-                >
-                  <h3 className="font-display text-[clamp(1.9rem,4.2vw,4rem)] font-medium leading-[1] tracking-[-0.045em]">
-                    {x.name.replace(/\.$/, "")}
-                  </h3>
-                  <p className="mt-4 max-w-lg text-muted sm:mt-6 sm:text-lg">{x.body}</p>
-                </div>
-              );
-            })}
-          </div>
-          {/* The index fills as it is read: a band sweeps across the reason in step
-              with the scroll, flipping forward in 3D as it arrives; the text inverts
-              under it. Reasons already read keep a filled rule. */}
-          {/* Own backdrop (isolate + paper), so the text's "difference" blend always has a ground to invert against. */}
-          <ol className="hidden border-t border-current/15 bg-paper [isolation:isolate] [perspective:900px] md:block">
-            {items.map((x, i) => {
-              const f = clamp(p * n - i);
-              const on = i === active;
-              return (
-                <li key={x.name} className="relative">
-                  <button
-                    type="button"
-                    onClick={() => scrollToStep(ref.current, i, n)}
-                    className="relative flex w-full items-center gap-4 overflow-hidden border-b border-current/15 px-3 py-2.5 text-left text-sm"
-                    aria-current={on ? "step" : undefined}
-                  >
-                    <span
-                      aria-hidden
-                      className="absolute bottom-0 left-0 h-[2px] w-full origin-left bg-ink"
-                      style={{ transform: `scaleX(${i < active ? 1 : 0})`, transition: "transform 600ms ease-out" }}
-                    />
-                    {/* Ink text on the page; the band carries its own paper-coloured copy, clipped with it. */}
-                    <span className="relative w-6 tabular-nums text-ink">{n2(i)}</span>
-                    <span
-                      className="relative flex-1 text-ink transition-opacity duration-500"
-                      style={{ opacity: on || i < active ? 1 : 0.5 }}
+        <ol className="border-t border-line md:col-span-7">
+          {items.map((x, i) => {
+            const on = i === active;
+            return (
+              <li
+                key={x.name}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => setActive(i)}
+                className="relative grid cursor-default grid-cols-[2.5rem_1fr] gap-x-4 border-b border-line py-6 sm:grid-cols-[3.5rem_1fr]"
+              >
+                <span
+                  aria-hidden
+                  className="absolute -top-px left-0 h-px w-full origin-left bg-ink transition-transform duration-500 ease-out motion-reduce:transition-none"
+                  style={{ transform: `scaleX(${on ? 1 : 0})` }}
+                />
+                <span className={"pt-1 text-sm tabular-nums transition-colors duration-300 " + (on ? "text-ink" : "text-muted")}>{n2(i)}</span>
+                <div>
+                  <h3 className="font-display text-[clamp(1.35rem,2.2vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
+                    <button
+                      type="button"
+                      onFocus={() => setActive(i)}
+                      aria-pressed={on}
+                      className="text-left outline-none focus-visible:underline focus-visible:underline-offset-4"
                     >
                       {x.name.replace(/\.$/, "")}
-                    </span>
-                    <span aria-hidden className="relative tabular-nums text-sm text-ink" style={{ opacity: on ? 1 : 0 }}>
-                      {Math.round(f * 100)}%
-                    </span>
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 flex origin-top items-center gap-4 bg-ink px-3 text-paper transition-transform duration-500 ease-out"
-                      style={{
-                        clipPath: `inset(0 ${(1 - (on ? f : 0)) * 100}% 0 0)`,
-                        transform: on ? "rotateX(0deg)" : "rotateX(-90deg)",
-                      }}
-                    >
-                      <span className="w-6 tabular-nums">{n2(i)}</span>
-                      <span className="flex-1">{x.name.replace(/\.$/, "")}</span>
-                      <span className="tabular-nums text-sm">{Math.round(f * 100)}%</span>
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-          <div aria-hidden className="flex gap-1.5 md:hidden">
-            {items.map((_, i) => (
-              <span key={i} className="h-[3px] flex-1 bg-current/15">
-                <span className="block h-full origin-left bg-current" style={{ transform: `scaleX(${clamp(p * n - i)})` }} />
-              </span>
-            ))}
-          </div>
-        </div>
+                    </button>
+                  </h3>
+                  <p className="mt-3 max-w-xl text-muted">{x.body}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </div>
   );

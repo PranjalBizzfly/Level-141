@@ -9,10 +9,9 @@ import {
   NecessaryList,
   Orbit,
   PortalHero,
-  ScaleStatement,
   VerticalTabs,
 } from "@/components/sections/pages/HowParts";
-import { BrandsSpell, QuestionDeal } from "@/components/sections/pages/HowScenes";
+import { BrandsSpell, OrbStatement, QuestionFocus } from "@/components/sections/pages/HowScenes";
 import { Reveal } from "@/components/ui/primitives";
 import {
   brandsLevers,
@@ -48,8 +47,8 @@ const jump = [
 
 /** How We Architect Growth — editorial redesign; each section plays its own arrival. */
 const questionImages = [
-  "/images/home-person-notebook.webp",
-  "/images/home-strategist-compass.webp",
+  "/images/client-executive-contemplation.webp",
+  "/images/client-lone-executive-skyline.webp",
   "/images/home-fragmented-to-integrated-muted.webp",
   "/images/ga-prioritised-bridge-muted.webp",
   "/images/home-hero-staircase-muted.webp",
@@ -98,7 +97,7 @@ export default function HowPage() {
 
         {/* The growth problem — question cards fanning out like a hand */}
         <section>
-          <QuestionDeal
+          <QuestionFocus
             label="The starting point is the growth problem"
             title="Level141 first identifies:"
             text="Only then do we architect the solution."
@@ -221,9 +220,9 @@ export default function HowPage() {
           </RefSection>
         </div>
 
-        {/* What we actually sell — a statement settling to size */}
+        {/* What we actually sell — the statement revealed by a growing light */}
         <section>
-          <ScaleStatement
+          <OrbStatement
             text="Not marketing. Not consulting. Not another strategy deck."
             accent="Growth Architecture"
             sub={

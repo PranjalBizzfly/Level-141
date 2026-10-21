@@ -63,7 +63,7 @@ export default function PersonalBrandPage() {
   return (
     <>
       <CinemaHero
-        image="/images/pba-hero-speaker.webp"
+        image="/images/client-speaker-conference-stage.webp"
         eyebrow="Personal Brand Architecture™"
         title={
           <>
@@ -161,7 +161,7 @@ export default function PersonalBrandPage() {
 
         {/* Image break */}
         <section>
-          <FullBleed image="/images/pba-leader-skyline.webp" alt={altFor("/images/pba-leader-skyline.webp")} />
+          <FullBleed image="/images/client-walk-toward-skyline.webp" alt={altFor("/images/client-walk-toward-skyline.webp")} />
         </section>
 
         {/* Ideal for */}

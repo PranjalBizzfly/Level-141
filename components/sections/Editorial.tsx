@@ -65,7 +65,7 @@ export function CinemaHero({
         fill
         priority
         sizes="100vw"
-        className="object-cover grayscale"
+        className="object-cover object-[22%_center] grayscale lg:object-center"
         style={{ scale: `${1.05 - 0.05 * (1 - p)}`, translate: `0 ${p * 8}%` }}
       />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />

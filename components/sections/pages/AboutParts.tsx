@@ -221,7 +221,7 @@ export function SplitPanels({
               onMouseEnter={() => setOpen(i)}
               onFocus={() => setOpen(i)}
               onBlur={() => setOpen(null)}
-              className="photo-tone group relative flex min-h-[70svh] min-w-0 flex-col justify-end overflow-hidden outline-none transition-[flex-grow] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white motion-reduce:transition-none md:min-h-0"
+              className="photo-tone group relative flex text-white min-h-[70svh] min-w-0 flex-col justify-end overflow-hidden outline-none transition-[flex-grow] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white motion-reduce:transition-none md:min-h-0"
               style={{ flexGrow: grow, flexBasis: 0 }}
             >
               <Image

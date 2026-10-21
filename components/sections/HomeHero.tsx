@@ -54,8 +54,8 @@ export function HomeHero() {
       <div className="container-x flex flex-1 flex-col pb-6 pt-10 sm:pb-8 sm:pt-12">
         <div data-rise className="flex flex-1">
           <MediaSlot
-            src="/images/home-hero-terrace-skyline.webp"
-            alt={altFor("/images/home-hero-terrace-skyline.webp")}
+            src="/images/client-executive-dubai-window.webp"
+            alt={altFor("/images/client-executive-dubai-window.webp")}
             label="Hero film or image — growth to the next level"
             className="min-h-[clamp(16rem,42svh,34rem)] w-full flex-1"
             priority

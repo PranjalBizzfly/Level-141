@@ -124,7 +124,7 @@ export default function AboutPage() {
                 name: "Personal Brand Architecture™",
                 body: "Converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset.",
                 href: routes.personalBrand,
-                image: "/images/pba-leader-skyline.webp",
+                image: "/images/client-executive-study-portrait.webp",
               },
               {
                 name: "Growth Architecture™",
@@ -139,8 +139,8 @@ export default function AboutPage() {
         {/* Ecosystem — full-bleed Dubai photograph */}
         <section>
           <ParallaxStrips
-            image="/images/about-dubai-terrace.webp"
-            alt={altFor("/images/about-dubai-terrace.webp")}
+            image="/images/client-executive-city-lounge.webp"
+            alt={altFor("/images/client-executive-city-lounge.webp")}
             caption={
               <span className="flex flex-col justify-between gap-2 sm:flex-row">
                 <span>Part of the 1XL ecosystem, headquartered in Dubai</span>

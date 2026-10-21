@@ -66,17 +66,17 @@ const whyImages = [
   "/images/home-fragmented-to-integrated-muted.webp",
   "/images/about-atrium-levels-muted.webp",
   "/images/how-strategy-table-muted.webp",
-  "/images/home-team-table.webp",
-  "/images/home-hero-staircase-muted.webp",
-  "/images/home-strategist-compass.webp",
+  "/images/client-mentorship-conversation.webp",
+  "/images/client-visionaries-horizon.webp",
+  "/images/client-executive-library.webp",
 ];
 const insightImages = [
   "/images/ga-hero-structural-node-muted.webp",
-  "/images/pba-hero-speaker.webp",
-  "/images/ga-prioritised-bridge-muted.webp",
-  "/images/contact-corridor-warm.webp",
-  "/images/pba-leader-skyline.webp",
-  "/images/home-person-notebook.webp",
+  "/images/client-keynote-auditorium.webp",
+  "/images/client-executive-portrait-woman.webp",
+  "/images/client-executive-study-woman.webp",
+  "/images/client-mentorship.webp",
+  "/images/client-keynote-monochrome.webp",
 ];
 
 /**
