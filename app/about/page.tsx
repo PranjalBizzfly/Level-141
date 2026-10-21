@@ -18,7 +18,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "Level141 is a Growth Architecture company — part of the 1XL ecosystem, headquartered in Dubai. Our purpose: architect the next level of growth for people, businesses and ideas.",
+    "Level141 is part of the 1XL ecosystem, headquartered in Dubai.",
   path: routes.about,
 });
 

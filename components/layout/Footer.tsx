@@ -138,7 +138,7 @@ export function Footer() {
             className="mt-14 h-px bg-black/12 shadow-[0_1px_0_rgb(255_255_255/0.85)] dark:bg-white/10 dark:shadow-none"
           />
           <p className="mt-6 text-[0.95rem] text-black/70 dark:text-white/65">
-            © {new Date().getFullYear()} Level141. All rights reserved.
+            © {new Date().getFullYear()} Level141.
           </p>
         </div>
       </div>

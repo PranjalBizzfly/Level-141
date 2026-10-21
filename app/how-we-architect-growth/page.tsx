@@ -32,7 +32,7 @@ import { Layers } from "@/components/sections/HomeInteractive";
 export const metadata = pageMetadata({
   title: "How We Architect Growth",
   description:
-    "Assess, Architect, Activate, Govern, Level Up — the Level141 approach, powered by the proprietary LQ™, IGF™, BRANDS™ and PEAK™ frameworks.",
+    "We don't start with deliverables. We start with the level you're trying to reach.",
   path: routes.how,
 });
 
@@ -110,7 +110,7 @@ export default function HowPage() {
         <section id="process">
           <Orbit
             label="How Level141 works"
-            title="Assess. Architect. Activate. Govern. Level up"
+            title="How Level141 works"
             stages={levelProcess}
           />
         </section>
@@ -155,10 +155,6 @@ export default function HowPage() {
                   <p className="mt-3 text-ink">
                     Because you cannot architect the next level without understanding the current one.
                   </p>
-                  <p className="mt-3">
-                    For people, LQ™ is assessed across the four VIBE™ dimensions. For organizations, the LQ™ Growth Audit
-                    examines the domains below.
-                  </p>
                 </>
               }
             />
@@ -201,11 +197,6 @@ export default function HowPage() {
                     <>
                       Six dimensions <span className="serif-accent">of growth</span>
                     </>
-                  }
-                  text={
-                    <span className="block text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">
-                      Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover &amp; Trust and Scale complete a system that is architected together — never as separate campaigns.
-                    </span>
                   }
                 />
               }

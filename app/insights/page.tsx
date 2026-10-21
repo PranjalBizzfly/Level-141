@@ -12,7 +12,7 @@ import { altFor } from "@/lib/image-alts";
 export const metadata = pageMetadata({
   title: "Insights — The Next Level",
   description:
-    "Ideas for people and organizations that refuse to remain where they are — on growth architecture, personal authority, brand and positioning, growth intelligence and leadership.",
+    "Ideas for people and organizations that refuse to remain where they are.",
   path: routes.insights,
 });
 

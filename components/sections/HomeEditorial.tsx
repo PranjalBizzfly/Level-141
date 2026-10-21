@@ -406,7 +406,7 @@ export function InsightGallery({
               className="object-cover opacity-70 grayscale transition-[scale,opacity] duration-700 ease-out group-hover:scale-[1.06] group-hover:opacity-85"
             />
             <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
-            <span className="relative text-sm text-white/80">Insights</span>
+            <span className="relative text-sm text-white/80">The Next Level</span>
             <span className="relative">
               <span
                 className={

@@ -84,9 +84,6 @@ export default function GrowthArchitecturePage() {
           <ButtonLink href="#waitlist" className="!bg-white !text-black hover:!bg-white/85">
             Join the Waitlist
           </ButtonLink>
-          <ButtonLink href="#peak" variant="ghost-light" className="!border-white/35 !text-white hover:!border-white">
-            Explore the architecture
-          </ButtonLink>
         </div>
       </CurtainHero>
 
@@ -133,10 +130,10 @@ export default function GrowthArchitecturePage() {
         {/* Operating logic — the flow chain */}
         <RefSection>
           <RefIntro
-            label="Core operating logic"
+            label="Growth Architecture™"
             title={
               <>
-                From current level to <span className="serif-accent">next level</span> — in one governed sequence
+                Core operating <span className="serif-accent">logic</span>
               </>
             }
             text="Level141 does not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
@@ -197,10 +194,10 @@ export default function GrowthArchitecturePage() {
           />
         </section>
 
-        {/* Who it's for */}
+        {/* Ideal for */}
         <RefSection>
           <RefIntro
-            label="Who it's for"
+            label="Ideal for"
             title={
               <>
                 For organizations whose ambition has <span className="serif-accent">outgrown</span> their current growth
@@ -209,7 +206,7 @@ export default function GrowthArchitecturePage() {
             }
             text="The best-fit client has a real business, a credible offer, leadership ambition and sufficient organizational or financial capacity to act on the architecture."
           />
-          <Ticker label="Who Growth Architecture™ is for" items={gaAudience} />
+          <Ticker label="Ideal for" items={gaAudience} />
           <div className="pb-16 sm:pb-24">
             <RuleQuote>
               When ambition changes, the architecture supporting it <span className="text-muted">must change too</span>
@@ -220,7 +217,7 @@ export default function GrowthArchitecturePage() {
         {/* Triggers — a gallery of photographed cards */}
         <section>
           <PillDetails
-            label="Who it's for"
+            label="Trigger events"
             title={
               <>
                 When a company needs <span className="text-white/50">Growth Architecture</span>

@@ -9,7 +9,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Start Your Next Level",
   description:
-    "Let's architect what's next. Start a conversation with Level141 about Personal Brand Architecture™, partnerships or your next level of growth.",
+    "Let's architect what's next.",
   path: routes.contact,
 });
 

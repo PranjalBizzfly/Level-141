@@ -31,7 +31,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Personal Brand Architecture™",
   description:
-    "Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset — architected through the VIBE™ Framework.",
+    "Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset.",
   path: routes.personalBrand,
 });
 
@@ -81,9 +81,6 @@ export default function PersonalBrandPage() {
         <div className="flex flex-col items-start gap-3">
           <ButtonLink href={assessmentHref} className="!bg-white !text-black hover:!bg-white/85">
             Start Your Personal Brand Assessment
-          </ButtonLink>
-          <ButtonLink href="#vibe" variant="ghost-light" className="!border-white/35 !text-white hover:!border-white">
-            Explore the VIBE™ Framework
           </ButtonLink>
         </div>
       </CinemaHero>
@@ -207,7 +204,6 @@ export default function PersonalBrandPage() {
                 Client pain. Level141 intervention
               </>
             }
-            text="Personal Brand Architecture™ starts by locating the gap between your actual value and the market's current perception of it."
             items={pbaVoices.map((v) => ({ quote: v.quote, answer: v.answer, note: `${v.effect} ${v.impact}` }))}
             action={
               <ButtonLink href={assessmentHref} className="!bg-white !text-black hover:!bg-white/85">
@@ -287,7 +283,7 @@ export default function PersonalBrandPage() {
         body={
           <p>
             Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived experience
-            into a structured personal growth asset — architected through the VIBE™ Framework.
+            into a structured personal growth asset.
           </p>
         }
         primary={{ label: "Start Your Personal Brand Assessment", href: assessmentHref }}
