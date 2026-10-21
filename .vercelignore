@@ -10,3 +10,5 @@ Docs/ref-videos
 .pw
 .tools
 .next-qa
+# Local screen recordings dropped into public/ for reference — never published.
+public/*.mp4
