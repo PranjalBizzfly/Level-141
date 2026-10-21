@@ -68,7 +68,7 @@ export function StackCards({ items }: {
               "stack-card relative grid min-h-[min(68svh,34rem)] gap-8 overflow-hidden rounded-[1.75rem] p-7 sm:p-12 lg:grid-cols-12 lg:p-16 " +
               (i % 2
                 ? "border border-white/15 bg-black text-white dark:border-black/10 dark:bg-white dark:text-black"
-                : "border border-black/10 bg-white text-black dark:border-white/15 dark:bg-[#0d0d0d] dark:text-white")
+                : "border border-black/10 bg-white text-black dark:border-white/15 dark:bg-black dark:text-white")
             }
           >
             <span
@@ -143,18 +143,20 @@ export function Strike({ items, conclusion }: { items: readonly string[]; conclu
 
 /** Short labels set huge and drifting sideways with the scroll. */
 export function Marquee({ items, label }: { items: readonly string[]; label: string }) {
+  // Row one solid, row two drawn in outline; names separated by a small open ring.
   const row = (rev: boolean) => (
-    <div aria-hidden className={"marquee-row flex w-max gap-[0.45em] whitespace-nowrap " + (rev ? "marquee-rev" : "")}>
+    <div aria-hidden className={"marquee-row flex w-max gap-[0.6em] whitespace-nowrap " + (rev ? "marquee-rev" : "")}>
       {[...items, ...items].map((t, i) => (
-        <span key={i} className="flex items-center gap-[0.45em]">
-          <span className={i % 2 ? "text-muted" : ""}>{t}</span>
-          <span className="inline-block size-[0.18em] translate-y-[-0.05em] bg-current opacity-40" />
+        <span key={i} className="flex items-center gap-[0.6em]">
+          <span style={rev ? { WebkitTextStroke: "1.2px currentColor", WebkitTextFillColor: "transparent" } : undefined}>{t}</span>
+          <span className="inline-block size-[0.16em] rounded-full border border-current opacity-50" />
         </span>
       ))}
     </div>
   );
   return (
-    <div className="marquee mt-14 overflow-hidden font-display text-[clamp(2.5rem,7.5vw,7rem)] font-medium leading-[1.05] tracking-[-0.04em] sm:mt-20">
+    // Full bleed (edge to edge of the screen), fading out at both sides instead of a hard cut.
+    <div className="marquee relative left-1/2 mt-14 w-screen -translate-x-1/2 overflow-hidden py-2 font-display text-[clamp(2.1rem,5.2vw,4.75rem)] font-medium leading-[1.12] tracking-[-0.04em] [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)] sm:mt-20">
       <ul className="sr-only" aria-label={label}>
         {items.map((t) => (
           <li key={t}>{t}</li>

@@ -3,17 +3,16 @@ import { IgfConnect, LqLevels } from "@/components/diagrams/FrameworkVisuals";
 import { FrameworkNav } from "@/components/sections/FrameworkNav";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { RefIntro, RefSection, RefStatement } from "@/components/sections/Ref";
-import { Shelf, Timeline } from "@/components/sections/Layouts";
+import { Timeline } from "@/components/sections/Layouts";
 import {
-  BrandsGrid,
   ExpandRows,
   NecessaryList,
   Orbit,
   PortalHero,
-  QuestionFan,
   ScaleStatement,
   VerticalTabs,
 } from "@/components/sections/pages/HowParts";
+import { BrandsSpell, QuestionDeal } from "@/components/sections/pages/HowScenes";
 import { Reveal } from "@/components/ui/primitives";
 import {
   brandsLevers,
@@ -27,6 +26,7 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
+import { Mosaic } from "@/components/sections/Premium";
 import { Layers } from "@/components/sections/HomeInteractive";
 
 export const metadata = pageMetadata({
@@ -99,7 +99,7 @@ export default function HowPage() {
 
         {/* The growth problem — question cards fanning out like a hand */}
         <section>
-          <QuestionFan
+          <QuestionDeal
             label="The starting point is the growth problem"
             title="Level141 first identifies:"
             text="Only then do we architect the solution."
@@ -166,7 +166,7 @@ export default function HowPage() {
             <LqLevels />
             <div className="mt-24">
               <RefIntro label="LQ™ Growth Audit" title="LQ™ outputs" />
-              <Shelf label="LQ™ outputs" items={lqOutputs.map((o) => ({ kicker: "LQ™ output", name: o }))} />
+              <Mosaic kicker="LQ™ output" items={lqOutputs} />
             </div>
           </RefSection>
 
@@ -193,20 +193,22 @@ export default function HowPage() {
           </RefSection>
 
           {/* BRANDS */}
-          <RefSection id="brands">
-            <RefIntro
-              label="BRANDS™"
-              title={
-                <>
-                  Six dimensions <span className="serif-accent">of growth</span>
-                </>
+          <div id="brands">
+            <BrandsSpell
+              head={
+                <RefIntro
+                  label="BRANDS™"
+                  title={
+                    <>
+                      Six dimensions <span className="serif-accent">of growth</span>
+                    </>
+                  }
+                  text="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
+                />
               }
-              text="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
+              items={brandsLevers.map((l) => ({ letter: l.letter, name: l.name, line: l.line, role: l.role, list: splitList(l.components) }))}
             />
-            <BrandsGrid
-              items={brandsLevers.map((l) => ({ letter: l.letter, name: l.name, list: splitList(l.components) }))}
-            />
-          </RefSection>
+          </div>
 
           {/* PEAK */}
           <RefSection id="peak" tone="ink">

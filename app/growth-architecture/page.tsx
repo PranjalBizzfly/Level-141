@@ -25,6 +25,7 @@ import {
   peakStages,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
+import { DetailsPanel, RuleQuote } from "@/components/sections/Premium";
 import { routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
@@ -209,12 +210,9 @@ export default function GrowthArchitecturePage() {
             text="The best-fit client has a real business, a credible offer, leadership ambition and sufficient organizational or financial capacity to act on the architecture."
           />
           <Ticker label="Who Growth Architecture™ is for" items={gaAudience} />
-          <Reveal className="mt-16 max-w-3xl">
-            <p className="font-display text-[1.6rem] font-medium leading-[1.2] tracking-[-0.02em] sm:text-[2rem]">
-              When ambition changes, the architecture supporting it{" "}
-              <span className="text-muted">must change too</span>
-            </p>
-          </Reveal>
+          <RuleQuote>
+            When ambition changes, the architecture supporting it <span className="text-muted">must change too</span>
+          </RuleQuote>
         </RefSection>
 
         {/* Triggers — a gallery of photographed cards */}
@@ -255,7 +253,7 @@ export default function GrowthArchitecturePage() {
         {/* Waitlist */}
         <RefSection id="waitlist">
           <div className="grid gap-14 lg:grid-cols-12">
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
               <RefIntro
                 label="Growth Architecture™ waitlist"
                 title={
@@ -264,6 +262,13 @@ export default function GrowthArchitecturePage() {
                   </>
                 }
                 text="Growth Architecture™ is not yet available. Join the waitlist and we'll contact you when it opens. Registering interest does not book or start an engagement."
+              />
+              <DetailsPanel
+                rows={[
+                  { label: "Status", value: "Not yet open for engagements — waitlist open" },
+                  { label: "For", value: gaAudience.slice(0, 4).join(" · ") },
+                  { label: "Frameworks", value: "LQ™ · PEAK™ · BRANDS™" },
+                ]}
               />
               <Reveal className="mt-10 border-t border-line pt-6 text-sm">
                 <p>

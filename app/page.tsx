@@ -131,14 +131,12 @@ export default function HomePage() {
                   name: "Personal Brand Architecture™",
                   line: "Your achievements built your reputation. What will build your next level?",
                   href: routes.personalBrand,
-                  image: "/images/pba-hero-speaker.webp",
                 },
                 {
                   key: "ga",
                   name: "Growth Architecture™",
                   line: "Your business doesn't need more disconnected growth initiatives. It needs them working together",
                   href: routes.growth,
-                  image: "/images/ga-hero-structural-node-muted.webp",
                 },
               ]}
             />

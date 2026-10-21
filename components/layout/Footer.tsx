@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FooterBigNav } from "@/components/layout/FooterBigNav";
 import { ArrowRight } from "lucide-react";
 import { BracketClose, BracketOpen, LogoLockup } from "@/components/brand/Logo";
 import { footerNav, routes, site } from "@/lib/site";
@@ -16,18 +17,18 @@ const nextLevel = [
   { label: "Join The Growth Architecture™ Waitlist", href: routes.waitlist },
 ];
 
-const label = "text-xs font-semibold uppercase tracking-[0.16em] text-[#6b6c72] dark:text-[#9a9ba1]";
+const label = "text-xs font-semibold uppercase tracking-[0.16em] text-black/60 dark:text-white/60";
 
 function FooterLink({ href, children, note }: { href: string; children: React.ReactNode; note?: string }) {
   return (
     <Link
       href={href}
-      className="group flex min-h-11 flex-col justify-center py-1.5 text-[1.02rem] leading-snug text-[#2b2c30] transition-colors duration-300 hover:text-[#0d0d0e] dark:text-[#d4d5da] dark:hover:text-white"
+      className="group flex min-h-11 flex-col justify-center py-1.5 text-[1.02rem] leading-snug text-black/85 transition-colors duration-300 hover:text-black dark:text-white/85 dark:hover:text-white"
     >
       <span className="w-fit bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-500 ease-[var(--ease-architect)] group-hover:bg-[length:100%_1px] group-focus-visible:bg-[length:100%_1px]">
         {children}
       </span>
-      {note ? <span className="mt-0.5 text-sm text-[#6b6c72] dark:text-[#9a9ba1]">{note}</span> : null}
+      {note ? <span className="mt-0.5 text-sm text-black/60 dark:text-white/60">{note}</span> : null}
     </Link>
   );
 }
@@ -52,9 +53,12 @@ export function Footer() {
       >
 
         <div className="relative px-6 pb-8 pt-10 sm:px-12 sm:pb-10 sm:pt-14 lg:px-20 lg:pt-16 2xl:px-28">
+          {/* Giant stacked menu, the current page lit (COLLINS footer). */}
+          <FooterBigNav />
+
           {/* Closing statement */}
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-            <p className="display text-[2.15rem] leading-[1.03] text-[#0d0d0e] sm:text-5xl lg:col-span-8 lg:text-[3.6rem] dark:text-white">
+            <p className="display text-[2.15rem] leading-[1.03] text-black sm:text-5xl lg:col-span-8 lg:text-[3.6rem] dark:text-white">
               Growth Architecture For <span className="serif-accent">People &amp; Organizations</span>
             </p>
             <div className="flex flex-col items-start gap-4 lg:col-span-4 lg:items-end">
@@ -72,9 +76,9 @@ export function Footer() {
 
           {/* Bracket hairline */}
           <div aria-hidden className="mt-12 flex items-center gap-4 sm:mt-14">
-            <BracketOpen className="size-3.5 text-[#0d0d0e] dark:text-white" />
-            <span className="h-px flex-1 bg-[#0d0d0e]/15 shadow-[0_1px_0_rgb(255_255_255/0.85)] dark:bg-white/12 dark:shadow-none" />
-            <BracketClose className="size-3.5 text-[#0d0d0e] dark:text-white" />
+            <BracketOpen className="size-3.5 text-black dark:text-white" />
+            <span className="h-px flex-1 bg-black/15 shadow-[0_1px_0_rgb(255_255_255/0.85)] dark:bg-white/12 dark:shadow-none" />
+            <BracketClose className="size-3.5 text-black dark:text-white" />
           </div>
 
           {/* Columns */}
@@ -87,11 +91,11 @@ export function Footer() {
               >
                 <LogoLockup className="h-[30px] w-auto sm:h-9" />
               </Link>
-              <p className="mt-5 max-w-xs leading-relaxed text-[#4d4e54] dark:text-[#a9aab0]">
+              <p className="mt-5 max-w-xs leading-relaxed text-black/70 dark:text-white/65">
                 Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}.
               </p>
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/50 px-3 py-1.5 text-sm text-[#2b2c30] ring-1 ring-[#0d0d0e]/10 dark:bg-white/[0.06] dark:text-[#d4d5da] dark:ring-white/12">
-                <span aria-hidden className="size-1.5 rounded-full bg-[#0d0d0e] dark:bg-white" />
+              <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/50 px-3 py-1.5 text-sm text-black/85 ring-1 ring-black/10 dark:bg-white/[0.06] dark:text-white/85 dark:ring-white/12">
+                <span aria-hidden className="size-1.5 rounded-full bg-black dark:bg-white" />
                 {site.headquarters}
               </div>
             </div>
@@ -135,9 +139,9 @@ export function Footer() {
           {/* Etched divider + copyright */}
           <div
             aria-hidden
-            className="mt-14 h-px bg-[#0d0d0e]/12 shadow-[0_1px_0_rgb(255_255_255/0.85)] dark:bg-white/10 dark:shadow-none"
+            className="mt-14 h-px bg-black/12 shadow-[0_1px_0_rgb(255_255_255/0.85)] dark:bg-white/10 dark:shadow-none"
           />
-          <p className="mt-6 text-[0.95rem] text-[#4d4e54] dark:text-[#a9aab0]">
+          <p className="mt-6 text-[0.95rem] text-black/70 dark:text-white/65">
             © {new Date().getFullYear()} Level141. All rights reserved.
           </p>
         </div>

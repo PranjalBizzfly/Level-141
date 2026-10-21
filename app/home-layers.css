@@ -8,13 +8,13 @@
 @media (prefers-reduced-motion: no-preference) {
   .layers {
     /* Depth behind the sheets while they turn or recede. */
-    background: #000;
+    background: var(--color-black, #000);
   }
   .layer {
     position: sticky;
     isolation: isolate;
     /* Black behind each sheet: as a covered sheet sinks back, the dark shows round it. */
-    background: #000;
+    background: var(--color-black, #000);
     /* Eased arrival. */
     --e: calc(1 - (1 - var(--in, 1)) * (1 - var(--in, 1)));
     will-change: transform;
@@ -397,7 +397,7 @@
 /* What the word hands on to: drawn in outline, the next link not yet reached. */
 .relay-outline {
   color: transparent;
-  -webkit-text-stroke: 1px rgb(255 255 255 / 0.75);
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--color-white) 75%, transparent);
 }
 /* Too fine at phone size: set it solid and quieter instead. */
 @media (max-width: 639.98px) {

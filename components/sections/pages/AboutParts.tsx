@@ -65,7 +65,7 @@ export function CounterHero({
   const p = value / 141;
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
+    <section className="photo-tone relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
       <div
         className="absolute inset-0 -z-10"
         style={{ clipPath: `inset(${(1 - p) * 50}% ${(1 - p) * 50}% round 0)`, opacity: 0.35 + 0.65 * p }}
@@ -126,7 +126,7 @@ export function SplitStatement({ left, right, sub }: { left: string; right: stri
       ) : null}
     </div>
   );
-  if (reduced) return <div className="overflow-hidden bg-black py-24 text-white sm:py-32">{body}</div>;
+  if (reduced) return <div className="overflow-hidden bg-black py-16 text-white sm:py-24">{body}</div>;
   return (
     <div ref={ref} className="relative h-[220lvh] bg-black text-white">
       <div className="sticky top-0 flex h-[100lvh] items-center overflow-hidden">{body}</div>
@@ -147,7 +147,7 @@ export function Triptych({
 }) {
   const [open, setOpen] = useState(items.length - 1);
   return (
-    <div className="bg-black py-24 text-white sm:py-32">
+    <div className="bg-black py-16 text-white sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Head label={label} title={title} dark />
         <div className="mt-14 flex flex-col gap-2 md:h-[30rem] md:flex-row">
@@ -167,7 +167,7 @@ export function Triptych({
                 }
                 style={{ flexBasis: 0 }}
               >
-                <span className={"text-sm tabular-nums " + (on ? "text-black/50" : "text-white/45")}>{n2(i)}</span>
+                <span className={"text-sm tabular-nums " + (on ? "text-black/60" : "text-white/60")}>{n2(i)}</span>
                 <span className="mt-10 block">
                   <span className="font-display block text-[clamp(1.8rem,3.4vw,3rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                     {it.lead}
@@ -207,7 +207,7 @@ export function SplitPanels({
 }) {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <div className="bg-black py-24 text-white sm:py-32">
+    <div className="bg-black py-16 text-white sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Head label={label} title={title} text={<p>{text}</p>} dark />
       </div>
@@ -222,7 +222,7 @@ export function SplitPanels({
               onMouseEnter={() => setOpen(i)}
               onFocus={() => setOpen(i)}
               onBlur={() => setOpen(null)}
-              className="group relative flex min-h-[70svh] min-w-0 flex-col justify-end overflow-hidden outline-none transition-[flex-grow] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white motion-reduce:transition-none md:min-h-0"
+              className="photo-tone group relative flex min-h-[70svh] min-w-0 flex-col justify-end overflow-hidden outline-none transition-[flex-grow] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white motion-reduce:transition-none md:min-h-0"
               style={{ flexGrow: grow, flexBasis: 0 }}
             >
               <Image
@@ -315,7 +315,7 @@ export function PrinciplesGrid({
   items: { name: string; body: string }[];
 }) {
   return (
-    <div className="bg-paper py-24 text-ink sm:py-32">
+    <div className="bg-paper py-16 text-ink sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Head label={label} title={title} />
         <ol className="mt-14 grid border-t border-ink/15 md:grid-cols-2">
@@ -324,7 +324,7 @@ export function PrinciplesGrid({
               key={it.name}
               className="grid grid-cols-[auto_1fr] gap-x-6 border-b border-ink/15 py-10 md:px-8 md:odd:border-r md:odd:pl-0 md:even:pr-0"
             >
-              <span className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-none tracking-[-0.05em] tabular-nums text-ink/20">
+              <span className="font-display text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-none tracking-[-0.05em] tabular-nums text-ink/45">
                 {n2(i)}
               </span>
               <div>

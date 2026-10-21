@@ -58,7 +58,7 @@ export function CinemaHero({
     if (el) setP(clamp(-el.getBoundingClientRect().top / el.offsetHeight));
   }, !reduced);
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
+    <section ref={ref} className="photo-tone relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
       <Image
         src={image}
         alt=""
@@ -84,7 +84,7 @@ export function CinemaHero({
           {children ? <div className="mt-8 [&>div]:!items-start">{children}</div> : null}
         </div>
       </div>
-      <div aria-hidden className="relative flex justify-center pb-6 text-[0.65rem] uppercase tracking-[0.3em] text-white/45">
+      <div aria-hidden className="relative flex justify-center pb-6 text-[0.65rem] uppercase tracking-[0.3em] text-white/60">
         <span className="flex flex-col items-center gap-2">
           Scroll
           <span className="relative h-8 w-px overflow-hidden bg-white/20">
@@ -119,7 +119,7 @@ export function QuoteStage({
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-28">
+      <div className="bg-black py-20 text-white sm:py-20">
         <div className="container-x">
           <Head label={label} title={title} text={text} dark />
           <ol className="mt-12 space-y-12">
@@ -188,7 +188,7 @@ export function Ledger({
   items: readonly { name: ReactNode; body?: ReactNode; meta?: ReactNode }[];
 }) {
   return (
-    <div className="container-x py-20 sm:py-28">
+    <div className="container-x py-20 sm:py-20">
       <Head label={label} title={title} text={text} />
       <ol className="mt-12 border-t border-current/15 sm:mt-16">
         {items.map((it, i) => (
@@ -196,7 +196,7 @@ export function Ledger({
             {/* A black band rises through the row on hover; the text inverts above it. */}
             <span aria-hidden className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-y-100" />
             <div className="relative grid gap-3 px-1 py-7 transition-colors duration-500 group-hover:text-paper sm:px-4 sm:py-9 lg:grid-cols-12 lg:items-baseline lg:gap-8">
-              <span className="text-sm tabular-nums opacity-50 lg:col-span-1">{n2(i)}</span>
+              <span className="text-sm tabular-nums opacity-60 lg:col-span-1">{n2(i)}</span>
               <h3 className="font-display text-[clamp(1.6rem,3.2vw,2.75rem)] font-medium leading-[1.05] tracking-[-0.035em] lg:col-span-5">{it.name}</h3>
               <div className="opacity-75 lg:col-span-5 lg:col-start-8 sm:text-lg">
                 {it.body}
@@ -229,7 +229,7 @@ export function FlipTiles({
 }) {
   const grid = { 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[cols];
   return (
-    <div className={(dark ? "bg-black text-white " : "") + "py-20 sm:py-28"}>
+    <div className={(dark ? "bg-black text-white " : "") + "py-20 sm:py-20"}>
       <div className="container-x">
         <Head label={label} title={title} text={text} dark={dark} />
         <ul className={"mt-12 grid gap-3 sm:mt-16 " + grid}>
@@ -237,7 +237,7 @@ export function FlipTiles({
             <FlipTile key={i} index={i} item={it} dark={dark} />
           ))}
         </ul>
-        <p className={"mt-6 text-sm " + (dark ? "text-white/45" : "text-muted")}>Hover or tap a tile to turn it over.</p>
+        <p className={"mt-6 text-sm " + (dark ? "text-white/60" : "text-muted")}>Hover or tap a tile to turn it over.</p>
       </div>
     </div>
   );
@@ -286,7 +286,7 @@ export function CompareSlider({ before, after }: { before: ReactNode; after: Rea
     if (r) setX(Math.min(92, Math.max(8, ((clientX - r.left) / r.width) * 100)));
   };
   return (
-    <div className="container-x py-20 sm:py-28">
+    <div className="container-x py-20 sm:py-20">
       <div
         ref={ref}
         className="relative h-[clamp(26rem,70svh,38rem)] touch-pan-y select-none overflow-hidden rounded-[1.75rem] border border-current/15"
@@ -337,7 +337,7 @@ export function FullBleed({ image, alt, caption }: { image: string; alt: string;
     setP(clamp((window.innerHeight - r.top) / (window.innerHeight + r.height)));
   }, !reduced);
   return (
-    <figure ref={ref} className="relative h-[clamp(22rem,85svh,56rem)] overflow-hidden bg-black">
+    <figure ref={ref} className="photo-tone relative h-[clamp(22rem,85svh,56rem)] overflow-hidden bg-black">
       <Image src={image} alt={alt} fill sizes="100vw" className="object-cover grayscale" style={{ scale: `${1.18 - 0.18 * p}` }} />
       {caption ? (
         <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent">

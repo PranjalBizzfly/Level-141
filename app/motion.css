@@ -497,6 +497,26 @@
       calc((1 - var(--e)) * var(--ox, 50%))
     );
   }
+  /* The section inside zooms gently into place from the logo window as it opens,
+     so the view travels through the logo into the section rather than cropping it. */
+  .stack-under__inner > * {
+    transform-origin: var(--ox, 50%) var(--oy, 50%);
+    scale: calc(0.82 + 0.18 * var(--e));
+  }
+  /* The section already fills a full screen here (for the opening), so its usual
+     top and bottom padding would only add empty space round the centred content. */
+  .stack-under__inner > section {
+    padding-block: 0;
+  }
+  /* …and the statement is set larger, to fill that screen rather than float in it. */
+  .stack-under__inner h2 {
+    font-size: clamp(2.4rem, 5.4vw, 5.5rem);
+    max-width: 18ch;
+  }
+  .stack-under__inner h2 + div {
+    max-width: 44rem;
+    font-size: clamp(1rem, 1.35vw, 1.25rem);
+  }
   .stack-under__spacer {
     height: 100lvh;
   }

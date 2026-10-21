@@ -49,8 +49,8 @@ export function HomeHero() {
       <div className="container-x pb-20 sm:pb-28">
         <div data-rise>
           <MediaSlot
-            src="/images/home-hero-staircase-muted.webp"
-            alt="A staircase rising into light"
+            src="/a1344a9a-db17-46db-96f9-8e11bea28008.png"
+            alt="A man on a terrace looking out over the Dubai skyline"
             label="Hero film or image — growth to the next level"
             className="aspect-[4/3] sm:aspect-[16/8] lg:aspect-[21/9]"
             priority

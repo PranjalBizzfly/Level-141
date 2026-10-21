@@ -58,7 +58,7 @@ export function PortalHero({
   const radius = 16 + e * 60;
 
   return (
-    <section className="bg-black text-white">
+    <section className="photo-tone bg-black text-white">
       <div ref={ref} className={reduced ? "" : "h-[190lvh]"}>
         <div className={(reduced ? "min-h-[100svh]" : "sticky top-0 h-[100lvh]") + " relative flex flex-col justify-end overflow-hidden"}>
           <div
@@ -125,7 +125,7 @@ export function QuestionFan({
 
   if (reduced) {
     return (
-      <div className="bg-paper py-20 text-ink sm:py-28">
+      <div className="bg-paper py-20 text-ink sm:py-20">
         <div className="container-x">
           <Head label={label} title={title} text={text} />
           <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
@@ -182,7 +182,7 @@ export function QuestionFan({
 function QCard({ item, i, n }: { item: { name: string; image: string }; i: number; n: number }) {
   return (
     <article className="flex aspect-[3/4.4] flex-col overflow-hidden rounded-[1.25rem] border border-line-strong bg-paper shadow-[0_24px_60px_-30px_rgb(0_0_0/0.45)]">
-      <div className="relative h-[52%] bg-black">
+      <div className="photo-tone relative h-[52%] bg-black">
         <Image src={item.image} alt="" fill sizes="15rem" className="object-cover opacity-85 grayscale" />
         <span aria-hidden className="absolute left-3 top-3 text-xs tabular-nums text-white/80">
           {n2(i)} / {String(n).padStart(2, "0")}
@@ -208,13 +208,13 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-28">
+      <div className="bg-black py-20 text-white sm:py-20">
         <div className="container-x">
           <Head label={label} title={title} dark />
           <ol className="mt-12 grid gap-10 border-t border-white/15 pt-10 sm:grid-cols-2 lg:grid-cols-5">
             {stages.map((s, i) => (
               <li key={s.name}>
-                <span className="text-sm tabular-nums text-white/50">{n2(i)}</span>
+                <span className="text-sm tabular-nums text-white/60">{n2(i)}</span>
                 <h3 className="font-display mt-2 text-[1.6rem] font-medium tracking-[-0.03em]">{s.name}</h3>
                 <p className="mt-3 text-white">{s.line}</p>
                 <p className="mt-2 text-white/65">{s.body}</p>
@@ -257,9 +257,9 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
                   style={{
                     left: `${50 + 50 * Math.cos(a)}%`,
                     top: `${50 + 50 * Math.sin(a)}%`,
-                    background: on ? "#fff" : "#000",
-                    color: on ? "#000" : "rgb(255 255 255 / 0.7)",
-                    borderColor: on ? "#fff" : "rgb(255 255 255 / 0.25)",
+                    background: on ? "var(--color-white)" : "var(--color-black)",
+                    color: on ? "var(--color-black)" : "color-mix(in oklab, var(--color-white) 70%, transparent)",
+                    borderColor: on ? "var(--color-white)" : "color-mix(in oklab, var(--color-white) 25%, transparent)",
                   }}
                 >
                   <span className="tabular-nums opacity-60">{n2(i)}</span>
@@ -268,7 +268,7 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
               );
             })}
             <div className="absolute inset-[22%] flex flex-col items-center justify-center text-center">
-              <p className="text-xs tabular-nums text-white/45">
+              <p className="text-xs tabular-nums text-white/60">
                 {n2(active)} / {String(n).padStart(2, "0")}
               </p>
               <p key={active} className="font-display mt-2 text-[clamp(0.95rem,2vw,1.6rem)] italic leading-tight tracking-[-0.02em] text-white">
@@ -303,7 +303,7 @@ export function ExpandRows({
   items: readonly { name: string; body: string; href: string }[];
 }) {
   return (
-    <div className="bg-black py-20 text-white sm:py-28 lg:py-32">
+    <div className="bg-black py-20 text-white sm:py-20 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} text={text} dark />
         <ul className="mt-14 border-t border-white/20">
@@ -318,11 +318,11 @@ export function ExpandRows({
                   className="absolute inset-0 origin-bottom scale-y-0 bg-white/[0.06] transition-transform duration-500 ease-out group-hover:scale-y-100 group-focus-visible:scale-y-100 motion-reduce:transition-none"
                 />
                 <span className="relative flex items-baseline gap-4 sm:gap-8">
-                  <span className="w-8 text-sm tabular-nums text-white/45">{n2(i)}</span>
+                  <span className="w-8 text-sm tabular-nums text-white/60">{n2(i)}</span>
                   <span className="font-display flex-1 text-[clamp(2rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.045em]">
                     {x.name}
                   </span>
-                  <span aria-hidden className="text-xl text-white/50 transition-transform duration-500 group-hover:translate-x-1 group-hover:text-white">
+                  <span aria-hidden className="text-xl text-white/60 transition-transform duration-500 group-hover:translate-x-1 group-hover:text-white">
                     →
                   </span>
                 </span>
@@ -428,7 +428,7 @@ export function VerticalTabs({
   const it = items[active];
 
   return (
-    <div className="py-20 sm:py-28 lg:py-32">
+    <div className="py-20 sm:py-20 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} />
         <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-12">
@@ -494,7 +494,7 @@ export function NecessaryList({ items }: { items: readonly string[] }) {
     <ol className="mt-14 grid border-t border-current/20 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((m, i) => (
         <li key={m} className="flex items-baseline gap-5 border-b border-current/20 py-6 sm:pr-8">
-          <span className="w-7 shrink-0 text-sm tabular-nums opacity-45">{n2(i)}</span>
+          <span className="w-7 shrink-0 text-sm tabular-nums opacity-60">{n2(i)}</span>
           <p className="font-display text-[clamp(1.4rem,2.4vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
             {m} <span className="font-sans text-base font-normal tracking-normal opacity-55">may be necessary</span>
           </p>

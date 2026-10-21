@@ -6,6 +6,7 @@ import { ScrollToggle } from "@/components/layout/ScrollToggle";
 import { themeScript } from "@/lib/theme";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ViewTransitions } from "@/components/motion/ViewTransitions";
+import { PageCurtain } from "@/components/layout/PageCurtain";
 import { Interactions } from "@/components/motion/Interactions";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Cursor } from "@/components/motion/Cursor";
@@ -16,6 +17,7 @@ import "./globals.css";
 import "./motion.css";
 import "./reference-motion.css";
 import "./layouts.css";
+import "./premium.css";
 import "./home-layers.css";
 import "./glass.css";
 import "lenis/dist/lenis.css";
@@ -111,6 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollToggle />
         <RevealObserver />
         <ViewTransitions />
+        <PageCurtain />
         <Interactions />
         <SmoothScroll />
         <Cursor />

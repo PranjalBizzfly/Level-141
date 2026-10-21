@@ -28,7 +28,7 @@ export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: Re
   const shift = reduced ? 0 : Math.max(arrived ? 0 : 1, p * 0.8);
   const settle = p === 0 ? "translate 1.2s cubic-bezier(.2,.8,.2,1), opacity 1.2s ease-out" : "none";
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
+    <section ref={ref} className="relative flex min-h-[68svh] sm:min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
       <div className="container-x relative pb-12 pt-40 sm:pb-16">
         <p className="text-sm uppercase tracking-[0.22em] text-white/60">{eyebrow}</p>
         <h1 className="font-display mt-6 text-[clamp(3rem,11vw,10rem)] font-medium leading-[0.92] tracking-[-0.045em]">
@@ -43,7 +43,7 @@ export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: Re
                   translate: `${dir * shift * 30}% 0`,
                   opacity: reduced ? 1 : 1 - shift * 0.9,
                   transition: reduced ? undefined : settle,
-                  ...(outlined ? { WebkitTextStroke: "1.5px #fff", WebkitTextFillColor: "transparent" } : null),
+                  ...(outlined ? { WebkitTextStroke: "1.5px var(--color-white)", WebkitTextFillColor: "transparent" } : null),
                 }}
               >
                 {line}
@@ -110,7 +110,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
   };
 
   return (
-    <div className="container-x py-20 sm:py-28">
+    <div className="container-x py-20 sm:py-20">
       <p className="text-sm uppercase tracking-[0.22em] text-ink/55">{label}</p>
       <h2 className="font-display mt-4 text-[clamp(2.2rem,5vw,4.5rem)] font-medium leading-[0.98] tracking-[-0.04em]">{title}</h2>
       <div role="tablist" aria-label={label} onKeyDown={onKey} className="mt-10 flex flex-wrap gap-2 border-b border-ink/15 pb-4">
@@ -149,7 +149,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
                 }}
                 className="flex flex-col gap-6 bg-paper p-6 sm:p-8"
               >
-                <span className="flex items-baseline justify-between gap-4 text-xs uppercase tracking-[0.18em] text-ink/50">
+                <span className="flex items-baseline justify-between gap-4 text-xs uppercase tracking-[0.18em] text-ink/60">
                   <span>{q.kicker}</span>
                   <span aria-hidden className="tabular-nums">{String(n + 1).padStart(2, "0")}</span>
                 </span>

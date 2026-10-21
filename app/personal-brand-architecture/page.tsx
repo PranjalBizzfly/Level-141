@@ -178,8 +178,8 @@ export default function PersonalBrandPage() {
             text="The strongest fit is not simply a person who wants to become famous. It is a person with genuine substance, a meaningful next-stage objective and sufficient credibility to convert architecture into authority."
           />
           <Marquee label="Ideal for" items={pbaAudience} />
-          <Reveal className="mt-16 max-w-3xl">
-            <p className="font-display text-[1.6rem] font-medium leading-[1.2] tracking-[-0.02em] sm:text-[2rem]">
+          <Reveal className="mt-16 border-t border-line pt-10 sm:mt-24 sm:pt-14 lg:ml-[33%]">
+            <p className="font-display max-w-4xl text-[clamp(1.7rem,3.3vw,3rem)] font-medium leading-[1.1] tracking-[-0.035em]">
               Your personal brand shouldn&apos;t simply document what you&apos;ve done.{" "}
               <span className="text-muted">It should position you for what you want to do next</span>
             </p>

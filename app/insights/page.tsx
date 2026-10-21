@@ -6,6 +6,17 @@ import { FilterTabs, TypeHero } from "@/components/sections/pages/InsightsParts"
 import { insightCategories, questionsWeAsk } from "@/lib/content";
 import { getPublishedInsights } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
+import { StoriesList } from "@/components/sections/Premium";
+
+/** Photographs behind the categories (decorative, greyscale). */
+const storyImages = [
+  "/images/home-strategist-compass.webp",
+  "/images/pba-hero-speaker.webp",
+  "/images/about-atrium-levels-muted.webp",
+  "/images/home-cards-grid-muted.webp",
+  "/images/pba-leader-skyline.webp",
+  "/images/how-strategy-table-muted.webp",
+];
 import { routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
@@ -59,7 +70,7 @@ export default function InsightsPage() {
         {/* Articles (shown only once real, approved articles exist) — a static editorial list */}
         {articles.length ? (
           <section aria-labelledby="latest-title" className="bg-black text-white">
-            <div className="container-x py-20 sm:py-28">
+            <div className="container-x py-20 sm:py-20">
               <h2 id="latest-title" className="sr-only">
                 Insights
               </h2>
@@ -97,28 +108,9 @@ export default function InsightsPage() {
         ) : null}
 
         {/* Categories — a static typographic index; each keeps its anchor for /insights#slug links */}
-        <section className="bg-paper text-ink">
-          <div className="container-x py-20 sm:py-28">
-            <h2 className="sr-only">Insight categories</h2>
-            <ol className="border-t border-ink">
-              {insightCategories.map((c, i) => (
-                <li
-                  key={c.slug}
-                  id={c.slug}
-                  className="grid scroll-mt-28 gap-4 border-b border-ink/15 py-8 sm:py-10 md:grid-cols-12 md:gap-8"
-                >
-                  <span aria-hidden className="text-sm tabular-nums text-ink/45 md:col-span-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-display text-[clamp(1.6rem,3.4vw,2.75rem)] font-medium leading-[1.02] tracking-[-0.035em] md:col-span-6">
-                    {c.name}
-                  </h3>
-                  <div className="leading-relaxed text-ink/70 md:col-span-5">{c.body}</div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+        <StoriesList
+          items={insightCategories.map((c, i) => ({ id: c.slug, name: c.name, body: c.body, image: storyImages[i % storyImages.length] }))}
+        />
 
         {/* Discovery questions — filtered by practice */}
         <section className="bg-paper text-ink">

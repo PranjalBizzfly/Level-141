@@ -30,7 +30,7 @@ export function RefSection({
     <section
       id={id}
       className={
-        "relative py-20 sm:py-28 lg:py-32 " +
+        "relative py-20 sm:py-20 lg:py-24 " +
         (tone === "ink" ? "on-dark bg-ink text-paper" : "bg-paper text-ink") +
         (enter ? ` enter-${enter}` : "")
       }

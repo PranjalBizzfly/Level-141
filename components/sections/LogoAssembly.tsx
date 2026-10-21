@@ -60,7 +60,7 @@ export function LogoAssembly() {
   const imgs = sets[set];
 
   return (
-    <section aria-label="Level141" className="overflow-hidden bg-black py-20 sm:py-28 lg:py-36">
+    <section aria-label="Level141" className="overflow-hidden bg-black py-20 sm:py-20 lg:py-36">
       <div ref={ref} data-open={open ? "" : undefined} className="container-x">
         <div className="mx-auto grid max-w-4xl grid-cols-5 items-end gap-2 pt-[14%] sm:gap-3">
           {from.map((f, i) => (

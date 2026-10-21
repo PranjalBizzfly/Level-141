@@ -178,8 +178,8 @@ export function Layers({ children, page }: { children: ReactNode; page?: LayerPa
       layers.forEach((el, i) => {
         // Earlier sections stay in front, so an arriving one turns in from behind them.
         el.style.zIndex = String(layers.length - i);
-        // Arrives over the first three quarters of a screen after its top edge enters.
-        const inn = clamp((vh - el.getBoundingClientRect().top) / (vh * 0.75));
+        // Lands by the time its top edge reaches the middle of the screen (no long, empty in-between).
+        const inn = clamp((vh - el.getBoundingClientRect().top) / (vh * 0.55));
         el.style.setProperty("--in", inn.toFixed(4));
         el.toggleAttribute("data-landed", inn >= 0.999);
       });
@@ -231,7 +231,7 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
 
   return (
     <div ref={ref} style={reduced ? undefined : { height: `${100 + n * 35}lvh` }}>
-      <div className={reduced ? "py-20 sm:py-28" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
+      <div className={reduced ? "py-20 sm:py-20" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
         <div className="container-x">
           {head}
           <ul className="mt-8 grid grid-cols-2 gap-2 [perspective:1600px] sm:mt-12 sm:gap-3 lg:grid-cols-3">

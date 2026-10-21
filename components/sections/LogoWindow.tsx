@@ -122,7 +122,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
         }
       >
         <div className="container-x flex flex-col items-center">
-          <div aria-hidden className="flex items-end pt-[3.2em] text-[clamp(1.25rem,5.2vw,4.75rem)]">
+          <div aria-hidden className="flex items-end pt-[1.2em] text-[clamp(1.25rem,5.2vw,4.75rem)]">
             <LogoWordHalf part="level" className="h-[1em] w-auto shrink-0" />
             <div
               className="logo-window__frame relative shrink-0 overflow-hidden"

@@ -62,7 +62,7 @@ export function CurtainHero({
   const shown = reduced || open;
   const ease = "transition-transform duration-[1400ms] ease-[cubic-bezier(.77,0,.18,1)]";
   return (
-    <section className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
+    <section className="photo-tone relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
       <Image src={image} alt="" fill priority sizes="100vw" className="object-cover grayscale" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/25" />
       {/* the two panels part from the centre */}
@@ -104,7 +104,7 @@ export function LineStatement({ lines, accent, sub }: { lines: readonly string[]
   const [ref, p] = useEnterProgress<HTMLDivElement>(reduced, 0.95, 0.55);
   const all = [...lines.map((t) => ({ t, a: false })), ...(accent ? [{ t: accent, a: true }] : [])];
   return (
-    <div ref={ref} className="bg-black py-24 text-white sm:py-36">
+    <div ref={ref} className="bg-black py-24 text-white sm:py-24">
       <div className="container-x">
         <p className="font-display max-w-5xl text-[clamp(2rem,4.8vw,4.6rem)] font-medium leading-[1.06] tracking-[-0.04em]">
           {all.map((x, i) => {
@@ -154,7 +154,7 @@ export function SpotlightGrid({
     el.style.setProperty("--on", "1");
   };
   return (
-    <div className="container-x py-20 sm:py-28">
+    <div className="container-x py-20 sm:py-20">
       <Head label={label} title={title} />
       <ul
         ref={grid}
@@ -208,16 +208,16 @@ export function Bridge({
   const [ref, p] = useEnterProgress<HTMLDivElement>(reduced, 0.85, 0.9);
   const n = items.length;
   return (
-    <div className="bg-black py-20 text-white sm:py-28">
+    <div className="bg-black py-20 text-white sm:py-20">
       <div className="container-x">
         <Head label={label} title={title} text={text} dark />
         <div ref={ref} className="mt-14 sm:mt-20">
           <svg aria-hidden viewBox="0 0 1000 160" preserveAspectRatio="none" className="hidden h-28 w-full md:block">
-            <path d="M0 150 Q500 -40 1000 150" fill="none" stroke="rgb(255 255 255 / 0.15)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+            <path d="M0 150 Q500 -40 1000 150" fill="none" stroke="currentColor" strokeOpacity={0.15} strokeWidth="1" vectorEffect="non-scaling-stroke" />
             <path
               d="M0 150 Q500 -40 1000 150"
               fill="none"
-              stroke="#fff"
+              stroke="currentColor"
               strokeWidth="2"
               vectorEffect="non-scaling-stroke"
               pathLength={1}
@@ -242,11 +242,11 @@ export function Bridge({
                     className="hidden w-px origin-top bg-white transition-transform duration-700 md:block md:self-center"
                     style={{ height: `${2 + h * 3}rem`, transform: `scaleY(${on ? 1 : 0})` }}
                   />
-                  <span className="text-xs tabular-nums text-white/45 md:mt-4">{n2(i)}</span>
+                  <span className="text-xs tabular-nums text-white/60 md:mt-4">{n2(i)}</span>
                   <div className="md:mt-2">
                     <h3 className="font-display text-xl font-medium tracking-[-0.02em]">{s.name}</h3>
                     <p className="mt-2 text-sm text-white/65">{s.body}</p>
-                    <p className="mt-3 text-xs uppercase tracking-[0.12em] text-white/45">{s.meta}</p>
+                    <p className="mt-3 text-xs uppercase tracking-[0.12em] text-white/60">{s.meta}</p>
                   </div>
                 </li>
               );
@@ -341,7 +341,7 @@ export function PillDetails({
   const [open, setOpen] = useState(0);
   const cur = items[open];
   return (
-    <div className="bg-black py-20 text-white sm:py-28">
+    <div className="bg-black py-20 text-white sm:py-20">
       <div className="container-x">
         <Head label={label} title={title} dark />
         <ul className="mt-12 flex flex-wrap gap-2 sm:mt-16">
@@ -370,11 +370,11 @@ export function PillDetails({
           className="mt-8 grid overflow-hidden rounded-3xl border border-white/15 sm:grid-cols-5"
         >
           <div key={cur.name} className="animate-rise p-7 sm:col-span-3 sm:p-12">
-            <span className="text-xs tabular-nums text-white/45">{n2(open)}</span>
+            <span className="text-xs tabular-nums text-white/60">{n2(open)}</span>
             <h3 className="font-display mt-6 text-[clamp(1.8rem,3.6vw,3rem)] font-medium leading-[1.02] tracking-[-0.035em]">{cur.name}</h3>
             <p className="mt-5 max-w-md text-white/70">{cur.body}</p>
           </div>
-          <div className="relative min-h-52 sm:col-span-2">
+          <div className="photo-tone relative min-h-52 sm:col-span-2">
             <Image key={cur.image} src={cur.image} alt="" fill sizes="(min-width: 640px) 40vw, 100vw" className="animate-fade object-cover grayscale" />
           </div>
         </div>
@@ -400,7 +400,7 @@ export function Staircase({
   const [ref, p] = useEnterProgress<HTMLOListElement>(reduced, 0.85, 1.1);
   const n = steps.length;
   return (
-    <div className="bg-black py-20 text-white sm:py-28">
+    <div className="bg-black py-20 text-white sm:py-20">
       <div className="container-x">
         <Head label={label} title={title} dark />
         <ol ref={ref} className="mt-14 flex flex-col-reverse sm:mt-20">
@@ -415,7 +415,7 @@ export function Staircase({
                   className="font-display py-3 pl-4 text-[clamp(1.05rem,2.2vw,1.7rem)] font-medium tracking-[-0.02em] transition-[opacity,transform] duration-500 sm:py-4"
                   style={{ opacity: local > 0.6 ? 1 : 0.15, transform: local > 0.6 ? "none" : "translateY(-12px)" }}
                 >
-                  <span className="mr-3 text-xs tabular-nums text-white/45">{n2(i)}</span>
+                  <span className="mr-3 text-xs tabular-nums text-white/60">{n2(i)}</span>
                   {s}
                 </p>
               </li>
@@ -435,7 +435,7 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
   const layer = (show: boolean) =>
     "col-start-1 row-start-1 transition-[opacity,filter] duration-700 " + (show ? "opacity-100 blur-0" : "pointer-events-none opacity-0 blur-md");
   return (
-    <div className="container-x py-20 sm:py-28">
+    <div className="container-x py-20 sm:py-20">
       <div
         className={
           "rounded-3xl p-7 transition-colors duration-700 sm:p-14 " + (isAfter ? "bg-black text-white" : "bg-paper text-ink ring-1 ring-line")
@@ -488,7 +488,7 @@ export function PanImage({ image, alt }: { image: string; alt: string }) {
   }, !reduced);
   const x = reduced ? -12.5 : -25 * p;
   return (
-    <div ref={ref} className="relative h-[60svh] min-h-80 overflow-hidden bg-black sm:h-[80svh]">
+    <div ref={ref} className="photo-tone relative h-[60svh] min-h-80 overflow-hidden bg-black sm:h-[80svh]">
       <div className="absolute inset-y-0 left-0 w-[133%] will-change-transform" style={{ transform: `translateX(${x}%)` }}>
         <Image src={image} alt={alt} fill sizes="133vw" className="object-cover grayscale" />
       </div>
@@ -498,15 +498,16 @@ export function PanImage({ image, alt }: { image: string; alt: string }) {
 
 /* ------------------------------------------------------------- PeakStatic */
 
+// Colours follow the section (light grey in the light theme, black in the dark).
 export function PeakStatic({ stages }: { stages: readonly { letter: string; name: string; question: string }[] }) {
   return (
-    <ol className="grid border-t border-white/20 sm:grid-cols-2 lg:grid-cols-4">
+    <ol className="grid border-t border-current/20 sm:grid-cols-2 lg:grid-cols-4">
       {stages.map((s, i) => (
-        <li key={s.letter} className="border-b border-white/20 py-8 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0">
-          <span className="text-xs tabular-nums text-white/45">{n2(i)}</span>
+        <li key={s.letter} className="border-b border-current/20 py-8 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0">
+          <span className="text-xs tabular-nums opacity-60">{n2(i)}</span>
           <p aria-hidden className="font-display mt-4 text-[clamp(5rem,11vw,9.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
           <h3 className="font-display mt-6 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
-          <p className="mt-3 text-sm text-white/60">{s.question}</p>
+          <p className="mt-3 text-sm opacity-75">{s.question}</p>
         </li>
       ))}
     </ol>

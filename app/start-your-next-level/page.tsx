@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HeroBackdrop } from "@/components/ui/Photo";
+import { FloatingDepth } from "@/components/sections/Premium";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { Reveal } from "@/components/ui/primitives";
@@ -30,7 +30,6 @@ export default async function ContactPage({ searchParams }: Props) {
         {/* Intro */}
         <div className="on-dark relative isolate overflow-hidden bg-ink px-5 pb-10 pt-32 text-paper sm:px-8 sm:pb-12 sm:pt-40 lg:col-span-5 lg:row-start-1 lg:px-14 lg:pb-0 lg:pt-44">
           {/* "Let's architect what's next." — a corridor opening into light. */}
-          <HeroBackdrop src="/images/contact-corridor-warm.webp" position="58% center" />
           <div className="relative">
             <p className="eyebrow animate-fade text-gold">Start your next level</p>
             <h1 id="contact-title" className="display mt-5 animate-rise text-[2.5rem] sm:mt-7 sm:text-6xl lg:text-[4.5rem]">
@@ -54,7 +53,9 @@ export default async function ContactPage({ searchParams }: Props) {
         </div>
 
         {/* Supporting information */}
-        <div className="on-dark bg-ink px-5 py-12 text-paper sm:px-8 lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:px-14 lg:pb-20 lg:pt-14">
+        <div className="on-dark relative isolate overflow-hidden bg-ink px-5 py-12 text-paper sm:px-8 lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:px-14 lg:pb-20 lg:pt-14">
+          {/* Photographs floating at different depths in the open space below. */}
+          <FloatingDepth />
           <div className="animate-fade [animation-delay:300ms]">
             <p className="eyebrow text-paper-muted">How Level141 works</p>
             <ol className="mt-5 space-y-4">

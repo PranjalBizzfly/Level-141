@@ -71,14 +71,14 @@ export function Relay({
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-28">
+      <div className="bg-black py-20 text-white sm:py-20">
         <div className="container-x">
           <p className="text-sm text-white/55">{label}</p>
           <h2 className="font-display mt-3 max-w-xl text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">{title}</h2>
           <ol className="mt-12 space-y-3">
             {steps.map((x) => (
               <li key={x.lead} className="font-display text-[clamp(1.6rem,4vw,3rem)] font-medium tracking-[-0.035em]">
-                {x.lead} <span className="text-white/45">{x.verb} {x.rest}</span>
+                {x.lead} <span className="text-white/60">{x.verb} {x.rest}</span>
               </li>
             ))}
           </ol>
@@ -203,7 +203,7 @@ export function WhySplit({
 
   if (reduced) {
     return (
-      <div className="container-x py-20 sm:py-28">
+      <div className="container-x py-20 sm:py-20">
         <p className="text-sm text-muted">{label}</p>
         <h2 className="font-display mt-3 max-w-xl text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">{title}</h2>
         <ol className="mt-12 grid gap-10 sm:grid-cols-2">
@@ -225,7 +225,7 @@ export function WhySplit({
         {/* The photograph for the reason being read, with its numeral. */}
         {/* Photographs stacked like pages: as a reason is finished, its photograph
             turns away on its left edge (3D), revealing the next one beneath. */}
-        <div className="relative overflow-hidden bg-black [perspective:1800px]">
+        <div className="photo-tone relative overflow-hidden bg-black [perspective:1800px]">
           {items.map((x, i) => {
             const t = turn(i);
             const gone = i < n - 1 && t >= 1;
@@ -312,27 +312,31 @@ export function WhySplit({
                   >
                     <span
                       aria-hidden
-                      className="absolute inset-0 origin-top bg-ink transition-transform duration-500 ease-out"
-                      style={{
-                        clipPath: `inset(0 ${(1 - (on ? f : 0)) * 100}% 0 0)`,
-                        transform: on ? "rotateX(0deg)" : "rotateX(-90deg)",
-                      }}
-                    />
-                    <span
-                      aria-hidden
                       className="absolute bottom-0 left-0 h-[2px] w-full origin-left bg-ink"
                       style={{ transform: `scaleX(${i < active ? 1 : 0})`, transition: "transform 600ms ease-out" }}
                     />
-                    {/* White text with "difference": dark on the page, white on the band. */}
-                    <span className="relative w-6 tabular-nums text-white mix-blend-difference">{n2(i)}</span>
+                    {/* Ink text on the page; the band carries its own paper-coloured copy, clipped with it. */}
+                    <span className="relative w-6 tabular-nums text-ink">{n2(i)}</span>
                     <span
-                      className="relative flex-1 text-white mix-blend-difference transition-opacity duration-500"
+                      className="relative flex-1 text-ink transition-opacity duration-500"
                       style={{ opacity: on || i < active ? 1 : 0.5 }}
                     >
                       {x.name.replace(/\.$/, "")}
                     </span>
-                    <span aria-hidden className="relative tabular-nums text-xs text-white mix-blend-difference" style={{ opacity: on ? 1 : 0 }}>
+                    <span aria-hidden className="relative tabular-nums text-xs text-ink" style={{ opacity: on ? 1 : 0 }}>
                       {Math.round(f * 100)}%
+                    </span>
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 flex origin-top items-center gap-4 bg-ink px-3 text-paper transition-transform duration-500 ease-out"
+                      style={{
+                        clipPath: `inset(0 ${(1 - (on ? f : 0)) * 100}% 0 0)`,
+                        transform: on ? "rotateX(0deg)" : "rotateX(-90deg)",
+                      }}
+                    >
+                      <span className="w-6 tabular-nums">{n2(i)}</span>
+                      <span className="flex-1">{x.name.replace(/\.$/, "")}</span>
+                      <span className="tabular-nums text-xs">{Math.round(f * 100)}%</span>
                     </span>
                   </button>
                 </li>
@@ -391,7 +395,7 @@ export function InsightGallery({
         >
           <Link
             href={it.href}
-            className="group relative flex h-[min(62lvh,34rem)] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-black p-6 text-white sm:p-8"
+            className="photo-tone group relative flex h-[min(62lvh,34rem)] flex-col justify-between overflow-hidden rounded-[1.5rem] bg-black p-6 text-white sm:p-8"
           >
             <Image
               src={it.image}
@@ -431,7 +435,7 @@ export function InsightGallery({
 
   if (!pin) {
     return (
-      <div className="py-20 sm:py-28">
+      <div className="py-20 sm:py-20">
         <div className="container-x">{head}</div>
         <div className="mt-10 pl-[max(1.25rem,calc((100vw-80rem)/2))] sm:mt-14">{cards}</div>
       </div>

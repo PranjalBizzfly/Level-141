@@ -57,17 +57,17 @@ export function OutlineFill({ text, accent, sub }: { text: string; accent?: stri
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
     color: "transparent",
-    WebkitTextStroke: "1px rgb(255 255 255 / 0.55)",
+    WebkitTextStroke: "1px color-mix(in oklab, var(--color-white) 55%, transparent)",
   });
   return (
-    <div ref={ref} className="bg-black py-24 text-white sm:py-36">
+    <div ref={ref} className="bg-black py-24 text-white sm:py-24">
       <div className="container-x">
         <p className="font-display max-w-5xl text-[clamp(2.1rem,5.4vw,5.25rem)] font-medium leading-[1.02] tracking-[-0.045em]">
-          <span style={fill("#fff")}>{text}</span>
+          <span style={fill("var(--color-white)")}>{text}</span>
           {accent ? (
             <>
               {" "}
-              <span style={fill("rgb(255 255 255 / 0.5)")}>{accent}</span>
+              <span style={fill("color-mix(in oklab, var(--color-white) 50%, transparent)")}>{accent}</span>
             </>
           ) : null}
         </p>
@@ -90,7 +90,7 @@ export function SpotlightText({ text, accent, sub }: { text: string; accent?: st
   );
   const cls = "font-display max-w-5xl text-[clamp(2rem,4.8vw,4.6rem)] font-medium leading-[1.05] tracking-[-0.04em]";
   return (
-    <div className="bg-black py-24 text-white sm:py-36">
+    <div className="bg-black py-24 text-white sm:py-24">
       <div className="container-x">
         <div
           ref={ref}
@@ -151,7 +151,7 @@ export function ScanRows({
     setOpen(best);
   }, !reduced);
   return (
-    <div className="bg-paper py-20 text-ink sm:py-28">
+    <div className="bg-paper py-20 text-ink sm:py-20">
       <div className="container-x">
         <Head label={label} title={title} text={text} />
         <div className="relative mt-12 sm:mt-16">
@@ -211,7 +211,7 @@ export function PeelStack({
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-28">
+      <div className="bg-black py-20 text-white sm:py-20">
         <div className="container-x">
           <Head label={label} title={title} dark />
           <ol className="mt-12 grid gap-10 sm:grid-cols-2">
@@ -247,7 +247,7 @@ export function PeelStack({
               <article
                 key={x.name}
                 aria-hidden={k >= 1 || undefined}
-                className="absolute inset-x-0 top-0 mx-auto flex h-full max-w-6xl origin-top flex-col justify-between rounded-[1.75rem] border border-white/15 bg-[#0d0d0d] p-7 sm:p-12"
+                className="absolute inset-x-0 top-0 mx-auto flex h-full max-w-6xl origin-top flex-col justify-between rounded-[1.75rem] border border-white/15 bg-black p-7 sm:p-12"
                 style={{
                   zIndex: n - i,
                   transform: `translateY(${Math.min(depth, 3) * 14}px) scale(${1 - Math.min(depth, 3) * 0.03}) rotateX(${e * 100}deg)`,
@@ -295,7 +295,7 @@ export function Checklist({ label, title, items }: { label?: string; title?: Rea
   }, [reduced]);
   const done = reduced ? items.length : seen;
   return (
-    <div className="bg-paper py-20 text-ink sm:py-28">
+    <div className="bg-paper py-20 text-ink sm:py-20">
       <div className="container-x grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
@@ -359,13 +359,13 @@ export function Ring3D({
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-28">
+      <div className="bg-black py-20 text-white sm:py-20">
         <div className="container-x">
           <Head label={label} title={title} text={text} dark />
           <ol className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {items.map((x, i) => (
               <li key={x.name} className="rounded-[1.25rem] border border-white/15 p-6">
-                <span className="text-sm tabular-nums text-white/50">{n2(i)}</span>
+                <span className="text-sm tabular-nums text-white/60">{n2(i)}</span>
                 <h3 className="font-display mt-6 text-[1.4rem] font-medium tracking-[-0.03em]">{x.name}</h3>
                 <p className="mt-3 text-white/65">{x.body}</p>
               </li>
@@ -394,9 +394,9 @@ export function Ring3D({
                 className="absolute inset-0 flex flex-col justify-between rounded-[1.25rem] border p-5 transition-[background-color,border-color,color] duration-500 [backface-visibility:hidden] sm:p-6"
                 style={{
                   transform: `rotateY(${i * step}deg) translateZ(var(--r))`,
-                  background: i === front ? "#fff" : "#0d0d0d",
-                  color: i === front ? "#000" : "#fff",
-                  borderColor: i === front ? "#fff" : "rgb(255 255 255 / 0.15)",
+                  background: i === front ? "var(--color-white)" : "var(--color-black)",
+                  color: i === front ? "var(--color-black)" : "var(--color-white)",
+                  borderColor: i === front ? "var(--color-white)" : "color-mix(in oklab, var(--color-white) 15%, transparent)",
                 }}
               >
                 <span className="text-sm tabular-nums opacity-55">
@@ -434,7 +434,7 @@ export function CadenceGrid({
   const scrolled = Math.min(items.length - 1, Math.floor(clamp((p - 0.25) / 0.45) * items.length));
   const active = hover ?? (reduced ? -1 : scrolled);
   return (
-    <div ref={ref} className="bg-paper py-20 text-ink sm:py-28">
+    <div ref={ref} className="bg-paper py-20 text-ink sm:py-20">
       <div className="container-x">
         <Head label={label} title={title} />
         <ol className="mt-12 border-t border-current/15 sm:mt-16" onPointerLeave={() => setHover(null)}>

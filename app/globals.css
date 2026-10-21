@@ -14,20 +14,20 @@
 --------------------------------------------------------------------------- */
 @theme {
   --color-ink: #000000;
-  --color-ink-2: #141414;
-  --color-ink-3: #262626;
+  --color-ink-2: #000000;
+  --color-ink-3: rgb(0 0 0 / 0.85);
   /* Brand palette (guidelines): #FFFFFF and #000000; greys are tints for lines
      and secondary text only. */
   --color-paper: #ffffff;
-  --color-paper-2: #f5f5f5;
+  --color-paper-2: #ffffff;
   /* Raised card surface. */
   --color-surface: #ffffff;
-  --color-stone: #cccccc;
-  /* 7:1 on white. */
-  --color-muted: #4c4c4c;
-  --color-muted-dark: #a3a3a3;
+  --color-stone: rgb(0 0 0 / 0.2);
+  /* 7:1 on white. Greys are the brand black at reduced opacity. */
+  --color-muted: rgb(0 0 0 / 0.7);
+  --color-muted-dark: rgb(255 255 255 / 0.65);
   /* Secondary text on re-scoped surfaces (≥4.5:1 in both themes). */
-  --color-paper-muted: #595959;
+  --color-paper-muted: rgb(0 0 0 / 0.65);
   /* Borders: the whole of each theme is one tone, so every border shares
      one hue — black hairlines here, white hairlines in dark mode. */
   --color-line: rgb(0 0 0 / 0.12);
@@ -35,7 +35,7 @@
   --color-line-dark: rgb(0 0 0 / 0.12);
   --color-line-dark-strong: rgb(0 0 0 / 0.24);
   --color-gold: #000000;
-  --color-gold-soft: #262626;
+  --color-gold-soft: rgb(0 0 0 / 0.85);
   --color-gold-ink: #000000;
   --color-error: #b42318;
   --color-error-dark: #b42318;
@@ -85,11 +85,11 @@
    Light theme: sections that were dark become a whisper of grey, with black
    type and the black logo, so the whole page stays white and monochrome. */
 :root:not([data-theme="dark"]) :is(body > header, body > footer, .on-dark) {
-  --color-ink: #f7f7f7;
+  --color-ink: #ffffff;
   --color-ink-2: #ffffff;
-  --color-ink-3: #ececec;
+  --color-ink-3: rgb(0 0 0 / 0.06);
   --color-paper: #000000;
-  --color-paper-muted: #595959;
+  --color-paper-muted: rgb(0 0 0 / 0.65);
 }
 :root:not([data-theme="dark"]) body > header {
   --color-ink: #ffffff;
@@ -99,24 +99,24 @@
 [data-theme="dark"] {
   color-scheme: dark;
   --color-paper: #000000;
-  --color-paper-2: #0f0f0f;
-  /* Shade ladder: #000 hero & bands → #0a0a0a / #0f0f0f alternating sections
-     → #1a1a1a cards → #242424 raised. Each step reads on the one below. */
-  --color-surface: #1a1a1a;
-  --color-stone: #2e2e2e;
+  --color-paper-2: #000000;
+  /* Brand palette only: every surface is #000000; cards and raised layers
+     are the brand white at low opacity over it. */
+  --color-surface: rgb(255 255 255 / 0.05);
+  --color-stone: rgb(255 255 255 / 0.2);
   --color-ink: #ffffff;
-  --color-ink-2: #ededed;
-  --color-ink-3: #d4d4d4;
-  /* 8.6:1 on black, 7.5:1 on cards. */
-  --color-muted: #a8a8a8;
-  --color-paper-muted: #a8a8a8;
+  --color-ink-2: #ffffff;
+  --color-ink-3: rgb(255 255 255 / 0.85);
+  /* 8.6:1 on black. Greys are the brand white at reduced opacity. */
+  --color-muted: rgb(255 255 255 / 0.68);
+  --color-paper-muted: rgb(255 255 255 / 0.68);
   /* White hairlines, strong enough to read on black and on cards. */
   --color-line: rgb(255 255 255 / 0.16);
   --color-line-strong: rgb(255 255 255 / 0.3);
   --color-line-dark: rgb(255 255 255 / 0.16);
   --color-line-dark-strong: rgb(255 255 255 / 0.3);
   --color-gold: #ffffff;
-  --color-gold-soft: #d4d4d4;
+  --color-gold-soft: rgb(255 255 255 / 0.85);
   --color-gold-ink: #ffffff;
   --color-error: #f97066;
   --color-error-dark: #f97066;
@@ -126,8 +126,8 @@
    hairline; cards inside sit just above it. */
 [data-theme="dark"] :is(body > header, body > footer, .on-dark) {
   --color-ink: #000000;
-  --color-ink-2: #1a1a1a;
-  --color-ink-3: #242424;
+  --color-ink-2: rgb(255 255 255 / 0.06);
+  --color-ink-3: rgb(255 255 255 / 0.1);
   --color-paper: #ffffff;
 }
 [data-theme="dark"] body > header {
@@ -136,15 +136,15 @@
 /* Highlighted cards and pills (dark-styled elements that are not whole
    sections) sit one step above the regular cards, so they always read. */
 [data-theme="dark"] .on-dark:not(section, header, footer) {
-  --color-ink: #2a2a2a;
-  --color-ink-2: #333333;
+  --color-ink: rgb(255 255 255 / 0.1);
+  --color-ink-2: rgb(255 255 255 / 0.14);
 }
-:root:not([data-theme="dark"]) .on-dark:not(section, header, footer) {
-  --color-ink: #ededed;
+.on-dark:not(section, header, footer):where(:root:not([data-theme="dark"]) *) {
+  --color-ink: rgb(0 0 0 / 0.07);
 }
 /* Sections using the card tone sit one shade above black, not at card level. */
 [data-theme="dark"] section[class~="bg-surface"] {
-  background-color: #0a0a0a;
+  background-color: #000000;
 }
 [data-theme="dark"] section:is([class~="bg-paper"], [class~="bg-paper-2"], [class~="bg-surface"]) {
   border-top: 1px solid var(--color-line);
@@ -414,6 +414,57 @@
 body > header[data-menu-open] {
   --color-ink: #000000 !important;
   --color-paper: #ffffff !important;
-  --color-paper-muted: #a3a3a3 !important;
+  --color-paper-muted: rgb(255 255 255 / 0.65) !important;
   background: transparent !important;
+}
+
+/* Theme follow-through for page content. Sections that hard-code black
+   backgrounds and white text (bg-black, text-white, from-black/…) read these
+   two variables, so in the light theme they are swapped inside <main>: dark
+   blocks become light, white type becomes black, photo veils turn light.
+   Pairs that contrast with each other stay contrasted (just inverted). The
+   dark theme is untouched; header, footer and overlays keep true colours. */
+:root:not([data-theme="dark"]) main {
+  --color-black: #fff;
+  --color-white: #000;
+}
+
+/* ---------------------------------------------------------------------------
+   Light theme refinement (dark theme untouched — every rule is light-scoped).
+--------------------------------------------------------------------------- */
+
+/* Photographs keep their true tones. The <main> swap above would turn their
+   dark veils into white fog and their white captions black, washing every
+   image out; `photo-tone` blocks (image + veil + caption) opt back out, so
+   photography reads crisp and cinematic on the white page. */
+:root:not([data-theme="dark"]) main .photo-tone {
+  --color-black: #000;
+  --color-white: #fff;
+}
+:root:not([data-theme="dark"]) main .photo-tone img {
+  filter: grayscale(1) contrast(1.08);
+}
+
+/* A neutral for alternating sections, so the page has rhythm instead of one
+   flat white field. */
+:root:not([data-theme="dark"]) {
+  --color-paper-2: #f4f4f3;
+}
+:root:not([data-theme="dark"]) main :is(section, div)[class~="bg-paper-2"] {
+  border-block: 1px solid var(--color-line);
+}
+
+/* Cards: a hairline plus soft, layered depth that lifts on hover. Pills and
+   round buttons (rounded-full) keep their flat outline. */
+:root:not([data-theme="dark"]) main :is(article, li, a, div)[class*="rounded-"][class*="border"]:not([class*="rounded-full"]) {
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -12px rgb(0 0 0 / 0.12);
+}
+:root:not([data-theme="dark"]) main :is(article, a)[class*="rounded-"][class*="border"]:not([class*="rounded-full"]):hover,
+:root:not([data-theme="dark"]) main a:hover > [class*="rounded-"][class*="border"]:not([class*="rounded-full"]) {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.05), 0 22px 48px -18px rgb(0 0 0 / 0.22);
+}
+
+/* Round buttons and arrow controls get a soft lift on hover. */
+:root:not([data-theme="dark"]) :is(a, button)[class*="rounded-full"][class*="border"]:hover {
+  box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.3);
 }
