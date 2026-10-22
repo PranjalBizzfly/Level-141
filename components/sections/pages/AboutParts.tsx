@@ -26,7 +26,7 @@ function Head({ label, title, text, dark }: { label?: string; title?: ReactNode;
         <div className="max-w-4xl @4xl:col-span-6">
           {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
           {title ? (
-            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+            <h2 className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
           ) : null}
         </div>
         {text ? (
@@ -82,13 +82,13 @@ export function CounterHero({
       </div>
       <p
         aria-hidden
-        className="font-display pointer-events-none absolute inset-x-0 top-[12svh] select-none text-center text-[clamp(7rem,34vw,30rem)] font-medium leading-none tracking-[-0.07em] tabular-nums text-white [text-shadow:0_8px_60px_rgb(0_0_0/0.55)]"
+        className="font-display pointer-events-none absolute inset-x-0 top-[12svh] select-none text-center text-[clamp(5.95rem,23.8vw,21rem)] font-medium leading-none tracking-[-0.07em] tabular-nums text-white [text-shadow:0_8px_60px_rgb(0_0_0/0.55)]"
       >
         {value}
       </p>
       <div className="mx-auto w-full max-w-7xl px-5 pb-14 sm:px-8 sm:pb-20">
         <p className="text-sm text-white/60">{eyebrow}</p>
-        <h1 className="font-display mt-6 text-[clamp(2.6rem,7vw,6rem)] font-medium leading-[0.98] tracking-[-0.045em]">{title}</h1>
+        <h1 className="font-display mt-6 text-[clamp(2.21rem,4.34vw,3.72rem)] font-medium leading-[0.98] tracking-[-0.045em]">{title}</h1>
         <div className="mt-8 grid gap-12 md:grid-cols-[1fr_auto] md:items-end">
           <div className="max-w-2xl text-lg text-white/75">{intro}</div>
           {children}
@@ -119,7 +119,7 @@ export function SplitStatement({
   const off = (1 - p) * 8;
   const body = (
     <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
-      <h2 className="font-display text-[clamp(2rem,6vw,5.4rem)] font-medium leading-[1.02] tracking-[-0.045em]">
+      <h2 className="font-display text-[clamp(1.7rem,3.72vw,3.35rem)] font-medium leading-[1.02] tracking-[-0.045em]">
         <span className="block" style={{ transform: `translateX(${-off}vw)`, opacity: 0.55 + 0.45 * p }}>
           {left}
         </span>
@@ -141,7 +141,7 @@ export function SplitStatement({
           style={{ opacity: reduced ? 1 : 0.55 + 0.45 * clamp((prog - 0.45) / 0.25) }}
         >
           {aside ? (
-            <div className="font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em] lg:col-span-5">
+            <div className="font-display text-[clamp(1.6rem,2.34vw,2.16rem)] font-medium leading-[1.1] tracking-[-0.03em] lg:col-span-5">
               {aside}
             </div>
           ) : null}
@@ -212,7 +212,7 @@ export function Triptych({
                   </>
                 ) : null}
                 <span className="relative block">
-                  <span className="font-display block text-[clamp(1.8rem,3.4vw,3rem)] font-medium leading-[1.02] tracking-[-0.04em]">
+                  <span className="font-display block text-[clamp(1.66rem,2.72vw,2.4rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                     {it.lead}
                   </span>
                   {it.rest ? (
@@ -277,7 +277,7 @@ export function SplitPanels({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
               <div className="relative p-8 sm:p-14">
-                <h3 className="font-display text-[clamp(1.6rem,3vw,2.8rem)] font-medium leading-[1.04] tracking-[-0.035em]">
+                <h3 className="font-display text-[clamp(1.6rem,2.4vw,2.24rem)] font-medium leading-[1.04] tracking-[-0.035em]">
                   {it.name}
                 </h3>
                 <div
@@ -369,7 +369,7 @@ export function PrinciplesGrid({
                 key={it.name}
                 className="grid gap-3 border-b border-ink/15 py-10 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-8 sm:py-12"
               >
-                <h3 className="font-display text-[clamp(1.4rem,2.3vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
+                <h3 className="font-display text-[clamp(1.4rem,2.07vw,1.8rem)] font-medium leading-[1.1] tracking-[-0.03em]">
                   {it.name}
                 </h3>
                 <p className="text-muted sm:text-lg">{it.body}</p>

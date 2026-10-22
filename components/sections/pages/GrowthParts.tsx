@@ -35,7 +35,7 @@ function Head({ label, title, text, dark }: { label?: string; title?: ReactNode;
         <div className={text ? "max-w-4xl @4xl:col-span-6" : "max-w-6xl @4xl:col-span-11"}>
           {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
           {title ? (
-            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+            <h2 className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
           ) : null}
         </div>
         {text ? (
@@ -72,35 +72,38 @@ export function CurtainHero({
   const shown = reduced || open;
   const ease = "transition-transform duration-[1400ms] ease-[cubic-bezier(.77,0,.18,1)]";
   return (
-    <section className="photo-tone relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-black text-white">
-      <Image src={image} alt={altFor(image)} fill priority sizes="100vw" className="object-cover grayscale" />
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/25" />
+    // One composed first screen: the photograph full-bleed, darkened from the left, and the
+    // label, headline, rule, intro and action stacked on the left.
+    <section className="on-dark photo-tone relative flex min-h-[100svh] items-center overflow-hidden bg-black text-white">
+      <Image src={image} alt={altFor(image)} fill priority sizes="100vw" className="object-cover object-[70%_center] grayscale" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/10" />
       {/* the two panels part from the centre */}
       <div aria-hidden className={"absolute inset-y-0 left-0 z-10 w-1/2 bg-black " + ease} style={{ transform: shown ? "translateX(-101%)" : "none" }} />
       <div aria-hidden className={"absolute inset-y-0 right-0 z-10 w-1/2 bg-black " + ease} style={{ transform: shown ? "translateX(101%)" : "none" }} />
-      <div className="container-x relative z-20 grid gap-14 pb-14 pt-40 sm:pb-20 lg:grid-cols-12 lg:items-end lg:gap-12">
-        <div className="lg:col-span-8">
+      <div className="container-x relative z-20 w-full pb-20 pt-36 sm:pt-40">
+        <div className="max-w-2xl">
           <p
-            className="text-sm uppercase tracking-[0.22em] text-white/60 transition-opacity duration-700 [transition-delay:700ms]"
-            style={{ opacity: shown ? 1 : 0 }}
+            className="text-[0.8rem] uppercase tracking-[0.32em] text-white/65 transition-opacity duration-700 [transition-delay:700ms]"
+            style={{ opacity: shown ? 1 : 0, letterSpacing: "0.32em" }}
           >
             {eyebrow}
           </p>
           <div className="overflow-hidden pb-2">
             <h1
-              className="font-display mt-8 text-[clamp(2.3rem,6.2vw,6.25rem)] font-medium leading-[0.95] tracking-[-0.045em] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(.2,.7,.1,1)] [transition-delay:850ms] [&_.serif-accent]:text-white/55"
+              className="font-display mt-8 text-[clamp(2.6rem,4.6vw,4.6rem)] font-normal leading-[1.08] tracking-[-0.025em] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(.2,.7,.1,1)] [transition-delay:850ms]"
               style={{ transform: shown ? "none" : "translateY(60%)", opacity: shown ? 1 : 0 }}
             >
               {title}
             </h1>
           </div>
-        </div>
-        <div
-          className="transition-[transform,opacity] duration-1000 [transition-delay:1200ms] lg:col-span-4 lg:pb-3"
-          style={{ transform: shown ? "none" : "translateY(24px)", opacity: shown ? 1 : 0 }}
-        >
-          {intro ? <div className="text-white/75 [&_p]:leading-relaxed">{intro}</div> : null}
-          {children ? <div className="mt-10">{children}</div> : null}
+          <div
+            className="transition-[transform,opacity] duration-1000 [transition-delay:1200ms]"
+            style={{ transform: shown ? "none" : "translateY(24px)", opacity: shown ? 1 : 0 }}
+          >
+            <span aria-hidden className="mt-10 block h-px w-12 bg-white/45" />
+            {intro ? <div className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{intro}</div> : null}
+            {children ? <div className="mt-10">{children}</div> : null}
+          </div>
         </div>
       </div>
     </section>
@@ -116,7 +119,7 @@ export function LineStatement({ lines, accent, sub }: { lines: readonly string[]
   return (
     <div ref={ref} className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
-        <p className="font-display max-w-5xl text-[clamp(2rem,4.8vw,4.6rem)] font-medium leading-[1.06] tracking-[-0.04em]">
+        <p className="font-display max-w-5xl text-[clamp(1.7rem,2.98vw,2.85rem)] font-medium leading-[1.06] tracking-[-0.04em]">
           {all.map((x, i) => {
             const local = clamp(p * all.length - i);
             return (
@@ -164,7 +167,7 @@ export function SpotlightGrid({
     el.style.setProperty("--on", "1");
   };
   return (
-    <div className="container-x py-20 sm:py-24 lg:py-24">
+    <div className="container-x py-24 sm:py-32 lg:py-40">
       <Head label={label} title={title} />
       <ul
         ref={grid}
@@ -220,7 +223,7 @@ export function Bridge({
     <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} text={text} dark />
-        <div ref={ref} className="mt-12 sm:mt-16">
+        <div ref={ref} className="mt-16 sm:mt-24">
           <svg aria-hidden viewBox="0 0 1000 160" preserveAspectRatio="none" className="hidden h-28 w-full lg:block">
             <path d="M0 150 Q500 -40 1000 150" fill="none" stroke="currentColor" strokeOpacity={0.15} strokeWidth="1" vectorEffect="non-scaling-stroke" />
             <path
@@ -284,7 +287,7 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
     return (
       <ul aria-label={label} className="mt-12 divide-y divide-line border-y border-line">
         {items.map((t) => (
-          <li key={t} className="font-display py-7 text-[clamp(2rem,5vw,4rem)] font-medium tracking-[-0.03em]">{t}</li>
+          <li key={t} className="font-display py-7 text-[clamp(1.7rem,3.1vw,2.48rem)] font-medium tracking-[-0.03em]">{t}</li>
         ))}
       </ul>
     );
@@ -301,7 +304,7 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
         {items.map((t) => <li key={t}>{t}</li>)}
       </ul>
       <div aria-hidden className="flex items-start">
-        <div className="relative h-[3.2em] min-w-0 flex-1 overflow-hidden font-display text-[clamp(2.1rem,5vw,4.75rem)] font-medium leading-[1.05] sm:h-[2.2em] tracking-[-0.035em]">
+        <div className="relative h-[3.2em] min-w-0 flex-1 overflow-hidden font-display text-[clamp(1.78rem,3.1vw,2.94rem)] font-medium leading-[1.05] sm:h-[2.2em] tracking-[-0.035em]">
           {items.map((t, k) => {
             const d = k - i;
             return (
@@ -378,7 +381,7 @@ export function PillDetails({
         >
           <div key={cur.name} className="animate-rise p-9 sm:col-span-3 sm:p-16">
             <span className="text-xs tabular-nums text-white/60">{n2(open)}</span>
-            <h3 className="font-display mt-8 text-[clamp(1.8rem,3.6vw,3rem)] font-medium leading-[1.02] tracking-[-0.035em]">{cur.name}</h3>
+            <h3 className="font-display mt-8 text-[clamp(1.66rem,2.88vw,2.4rem)] font-medium leading-[1.02] tracking-[-0.035em]">{cur.name}</h3>
             <p className="mt-6 max-w-lg text-white/70">{cur.body}</p>
           </div>
           <div className="photo-tone relative min-h-52 sm:col-span-2">
@@ -421,7 +424,7 @@ export function Staircase({
                 <span aria-hidden className="absolute bottom-0 left-0 h-full w-px origin-bottom bg-white" style={{ transform: `scaleY(${clamp(local * 2)})` }} />
                 <span aria-hidden className="absolute left-0 top-0 h-px w-full origin-left bg-white" style={{ transform: `scaleX(${clamp(local * 2 - 1)})` }} />
                 <p
-                  className="font-display py-3 pl-4 text-[clamp(1.35rem,2.6vw,2.15rem)] leading-tight font-medium tracking-[-0.02em] transition-[opacity,transform] duration-500 sm:py-4"
+                  className="font-display py-3 pl-4 text-[clamp(1.35rem,2.34vw,1.94rem)] leading-tight font-medium tracking-[-0.02em] transition-[opacity,transform] duration-500 sm:py-4"
                   style={{ opacity: local > 0.6 ? 1 : 0.6, transform: local > 0.6 ? "none" : "translateY(-6px)" }}
                 >
                   <span className="mr-3 text-base tabular-nums text-white/75">{n2(i)}</span>
@@ -444,7 +447,7 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
   const layer = (show: boolean) =>
     "col-start-1 row-start-1 transition-[opacity,filter] duration-700 " + (show ? "opacity-100 blur-0" : "pointer-events-none opacity-0 blur-md");
   return (
-    <div className="container-x py-20 sm:py-24 lg:py-24">
+    <div className="container-x py-24 sm:py-32 lg:py-40">
       <div
         className={
           "true-tone rounded-[1.25rem] p-9 transition-colors duration-700 sm:p-14 " + (isAfter ? "bg-black text-white" : "bg-paper text-ink ring-1 ring-line")
@@ -470,10 +473,10 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
           })}
         </div>
         <div className="mt-12 grid">
-          <p aria-hidden={isAfter} className={"font-display text-[clamp(1.3rem,2.8vw,2.3rem)] font-medium leading-[1.2] tracking-[-0.025em] " + layer(!isAfter)}>
+          <p aria-hidden={isAfter} className={"font-display text-[clamp(1.3rem,2.52vw,2.07rem)] font-medium leading-[1.2] tracking-[-0.025em] " + layer(!isAfter)}>
             {before}
           </p>
-          <p aria-hidden={!isAfter} className={"font-display text-[clamp(1.3rem,2.8vw,2.3rem)] font-medium leading-[1.2] tracking-[-0.025em] " + layer(isAfter)}>
+          <p aria-hidden={!isAfter} className={"font-display text-[clamp(1.3rem,2.52vw,2.07rem)] font-medium leading-[1.2] tracking-[-0.025em] " + layer(isAfter)}>
             {after}
           </p>
         </div>
@@ -517,7 +520,7 @@ export function PeakStatic({ stages }: { stages: readonly { letter: string; name
           className="border-b border-current/20 py-12 sm:px-8 sm:py-14 sm:max-lg:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-10 lg:py-16 lg:first:border-l-0 lg:first:pl-0"
         >
           <span className="text-sm tabular-nums opacity-60">{n2(i)}</span>
-          <p aria-hidden className="font-display mt-8 text-[clamp(5rem,11vw,9.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
+          <p aria-hidden className="font-display mt-8 text-[clamp(4.25rem,7.7vw,6.65rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
           <h3 className="font-display mt-10 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
           <p className="mt-4 max-w-[19rem] text-base leading-relaxed opacity-80 sm:text-lg">{s.question}</p>
         </li>

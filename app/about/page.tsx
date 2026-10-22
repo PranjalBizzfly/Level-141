@@ -132,7 +132,7 @@ export default function AboutPage() {
           <section className="on-dark bg-ink text-paper">
             <BeliefDeck
               head={
-                <h2 className="display max-w-[22ch] text-[clamp(1.75rem,3.6vw,3.5rem)]">
+                <h2 className="display max-w-[22ch] text-[clamp(1.61rem,2.88vw,2.8rem)]">
                   <ScrubText text="Growth isn't a collection of activities" accent="It's a system" />
                 </h2>
               }

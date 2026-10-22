@@ -97,7 +97,7 @@ export default function HomePage() {
                 },
               ]}
             />
-            <div className="mt-12 sm:mt-16" data-rise>
+            <div className="mt-16 sm:mt-24" data-rise>
               <MediaSlot
                 src="/images/home-team-table-muted.webp"
                 alt={altFor("/images/home-team-table-muted.webp")}
@@ -144,7 +144,7 @@ export default function HomePage() {
               text="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
             />
             <LetterItems
-              markClass="!text-[clamp(3rem,3.9vw,3.6rem)]"
+              markClass="!text-[clamp(2.76rem,3.12vw,2.88rem)]"
               items={frameworks.map((f) => ({
                 key: f.id,
                 title: f.full,

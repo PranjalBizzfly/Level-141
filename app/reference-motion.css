@@ -213,7 +213,7 @@ body:has(header[data-menu-open]) .scroll-toggle {
   min-width: 0;
 }
 .letter-items__mark {
-  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-size: clamp(2.98rem, 3.72vw, 3.41rem);
   white-space: nowrap;
 }
 .letter-items__list {

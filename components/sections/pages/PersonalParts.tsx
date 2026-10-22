@@ -31,7 +31,7 @@ function Head({ label, title, text, dark }: { label?: string; title?: ReactNode;
         <div className="max-w-4xl @4xl:col-span-6">
           {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
           {title ? (
-            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+            <h2 className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
           ) : null}
         </div>
         {text ? (
@@ -74,7 +74,7 @@ export function OutlineFill({ text, accent, sub }: { text: string; accent?: stri
   return (
     <div ref={ref} className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
-        <p className="font-display max-w-5xl text-[clamp(2.1rem,5.4vw,5.25rem)] font-medium leading-[1.02] tracking-[-0.045em]">
+        <p className="font-display max-w-5xl text-[clamp(1.78rem,3.35vw,3.25rem)] font-medium leading-[1.02] tracking-[-0.045em]">
           <span style={fill("var(--color-white)")}>{text}</span>
           {accent ? (
             <>
@@ -100,9 +100,9 @@ export function SpotlightText({ text, accent, sub }: { text: string; accent?: st
       {text} {accent ? <span className="opacity-60">{accent}</span> : null}
     </>
   );
-  const cls = "font-display text-[clamp(1.9rem,3.7vw,3.75rem)] font-medium leading-[1.08] tracking-[-0.035em]";
+  const cls = "font-display text-[clamp(1.75rem,2.96vw,3rem)] font-medium leading-[1.08] tracking-[-0.035em]";
   return (
-    <div className="bg-black py-20 text-white sm:py-24 lg:py-28">
+    <div className="bg-black py-20 text-white sm:py-28 sm:py-32 lg:py-40">
       {/* Editorial split: the label introduces the statement from the left; the statement runs wide on the right. */}
       <div className="container-x grid gap-8 lg:grid-cols-12 lg:gap-16">
         {sub ? (
@@ -172,7 +172,7 @@ export function ScanRows({
     <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} text={text} />
-        <div className="relative mt-12 sm:mt-16">
+        <div className="relative mt-16 sm:mt-24">
           {/* The scan line, held at the middle of the screen while the list passes. */}
           {!reduced ? (
             <div aria-hidden className="pointer-events-none sticky top-1/2 z-10 h-0">
@@ -187,7 +187,7 @@ export function ScanRows({
                 <li key={it.name} className="border-b border-current/15">
                   <div className="grid gap-x-6 py-8 sm:grid-cols-12 sm:py-10">
                     <h3
-                      className="font-display text-[clamp(1.6rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em] transition-opacity duration-500 sm:col-span-7"
+                      className="font-display text-[clamp(1.6rem,2.72vw,2.4rem)] font-medium leading-[1.05] tracking-[-0.035em] transition-opacity duration-500 sm:col-span-7"
                       style={{ opacity: on ? 1 : 0.6 }}
                     >
                       {it.name}
@@ -271,9 +271,9 @@ export function PeelStack({
                   opacity: 1 - clamp((k - 0.75) / 0.25),
                 }}
               >
-                <span className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.8] tracking-[-0.06em] text-white/90">{x.n ?? n2(i)}</span>
+                <span className="font-display text-[clamp(3.4rem,8.4vw,7rem)] leading-[0.8] tracking-[-0.06em] text-white/90">{x.n ?? n2(i)}</span>
                 <div className="max-w-3xl">
-                  <h3 className="font-display text-[clamp(2rem,4.6vw,4rem)] font-medium leading-[1] tracking-[-0.04em]">{x.name}</h3>
+                  <h3 className="font-display text-[clamp(1.7rem,2.85vw,2.48rem)] font-medium leading-[1] tracking-[-0.04em]">{x.name}</h3>
                   <p className="mt-6 text-white/75 sm:text-lg">{x.body}</p>
                 </div>
               </article>
@@ -326,11 +326,11 @@ export function Checklist({
     <div className="bg-paper py-20 text-ink sm:py-24">
       {lead ? (
         <div className="container-x">
-          <p className="font-display max-w-5xl text-[clamp(1.9rem,3.6vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.035em]">{lead}</p>
+          <p className="font-display max-w-5xl text-[clamp(1.75rem,2.88vw,2.72rem)] font-medium leading-[1.08] tracking-[-0.035em]">{lead}</p>
           <div aria-hidden className="mt-12 h-px bg-current/15 sm:mt-16" />
         </div>
       ) : null}
-      <div className={"container-x grid gap-16 lg:grid-cols-12" + (lead ? " mt-12 sm:mt-16" : "")}>
+      <div className={"container-x grid gap-16 lg:grid-cols-12" + (lead ? " mt-16 sm:mt-24" : "")}>
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <Head label={label} title={title} />
@@ -355,7 +355,7 @@ export function Checklist({
                     style={{ transition: "stroke-dashoffset 600ms cubic-bezier(0.2,0.8,0.2,1) 150ms" }}
                   />
                 </svg>
-                <p className="font-display text-[clamp(1.3rem,2.4vw,2rem)] font-medium leading-[1.2] tracking-[-0.025em] transition-opacity duration-500" style={{ opacity: on ? 1 : 0.65 }}>
+                <p className="font-display text-[clamp(1.3rem,2.16vw,1.8rem)] font-medium leading-[1.2] tracking-[-0.025em] transition-opacity duration-500" style={{ opacity: on ? 1 : 0.65 }}>
                   {t}
                 </p>
               </li>
@@ -395,7 +395,7 @@ export function Ring3D({
 
   if (reduced) {
     return (
-      <div className={shell + " py-20 sm:py-24 lg:py-24"}>
+      <div className={shell + " py-24 sm:py-32 lg:py-40"}>
         <div className="container-x">
           <Head label={label} title={title} text={text} dark={dark} />
           <ol className="mt-12 grid gap-3 lg:gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -489,7 +489,7 @@ export function CadenceGrid({
                   onBlur={() => setHover(null)}
                   className="grid w-full gap-4 lg:gap-x-10 py-8 text-left sm:grid-cols-12 sm:items-center sm:py-10"
                 >
-                  <span className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-medium tracking-[-0.035em] transition-opacity duration-500 sm:col-span-3" style={{ opacity: on ? 1 : 0.6 }}>
+                  <span className="font-display text-[clamp(1.6rem,2.4vw,2.08rem)] font-medium tracking-[-0.035em] transition-opacity duration-500 sm:col-span-3" style={{ opacity: on ? 1 : 0.6 }}>
                     {k}
                   </span>
                   <span className="text-muted sm:col-span-4">{v}</span>

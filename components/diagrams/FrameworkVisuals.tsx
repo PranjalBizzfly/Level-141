@@ -73,7 +73,7 @@ export function IgfConnect() {
           />
         ))}
       </svg>
-      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[clamp(1.75rem,5vw,2.75rem)] font-medium tracking-[-0.03em]">
+      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[clamp(1.61rem,4vw,2.2rem)] font-medium tracking-[-0.03em]">
         IGF™
       </span>
       {functions.map((f, i) => (

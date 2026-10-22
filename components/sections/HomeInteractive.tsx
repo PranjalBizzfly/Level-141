@@ -240,7 +240,7 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
 
   return (
     <div ref={ref} style={reduced ? undefined : { height: `${100 + n * 35}lvh` }}>
-      <div className={reduced ? "py-20 sm:py-24 lg:py-24" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
+      <div className={reduced ? "py-24 sm:py-32 lg:py-40" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
         <div className="container-x">
           {head}
           <ul className="mt-10 grid grid-cols-2 gap-2 [perspective:1600px] sm:mt-12 sm:gap-3 lg:grid-cols-3">
@@ -261,7 +261,7 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
                     }}
                   >
                     <span aria-hidden className="text-sm tabular-nums opacity-75 sm:text-sm">{n2(i)}</span>
-                    <h3 className="font-display text-[clamp(1rem,2.2vw,1.85rem)] font-medium leading-[1.12] tracking-[-0.03em]">{t}</h3>
+                    <h3 className="font-display text-[clamp(1rem,1.98vw,1.67rem)] font-medium leading-[1.12] tracking-[-0.03em]">{t}</h3>
                   </div>
                 </li>
               );

@@ -58,8 +58,7 @@ export function WaitlistForm() {
       <SuccessPanel title="You're on the Growth Architecture™ waitlist">
         <p>
           We&apos;ve registered interest for <strong className="text-ink">{values.company}</strong>. We&apos;ll contact{" "}
-          <strong className="text-ink">{values.email}</strong> when Growth Architecture™ opens. Registering interest does
-          not commit you to anything.
+          <strong className="text-ink">{values.email}</strong>.
         </p>
       </SuccessPanel>
     );
@@ -164,10 +163,6 @@ export function WaitlistForm() {
           Join the Waitlist
           <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
         </SubmitButton>
-        <p className="max-w-sm text-sm leading-relaxed text-muted">
-          Registering interest is not a booking or an engagement. We&apos;ll only use your details to contact you about
-          availability.
-        </p>
       </div>
     </form>
   );

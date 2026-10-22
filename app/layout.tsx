@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Poppins } from "next/font/google";
+import { Fraunces, Google_Sans_Flex } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollToggle } from "@/components/layout/ScrollToggle";
@@ -22,22 +22,28 @@ import "./glass.css";
 import "lenis/dist/lenis.css";
 
 /**
- * Brand typography (Docs/level 141 Brand guidelines.pdf):
- * - Geist — the logo / primary brand font, used for display headlines.
- * - Poppins — secondary typography, used for body and interface text.
- * Both in the approved weights only: Normal, Medium, Semi-Bold, Bold.
+ * Typography (client reference): Google Sans Flex for headlines and text, in
+ * light weights; Fraunces (light) as the serif accent. The CSS variable names
+ * are kept so every component picks the fonts up unchanged.
  */
-const geist = Geist({
+const geist = Google_Sans_Flex({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-geist",
   display: "swap",
 });
 
-const poppins = Poppins({
+const poppins = Google_Sans_Flex({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-poppins",
+  display: "swap",
+});
+
+const serif = Fraunces({
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  variable: "--font-accent-serif",
   display: "swap",
 });
 
@@ -84,7 +90,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${geist.variable} ${poppins.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
         {/*
           Marks JS as available so reveal animations may hide content until in view.

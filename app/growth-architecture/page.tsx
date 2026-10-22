@@ -32,7 +32,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Growth Architecture™: Join the Waitlist",
   description:
-    "Growth Architecture™ diagnoses where an organization is and architects the integrated growth system that bridges the gap. Not yet open: register your interest.",
+    "Growth Architecture™ diagnoses where an organization is and architects the integrated growth system that bridges the gap.",
   path: routes.growth,
 });
 
@@ -40,7 +40,7 @@ export const metadata = pageMetadata({
  * Growth Architecture — editorial redesign on the Personal Brand Architecture
  * model: curtain hero, a line-by-line statement, a spotlight grid, the signature
  * diagrams, a drawn bridge, triggers that open in place and a contribution staircase.
- * Waitlist status is unchanged pending client confirmation.
+ * Waitlist messaging is one CTA only: "Join the Waitlist".
  */
 const triggerImages = [
   "/images/home-hero-staircase-muted.webp",
@@ -59,25 +59,21 @@ export default function GrowthArchitecturePage() {
   return (
     <>
       <CurtainHero
-        image="/images/ga-hero-structural-node-muted.webp"
-        eyebrow="Growth Architecture™ · Coming later · Waitlist open"
+        image="/images/ga-hero-stair-light.webp"
+        eyebrow="Growth Architecture™"
         title={
           <>
-            Your business doesn&apos;t need more disconnected growth initiatives.{" "}
-            <span className="serif-accent">It needs them working together</span>
+            <span className="block">Your business</span>
+            <span className="block text-white/55">doesn&apos;t need more</span>
+            <span className="block">disconnected</span>
+            <span className="block">growth initiatives.</span>
           </>
         }
         intro={
-          <>
-            <p>
-              We diagnose where your organization is, define where it needs to go, and architect the integrated growth
-              system that bridges the gap.
-            </p>
-            <p className="mt-6 text-base text-white/75">
-              Not yet open for engagements. Organizations can register their interest now and will be contacted when it
-              becomes available.
-            </p>
-          </>
+          <p>
+            We diagnose where your organization is, define where it needs to go, and architect the integrated growth
+            system that bridges the gap.
+          </p>
         }
       >
         <div className="flex flex-col items-start gap-3">
@@ -138,7 +134,7 @@ export default function GrowthArchitecturePage() {
             }
             text="Level141 does not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
           />
-          <div className="mt-12 sm:mt-16">
+          <div className="mt-16 sm:mt-24">
             <FlowChain items={gaOperatingLogic} highlight={["Current Level", "Next Level", "Scale"]} />
           </div>
         </RefSection>
@@ -154,7 +150,7 @@ export default function GrowthArchitecturePage() {
             }
             text="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
-          <div className="mt-12 sm:mt-16">
+          <div className="mt-16 sm:mt-24">
             <PeakStatic stages={peakStages} />
           </div>
         </RefSection>
@@ -170,7 +166,7 @@ export default function GrowthArchitecturePage() {
             }
             text="BRANDS™ ensures the major market-facing growth levers are not managed as separate campaigns. Customer & Market is a cross-cutting foundation: every lever is built around the defined ICP, buying context and market reality."
           />
-          <div className="mt-12 sm:mt-16">
+          <div className="mt-16 sm:mt-24">
             <BrandsSystem detailed tone="light" />
           </div>
         </RefSection>
@@ -254,26 +250,21 @@ export default function GrowthArchitecturePage() {
           <div className="grid gap-14 lg:grid-cols-12">
             <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
               <RefIntro
-                label="Growth Architecture™ waitlist"
+                label="Join the Waitlist"
                 title={
                   <>
                     Register your organization&apos;s <span className="serif-accent">interest</span>
                   </>
                 }
-                text="Growth Architecture™ is not yet available. Join the waitlist and we'll contact you when it opens. Registering interest does not book or start an engagement."
               />
               <DetailsPanel
                 rows={[
-                  { label: "Status", value: "Not yet open for engagements. Waitlist open" },
                   { label: "For", value: gaAudience.slice(0, 4).join(" · ") },
                   { label: "Frameworks", value: "LQ™ · PEAK™ · BRANDS™" },
                 ]}
               />
               <Reveal className="mt-12 border-t border-line pt-8 text-base sm:text-lg">
-                <p>
-                  Building your personal authority as a founder or leader?{" "}
-                  <span className="text-muted">Personal Brand Architecture™ is available now.</span>
-                </p>
+                <p>Building your personal authority as a founder or leader?</p>
                 <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6">
                   Explore Personal Brand Architecture
                 </ButtonLink>

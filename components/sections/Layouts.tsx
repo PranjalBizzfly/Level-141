@@ -33,11 +33,11 @@ export function StickyIndex({
       <ol className="lg:col-span-7 lg:col-start-6">
         {items.map((it, i) => (
           <li key={i} className="si-item grid grid-cols-[3.25rem_1fr] gap-x-4 py-10 sm:grid-cols-[5rem_1fr] sm:py-16">
-            <span aria-hidden className="font-display text-[1.75rem] leading-none tracking-[-0.04em] text-muted sm:text-[2.75rem]">
+            <span aria-hidden className="font-display text-[1.75rem] leading-none tracking-[-0.04em] text-muted sm:text-[2.2rem]">
               {n2(i)}
             </span>
             <div>
-              <h3 className="font-display text-[1.6rem] font-medium leading-[1.1] tracking-[-0.025em] sm:text-[2.4rem]">
+              <h3 className="font-display text-[1.6rem] font-medium leading-[1.1] tracking-[-0.025em] sm:text-[2.16rem]">
                 {/* Headings carry no closing full stop (brand guidance). */}
                 {typeof it.name === "string" ? it.name.replace(/\.$/, "") : it.name}
               </h3>
@@ -60,7 +60,7 @@ export function StackCards({ items }: {
   items: readonly { n?: string; name: ReactNode; line?: ReactNode; body?: ReactNode; aside?: ReactNode }[];
 }) {
   return (
-    <ol className="stack mt-12 sm:mt-16">
+    <ol className="stack mt-16 sm:mt-24">
       {items.map((it, i) => (
         <li key={i} className="stack-slot" style={vars({ "--i": i, "--n": items.length })}>
           <div
@@ -73,12 +73,12 @@ export function StackCards({ items }: {
           >
             <span
               aria-hidden
-              className="font-display text-[clamp(4.5rem,13vw,11rem)] leading-[0.8] tracking-[-0.06em] opacity-90 lg:col-span-5"
+              className="font-display text-[clamp(3.82rem,9.1vw,7.7rem)] leading-[0.8] tracking-[-0.06em] opacity-90 lg:col-span-5"
             >
               {it.n ?? n2(i)}
             </span>
             <div className="flex flex-col justify-end lg:col-span-6 lg:col-start-7">
-              <h3 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1] tracking-[-0.035em]">{it.name}</h3>
+              <h3 className="font-display text-[clamp(1.84rem,3.2vw,2.8rem)] font-medium leading-[1] tracking-[-0.035em]">{it.name}</h3>
               {it.line ? <p className="mt-6 text-lg opacity-90 sm:text-xl">{it.line}</p> : null}
               {it.body ? <p className="mt-6 max-w-xl opacity-70">{it.body}</p> : null}
               {it.aside ? <div className="mt-10 border-t border-current/20 pt-5 font-medium">{it.aside}</div> : null}
@@ -102,7 +102,7 @@ export function Cascade({ lines }: { lines: readonly { lead: ReactNode; rest?: R
       {lines.map((l, i) => (
         <li
           key={i}
-          className="cascade-line font-display text-[clamp(1.6rem,4.6vw,4.25rem)] font-medium leading-[1.05] tracking-[-0.035em]"
+          className="cascade-line font-display text-[clamp(1.6rem,2.85vw,2.63rem)] font-medium leading-[1.05] tracking-[-0.035em]"
           style={vars({ "--step": `${(i / Math.max(lines.length - 1, 1)) * 100}%` })}
         >
           <span className="cascade-inner inline-flex flex-wrap items-baseline gap-x-[0.3em]">
@@ -124,7 +124,7 @@ export function Cascade({ lines }: { lines: readonly { lead: ReactNode; rest?: R
  */
 export function Strike({ items, conclusion }: { items: readonly string[]; conclusion?: ReactNode }) {
   return (
-    <div className="mt-12 sm:mt-16">
+    <div className="mt-16 sm:mt-24">
       {/* A two-column register: a hairline, a × mark and number, and each claim struck through as it scrolls in. */}
       <ul className="grid border-t border-current/15 sm:grid-cols-2 sm:gap-x-12 lg:gap-x-16">
         {items.map((t, i) => (
@@ -140,7 +140,7 @@ export function Strike({ items, conclusion }: { items: readonly string[]; conclu
               <span className="text-base leading-none">×</span>
               {String(i + 1).padStart(2, "0")}
             </span>
-            <span className="font-display text-[clamp(1.35rem,2.2vw,2rem)] font-medium leading-[1.2] tracking-[-0.025em]">
+            <span className="font-display text-[clamp(1.35rem,1.98vw,1.8rem)] font-medium leading-[1.2] tracking-[-0.025em]">
               <span className="strike relative inline">
                 <span className="strike-text">{t}</span>
               </span>
@@ -170,7 +170,7 @@ export function Marquee({ items, label }: { items: readonly string[]; label: str
   );
   return (
     // Full bleed (edge to edge of the screen), fading out at both sides instead of a hard cut.
-    <div className="marquee relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden py-2 font-display text-[clamp(2.1rem,5.2vw,4.75rem)] font-medium leading-[1.12] tracking-[-0.04em] [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)] sm:mt-16">
+    <div className="marquee relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden py-2 font-display text-[clamp(1.78rem,3.22vw,2.94rem)] font-medium leading-[1.12] tracking-[-0.04em] [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)] sm:mt-16">
       <ul className="sr-only" aria-label={label}>
         {items.map((t) => (
           <li key={t}>{t}</li>
@@ -211,7 +211,7 @@ export function Bento({ items }: {
             <h3
               className={
                 "font-display font-medium leading-[1.05] tracking-[-0.03em] " +
-                (i === 0 ? "text-[clamp(2.25rem,4.5vw,4rem)]" : "text-[1.5rem] sm:text-[1.75rem]")
+                (i === 0 ? "text-[clamp(1.91rem,2.79vw,2.48rem)]" : "text-[1.5rem] sm:text-[1.75rem]")
               }
             >
               {it.name}
@@ -251,7 +251,7 @@ function BentoInner({ href, children }: { href?: string; children: ReactNode }) 
 /** Points on one line that fills as the section is read. */
 export function Timeline({ items }: { items: readonly { name: ReactNode; body: ReactNode }[] }) {
   return (
-    <div className="timeline relative mt-12 sm:mt-16">
+    <div className="timeline relative mt-16 sm:mt-24">
       <div aria-hidden className="absolute left-[0.4rem] top-0 h-full w-px bg-current opacity-15 lg:left-0 lg:top-[0.4rem] lg:h-px lg:w-full" />
       <div aria-hidden className="timeline-fill absolute left-[0.4rem] top-0 h-full w-px bg-current lg:left-0 lg:top-[0.4rem] lg:h-px lg:w-full" />
       <ol className="relative grid gap-14 lg:gap-12" style={{ gridTemplateColumns: `repeat(1, 1fr)` }}>
@@ -259,7 +259,7 @@ export function Timeline({ items }: { items: readonly { name: ReactNode; body: R
         {items.map((it, i) => (
           <li key={i} className="relative pl-10 lg:pl-0 lg:pt-12">
             <span aria-hidden className="absolute left-0 top-0 size-[0.85rem] rounded-full border border-current bg-[var(--color-paper)] lg:top-0" />
-            <h3 className="font-display text-[1.75rem] font-medium leading-tight tracking-[-0.03em] sm:text-[2.25rem]">{it.name}</h3>
+            <h3 className="font-display text-[1.75rem] font-medium leading-tight tracking-[-0.03em] sm:text-[2.02rem]">{it.name}</h3>
             <p className="mt-4 max-w-sm text-muted">{it.body}</p>
           </li>
         ))}
@@ -283,7 +283,7 @@ export function Lanes({ items }: {
         <li key={i} className="lane grid gap-8 lg:gap-x-16 lg:grid-cols-12 lg:items-end" data-side={i % 2 ? "r" : "l"}>
           <p
             className={
-              "font-display text-[clamp(1.75rem,3.6vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.03em] lg:col-span-7 " +
+              "font-display text-[clamp(1.61rem,2.88vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] lg:col-span-7 " +
               (i % 2 ? "lg:order-2 lg:col-start-6" : "")
             }
           >
@@ -309,11 +309,11 @@ export function Compare({ before, after }: { before: ReactNode; after: ReactNode
   return (
     <div className="grid gap-3 lg:gap-x-8 lg:grid-cols-2">
       <div className="flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] border border-black/12 bg-white p-8 text-black sm:p-16 dark:border-white/15 dark:bg-black dark:text-white">
-        <p className="font-display text-[clamp(3rem,7vw,6rem)] font-medium leading-none tracking-[-0.05em] opacity-50">Before</p>
+        <p className="font-display text-[clamp(2.55rem,4.34vw,3.72rem)] font-medium leading-none tracking-[-0.05em] opacity-50">Before</p>
         <p className="mt-12 max-w-lg text-lg opacity-75">{before}</p>
       </div>
       <div className="compare-after flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] bg-black p-8 text-white sm:p-16 dark:bg-white dark:text-black">
-        <p className="font-display text-[clamp(3rem,7vw,6rem)] font-medium leading-none tracking-[-0.05em]">After</p>
+        <p className="font-display text-[clamp(2.55rem,4.34vw,3.72rem)] font-medium leading-none tracking-[-0.05em]">After</p>
         <p className="mt-12 max-w-lg text-lg">{after}</p>
       </div>
     </div>

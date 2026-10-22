@@ -116,7 +116,7 @@ export function Relay({
                 {n2(i)} <span className="text-white/40">/ {String(n).padStart(2, "0")}</span>
               </span>
               <span className="relative">
-                <span className="block font-display text-[clamp(1.75rem,2.3vw,2.4rem)] font-medium leading-[1] tracking-[-0.04em]">{x.lead}</span>
+                <span className="block font-display text-[clamp(1.61rem,2.07vw,2.16rem)] font-medium leading-[1] tracking-[-0.04em]">{x.lead}</span>
                 <span className="mt-3 flex flex-wrap items-baseline gap-x-2 text-base">
                   {x.verb ? <span className="text-[0.7rem] uppercase tracking-[0.3em] text-white/60">{x.verb}</span> : null}
                   <span className="text-white/85">{x.rest}</span>
@@ -132,7 +132,7 @@ export function Relay({
   const headBlock = (
     <div className="max-w-xl">
       <p className="text-sm text-white/55">{label}</p>
-      <h2 className="font-display mt-3 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
+      <h2 className="font-display mt-3 text-[clamp(1.5rem,2.34vw,2.16rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
     </div>
   );
 
@@ -242,10 +242,10 @@ export function WhySplit({
     };
   }, [go]);
   return (
-    <div className="container-x py-20 sm:py-24 lg:py-24">
+    <div className="container-x py-24 sm:py-32 lg:py-40">
       <div className="max-w-2xl">
         <p className="text-sm text-muted">{label}</p>
-        <h2 className="font-display mt-4 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
+        <h2 className="font-display mt-4 text-[clamp(1.5rem,2.34vw,2.16rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
       </div>
 
       <div className="mt-12 grid items-start gap-20 sm:mt-16 md:grid-cols-12 md:gap-x-6 md:gap-y-24">
@@ -291,7 +291,7 @@ export function WhySplit({
                 />
                 <span className={"pt-1 text-sm tabular-nums transition-colors duration-300 " + (on ? "text-ink" : "text-muted")}>{n2(i)}</span>
                 <div>
-                  <h3 className="font-display text-[clamp(1.35rem,2.2vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
+                  <h3 className="font-display text-[clamp(1.35rem,1.98vw,1.8rem)] font-medium leading-[1.1] tracking-[-0.03em]">
                     <button
                       type="button"
                       onFocus={() => go(i)}
@@ -366,7 +366,7 @@ export function InsightGallery({
               <span
                 className={
                   "block font-display font-medium leading-[1] tracking-[-0.04em] " +
-                  (i === 0 ? "text-[clamp(2.25rem,4.4vw,4.25rem)]" : "text-[clamp(1.6rem,2.2vw,2.1rem)]")
+                  (i === 0 ? "text-[clamp(1.91rem,2.73vw,2.63rem)]" : "text-[clamp(1.6rem,1.98vw,1.89rem)]")
                 }
               >
                 {it.name}
@@ -386,7 +386,7 @@ export function InsightGallery({
 
   if (!pin) {
     return (
-      <div className="py-20 sm:py-24 lg:py-24">
+      <div className="py-24 sm:py-32 lg:py-40">
         <div className="container-x">{head}</div>
         <div className="mt-12 pl-[max(1.25rem,calc((100vw-80rem)/2))] sm:mt-14">{cards}</div>
       </div>

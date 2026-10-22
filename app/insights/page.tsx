@@ -72,7 +72,7 @@ export default function InsightsPage() {
         {/* Articles (shown only once real, approved articles exist) — a static editorial list */}
         {articles.length ? (
           <section aria-labelledby="latest-title" className="bg-black text-white">
-            <div className="container-x py-20 sm:py-24 lg:py-24">
+            <div className="container-x py-24 sm:py-32 lg:py-40">
               <h2 id="latest-title" className="sr-only">
                 Insights
               </h2>
@@ -97,7 +97,7 @@ export default function InsightsPage() {
                       </p>
                       <h3
                         className={`font-display mt-3 font-medium tracking-[-0.03em] underline-offset-4 group-hover:underline ${
-                          i === 0 ? "text-[clamp(1.8rem,4vw,3.5rem)] leading-[1.02]" : "text-2xl leading-snug"
+                          i === 0 ? "text-[clamp(1.66rem,3.2vw,2.8rem)] leading-[1.02]" : "text-2xl leading-snug"
                         }`}
                       >
                         {a.title}

@@ -42,6 +42,23 @@ export function Header() {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
+      // Is the page behind the header dark (a dark photo or section)? Then the
+      // transparent header switches to white so it stays readable.
+      const h = document.querySelector("body > header");
+      if (h) {
+        const yy = h.getBoundingClientRect().bottom - 8;
+        let dark = false;
+        for (const el of document.elementsFromPoint(window.innerWidth / 2, yy)) {
+          if (h.contains(el)) continue;
+          if (el.tagName === "IMG" || el.tagName === "VIDEO") { dark = true; break; }
+          const m = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+          if (m && (m[3] === undefined || +m[3] > 0.5)) {
+            dark = 0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2] < 128;
+            break;
+          }
+        }
+        h.toggleAttribute("data-over-dark", dark);
+      }
       if (Math.abs(y - lastY.current) > 6) {
         setHidden(y > lastY.current && y > 120);
         lastY.current = y;
@@ -49,7 +66,25 @@ export function Header() {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    // Re-check after a theme switch (the page behind changes colour without a scroll).
+    // Colours fade between themes, so check again once the fade has finished.
+    const themeWatch = new MutationObserver(() => {
+      requestAnimationFrame(onScroll);
+      window.setTimeout(onScroll, 450);
+      window.setTimeout(onScroll, 1000);
+    });
+    themeWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    // ...and after navigating to another page.
+    const pageWatch = new MutationObserver(() => requestAnimationFrame(onScroll));
+    const main = document.getElementById("main");
+    if (main) pageWatch.observe(main, { childList: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      themeWatch.disconnect();
+      pageWatch.disconnect();
+    };
   }, []);
 
   useEffect(() => {

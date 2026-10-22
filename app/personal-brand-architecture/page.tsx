@@ -155,7 +155,7 @@ export default function PersonalBrandPage() {
             }
             text="VIBE™ answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
           />
-          <div className="mt-12 sm:mt-16">
+          <div className="mt-16 sm:mt-24">
             <VibeExplorer />
           </div>
           <Reveal className="mx-auto mt-12 max-w-4xl text-center text-xl leading-relaxed text-paper/80 sm:text-2xl">

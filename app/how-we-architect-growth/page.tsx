@@ -225,7 +225,7 @@ export default function HowPage() {
               }
               text="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
             />
-            <div className="mt-12 sm:mt-16">
+            <div className="mt-16 sm:mt-24">
               <PeakAscent dark={false} />
             </div>
           </RefSection>

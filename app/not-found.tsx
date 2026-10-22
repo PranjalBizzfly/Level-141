@@ -12,7 +12,7 @@ export default function NotFound() {
           <BracketOpen className="absolute bottom-0 left-0 size-6 text-paper/40 sm:size-8" />
           <p className="eyebrow text-gold">404</p>
           {/* Functional page: no brand copy beyond the documented CTA below. */}
-          <h1 className="display mt-8 text-[2.25rem] sm:text-[2.75rem] lg:text-[3.5rem] xl:text-[4.5rem]">Page not found</h1>
+          <h1 className="display mt-8 text-[2.02rem] sm:text-[2.2rem] lg:text-[2.8rem] xl:text-[2.79rem]">Page not found</h1>
         </div>
         <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
           <ButtonLink href={routes.home} variant="gold">

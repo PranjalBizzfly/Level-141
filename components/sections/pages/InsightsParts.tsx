@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { altFor } from "@/lib/image-alts";
+
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
 
@@ -10,6 +13,8 @@ const clamp = (v: number) => Math.min(1, Math.max(0, v));
  * as the page scrolls; solid and outlined lines alternate. Reduced motion: lines
  * sit at rest.
  */
+const HERO = "/images/insights-hero-light-shaft.webp";
+
 export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: ReactNode[]; intro: ReactNode }) {
   const reduced = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
@@ -28,10 +33,12 @@ export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: Re
   const shift = reduced ? 0 : Math.max(arrived ? 0 : 1, p * 0.8);
   const settle = p === 0 ? "translate 1.2s cubic-bezier(.2,.8,.2,1), opacity 1.2s ease-out" : "none";
   return (
-    <section ref={ref} className="relative flex min-h-[50svh] flex-col justify-end overflow-hidden bg-black text-white sm:min-h-[62svh]">
+    <section ref={ref} className="photo-tone relative flex min-h-[70svh] flex-col justify-end overflow-hidden bg-black text-white sm:min-h-[86svh]">
+      <Image src={HERO} alt={altFor(HERO)} fill priority sizes="100vw" className="object-cover object-[65%_center] grayscale" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/10" />
       <div className="container-x relative pb-12 pt-36 sm:pb-14 sm:pt-40">
         <p className="text-[0.95rem] font-medium text-white/70">{eyebrow}</p>
-        <h1 className="font-display mt-6 text-[clamp(3rem,8.5vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.045em]">
+        <h1 className="font-display mt-6 text-[clamp(2.55rem,5.27vw,4.65rem)] font-medium leading-[0.92] tracking-[-0.045em]">
           {lines.map((line, i) => {
             const dir = i % 2 === 0 ? -1 : 1;
             const outlined = i % 2 === 1;
@@ -110,10 +117,10 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
   };
 
   return (
-    <div className="container-x py-20 sm:py-24 lg:py-24">
+    <div className="container-x py-24 sm:py-32 lg:py-40">
       <div className="max-w-4xl">
         <p className="text-[0.95rem] font-medium text-muted">{label}</p>
-        <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+        <h2 className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
       </div>
       <div role="tablist" aria-label={label} onKeyDown={onKey} className="mt-12 flex flex-wrap gap-3">
         {tabs.map((t, i) => (
@@ -169,7 +176,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
 export function CategoryIndex({ items }: { items: readonly { id: string; name: ReactNode; body: ReactNode }[] }) {
   return (
     <section aria-labelledby="ins-cat-title" className="bg-paper text-ink">
-      <div className="container-x py-20 sm:py-24 lg:py-24">
+      <div className="container-x py-24 sm:py-32 lg:py-40">
         <h2 id="ins-cat-title" className="sr-only">
           Insight categories
         </h2>
@@ -178,9 +185,9 @@ export function CategoryIndex({ items }: { items: readonly { id: string; name: R
             <li
               key={it.id}
               id={it.id}
-              className="group grid scroll-mt-28 gap-4 lg:gap-x-10 border-b border-ink/15 py-12 sm:py-16 md:grid-cols-12 md:items-baseline md:gap-8"
+              className="group grid scroll-mt-28 gap-4 lg:gap-x-10 border-b border-ink/15 py-12 sm:py-16 md:grid-cols-12 md:items-center md:gap-8"
             >
-              <h3 className="font-display text-[clamp(2.1rem,5vw,4.5rem)] font-medium leading-none tracking-[-0.045em] transition-transform duration-500 ease-out motion-safe:group-hover:translate-x-2 md:col-span-7">
+              <h3 className="font-display text-[clamp(1.78rem,3.1vw,2.79rem)] font-medium leading-none tracking-[-0.045em] transition-transform duration-500 ease-out motion-safe:group-hover:translate-x-2 md:col-span-7">
                 {it.name}
               </h3>
               <p className="max-w-lg text-[1.0625rem] leading-relaxed text-ink/85 sm:text-lg md:col-span-5">{it.body}</p>

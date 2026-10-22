@@ -23,7 +23,7 @@ export function BigList({ items }: {
   return (
     <div
       ref={ref}
-      className="biglist relative mt-12 sm:mt-16"
+      className="biglist relative mt-16 sm:mt-24"
       onPointerMove={(e) => {
         if (e.pointerType !== "mouse" || !ref.current) return;
         const r = ref.current.getBoundingClientRect();
@@ -35,16 +35,16 @@ export function BigList({ items }: {
         {items.map((it, i) => {
           const inner = (
             <>
-              <span className="font-display text-[clamp(2.1rem,6vw,5.75rem)] font-medium leading-[0.98] tracking-[-0.045em]">
+              <span className="font-display text-[clamp(1.78rem,3.72vw,3.56rem)] font-medium leading-[0.98] tracking-[-0.045em]">
                 {it.name}
               </span>
-              <span className="flex items-end justify-between gap-8 sm:max-w-[19rem] sm:shrink-0 sm:flex-col sm:items-end sm:text-right lg:ml-24">
+              <span className="flex items-end justify-between gap-8 sm:max-w-[24rem] sm:shrink-0 sm:items-center sm:text-right lg:ml-24">
                 {it.line ? <span className="text-muted">{it.line}</span> : null}
                 {it.href ? <ArrowUpRight aria-hidden className="biglist-arrow size-6 shrink-0" /> : null}
               </span>
             </>
           );
-          const cls = "biglist-item flex flex-col gap-4 py-12 outline-none sm:flex-row sm:items-end sm:justify-between sm:gap-16 sm:py-16 lg:py-20";
+          const cls = "biglist-item flex flex-col gap-4 py-12 outline-none sm:flex-row sm:items-center sm:justify-between sm:gap-16 sm:py-24 lg:py-28";
           return (
             <li
               key={it.key}

@@ -108,7 +108,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-20 sm:py-24 lg:py-24", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-24 sm:py-32 lg:py-40", tones[tone], className)}>
       {children}
     </section>
   );
@@ -138,7 +138,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         <Eyebrow index={index} className={dark ? "text-gold" : "text-gold-ink"}>
           {eyebrow}
         </Eyebrow>
-        <h2 id={id} className="display mt-6 text-[2rem] sm:mt-6 sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.625rem]">
+        <h2 id={id} className="display mt-6 text-[2rem] sm:mt-6 sm:text-[2.25rem] lg:text-[2.4rem] xl:text-[2.9rem]">
           <span data-split className="block">
             {title}
           </span>
@@ -215,7 +215,7 @@ export function PageHero({
           page's actions, then a full-width media frame. The aside follows below. */}
       <div className="container-x flex flex-col items-center pb-14 pt-36 text-center sm:pb-16 sm:pt-44 lg:pt-48">
         <p className="eyebrow animate-fade text-paper-muted">{eyebrow}</p>
-        <h1 data-split="load" className="display mt-8 max-w-[18ch] text-[clamp(2.5rem,5.6vw,5.75rem)] leading-[0.98] sm:mt-8">
+        <h1 data-split="load" className="display mt-8 max-w-[18ch] text-[clamp(2.13rem,3.47vw,3.56rem)] leading-[0.98] sm:mt-8">
           {title}
         </h1>
         {intro ? <div className="mt-10 max-w-2xl animate-rise text-paper/75 [animation-delay:400ms]">{intro}</div> : null}

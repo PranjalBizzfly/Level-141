@@ -140,7 +140,7 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
                 />
               </span>
               <div className="flex items-start justify-between gap-4">
-                <span aria-hidden className={cx("serif-accent text-6xl leading-none", dark ? "text-gold" : "text-gold-ink")}>
+                <span aria-hidden className={cx("serif-accent text-5xl leading-none", dark ? "text-gold" : "text-gold-ink")}>
                   {s.letter}
                 </span>
                 <span aria-hidden className={cx("eyebrow mt-2", dark ? "text-paper-muted" : "text-muted")}>
@@ -279,7 +279,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
                   } as CSSProperties
                 }
               >
-                <span data-step style={step(i)} className={cx("serif-accent text-3xl leading-none sm:text-5xl", dark ? "text-gold" : "text-gold-ink")}>
+                <span data-step style={step(i)} className={cx("serif-accent text-3xl leading-none sm:text-4xl", dark ? "text-gold" : "text-gold-ink")}>
                   {l.letter}
                 </span>
               </div>

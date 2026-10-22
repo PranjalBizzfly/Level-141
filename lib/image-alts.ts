@@ -5,6 +5,7 @@
  * compass photographs, so they share those descriptions.)
  */
 export const imageAlts: Record<string, string> = {
+  "/images/client-hero-skyline-opening.webp": "Light falling through a tall opening in a stone interior, framing the Dubai skyline",
   "/images/client-mentorship-conversation.webp": "A senior leader in conversation with two younger colleagues",
   "/images/client-executive-library.webp": "An executive in glasses seated in a library, deep in thought",
   "/images/client-executive-portrait-woman.webp": "A composed woman in a dark suit seated in a leather chair",
@@ -31,6 +32,8 @@ export const imageAlts: Record<string, string> = {
   "/images/ga-prioritised-bridge-muted.webp": "A curved bridge walkway linking two levels inside a modern building",
   "/images/home-cards-grid-muted.webp": "A hand using drafting compasses on a sketched plan in a notebook",
   "/images/home-fragmented-to-integrated-muted.webp": "Scattered wooden blocks beside blocks assembled into one structure",
+  "/images/ga-hero-stair-light.webp": "A dark stone staircase rising towards a tall opening of light",
+  "/images/insights-hero-light-shaft.webp": "A shaft of light falling between dark concrete walls onto still water",
   "/images/home-hero-staircase-muted.webp": "A floating staircase rising towards the light",
   "/images/home-hero-terrace-skyline.webp": "A man in a suit on a terrace looking out over a city skyline",
   "/images/home-person-notebook.webp": "A woman thinking at a desk with an open notebook",

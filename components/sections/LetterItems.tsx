@@ -12,7 +12,7 @@ export type LetterItem = { key: string; title: ReactNode; mark: ReactNode; list:
  */
 export function LetterItems({ items, markClass = "" }: { items: readonly LetterItem[]; markClass?: string }) {
   return (
-    <ul className="letter-items mt-12 sm:mt-16">
+    <ul className="letter-items mt-16 sm:mt-24">
       {items.map((it) => {
         const inner = (
           <>

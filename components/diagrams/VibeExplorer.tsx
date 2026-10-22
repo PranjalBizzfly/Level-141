@@ -76,7 +76,7 @@ export function VibeExplorer() {
               <span
                 aria-hidden
                 className={cx(
-                  "vibe-letter font-display order-last text-4xl leading-[0.85] tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-architect)] sm:mt-auto sm:text-7xl lg:text-[6.5rem]",
+                  "vibe-letter font-display order-last text-4xl leading-[0.85] tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-architect)] sm:mt-auto sm:text-7xl lg:text-[4.03rem]",
                   selected ? "text-paper sm:-translate-y-3" : "translate-y-0 text-paper/55",
                 )}
               >
@@ -103,7 +103,7 @@ export function VibeExplorer() {
 
       {/* Panel: editorial composition — story and scope on the left, a single
           feature card for the strategic question on the right. No table rules. */}
-      <div className="mt-12 sm:mt-16 lg:mt-24">
+      <div className="mt-16 sm:mt-24 lg:mt-24">
         {vibe.map((d, i) => (
           <div
             key={d.letter}
@@ -121,7 +121,7 @@ export function VibeExplorer() {
               <p className="eyebrow text-gold">
                 {d.letter} — {d.full}
               </p>
-              <h3 className="mt-6 text-3xl leading-tight tracking-[-0.025em] sm:text-[2.75rem] sm:leading-[1.1]">
+              <h3 className="mt-6 text-3xl leading-tight tracking-[-0.025em] sm:text-[2.2rem] sm:leading-[1.1]">
                 {d.headline}
               </h3>
               <p className="measure mt-8 text-lg leading-relaxed text-paper/75">{d.body}</p>
@@ -143,12 +143,12 @@ export function VibeExplorer() {
             <div className="relative overflow-hidden border-t border-paper/25 pt-10 lg:col-span-5 lg:self-start">
               <span
                 aria-hidden
-                className="font-display pointer-events-none absolute -right-2 -top-6 select-none text-[12rem] font-medium leading-none text-paper/[0.05] sm:text-[15rem]"
+                className="font-display pointer-events-none absolute -right-2 -top-6 select-none text-[8.4rem] font-medium leading-none text-paper/[0.05] sm:text-[10.5rem]"
               >
                 {d.letter}
               </span>
               <p className="eyebrow relative text-paper-muted">Strategic question</p>
-              <p className="serif-accent relative mt-6 text-3xl leading-snug text-gold-soft sm:text-4xl">“{d.question}”</p>
+              <p className="serif-accent relative mt-6 text-2xl leading-snug text-gold-soft sm:text-3xl">“{d.question}”</p>
               <p className="relative mt-8 leading-relaxed text-paper/70">{d.detail}</p>
               <div className="relative mt-10 border-t border-paper/12 pt-8">
                 <p className="eyebrow text-gold">Illustrative outcomes</p>

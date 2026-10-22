@@ -510,7 +510,7 @@
   }
   /* …and the statement is set larger, to fill that screen rather than float in it. */
   .stack-under__inner h2 {
-    font-size: clamp(2.4rem, 5.4vw, 5.5rem);
+    font-size: clamp(2.04rem, 3.35vw, 3.41rem);
     max-width: 18ch;
   }
   .stack-under__inner h2 + div {

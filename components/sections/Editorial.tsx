@@ -31,7 +31,7 @@ function Head({ label, title, text, dark, wide }: { label?: string; title?: Reac
         <div className={wide ? "@4xl:col-span-9" : "max-w-4xl @4xl:col-span-6"}>
           {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
           {title ? (
-            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+            <h2 className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
           ) : null}
         </div>
         {text ? (
@@ -83,7 +83,7 @@ export function CinemaHero({
           <p className="animate-fade text-sm uppercase tracking-[0.22em] text-white/60">{eyebrow}</p>
           <h1
             data-split="load"
-            className="font-display mt-8 text-[clamp(2.4rem,6.2vw,6.25rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
+            className="font-display mt-8 text-[clamp(2.04rem,3.84vw,3.88rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
           >
             {title}
           </h1>
@@ -134,7 +134,7 @@ export function QuoteStage({
           <ol className="mt-12 space-y-12">
             {items.map((x) => (
               <li key={x.quote}>
-                <p className="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] font-medium leading-[1.1]">“{x.quote}”</p>
+                <p className="font-display text-[clamp(1.6rem,2.72vw,2.08rem)] font-medium leading-[1.1]">“{x.quote}”</p>
                 <div className="mt-6 text-lg">{x.answer}</div>
                 {x.note ? <div className="mt-2 text-white/75">{x.note}</div> : null}
               </li>
@@ -155,11 +155,11 @@ export function QuoteStage({
             {action ? <div className="shrink-0">{action}</div> : null}
           </div>
           <div className="relative mt-12 flex flex-col sm:mt-14">
-            <span aria-hidden className="pointer-events-none absolute -left-2 top-1/2 -translate-y-[70%] font-display text-[clamp(10rem,30vw,26rem)] leading-none text-white/[0.06]">
+            <span aria-hidden className="pointer-events-none absolute -left-2 top-1/2 -translate-y-[70%] font-display text-[clamp(8.5rem,21vw,18.2rem)] leading-none text-white/[0.06]">
               “
             </span>
             <div key={active} className="relay-in relative max-w-5xl">
-              <p className="font-display text-[clamp(1.7rem,4.4vw,4.2rem)] font-medium leading-[1.05] tracking-[-0.035em]">“{it.quote}”</p>
+              <p className="font-display text-[clamp(1.6rem,2.73vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">“{it.quote}”</p>
               <div className="mt-10 grid gap-8 lg:gap-x-16 border-t border-white/15 pt-8 sm:grid-cols-2 sm:gap-10">
                 <div className="text-lg sm:text-xl">{it.answer}</div>
                 {it.note ? <div className="text-base leading-relaxed text-white/80 sm:text-lg">{it.note}</div> : null}
@@ -195,15 +195,15 @@ export function Ledger({
   items: readonly { name: ReactNode; body?: ReactNode; meta?: ReactNode }[];
 }) {
   return (
-    <div className="container-x py-20 sm:py-24 lg:py-24">
+    <div className="container-x py-24 sm:py-32 lg:py-40">
       <Head label={label} title={title} text={text} />
       <ol className="mt-12 border-t border-current/15 sm:mt-16">
         {items.map((it, i) => (
           <li key={i} className="group relative border-b border-current/15">
             {/* A black band rises through the row on hover; the text inverts above it. */}
             <span aria-hidden className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-y-100" />
-            <div className="relative grid gap-3 lg:gap-x-8 px-1 py-7 transition-colors duration-500 group-hover:text-paper sm:px-4 sm:py-9 lg:grid-cols-12 lg:items-baseline lg:gap-12">
-              <h3 className="font-display text-[clamp(1.6rem,3.2vw,2.75rem)] font-medium leading-[1.05] tracking-[-0.035em] lg:col-span-6">{it.name}</h3>
+            <div className="relative grid gap-3 lg:gap-x-8 px-1 py-7 transition-colors duration-500 group-hover:text-paper sm:px-4 sm:py-9 lg:grid-cols-12 lg:items-center lg:gap-12">
+              <h3 className="font-display text-[clamp(1.6rem,2.56vw,2.2rem)] font-medium leading-[1.05] tracking-[-0.035em] lg:col-span-6">{it.name}</h3>
               <div className="opacity-75 lg:col-span-5 lg:col-start-8 sm:text-lg">
                 {it.body}
                 {it.meta ? <div className="mt-4 text-sm opacity-80">{it.meta}</div> : null}
@@ -243,7 +243,7 @@ export function FlipTiles({
     ? "sm:grid-cols-2 lg:grid-cols-12"
     : { 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[cols];
   return (
-    <div className={(dark ? "bg-black text-white " : "") + "py-20 sm:py-24 lg:py-24"}>
+    <div className={(dark ? "bg-black text-white " : "") + "py-24 sm:py-32 lg:py-40"}>
       <div className="container-x">
         <Head label={label} title={title} text={text} dark={dark} wide={wide} />
         <ul className={"mt-12 grid gap-3 sm:mt-16 " + grid}>
@@ -279,7 +279,7 @@ function FlipTile({ item, className }: { item: { name: ReactNode; back: ReactNod
               <span aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-black/55" />
             </>
           ) : null}
-          <span className="relative font-display text-[clamp(1.75rem,2.8vw,2.5rem)] font-medium leading-[1.04] tracking-[-0.035em]">{item.name}</span>
+          <span className="relative font-display text-[clamp(1.61rem,2.52vw,2.25rem)] font-medium leading-[1.04] tracking-[-0.035em]">{item.name}</span>
           <span aria-hidden className="relative flex items-center justify-between border-t border-current/15 pt-4 text-lg opacity-80">
             <span className="h-px w-10 bg-current" />
             <span>↻</span>
@@ -307,7 +307,7 @@ export function CompareSlider({ before, after, dark }: { before: ReactNode; afte
   };
   return (
     <div className={dark ? "bg-black text-white" : undefined}>
-    <div className="container-x py-20 sm:py-24 lg:py-24">
+    <div className="container-x py-24 sm:py-32 lg:py-40">
       <div
         ref={ref}
         className="relative h-[clamp(22rem,56svh,30rem)] touch-pan-y select-none overflow-hidden rounded-[1.25rem] border border-current/15"
@@ -315,11 +315,11 @@ export function CompareSlider({ before, after, dark }: { before: ReactNode; afte
         onPointerDown={(e) => move(e.clientX)}
       >
         <div className="absolute inset-0 flex flex-col justify-between bg-paper p-9 text-ink sm:p-16">
-          <p className="font-display text-[clamp(3rem,8vw,7rem)] font-medium leading-none tracking-[-0.05em] opacity-60">Before</p>
+          <p className="font-display text-[clamp(2.55rem,4.96vw,4.34rem)] font-medium leading-none tracking-[-0.05em] opacity-60">Before</p>
           <p className="max-w-lg text-lg opacity-80">{before}</p>
         </div>
         <div className="absolute inset-0 flex flex-col items-end justify-between bg-ink p-9 text-right text-paper sm:p-16" style={{ clipPath: `inset(0 0 0 ${x}%)` }}>
-          <p className="font-display text-[clamp(3rem,8vw,7rem)] font-medium leading-none tracking-[-0.05em]">After</p>
+          <p className="font-display text-[clamp(2.55rem,4.96vw,4.34rem)] font-medium leading-none tracking-[-0.05em]">After</p>
           <p className="max-w-lg text-lg">{after}</p>
         </div>
         <div aria-hidden className="absolute inset-y-0 w-px bg-current mix-blend-difference" style={{ left: `${x}%` }} />

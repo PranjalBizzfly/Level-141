@@ -94,6 +94,12 @@
 :root:not([data-theme="dark"]) body > header {
   --color-ink: #ffffff;
 }
+/* Over a page that opens on a dark photograph, the transparent header reads
+   white (logo, pill and menu) until it turns solid on scroll. */
+:root:not([data-theme="dark"]) body:has(main > :first-child:is(.photo-tone, :has(> .photo-tone))) > header:not([data-solid], [data-menu-open]) {
+  --color-paper: #ffffff;
+  --color-ink: #000000;
+}
 
 /* Dark theme: pure black canvas, white type, white logo. */
 [data-theme="dark"] {
@@ -479,4 +485,38 @@ body > header[data-menu-open] {
 /* Round buttons and arrow controls get a soft lift on hover. */
 :root:not([data-theme="dark"]) :is(a, button)[class*="rounded-full"][class*="border"]:hover {
   box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.3);
+}
+
+/* Reference typography: light, open headlines with the grey accent set in a
+   light serif; body text light with generous line spacing; small labels set
+   wide in caps. */
+main :is(h1, h2, h3, .display, .font-display) {
+  font-weight: 300 !important;
+  letter-spacing: -0.015em !important;
+  line-height: 1.12;
+}
+main .serif-accent {
+  font-family: var(--font-accent-serif), Georgia, serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+main p,
+main li {
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.005em;
+}
+.eyebrow {
+  letter-spacing: 0.32em !important;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* Transparent header over anything dark (detected in the Header component):
+   white logo, buttons and menu, in both themes. */
+body > header[data-over-dark]:not([data-solid], [data-menu-open]) {
+  --color-paper: #ffffff !important;
+  --color-ink: #000000 !important;
+  --color-paper-muted: rgb(255 255 255 / 0.7) !important;
+  color: #fff;
 }

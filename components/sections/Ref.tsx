@@ -30,7 +30,7 @@ export function RefSection({
     <section
       id={id}
       className={
-        "relative py-20 sm:py-24 lg:py-24 " +
+        "relative py-24 sm:py-32 lg:py-40 " +
         (tone === "ink" ? "on-dark bg-ink text-paper" : "bg-paper text-ink") +
         (enter ? ` enter-${enter}` : "")
       }
@@ -60,7 +60,7 @@ export function RefIntro({
         {/* With no supporting text beside it, the title runs wider (only a button, or nothing, shares the row). */}
         <div className={text ? "max-w-4xl @4xl:col-span-6" : action ? "max-w-5xl @4xl:col-span-9" : "max-w-6xl @4xl:col-span-11"}>
           <p className="text-[0.95rem] font-medium text-muted">{label}</p>
-          <h2 id={id} className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">
+          <h2 id={id} className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">
             {title}
           </h2>
         </div>
@@ -153,7 +153,7 @@ export function RefStatement({
     <Reveal variant="fade" className="flex flex-col items-center py-10 text-center sm:py-16">
       <h2
         data-split={reveal === "words" ? "" : undefined}
-        className={"display max-w-[22ch] text-[clamp(2rem,4vw,3.75rem)]" + (reveal === "mask" ? " reveal-mask" : "")}
+        className={"display max-w-[22ch] text-[clamp(1.84rem,3.2vw,3rem)]" + (reveal === "mask" ? " reveal-mask" : "")}
       >
         {children}
       </h2>

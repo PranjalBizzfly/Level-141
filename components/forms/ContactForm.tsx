@@ -142,11 +142,6 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                   <Check className={cx("size-3 transition-[opacity,transform] duration-300", checked ? "scale-100 opacity-100" : "scale-50 opacity-0")} strokeWidth={3} />
                 </span>
                 <span className="text-[0.95rem] font-medium">{o.label}</span>
-                {o.value === "growth-architecture" ? (
-                  <span className={cx("ml-auto rounded-full px-2.5 py-1 text-sm", checked ? "bg-paper/15 text-paper/85" : "bg-paper-2 text-muted")}>
-                    Waitlist
-                  </span>
-                ) : null}
               </label>
             );
           })}
@@ -155,10 +150,8 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
           <div className="mt-6 flex gap-3 rounded-xl border border-gold-ink/25 bg-ink/5 p-4 text-sm leading-relaxed text-ink">
             <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-gold-ink" />
             <p>
-              Growth Architecture™ is not yet open for engagements. You can register your organization&apos;s interest
-              and we&apos;ll be in touch when it becomes available.{" "}
               <Link href={routes.waitlist} className="font-medium underline underline-offset-4">
-                Join the Growth Architecture waitlist →
+                Join the Waitlist →
               </Link>
             </p>
           </div>
@@ -266,7 +259,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
             href={routes.waitlist}
             className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-ink px-8 text-base font-medium text-paper transition-colors hover:bg-ink-3 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/25 focus-visible:ring-offset-2 sm:w-auto"
           >
-            Go to the waitlist
+            Join the Waitlist
             <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
           </Link>
         ) : (

@@ -13,7 +13,6 @@ const frameworkNotes: Record<string, string> = {
 
 const nextLevel = [
   { label: "Start Your Personal Brand Assessment", href: `${routes.contact}?interest=personal-brand-architecture` },
-  { label: "Join The Growth Architecture™ Waitlist", href: routes.waitlist },
 ];
 
 const label = "text-xs font-semibold uppercase tracking-[0.16em] text-black/60 dark:text-white/60";
@@ -54,7 +53,7 @@ export function Footer() {
         <div className="relative px-6 pb-12 pt-16 sm:px-12 sm:pb-16 sm:pt-20 lg:px-20 lg:pt-24 2xl:px-28">
           {/* Closing statement */}
           <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
-            <p className="display text-[2.15rem] leading-[1.03] text-black sm:text-5xl lg:col-span-8 lg:text-[3.6rem] dark:text-white">
+            <p className="display text-[2.15rem] leading-[1.03] text-black sm:text-[2.6rem] lg:col-span-8 lg:text-[2.88rem] dark:text-white">
               Growth Architecture For <span className="serif-accent">People &amp; Organizations</span>
             </p>
             <div className="flex flex-col items-start gap-4 lg:col-span-4 lg:items-end">

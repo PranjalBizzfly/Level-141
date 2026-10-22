@@ -101,7 +101,7 @@ export function validateContact(v: ContactInput): FieldErrors<ContactInput> {
   const e: Record<string, string> = {};
   if (!interestOptions.some((o) => o.value === v.interest)) e.interest = "Please choose what you are interested in.";
   else if (v.interest === "growth-architecture")
-    e.interest = "Growth Architecture™ is not yet open for engagements. Please join the waitlist instead.";
+    e.interest = "For Growth Architecture™, please use Join the Waitlist.";
   checkName(e, v.name);
   checkOptionalText(e, "company", v.company, "company name");
   checkOptionalText(e, "designation", v.designation, "designation");

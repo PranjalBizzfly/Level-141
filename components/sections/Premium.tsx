@@ -72,7 +72,7 @@ export function StoriesList({
               </span>
               <div className="md:col-span-8">
                 <h3
-                  className="font-display text-[clamp(2.25rem,6vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.045em] transition-opacity duration-700"
+                  className="font-display text-[clamp(1.91rem,3.72vw,3.41rem)] font-medium leading-[0.98] tracking-[-0.045em] transition-opacity duration-700"
                   style={{ opacity: i === active ? 1 : 0.3 }}
                 >
                   {it.name}
@@ -133,7 +133,7 @@ export function RuleQuote({ children, cite }: { children: ReactNode; cite?: Reac
   return (
     <figure className="rule-quote relative mt-12 max-w-4xl pl-8 sm:pl-12">
       <span aria-hidden className="rule-quote__line absolute left-0 top-0 h-full w-[3px] bg-current" />
-      <blockquote className="font-display text-[clamp(1.9rem,3.8vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.035em]">
+      <blockquote className="font-display text-[clamp(1.75rem,3.04vw,2.72rem)] font-medium leading-[1.08] tracking-[-0.035em]">
         {children}
       </blockquote>
       {cite ? <figcaption className="mt-8 text-sm text-muted">{cite}</figcaption> : null}

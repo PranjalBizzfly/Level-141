@@ -31,7 +31,7 @@ function Head({ label, title, text, dark }: { label?: string; title?: ReactNode;
         <div className="max-w-4xl @4xl:col-span-6">
           {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
           {title ? (
-            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+            <h2 className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
           ) : null}
         </div>
         {text ? (
@@ -98,7 +98,7 @@ export function PortalHero({
               <p className="animate-fade text-sm uppercase tracking-[0.22em] text-white/60">{eyebrow}</p>
               <h1
                 data-split="load"
-                className="font-display mt-8 text-[clamp(2.3rem,6vw,6rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
+                className="font-display mt-8 text-[clamp(1.95rem,3.72vw,3.72rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
               >
                 {title}
               </h1>
@@ -282,7 +282,7 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
             </div>
           </div>
           <div className="min-h-[9.5rem] lg:col-span-6" aria-live="polite">
-            <h3 className="font-display text-[clamp(1.6rem,3.6vw,3.4rem)] font-medium leading-[1.02] tracking-[-0.04em]">{s.name}</h3>
+            <h3 className="font-display text-[clamp(1.6rem,2.88vw,2.72rem)] font-medium leading-[1.02] tracking-[-0.04em]">{s.name}</h3>
             <p className="mt-4 text-[1.0625rem] text-white sm:text-lg">{s.line}</p>
             <p className="mt-2 max-w-xl text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{s.body}</p>
             {foot && active === n - 1 ? <p className="mt-6 border-t border-white/15 pt-4 text-base text-white/85">{foot}</p> : null}
@@ -323,7 +323,7 @@ export function ExpandRows({
                   className="absolute inset-0 origin-bottom scale-y-0 bg-ink/[0.04] transition-transform duration-500 ease-out group-hover:scale-y-100 group-focus-visible:scale-y-100 motion-reduce:transition-none"
                 />
                 <span className="relative flex items-baseline gap-4 sm:gap-8">
-                  <span className="font-display flex-1 text-[clamp(2rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.045em]">
+                  <span className="font-display flex-1 text-[clamp(1.7rem,3.72vw,3.41rem)] font-medium leading-[0.95] tracking-[-0.045em]">
                     {x.name}
                   </span>
                   <span aria-hidden className="text-xl text-muted transition-transform duration-500 group-hover:translate-x-1 group-hover:text-ink">
@@ -364,7 +364,7 @@ export function ScaleStatement({ text, accent, sub }: { text: string; accent: st
       <div className="container-x">
         <div ref={ref}>
           <p
-            className="font-display origin-top-left text-[clamp(2rem,5.4vw,5rem)] font-medium leading-[1] tracking-[-0.045em]"
+            className="font-display origin-top-left text-[clamp(1.7rem,3.35vw,3.1rem)] font-medium leading-[1] tracking-[-0.045em]"
             style={{ scale: `${1 + 0.35 * (1 - e)}`, opacity: 0.6 + 0.4 * e }}
           >
             {text} <span className="serif-accent">{accent}</span>
@@ -432,7 +432,7 @@ export function VerticalTabs({
   const it = items[active];
 
   return (
-    <div className="py-20 sm:py-24 lg:py-24">
+    <div className="py-24 sm:py-32 lg:py-40">
       <div className="container-x">
         <Head label={label} title={title} />
         <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-16">
@@ -486,7 +486,7 @@ export function VerticalTabs({
               </>
             ) : null}
             <div className="relative">
-              <h3 className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.03em]">{it.name}</h3>
+              <h3 className="font-display text-[clamp(1.6rem,2.4vw,2.08rem)] font-medium leading-[1.05] tracking-[-0.03em]">{it.name}</h3>
               <p className={"mt-6 max-w-2xl text-[1.0625rem] leading-relaxed sm:text-lg " + (it.image ? "text-white/85" : "text-paper/90")}>{it.body}</p>
             </div>
           </div>
@@ -504,7 +504,7 @@ export function NecessaryList({ items }: { items: readonly string[] }) {
     <ol className="mt-12 grid border-t border-current/15 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((m) => (
         <li key={m} className="flex items-baseline gap-5 border-b border-current/15 py-8 sm:pr-8">
-          <p className="font-display text-[clamp(1.4rem,2.4vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
+          <p className="font-display text-[clamp(1.4rem,2.16vw,1.8rem)] font-medium leading-[1.1] tracking-[-0.03em]">
             {m} <span className="font-sans text-base font-normal tracking-normal opacity-70">may be necessary</span>
           </p>
         </li>
@@ -522,7 +522,7 @@ export function BrandsGrid({ items }: { items: readonly { letter: string; name: 
           <div className="flex items-start justify-between gap-4">
             <span
               aria-hidden
-              className="font-display text-[clamp(4rem,7vw,6rem)] font-medium leading-[0.8] tracking-[-0.06em] text-transparent [-webkit-text-stroke:1.5px_var(--color-ink)]"
+              className="font-display text-[clamp(3.4rem,4.34vw,3.72rem)] font-medium leading-[0.8] tracking-[-0.06em] text-transparent [-webkit-text-stroke:1.5px_var(--color-ink)]"
             >
               {l.letter}
             </span>

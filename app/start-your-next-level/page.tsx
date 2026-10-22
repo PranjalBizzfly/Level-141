@@ -48,7 +48,7 @@ export default async function ContactPage({ searchParams }: Props) {
           <p className="animate-fade text-[0.95rem] font-medium text-white/70">Start your next level</p>
           <h1
             id="contact-title"
-            className="font-display mt-8 animate-rise text-[clamp(2.6rem,5.2vw,4.75rem)] font-medium leading-[1] tracking-[-0.045em]"
+            className="font-display mt-8 animate-rise text-[clamp(2.21rem,3.22vw,2.94rem)] font-medium leading-[1] tracking-[-0.045em]"
           >
             Let&apos;s architect <span className="serif-accent">what&apos;s next</span>
           </h1>
@@ -90,14 +90,13 @@ export default async function ContactPage({ searchParams }: Props) {
           <div className="relative mt-12 max-w-lg rounded-[1.25rem] border border-white/20 px-6 py-7 text-[0.95rem] leading-relaxed text-white/75">
             <BracketClose className="absolute right-3 top-3 size-4 text-white/70" />
             <BracketOpen className="absolute bottom-3 left-3 size-4 text-white/70" />
-            Interested in Growth Architecture™ for your organization? It isn&apos;t open for engagements yet.{" "}
+            Growth Architecture™{" "}
             <Link
               href={routes.waitlist}
               className="-my-3 inline-flex min-h-12 items-center text-white underline underline-offset-4 hover:text-white/80"
             >
-              Join the waitlist
+              Join the Waitlist
             </Link>
-            .
           </div>
           <p className="mt-12 text-[0.95rem] text-white/70">Level141 is part of the 1XL ecosystem, headquartered in Dubai.</p>
         </div>

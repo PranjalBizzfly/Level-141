@@ -41,7 +41,7 @@ export function OrbStatement({ text, accent, sub }: { text: string; accent?: str
   const body = (
     <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 text-center">
       <p
-        className="font-display text-[clamp(2.2rem,5.6vw,5.25rem)] font-medium leading-[1.02] tracking-[-0.045em]"
+        className="font-display text-[clamp(1.87rem,3.47vw,3.25rem)] font-medium leading-[1.02] tracking-[-0.045em]"
         style={{ opacity: 0.14 + lit * 0.86, filter: lit < 1 ? `blur(${(1 - lit) * 6}px)` : undefined }}
       >
         {text} {accent ? <span className="text-white/60">{accent}</span> : null}
@@ -127,7 +127,7 @@ export function QuestionFocus({
       <div className="container-x">
         <div className="max-w-2xl">
           <p className="text-sm text-white/60">{label}</p>
-          <h2 className="font-display mt-4 text-[clamp(1.8rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+          <h2 className="font-display mt-4 text-[clamp(1.66rem,2.72vw,2.4rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
         </div>
         <div className="mt-12 grid gap-14 sm:mt-16 lg:grid-cols-12 lg:gap-16">
           {/* Pinned frame: photographs stack in order — each unveils over the last,
@@ -160,7 +160,7 @@ export function QuestionFocus({
                   <Image src={q.image} alt={altFor(q.image)} fill sizes="100vw" className="object-cover" />
                 </div>
                 <span className="text-sm tabular-nums text-white/60">{n2(i)}</span>
-                <h3 className="mt-4 overflow-hidden font-display text-[clamp(2rem,4.4vw,4rem)] font-medium leading-[1.02] tracking-[-0.04em]">
+                <h3 className="mt-4 overflow-hidden font-display text-[clamp(1.7rem,2.73vw,2.48rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                   <span className="qf-rise block">{q.name}</span>
                 </h3>
                 {/* How Level141 answers the question. */}
@@ -197,7 +197,7 @@ export function BrandsSpell({
           <ol className="mt-12 grid gap-14 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((it) => (
               <li key={it.letter}>
-                <p aria-hidden className="font-display text-[4rem] font-medium leading-none">{it.letter}</p>
+                <p aria-hidden className="font-display text-[2.48rem] font-medium leading-none">{it.letter}</p>
                 <h3 className="font-display mt-4 text-2xl font-medium">{it.name}</h3>
                 <p className="mt-2 text-[1.0625rem] text-white/85">{it.role}</p>
                 <p className="mt-4 text-[0.95rem] text-white/80">{it.list.join(" · ")}</p>
@@ -239,7 +239,7 @@ export function BrandsSpell({
                     aria-selected={on}
                     aria-label={it.name}
                     onClick={() => jump(i)}
-                    className="spell-letter font-display text-[clamp(4.5rem,15.5vw,15rem)] font-medium leading-[0.8] tracking-[-0.05em]"
+                    className="spell-letter font-display text-[clamp(3.82rem,10.85vw,10.5rem)] font-medium leading-[0.8] tracking-[-0.05em]"
                     style={
                       {
                         "--fill": `${fill * 100}%`,
@@ -267,7 +267,7 @@ export function BrandsSpell({
                 data-on={i === active ? "" : undefined}
               >
                 <div className="lg:col-span-5">
-                  <h3 className="overflow-hidden font-display text-[clamp(1.9rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em]">
+                  <h3 className="overflow-hidden font-display text-[clamp(1.75rem,2.72vw,2.4rem)] font-medium leading-[1.05] tracking-[-0.035em]">
                     <span className="spell-rise block" style={{ "--d": 0 } as CSSProperties}>{it.name}</span>
                   </h3>
                   <p className="mt-4 overflow-hidden text-lg text-white/80">
