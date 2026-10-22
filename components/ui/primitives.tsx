@@ -227,7 +227,7 @@ export function PageHero({
           <div data-rise>
             <MediaSlot
               src={image}
-              label={`Page film or image — ${eyebrow}`}
+              label={`Page film or image: ${eyebrow}`}
               className="aspect-[16/10] sm:aspect-[16/7]"
               sizes="(min-width: 1408px) 1300px, 100vw"
               priority

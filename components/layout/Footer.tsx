@@ -82,7 +82,7 @@ export function Footer() {
             <div className="sm:col-span-2 lg:col-span-3">
               <Link
                 href="/"
-                aria-label="Level141 — Home"
+                aria-label="Level141 home"
                 className="inline-flex min-h-11 items-center text-black dark:text-white"
               >
                 <LogoLockup className="h-[30px] w-auto sm:h-9" />

@@ -315,7 +315,7 @@ export function Compare({ before, after }: { before: ReactNode; after: ReactNode
  */
 export function Shelf({
   items,
-  label = "Cards — scroll sideways",
+  label = "Cards, scroll sideways",
 }: {
   items: readonly { kicker?: ReactNode; name: ReactNode; body?: ReactNode }[];
   label?: string;

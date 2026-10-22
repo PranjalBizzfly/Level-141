@@ -24,9 +24,9 @@ import { altFor } from "@/lib/image-alts";
 /** Frame width and height per level, in em (1em = wordmark cap height). */
 const levels = [
   { w: 0, h: 0 },
-  { w: 2.4, h: 1 },
-  { w: 2.4, h: 2.1 },
-  { w: 2.4, h: 3.2 },
+  { w: 2.8, h: 1 },
+  { w: 2.8, h: 2.1 },
+  { w: 2.8, h: 3.2 },
 ] as const;
 
 const images = [
@@ -35,11 +35,11 @@ const images = [
   "/images/about-dubai-terrace.webp",
 ];
 
-/** Track progress (0–1) at which each phase begins. */
-const AT_L1 = 0.03;
-const AT_L2 = 0.27;
-const AT_L3 = 0.51;
-const AT_SETTLE = 0.8; // frame closes back onto the baseline, then the stage is released
+/** The climb plays by itself once the stage is in view: ms per level, then a hold before it settles. */
+const STEP_MS = 1100;
+const HOLD_MS = 1600;
+/** Pause on the settled logo before the page glides on to the next section. */
+const REST_MS = 500;
 
 const RM = "(prefers-reduced-motion: reduce)";
 const subscribeRM = (cb: () => void) => {
@@ -48,18 +48,70 @@ const subscribeRM = (cb: () => void) => {
   return () => m.removeEventListener("change", cb);
 };
 
-function stepAt(p: number) {
-  if (p >= AT_SETTLE) return 0;
-  if (p >= AT_L3) return 3;
-  if (p >= AT_L2) return 2;
-  if (p >= AT_L1) return 1;
-  return 0;
+/**
+ * Glide the page to the point where the next section has fully opened out of
+ * the logo window — only if the visitor is still on the pinned stage (not
+ * already past it, and not just passing above it).
+ */
+function openNext(el: HTMLElement | null) {
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  const h = (el.firstElementChild as HTMLElement | null)?.offsetHeight || window.innerHeight;
+  const target = window.scrollY + r.top + (r.height - 2 * h) + h;
+  const onStage = r.top <= h * 0.25 && window.scrollY < target - 4;
+  if (!onStage) return;
+  const lenis = (window as unknown as { __lenis?: { scrollTo: (y: number, o?: { duration?: number }) => void } }).__lenis;
+  if (lenis) lenis.scrollTo(target, { duration: 1.6 });
+  else window.scrollTo({ top: target, behavior: "smooth" });
 }
 
 export function LogoWindow({ caption }: { caption?: string }) {
   const track = useRef<HTMLElement>(null);
   const reduced = useSyncExternalStore(subscribeRM, () => window.matchMedia(RM).matches, () => false);
   const [progress, setProgress] = useState(0);
+  // The climb: 0 = on the baseline, 1–3 = the frame's levels. It plays on a timer
+  // when the stage comes into view (no scrolling per level), once per visit.
+  const [climb, setClimb] = useState(0);
+  const [inView, setInView] = useState(false);
+  const [played, setPlayed] = useState(false);
+
+  useEffect(() => {
+    if (reduced) return;
+    const el = track.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      setInView(e.isIntersecting);
+      // Leaving the section resets it, so the climb plays again on the next visit.
+      if (!e.isIntersecting) {
+        setPlayed(false);
+        setClimb(0);
+      }
+    }, { threshold: 0.35 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduced]);
+
+  // Plays on its own: climb the three levels, hold, settle onto the baseline,
+  // then glide the page on so the next section opens out of the logo window —
+  // no scrolling needed. Any scroll by the visitor simply takes over.
+  // (Tracked in a ref too, so marking it played doesn't cancel the timers still to run.)
+  const playedRef = useRef(false);
+  useEffect(() => {
+    if (!inView) playedRef.current = false;
+    if (reduced || !inView || playedRef.current) return;
+    playedRef.current = true;
+    const timers = [1, 2, 3].map((lvl, i) => window.setTimeout(() => setClimb(lvl), 150 + i * STEP_MS));
+    const settle = 150 + 3 * STEP_MS + HOLD_MS;
+    timers.push(window.setTimeout(() => { setClimb(0); setPlayed(true); }, settle));
+    timers.push(window.setTimeout(() => openNext(track.current), settle + REST_MS));
+    return () => {
+      timers.forEach((t) => window.clearTimeout(t));
+      playedRef.current = false;
+    };
+  }, [inView, reduced]);
+
+  // Scrolling on to the reveal skips the rest of the climb, so nobody has to wait for it.
+  const skipped = progress >= 1;
 
   useEffect(() => {
     if (reduced) return;
@@ -104,7 +156,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
     };
   }, [reduced]);
 
-  const step = reduced ? 0 : stepAt(progress);
+  const step = reduced || skipped ? 0 : climb;
   const l = levels[step];
   // While settling back, keep the top image so the frame closes with content.
   const shown = step === 0 ? images.length - 1 : step - 1;
@@ -113,7 +165,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
     <section
       ref={track}
       aria-label="Level141"
-      className={reduced ? "bg-black text-white" : "relative z-10 h-[300lvh]"}
+      className={reduced ? "bg-black text-white" : "relative z-10 h-[220lvh]"}
     >
       <div
         className={
@@ -123,11 +175,11 @@ export function LogoWindow({ caption }: { caption?: string }) {
         }
       >
         <div className="container-x flex flex-col items-center">
-          <div aria-hidden className="flex items-end pt-[1.2em] text-[clamp(1.25rem,5.2vw,4.75rem)]">
+          <div aria-hidden className="flex items-end pt-[1.2em] text-[clamp(1.75rem,min(8.6vw,14lvh),9rem)]">
             <LogoWordHalf part="level" className="h-[1em] w-auto shrink-0" />
             <div
               className="logo-window__frame relative shrink-0 overflow-hidden"
-              style={{ width: l.w ? `min(${l.w}em, 24vw)` : 0, height: `${l.h}em`, marginInline: l.w ? "0.12em" : "0.385em" }}
+              style={{ width: l.w ? `min(${l.w}em, 30vw)` : 0, height: `${l.h}em`, marginInline: l.w ? "0.12em" : "0.385em" }}
             >
               {images.map((src, i) => (
                 <Image
@@ -152,7 +204,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
           <div
             aria-hidden
             className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-white/50 transition-opacity duration-500"
-            style={{ opacity: progress < AT_L1 * 0.6 ? 1 : 0 }}
+            style={{ opacity: !played && climb === 0 && progress < 0.5 ? 1 : 0 }}
           >
             Scroll
             <span className="relative h-10 w-px overflow-hidden bg-white/20">

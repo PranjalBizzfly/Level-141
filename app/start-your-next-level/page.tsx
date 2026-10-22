@@ -79,8 +79,8 @@ export default async function ContactPage({ searchParams }: Props) {
                     {s.n}
                   </span>
                   <span className="pt-2 leading-relaxed transition-transform duration-300 motion-safe:group-hover:translate-x-1">
-                    <span className="font-display text-lg font-medium tracking-[-0.01em]">{s.name}</span> —{" "}
-                    <span className="text-white/75 transition-colors duration-300 group-hover:text-white">{s.line}</span>
+                    <span className="block font-display text-lg font-medium tracking-[-0.01em]">{s.name}</span>
+                    <span className="block text-white/75 transition-colors duration-300 group-hover:text-white">{s.line}</span>
                   </span>
                 </li>
               ))}
@@ -90,12 +90,12 @@ export default async function ContactPage({ searchParams }: Props) {
           <div className="relative mt-12 max-w-lg rounded-[1.25rem] border border-white/20 px-6 py-7 text-[0.95rem] leading-relaxed text-white/75">
             <BracketClose className="absolute right-3 top-3 size-4 text-white/70" />
             <BracketOpen className="absolute bottom-3 left-3 size-4 text-white/70" />
-            Interested in Growth Architecture™ for your organization? It isn&apos;t open for engagements yet —{" "}
+            Interested in Growth Architecture™ for your organization? It isn&apos;t open for engagements yet.{" "}
             <Link
               href={routes.waitlist}
               className="-my-3 inline-flex min-h-12 items-center text-white underline underline-offset-4 hover:text-white/80"
             >
-              join the waitlist
+              Join the waitlist
             </Link>
             .
           </div>

@@ -136,8 +136,8 @@ export default function HowPage() {
             }
             text="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
             items={[
-              { name: "LQ™", body: "Level Quotient — First, know your level", href: "#lq" },
-              { name: "IGF™", body: "Integrated Growth Framework — Connect the growth engine", href: "#igf" },
+              { name: "LQ™", body: "Level Quotient: First, know your level", href: "#lq" },
+              { name: "IGF™", body: "Integrated Growth Framework: Connect the growth engine", href: "#igf" },
               { name: "BRANDS™", body: "Six dimensions of growth", href: "#brands" },
               { name: "PEAK™", body: "From presence to momentum", href: "#peak" },
             ]}
@@ -191,7 +191,7 @@ export default function HowPage() {
                 </>
               }
             >
-              IGF™ — Connect the growth engine.{" "}
+              IGF™: Connect the growth engine.{" "}
               <span className="serif-accent">Growth rarely comes from one function</span>
             </RefStatement>
             <IgfConnect />

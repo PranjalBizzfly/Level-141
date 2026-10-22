@@ -22,19 +22,20 @@ import { altFor } from "@/lib/image-alts";
 
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
-function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
+function Head({ label, title, text, dark, wide }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean; wide?: boolean }) {
   if (!label && !title) return null;
   return (
     <div className="@container w-full">
       <div className="@4xl:grid @4xl:grid-cols-12 @4xl:items-end @4xl:gap-x-16">
-        <div className="max-w-4xl @4xl:col-span-6">
+        {/* wide: a long title takes three quarters of the row, short supporting text the rest. */}
+        <div className={wide ? "@4xl:col-span-9" : "max-w-4xl @4xl:col-span-6"}>
           {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
           {title ? (
             <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
           ) : null}
         </div>
         {text ? (
-          <div className={"mt-8 max-w-2xl text-base leading-relaxed sm:text-lg @4xl:col-span-6 @4xl:col-start-7 @4xl:mt-0 " + (dark ? "text-white/80" : "text-muted")}>
+          <div className={"mt-8 max-w-2xl text-base leading-relaxed sm:text-lg @4xl:mt-0 " + (wide ? "@4xl:col-span-3 @4xl:col-start-10 " : "@4xl:col-span-6 @4xl:col-start-7 ") + (dark ? "text-white/80" : "text-muted")}>
             {text}
           </div>
         ) : null}
@@ -224,6 +225,7 @@ export function FlipTiles({
   items,
   cols = 3,
   dark,
+  wide,
 }: {
   label?: string;
   title?: ReactNode;
@@ -231,6 +233,8 @@ export function FlipTiles({
   items: readonly { name: ReactNode; back: ReactNode; foot?: ReactNode; image?: string }[];
   cols?: 2 | 3 | 4;
   dark?: boolean;
+  /** Give a long title three quarters of the heading row. */
+  wide?: boolean;
 }) {
   // Three columns with one tile left over (e.g. seven) would leave it alone on
   // the last row; instead the first row takes four and the rows below three.
@@ -241,7 +245,7 @@ export function FlipTiles({
   return (
     <div className={(dark ? "bg-black text-white " : "") + "py-20 sm:py-24 lg:py-24"}>
       <div className="container-x">
-        <Head label={label} title={title} text={text} dark={dark} />
+        <Head label={label} title={title} text={text} dark={dark} wide={wide} />
         <ul className={"mt-12 grid gap-3 sm:mt-16 " + grid}>
           {items.map((it, i) => (
             <FlipTile key={i} item={it} className={balance ? (i < 4 ? "lg:col-span-3" : "lg:col-span-4") + (i === items.length - 1 && items.length % 2 ? " sm:col-span-2" : "") : undefined} />
@@ -281,8 +285,8 @@ function FlipTile({ item, className }: { item: { name: ReactNode; back: ReactNod
             <span>↻</span>
           </span>
         </span>
-        <span className={face + " justify-end [transform:rotateY(180deg)] true-tone border border-black/15 bg-white text-black"}>
-          <span>
+        <span className={face + " items-center text-center [transform:rotateY(180deg)] true-tone border border-black/15 bg-white text-black"}>
+          <span className="my-auto max-w-[18rem]">
             <span className="block text-[1.02rem] leading-relaxed">{item.back}</span>
             {item.foot ? <span className="mt-6 block border-t border-current/25 pt-3 text-sm opacity-80">{item.foot}</span> : null}
           </span>

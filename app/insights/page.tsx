@@ -22,7 +22,7 @@ import { routes } from "@/lib/site";
 import { altFor } from "@/lib/image-alts";
 
 export const metadata = pageMetadata({
-  title: "Insights — The Next Level",
+  title: "Insights: The Next Level",
   description:
     "Ideas for people and organizations that refuse to remain where they are.",
   path: routes.insights,
@@ -118,7 +118,7 @@ export default function InsightsPage() {
               head={
                 <RefIntro
                   label="Insights"
-                  title="The Next Level — ideas for people and organizations that refuse to remain where they are"
+                  title="The Next Level. Ideas for people and organizations that refuse to remain where they are"
                   action={{ label: "Explore Insights", href: routes.insights }}
                 />
               }

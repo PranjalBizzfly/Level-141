@@ -72,7 +72,7 @@ function checkPhone(e: Record<string, string>, v: { phone: string; phoneCountry:
   if (!country) e.phoneCountry = "Please choose a country code.";
   if (!v.phone) return;
   const digits = nationalDigits(v.phone, country);
-  if (!/^\d+$/.test(digits)) e.phone = "Please use digits only — the country code is selected separately.";
+  if (!/^\d+$/.test(digits)) e.phone = "Please use digits only. The country code is selected separately.";
   else if (country && (digits.length < country.min || digits.length > country.max))
     e.phone =
       country.min === country.max
@@ -101,7 +101,7 @@ export function validateContact(v: ContactInput): FieldErrors<ContactInput> {
   const e: Record<string, string> = {};
   if (!interestOptions.some((o) => o.value === v.interest)) e.interest = "Please choose what you are interested in.";
   else if (v.interest === "growth-architecture")
-    e.interest = "Growth Architecture™ is not yet open for engagements — please join the waitlist instead.";
+    e.interest = "Growth Architecture™ is not yet open for engagements. Please join the waitlist instead.";
   checkName(e, v.name);
   checkOptionalText(e, "company", v.company, "company name");
   checkOptionalText(e, "designation", v.designation, "designation");

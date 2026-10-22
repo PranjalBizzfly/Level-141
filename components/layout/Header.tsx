@@ -107,7 +107,7 @@ export function Header() {
           Skip to content
         </a>
         <div className="container-x flex h-16 items-center justify-between gap-4 sm:h-20">
-          <Link href="/" aria-label="Level141 — Home" className="logo-split relative z-10 flex min-h-11 shrink-0 items-center">
+          <Link href="/" aria-label="Level141 home" className="logo-split relative z-10 flex min-h-11 shrink-0 items-center">
             <LogoLockupSplit className="h-[30px] w-auto overflow-visible" title="Level141" />
           </Link>
 

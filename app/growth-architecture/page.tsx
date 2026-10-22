@@ -30,7 +30,7 @@ import { DetailsPanel, RuleQuote } from "@/components/sections/Premium";
 import { routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: "Growth Architecture™ — Join the Waitlist",
+  title: "Growth Architecture™: Join the Waitlist",
   description:
     "Level141 Growth Architecture™ diagnoses where an organization is, defines where it needs to go, and architects the integrated growth system that bridges the gap. Not yet open — register your interest.",
   path: routes.growth,
@@ -146,7 +146,7 @@ export default function GrowthArchitecturePage() {
         {/* PEAK — the signature ascent, on black */}
         <RefSection id="peak" tone="ink">
           <RefIntro
-            label="PEAK™ — From presence to momentum"
+            label="PEAK™: From presence to momentum"
             title={
               <>
                 From being present in the market to <span className="serif-accent">self-reinforcing growth</span>
@@ -264,7 +264,7 @@ export default function GrowthArchitecturePage() {
               />
               <DetailsPanel
                 rows={[
-                  { label: "Status", value: "Not yet open for engagements — waitlist open" },
+                  { label: "Status", value: "Not yet open for engagements. Waitlist open" },
                   { label: "For", value: gaAudience.slice(0, 4).join(" · ") },
                   { label: "Frameworks", value: "LQ™ · PEAK™ · BRANDS™" },
                 ]}

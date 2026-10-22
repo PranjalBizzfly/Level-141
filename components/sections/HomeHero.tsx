@@ -56,7 +56,7 @@ export function HomeHero() {
           <MediaSlot
             src="/images/client-executive-dubai-window.webp"
             alt={altFor("/images/client-executive-dubai-window.webp")}
-            label="Hero film or image — growth to the next level"
+            label="Hero film or image: growth to the next level"
             className="min-h-[clamp(16rem,42svh,34rem)] w-full flex-1"
             priority
           />

@@ -118,7 +118,7 @@ export default function PersonalBrandPage() {
                 <p>
                   Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived
                   experience into a structured personal growth asset. It is designed to help accomplished people become
-                  clearer, more credible, more influential and more commercially relevant — without manufacturing a
+                  clearer, more credible, more influential and more commercially relevant without manufacturing a
                   persona.
                 </p>
                 <p className="text-white">
@@ -266,6 +266,7 @@ export default function PersonalBrandPage() {
         <section>
           <FlipTiles
             dark
+            wide
             label="Measurement & Success System"
             title="Visibility metrics are useful signals, but they are not the product outcome"
             text="Success should be measured through a balanced scorecard."

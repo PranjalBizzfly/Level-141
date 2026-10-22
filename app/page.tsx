@@ -18,7 +18,7 @@ export const metadata = {
     description: site.description,
     path: "/",
   }),
-  title: { absolute: "Level141 — Growth Architecture for People & Organizations" },
+  title: { absolute: "Level141 | Growth Architecture for People & Organizations" },
 };
 
 /** The four frameworks for the Growth System letter columns, each linking to its section on the How page. */

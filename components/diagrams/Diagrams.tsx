@@ -119,7 +119,7 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
   return (
     <figure data-seq>
       <figcaption className="sr-only">
-        PEAK™ — Presence → Equity → Authority → Kinetic Growth
+        PEAK™: Presence → Equity → Authority → Kinetic Growth
       </figcaption>
       {/* Equal cards sized to their content; the ascent is shown by a bar that
           fills 25 → 100% across the four stages instead of empty card height. */}
@@ -218,7 +218,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
       <style>{brandsLinkCss}</style>
       <figure data-seq className="mx-auto w-full max-w-[30rem] lg:col-span-5">
         <figcaption className="sr-only">
-          BRANDS™ — Six dimensions of growth.
+          BRANDS™: Six dimensions of growth.
         </figcaption>
         <div aria-hidden className={cx("relative aspect-square", dark ? "text-paper" : "text-ink")}>
           <svg viewBox="0 0 400 400" className="absolute inset-0 size-full">
