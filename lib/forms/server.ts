@@ -28,7 +28,7 @@ const escapeHtml = (s: string) =>
 
 async function sendEmail(sub: Submission) {
   const rows = Object.entries(sub.fields)
-    .map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#5c5750;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0">${escapeHtml(v || "—").replace(/\n/g, "<br>")}</td></tr>`)
+    .map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#5c5c5c;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0">${escapeHtml(v || "—").replace(/\n/g, "<br>")}</td></tr>`)
     .join("");
   const text = Object.entries(sub.fields)
     .map(([k, v]) => `${k}: ${v || "—"}`)

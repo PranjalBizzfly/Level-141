@@ -8,7 +8,7 @@ export const site = {
   tagline: "Growth Architecture for People & Organizations",
   brandLine: "Level141 — Growth by Design",
   description:
-    "Level141 architects the next level of growth for people and organizations through clarity, positioning, visibility, credibility, authority and structured growth systems.",
+    "Level141 architects the next level of growth for people and organizations through clarity, positioning, visibility, credibility, authority and growth systems.",
   headquarters: "Dubai",
   ecosystem: "1XL",
   primaryCta: { label: "Find Your Level", href: "/start-your-next-level" },

@@ -31,7 +31,7 @@ export default async function OpengraphImage() {
             for People &amp; Organizations.
           </div>
         </div>
-        <div style={{ fontSize: 22, letterSpacing: 6, textTransform: "uppercase", color: "#A3A3A3" }}>
+        <div style={{ fontSize: 22, letterSpacing: 6, textTransform: "uppercase", color: "rgba(255, 255, 255, 0.64)" }}>
           Level141 — Growth by Design
         </div>
       </div>

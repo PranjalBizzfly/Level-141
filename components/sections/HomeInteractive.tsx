@@ -260,7 +260,7 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
                       transformOrigin: "0% 50%",
                     }}
                   >
-                    <span aria-hidden className="text-sm tabular-nums opacity-55 sm:text-sm">{n2(i)}</span>
+                    <span aria-hidden className="text-sm tabular-nums opacity-75 sm:text-sm">{n2(i)}</span>
                     <h3 className="font-display text-[clamp(1rem,2.2vw,1.85rem)] font-medium leading-[1.12] tracking-[-0.03em]">{t}</h3>
                   </div>
                 </li>

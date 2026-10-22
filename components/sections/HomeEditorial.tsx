@@ -85,8 +85,11 @@ export function Relay({
   const cards = (
     <ol
       ref={row}
-      className={"flex items-end gap-4 sm:gap-5 " + (pin ? "" : "snap-x snap-mandatory overflow-x-auto pb-4 [scrollbar-width:none]")}
+      className={"flex items-end gap-4 sm:gap-5 " + (pin ? "" : "snap-x snap-mandatory overflow-x-auto pb-4 outline-none [scrollbar-width:none] focus-visible:ring-2 focus-visible:ring-white/60")}
       style={pin ? { transform: `translateX(${-shift}px)` } : undefined}
+      // As a swipeable row (phones), keyboard users can focus it and scroll it with the arrow keys.
+      tabIndex={pin ? undefined : 0}
+      aria-label={pin ? undefined : `${label}: swipe or use the arrow keys to see every link`}
     >
       {steps.map((x, i) => {
         // How far right of the row's left edge this card sits, 0 → 1 across the view.

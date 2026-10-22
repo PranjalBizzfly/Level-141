@@ -75,7 +75,7 @@ export function LogoAssembly() {
                   src={photo}
                   alt={altFor(photo)}
                   fill
-                  sizes="20vw"
+                  sizes="(min-width: 640px) 12vw, 25vw"
                   priority
                   className="object-cover grayscale"
                   style={{ objectPosition: `${i * 25}% 50%` }}

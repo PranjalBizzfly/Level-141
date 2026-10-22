@@ -44,7 +44,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} — Growth Architecture for People & Organizations`,
+    default: `${site.name} | Growth Architecture for People & Organizations`,
     template: `%s | ${site.name}`,
   },
   description: site.description,

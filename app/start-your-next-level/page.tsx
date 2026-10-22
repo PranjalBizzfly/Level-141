@@ -11,7 +11,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Start Your Next Level",
   description:
-    "Let's architect what's next.",
+    "Let's architect what's next. The first step isn't another campaign. It's understanding your current level.",
   path: routes.contact,
 });
 

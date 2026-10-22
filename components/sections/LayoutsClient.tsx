@@ -107,7 +107,7 @@ export function TiltGrid({
     <ul className={"tilt-grid mt-12 grid gap-3 sm:mt-16 " + grid}>
       {items.map((it, i) => (
         <TiltCard key={it.key} className={card} index={i}>
-          <span aria-hidden className="text-sm tabular-nums opacity-55">
+          <span aria-hidden className="text-sm tabular-nums opacity-75">
             {String(i + 1).padStart(2, "0")}
           </span>
           <div className="mt-12">

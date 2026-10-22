@@ -32,7 +32,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Growth Architecture™: Join the Waitlist",
   description:
-    "Level141 Growth Architecture™ diagnoses where an organization is, defines where it needs to go, and architects the integrated growth system that bridges the gap. Not yet open — register your interest.",
+    "Growth Architecture™ diagnoses where an organization is and architects the integrated growth system that bridges the gap. Not yet open: register your interest.",
   path: routes.growth,
 });
 

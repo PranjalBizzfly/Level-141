@@ -111,7 +111,7 @@ export function CountryPicker({
         ref={button}
         type="button"
         id={`${id}-country`}
-        aria-label={`Country code: ${selected.name} +${selected.dial}`}
+        aria-label={`${selected.iso} +${selected.dial}, country code for ${selected.name}`}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listId}

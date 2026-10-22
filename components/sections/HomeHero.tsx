@@ -23,7 +23,7 @@ export function HomeHero() {
         >
           {/* The two brackets of the Level141 symbol lock around the statement. */}
           <BracketClose className="absolute right-0 top-0 size-[0.22em] bracket-in-close text-ink" />
-          <BracketOpen className="absolute bottom-0 left-0 size-[0.22em] bracket-in-open text-ink/35" />
+          <BracketOpen className="absolute bottom-0 left-0 size-[0.22em] bracket-in-open text-ink" />
           What&apos;s Your <span className="serif-accent">Level</span>?
         </h1>
 

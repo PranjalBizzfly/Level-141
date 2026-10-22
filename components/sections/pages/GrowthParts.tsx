@@ -180,14 +180,14 @@ export function SpotlightGrid({
             className="relative rounded-[1.25rem] bg-line/60 p-px outline-none [--x:50%] [--y:50%] focus-visible:ring-2 focus-visible:ring-ink"
             style={{
               backgroundImage:
-                "radial-gradient(260px circle at var(--x) var(--y), rgb(10 10 10 / calc(var(--on) * 0.9)), transparent 70%)",
+                "radial-gradient(260px circle at var(--x) var(--y), rgb(0 0 0 / calc(var(--on) * 0.9)), transparent 70%)",
             }}
           >
             <div
               className="relative h-full overflow-hidden rounded-[15px] bg-paper p-9 sm:p-10"
               style={{
                 backgroundImage:
-                  "radial-gradient(320px circle at var(--x) var(--y), rgb(10 10 10 / calc(var(--on) * 0.05)), transparent 70%)",
+                  "radial-gradient(320px circle at var(--x) var(--y), rgb(0 0 0 / calc(var(--on) * 0.05)), transparent 70%)",
               }}
             >
               <h3 className="font-display text-[1.6rem] font-medium leading-tight tracking-[-0.02em]">{it.name}</h3>
@@ -244,7 +244,7 @@ export function Bridge({
                 <li
                   key={s.name}
                   className="flex gap-5 border-l border-white/15 py-7 pl-5 transition-[opacity,transform] duration-700 lg:flex-col lg:gap-0 lg:border-l-0 lg:py-0 lg:pl-0"
-                  style={{ opacity: on ? 1 : 0.6, transform: on ? "none" : "translateY(8px)" }}
+                  style={{ opacity: on ? 1 : 0.85, transform: on ? "none" : "translateY(8px)" }}
                 >
                   <span aria-hidden className="relative hidden w-px bg-white/25 lg:block lg:self-center" style={{ height: `${2 + h * 3}rem` }}>
                     <span
@@ -252,11 +252,11 @@ export function Bridge({
                       style={{ transform: `scaleY(${on ? 1 : 0})` }}
                     />
                   </span>
-                  <span className="text-base tabular-nums text-white/75 lg:mt-4">{n2(i)}</span>
+                  <span className="text-base tabular-nums text-white/85 lg:mt-4">{n2(i)}</span>
                   <div className="lg:mt-2">
                     <h3 className="font-display text-[1.4rem] font-medium leading-tight tracking-[-0.02em]">{s.name}</h3>
-                    <p className="mt-2 text-base text-white/80">{s.body}</p>
-                    <p className="mt-4 text-sm uppercase tracking-[0.12em] text-white/75">{s.meta}</p>
+                    <p className="mt-2 text-base text-white/90">{s.body}</p>
+                    <p className="mt-4 text-sm uppercase tracking-[0.12em] text-white/85">{s.meta}</p>
                   </div>
                 </li>
               );
