@@ -240,17 +240,21 @@
     font-style: normal;
     font-weight: inherit;
   }
+  /* Wide, airy containers (Apple-like): generous side gutters at every size. */
   .container-x {
     width: 100%;
-    max-width: 88rem;
+    max-width: 92rem;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
   }
   @media (min-width: 640px) {
-    .container-x { padding-inline: 2rem; }
+    .container-x { padding-inline: 3rem; }
   }
   @media (min-width: 1024px) {
-    .container-x { padding-inline: 3.5rem; }
+    .container-x { padding-inline: 5rem; }
+  }
+  @media (min-width: 1536px) {
+    .container-x { padding-inline: 6.5rem; }
   }
   /* Comfortable measure for running text (~65 characters). */
   .measure {

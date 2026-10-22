@@ -29,7 +29,7 @@ export function ProcessTimeline({ steps, dark, className }: { steps: readonly St
         className={cx("absolute left-0 right-0 top-[1.4rem] hidden h-px lg:block", dark ? "bg-line-dark-strong" : "bg-line-strong")}
       />
       {steps.map((s, i) => (
-        <li key={s.n} data-step style={step(i)} className="group/step relative flex gap-6 pb-12 last:pb-0 lg:row-span-5 lg:grid lg:grid-rows-subgrid lg:gap-0 lg:pb-0">
+        <li key={s.n} data-step style={step(i)} className="group/step relative flex gap-8 pb-12 last:pb-0 lg:row-span-5 lg:grid lg:grid-rows-subgrid lg:gap-0 lg:pb-0">
           {i < steps.length - 1 ? (
             <span
               aria-hidden
@@ -51,9 +51,9 @@ export function ProcessTimeline({ steps, dark, className }: { steps: readonly St
           <div className="lg:contents">
             <h3 className="text-xl tracking-[-0.015em] sm:text-2xl lg:mt-8">{s.name}</h3>
             {s.line ? <p className={cx("mt-2 font-medium", dark ? "text-gold-soft" : "text-gold-ink")}>{s.line}</p> : null}
-            <p className={cx("mt-3 leading-relaxed", dark ? "text-paper/75" : "text-muted")}>{s.body}</p>
+            <p className={cx("mt-4 leading-relaxed", dark ? "text-paper/75" : "text-muted")}>{s.body}</p>
             {s.question ? (
-              <p className={cx("serif-accent mt-4 text-xl", dark ? "text-paper" : "text-ink")}>{s.question}</p>
+              <p className={cx("serif-accent mt-6 text-xl", dark ? "text-paper" : "text-ink")}>{s.question}</p>
             ) : null}
           </div>
         </li>
@@ -103,7 +103,7 @@ export function GrowthChainDiagram() {
         <div
           data-step
           style={step(nodes.length)}
-          className="relative mt-4 flex items-center justify-center rounded-2xl border border-gold/50 bg-gold/10 px-6 py-4 text-center text-gold-soft"
+          className="relative mt-6 flex items-center justify-center rounded-2xl border border-gold/50 bg-gold/10 px-6 py-6 text-center text-gold-soft"
         >
           <span className="eyebrow">And leadership influences all of them</span>
         </div>
@@ -123,13 +123,13 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
       </figcaption>
       {/* Equal cards sized to their content; the ascent is shown by a bar that
           fills 25 → 100% across the four stages instead of empty card height. */}
-      <ol className="grid gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-4">
+      <ol className="grid gap-3 lg:gap-x-8 md:grid-cols-2 md:gap-4 lg:grid-cols-4">
         {peakStages.map((s, i) => (
           <li key={s.letter} data-step style={step(i)}>
             <div
               data-spotlight={dark ? "" : undefined}
               className={cx(
-                "card-interactive relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 sm:p-8 lg:p-6 xl:p-7",
+                "card-interactive relative flex h-full flex-col overflow-hidden rounded-2xl border p-8 sm:p-10 lg:p-6 xl:p-7",
                 dark ? "border-line-dark-strong bg-ink-2" : "border-line bg-surface",
               )}
             >
@@ -147,17 +147,17 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
                   0{i + 1}
                 </span>
               </div>
-              <div className="mt-8">
+              <div className="mt-10">
                 <h3 className="text-2xl tracking-[-0.02em]">{s.name}</h3>
                 {detailed ? (
                   <>
-                    <p className={cx("mt-3 text-[0.95rem] font-medium leading-snug", dark ? "text-gold-soft" : "text-gold-ink")}>
+                    <p className={cx("mt-4 text-[0.95rem] font-medium leading-snug", dark ? "text-gold-soft" : "text-gold-ink")}>
                       {s.question}
                     </p>
-                    <p className={cx("mt-4 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{s.focus}</p>
+                    <p className={cx("mt-6 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{s.focus}</p>
                     <p
                       className={cx(
-                        "mt-4 border-t pt-4 text-sm leading-relaxed",
+                        "mt-6 border-t pt-4 text-sm leading-relaxed",
                         dark ? "border-line-dark text-paper/85" : "border-line",
                       )}
                     >
@@ -165,14 +165,14 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
                     </p>
                   </>
                 ) : (
-                  <p className={cx("mt-3 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{s.question}</p>
+                  <p className={cx("mt-4 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{s.question}</p>
                 )}
               </div>
             </div>
           </li>
         ))}
       </ol>
-      <div aria-hidden className={cx("mt-5 flex items-center gap-3", dark ? "text-paper-muted" : "text-muted")}>
+      <div aria-hidden className={cx("mt-6 flex items-center gap-3", dark ? "text-paper-muted" : "text-muted")}>
         <span className="eyebrow">Presence</span>
         <span
           data-seq-line
@@ -212,7 +212,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
   const dark = tone === "dark";
   return (
     <div
-      className="brands grid gap-12 lg:grid-cols-12 lg:items-center"
+      className="brands grid gap-16 lg:grid-cols-12 lg:items-center"
       style={{ "--brands-accent": dark ? "var(--color-gold)" : "var(--color-gold-ink)" } as CSSProperties}
     >
       <style>{brandsLinkCss}</style>
@@ -303,7 +303,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
           >
             <div
               data-lever-item={l.letter}
-              className="h-full p-6 transition-shadow duration-300 hover:shadow-[inset_0_0_0_1px_var(--brands-accent)] sm:p-8 lg:p-6 xl:p-8"
+              className="h-full p-8 transition-shadow duration-300 hover:shadow-[inset_0_0_0_1px_var(--brands-accent)] sm:p-10 lg:p-6 xl:p-8"
             >
               <p className="flex items-baseline gap-3">
                 <span aria-hidden className={cx("serif-accent text-3xl leading-none", dark ? "text-gold" : "text-gold-ink")}>
@@ -311,11 +311,11 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
                 </span>
                 <span className="text-lg tracking-[-0.01em]">{l.name}</span>
               </p>
-              <p className={cx("mt-3 font-medium", dark ? "text-gold-soft" : "text-gold-ink")}>{l.line}</p>
+              <p className={cx("mt-4 font-medium", dark ? "text-gold-soft" : "text-gold-ink")}>{l.line}</p>
               {detailed ? (
                 <>
-                  <p className={cx("mt-3 text-sm leading-relaxed", dark ? "text-paper/80" : "text-ink/80")}>{l.role}</p>
-                  <p className={cx("mt-3 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{l.components}</p>
+                  <p className={cx("mt-4 text-sm leading-relaxed", dark ? "text-paper/80" : "text-ink/80")}>{l.role}</p>
+                  <p className={cx("mt-4 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{l.components}</p>
                 </>
               ) : null}
             </div>
@@ -349,7 +349,7 @@ export function FlowChain({ items, dark, highlight }: { items: readonly string[]
             key={item}
             data-step
             style={step(i)}
-            className={cx("flex items-center gap-4 border-b py-5 sm:py-6", dark ? "border-line-dark" : "border-line")}
+            className={cx("flex items-center gap-4 border-b py-7 sm:py-8", dark ? "border-line-dark" : "border-line")}
           >
             <span aria-hidden className={cx("eyebrow w-7 shrink-0 tabular-nums", dark ? "text-paper-muted" : "text-muted")}>
               {String(i + 1).padStart(2, "0")}

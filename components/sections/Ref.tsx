@@ -30,7 +30,7 @@ export function RefSection({
     <section
       id={id}
       className={
-        "relative py-20 sm:py-20 lg:py-24 " +
+        "relative py-20 sm:py-24 lg:py-24 " +
         (tone === "ink" ? "on-dark bg-ink text-paper" : "bg-paper text-ink") +
         (enter ? ` enter-${enter}` : "")
       }
@@ -55,20 +55,28 @@ export function RefIntro({
   id?: string;
 }) {
   return (
-    <Reveal className="max-w-3xl">
-      <p className="text-[0.95rem] font-medium text-muted">{label}</p>
-      <h2 id={id} className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">
-        {title}
-      </h2>
-      {text ? <div className="mt-6 max-w-xl text-muted sm:text-lg">{text}</div> : null}
-      {action ? (
-        <Link
-          href={action.href}
-          className="mt-8 inline-flex min-h-12 items-center rounded-full bg-gold px-6 text-[0.95rem] font-medium text-ink"
-        >
-          {action.label}
-        </Link>
-      ) : null}
+    <Reveal className="@container w-full">
+      <div className="@4xl:grid @4xl:grid-cols-12 @4xl:items-end @4xl:gap-x-16">
+        <div className="max-w-4xl @4xl:col-span-6">
+          <p className="text-[0.95rem] font-medium text-muted">{label}</p>
+          <h2 id={id} className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">
+            {title}
+          </h2>
+        </div>
+        {text || action ? (
+          <div className={"@4xl:col-span-6 @4xl:col-start-7" + (text ? "" : " @4xl:flex @4xl:justify-end")}>
+            {text ? <div className="mt-8 max-w-2xl text-muted sm:text-lg @4xl:mt-0">{text}</div> : null}
+            {action ? (
+              <Link
+                href={action.href}
+                className="mt-10 inline-flex min-h-12 items-center rounded-full bg-gold px-6 text-[0.95rem] font-medium text-ink"
+              >
+                {action.label}
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
     </Reveal>
   );
 }
@@ -90,7 +98,7 @@ export function RefRows({
   return (
     <ul
       className={
-        "mt-14 border-t border-line sm:mt-16 " + (columns ? `grid gap-x-10 ${colClass[columns]} ` : "") + className
+        "mt-12 border-t border-line sm:mt-16 " + (columns ? `grid gap-x-10 ${colClass[columns]} ` : "") + className
       }
     >
       {rows.map((r) => {
@@ -110,7 +118,7 @@ export function RefRows({
             </span>
           </>
         );
-        const cls = "row-invert grid gap-1 py-5 sm:grid-cols-12 sm:items-baseline sm:gap-6";
+        const cls = "row-invert grid gap-1 py-7 sm:grid-cols-12 sm:items-baseline sm:gap-6";
         return (
           <li key={r.key} id={r.id} className="scroll-mt-28 border-b border-line">
             {r.href ? (
@@ -141,14 +149,14 @@ export function RefStatement({
   reveal?: "words" | "mask";
 }) {
   return (
-    <Reveal variant="fade" className="flex flex-col items-center py-8 text-center sm:py-12">
+    <Reveal variant="fade" className="flex flex-col items-center py-10 text-center sm:py-16">
       <h2
         data-split={reveal === "words" ? "" : undefined}
         className={"display max-w-[22ch] text-[clamp(2rem,4vw,3.75rem)]" + (reveal === "mask" ? " reveal-mask" : "")}
       >
         {children}
       </h2>
-      {sub ? <div className="mt-8 max-w-xl text-muted">{sub}</div> : null}
+      {sub ? <div className="mt-10 max-w-2xl text-muted">{sub}</div> : null}
     </Reveal>
   );
 }

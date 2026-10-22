@@ -37,6 +37,27 @@ export const metadata = pageMetadata({
 
 const assessmentHref = `${routes.contact}?interest=personal-brand-architecture`;
 
+/** One photograph per module on the ring, in module order. */
+const moduleImages = [
+  "/images/client-executive-study-portrait.webp",
+  "/images/client-lone-executive-skyline.webp",
+  "/images/client-executive-portrait-woman.webp",
+  "/images/client-keynote-monochrome.webp",
+  "/images/client-mentorship.webp",
+  "/images/client-executive-in-motion.webp",
+  "/images/client-executive-contemplation.webp",
+];
+/** One photograph per scorecard measure, in measure order. */
+const measureImages = [
+  "/images/client-ceo-portrait.webp",
+  "/images/client-speaker-conference-stage.webp",
+  "/images/client-mentorship-conversation.webp",
+  "/images/client-keynote-auditorium.webp",
+  "/images/client-walk-toward-skyline.webp",
+  "/images/client-executive-dubai-window.webp",
+  "/images/client-visionaries-horizon.webp",
+];
+
 const qualification = [
   "Has demonstrable expertise, achievements, leadership experience or a credible body of work.",
   "Has a defined ambition: growth, investment, influence, career transition, market leadership, board/advisory roles or legacy.",
@@ -134,10 +155,10 @@ export default function PersonalBrandPage() {
             }
             text="VIBE™ answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
           />
-          <div className="mt-14 sm:mt-16">
+          <div className="mt-12 sm:mt-16">
             <VibeExplorer />
           </div>
-          <Reveal className="mx-auto mt-16 max-w-3xl text-center text-xl leading-relaxed text-paper/80 sm:text-2xl">
+          <Reveal className="mx-auto mt-12 max-w-4xl text-center text-xl leading-relaxed text-paper/80 sm:text-2xl">
             <p>
               Visionary Leadership that creates Impact, Impact that enables Business Growth, and Business Growth that fuels
               continuous Evolution
@@ -176,7 +197,7 @@ export default function PersonalBrandPage() {
             text="The strongest fit is not simply a person who wants to become famous. It is a person with genuine substance, a meaningful next-stage objective and sufficient credibility to convert architecture into authority."
           />
           <Marquee label="Ideal for" items={pbaAudience} />
-          <Reveal className="mt-16 border-t border-line pt-10 sm:mt-24 sm:pt-14 lg:ml-[33%]">
+          <Reveal className="mt-12 border-t border-line pt-10 sm:mt-16 sm:pt-14 lg:ml-[33%]">
             <p className="font-display max-w-4xl text-[clamp(1.7rem,3.3vw,3rem)] font-medium leading-[1.1] tracking-[-0.035em]">
               Your personal brand shouldn&apos;t simply document what you&apos;ve done.{" "}
               <span className="text-muted">It should position you for what you want to do next</span>
@@ -220,7 +241,7 @@ export default function PersonalBrandPage() {
             label="Personal Brand Architecture™"
             title="Product Architecture & Modules"
             text="Level141's role is architecture, strategic direction, governance and measurement. Where execution partners, internal teams or specialist vendors are required, the architecture should define the brief, standards, dependencies, review mechanism and success criteria. The product should not collapse into undifferentiated execution."
-            items={pbaModules.map((m) => ({ name: m.name, body: m.purpose }))}
+            items={pbaModules.map((m, i) => ({ name: m.name, body: m.purpose, image: moduleImages[i % moduleImages.length] }))}
           />
         </section>
 
@@ -244,7 +265,7 @@ export default function PersonalBrandPage() {
             label="Measurement & Success System"
             title="Visibility metrics are useful signals, but they are not the product outcome"
             text="Success should be measured through a balanced scorecard."
-            items={pbaMeasures.map((m) => ({ name: m.name, back: m.q }))}
+            items={pbaMeasures.map((m, i) => ({ name: m.name, back: m.q, image: measureImages[i % measureImages.length] }))}
           />
         </section>
 

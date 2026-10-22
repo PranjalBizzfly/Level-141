@@ -9,11 +9,11 @@ import { lqDomains } from "@/lib/content";
  */
 export function LqLevels() {
   return (
-    <ol className="lq mt-14 flex flex-col-reverse border-b border-line sm:mt-16">
+    <ol className="lq mt-12 flex flex-col-reverse border-b border-line sm:mt-16">
       {lqDomains.map((d, i) => (
         <li
           key={d.name}
-          className="lq-floor group grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-1 border-t border-line py-4 sm:grid-cols-12 sm:items-center sm:gap-6"
+          className="lq-floor group grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-1 border-t border-line py-6 sm:grid-cols-12 sm:items-center sm:gap-6"
           style={{ "--i": i, "--w": `${((i + 1) / lqDomains.length) * 100}%` } as CSSProperties}
         >
           <span className="text-sm tabular-nums text-muted sm:col-span-1">{String(i + 1).padStart(2, "0")}</span>
@@ -55,7 +55,7 @@ const igfCss = functions
  */
 export function IgfConnect() {
   return (
-    <figure className="igf relative mx-auto mt-14 aspect-square w-full max-w-[34rem] sm:mt-16" aria-label="IGF™ connects branding, social media, websites, paid media, PR, sales, CRM and content into one growth engine">
+    <figure className="igf relative mx-auto mt-12 aspect-square w-full max-w-[34rem] sm:mt-16" aria-label="IGF™ connects branding, social media, websites, paid media, PR, sales, CRM and content into one growth engine">
       <style>{igfCss}</style>
       <svg viewBox="0 0 100 100" className="absolute inset-0 size-full" aria-hidden>
         {links.map(([a, b], i) => (

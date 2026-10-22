@@ -53,12 +53,12 @@ export function LogoAssembly() {
   }, [visible, open]);
 
   return (
-    <section aria-label="Level141" className="overflow-hidden bg-black py-20 sm:py-20 lg:py-36">
+    <section aria-label="Level141" className="overflow-hidden bg-black py-20 sm:py-24 lg:py-24">
       {/* Mobile: the wordmark set whole on one panel, the photograph revealed beneath it. */}
       <div className="container-x sm:hidden">
-        <div className="rounded-[1.25rem] bg-white p-6 text-black">
+        <div className="rounded-[1.25rem] bg-white p-8 text-black">
           <LogoWordmark className="h-auto w-full" />
-          <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-[0.75rem]">
+          <div className="relative mt-8 aspect-[4/3] overflow-hidden rounded-[0.75rem]">
             <Image src={photo} alt={altFor(photo)} fill sizes="90vw" className="object-cover grayscale" />
           </div>
         </div>

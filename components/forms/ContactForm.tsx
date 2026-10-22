@@ -93,7 +93,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
         <legend className="text-[0.95rem] font-medium text-ink">
           I am interested in<span aria-hidden className="ml-1 text-gold-ink">*</span>
         </legend>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        <div className="mt-4 grid gap-3 lg:gap-x-8 sm:grid-cols-2">
           {interestOptions.map((o) => {
             const checked = values.interest === o.value;
             return (
@@ -125,7 +125,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
           })}
         </div>
         {gaSelected ? (
-          <div className="mt-4 flex gap-3 rounded-xl border border-gold-ink/25 bg-ink/5 p-4 text-sm leading-relaxed text-ink">
+          <div className="mt-6 flex gap-3 rounded-xl border border-gold-ink/25 bg-ink/5 p-4 text-sm leading-relaxed text-ink">
             <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-gold-ink" />
             <p>
               Growth Architecture™ is not yet open for engagements. You can register your organization&apos;s interest
@@ -248,7 +248,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
             <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
           </SubmitButton>
         )}
-        <p className="max-w-xs text-sm leading-relaxed text-muted">
+        <p className="max-w-sm text-sm leading-relaxed text-muted">
           Your details are used only to respond to this enquiry.
         </p>
       </div>

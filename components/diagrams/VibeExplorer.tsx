@@ -103,7 +103,7 @@ export function VibeExplorer() {
 
       {/* Panel: editorial composition — story and scope on the left, a single
           feature card for the strategic question on the right. No table rules. */}
-      <div className="mt-14 sm:mt-16 lg:mt-24">
+      <div className="mt-12 sm:mt-16 lg:mt-24">
         {vibe.map((d, i) => (
           <div
             key={d.letter}
@@ -113,7 +113,7 @@ export function VibeExplorer() {
             hidden={i !== active}
             tabIndex={0}
             className={cx(
-              "grid gap-10 outline-none lg:grid-cols-12 lg:gap-16",
+              "grid gap-14 outline-none lg:grid-cols-12 lg:gap-16",
               direction === "forward" ? "animate-slide-from-right" : "animate-slide-from-left",
             )}
           >
@@ -121,13 +121,13 @@ export function VibeExplorer() {
               <p className="eyebrow text-gold">
                 {d.letter} — {d.full}
               </p>
-              <h3 className="mt-5 text-3xl leading-tight tracking-[-0.025em] sm:text-[2.75rem] sm:leading-[1.1]">
+              <h3 className="mt-6 text-3xl leading-tight tracking-[-0.025em] sm:text-[2.75rem] sm:leading-[1.1]">
                 {d.headline}
               </h3>
-              <p className="measure mt-6 text-lg leading-relaxed text-paper/75">{d.body}</p>
+              <p className="measure mt-8 text-lg leading-relaxed text-paper/75">{d.body}</p>
 
               <p className="eyebrow mt-12 text-paper-muted">Architecture focus</p>
-              <ul className="mt-5 grid gap-x-8 sm:grid-cols-2">
+              <ul className="mt-6 grid gap-x-8 sm:grid-cols-2">
                 {d.focus.map((f) => (
                   <li
                     key={f}
@@ -140,7 +140,7 @@ export function VibeExplorer() {
               </ul>
             </div>
 
-            <div className="relative overflow-hidden border-t border-paper/25 pt-8 lg:col-span-5 lg:self-start">
+            <div className="relative overflow-hidden border-t border-paper/25 pt-10 lg:col-span-5 lg:self-start">
               <span
                 aria-hidden
                 className="font-display pointer-events-none absolute -right-2 -top-6 select-none text-[12rem] font-medium leading-none text-paper/[0.05] sm:text-[15rem]"
@@ -148,11 +148,11 @@ export function VibeExplorer() {
                 {d.letter}
               </span>
               <p className="eyebrow relative text-paper-muted">Strategic question</p>
-              <p className="serif-accent relative mt-5 text-3xl leading-snug text-gold-soft sm:text-4xl">“{d.question}”</p>
-              <p className="relative mt-6 leading-relaxed text-paper/70">{d.detail}</p>
-              <div className="relative mt-8 border-t border-paper/12 pt-6">
+              <p className="serif-accent relative mt-6 text-3xl leading-snug text-gold-soft sm:text-4xl">“{d.question}”</p>
+              <p className="relative mt-8 leading-relaxed text-paper/70">{d.detail}</p>
+              <div className="relative mt-10 border-t border-paper/12 pt-8">
                 <p className="eyebrow text-gold">Illustrative outcomes</p>
-                <p className="mt-3 text-lg leading-snug tracking-[-0.01em] text-paper">{d.outcomes}</p>
+                <p className="mt-4 text-lg leading-snug tracking-[-0.01em] text-paper">{d.outcomes}</p>
               </div>
             </div>
           </div>

@@ -108,7 +108,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-24 sm:py-32 lg:py-44", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-20 sm:py-24 lg:py-24", tones[tone], className)}>
       {children}
     </section>
   );
@@ -130,7 +130,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
   return (
     <header
       className={cx(
-        align === "split" ? "grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12" : "max-w-4xl",
+        align === "split" ? "grid gap-8 lg:gap-x-16 sm:gap-8 lg:grid-cols-12 lg:gap-16" : "max-w-4xl",
         className,
       )}
     >
@@ -138,7 +138,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         <Eyebrow index={index} className={dark ? "text-gold" : "text-gold-ink"}>
           {eyebrow}
         </Eyebrow>
-        <h2 id={id} className="display mt-5 text-[2rem] sm:mt-6 sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.625rem]">
+        <h2 id={id} className="display mt-6 text-[2rem] sm:mt-6 sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.625rem]">
           <span data-split className="block">
             {title}
           </span>
@@ -150,7 +150,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
           className={cx(
             "measure text-base leading-relaxed sm:text-lg",
             dark ? "text-paper/75" : "text-muted",
-            align === "split" ? "lg:col-span-5 lg:self-end" : "mt-8",
+            align === "split" ? "lg:col-span-5 lg:self-end" : "mt-10",
           )}
         >
           {intro}
@@ -179,7 +179,7 @@ export function BracketFrame({
 }) {
   const color = { gold: "text-gold", ink: "text-ink", paper: "text-paper" }[tone];
   const s = { sm: "size-4", md: "size-6 sm:size-8", lg: "size-8 sm:size-12" }[size];
-  const pad = { sm: "px-6 py-5", md: "px-8 py-8 sm:px-12 sm:py-10", lg: "px-10 py-10 sm:px-16 sm:py-14" }[size];
+  const pad = { sm: "px-6 py-7", md: "px-8 py-10 sm:px-12 sm:py-12", lg: "px-10 py-12 sm:px-16 sm:py-14" }[size];
   return (
     <div className={cx("relative", pad, className)}>
       <BracketClose className={cx("absolute right-0 top-0", s, color)} />
@@ -215,14 +215,14 @@ export function PageHero({
           page's actions, then a full-width media frame. The aside follows below. */}
       <div className="container-x flex flex-col items-center pb-14 pt-36 text-center sm:pb-16 sm:pt-44 lg:pt-48">
         <p className="eyebrow animate-fade text-paper-muted">{eyebrow}</p>
-        <h1 data-split="load" className="display mt-6 max-w-[18ch] text-[clamp(2.5rem,5.6vw,5.75rem)] leading-[0.98] sm:mt-8">
+        <h1 data-split="load" className="display mt-8 max-w-[18ch] text-[clamp(2.5rem,5.6vw,5.75rem)] leading-[0.98] sm:mt-8">
           {title}
         </h1>
-        {intro ? <div className="mt-8 max-w-xl animate-rise text-paper/75 [animation-delay:400ms]">{intro}</div> : null}
-        {children ? <div className="mt-10 flex animate-rise justify-center [animation-delay:520ms]">{children}</div> : null}
+        {intro ? <div className="mt-10 max-w-2xl animate-rise text-paper/75 [animation-delay:400ms]">{intro}</div> : null}
+        {children ? <div className="mt-12 flex animate-rise justify-center [animation-delay:520ms]">{children}</div> : null}
       </div>
       {/* Media only when the page has it — an empty placeholder never ships. */}
-      <div className={cx("container-x", image || aside ? "pb-20 sm:pb-28" : "pb-8")}>
+      <div className={cx("container-x", image || aside ? "pb-20 sm:pb-28" : "pb-10")}>
         {image ? (
           <div data-rise>
             <MediaSlot
@@ -234,7 +234,7 @@ export function PageHero({
             />
           </div>
         ) : null}
-        {aside ? <div className="mx-auto mt-14 max-w-xl animate-fade [animation-delay:400ms]">{aside}</div> : null}
+        {aside ? <div className="mx-auto mt-12 max-w-2xl animate-fade [animation-delay:400ms]">{aside}</div> : null}
       </div>
     </section>
   );
@@ -244,7 +244,7 @@ export function PageHero({
 
 export function DotList({ items, dark, className }: { items: readonly string[]; dark?: boolean; className?: string }) {
   return (
-    <ul className={cx("space-y-3", className)}>
+    <ul className={cx("space-y-4", className)}>
       {items.map((item) => (
         <li key={item} className="flex gap-4 leading-relaxed">
           <span aria-hidden className={cx("mt-[0.7em] h-px w-4 shrink-0", dark ? "bg-gold" : "bg-gold-ink")} />

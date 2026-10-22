@@ -104,7 +104,7 @@ export default function HomePage() {
                     Most businesses don&apos;t have a shortage of activity. They have{" "}
                     {activityList.map((a) => a.replace(".", "")).join(", ")}. Yet growth can still feel fragmented.
                   </p>
-                  <p className="mt-4 text-ink">Level141 connects the pieces</p>
+                  <p className="mt-6 text-ink">Level141 connects the pieces</p>
                 </>
               }
             >
@@ -141,7 +141,7 @@ export default function HomePage() {
                 },
               ]}
             />
-            <div className="mt-16 sm:mt-24" data-rise>
+            <div className="mt-12 sm:mt-16" data-rise>
               <MediaSlot
                 src="/images/home-team-table-muted.webp"
                 alt={altFor("/images/home-team-table-muted.webp")}
@@ -227,7 +227,7 @@ export default function HomePage() {
                 sub={
                   <>
                     <p>Level141 sits between strategy and execution. {whatWeDo.join(" ")}</p>
-                    <p className="mt-4 text-paper">Making sure everything is moving toward the same growth outcome.</p>
+                    <p className="mt-6 text-paper">Making sure everything is moving toward the same growth outcome.</p>
                   </>
                 }
               >

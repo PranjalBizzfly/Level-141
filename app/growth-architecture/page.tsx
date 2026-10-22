@@ -73,7 +73,7 @@ export default function GrowthArchitecturePage() {
               We diagnose where your organization is, define where it needs to go, and architect the integrated growth
               system that bridges the gap.
             </p>
-            <p className="mt-4 text-base text-white/75">
+            <p className="mt-6 text-base text-white/75">
               Not yet open for engagements. Organizations can register their interest now and will be contacted when it
               becomes available.
             </p>
@@ -118,7 +118,7 @@ export default function GrowthArchitecturePage() {
             items={gaDimensions}
           />
           <div className="container-x pb-20 sm:pb-28">
-            <Reveal className="max-w-3xl">
+            <Reveal className="max-w-4xl">
               <p className="font-display text-[1.6rem] font-medium leading-[1.2] tracking-[-0.02em] sm:text-[2rem]">
                 Growth shouldn&apos;t depend on isolated initiatives.{" "}
                 <span className="text-muted">It should operate as a system</span>
@@ -138,7 +138,7 @@ export default function GrowthArchitecturePage() {
             }
             text="Level141 does not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
           />
-          <div className="mt-14 sm:mt-16">
+          <div className="mt-12 sm:mt-16">
             <FlowChain items={gaOperatingLogic} highlight={["Current Level", "Next Level", "Scale"]} />
           </div>
         </RefSection>
@@ -154,7 +154,7 @@ export default function GrowthArchitecturePage() {
             }
             text="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
-          <div className="mt-14 sm:mt-16">
+          <div className="mt-12 sm:mt-16">
             <PeakStatic stages={peakStages} />
           </div>
         </RefSection>
@@ -170,7 +170,7 @@ export default function GrowthArchitecturePage() {
             }
             text="BRANDS™ ensures the major market-facing growth levers are not managed as separate campaigns. Customer & Market is a cross-cutting foundation: every lever is built around the defined ICP, buying context and market reality."
           />
-          <div className="mt-14 sm:mt-16">
+          <div className="mt-12 sm:mt-16">
             <BrandsSystem detailed tone="light" />
           </div>
         </RefSection>
@@ -269,12 +269,12 @@ export default function GrowthArchitecturePage() {
                   { label: "Frameworks", value: "LQ™ · PEAK™ · BRANDS™" },
                 ]}
               />
-              <Reveal className="mt-10 border-t border-line pt-6 text-base sm:text-lg">
+              <Reveal className="mt-12 border-t border-line pt-8 text-base sm:text-lg">
                 <p>
                   Building your personal authority as a founder or leader?{" "}
                   <span className="text-muted">Personal Brand Architecture™ is available now.</span>
                 </p>
-                <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-4">
+                <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6">
                   Explore Personal Brand Architecture
                 </ButtonLink>
               </Reveal>

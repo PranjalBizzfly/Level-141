@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { usePinProgress, useReducedMotion, useScrollFrame } from "./HomeInteractive";
 import { altFor } from "@/lib/image-alts";
@@ -62,18 +62,18 @@ export function Relay({
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-20">
+      <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
         <div className="container-x">
           <p className="text-sm text-white/55">{label}</p>
-          <h2 className="font-display mt-3 max-w-xl text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">{title}</h2>
-          <ol className="mt-12 space-y-3">
+          <h2 className="font-display mt-4 max-w-2xl text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">{title}</h2>
+          <ol className="mt-12 space-y-4">
             {steps.map((x) => (
               <li key={x.lead} className="font-display text-[clamp(1.6rem,4vw,3rem)] font-medium tracking-[-0.035em]">
                 {x.lead} <span className="text-white/60">{x.verb} {x.rest}</span>
               </li>
             ))}
           </ol>
-          {foot ? <div className="mt-10 max-w-md text-white/60">{foot}</div> : null}
+          {foot ? <div className="mt-12 max-w-lg text-white/60">{foot}</div> : null}
         </div>
       </div>
     );
@@ -82,12 +82,12 @@ export function Relay({
   return (
     <div ref={ref} style={{ height: `${100 + n * 55}lvh` }} className="bg-black text-white">
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
-        <div className="container-x flex flex-1 flex-col pb-8 pt-24 sm:pb-10 sm:pt-28">
+        <div className="container-x flex flex-1 flex-col pb-10 pt-16 sm:pb-12 sm:pt-28">
           {/* Heading, small and quiet, so the word is the event. */}
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
-            <div className="max-w-md">
+            <div className="max-w-lg">
               <p className="text-sm text-white/55">{label}</p>
-              <h2 className="font-display mt-3 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
+              <h2 className="font-display mt-4 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
             </div>
             <p aria-hidden className="font-display text-sm tabular-nums text-white/55">
               {n2(active)} <span className="text-white/30">/ {String(n).padStart(2, "0")}</span>
@@ -160,7 +160,7 @@ export function Relay({
           </div>
           {foot ? (
             <div
-              className="mt-8 max-w-lg text-base text-white/75 transition-opacity duration-700 sm:text-lg"
+              className="mt-10 max-w-xl text-base text-white/75 transition-opacity duration-700 sm:text-lg"
               style={{ opacity: active === n - 1 ? 1 : 0.35 }}
             >
               {foot}
@@ -176,7 +176,15 @@ export function Relay({
 
 /** Cube turns that bring each face to the front (six reasons, six faces). */
 const CUBE_FACES = ["rotateY(0deg)", "rotateY(90deg)", "rotateY(180deg)", "rotateY(-90deg)", "rotateX(90deg)", "rotateX(-90deg)"];
-const CUBE_TURNS = ["rotateX(0deg) rotateY(0deg)", "rotateX(0deg) rotateY(-90deg)", "rotateX(0deg) rotateY(-180deg)", "rotateX(0deg) rotateY(90deg)", "rotateX(-90deg) rotateY(0deg)", "rotateX(90deg) rotateY(0deg)"];
+/** The turn that brings each face to the front: side faces turn on Y, top and bottom on X. */
+const CUBE_TARGETS = [
+  { side: true, x: 0, y: 0 },
+  { side: true, x: 0, y: -90 },
+  { side: true, x: 0, y: -180 },
+  { side: true, x: 0, y: 90 },
+  { side: false, x: -90, y: 0 },
+  { side: false, x: 90, y: 0 },
+] as const;
 
 /**
  * Why Level141 as a 3D cube beside the full index: each reason is one face
@@ -195,17 +203,58 @@ export function WhySplit({
 }) {
   const [active, setActive] = useState(0);
   const faces = items.slice(0, CUBE_FACES.length);
+  // The cube keeps turning from where it is, always the short way round, so it
+  // never spins 270° or tumbles when moving between faces.
+  const [turn, setTurn] = useState({ x: 0, y: 0 });
+  const go = useCallback((i: number) => {
+    setActive(i);
+    const target = CUBE_TARGETS[Math.min(i, CUBE_TARGETS.length - 1)];
+    // Equivalent angle closest to where the cube is now (never more than 180° away).
+    const nearest = (from: number, to: number) => to + 360 * Math.round((from - to) / 360);
+    setTurn((t) =>
+      target.side ? { x: nearest(t.x, 0), y: nearest(t.y, target.y) } : { x: nearest(t.x, target.x), y: nearest(t.y, 0) },
+    );
+  }, []);
+  // Scrolling also turns the cube: the reason crossing the middle of the
+  // screen becomes the active one (hover and focus still work on top of this).
+  const rows = useRef<(HTMLLIElement | null)[]>([]);
+  useEffect(() => {
+    // The active reason is the last one whose top has passed 70% of the screen,
+    // so even the final reason (which can't reach the centre) gets its turn.
+    let last = -1;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = window.innerHeight * 0.7;
+      let i = -1;
+      rows.current.forEach((el, k) => {
+        if (el && el.getBoundingClientRect().top < line) i = k;
+      });
+      if (i >= 0 && i !== last) {
+        last = i;
+        go(i);
+      }
+    };
+    const on = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", on, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", on);
+    };
+  }, [go]);
   return (
-    <div className="container-x py-20 sm:py-28">
-      <div className="max-w-xl">
+    <div className="container-x py-20 sm:py-24 lg:py-24">
+      <div className="max-w-2xl">
         <p className="text-sm text-muted">{label}</p>
-        <h2 className="font-display mt-3 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
+        <h2 className="font-display mt-4 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
       </div>
 
-      <div className="mt-12 grid items-start gap-12 sm:mt-16 md:grid-cols-12 md:gap-14">
+      <div className="mt-12 grid items-start gap-20 sm:mt-16 md:grid-cols-12 md:gap-x-6 md:gap-y-24">
         <div className="md:sticky md:top-[max(6rem,calc(50lvh-17rem))] md:col-span-5">
           <div className="cube-scene" aria-hidden>
-            <div className="cube" style={{ transform: `rotateX(-16deg) rotateY(24deg) ${CUBE_TURNS[Math.min(active, CUBE_TURNS.length - 1)]}` }}>
+            <div className="cube" style={{ transform: `rotateX(-16deg) rotateY(24deg) rotateX(${turn.x}deg) rotateY(${turn.y}deg)` }}>
               {faces.map((x, i) => (
                 <div key={x.image + i} className="cube-face photo-tone" style={{ transform: `${CUBE_FACES[i]} translateZ(calc(var(--cube) / 2))` }}>
                   <Image src={x.image} alt="" fill sizes="(min-width: 768px) 22rem, 70vw" className="object-cover grayscale" />
@@ -224,15 +273,19 @@ export function WhySplit({
           </div>
         </div>
 
-        <ol className="border-t border-line md:col-span-7">
+        <ol className="border-t border-line md:col-span-7 md:ml-12 lg:ml-24 xl:ml-32">
           {items.map((x, i) => {
             const on = i === active;
             return (
               <li
                 key={x.name}
-                onMouseEnter={() => setActive(i)}
-                onClick={() => setActive(i)}
-                className="relative grid cursor-default grid-cols-[2.5rem_1fr] gap-x-4 border-b border-line py-6 sm:grid-cols-[3.5rem_1fr]"
+                data-i={i}
+                ref={(el) => {
+                  rows.current[i] = el;
+                }}
+                onMouseEnter={() => go(i)}
+                onClick={() => go(i)}
+                className="relative grid cursor-default grid-cols-[2.5rem_1fr] gap-x-4 border-b border-line py-12 sm:py-14 sm:grid-cols-[3.5rem_1fr]"
               >
                 <span
                   aria-hidden
@@ -244,14 +297,14 @@ export function WhySplit({
                   <h3 className="font-display text-[clamp(1.35rem,2.2vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
                     <button
                       type="button"
-                      onFocus={() => setActive(i)}
+                      onFocus={() => go(i)}
                       aria-pressed={on}
                       className="text-left outline-none focus-visible:underline focus-visible:underline-offset-4"
                     >
                       {x.name.replace(/\.$/, "")}
                     </button>
                   </h3>
-                  <p className="mt-3 max-w-xl text-muted">{x.body}</p>
+                  <p className="mt-4 max-w-2xl text-muted">{x.body}</p>
                 </div>
               </li>
             );
@@ -301,7 +354,7 @@ export function InsightGallery({
         >
           <Link
             href={it.href}
-            className="photo-tone group relative flex h-[min(62lvh,34rem)] flex-col justify-between overflow-hidden rounded-[1.25rem] bg-black p-6 text-white sm:p-8"
+            className="photo-tone group relative flex h-[min(62lvh,34rem)] flex-col justify-between overflow-hidden rounded-[1.25rem] bg-black p-8 text-white sm:p-10"
           >
             <Image
               src={it.image}
@@ -321,8 +374,8 @@ export function InsightGallery({
               >
                 {it.name}
               </span>
-              <span className="mt-3 flex items-end justify-between gap-6">
-                <span className="max-w-sm text-[0.95rem] text-white/70">{it.body}</span>
+              <span className="mt-4 flex items-end justify-between gap-8">
+                <span className="max-w-md text-[0.95rem] text-white/70">{it.body}</span>
                 <span className="grid size-10 shrink-0 place-items-center rounded-full border border-white/40 transition-colors duration-300 group-hover:bg-white group-hover:text-black">
                   <ArrowUpRight aria-hidden className="size-4" />
                 </span>
@@ -336,17 +389,17 @@ export function InsightGallery({
 
   if (!pin) {
     return (
-      <div className="py-20 sm:py-20">
+      <div className="py-20 sm:py-24 lg:py-24">
         <div className="container-x">{head}</div>
-        <div className="mt-10 pl-[max(1.25rem,calc((100vw-80rem)/2))] sm:mt-14">{cards}</div>
+        <div className="mt-12 pl-[max(1.25rem,calc((100vw-80rem)/2))] sm:mt-14">{cards}</div>
       </div>
     );
   }
 
   return (
     <div ref={ref} style={{ height: `calc(100lvh + ${dist}px)` }}>
-      <div className="sticky top-0 flex h-[100lvh] flex-col justify-center gap-10 overflow-hidden">
-        <div className="container-x flex items-end justify-between gap-8">
+      <div className="sticky top-0 flex h-[100lvh] flex-col justify-center gap-14 overflow-hidden">
+        <div className="container-x flex items-end justify-between gap-12">
           {head}
           {/* How far along the gallery is. */}
           <div aria-hidden className="mb-2 hidden h-px w-40 bg-current/15 lg:block">

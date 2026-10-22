@@ -29,12 +29,20 @@ function useEnterProgress<T extends HTMLElement>(reduced: boolean, start = 0.9, 
 
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   return (
-    <div className="max-w-3xl">
-      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
-      {title ? (
-        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
-      ) : null}
-      {text ? <div className={"mt-6 max-w-xl sm:text-lg " + (dark ? "text-white/75" : "text-muted")}>{text}</div> : null}
+    <div className="@container w-full">
+      <div className="@4xl:grid @4xl:grid-cols-12 @4xl:items-end @4xl:gap-x-16">
+        <div className="max-w-4xl @4xl:col-span-6">
+          {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
+          {title ? (
+            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+          ) : null}
+        </div>
+        {text ? (
+          <div className={"mt-8 max-w-2xl text-base leading-relaxed sm:text-lg @4xl:col-span-6 @4xl:col-start-7 @4xl:mt-0 " + (dark ? "text-white/80" : "text-muted")}>
+            {text}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -69,7 +77,7 @@ export function CurtainHero({
       {/* the two panels part from the centre */}
       <div aria-hidden className={"absolute inset-y-0 left-0 z-10 w-1/2 bg-black " + ease} style={{ transform: shown ? "translateX(-101%)" : "none" }} />
       <div aria-hidden className={"absolute inset-y-0 right-0 z-10 w-1/2 bg-black " + ease} style={{ transform: shown ? "translateX(101%)" : "none" }} />
-      <div className="container-x relative z-20 grid gap-10 pb-14 pt-40 sm:pb-20 lg:grid-cols-12 lg:items-end lg:gap-8">
+      <div className="container-x relative z-20 grid gap-14 pb-14 pt-40 sm:pb-20 lg:grid-cols-12 lg:items-end lg:gap-12">
         <div className="lg:col-span-8">
           <p
             className="text-sm uppercase tracking-[0.22em] text-white/60 transition-opacity duration-700 [transition-delay:700ms]"
@@ -79,7 +87,7 @@ export function CurtainHero({
           </p>
           <div className="overflow-hidden pb-2">
             <h1
-              className="font-display mt-6 text-[clamp(2.3rem,6.2vw,6.25rem)] font-medium leading-[0.95] tracking-[-0.045em] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(.2,.7,.1,1)] [transition-delay:850ms] [&_.serif-accent]:text-white/55"
+              className="font-display mt-8 text-[clamp(2.3rem,6.2vw,6.25rem)] font-medium leading-[0.95] tracking-[-0.045em] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(.2,.7,.1,1)] [transition-delay:850ms] [&_.serif-accent]:text-white/55"
               style={{ transform: shown ? "none" : "translateY(60%)", opacity: shown ? 1 : 0 }}
             >
               {title}
@@ -91,7 +99,7 @@ export function CurtainHero({
           style={{ transform: shown ? "none" : "translateY(24px)", opacity: shown ? 1 : 0 }}
         >
           {intro ? <div className="text-white/75 [&_p]:leading-relaxed">{intro}</div> : null}
-          {children ? <div className="mt-8">{children}</div> : null}
+          {children ? <div className="mt-10">{children}</div> : null}
         </div>
       </div>
     </section>
@@ -105,7 +113,7 @@ export function LineStatement({ lines, accent, sub }: { lines: readonly string[]
   const [ref, p] = useEnterProgress<HTMLDivElement>(reduced, 0.95, 0.55);
   const all = [...lines.map((t) => ({ t, a: false })), ...(accent ? [{ t: accent, a: true }] : [])];
   return (
-    <div ref={ref} className="bg-black py-24 text-white sm:py-24">
+    <div ref={ref} className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
         <p className="font-display max-w-5xl text-[clamp(2rem,4.8vw,4.6rem)] font-medium leading-[1.06] tracking-[-0.04em]">
           {all.map((x, i) => {
@@ -123,7 +131,7 @@ export function LineStatement({ lines, accent, sub }: { lines: readonly string[]
           })}
         </p>
         {sub ? (
-          <div className="mt-10 max-w-2xl text-base text-white/80 transition-opacity sm:text-lg duration-700 [&_p+p]:mt-4" style={{ opacity: p > 0.9 ? 1 : 0.75 }}>
+          <div className="mt-12 max-w-3xl text-base text-white/80 transition-opacity sm:text-lg duration-700 [&_p+p]:mt-4" style={{ opacity: p > 0.9 ? 1 : 0.75 }}>
             {sub}
           </div>
         ) : null}
@@ -155,13 +163,13 @@ export function SpotlightGrid({
     el.style.setProperty("--on", "1");
   };
   return (
-    <div className="container-x py-20 sm:py-20">
+    <div className="container-x py-20 sm:py-24 lg:py-24">
       <Head label={label} title={title} />
       <ul
         ref={grid}
         onPointerMove={move}
         onPointerLeave={() => grid.current?.style.setProperty("--on", "0")}
-        className="group/spot mt-12 grid gap-3 [--on:0] sm:mt-16 sm:grid-cols-2 lg:grid-cols-3"
+        className="group/spot mt-12 grid gap-3 lg:gap-x-8 [--on:0] sm:mt-16 sm:grid-cols-2 lg:grid-cols-3"
       >
         {items.map((it) => (
           <li
@@ -175,14 +183,14 @@ export function SpotlightGrid({
             }}
           >
             <div
-              className="relative h-full overflow-hidden rounded-[15px] bg-paper p-7 sm:p-8"
+              className="relative h-full overflow-hidden rounded-[15px] bg-paper p-9 sm:p-10"
               style={{
                 backgroundImage:
                   "radial-gradient(320px circle at var(--x) var(--y), rgb(10 10 10 / calc(var(--on) * 0.05)), transparent 70%)",
               }}
             >
               <h3 className="font-display text-[1.6rem] font-medium leading-tight tracking-[-0.02em]">{it.name}</h3>
-              <p className="mt-3 text-muted">{it.body}</p>
+              <p className="mt-4 text-muted">{it.body}</p>
             </div>
           </li>
         ))}
@@ -208,10 +216,10 @@ export function Bridge({
   const [ref, p] = useEnterProgress<HTMLDivElement>(reduced, 0.85, 0.9);
   const n = items.length;
   return (
-    <div className="bg-black py-20 text-white sm:py-20">
+    <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} text={text} dark />
-        <div ref={ref} className="mt-14 sm:mt-20">
+        <div ref={ref} className="mt-12 sm:mt-16">
           <svg aria-hidden viewBox="0 0 1000 160" preserveAspectRatio="none" className="hidden h-28 w-full lg:block">
             <path d="M0 150 Q500 -40 1000 150" fill="none" stroke="currentColor" strokeOpacity={0.15} strokeWidth="1" vectorEffect="non-scaling-stroke" />
             <path
@@ -234,7 +242,7 @@ export function Bridge({
               return (
                 <li
                   key={s.name}
-                  className="flex gap-5 border-l border-white/15 py-5 pl-5 transition-[opacity,transform] duration-700 lg:flex-col lg:gap-0 lg:border-l-0 lg:py-0 lg:pl-0"
+                  className="flex gap-5 border-l border-white/15 py-7 pl-5 transition-[opacity,transform] duration-700 lg:flex-col lg:gap-0 lg:border-l-0 lg:py-0 lg:pl-0"
                   style={{ opacity: on ? 1 : 0.6, transform: on ? "none" : "translateY(8px)" }}
                 >
                   <span aria-hidden className="relative hidden w-px bg-white/25 lg:block lg:self-center" style={{ height: `${2 + h * 3}rem` }}>
@@ -247,7 +255,7 @@ export function Bridge({
                   <div className="lg:mt-2">
                     <h3 className="font-display text-[1.4rem] font-medium leading-tight tracking-[-0.02em]">{s.name}</h3>
                     <p className="mt-2 text-base text-white/80">{s.body}</p>
-                    <p className="mt-3 text-sm uppercase tracking-[0.12em] text-white/75">{s.meta}</p>
+                    <p className="mt-4 text-sm uppercase tracking-[0.12em] text-white/75">{s.meta}</p>
                   </div>
                 </li>
               );
@@ -275,14 +283,14 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
     return (
       <ul aria-label={label} className="mt-12 divide-y divide-line border-y border-line">
         {items.map((t) => (
-          <li key={t} className="font-display py-5 text-[clamp(2rem,5vw,4rem)] font-medium tracking-[-0.03em]">{t}</li>
+          <li key={t} className="font-display py-7 text-[clamp(2rem,5vw,4rem)] font-medium tracking-[-0.03em]">{t}</li>
         ))}
       </ul>
     );
   }
   return (
     <div
-      className="mt-16 border-y border-ink py-10 sm:py-14"
+      className="mt-12 border-y border-ink py-12 sm:py-14"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -307,7 +315,7 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
           })}
         </div>
       </div>
-      <div className="mt-8 flex gap-1.5" role="group" aria-label={label}>
+      <div className="mt-10 flex gap-1.5" role="group" aria-label={label}>
         {items.map((t, k) => (
           <button
             key={t}
@@ -339,7 +347,7 @@ export function PillDetails({
   const [open, setOpen] = useState(0);
   const cur = items[open];
   return (
-    <div className="bg-black py-20 text-white sm:py-20">
+    <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} dark />
         <ul className="mt-12 flex flex-wrap gap-2 sm:mt-16">
@@ -365,12 +373,12 @@ export function PillDetails({
           role="region"
           aria-live="polite"
           aria-label={cur.name}
-          className="mt-8 grid overflow-hidden rounded-3xl border border-white/15 sm:grid-cols-5"
+          className="mt-10 grid overflow-hidden rounded-3xl border border-white/15 sm:grid-cols-5"
         >
-          <div key={cur.name} className="animate-rise p-7 sm:col-span-3 sm:p-12">
+          <div key={cur.name} className="animate-rise p-9 sm:col-span-3 sm:p-16">
             <span className="text-xs tabular-nums text-white/60">{n2(open)}</span>
-            <h3 className="font-display mt-6 text-[clamp(1.8rem,3.6vw,3rem)] font-medium leading-[1.02] tracking-[-0.035em]">{cur.name}</h3>
-            <p className="mt-5 max-w-md text-white/70">{cur.body}</p>
+            <h3 className="font-display mt-8 text-[clamp(1.8rem,3.6vw,3rem)] font-medium leading-[1.02] tracking-[-0.035em]">{cur.name}</h3>
+            <p className="mt-6 max-w-lg text-white/70">{cur.body}</p>
           </div>
           <div className="photo-tone relative min-h-52 sm:col-span-2">
             <Image key={cur.image} src={cur.image} alt={altFor(cur.image)} fill sizes="(min-width: 640px) 40vw, 100vw" className="animate-fade object-cover grayscale" />
@@ -398,10 +406,10 @@ export function Staircase({
   const [ref, p] = useEnterProgress<HTMLOListElement>(reduced, 0.85, 1.1);
   const n = steps.length;
   return (
-    <div className="bg-black py-20 text-white sm:py-20">
+    <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} dark />
-        <ol ref={ref} className="mt-14 flex flex-col-reverse sm:mt-20">
+        <ol ref={ref} className="mt-12 flex flex-col-reverse sm:mt-16">
           {steps.map((s, i) => {
             const local = clamp(p * n - i);
             return (
@@ -422,7 +430,7 @@ export function Staircase({
             );
           })}
         </ol>
-        {foot ? <p className="mt-14 max-w-2xl text-base text-white/80 sm:text-lg">{foot}</p> : null}
+        {foot ? <p className="mt-12 max-w-3xl text-base text-white/80 sm:text-lg">{foot}</p> : null}
       </div>
     </div>
   );
@@ -435,10 +443,10 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
   const layer = (show: boolean) =>
     "col-start-1 row-start-1 transition-[opacity,filter] duration-700 " + (show ? "opacity-100 blur-0" : "pointer-events-none opacity-0 blur-md");
   return (
-    <div className="container-x py-20 sm:py-20">
+    <div className="container-x py-20 sm:py-24 lg:py-24">
       <div
         className={
-          "true-tone rounded-[1.25rem] p-7 transition-colors duration-700 sm:p-14 " + (isAfter ? "bg-black text-white" : "bg-paper text-ink ring-1 ring-line")
+          "true-tone rounded-[1.25rem] p-9 transition-colors duration-700 sm:p-14 " + (isAfter ? "bg-black text-white" : "bg-paper text-ink ring-1 ring-line")
         }
       >
         <div role="group" aria-label="Before / After" className={"inline-flex rounded-full border p-1 " + (isAfter ? "border-white/25" : "border-line")}>
@@ -460,7 +468,7 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
             );
           })}
         </div>
-        <div className="mt-10 grid">
+        <div className="mt-12 grid">
           <p aria-hidden={isAfter} className={"font-display text-[clamp(1.3rem,2.8vw,2.3rem)] font-medium leading-[1.2] tracking-[-0.025em] " + layer(!isAfter)}>
             {before}
           </p>
@@ -503,11 +511,11 @@ export function PeakStatic({ stages }: { stages: readonly { letter: string; name
   return (
     <ol className="grid border-t border-current/20 sm:grid-cols-2 lg:grid-cols-4">
       {stages.map((s, i) => (
-        <li key={s.letter} className="border-b border-current/20 py-8 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0">
+        <li key={s.letter} className="border-b border-current/20 py-10 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0">
           <span className="text-sm tabular-nums opacity-60">{n2(i)}</span>
-          <p aria-hidden className="font-display mt-4 text-[clamp(5rem,11vw,9.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
-          <h3 className="font-display mt-6 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
-          <p className="mt-3 text-base opacity-80 sm:text-lg">{s.question}</p>
+          <p aria-hidden className="font-display mt-6 text-[clamp(5rem,11vw,9.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
+          <h3 className="font-display mt-8 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
+          <p className="mt-4 text-base opacity-80 sm:text-lg">{s.question}</p>
         </li>
       ))}
     </ol>

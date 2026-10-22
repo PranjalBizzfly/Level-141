@@ -39,22 +39,22 @@ export default async function InsightArticle({ params }: Props) {
           <Link href={routes.insights} className="-my-3 inline-flex min-h-11 items-center gap-2 text-sm text-paper/60 hover:text-gold">
             <ArrowLeft aria-hidden className="size-4" /> All insights
           </Link>
-          {category ? <p className="eyebrow mt-8 text-gold sm:mt-10">{category.name}</p> : null}
-          <h1 className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-6xl">{article.title}</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-paper/70 sm:mt-6 sm:text-xl">{article.summary}</p>
-          <p className="mt-8 text-sm text-paper/50">
+          {category ? <p className="eyebrow mt-10 text-gold sm:mt-10">{category.name}</p> : null}
+          <h1 className="display mt-6 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-6xl">{article.title}</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-paper/70 sm:mt-6 sm:text-xl">{article.summary}</p>
+          <p className="mt-10 text-sm text-paper/50">
             {article.author ? `${article.author} · ` : null}
             <time dateTime={article.publishedAt}>{dateFmt.format(new Date(article.publishedAt))}</time>
           </p>
         </div>
       </header>
-      <div className="bg-paper py-16 sm:py-20 lg:py-24">
-        <div className="container-x max-w-3xl space-y-5 text-base leading-[1.75] text-ink/85 sm:space-y-6 sm:text-lg">
+      <div className="bg-paper py-20 sm:py-24 lg:py-24">
+        <div className="container-x max-w-4xl space-y-5 text-base leading-[1.75] text-ink/85 sm:space-y-6 sm:text-lg">
           {article.body.map((block, i) => {
             switch (block.type) {
               case "h2":
                 return (
-                  <h2 key={i} className="!mt-12 text-2xl sm:!mt-14 sm:text-3xl leading-tight tracking-[-0.02em] text-ink">
+                  <h2 key={i} className="!mt-12 text-2xl sm:!mt-12 sm:text-3xl leading-tight tracking-[-0.02em] text-ink">
                     {block.text}
                   </h2>
                 );

@@ -60,7 +60,7 @@ export default function InsightsPage() {
         {/* Articles (shown only once real, approved articles exist) — a static editorial list */}
         {articles.length ? (
           <section aria-labelledby="latest-title" className="bg-black text-white">
-            <div className="container-x py-20 sm:py-20">
+            <div className="container-x py-20 sm:py-24 lg:py-24">
               <h2 id="latest-title" className="sr-only">
                 Insights
               </h2>
@@ -90,7 +90,7 @@ export default function InsightsPage() {
                       >
                         {a.title}
                       </h3>
-                      <p className="mt-3 max-w-2xl leading-relaxed text-white/75">{a.summary}</p>
+                      <p className="mt-4 max-w-3xl leading-relaxed text-white/75">{a.summary}</p>
                     </Link>
                   </li>
                 ))}

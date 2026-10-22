@@ -26,13 +26,13 @@ export function StickyIndex({
   items: readonly { name: ReactNode; body?: ReactNode }[];
 }) {
   return (
-    <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+    <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
       <div className="lg:col-span-4">
         <div className="lg:sticky lg:top-32">{head}</div>
       </div>
       <ol className="lg:col-span-7 lg:col-start-6">
         {items.map((it, i) => (
-          <li key={i} className="si-item grid grid-cols-[3.25rem_1fr] gap-x-4 py-8 sm:grid-cols-[5rem_1fr] sm:py-12">
+          <li key={i} className="si-item grid grid-cols-[3.25rem_1fr] gap-x-4 py-10 sm:grid-cols-[5rem_1fr] sm:py-16">
             <span aria-hidden className="font-display text-[1.75rem] leading-none tracking-[-0.04em] text-muted sm:text-[2.75rem]">
               {n2(i)}
             </span>
@@ -41,7 +41,7 @@ export function StickyIndex({
                 {/* Headings carry no closing full stop (brand guidance). */}
                 {typeof it.name === "string" ? it.name.replace(/\.$/, "") : it.name}
               </h3>
-              {it.body ? <p className="mt-4 max-w-xl text-muted sm:text-lg">{it.body}</p> : null}
+              {it.body ? <p className="mt-6 max-w-2xl text-muted sm:text-lg">{it.body}</p> : null}
             </div>
           </li>
         ))}
@@ -60,12 +60,12 @@ export function StackCards({ items }: {
   items: readonly { n?: string; name: ReactNode; line?: ReactNode; body?: ReactNode; aside?: ReactNode }[];
 }) {
   return (
-    <ol className="stack mt-14 sm:mt-20">
+    <ol className="stack mt-12 sm:mt-16">
       {items.map((it, i) => (
         <li key={i} className="stack-slot" style={vars({ "--i": i, "--n": items.length })}>
           <div
             className={
-              "stack-card relative grid min-h-[min(68svh,34rem)] gap-8 overflow-hidden rounded-[1.25rem] p-7 sm:p-12 lg:grid-cols-12 lg:p-16 " +
+              "stack-card relative grid min-h-[min(68svh,34rem)] gap-12 overflow-hidden rounded-[1.25rem] p-9 sm:p-16 lg:grid-cols-12 lg:p-20 " +
               (i % 2
                 ? "border border-white/15 bg-black text-white dark:border-black/10 dark:bg-white dark:text-black"
                 : "border border-black/10 bg-white text-black dark:border-white/15 dark:bg-black dark:text-white")
@@ -79,9 +79,9 @@ export function StackCards({ items }: {
             </span>
             <div className="flex flex-col justify-end lg:col-span-6 lg:col-start-7">
               <h3 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1] tracking-[-0.035em]">{it.name}</h3>
-              {it.line ? <p className="mt-4 text-lg opacity-90 sm:text-xl">{it.line}</p> : null}
-              {it.body ? <p className="mt-4 max-w-lg opacity-70">{it.body}</p> : null}
-              {it.aside ? <div className="mt-8 border-t border-current/20 pt-5 font-medium">{it.aside}</div> : null}
+              {it.line ? <p className="mt-6 text-lg opacity-90 sm:text-xl">{it.line}</p> : null}
+              {it.body ? <p className="mt-6 max-w-xl opacity-70">{it.body}</p> : null}
+              {it.aside ? <div className="mt-10 border-t border-current/20 pt-5 font-medium">{it.aside}</div> : null}
             </div>
           </div>
         </li>
@@ -98,7 +98,7 @@ export function StackCards({ items }: {
  */
 export function Cascade({ lines }: { lines: readonly { lead: ReactNode; rest?: ReactNode }[] }) {
   return (
-    <ol className="mt-14 space-y-2 sm:mt-20 sm:space-y-3">
+    <ol className="mt-12 space-y-2 sm:mt-16 sm:space-y-3">
       {lines.map((l, i) => (
         <li
           key={i}
@@ -124,7 +124,7 @@ export function Cascade({ lines }: { lines: readonly { lead: ReactNode; rest?: R
  */
 export function Strike({ items, conclusion }: { items: readonly string[]; conclusion?: ReactNode }) {
   return (
-    <div className="mt-14 sm:mt-20">
+    <div className="mt-12 sm:mt-16">
       <ul className="space-y-1 sm:space-y-2">
         {items.map((t) => (
           <li key={t} className="font-display text-[clamp(1.5rem,4.2vw,3.75rem)] font-medium leading-[1.12] tracking-[-0.03em]">
@@ -134,7 +134,7 @@ export function Strike({ items, conclusion }: { items: readonly string[]; conclu
           </li>
         ))}
       </ul>
-      {conclusion ? <div className="mt-14 max-w-2xl text-xl sm:text-2xl">{conclusion}</div> : null}
+      {conclusion ? <div className="mt-12 max-w-3xl text-xl sm:text-2xl">{conclusion}</div> : null}
     </div>
   );
 }
@@ -156,7 +156,7 @@ export function Marquee({ items, label }: { items: readonly string[]; label: str
   );
   return (
     // Full bleed (edge to edge of the screen), fading out at both sides instead of a hard cut.
-    <div className="marquee relative left-1/2 mt-14 w-screen -translate-x-1/2 overflow-hidden py-2 font-display text-[clamp(2.1rem,5.2vw,4.75rem)] font-medium leading-[1.12] tracking-[-0.04em] [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)] sm:mt-20">
+    <div className="marquee relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden py-2 font-display text-[clamp(2.1rem,5.2vw,4.75rem)] font-medium leading-[1.12] tracking-[-0.04em] [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)] sm:mt-16">
       <ul className="sr-only" aria-label={label}>
         {items.map((t) => (
           <li key={t}>{t}</li>
@@ -176,7 +176,7 @@ export function Bento({ items }: {
 }) {
   const card = "border-[color-mix(in_oklab,currentColor_14%,transparent)] bg-[color-mix(in_oklab,currentColor_3%,transparent)]";
   return (
-    <ul className="mt-14 grid auto-rows-[minmax(12rem,auto)] gap-3 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+    <ul className="mt-12 grid auto-rows-[minmax(12rem,auto)] gap-3 lg:gap-x-8 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((it, i) => (
         <li
           key={i}
@@ -202,7 +202,7 @@ export function Bento({ items }: {
             >
               {it.name}
             </h3>
-            {it.body ? <p className={"mt-3 opacity-70 " + (i === 0 ? "max-w-md text-lg" : "text-[0.95rem]")}>{it.body}</p> : null}
+            {it.body ? <p className={"mt-4 opacity-70 " + (i === 0 ? "max-w-lg text-lg" : "text-[0.95rem]")}>{it.body}</p> : null}
           </div>
           </BentoInner>
         </li>
@@ -222,7 +222,7 @@ function bentoTail(n: number) {
 }
 
 function BentoInner({ href, children }: { href?: string; children: ReactNode }) {
-  const cls = "flex h-full flex-col justify-between gap-8 p-6 sm:p-8";
+  const cls = "flex h-full flex-col justify-between gap-12 p-8 sm:p-10";
   return href ? (
     <Link href={href} className={cls + " transition-opacity hover:opacity-80"}>
       {children}
@@ -237,16 +237,16 @@ function BentoInner({ href, children }: { href?: string; children: ReactNode }) 
 /** Points on one line that fills as the section is read. */
 export function Timeline({ items }: { items: readonly { name: ReactNode; body: ReactNode }[] }) {
   return (
-    <div className="timeline relative mt-14 sm:mt-20">
+    <div className="timeline relative mt-12 sm:mt-16">
       <div aria-hidden className="absolute left-[0.4rem] top-0 h-full w-px bg-current opacity-15 lg:left-0 lg:top-[0.4rem] lg:h-px lg:w-full" />
       <div aria-hidden className="timeline-fill absolute left-[0.4rem] top-0 h-full w-px bg-current lg:left-0 lg:top-[0.4rem] lg:h-px lg:w-full" />
-      <ol className="relative grid gap-10 lg:gap-8" style={{ gridTemplateColumns: `repeat(1, 1fr)` }}>
+      <ol className="relative grid gap-14 lg:gap-12" style={{ gridTemplateColumns: `repeat(1, 1fr)` }}>
         <style>{`@media (min-width:1024px){.timeline ol{grid-template-columns:repeat(${items.length},1fr)!important}}`}</style>
         {items.map((it, i) => (
           <li key={i} className="relative pl-10 lg:pl-0 lg:pt-12">
             <span aria-hidden className="absolute left-0 top-0 size-[0.85rem] rounded-full border border-current bg-[var(--color-paper)] lg:top-0" />
             <h3 className="font-display text-[1.75rem] font-medium leading-tight tracking-[-0.03em] sm:text-[2.25rem]">{it.name}</h3>
-            <p className="mt-3 max-w-xs text-muted">{it.body}</p>
+            <p className="mt-4 max-w-sm text-muted">{it.body}</p>
           </li>
         ))}
       </ol>
@@ -264,9 +264,9 @@ export function Lanes({ items }: {
   items: readonly { lead: ReactNode; answer: ReactNode; note?: ReactNode }[];
 }) {
   return (
-    <ol className="mt-14 space-y-16 sm:mt-20 sm:space-y-24">
+    <ol className="mt-12 space-y-16 sm:mt-16 sm:space-y-24">
       {items.map((it, i) => (
-        <li key={i} className="lane grid gap-6 lg:grid-cols-12 lg:items-end" data-side={i % 2 ? "r" : "l"}>
+        <li key={i} className="lane grid gap-8 lg:gap-x-16 lg:grid-cols-12 lg:items-end" data-side={i % 2 ? "r" : "l"}>
           <p
             className={
               "font-display text-[clamp(1.75rem,3.6vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.03em] lg:col-span-7 " +
@@ -280,7 +280,7 @@ export function Lanes({ items }: {
               <span aria-hidden className="mt-[0.7em] h-px w-6 shrink-0 bg-current" />
               <span>{it.answer}</span>
             </p>
-            {it.note ? <p className="mt-3 pl-9 text-muted">{it.note}</p> : null}
+            {it.note ? <p className="mt-4 pl-9 text-muted">{it.note}</p> : null}
           </div>
         </li>
       ))}
@@ -293,14 +293,14 @@ export function Lanes({ items }: {
 /** Before and after as two contrasting panels; the after panel rises in. */
 export function Compare({ before, after }: { before: ReactNode; after: ReactNode }) {
   return (
-    <div className="grid gap-3 lg:grid-cols-2">
-      <div className="flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] border border-black/12 bg-white p-8 text-black sm:p-12 dark:border-white/15 dark:bg-black dark:text-white">
+    <div className="grid gap-3 lg:gap-x-8 lg:grid-cols-2">
+      <div className="flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] border border-black/12 bg-white p-8 text-black sm:p-16 dark:border-white/15 dark:bg-black dark:text-white">
         <p className="font-display text-[clamp(3rem,7vw,6rem)] font-medium leading-none tracking-[-0.05em] opacity-50">Before</p>
-        <p className="mt-10 max-w-md text-lg opacity-75">{before}</p>
+        <p className="mt-12 max-w-lg text-lg opacity-75">{before}</p>
       </div>
-      <div className="compare-after flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] bg-black p-8 text-white sm:p-12 dark:bg-white dark:text-black">
+      <div className="compare-after flex min-h-[22rem] flex-col justify-between rounded-[1.25rem] bg-black p-8 text-white sm:p-16 dark:bg-white dark:text-black">
         <p className="font-display text-[clamp(3rem,7vw,6rem)] font-medium leading-none tracking-[-0.05em]">After</p>
-        <p className="mt-10 max-w-md text-lg">{after}</p>
+        <p className="mt-12 max-w-lg text-lg">{after}</p>
       </div>
     </div>
   );
@@ -327,11 +327,11 @@ export function Shelf({
         {/* Focusable so the row can be scrolled from the keyboard on small screens. */}
         <ol tabIndex={0} aria-label={label} className="shelf-track flex gap-4 outline-none focus-visible:ring-2 focus-visible:ring-current sm:gap-5">
           {items.map((it, i) => (
-            <li key={i} className={"shelf-card flex w-[78vw] shrink-0 flex-col justify-between rounded-[1.25rem] border p-7 sm:w-[24rem] sm:p-9 " + card}>
+            <li key={i} className={"shelf-card flex w-[78vw] shrink-0 flex-col justify-between rounded-[1.25rem] border p-9 sm:w-[24rem] sm:p-9 " + card}>
               <span className="text-sm tabular-nums opacity-60">{it.kicker ?? n2(i)}</span>
-              <div className="mt-16">
+              <div className="mt-12">
                 <h3 className="font-display text-[1.75rem] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[2rem]">{it.name}</h3>
-                {it.body ? <p className="mt-4 opacity-70">{it.body}</p> : null}
+                {it.body ? <p className="mt-6 opacity-70">{it.body}</p> : null}
               </div>
             </li>
           ))}

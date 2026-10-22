@@ -51,9 +51,9 @@ export function Footer() {
         className="relative mx-auto w-full border-t border-black/15 dark:border-white/15"
       >
 
-        <div className="relative px-6 pb-8 pt-8 sm:px-12 sm:pb-10 sm:pt-10 lg:px-20 lg:pt-10 2xl:px-28">
+        <div className="relative px-6 pb-12 pt-16 sm:px-12 sm:pb-16 sm:pt-20 lg:px-20 lg:pt-24 2xl:px-28">
           {/* Closing statement */}
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
             <p className="display text-[2.15rem] leading-[1.03] text-black sm:text-5xl lg:col-span-8 lg:text-[3.6rem] dark:text-white">
               Growth Architecture For <span className="serif-accent">People &amp; Organizations</span>
             </p>
@@ -78,7 +78,7 @@ export function Footer() {
           </div>
 
           {/* Columns */}
-          <div className="mt-12 grid gap-12 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-12 lg:gap-8">
+          <div className="mt-12 grid gap-16 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-12 lg:gap-12">
             <div className="sm:col-span-2 lg:col-span-3">
               <Link
                 href="/"
@@ -87,10 +87,10 @@ export function Footer() {
               >
                 <LogoLockup className="h-[30px] w-auto sm:h-9" />
               </Link>
-              <p className="mt-5 max-w-xs leading-relaxed text-black/70 dark:text-white/65">
+              <p className="mt-6 max-w-sm leading-relaxed text-black/70 dark:text-white/65">
                 Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}.
               </p>
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/50 px-3 py-1.5 text-sm text-black/85 ring-1 ring-black/10 dark:bg-white/[0.06] dark:text-white/85 dark:ring-white/12">
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/50 px-3 py-1.5 text-sm text-black/85 ring-1 ring-black/10 dark:bg-white/[0.06] dark:text-white/85 dark:ring-white/12">
                 <span aria-hidden className="size-1.5 rounded-full bg-black dark:bg-white" />
                 {site.headquarters}
               </div>
@@ -98,7 +98,7 @@ export function Footer() {
 
             <nav aria-label="Explore" className="lg:col-span-3">
               <p className={label}>Explore</p>
-              <ul className="mt-4">
+              <ul className="mt-6">
                 {footerNav.explore.map((item) => (
                   <li key={item.href}>
                     <FooterLink href={item.href}>{item.label}</FooterLink>
@@ -109,7 +109,7 @@ export function Footer() {
 
             <nav aria-label="Frameworks" className="lg:col-span-3">
               <p className={label}>Frameworks</p>
-              <ul className="mt-4">
+              <ul className="mt-6">
                 {footerNav.frameworks.map((item) => (
                   <li key={item.href}>
                     <FooterLink href={item.href} note={frameworkNotes[item.label]}>
@@ -122,7 +122,7 @@ export function Footer() {
 
             <nav aria-label="Start your next level" className="lg:col-span-3">
               <p className={label}>Start Your Next Level</p>
-              <ul className="mt-4">
+              <ul className="mt-6">
                 {nextLevel.map((item) => (
                   <li key={item.href}>
                     <FooterLink href={item.href}>{item.label}</FooterLink>
@@ -135,9 +135,9 @@ export function Footer() {
           {/* Etched divider + copyright */}
           <div
             aria-hidden
-            className="mt-14 h-px bg-black/12 shadow-[0_1px_0_rgb(255_255_255/0.85)] dark:bg-white/10 dark:shadow-none"
+            className="mt-12 h-px bg-black/12 shadow-[0_1px_0_rgb(255_255_255/0.85)] dark:bg-white/10 dark:shadow-none"
           />
-          <p className="mt-6 text-[0.95rem] text-black/70 dark:text-white/65">
+          <p className="mt-8 text-[0.95rem] text-black/70 dark:text-white/65">
             © {new Date().getFullYear()} Level141.
           </p>
         </div>

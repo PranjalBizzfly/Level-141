@@ -15,7 +15,7 @@ const built = ["A career.", "A reputation.", "A business.", "A company."];
 export function HomeHero() {
   return (
     <section className="recede relative flex min-h-[100svh] flex-col overflow-x-clip bg-paper text-ink" aria-labelledby="hero-title">
-      <div className="container-x pt-28 sm:pt-32 lg:pt-36">
+      <div className="container-x pt-28 sm:pt-20 lg:pt-36">
         <h1
           id="hero-title"
           data-split="load"
@@ -27,8 +27,8 @@ export function HomeHero() {
           What&apos;s Your <span className="serif-accent">Level</span>?
         </h1>
 
-        <div className="mt-10 grid animate-rise gap-8 [animation-delay:500ms] sm:mt-14 lg:grid-cols-12 lg:items-end">
-          <div className="max-w-2xl space-y-3 text-muted sm:text-lg lg:col-span-7">
+        <div className="mt-12 grid animate-rise gap-12 [animation-delay:500ms] sm:mt-14 lg:grid-cols-12 lg:items-end">
+          <div className="max-w-3xl space-y-4 text-muted sm:text-lg lg:col-span-7">
             <p>
               You&apos;ve built something. {built.join(" ")} But where you are today doesn&apos;t have to define where you
               go next.
@@ -51,7 +51,7 @@ export function HomeHero() {
       </div>
 
       {/* The photograph fills the rest of the first screen (and keeps a generous size on short screens). */}
-      <div className="container-x flex flex-1 flex-col pb-6 pt-10 sm:pb-8 sm:pt-12">
+      <div className="container-x flex flex-1 flex-col pb-8 pt-10 sm:pb-8 sm:pt-12">
         <div data-rise className="flex flex-1">
           <MediaSlot
             src="/images/client-executive-dubai-window.webp"

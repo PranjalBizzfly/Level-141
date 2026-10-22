@@ -55,7 +55,7 @@
     transform-origin: 50% calc(100% - 50lvh);
   }
   .layer > section > * {
-    opacity: calc(1 - var(--out, 0) * 0.85);
+    opacity: max(0, calc(1 - var(--out, 0) * 2.2));
     translate: 0 calc(var(--out, 0) * -6vh);
   }
 

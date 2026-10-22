@@ -21,12 +21,20 @@ import { altFor } from "@/lib/image-alts";
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   return (
-    <div className="max-w-3xl">
-      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
-      {title ? (
-        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
-      ) : null}
-      {text ? <div className={"mt-6 max-w-xl text-base sm:text-lg " + (dark ? "text-white/80" : "text-muted")}>{text}</div> : null}
+    <div className="@container w-full">
+      <div className="@4xl:grid @4xl:grid-cols-12 @4xl:items-end @4xl:gap-x-16">
+        <div className="max-w-4xl @4xl:col-span-6">
+          {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
+          {title ? (
+            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+          ) : null}
+        </div>
+        {text ? (
+          <div className={"mt-8 max-w-2xl text-base leading-relaxed sm:text-lg @4xl:col-span-6 @4xl:col-start-7 @4xl:mt-0 " + (dark ? "text-white/80" : "text-muted")}>
+            {text}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -70,19 +78,19 @@ export function CounterHero({
         style={{ clipPath: `inset(${(1 - p) * 50}% ${(1 - p) * 50}% round 0)`, opacity: 0.35 + 0.65 * p }}
       >
         <Image src={image} alt={altFor(image)} fill priority sizes="100vw" className="object-cover grayscale" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/55" />
       </div>
       <p
         aria-hidden
-        className="font-display pointer-events-none absolute inset-x-0 top-[12svh] select-none text-center text-[clamp(7rem,34vw,30rem)] font-medium leading-none tracking-[-0.07em] tabular-nums text-white/90 mix-blend-difference"
+        className="font-display pointer-events-none absolute inset-x-0 top-[12svh] select-none text-center text-[clamp(7rem,34vw,30rem)] font-medium leading-none tracking-[-0.07em] tabular-nums text-white [text-shadow:0_8px_60px_rgb(0_0_0/0.55)]"
       >
         {value}
       </p>
       <div className="mx-auto w-full max-w-7xl px-5 pb-14 sm:px-8 sm:pb-20">
         <p className="text-sm text-white/60">{eyebrow}</p>
-        <h1 className="font-display mt-4 text-[clamp(2.6rem,7vw,6rem)] font-medium leading-[0.98] tracking-[-0.045em]">{title}</h1>
-        <div className="mt-6 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-          <div className="max-w-xl text-lg text-white/75">{intro}</div>
+        <h1 className="font-display mt-6 text-[clamp(2.6rem,7vw,6rem)] font-medium leading-[0.98] tracking-[-0.045em]">{title}</h1>
+        <div className="mt-8 grid gap-12 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="max-w-2xl text-lg text-white/75">{intro}</div>
           {children}
         </div>
       </div>
@@ -112,13 +120,13 @@ export function SplitStatement({ left, right, sub }: { left: string; right: stri
         </span>
       </h2>
       <div
-        className="mt-10 h-px origin-center bg-white/30"
+        className="mt-12 h-px origin-center bg-white/30"
         style={{ transform: `scaleX(${p})` }}
         aria-hidden
       />
       {sub ? (
         <div
-          className="mt-10 ml-auto max-w-xl space-y-4 text-base text-white/85 sm:text-lg"
+          className="mt-12 ml-auto max-w-2xl space-y-6 text-base text-white/85 sm:text-lg"
           style={{ opacity: reduced ? 1 : 0.55 + 0.45 * clamp((prog - 0.45) / 0.25) }}
         >
           {sub}
@@ -126,7 +134,7 @@ export function SplitStatement({ left, right, sub }: { left: string; right: stri
       ) : null}
     </div>
   );
-  if (reduced) return <div className="overflow-hidden bg-black py-16 text-white sm:py-24">{body}</div>;
+  if (reduced) return <div className="overflow-hidden bg-black py-20 text-white sm:py-24 lg:py-24">{body}</div>;
   return (
     <div ref={ref} className="relative h-[220lvh] bg-black text-white">
       <div className="sticky top-0 flex h-[100lvh] items-center overflow-hidden">{body}</div>
@@ -147,10 +155,10 @@ export function Triptych({
 }) {
   const [open, setOpen] = useState(items.length - 1);
   return (
-    <div className="bg-paper py-16 text-ink sm:py-24">
+    <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Head label={label} title={title} />
-        <div className="mt-14 flex flex-col gap-2 md:h-[30rem] md:flex-row">
+        <div className="mt-12 flex flex-col gap-2 md:h-[30rem] md:flex-row">
           {items.map((it, i) => {
             const on = open === i;
             return (
@@ -162,7 +170,7 @@ export function Triptych({
                 onFocus={() => setOpen(i)}
                 onClick={() => setOpen(i)}
                 className={
-                  "group relative flex min-w-0 flex-col justify-end overflow-hidden rounded-[1.25rem] border p-6 text-left outline-none transition-[flex-grow,background-color,color] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 motion-reduce:transition-none sm:p-8 " +
+                  "group relative flex min-w-0 flex-col justify-end overflow-hidden rounded-[1.25rem] border p-8 text-left outline-none transition-[flex-grow,background-color,color] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 motion-reduce:transition-none sm:p-10 " +
                   (on ? "border-ink bg-ink text-paper md:grow-[3]" : "border-current/15 bg-paper md:grow")
                 }
                 style={{ flexBasis: 0 }}
@@ -174,8 +182,8 @@ export function Triptych({
                   {it.rest ? (
                     <span
                       className={
-                        "block max-w-md overflow-hidden text-lg transition-[max-height,opacity] duration-700 motion-reduce:transition-none " +
-                        (on ? "mt-4 max-h-40 opacity-100 text-paper/85" : "max-h-0 opacity-0")
+                        "block max-w-lg overflow-hidden text-lg transition-[max-height,opacity] duration-700 motion-reduce:transition-none " +
+                        (on ? "mt-6 max-h-40 opacity-100 text-paper/85" : "max-h-0 opacity-0")
                       }
                     >
                       {it.rest}
@@ -206,11 +214,11 @@ export function SplitPanels({
 }) {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <div className="bg-black py-16 text-white sm:py-24">
+    <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Head label={label} title={title} text={<p>{text}</p>} dark />
       </div>
-      <div className="mt-14 flex flex-col gap-px md:h-[80svh] md:flex-row" onMouseLeave={() => setOpen(null)}>
+      <div className="mt-12 flex flex-col gap-px md:h-[80svh] md:flex-row" onMouseLeave={() => setOpen(null)}>
         {items.map((it, i) => {
           const grow = open === null ? 1 : open === i ? 7 : 3;
           const shown = open === i;
@@ -232,7 +240,7 @@ export function SplitPanels({
                 className="object-cover grayscale transition-transform duration-1000 group-hover:scale-105 motion-reduce:transition-none"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
-              <div className="relative p-6 sm:p-10">
+              <div className="relative p-8 sm:p-14">
                 <h3 className="font-display text-[clamp(1.6rem,3vw,2.8rem)] font-medium leading-[1.04] tracking-[-0.035em]">
                   {it.name}
                 </h3>
@@ -243,8 +251,8 @@ export function SplitPanels({
                   }
                 >
                   <div className="overflow-hidden">
-                    <p className="mt-4 max-w-md text-base text-white/85 sm:text-lg">{it.body}</p>
-                    <ArrowUpRight className="mt-6 size-6" aria-hidden />
+                    <p className="mt-6 max-w-lg text-base text-white/85 sm:text-lg">{it.body}</p>
+                    <ArrowUpRight className="mt-8 size-6" aria-hidden />
                   </div>
                 </div>
               </div>
@@ -275,7 +283,7 @@ export function ParallaxStrips({ image, alt, caption }: { image: string; alt: st
   const k = reduced ? 0 : d;
   const n = STRIP_SPEED.length;
   return (
-    <figure className="bg-paper py-16 text-ink sm:py-24">
+    <figure className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
       <div ref={ref} role="img" aria-label={alt} className="relative h-[75svh] w-full overflow-hidden">
         {STRIP_SPEED.map((s, i) => (
           <div
@@ -295,7 +303,7 @@ export function ParallaxStrips({ image, alt, caption }: { image: string; alt: st
         ))}
       </div>
       {caption ? (
-        <figcaption className="mx-auto mt-6 max-w-7xl px-5 text-[0.95rem] text-muted sm:px-8">{caption}</figcaption>
+        <figcaption className="mx-auto mt-8 max-w-7xl px-5 text-[0.95rem] text-muted sm:px-8">{caption}</figcaption>
       ) : null}
     </figure>
   );
@@ -313,9 +321,9 @@ export function PrinciplesGrid({
   items: { name: string; body: string }[];
 }) {
   return (
-    <div className="bg-paper py-16 text-ink sm:py-24">
+    <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <div className="grid gap-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <Head label={label} title={title} />
           </div>
@@ -323,7 +331,7 @@ export function PrinciplesGrid({
             {items.map((it) => (
               <li
                 key={it.name}
-                className="grid gap-3 border-b border-ink/15 py-8 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-8 sm:py-10"
+                className="grid gap-3 border-b border-ink/15 py-10 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-8 sm:py-12"
               >
                 <h3 className="font-display text-[clamp(1.4rem,2.3vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
                   {it.name}

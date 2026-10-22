@@ -33,7 +33,7 @@ export function Expandable({
         aria-controls={id}
         onClick={() => setOpen((v) => !v)}
         className={
-          "group mt-6 inline-flex min-h-11 items-center gap-3 rounded-full border px-5 text-sm font-medium " +
+          "group mt-8 inline-flex min-h-11 items-center gap-3 rounded-full border px-5 text-sm font-medium " +
           (dark ? "border-paper/25 text-paper hover:border-paper/60" : "border-line-strong text-ink hover:border-ink")
         }
       >

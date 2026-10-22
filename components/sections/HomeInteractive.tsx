@@ -169,17 +169,23 @@ export function Layers({ children, page }: { children: ReactNode; page?: LayerPa
   // Inner pages don't stack: each section scrolls normally and plays its own
   // arrival as it comes into view (the stacked sheets are kept for home).
   const flat = !!page;
+  // Sections already on screen when the page opens start settled, so the
+  // first look is never caught mid-turn; every later section still plays.
+  const settled = useRef<WeakSet<HTMLElement> | null>(null);
   useScrollFrame(() => {
     const root = ref.current;
     if (!root) return;
     const vh = window.innerHeight;
     const layers = Array.from(root.children) as HTMLElement[];
     if (flat) {
+      if (!settled.current) {
+        settled.current = new WeakSet(layers.filter((el) => el.getBoundingClientRect().top < vh));
+      }
       layers.forEach((el, i) => {
         // Earlier sections stay in front, so an arriving one turns in from behind them.
         el.style.zIndex = String(layers.length - i);
         // Lands by the time its top edge reaches the middle of the screen (no long, empty in-between).
-        const inn = clamp((vh - el.getBoundingClientRect().top) / (vh * 0.55));
+        const inn = settled.current?.has(el) ? 1 : clamp((vh - el.getBoundingClientRect().top) / (vh * 0.55));
         el.style.setProperty("--in", inn.toFixed(4));
         el.toggleAttribute("data-landed", inn >= 0.999);
       });
@@ -231,10 +237,10 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
 
   return (
     <div ref={ref} style={reduced ? undefined : { height: `${100 + n * 35}lvh` }}>
-      <div className={reduced ? "py-20 sm:py-20" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
+      <div className={reduced ? "py-20 sm:py-24 lg:py-24" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
         <div className="container-x">
           {head}
-          <ul className="mt-8 grid grid-cols-2 gap-2 [perspective:1600px] sm:mt-12 sm:gap-3 lg:grid-cols-3">
+          <ul className="mt-10 grid grid-cols-2 gap-2 [perspective:1600px] sm:mt-12 sm:gap-3 lg:grid-cols-3">
             {items.map((t, i) => {
               const k = reduced ? 1 : clamp(q * n - i);
               const e = 1 - Math.pow(1 - k, 3);
@@ -258,7 +264,7 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
               );
             })}
           </ul>
-          {foot ? <div className="mt-8 sm:mt-10">{foot}</div> : null}
+          {foot ? <div className="mt-10 sm:mt-10">{foot}</div> : null}
         </div>
       </div>
     </div>

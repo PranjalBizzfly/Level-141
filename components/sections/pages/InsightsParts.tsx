@@ -31,7 +31,7 @@ export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: Re
     <section ref={ref} className="relative flex min-h-[50svh] flex-col justify-end overflow-hidden bg-black text-white sm:min-h-[62svh]">
       <div className="container-x relative pb-12 pt-36 sm:pb-14 sm:pt-40">
         <p className="text-[0.95rem] font-medium text-white/70">{eyebrow}</p>
-        <h1 className="font-display mt-5 text-[clamp(3rem,8.5vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.045em]">
+        <h1 className="font-display mt-6 text-[clamp(3rem,8.5vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.045em]">
           {lines.map((line, i) => {
             const dir = i % 2 === 0 ? -1 : 1;
             const outlined = i % 2 === 1;
@@ -51,7 +51,7 @@ export function TypeHero({ eyebrow, lines, intro }: { eyebrow: string; lines: Re
             );
           })}
         </h1>
-        <div className="mt-8 max-w-xl border-t border-white/20 pt-6 text-[1.0625rem] text-white/85 sm:text-lg [&_p]:leading-relaxed">{intro}</div>
+        <div className="mt-10 max-w-2xl border-t border-white/20 pt-8 text-[1.0625rem] text-white/85 sm:text-lg [&_p]:leading-relaxed">{intro}</div>
       </div>
     </section>
   );
@@ -110,12 +110,12 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
   };
 
   return (
-    <div className="container-x py-20 sm:py-20">
-      <div className="max-w-3xl">
+    <div className="container-x py-20 sm:py-24 lg:py-24">
+      <div className="max-w-4xl">
         <p className="text-[0.95rem] font-medium text-muted">{label}</p>
-        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+        <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
       </div>
-      <div role="tablist" aria-label={label} onKeyDown={onKey} className="mt-10 flex flex-wrap gap-3">
+      <div role="tablist" aria-label={label} onKeyDown={onKey} className="mt-12 flex flex-wrap gap-3">
         {tabs.map((t, i) => (
           <button
             key={t}
@@ -137,8 +137,8 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
           </button>
         ))}
       </div>
-      <div id="ins-panel" role="tabpanel" aria-labelledby={`ins-tab-${active}`} tabIndex={0} className="mt-8 focus-visible:outline-none">
-        <ul className="grid gap-4 md:grid-cols-2">
+      <div id="ins-panel" role="tabpanel" aria-labelledby={`ins-tab-${active}`} tabIndex={0} className="mt-10 focus-visible:outline-none">
+        <ul className="grid gap-4 lg:gap-x-10 md:grid-cols-2">
           {visible.map((q) => {
             const key = `${q.kicker}:${q.name}`;
             return (
@@ -148,7 +148,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
                   if (el) itemRefs.current.set(key, el);
                   else itemRefs.current.delete(key);
                 }}
-                className="flex flex-col gap-6 rounded-[1.25rem] border border-current/15 p-6 sm:p-8"
+                className="flex flex-col gap-8 rounded-[1.25rem] border border-current/15 p-8 sm:p-10"
               >
                 <span className="text-sm font-medium text-muted">{q.kicker}</span>
                 <span className="font-display text-xl leading-snug tracking-[-0.02em] sm:text-2xl">{q.name}</span>
@@ -169,7 +169,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
 export function CategoryIndex({ items }: { items: readonly { id: string; name: ReactNode; body: ReactNode }[] }) {
   return (
     <section aria-labelledby="ins-cat-title" className="bg-paper text-ink">
-      <div className="container-x py-20 sm:py-28">
+      <div className="container-x py-20 sm:py-24 lg:py-24">
         <h2 id="ins-cat-title" className="sr-only">
           Insight categories
         </h2>
@@ -178,12 +178,12 @@ export function CategoryIndex({ items }: { items: readonly { id: string; name: R
             <li
               key={it.id}
               id={it.id}
-              className="group grid scroll-mt-28 gap-4 border-b border-ink/15 py-10 sm:py-12 md:grid-cols-12 md:items-baseline md:gap-8"
+              className="group grid scroll-mt-28 gap-4 lg:gap-x-10 border-b border-ink/15 py-12 sm:py-16 md:grid-cols-12 md:items-baseline md:gap-8"
             >
               <h3 className="font-display text-[clamp(2.1rem,5vw,4.5rem)] font-medium leading-none tracking-[-0.045em] transition-transform duration-500 ease-out motion-safe:group-hover:translate-x-2 md:col-span-7">
                 {it.name}
               </h3>
-              <p className="max-w-md text-[1.0625rem] leading-relaxed text-ink/85 sm:text-lg md:col-span-5">{it.body}</p>
+              <p className="max-w-lg text-[1.0625rem] leading-relaxed text-ink/85 sm:text-lg md:col-span-5">{it.body}</p>
             </li>
           ))}
         </ul>

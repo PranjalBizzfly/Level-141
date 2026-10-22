@@ -74,7 +74,7 @@ export function useFormSubmit(endpoint: string) {
 /* --------------------------------------------------------------- Fields */
 
 const inputBase =
-  "block min-h-[3.5rem] w-full rounded-xl border bg-surface px-5 py-4 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
+  "block min-h-[3.5rem] w-full rounded-xl border bg-surface px-5 py-6 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
 
 export function inputClasses(error?: string) {
   return cx(
@@ -195,7 +195,7 @@ export function PhoneInput({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className="min-h-[3.5rem] min-w-0 flex-1 rounded-r-xl bg-transparent px-5 py-4 text-base text-ink placeholder:text-muted/50 focus:outline-none"
+        className="min-h-[3.5rem] min-w-0 flex-1 rounded-r-xl bg-transparent px-5 py-6 text-base text-ink placeholder:text-muted/50 focus:outline-none"
       />
     </div>
   );
@@ -259,14 +259,14 @@ export function SuccessPanel({ title, children }: { title: string; children: Rea
       }}
       tabIndex={-1}
       role="status"
-      className="animate-rise rounded-[1.25rem] border border-success/25 bg-surface p-6 outline-none sm:p-10"
+      className="animate-rise rounded-[1.25rem] border border-success/25 bg-surface p-8 outline-none sm:p-14"
     >
       <svg aria-hidden viewBox="0 0 32 32" className="size-10 text-success" fill="none" stroke="currentColor" strokeWidth="1.75">
         <circle cx="16" cy="16" r="14" pathLength={1} className="motion-safe:animate-[draw-stroke_0.7s_var(--ease-architect)_both] [stroke-dasharray:1]" />
         <path d="M10 16.5l4 4 8-9" pathLength={1} className="motion-safe:animate-[draw-stroke_0.5s_var(--ease-architect)_0.45s_both] [stroke-dasharray:1]" />
       </svg>
-      <h3 className="mt-5 text-2xl tracking-[-0.02em]">{title}</h3>
-      <div className="mt-3 leading-relaxed text-muted">{children}</div>
+      <h3 className="mt-6 text-2xl tracking-[-0.02em]">{title}</h3>
+      <div className="mt-4 leading-relaxed text-muted">{children}</div>
     </div>
   );
 }

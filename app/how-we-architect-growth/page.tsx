@@ -151,14 +151,14 @@ export default function HowPage() {
                     Before recommending what should change, we establish where you currently stand. LQ™ provides a
                     structured assessment of the factors influencing your current growth position.
                   </p>
-                  <p className="mt-3 text-ink">
+                  <p className="mt-4 text-ink">
                     Because you cannot architect the next level without understanding the current one.
                   </p>
                 </>
               }
             />
             <LqLevels />
-            <div className="mt-24">
+            <div className="mt-12">
               <RefIntro label="LQ™ Growth Audit" title="LQ™ outputs" />
               <Mosaic kicker="LQ™ output" items={lqOutputs} />
             </div>
@@ -173,7 +173,7 @@ export default function HowPage() {
                     IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment
                     between them.
                   </p>
-                  <p className="mt-4 text-paper">
+                  <p className="mt-6 text-paper">
                     Instead of optimizing individual activities, we architect how the entire growth ecosystem works
                     together.
                   </p>
@@ -214,7 +214,7 @@ export default function HowPage() {
               }
               text="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
             />
-            <div className="mt-14 sm:mt-16">
+            <div className="mt-12 sm:mt-16">
               <PeakAscent dark={false} />
             </div>
           </RefSection>
@@ -263,7 +263,7 @@ Growth Architecture, not fragmented consulting</>
               name: t.label,
               body: <span className="block text-[1.0625rem] leading-relaxed text-paper/85 sm:text-lg">{t.question}</span>,
             }))} />
-          <Reveal className="mt-10 flex flex-wrap gap-3">
+          <Reveal className="mt-12 flex flex-wrap gap-3">
             <RefIntroLink href={routes.personalBrand}>Personal Brand Architecture™</RefIntroLink>
             <RefIntroLink href={routes.growth}>Growth Architecture™</RefIntroLink>
           </Reveal>

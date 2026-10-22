@@ -180,7 +180,7 @@ export function Header() {
             })}
           </ul>
           <div
-            className="menu-item mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
+            className="menu-item mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
             style={{ "--d": "620ms" } as React.CSSProperties}
           >
             <Link
@@ -205,7 +205,7 @@ export function Header() {
             ))}
           </div>
         </nav>
-        <div className="container-x flex flex-col gap-2 pb-8 text-sm text-white/55 sm:flex-row sm:justify-between">
+        <div className="container-x flex flex-col gap-2 pb-10 text-sm text-white/55 sm:flex-row sm:justify-between">
           <p>{site.brandLine}</p>
           <p>
             Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}

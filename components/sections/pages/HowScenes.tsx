@@ -47,14 +47,14 @@ export function OrbStatement({ text, accent, sub }: { text: string; accent?: str
         {text} {accent ? <span className="text-white/60">{accent}</span> : null}
       </p>
       {sub ? (
-        <div className="mt-10 max-w-2xl text-white/75 [&_p+p]:mt-4" style={{ opacity: tail, translate: `0 ${(1 - tail) * 1.5}rem` }}>
+        <div className="mt-12 max-w-3xl text-white/75 [&_p+p]:mt-4" style={{ opacity: tail, translate: `0 ${(1 - tail) * 1.5}rem` }}>
           {sub}
         </div>
       ) : null}
     </div>
   );
 
-  if (reduced) return <section className="relative bg-black py-28 text-white sm:py-36">{body}</section>;
+  if (reduced) return <section className="relative bg-black py-20 text-white sm:py-24 lg:py-24">{body}</section>;
 
   return (
     <section ref={ref} className="relative bg-black text-white" style={{ height: "220lvh" }}>
@@ -123,13 +123,13 @@ export function QuestionFocus({
   }, []);
 
   return (
-    <section className="qf bg-black py-24 text-white sm:py-32">
+    <section className="qf bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
-        <div className="max-w-xl">
+        <div className="max-w-2xl">
           <p className="text-sm text-white/60">{label}</p>
-          <h2 className="font-display mt-3 text-[clamp(1.8rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+          <h2 className="font-display mt-4 text-[clamp(1.8rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
         </div>
-        <div className="mt-12 grid gap-10 sm:mt-16 lg:grid-cols-12 lg:gap-12">
+        <div className="mt-12 grid gap-14 sm:mt-16 lg:grid-cols-12 lg:gap-16">
           {/* Pinned frame: photographs stack in order — each unveils over the last,
               and scrolling back draws it away again to show the one beneath. */}
           <div aria-hidden className="hidden lg:col-span-5 lg:block">
@@ -152,7 +152,7 @@ export function QuestionFocus({
                 ref={(el) => {
                   refs.current[i] = el;
                 }}
-                className="qf-line flex flex-col justify-center border-t border-white/15 py-8 lg:min-h-[42vh] lg:py-10"
+                className="qf-line flex flex-col justify-center border-t border-white/15 py-10 lg:min-h-[42vh] lg:py-12"
                 data-on={i === active ? "" : undefined}
                 data-seen={seen.has(i) ? "" : undefined}
               >
@@ -160,7 +160,7 @@ export function QuestionFocus({
                   <Image src={q.image} alt={altFor(q.image)} fill sizes="100vw" className="object-cover" />
                 </div>
                 <span className="text-sm tabular-nums text-white/60">{n2(i)}</span>
-                <h3 className="mt-3 overflow-hidden font-display text-[clamp(2rem,4.4vw,4rem)] font-medium leading-[1.02] tracking-[-0.04em]">
+                <h3 className="mt-4 overflow-hidden font-display text-[clamp(2rem,4.4vw,4rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                   <span className="qf-rise block">{q.name}</span>
                 </h3>
               </li>
@@ -189,16 +189,16 @@ export function BrandsSpell({
 
   if (reduced) {
     return (
-      <section className="bg-black py-20 text-white sm:py-20">
+      <section className="bg-black py-20 text-white sm:py-24 lg:py-24">
         <div className="container-x">
           {head}
-          <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-12 grid gap-14 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((it) => (
               <li key={it.letter}>
                 <p aria-hidden className="font-display text-[4rem] font-medium leading-none">{it.letter}</p>
-                <h3 className="font-display mt-3 text-2xl font-medium">{it.name}</h3>
+                <h3 className="font-display mt-4 text-2xl font-medium">{it.name}</h3>
                 <p className="mt-2 text-[1.0625rem] text-white/85">{it.role}</p>
-                <p className="mt-3 text-[0.95rem] text-white/80">{it.list.join(" · ")}</p>
+                <p className="mt-4 text-[0.95rem] text-white/80">{it.list.join(" · ")}</p>
               </li>
             ))}
           </ol>
@@ -220,7 +220,7 @@ export function BrandsSpell({
   return (
     <section ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 55}lvh` }}>
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
-        <div className="container-x flex flex-1 flex-col justify-between pb-10 pt-24 sm:pt-28">
+        <div className="container-x flex flex-1 flex-col justify-between pb-10 pt-16 sm:pt-28">
           {head}
 
           {/* The word: each letter fills and lifts as its lever is read. */}
@@ -250,7 +250,7 @@ export function BrandsSpell({
                 );
               })}
             </div>
-            <div aria-hidden className="mt-5 h-px bg-white/20">
+            <div aria-hidden className="mt-6 h-px bg-white/20">
               <div className="h-px origin-left bg-white" style={{ transform: `scaleX(${clamp(p)})` }} />
             </div>
           </div>
@@ -261,14 +261,14 @@ export function BrandsSpell({
               <div
                 key={it.letter}
                 aria-hidden={i !== active}
-                className="spell-panel col-start-1 row-start-1 grid gap-6 lg:grid-cols-12"
+                className="spell-panel col-start-1 row-start-1 grid gap-8 lg:gap-x-16 lg:grid-cols-12"
                 data-on={i === active ? "" : undefined}
               >
                 <div className="lg:col-span-5">
                   <h3 className="overflow-hidden font-display text-[clamp(1.9rem,3.4vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em]">
                     <span className="spell-rise block" style={{ "--d": 0 } as CSSProperties}>{it.name}</span>
                   </h3>
-                  <p className="mt-3 overflow-hidden text-lg text-white/80">
+                  <p className="mt-4 overflow-hidden text-lg text-white/80">
                     <span className="spell-rise block" style={{ "--d": 1 } as CSSProperties}>{it.line}</span>
                   </p>
                 </div>
@@ -276,7 +276,7 @@ export function BrandsSpell({
                   <p className="overflow-hidden text-[1.0625rem] text-white/85 sm:text-lg">
                     <span className="spell-rise block" style={{ "--d": 2 } as CSSProperties}>{it.role}</span>
                   </p>
-                  <ul className="mt-4 flex flex-wrap gap-2">
+                  <ul className="mt-6 flex flex-wrap gap-2">
                     {it.list.map((c, j) => (
                       <li key={c} className="spell-rise rounded-full border border-white/25 px-3 py-1 text-sm" style={{ "--d": 3 + j * 0.5 } as CSSProperties}>
                         {c}

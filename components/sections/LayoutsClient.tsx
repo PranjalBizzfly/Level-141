@@ -23,7 +23,7 @@ export function BigList({ items }: {
   return (
     <div
       ref={ref}
-      className="biglist relative mt-14 sm:mt-20"
+      className="biglist relative mt-12 sm:mt-16"
       onPointerMove={(e) => {
         if (e.pointerType !== "mouse" || !ref.current) return;
         const r = ref.current.getBoundingClientRect();
@@ -38,13 +38,13 @@ export function BigList({ items }: {
               <span className="font-display text-[clamp(2.1rem,6vw,5.75rem)] font-medium leading-[0.98] tracking-[-0.045em]">
                 {it.name}
               </span>
-              <span className="flex items-end justify-between gap-6 sm:max-w-sm sm:flex-col sm:items-end sm:text-right">
+              <span className="flex items-end justify-between gap-8 sm:max-w-[19rem] sm:shrink-0 sm:flex-col sm:items-end sm:text-right lg:ml-24">
                 {it.line ? <span className="text-muted">{it.line}</span> : null}
                 {it.href ? <ArrowUpRight aria-hidden className="biglist-arrow size-6 shrink-0" /> : null}
               </span>
             </>
           );
-          const cls = "biglist-item flex flex-col gap-3 py-6 outline-none sm:flex-row sm:items-end sm:justify-between sm:gap-10 sm:py-8";
+          const cls = "biglist-item flex flex-col gap-4 py-12 outline-none sm:flex-row sm:items-end sm:justify-between sm:gap-16 sm:py-16 lg:py-20";
           return (
             <li
               key={it.key}
@@ -104,16 +104,16 @@ export function TiltGrid({
   const grid = { 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[cols];
   const card = "border-[color-mix(in_oklab,currentColor_14%,transparent)] bg-[color-mix(in_oklab,currentColor_3%,transparent)]";
   return (
-    <ul className={"tilt-grid mt-14 grid gap-3 sm:mt-20 " + grid}>
+    <ul className={"tilt-grid mt-12 grid gap-3 sm:mt-16 " + grid}>
       {items.map((it, i) => (
         <TiltCard key={it.key} className={card} index={i}>
           <span aria-hidden className="text-sm tabular-nums opacity-55">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <div className="mt-14">
+          <div className="mt-12">
             <h3 className="font-display text-[1.6rem] font-medium leading-[1.1] tracking-[-0.03em] sm:text-[1.85rem]">{it.title}</h3>
-            {it.body ? <p className="mt-4 opacity-70">{it.body}</p> : null}
-            {it.foot ? <div className="mt-6 border-t border-current/15 pt-4 text-[0.95rem]">{it.foot}</div> : null}
+            {it.body ? <p className="mt-6 opacity-70">{it.body}</p> : null}
+            {it.foot ? <div className="mt-8 border-t border-current/15 pt-4 text-[0.95rem]">{it.foot}</div> : null}
           </div>
         </TiltCard>
       ))}
@@ -138,7 +138,7 @@ function TiltCard({ children, className, index }: { children: ReactNode; classNa
       onPointerLeave={() => setT({ x: 0, y: 0 })}
     >
       <div
-        className={"tilt-card flex h-full min-h-[17rem] flex-col justify-between rounded-[1.25rem] border p-7 sm:p-8 " + className}
+        className={"tilt-card flex h-full min-h-[17rem] flex-col justify-between rounded-[1.25rem] border p-9 sm:p-10 " + className}
         style={{ "--rx": `${(-t.y * 10).toFixed(2)}deg`, "--ry": `${(t.x * 12).toFixed(2)}deg` } as CSSProperties}
       >
         {children}

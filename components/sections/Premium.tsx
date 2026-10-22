@@ -65,7 +65,7 @@ export function StoriesList({
               ref={(el) => {
                 refs.current[i] = el;
               }}
-              className="grid min-h-[60lvh] scroll-mt-28 content-center gap-5 md:grid-cols-12"
+              className="grid min-h-[60lvh] scroll-mt-28 content-center gap-5 lg:gap-x-10 md:grid-cols-12"
             >
               <span aria-hidden className="text-sm tabular-nums text-white/55 md:col-span-1">
                 {String(i + 1).padStart(2, "0")}
@@ -77,7 +77,7 @@ export function StoriesList({
                 >
                   {it.name}
                 </h3>
-                <p className="mt-5 max-w-lg text-lg text-white/75 transition-opacity duration-700" style={{ opacity: i === active ? 1 : 0.3 }}>
+                <p className="mt-6 max-w-xl text-lg text-white/75 transition-opacity duration-700" style={{ opacity: i === active ? 1 : 0.3 }}>
                   {it.body}
                 </p>
               </div>
@@ -103,14 +103,14 @@ const SCATTER = [
 
 export function Mosaic({ items, kicker }: { items: readonly string[]; kicker: string }) {
   return (
-    <ol className="mosaic mt-14 grid gap-3 [perspective:1400px] sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
+    <ol className="mosaic mt-12 grid gap-3 lg:gap-x-8 [perspective:1400px] sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((t, i) => {
         const [x, y, z, r] = SCATTER[i % SCATTER.length];
         return (
           <li
             key={t}
             className={
-              "mosaic-tile flex min-h-[13rem] flex-col justify-between rounded-[1.25rem] p-7 sm:p-8 " +
+              "mosaic-tile flex min-h-[13rem] flex-col justify-between rounded-[1.25rem] p-9 sm:p-10 " +
               (i % 3 === 1 ? "bg-black text-white dark:bg-white dark:text-black" : "border border-current/15")
             }
             style={{ "--mx": `${x}%`, "--my": `${y}%`, "--mz": `${z}px`, "--mr": `${r}deg` } as CSSProperties}
@@ -119,7 +119,7 @@ export function Mosaic({ items, kicker }: { items: readonly string[]; kicker: st
               <span>{kicker}</span>
               <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
             </span>
-            <span className="mt-10 font-display text-[1.5rem] font-medium leading-[1.12] tracking-[-0.03em] sm:text-[1.7rem]">{t}</span>
+            <span className="mt-12 font-display text-[1.5rem] font-medium leading-[1.12] tracking-[-0.03em] sm:text-[1.7rem]">{t}</span>
           </li>
         );
       })}
@@ -131,12 +131,12 @@ export function Mosaic({ items, kicker }: { items: readonly string[]; kicker: st
 
 export function RuleQuote({ children, cite }: { children: ReactNode; cite?: ReactNode }) {
   return (
-    <figure className="rule-quote relative mt-16 max-w-4xl pl-8 sm:pl-12">
+    <figure className="rule-quote relative mt-12 max-w-4xl pl-8 sm:pl-12">
       <span aria-hidden className="rule-quote__line absolute left-0 top-0 h-full w-[3px] bg-current" />
       <blockquote className="font-display text-[clamp(1.9rem,3.8vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.035em]">
         {children}
       </blockquote>
-      {cite ? <figcaption className="mt-6 text-sm text-muted">{cite}</figcaption> : null}
+      {cite ? <figcaption className="mt-8 text-sm text-muted">{cite}</figcaption> : null}
     </figure>
   );
 }
@@ -145,9 +145,9 @@ export function RuleQuote({ children, cite }: { children: ReactNode; cite?: Reac
 
 export function DetailsPanel({ rows }: { rows: readonly { label: string; value: ReactNode }[] }) {
   return (
-    <dl className="mt-10 grid gap-px overflow-hidden rounded-[1.25rem] bg-white/15 text-white [background:rgb(255_255_255/0.14)]">
+    <dl className="mt-12 grid gap-px overflow-hidden rounded-[1.25rem] bg-white/15 text-white [background:rgb(255_255_255/0.14)]">
       {rows.map((r) => (
-        <div key={r.label} className="grid gap-2 bg-black p-6 sm:grid-cols-[8rem_1fr] sm:p-7 dark:bg-black">
+        <div key={r.label} className="grid gap-2 bg-black p-8 sm:grid-cols-[8rem_1fr] sm:p-7 dark:bg-black">
           <dt className="text-sm text-white/55">{r.label}</dt>
           <dd className="text-[0.95rem] leading-relaxed">{r.value}</dd>
         </div>

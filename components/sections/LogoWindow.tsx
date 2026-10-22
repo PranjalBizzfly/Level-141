@@ -118,7 +118,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
       <div
         className={
           reduced
-            ? "flex flex-col items-center justify-center py-14 sm:py-16 lg:py-20"
+            ? "flex flex-col items-center justify-center py-14 sm:py-16 lg:py-24"
             : "sticky top-0 flex h-[100lvh] flex-col items-center justify-center overflow-hidden bg-black text-white"
         }
       >

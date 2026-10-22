@@ -164,7 +164,7 @@ export function WaitlistForm() {
           Join the Waitlist
           <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
         </SubmitButton>
-        <p className="max-w-xs text-sm leading-relaxed text-muted">
+        <p className="max-w-sm text-sm leading-relaxed text-muted">
           Registering interest is not a booking or an engagement. We&apos;ll only use your details to contact you about
           availability.
         </p>

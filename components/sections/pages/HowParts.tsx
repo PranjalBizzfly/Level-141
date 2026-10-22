@@ -26,12 +26,20 @@ function scrollToStep(track: HTMLElement | null, i: number, n: number) {
 
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   return (
-    <div className="max-w-3xl">
-      {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
-      {title ? (
-        <h2 className="font-display mt-4 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
-      ) : null}
-      {text ? <div className={"mt-6 max-w-xl text-[1.0625rem] leading-relaxed sm:text-lg " + (dark ? "text-white/85" : "text-ink/80")}>{text}</div> : null}
+    <div className="@container w-full">
+      <div className="@4xl:grid @4xl:grid-cols-12 @4xl:items-end @4xl:gap-x-16">
+        <div className="max-w-4xl @4xl:col-span-6">
+          {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
+          {title ? (
+            <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
+          ) : null}
+        </div>
+        {text ? (
+          <div className={"mt-8 max-w-2xl text-base leading-relaxed sm:text-lg @4xl:col-span-6 @4xl:col-start-7 @4xl:mt-0 " + (dark ? "text-white/80" : "text-muted")}>
+            {text}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -85,19 +93,19 @@ export function PortalHero({
               style={{ width: `${radius * 2 * 1.02}vmax`, opacity: 1 - e }}
             />
           ) : null}
-          <div className="container-x relative grid gap-10 pb-12 pt-40 sm:pb-16 lg:grid-cols-12 lg:items-end lg:gap-8">
+          <div className="container-x relative grid gap-14 pb-12 pt-40 sm:pb-16 lg:grid-cols-12 lg:items-end lg:gap-12">
             <div className="lg:col-span-8">
               <p className="animate-fade text-sm uppercase tracking-[0.22em] text-white/60">{eyebrow}</p>
               <h1
                 data-split="load"
-                className="font-display mt-6 text-[clamp(2.3rem,6vw,6rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
+                className="font-display mt-8 text-[clamp(2.3rem,6vw,6rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
               >
                 {title}
               </h1>
             </div>
             <div className="animate-rise [animation-delay:450ms] lg:col-span-4 lg:pb-3">
               {intro ? <div className="text-white/75 [&_p]:leading-relaxed">{intro}</div> : null}
-              {children ? <div className="mt-8">{children}</div> : null}
+              {children ? <div className="mt-10">{children}</div> : null}
             </div>
           </div>
         </div>
@@ -126,10 +134,10 @@ export function QuestionFan({
 
   if (reduced) {
     return (
-      <div className="bg-paper py-20 text-ink sm:py-20">
+      <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
         <div className="container-x">
           <Head label={label} title={title} text={text} />
-          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <ol className="mt-12 grid gap-8 lg:gap-x-16 sm:grid-cols-2 lg:grid-cols-5">
             {items.map((x) => (
               <li key={x.name}>
                 <QCard item={x} />
@@ -147,7 +155,7 @@ export function QuestionFan({
   return (
     <div ref={ref} className="bg-paper text-ink" style={{ height: "260lvh" }}>
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
-        <div className="container-x pt-24 sm:pt-28">
+        <div className="container-x pt-16 sm:pt-28">
           <Head label={label} title={title} />
         </div>
         <ol className="relative flex-1">
@@ -171,7 +179,7 @@ export function QuestionFan({
           })}
         </ol>
         {text ? (
-          <div className="container-x pb-8 text-[1.0625rem] text-ink/80 sm:text-lg" style={{ opacity: clamp((p - 0.6) / 0.3) }}>
+          <div className="container-x pb-10 text-[1.0625rem] text-ink/80 sm:text-lg" style={{ opacity: clamp((p - 0.6) / 0.3) }}>
             {text}
           </div>
         ) : null}
@@ -205,15 +213,15 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
 
   if (reduced) {
     return (
-      <div className="bg-black py-20 text-white sm:py-20">
+      <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
         <div className="container-x">
           <Head label={label} title={title} dark />
-          <ol className="mt-12 grid gap-10 border-t border-white/15 pt-10 sm:grid-cols-2 lg:grid-cols-5">
+          <ol className="mt-12 grid gap-14 border-t border-white/15 pt-10 sm:grid-cols-2 lg:grid-cols-5">
             {stages.map((s, i) => (
               <li key={s.name}>
                 <span className="text-sm tabular-nums text-white/60">{n2(i)}</span>
                 <h3 className="font-display mt-2 text-[1.6rem] font-medium tracking-[-0.03em]">{s.name}</h3>
-                <p className="mt-3 text-white">{s.line}</p>
+                <p className="mt-4 text-white">{s.line}</p>
                 <p className="mt-2 text-[1.0625rem] text-white/85 sm:text-lg">{s.body}</p>
                 <p className="mt-2 text-white/85">{s.question}</p>
               </li>
@@ -232,11 +240,11 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
 
   return (
     <div ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 55}lvh` }}>
-      <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden pb-6 pt-24 sm:pt-28">
+      <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden pb-8 pt-16 sm:pt-28">
         <div className="container-x">
           <Head label={label} title={title} dark />
         </div>
-        <div className="container-x grid flex-1 items-center gap-4 lg:grid-cols-12">
+        <div className="container-x grid flex-1 items-center gap-4 lg:gap-x-10 lg:grid-cols-12">
           <div className="relative mx-auto aspect-square w-[min(68vw,40vh)] lg:col-span-6 lg:w-[min(36vw,58vh)]">
             <div aria-hidden className="absolute inset-0 rounded-full border border-white/20" />
             <div aria-hidden className="absolute inset-[18%] rounded-full border border-dashed border-white/10" />
@@ -275,9 +283,9 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
           </div>
           <div className="min-h-[9.5rem] lg:col-span-6" aria-live="polite">
             <h3 className="font-display text-[clamp(1.6rem,3.6vw,3.4rem)] font-medium leading-[1.02] tracking-[-0.04em]">{s.name}</h3>
-            <p className="mt-3 text-[1.0625rem] text-white sm:text-lg">{s.line}</p>
-            <p className="mt-2 max-w-lg text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{s.body}</p>
-            {foot && active === n - 1 ? <p className="mt-5 border-t border-white/15 pt-4 text-base text-white/85">{foot}</p> : null}
+            <p className="mt-4 text-[1.0625rem] text-white sm:text-lg">{s.line}</p>
+            <p className="mt-2 max-w-xl text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{s.body}</p>
+            {foot && active === n - 1 ? <p className="mt-6 border-t border-white/15 pt-4 text-base text-white/85">{foot}</p> : null}
           </div>
         </div>
       </div>
@@ -300,15 +308,15 @@ export function ExpandRows({
   items: readonly { name: string; body: string; href: string }[];
 }) {
   return (
-    <div className="bg-paper py-20 text-ink sm:py-20 lg:py-24">
+    <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} text={text} />
-        <ul className="mt-14 border-t border-current/15">
+        <ul className="mt-12 border-t border-current/15">
           {items.map((x) => (
             <li key={x.href}>
               <a
                 href={x.href}
-                className="group relative block overflow-hidden border-b border-current/15 py-6 outline-none transition-[padding] duration-500 ease-out hover:py-10 focus-visible:py-10 motion-reduce:transition-none sm:py-8"
+                className="group relative block overflow-hidden border-b border-current/15 py-8 outline-none transition-[padding] duration-500 ease-out hover:py-10 focus-visible:py-10 motion-reduce:transition-none sm:py-10"
               >
                 <span
                   aria-hidden
@@ -352,7 +360,7 @@ export function ScaleStatement({ text, accent, sub }: { text: string; accent: st
   const e = reduced ? 1 : 1 - Math.pow(1 - p, 3);
 
   return (
-    <div className="overflow-hidden bg-black py-24 text-white sm:py-32 lg:py-40">
+    <div className="overflow-hidden bg-black py-20 text-white sm:py-24 lg:py-24">
       <div className="container-x">
         <div ref={ref}>
           <p
@@ -364,7 +372,7 @@ export function ScaleStatement({ text, accent, sub }: { text: string; accent: st
         </div>
         {sub ? (
           <div
-            className="mt-12 grid max-w-2xl gap-4 text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg lg:ml-auto"
+            className="mt-12 grid max-w-3xl gap-4 text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg lg:ml-auto"
             style={{ opacity: 0.75 + 0.25 * clamp((e - 0.6) / 0.4) }}
           >
             {sub}
@@ -424,10 +432,10 @@ export function VerticalTabs({
   const it = items[active];
 
   return (
-    <div className="py-20 sm:py-20 lg:py-24">
+    <div className="py-20 sm:py-24 lg:py-24">
       <div className="container-x">
         <Head label={label} title={title} />
-        <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-12">
+        <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div role="tablist" aria-orientation="vertical" aria-label={label} onKeyDown={onKey} className="border-t border-line-strong lg:col-span-5">
             {items.map((x, i) => {
               const on = i === active;
@@ -445,7 +453,7 @@ export function VerticalTabs({
                   tabIndex={on ? 0 : -1}
                   onClick={() => setActive(i)}
                   className={
-                    "relative flex min-h-14 w-full items-center gap-4 border-b border-line-strong py-4 pl-4 text-left transition-colors duration-300 " +
+                    "relative flex min-h-14 w-full items-center gap-4 border-b border-line-strong py-6 pl-4 text-left transition-colors duration-300 " +
                     (on ? "text-ink" : "text-ink/75 hover:text-ink")
                   }
                 >
@@ -465,11 +473,11 @@ export function VerticalTabs({
             role="tabpanel"
             aria-labelledby={`why-tab-${active}`}
             tabIndex={0}
-            className="relative flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[1.25rem] bg-ink p-7 text-paper sm:p-10 lg:col-span-7 lg:min-h-[26rem]"
+            className="relative flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[1.25rem] bg-ink p-9 text-paper sm:p-14 lg:col-span-7 lg:min-h-[26rem]"
           >
             <div>
               <h3 className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.03em]">{it.name}</h3>
-              <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-paper/90 sm:text-lg">{it.body}</p>
+              <p className="mt-6 max-w-2xl text-[1.0625rem] leading-relaxed text-paper/90 sm:text-lg">{it.body}</p>
             </div>
           </div>
         </div>
@@ -483,9 +491,9 @@ export function VerticalTabs({
 /** What may be necessary — a quiet register on hairlines. */
 export function NecessaryList({ items }: { items: readonly string[] }) {
   return (
-    <ol className="mt-14 grid border-t border-current/15 sm:grid-cols-2 lg:grid-cols-3">
+    <ol className="mt-12 grid border-t border-current/15 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((m) => (
-        <li key={m} className="flex items-baseline gap-5 border-b border-current/15 py-6 sm:pr-8">
+        <li key={m} className="flex items-baseline gap-5 border-b border-current/15 py-8 sm:pr-8">
           <p className="font-display text-[clamp(1.4rem,2.4vw,2rem)] font-medium leading-[1.1] tracking-[-0.03em]">
             {m} <span className="font-sans text-base font-normal tracking-normal opacity-70">may be necessary</span>
           </p>
@@ -498,9 +506,9 @@ export function NecessaryList({ items }: { items: readonly string[] }) {
 /** The six BRANDS™ levers as a still, architectural grid. */
 export function BrandsGrid({ items }: { items: readonly { letter: string; name: string; list: string[] }[] }) {
   return (
-    <ol className="mt-14 grid gap-px overflow-hidden rounded-[1.25rem] border border-line-strong bg-line-strong sm:grid-cols-2 lg:grid-cols-3">
+    <ol className="mt-12 grid gap-px overflow-hidden rounded-[1.25rem] border border-line-strong bg-line-strong sm:grid-cols-2 lg:grid-cols-3">
       {items.map((l) => (
-        <li key={l.letter} className="flex flex-col bg-paper p-6 sm:p-8">
+        <li key={l.letter} className="flex flex-col bg-paper p-8 sm:p-10">
           <div className="flex items-start justify-between gap-4">
             <span
               aria-hidden
@@ -510,7 +518,7 @@ export function BrandsGrid({ items }: { items: readonly { letter: string; name: 
             </span>
             <h3 className="font-display max-w-[12ch] text-right text-[1.3rem] font-medium leading-[1.1] tracking-[-0.02em]">{l.name}</h3>
           </div>
-          <ul className="mt-8 border-t border-line pt-4 text-[0.95rem] text-ink/80">
+          <ul className="mt-10 border-t border-line pt-4 text-[0.95rem] text-ink/80">
             {l.list.map((x) => (
               <li key={x} className="flex gap-3 py-1">
                 <span aria-hidden className="mt-[0.6em] h-px w-3 shrink-0 bg-current" />
