@@ -202,7 +202,7 @@ export function Triptych({
                   <>
                     <Image
                       src={it.image}
-                      alt=""
+                      alt={altFor(it.image)}
                       fill
                       sizes="(min-width: 768px) 50vw, 100vw"
                       className="object-cover object-[50%_30%] grayscale transition-[opacity,scale] duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"

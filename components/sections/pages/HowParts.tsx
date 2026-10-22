@@ -481,7 +481,7 @@ export function VerticalTabs({
             {/* The reason's photograph fills the panel; a veil keeps the words legible. */}
             {it.image ? (
               <>
-                <Image key={it.image} src={it.image} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-[50%_30%] grayscale" />
+                <Image key={it.image} src={it.image} alt={altFor(it.image)} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-[50%_30%] grayscale" />
                 <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
               </>
             ) : null}

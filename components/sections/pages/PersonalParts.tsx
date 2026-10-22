@@ -1,5 +1,6 @@
 "use client";
 
+import { altFor } from "@/lib/image-alts";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
 import { usePinProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
@@ -429,7 +430,7 @@ export function Ring3D({
               >
                 {x.image ? (
                   <span className="photo-tone relative block min-h-0 flex-1 overflow-hidden rounded-[0.85rem] bg-black">
-                    <Image src={x.image} alt="" fill sizes="24rem" className="object-cover grayscale" />
+                    <Image src={x.image} alt={altFor(x.image)} fill sizes="24rem" className="object-cover grayscale" />
                   </span>
                 ) : (
                   <span className="flex-1" />

@@ -1,3 +1,4 @@
+import { altFor } from "@/lib/image-alts";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -32,7 +33,7 @@ export default async function ContactPage({ searchParams }: Props) {
       <div className="grid lg:min-h-screen lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
         {/* Desktop: one photograph behind the whole left column (intro + supporting information). */}
         <div aria-hidden className="true-tone photo-tone relative hidden overflow-hidden bg-black lg:col-span-5 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:block">
-          <Image src={backdrop} alt="" fill sizes="42vw" priority className="object-cover object-[38%_50%] grayscale" />
+          <Image src={backdrop} alt={altFor(backdrop)} fill sizes="42vw" priority className="object-cover object-[38%_50%] grayscale" />
           <span className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/85" />
         </div>
 
@@ -40,7 +41,7 @@ export default async function ContactPage({ searchParams }: Props) {
         <div className="true-tone photo-tone relative overflow-hidden bg-black px-5 pb-12 pt-32 text-white sm:px-8 sm:pb-14 sm:pt-40 lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:bg-transparent lg:px-14 lg:pb-0 lg:pt-44 xl:px-20">
           {/* Phones: the photograph sits behind the intro alone (the form follows it). */}
           <span aria-hidden className="lg:hidden">
-            <Image src={backdrop} alt="" fill sizes="100vw" priority className="object-cover object-[38%_50%] grayscale" />
+            <Image src={backdrop} alt={altFor(backdrop)} fill sizes="100vw" priority className="object-cover object-[38%_50%] grayscale" />
             <span className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/85" />
           </span>
           <div className="relative">

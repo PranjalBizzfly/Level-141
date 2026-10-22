@@ -136,7 +136,7 @@ export function QuestionFocus({
             <div className="photo-tone sticky top-28 aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-black">
               {items.map((q, i) => (
                 <div key={q.image + i} className="qf-img absolute inset-0" data-on={i <= active ? "" : undefined} style={{ zIndex: i + 1 }}>
-                  <Image src={q.image} alt="" fill sizes="40vw" className="object-cover" />
+                  <Image src={q.image} alt={altFor(q.image)} fill sizes="40vw" className="object-cover" />
                 </div>
               ))}
               <span className="absolute bottom-5 left-5 z-10 rounded-full bg-black/70 px-3 py-1 text-xs tabular-nums text-white">

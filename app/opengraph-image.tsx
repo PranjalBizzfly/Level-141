@@ -24,7 +24,7 @@ export default async function OpengraphImage() {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logo} width={420} height={66} alt="" />
+        <img src={logo} width={420} height={66} alt="Level141" />
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 76, letterSpacing: -3, lineHeight: 1.02 }}>Growth Architecture</div>
           <div style={{ fontSize: 76, letterSpacing: -3, lineHeight: 1.02, color: "#FFFFFF" }}>

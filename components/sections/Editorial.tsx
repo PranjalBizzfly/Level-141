@@ -271,7 +271,7 @@ function FlipTile({ item, className }: { item: { name: ReactNode; back: ReactNod
         <span className={face + " true-tone photo-tone overflow-hidden border border-white/20 bg-black text-white"}>
           {item.image ? (
             <>
-              <Image src={item.image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" className="object-cover object-[50%_22%] opacity-80 grayscale" />
+              <Image src={item.image} alt={altFor(item.image)} fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" className="object-cover object-[50%_22%] opacity-80 grayscale" />
               <span aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-black/55" />
             </>
           ) : null}

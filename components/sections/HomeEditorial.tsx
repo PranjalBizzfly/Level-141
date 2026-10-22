@@ -251,7 +251,7 @@ export function WhySplit({
             <div className="cube" style={{ transform: `rotateX(-16deg) rotateY(24deg) rotateX(${turn.x}deg) rotateY(${turn.y}deg)` }}>
               {faces.map((x, i) => (
                 <div key={x.image + i} className="cube-face photo-tone" style={{ transform: `${CUBE_FACES[i]} translateZ(calc(var(--cube) / 2))` }}>
-                  <Image src={x.image} alt="" fill sizes="(min-width: 768px) 22rem, 70vw" className="object-cover grayscale" />
+                  <Image src={x.image} alt={altFor(x.image)} fill sizes="(min-width: 768px) 22rem, 70vw" className="object-cover grayscale" />
                   <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
                   {/* Only the face turned to the front carries its numeral, so no
                       label is ever read sideways or upside down. */}
