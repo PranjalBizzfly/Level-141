@@ -281,7 +281,18 @@ export function PeelStack({
 
 /* -------------------------------------------------------------- Checklist */
 
-export function Checklist({ label, title, items }: { label?: string; title?: ReactNode; items: readonly string[] }) {
+export function Checklist({
+  lead,
+  label,
+  title,
+  items,
+}: {
+  /** An opening statement set full width above the heading and the list. */
+  lead?: ReactNode;
+  label?: string;
+  title?: ReactNode;
+  items: readonly string[];
+}) {
   const reduced = useReducedMotion();
   const list = useRef<HTMLOListElement>(null);
   const [seen, setSeen] = useState<number>(reduced ? items.length : 0);
@@ -305,8 +316,14 @@ export function Checklist({ label, title, items }: { label?: string; title?: Rea
   }, [reduced]);
   const done = reduced ? items.length : seen;
   return (
-    <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
-      <div className="container-x grid gap-16 lg:grid-cols-12">
+    <div className="bg-paper py-20 text-ink sm:py-24">
+      {lead ? (
+        <div className="container-x">
+          <p className="font-display max-w-5xl text-[clamp(1.9rem,3.6vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.035em]">{lead}</p>
+          <div aria-hidden className="mt-12 h-px bg-current/15 sm:mt-16" />
+        </div>
+      ) : null}
+      <div className={"container-x grid gap-16 lg:grid-cols-12" + (lead ? " mt-12 sm:mt-16" : "")}>
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <Head label={label} title={title} />
@@ -395,10 +412,10 @@ export function Ring3D({
         </div>
         {/* The ring: --w is a card's width, the radius fits n cards edge to edge. */}
         <div
-          className="relative flex flex-1 items-center justify-center [--w:min(64vw,17rem)] [perspective:1600px]"
+          className="relative flex flex-1 items-center justify-center [--w:min(78vw,24rem)] [perspective:1600px]"
           style={{ "--r": `calc(var(--w) / 2 / ${Math.tan(Math.PI / n).toFixed(4)} + 1.5rem)` } as CSSProperties}
         >
-          <ol className="relative h-[min(46lvh,20rem)] w-[var(--w)] [transform-style:preserve-3d]" style={{ transform: `translateZ(calc(var(--r) * -1)) rotateY(${-turn}deg)` }}>
+          <ol className="relative h-[min(60lvh,29rem)] w-[var(--w)] [transform-style:preserve-3d]" style={{ transform: `translateZ(calc(var(--r) * -1)) rotateY(${-turn}deg)` }}>
             {items.map((x, i) => (
               <li
                 key={x.name}
@@ -412,13 +429,13 @@ export function Ring3D({
               >
                 {x.image ? (
                   <span className="photo-tone relative block min-h-0 flex-1 overflow-hidden rounded-[0.85rem] bg-black">
-                    <Image src={x.image} alt="" fill sizes="17rem" className="object-cover grayscale" />
+                    <Image src={x.image} alt="" fill sizes="24rem" className="object-cover grayscale" />
                   </span>
                 ) : (
                   <span className="flex-1" />
                 )}
                 <span>
-                  <span className="block font-display text-[1.35rem] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[1.5rem]">{x.name}</span>
+                  <span className="block font-display text-[1.5rem] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[1.8rem]">{x.name}</span>
                   <span className="mt-4 block text-[0.95rem] opacity-80">{x.body}</span>
                 </span>
               </li>

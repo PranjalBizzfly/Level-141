@@ -57,14 +57,15 @@ export function RefIntro({
   return (
     <Reveal className="@container w-full">
       <div className="@4xl:grid @4xl:grid-cols-12 @4xl:items-end @4xl:gap-x-16">
-        <div className="max-w-4xl @4xl:col-span-6">
+        {/* With no supporting text beside it, the title runs wider (only a button, or nothing, shares the row). */}
+        <div className={text ? "max-w-4xl @4xl:col-span-6" : action ? "max-w-5xl @4xl:col-span-9" : "max-w-6xl @4xl:col-span-11"}>
           <p className="text-[0.95rem] font-medium text-muted">{label}</p>
           <h2 id={id} className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">
             {title}
           </h2>
         </div>
         {text || action ? (
-          <div className={"@4xl:col-span-6 @4xl:col-start-7" + (text ? "" : " @4xl:flex @4xl:justify-end")}>
+          <div className={text ? "@4xl:col-span-6 @4xl:col-start-7" : "@4xl:col-span-3 @4xl:col-start-10 @4xl:flex @4xl:justify-end"}>
             {text ? <div className="mt-8 max-w-2xl text-muted sm:text-lg @4xl:mt-0">{text}</div> : null}
             {action ? (
               <Link

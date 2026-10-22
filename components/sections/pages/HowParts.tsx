@@ -393,7 +393,7 @@ export function VerticalTabs({
 }: {
   label?: string;
   title?: ReactNode;
-  items: readonly { name: string; body: string }[];
+  items: readonly { name: string; body: string; image?: string }[];
 }) {
   const reduced = useReducedMotion();
   const [active, setActive] = useState(0);
@@ -473,11 +473,21 @@ export function VerticalTabs({
             role="tabpanel"
             aria-labelledby={`why-tab-${active}`}
             tabIndex={0}
-            className="relative flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[1.25rem] bg-ink p-9 text-paper sm:p-14 lg:col-span-7 lg:min-h-[26rem]"
+            className={
+              "relative flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[1.25rem] p-9 sm:p-14 lg:col-span-7 lg:min-h-[26rem] " +
+              (it.image ? "photo-tone bg-black text-white" : "bg-ink text-paper")
+            }
           >
-            <div>
+            {/* The reason's photograph fills the panel; a veil keeps the words legible. */}
+            {it.image ? (
+              <>
+                <Image key={it.image} src={it.image} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-[50%_30%] grayscale" />
+                <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
+              </>
+            ) : null}
+            <div className="relative">
               <h3 className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.03em]">{it.name}</h3>
-              <p className="mt-6 max-w-2xl text-[1.0625rem] leading-relaxed text-paper/90 sm:text-lg">{it.body}</p>
+              <p className={"mt-6 max-w-2xl text-[1.0625rem] leading-relaxed sm:text-lg " + (it.image ? "text-white/85" : "text-paper/90")}>{it.body}</p>
             </div>
           </div>
         </div>

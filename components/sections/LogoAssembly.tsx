@@ -12,14 +12,14 @@ const from = ["62%", "28%", "78%", "40%", "56%"];
 const bottom = [null, null, 5, 6, 7] as const;
 
 /** One photograph sliced across the five windows, so no photo repeats on the About page. */
-const photo = "/images/home-strategist-compass.webp";
+const photo = "/images/client-walk-toward-skyline.webp";
 
 /**
  * Level staircase: each official letterform sits in its own tall white panel
  * — LEVEL across the top, 141 along the foot of the last three. As the section
  * scrolls in, the panels travel at different speeds and settle as a rising
- * staircase, one level higher per column. Images then rise from the floor of
- * each panel, column by column, and fall away again with new pictures. Glyphs
+ * staircase, one level higher per column. The photograph then rises from the
+ * floor of each panel, column by column, and holds. Glyphs
  * are the unmodified logo paths at one shared cap height.
  */
 export function LogoAssembly() {
@@ -34,21 +34,18 @@ export function LogoAssembly() {
         setVisible(e.isIntersecting);
         if (!e.isIntersecting) setOpen(false);
       },
-      { threshold: 0.45 },
+      { threshold: 0.2 },
     );
     if (ref.current) io.observe(ref.current);
     return () => io.disconnect();
   }, []);
 
+  // The photographs rise into the windows once the panels have settled and
+  // then stay; they only reset when the section leaves the screen, so the
+  // rise plays again on the next visit instead of blinking on and off.
   useEffect(() => {
-    if (!visible) return;
-    const t = window.setTimeout(
-      () => {
-        if (open) setOpen(false);
-        else setOpen(true);
-      },
-      open ? 2600 : 1300,
-    );
+    if (!visible || open) return;
+    const t = window.setTimeout(() => setOpen(true), 250);
     return () => window.clearTimeout(t);
   }, [visible, open]);
 
@@ -79,6 +76,7 @@ export function LogoAssembly() {
                   alt={altFor(photo)}
                   fill
                   sizes="20vw"
+                  priority
                   className="object-cover grayscale"
                   style={{ objectPosition: `${i * 25}% 50%` }}
                 />

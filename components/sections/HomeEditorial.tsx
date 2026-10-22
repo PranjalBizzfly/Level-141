@@ -9,7 +9,7 @@ import { altFor } from "@/lib/image-alts";
 
 /**
  * Editorial, full-screen home sections (black and white, image-led):
- * - Relay: the growth chain as an isometric tower of floors on a Leadership foundation.
+ * - Relay: the growth chain as tall photo cards gliding sideways, rising into line.
  * - WhySplit: a 3D cube, one face per reason, beside the full index of reasons.
  * - InsightGallery: tall photo cards gliding sideways as you scroll down.
  * All text stays in the DOM; reduced motion shows everything without pinning.
@@ -17,10 +17,6 @@ import { altFor } from "@/lib/image-alts";
 
 const n2 = (i: number) => String(i + 1).padStart(2, "0");
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
-
-/** Relay drum geometry: each face is 1.75em tall, 32° apart on the cylinder. */
-const DRUM_STEP = 32;
-const DRUM_R = 0.875 / Math.tan(((DRUM_STEP / 2) * Math.PI) / 180);
 
 
 const MQ = "(min-width: 768px)";
@@ -35,6 +31,23 @@ function useWide() {
 
 /* ------------------------------------------------------------------ Relay */
 
+/** One photograph per link of the chain, in order (black and white). */
+const RELAY_IMAGES = [
+  "/images/client-ceo-portrait.webp",
+  "/images/client-keynote-auditorium.webp",
+  "/images/client-walk-through-crowd.webp",
+  "/images/client-mentorship-conversation.webp",
+  "/images/home-team-table.webp",
+  "/images/client-executive-dubai-window.webp",
+  "/images/client-visionaries-horizon.webp",
+];
+
+/**
+ * The growth chain as a gallery of tall photo cards gliding sideways as the
+ * page scrolls (the reference's case-study row): each card arrives from the
+ * right set lower and rises into line as it moves across, so the row reads
+ * as a stepped climb. Phones and reduced motion get a swipeable row instead.
+ */
 export function Relay({
   label,
   title,
@@ -49,123 +62,104 @@ export function Relay({
   foot?: ReactNode;
 }) {
   const reduced = useReducedMotion();
-  const [ref, p] = usePinProgress(!reduced);
-  const steps = [...chain.map((c) => ({ lead: c.from, verb: "affects", rest: c.to })), { lead: last.lead, verb: "", rest: last.rest }];
-  const n = steps.length;
-  const active = Math.min(n - 1, Math.floor(p * n * 0.999));
-  const labels = steps.map((x) => x.lead);
-  // Continuous position on the drum: each step holds still for most of its
-  // stretch of scroll, then the drum rolls to the next in the last third.
-  const seg = p * n;
-  const base = Math.min(n - 1, Math.floor(seg));
-  const fp = Math.min(n - 1, base + clamp((seg - base - 0.62) / 0.38));
+  const wide = useWide();
+  const pin = wide && !reduced;
+  const [ref, p] = usePinProgress(pin);
+  const row = useRef<HTMLOListElement>(null);
+  const [geo, setGeo] = useState({ dist: 0, step: 0, view: 1 });
+  useScrollFrame(() => {
+    const el = row.current;
+    const first = el?.firstElementChild as HTMLElement | null;
+    if (!el || !first) return;
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+    setGeo({ dist: Math.max(0, el.scrollWidth - el.clientWidth), step: first.offsetWidth + gap, view: el.clientWidth || 1 });
+  }, pin);
 
-  if (reduced) {
+  const steps = [
+    ...chain.map((c) => ({ lead: c.from, verb: "affects", rest: c.to })),
+    { lead: last.lead, verb: "", rest: last.rest },
+  ];
+  const n = steps.length;
+  const shift = p * geo.dist;
+
+  const cards = (
+    <ol
+      ref={row}
+      className={"flex items-end gap-4 sm:gap-5 " + (pin ? "" : "snap-x snap-mandatory overflow-x-auto pb-4 [scrollbar-width:none]")}
+      style={pin ? { transform: `translateX(${-shift}px)` } : undefined}
+    >
+      {steps.map((x, i) => {
+        // How far right of the row's left edge this card sits, 0 → 1 across the view.
+        const along = clamp((i * geo.step - shift) / geo.view);
+        // As in the reference row, every card stands on one baseline; a card
+        // still arriving from the right is revealed shorter (cut from the top)
+        // and grows to full height as it moves into place.
+        const cut = pin ? Math.pow(along, 1.4) * 24 : 0;
+        return (
+          <li key={x.lead} className="w-[82vw] shrink-0 snap-start md:w-[min(28vw,25rem)]">
+            <div
+              className="photo-tone relative flex h-[min(64lvh,36rem)] flex-col justify-end overflow-hidden rounded-[1rem] bg-black p-6 text-white sm:p-7"
+              style={pin ? { clipPath: `inset(${cut}% 0 0 0 round 1rem)` } : undefined}
+            >
+              <Image
+                src={RELAY_IMAGES[i % RELAY_IMAGES.length]}
+                alt={altFor(RELAY_IMAGES[i % RELAY_IMAGES.length])}
+                fill
+                sizes="(min-width: 768px) 30vw, 84vw"
+                className="object-cover opacity-85 grayscale"
+              />
+              <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+              <span aria-hidden className="relative mb-3 text-sm tabular-nums text-white/70">
+                {n2(i)} <span className="text-white/40">/ {String(n).padStart(2, "0")}</span>
+              </span>
+              <span className="relative">
+                <span className="block font-display text-[clamp(1.75rem,2.3vw,2.4rem)] font-medium leading-[1] tracking-[-0.04em]">{x.lead}</span>
+                <span className="mt-3 flex flex-wrap items-baseline gap-x-2 text-base">
+                  {x.verb ? <span className="text-[0.7rem] uppercase tracking-[0.3em] text-white/60">{x.verb}</span> : null}
+                  <span className="text-white/85">{x.rest}</span>
+                </span>
+              </span>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  );
+
+  const headBlock = (
+    <div className="max-w-xl">
+      <p className="text-sm text-white/55">{label}</p>
+      <h2 className="font-display mt-3 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
+    </div>
+  );
+
+  if (!pin) {
     return (
-      <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
-        <div className="container-x">
-          <p className="text-sm text-white/55">{label}</p>
-          <h2 className="font-display mt-4 max-w-2xl text-[1.6rem] font-medium leading-[1.15] tracking-[-0.02em] sm:text-[1.9rem]">{title}</h2>
-          <ol className="mt-12 space-y-4">
-            {steps.map((x) => (
-              <li key={x.lead} className="font-display text-[clamp(1.6rem,4vw,3rem)] font-medium tracking-[-0.035em]">
-                {x.lead} <span className="text-white/60">{x.verb} {x.rest}</span>
-              </li>
-            ))}
-          </ol>
-          {foot ? <div className="mt-12 max-w-lg text-white/60">{foot}</div> : null}
-        </div>
+      <div className="bg-black py-20 text-white sm:py-24">
+        <div className="container-x">{headBlock}</div>
+        <div className="mt-12 pl-[max(1.25rem,calc((100vw-80rem)/2))]">{cards}</div>
+        {foot ? <div className="container-x mt-10 max-w-lg text-base text-white/75 sm:text-lg">{foot}</div> : null}
       </div>
     );
   }
 
   return (
-    <div ref={ref} style={{ height: `${100 + n * 55}lvh` }} className="bg-black text-white">
-      <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
-        <div className="container-x flex flex-1 flex-col pb-10 pt-16 sm:pb-12 sm:pt-28">
-          {/* Heading, small and quiet, so the word is the event. */}
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
-            <div className="max-w-lg">
-              <p className="text-sm text-white/55">{label}</p>
-              <h2 className="font-display mt-4 text-[clamp(1.5rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
-            </div>
-            <p aria-hidden className="font-display text-sm tabular-nums text-white/55">
-              {n2(active)} <span className="text-white/30">/ {String(n).padStart(2, "0")}</span>
-            </p>
-          </div>
-
-          {/* The relay on a 3D drum: every link sits on the face of a cylinder;
-              scrolling turns it, so the word being read tilts up and away while
-              the next one rolls up from below into place. */}
-          <div className="relative flex flex-1 items-center overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_16%,black_84%,transparent)] [perspective:1500px] [perspective-origin:30%_50%]">
-            <div
-              className="relative h-[1.75em] w-full text-[clamp(3.25rem,12vw,10.5rem)] [transform-style:preserve-3d]"
-              style={{ transform: `translateZ(-${DRUM_R}em) rotateX(${fp * DRUM_STEP}deg)` }}
-            >
-              {steps.map((x, i) => {
-                const d = Math.abs(i - fp);
-                return (
-                  <div
-                    key={x.lead}
-                    aria-hidden={i !== active}
-                    className="absolute inset-0 flex flex-col justify-center [backface-visibility:hidden]"
-                    style={{
-                      transform: `rotateX(${-i * DRUM_STEP}deg) translateZ(${DRUM_R}em)`,
-                      // Only the word being read is solid; its neighbours exist only mid-roll.
-                      opacity: clamp(1 - d * 1.15),
-                      visibility: d >= 0.9 ? "hidden" : "visible",
-                    }}
-                  >
-                    <p className="font-display font-medium leading-[0.86] tracking-[-0.06em]">{x.lead}</p>
-                    <p className="mt-[0.12em] flex flex-wrap items-baseline gap-x-[0.18em] font-display text-[max(0.34em,1.4rem)] font-medium leading-[1] tracking-[-0.04em]">
-                      {x.verb ? (
-                        <span className="font-sans text-[max(0.4em,0.7rem)] font-normal uppercase tracking-[0.3em] text-white/55">{x.verb}</span>
-                      ) : null}
-                      <span className="relay-outline">{x.rest}</span>
-                    </p>
-                  </div>
-                );
-              })}
+    <div ref={ref} className="bg-black text-white" style={{ height: `calc(100lvh + ${geo.dist}px)` }}>
+      <div className="sticky top-0 flex h-[100lvh] flex-col justify-center gap-12 overflow-hidden">
+        {/* Heading on the left; the closing line and the progress rule on the right. */}
+        <div className="container-x grid items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-7">{headBlock}</div>
+          <div className="lg:col-span-4 lg:col-start-9">
+            {foot ? <div className="text-[0.95rem] leading-relaxed text-white/65">{foot}</div> : null}
+            {/* How far along the chain is. */}
+            <div aria-hidden className="mt-6 h-px bg-white/15">
+              <div className="h-px origin-left bg-white" style={{ transform: `scaleX(${clamp(p)})` }} />
             </div>
           </div>
-
-          {/* The chain: every link, joined by a line that fills as it is read. */}
-          <div className="relative">
-            <div aria-hidden className="absolute left-0 right-0 top-[0.4rem] h-px bg-white/15" />
-            <div
-              aria-hidden
-              className="absolute left-0 top-[0.4rem] h-px origin-left bg-white transition-transform duration-500 ease-out"
-              style={{ width: "100%", transform: `scaleX(${n > 1 ? active / (n - 1) : 1})` }}
-            />
-            <ol className="relative flex justify-between">
-              {labels.map((t, i) => (
-                <li key={t} className="flex flex-col items-center gap-3 first:items-start last:items-end">
-                  <span
-                    className={
-                      "size-[0.8rem] rounded-full border transition-colors duration-500 " +
-                      (i <= active ? "border-white bg-white" : "border-white/35 bg-black")
-                    }
-                  />
-                  <span
-                    className={
-                      "text-sm uppercase tracking-[0.18em] transition-colors duration-500 sm:text-sm " +
-                      (i === active ? "text-white" : "hidden text-white/40 md:inline")
-                    }
-                  >
-                    {t}
-                  </span>
-                </li>
-              ))}
-            </ol>
-          </div>
-          {foot ? (
-            <div
-              className="mt-10 max-w-xl text-base text-white/75 transition-opacity duration-700 sm:text-lg"
-              style={{ opacity: active === n - 1 ? 1 : 0.35 }}
-            >
-              {foot}
-            </div>
-          ) : null}
+        </div>
+        {/* Cards fade at the screen edges rather than being cut hard. */}
+        <div className="[mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+          <div className="container-x">{cards}</div>
         </div>
       </div>
     </div>

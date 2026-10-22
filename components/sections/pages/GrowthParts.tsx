@@ -31,7 +31,8 @@ function Head({ label, title, text, dark }: { label?: string; title?: ReactNode;
   return (
     <div className="@container w-full">
       <div className="@4xl:grid @4xl:grid-cols-12 @4xl:items-end @4xl:gap-x-16">
-        <div className="max-w-4xl @4xl:col-span-6">
+        {/* With no supporting text beside it, the title takes the full width instead of leaving the right half empty. */}
+        <div className={text ? "max-w-4xl @4xl:col-span-6" : "max-w-6xl @4xl:col-span-11"}>
           {label ? <p className={"text-[0.95rem] font-medium " + (dark ? "text-white/70" : "text-muted")}>{label}</p> : null}
           {title ? (
             <h2 className="font-display mt-6 text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
@@ -511,11 +512,14 @@ export function PeakStatic({ stages }: { stages: readonly { letter: string; name
   return (
     <ol className="grid border-t border-current/20 sm:grid-cols-2 lg:grid-cols-4">
       {stages.map((s, i) => (
-        <li key={s.letter} className="border-b border-current/20 py-10 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0">
+        <li
+          key={s.letter}
+          className="border-b border-current/20 py-12 sm:px-8 sm:py-14 sm:max-lg:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-10 lg:py-16 lg:first:border-l-0 lg:first:pl-0"
+        >
           <span className="text-sm tabular-nums opacity-60">{n2(i)}</span>
-          <p aria-hidden className="font-display mt-6 text-[clamp(5rem,11vw,9.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
-          <h3 className="font-display mt-8 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
-          <p className="mt-4 text-base opacity-80 sm:text-lg">{s.question}</p>
+          <p aria-hidden className="font-display mt-8 text-[clamp(5rem,11vw,9.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
+          <h3 className="font-display mt-10 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
+          <p className="mt-4 max-w-[19rem] text-base leading-relaxed opacity-80 sm:text-lg">{s.question}</p>
         </li>
       ))}
     </ol>

@@ -140,18 +140,21 @@ export function Layer({ pattern, children }: { pattern?: LayerPattern; children:
 function assignPatterns(children: ReactNode, page?: LayerPage) {
   const kids = Children.toArray(children).filter(isValidElement);
   const block: readonly LayerPattern[] = page ? pageBlock(page) : [];
-  if (process.env.NODE_ENV !== "production" && page && kids.length > block.length) {
-    console.error(`Layers: page "${page}" has ${kids.length} sections but a block of ${block.length} patterns.`);
+  // A Layer element passed from a server page arrives as a client reference, so its
+  // type cannot be compared; a Layer is recognised by the pattern it names. Named
+  // layers (sections brought over from home with their own pattern) keep it and
+  // don't take a slot, so the page's own sections keep their patterns in order.
+  const isNamed = (c: (typeof kids)[number]) => typeof (c.props as { pattern?: unknown }).pattern === "string";
+  const unnamed = kids.filter((c) => !isNamed(c)).length;
+  if (process.env.NODE_ENV !== "production" && page && unnamed > block.length) {
+    console.error(`Layers: page "${page}" has ${unnamed} sections but a block of ${block.length} patterns.`);
   }
+  let slot = 0;
   return kids.map((c, i) => {
-    // A Layer element passed from a server page arrives as a client reference, so its
-    // type cannot be compared; a Layer is recognised by the pattern it names.
-    const named = (c.props as { pattern?: unknown }).pattern;
-    if (typeof named === "string") return c;
-    const inner = c;
+    if (isNamed(c)) return c;
     return (
-      <Layer key={c.key ?? i} pattern={block[i]}>
-        {inner}
+      <Layer key={c.key ?? i} pattern={block[slot++]}>
+        {c}
       </Layer>
     );
   });

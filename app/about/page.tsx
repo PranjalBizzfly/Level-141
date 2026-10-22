@@ -8,9 +8,23 @@ import {
   SplitStatement,
   Triptych,
 } from "@/components/sections/pages/AboutParts";
-import { Layers } from "@/components/sections/HomeInteractive";
+import { BeliefDeck, Layer, Layers } from "@/components/sections/HomeInteractive";
+import { WhySplit } from "@/components/sections/HomeEditorial";
+import { StackCards } from "@/components/sections/Layouts";
+import { RefIntro, RefSection, RefStatement } from "@/components/sections/Ref";
+import { ScrubText } from "@/components/motion/ScrubText";
 import { ButtonLink } from "@/components/ui/primitives";
-import { principles } from "@/lib/content";
+import { beliefPairs, levelProcess, principles, whatWeDo, whyLevel141 } from "@/lib/content";
+
+/** Decorative photographs (black and white) for the reasons, in order. */
+const whyImages = [
+  "/images/home-fragmented-to-integrated-muted.webp",
+  "/images/client-lone-executive-skyline.webp",
+  "/images/how-strategy-table-muted.webp",
+  "/images/client-mentorship-conversation.webp",
+  "/images/client-visionaries-horizon.webp",
+  "/images/client-executive-library.webp",
+];
 import { altFor } from "@/lib/image-alts";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
@@ -73,8 +87,12 @@ export default function AboutPage() {
                   We work with ambitious people and organizations to understand where they are, define where they want to go
                   and architect the interconnected systems required to get there.
                 </p>
-                <p className="text-white">We call it: Growth Architecture</p>
               </>
+            }
+            aside={
+              <p>
+                We call it: <span className="serif-accent">Growth Architecture</span>
+              </p>
             }
           />
         </section>
@@ -89,9 +107,9 @@ export default function AboutPage() {
               </>
             }
             items={[
-              { lead: "For people" },
-              { lead: "For businesses" },
-              { lead: "For ideas", rest: "with the potential to become significantly bigger than they are today" },
+              { lead: "For people", image: "/images/client-executive-portrait-woman.webp" },
+              { lead: "For businesses", image: "/images/home-team-table.webp" },
+              { lead: "For ideas", rest: "with the potential to become significantly bigger than they are today", image: "/images/client-executive-study-woman.webp" },
             ]}
           />
         </section>
@@ -108,6 +126,21 @@ export default function AboutPage() {
             items={principles.map((p) => ({ name: p.name, body: p.body }))}
           />
         </section>
+
+        {/* The Level141 belief — the statements turn over into place (moved from home, keeps its pattern) */}
+        <Layer pattern="turn">
+          <section className="on-dark bg-ink text-paper">
+            <BeliefDeck
+              head={
+                <h2 className="display max-w-[22ch] text-[clamp(1.75rem,3.6vw,3.5rem)]">
+                  <ScrubText text="Growth isn't a collection of activities" accent="It's a system" />
+                </h2>
+              }
+              items={beliefPairs}
+              foot={<p className="text-paper-muted">Growth happens when the pieces work together. That&apos;s what we architect.</p>}
+            />
+          </section>
+        </Layer>
 
         {/* Two ambitions — a gliding gallery of the two architectures */}
         <section>
@@ -135,6 +168,55 @@ export default function AboutPage() {
             ]}
           />
         </section>
+
+        {/* What we actually sell (moved from home, keeps its pattern) */}
+        <Layer pattern="doors">
+          <RefSection tone="ink">
+            <div className="flex min-h-[70svh] items-center justify-center">
+              <RefStatement
+                reveal="mask"
+                sub={
+                  <>
+                    <p>Level141 sits between strategy and execution. {whatWeDo.join(" ")}</p>
+                    <p className="mt-6 text-paper">Making sure everything is moving toward the same growth outcome.</p>
+                  </>
+                }
+              >
+                Not marketing. Not consulting. Not another strategy deck.{" "}
+                <span className="serif-accent">Growth Architecture</span>
+              </RefStatement>
+            </div>
+          </RefSection>
+        </Layer>
+
+        {/* How Level141 works — process as stacked cards (moved from home, keeps its pattern) */}
+        <Layer pattern="split">
+          <RefSection>
+            <RefIntro
+              label="How Level141 works"
+              title={
+                <>
+                  We don&apos;t start with deliverables. <span className="serif-accent">We start with the level you&apos;re trying to reach</span>
+                </>
+              }
+              action={{ label: "How we architect growth", href: routes.how }}
+            />
+            <StackCards
+              items={levelProcess.map((s) => ({ n: s.n, name: s.name, line: s.line, body: s.body, aside: s.question }))}
+            />
+          </RefSection>
+        </Layer>
+
+        {/* Why Level141? — the reasons on a 3D cube (moved from home, keeps its pattern) */}
+        <Layer pattern="slide">
+          <section className="bg-paper text-ink">
+            <WhySplit
+              label="Why Level141?"
+              title="Growth Architecture, not fragmented consulting"
+              items={whyLevel141.map((w, i) => ({ name: w.title, body: w.body, image: whyImages[i % whyImages.length] }))}
+            />
+          </section>
+        </Layer>
 
         {/* Ecosystem — full-bleed Dubai photograph */}
         <section>

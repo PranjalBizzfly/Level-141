@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Info } from "lucide-react";
+import { ArrowRight, Check, Info } from "lucide-react";
 import { useState } from "react";
 import { routes } from "@/lib/site";
 import { DEFAULT_COUNTRY } from "@/lib/forms/countries";
@@ -47,6 +47,9 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
   const live = validateContact(normaliseContact(values));
   const { errors: allErrors, blur, markSubmitted } = useVisibleErrors<ContactInput>(live, serverErrors);
   const gaSelected = values.interest === "growth-architecture";
+  // A required answer counts once it is filled in and passes validation.
+  const required = ["interest", "name", "email", "level"] as const;
+  const done = required.filter((k) => values[k].trim() !== "" && !(k in live)).length;
 
   const update = (key: keyof ContactInput, value: string) => {
     markStarted();
@@ -85,9 +88,23 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
 
   return (
     <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-10 sm:space-y-12" aria-describedby="form-required-note">
-      <p id="form-required-note" className="text-sm text-muted">
-        Fields marked <span className="text-gold-ink">*</span> are required.
-      </p>
+      {/* Live progress through the required answers. */}
+      <div>
+        <div className="flex items-baseline justify-between gap-4">
+          <p id="form-required-note" className="text-sm text-muted">
+            Fields marked <span className="text-gold-ink">*</span> are required.
+          </p>
+          <p className="text-sm tabular-nums text-muted" aria-live="polite">
+            <span className="text-ink">{done}</span> of {required.length} complete
+          </p>
+        </div>
+        <div aria-hidden className="mt-3 h-[3px] overflow-hidden rounded-full bg-line">
+          <div
+            className="h-full origin-left rounded-full bg-ink transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{ transform: `scaleX(${done / required.length})` }}
+          />
+        </div>
+      </div>
 
       <fieldset aria-describedby={allErrors.interest ? "interest-error" : undefined}>
         <legend className="text-[0.95rem] font-medium text-ink">
@@ -101,8 +118,8 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                 key={o.value}
                 htmlFor={`interest-${o.value}`}
                 className={cx(
-                  "relative flex min-h-[3.75rem] cursor-pointer items-center gap-3 rounded-xl border bg-surface px-5 py-3.5 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ink/15",
-                  checked ? "border-ink bg-ink/5" : "border-line-strong hover:border-ink/40",
+                  "group relative flex min-h-[3.75rem] cursor-pointer items-center gap-3 rounded-xl border px-5 py-3.5 transition-[background-color,border-color,color,transform] duration-300 has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ink/15 motion-safe:active:scale-[0.99]",
+                  checked ? "border-ink bg-ink text-paper" : "border-line-strong bg-surface hover:-translate-y-0.5 hover:border-ink/50",
                 )}
               >
                 <input
@@ -112,11 +129,21 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                   value={o.value}
                   checked={checked}
                   onChange={set("interest")}
-                  className="size-[1.125rem] accent-ink"
+                  className="sr-only"
                 />
-                <span className="text-[0.95rem]">{o.label}</span>
+                {/* The choice mark: an empty ring that fills with a tick when chosen. */}
+                <span
+                  aria-hidden
+                  className={cx(
+                    "grid size-5 shrink-0 place-items-center rounded-full border transition-colors duration-300",
+                    checked ? "border-paper bg-paper text-ink" : "border-current/40 group-hover:border-current",
+                  )}
+                >
+                  <Check className={cx("size-3 transition-[opacity,transform] duration-300", checked ? "scale-100 opacity-100" : "scale-50 opacity-0")} strokeWidth={3} />
+                </span>
+                <span className="text-[0.95rem] font-medium">{o.label}</span>
                 {o.value === "growth-architecture" ? (
-                  <span className="ml-auto rounded-full bg-paper-2 px-2.5 py-1 text-sm text-muted">
+                  <span className={cx("ml-auto rounded-full px-2.5 py-1 text-sm", checked ? "bg-paper/15 text-paper/85" : "bg-paper-2 text-muted")}>
                     Waitlist
                   </span>
                 ) : null}

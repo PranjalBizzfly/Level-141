@@ -100,7 +100,18 @@ export function CounterHero({
 
 /* --------------------------------------------------------- SplitStatement */
 
-export function SplitStatement({ left, right, sub }: { left: string; right: string; sub?: ReactNode }) {
+export function SplitStatement({
+  left,
+  right,
+  sub,
+  aside,
+}: {
+  left: string;
+  right: string;
+  sub?: ReactNode;
+  /** The section's conclusion, set large in the left column beside the supporting text. */
+  aside?: ReactNode;
+}) {
   const reduced = useReducedMotion();
   const [ref, prog] = usePinProgress(!reduced);
   const p = reduced ? 1 : clamp(prog / 0.6);
@@ -124,12 +135,19 @@ export function SplitStatement({ left, right, sub }: { left: string; right: stri
         style={{ transform: `scaleX(${p})` }}
         aria-hidden
       />
-      {sub ? (
+      {sub || aside ? (
         <div
-          className="mt-12 ml-auto max-w-2xl space-y-6 text-base text-white/85 sm:text-lg"
+          className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-16"
           style={{ opacity: reduced ? 1 : 0.55 + 0.45 * clamp((prog - 0.45) / 0.25) }}
         >
-          {sub}
+          {aside ? (
+            <div className="font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em] lg:col-span-5">
+              {aside}
+            </div>
+          ) : null}
+          {sub ? (
+            <div className="max-w-2xl space-y-6 text-base text-white/85 sm:text-lg lg:col-span-6 lg:col-start-7">{sub}</div>
+          ) : null}
         </div>
       ) : null}
     </div>
@@ -151,14 +169,14 @@ export function Triptych({
 }: {
   label: string;
   title: ReactNode;
-  items: { lead: string; rest?: string }[];
+  items: { lead: string; rest?: string; image?: string }[];
 }) {
   const [open, setOpen] = useState(items.length - 1);
   return (
     <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Head label={label} title={title} />
-        <div className="mt-12 flex flex-col gap-2 md:h-[30rem] md:flex-row">
+        <div className="mt-12 flex flex-col gap-2 md:h-[26rem] md:flex-row">
           {items.map((it, i) => {
             const on = open === i;
             return (
@@ -171,11 +189,29 @@ export function Triptych({
                 onClick={() => setOpen(i)}
                 className={
                   "group relative flex min-w-0 flex-col justify-end overflow-hidden rounded-[1.25rem] border p-8 text-left outline-none transition-[flex-grow,background-color,color] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 motion-reduce:transition-none sm:p-10 " +
-                  (on ? "border-ink bg-ink text-paper md:grow-[3]" : "border-current/15 bg-paper md:grow")
+                  (it.image
+                    ? "photo-tone min-h-[16rem] border-white/15 bg-black text-white md:min-h-0 " + (on ? "md:grow-[3]" : "md:grow")
+                    : on
+                      ? "border-ink bg-ink text-paper md:grow-[3]"
+                      : "border-current/15 bg-paper md:grow")
                 }
                 style={{ flexBasis: 0 }}
               >
-                <span className="block">
+                {/* The panel's photograph: brighter on the open panel, quieter on the others. */}
+                {it.image ? (
+                  <>
+                    <Image
+                      src={it.image}
+                      alt=""
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover object-[50%_30%] grayscale transition-[opacity,scale] duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
+                      style={{ opacity: on ? 0.85 : 0.5 }}
+                    />
+                    <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
+                  </>
+                ) : null}
+                <span className="relative block">
                   <span className="font-display block text-[clamp(1.8rem,3.4vw,3rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                     {it.lead}
                   </span>
@@ -183,7 +219,7 @@ export function Triptych({
                     <span
                       className={
                         "block max-w-lg overflow-hidden text-lg transition-[max-height,opacity] duration-700 motion-reduce:transition-none " +
-                        (on ? "mt-6 max-h-40 opacity-100 text-paper/85" : "max-h-0 opacity-0")
+                        (on ? "mt-6 max-h-40 opacity-100 " + (it.image ? "text-white/85" : "text-paper/85") : "max-h-0 opacity-0")
                       }
                     >
                       {it.rest}

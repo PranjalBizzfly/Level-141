@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
@@ -13,6 +14,9 @@ export const metadata = pageMetadata({
   path: routes.contact,
 });
 
+/** Background of the left column: a leader looking out over the Dubai skyline — what's next (client photograph). */
+const backdrop = "/images/client-executive-dubai-window.webp";
+
 type Props = { searchParams: Promise<{ interest?: string | string[] }> };
 
 export default async function ContactPage({ searchParams }: Props) {
@@ -26,8 +30,20 @@ export default async function ContactPage({ searchParams }: Props) {
         Desktop: one strong dark left panel (intro, process, notes); a spacious form on the right.
       */}
       <div className="grid lg:min-h-screen lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
+        {/* Desktop: one photograph behind the whole left column (intro + supporting information). */}
+        <div aria-hidden className="true-tone photo-tone relative hidden overflow-hidden bg-black lg:col-span-5 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:block">
+          <Image src={backdrop} alt="" fill sizes="42vw" priority className="object-cover object-[38%_50%] grayscale" />
+          <span className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/85" />
+        </div>
+
         {/* Intro */}
-        <div className="true-tone relative bg-black px-5 pb-12 pt-32 text-white sm:px-8 sm:pb-14 sm:pt-40 lg:col-span-5 lg:row-start-1 lg:px-14 lg:pb-0 lg:pt-44 xl:px-20">
+        <div className="true-tone photo-tone relative overflow-hidden bg-black px-5 pb-12 pt-32 text-white sm:px-8 sm:pb-14 sm:pt-40 lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:bg-transparent lg:px-14 lg:pb-0 lg:pt-44 xl:px-20">
+          {/* Phones: the photograph sits behind the intro alone (the form follows it). */}
+          <span aria-hidden className="lg:hidden">
+            <Image src={backdrop} alt="" fill sizes="100vw" priority className="object-cover object-[38%_50%] grayscale" />
+            <span className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/85" />
+          </span>
+          <div className="relative">
           <p className="animate-fade text-[0.95rem] font-medium text-white/70">Start your next level</p>
           <h1
             id="contact-title"
@@ -39,6 +55,7 @@ export default async function ContactPage({ searchParams }: Props) {
             Whether you&apos;re building your personal authority or preparing an organization for its next stage of
             growth, the first step isn&apos;t another campaign. It&apos;s understanding your current level.
           </p>
+          </div>
         </div>
 
         {/* Form */}
@@ -50,18 +67,19 @@ export default async function ContactPage({ searchParams }: Props) {
         </div>
 
         {/* Supporting information */}
-        <div className="true-tone relative bg-black px-5 pb-16 pt-4 text-white sm:px-8 lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:px-14 lg:pb-24 lg:pt-14 xl:px-20">
+        <div className="true-tone relative bg-black px-5 pb-16 pt-4 text-white sm:px-8 lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:bg-transparent lg:px-14 lg:pb-24 lg:pt-14 xl:px-20">
           <div className="animate-fade border-t border-white/20 pt-10 [animation-delay:300ms]">
             <p className="text-[0.95rem] font-medium text-white/70">How Level141 works</p>
             <ol className="mt-10 space-y-7">
               {levelProcess.slice(0, 3).map((s) => (
-                <li key={s.n} className="grid grid-cols-[2.75rem_1fr] gap-4">
-                  <span className="flex size-11 items-center justify-center rounded-full border border-white/30 text-sm tabular-nums">
+                <li key={s.n} className="group grid cursor-default grid-cols-[2.75rem_1fr] gap-4">
+                  {/* The step lights up under the pointer: its number fills and its line brightens. */}
+                  <span className="flex size-11 items-center justify-center rounded-full border border-white/30 text-sm tabular-nums transition-colors duration-300 group-hover:border-white group-hover:bg-white group-hover:text-black">
                     {s.n}
                   </span>
-                  <span className="pt-2 leading-relaxed">
+                  <span className="pt-2 leading-relaxed transition-transform duration-300 motion-safe:group-hover:translate-x-1">
                     <span className="font-display text-lg font-medium tracking-[-0.01em]">{s.name}</span> —{" "}
-                    <span className="text-white/75">{s.line}</span>
+                    <span className="text-white/75 transition-colors duration-300 group-hover:text-white">{s.line}</span>
                   </span>
                 </li>
               ))}

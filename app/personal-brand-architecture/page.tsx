@@ -197,17 +197,21 @@ export default function PersonalBrandPage() {
             text="The strongest fit is not simply a person who wants to become famous. It is a person with genuine substance, a meaningful next-stage objective and sufficient credibility to convert architecture into authority."
           />
           <Marquee label="Ideal for" items={pbaAudience} />
-          <Reveal className="mt-12 border-t border-line pt-10 sm:mt-16 sm:pt-14 lg:ml-[33%]">
-            <p className="font-display max-w-4xl text-[clamp(1.7rem,3.3vw,3rem)] font-medium leading-[1.1] tracking-[-0.035em]">
-              Your personal brand shouldn&apos;t simply document what you&apos;ve done.{" "}
-              <span className="text-muted">It should position you for what you want to do next</span>
-            </p>
-          </Reveal>
         </RefSection>
 
-        {/* Qualification signals — each is checked off as it comes into view */}
+        {/* Qualification signals — opened by the closing line of "Ideal for"; each signal is checked off as it comes into view */}
         <section>
-          <Checklist label="Ideal for" title="Qualification signals" items={qualification} />
+          <Checklist
+            lead={
+              <>
+                Your personal brand shouldn&apos;t simply document what you&apos;ve done.{" "}
+                <span className="text-muted">It should position you for what you want to do next</span>
+              </>
+            }
+            label="Ideal for"
+            title="Qualification signals"
+            items={qualification}
+          />
         </section>
 
         {/* What it is not */}

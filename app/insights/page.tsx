@@ -1,7 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { Layers } from "@/components/sections/HomeInteractive";
+import { Layer, Layers } from "@/components/sections/HomeInteractive";
+import { InsightGallery } from "@/components/sections/HomeEditorial";
+import { RefIntro } from "@/components/sections/Ref";
+
+/** Decorative photographs (black and white) for the insight categories, in order. */
+const insightImages = [
+  "/images/ga-hero-structural-node-muted.webp",
+  "/images/client-keynote-auditorium.webp",
+  "/images/client-executive-portrait-woman.webp",
+  "/images/client-executive-study-woman.webp",
+  "/images/client-mentorship.webp",
+  "/images/client-keynote-monochrome.webp",
+];
 import { CategoryIndex, FilterTabs, TypeHero } from "@/components/sections/pages/InsightsParts";
 import { insightCategories, questionsWeAsk } from "@/lib/content";
 import { getPublishedInsights } from "@/lib/insights";
@@ -98,6 +110,27 @@ export default function InsightsPage() {
             </div>
           </section>
         ) : null}
+
+        {/* Insights gallery — tall photo cards gliding sideways (moved from home, keeps its pattern) */}
+        <Layer pattern="zoom">
+          <section className="bg-paper text-ink">
+            <InsightGallery
+              head={
+                <RefIntro
+                  label="Insights"
+                  title="The Next Level — ideas for people and organizations that refuse to remain where they are"
+                  action={{ label: "Explore Insights", href: routes.insights }}
+                />
+              }
+              items={insightCategories.map((c, i) => ({
+                name: c.name,
+                body: c.body,
+                href: `${routes.insights}#${c.slug}`,
+                image: insightImages[i % insightImages.length],
+              }))}
+            />
+          </section>
+        </Layer>
 
         {/* Categories — a static typographic index; each keeps its anchor for /insights#slug links */}
         <CategoryIndex items={insightCategories.map((c) => ({ id: c.slug, name: c.name, body: c.body }))} />

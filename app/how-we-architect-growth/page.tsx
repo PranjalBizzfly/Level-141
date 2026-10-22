@@ -54,6 +54,16 @@ const questionImages = [
   "/images/home-hero-staircase-muted.webp",
 ];
 
+/** One photograph per reason in the Why Level141 tabs, in order (black and white). */
+const whyImages = [
+  "/images/home-fragmented-to-integrated-muted.webp",
+  "/images/about-atrium-levels-muted.webp",
+  "/images/how-strategy-table-muted.webp",
+  "/images/client-mentorship-conversation.webp",
+  "/images/client-visionaries-horizon.webp",
+  "/images/client-executive-library.webp",
+];
+
 export default function HowPage() {
   return (
     <>
@@ -245,7 +255,7 @@ export default function HowPage() {
               <>
 Growth Architecture, not fragmented consulting</>
             }
-            items={whyLevel141.map((w) => ({ name: w.title, body: w.body }))}
+            items={whyLevel141.map((w, i) => ({ name: w.title, body: w.body, image: whyImages[i % whyImages.length] }))}
           />
         </section>
 

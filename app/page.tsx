@@ -1,26 +1,13 @@
+import { LetterItems } from "@/components/sections/LetterItems";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { HomeHero } from "@/components/sections/HomeHero";
-import { LetterItems } from "@/components/sections/LetterItems";
-import { StackCards } from "@/components/sections/Layouts";
-import { BeliefDeck, Layer, Layers } from "@/components/sections/HomeInteractive";
-import { InsightGallery, Relay, WhySplit } from "@/components/sections/HomeEditorial";
+import { Layer, Layers } from "@/components/sections/HomeInteractive";
+import { Relay } from "@/components/sections/HomeEditorial";
 import { BigList } from "@/components/sections/LayoutsClient";
 import { LogoWindow } from "@/components/sections/LogoWindow";
 import { RefIntro, RefSection, RefStatement } from "@/components/sections/Ref";
 import { MediaSlot } from "@/components/ui/MediaSlot";
-import { ScrubText } from "@/components/motion/ScrubText";
-import {
-  activityList,
-  brandsLevers,
-  beliefPairs,
-  growthChain,
-  insightCategories,
-  levelProcess,
-  lqOutputs,
-  peakStages,
-  whatWeDo,
-  whyLevel141,
-} from "@/lib/content";
+import { activityList, brandsLevers, growthChain, lqOutputs, peakStages } from "@/lib/content";
 import { altFor } from "@/lib/image-alts";
 import { pageMetadata } from "@/lib/seo";
 import { routes, site } from "@/lib/site";
@@ -34,54 +21,23 @@ export const metadata = {
   title: { absolute: "Level141 — Growth Architecture for People & Organizations" },
 };
 
+/** The four frameworks for the Growth System letter columns, each linking to its section on the How page. */
 const frameworks = [
-  {
-    id: "lq",
-    name: "LQ™",
-    full: "Level Quotient",
-    list: lqOutputs.slice(0, 4).map((o) => o.replace(/\.$/, "")),
-  },
+  { id: "lq", name: "LQ™", full: "Level Quotient", list: lqOutputs.slice(0, 4).map((o) => o.replace(/\.$/, "")) },
   {
     id: "igf",
     name: "IGF™",
     full: "Integrated Growth Framework",
     list: ["Connect the growth engine", "Growth rarely comes from one function", "Creates alignment between interconnected drivers"],
   },
-  {
-    id: "brands",
-    name: "BRANDS™",
-    full: "Six dimensions of growth",
-    list: brandsLevers.map((l) => l.name),
-  },
-  {
-    id: "peak",
-    name: "PEAK™",
-    full: "From presence to momentum",
-    list: peakStages.map((p) => p.name),
-  },
-];
-
-/** Decorative photographs (black and white) for the reasons and the insight categories, in order. */
-const whyImages = [
-  "/images/home-fragmented-to-integrated-muted.webp",
-  "/images/about-atrium-levels-muted.webp",
-  "/images/how-strategy-table-muted.webp",
-  "/images/client-mentorship-conversation.webp",
-  "/images/client-visionaries-horizon.webp",
-  "/images/client-executive-library.webp",
-];
-const insightImages = [
-  "/images/ga-hero-structural-node-muted.webp",
-  "/images/client-keynote-auditorium.webp",
-  "/images/client-executive-portrait-woman.webp",
-  "/images/client-executive-study-woman.webp",
-  "/images/client-mentorship.webp",
-  "/images/client-keynote-monochrome.webp",
+  { id: "brands", name: "BRANDS™", full: "Six dimensions of growth", list: brandsLevers.map((l) => l.name) },
+  { id: "peak", name: "PEAK™", full: "From presence to momentum", list: peakStages.map((p) => p.name) },
 ];
 
 /**
- * Home, rebuilt on the reference structure: hero → statement → lists of
- * rows (programs) → framework index → statement → rows → final CTA.
+ * Home, kept short: hero → logo window → the problem → two architectures →
+ * the Level141 difference (with links to the frameworks) → final CTA. The
+ * other home sections now live on the inner pages where their content fits.
  * All wording comes from the Website Structure document.
  */
 export default function HomePage() {
@@ -174,8 +130,8 @@ export default function HomePage() {
           </section>
         </Layer>
 
-        {/* The Level141 Growth System — Mucho "Explore our services" letter columns. */}
-        <Layer pattern="depth">
+        {/* The Level141 Growth System — letter columns, each framework linking to its section on the How page */}
+        <Layer pattern="float">
           <RefSection>
             <RefIntro
               id="system-title"
@@ -198,91 +154,6 @@ export default function HomePage() {
               }))}
             />
           </RefSection>
-        </Layer>
-
-        {/* How Level141 works — process as stacked cards */}
-        <Layer pattern="split">
-          <RefSection>
-            <RefIntro
-              label="How Level141 works"
-              title={
-                <>
-                  We don&apos;t start with deliverables. <span className="serif-accent">We start with the level you&apos;re trying to reach</span>
-                </>
-              }
-              action={{ label: "How we architect growth", href: routes.how }}
-            />
-            <StackCards
-              items={levelProcess.map((s) => ({ n: s.n, name: s.name, line: s.line, body: s.body, aside: s.question }))}
-            />
-          </RefSection>
-        </Layer>
-
-        {/* What we actually sell */}
-        <Layer pattern="doors">
-          <RefSection tone="ink">
-            <div className="flex min-h-[70svh] items-center justify-center">
-              <RefStatement
-                reveal="mask"
-                sub={
-                  <>
-                    <p>Level141 sits between strategy and execution. {whatWeDo.join(" ")}</p>
-                    <p className="mt-6 text-paper">Making sure everything is moving toward the same growth outcome.</p>
-                  </>
-                }
-              >
-                Not marketing. Not consulting. Not another strategy deck.{" "}
-                <span className="serif-accent">Growth Architecture</span>
-              </RefStatement>
-            </div>
-          </RefSection>
-        </Layer>
-
-        {/* Why Level141? — slides up over the held dark statement, as in the reference recording */}
-        <Layer pattern="slide">
-          <section className="bg-paper text-ink">
-            <WhySplit
-              label="Why Level141?"
-              title="Growth Architecture, not fragmented consulting"
-              items={whyLevel141.map((w, i) => ({ name: w.title, body: w.body, image: whyImages[i % whyImages.length] }))}
-            />
-          </section>
-        </Layer>
-
-        {/* The Level141 belief — the statements turn over into place */}
-        <Layer pattern="turn">
-          <section className="on-dark bg-ink text-paper">
-            <BeliefDeck
-              head={
-                <h2 className="display max-w-[22ch] text-[clamp(1.75rem,3.6vw,3.5rem)]">
-                  <ScrubText text="Growth isn't a collection of activities" accent="It's a system" />
-                </h2>
-              }
-              items={beliefPairs}
-              foot={<p className="text-paper-muted">Growth happens when the pieces work together. That&apos;s what we architect.</p>}
-            />
-          </section>
-        </Layer>
-
-        {/* Insights */}
-        <Layer pattern="zoom">
-          <section className="bg-paper text-ink">
-            <InsightGallery
-              head={
-                <RefIntro
-                  label="Insights"
-                  title="The Next Level — ideas for people and organizations that refuse to remain where they are"
-                  action={{ label: "Explore Insights", href: routes.insights }}
-                />
-              }
-              items={insightCategories.map((c, i) => ({
-                name: c.name,
-                body: c.body,
-                href: `${routes.insights}#${c.slug}`,
-                image: insightImages[i % insightImages.length],
-              }))}
-            />
-          </section>
         </Layer>
       </Layers>
 

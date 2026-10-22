@@ -232,14 +232,19 @@ export function FlipTiles({
   cols?: 2 | 3 | 4;
   dark?: boolean;
 }) {
-  const grid = { 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[cols];
+  // Three columns with one tile left over (e.g. seven) would leave it alone on
+  // the last row; instead the first row takes four and the rows below three.
+  const balance = cols === 3 && items.length > 3 && items.length % 3 === 1;
+  const grid = balance
+    ? "sm:grid-cols-2 lg:grid-cols-12"
+    : { 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[cols];
   return (
     <div className={(dark ? "bg-black text-white " : "") + "py-20 sm:py-24 lg:py-24"}>
       <div className="container-x">
         <Head label={label} title={title} text={text} dark={dark} />
         <ul className={"mt-12 grid gap-3 sm:mt-16 " + grid}>
           {items.map((it, i) => (
-            <FlipTile key={i} item={it} />
+            <FlipTile key={i} item={it} className={balance ? (i < 4 ? "lg:col-span-3" : "lg:col-span-4") + (i === items.length - 1 && items.length % 2 ? " sm:col-span-2" : "") : undefined} />
           ))}
         </ul>
         <p className={"mt-8 text-sm " + (dark ? "text-white/70" : "text-muted")}>Hover or tap a tile to turn it over.</p>
@@ -248,11 +253,11 @@ export function FlipTiles({
   );
 }
 
-function FlipTile({ item }: { item: { name: ReactNode; back: ReactNode; foot?: ReactNode; image?: string } }) {
+function FlipTile({ item, className }: { item: { name: ReactNode; back: ReactNode; foot?: ReactNode; image?: string }; className?: string }) {
   const [on, setOn] = useState(false);
   const face = "absolute inset-0 flex flex-col justify-between rounded-[1.25rem] p-8 [backface-visibility:hidden] sm:p-10";
   return (
-    <li className="[perspective:1400px]">
+    <li className={"[perspective:1400px] " + (className ?? "")}>
       <button
         type="button"
         aria-pressed={on}
@@ -266,8 +271,8 @@ function FlipTile({ item }: { item: { name: ReactNode; back: ReactNode; foot?: R
         <span className={face + " true-tone photo-tone overflow-hidden border border-white/20 bg-black text-white"}>
           {item.image ? (
             <>
-              <Image src={item.image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" className="object-cover opacity-60 grayscale" />
-              <span aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/30 to-black/80" />
+              <Image src={item.image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" className="object-cover object-[50%_22%] opacity-80 grayscale" />
+              <span aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-black/55" />
             </>
           ) : null}
           <span className="relative font-display text-[clamp(1.75rem,2.8vw,2.5rem)] font-medium leading-[1.04] tracking-[-0.035em]">{item.name}</span>
@@ -301,7 +306,7 @@ export function CompareSlider({ before, after, dark }: { before: ReactNode; afte
     <div className="container-x py-20 sm:py-24 lg:py-24">
       <div
         ref={ref}
-        className="relative h-[clamp(26rem,70svh,38rem)] touch-pan-y select-none overflow-hidden rounded-[1.25rem] border border-current/15"
+        className="relative h-[clamp(22rem,56svh,30rem)] touch-pan-y select-none overflow-hidden rounded-[1.25rem] border border-current/15"
         onPointerMove={(e) => e.buttons === 1 && move(e.clientX)}
         onPointerDown={(e) => move(e.clientX)}
       >
