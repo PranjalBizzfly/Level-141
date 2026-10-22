@@ -38,7 +38,7 @@ const RELAY_IMAGES = [
   "/images/client-walk-through-crowd.webp",
   "/images/client-mentorship-conversation.webp",
   "/images/home-team-table.webp",
-  "/images/client-executive-dubai-window.webp",
+  "/images/client-executive-library.webp",
   "/images/client-visionaries-horizon.webp",
 ];
 
