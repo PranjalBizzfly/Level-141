@@ -85,6 +85,15 @@ export const startingQuestions = [
   "How should those changes work together?",
 ] as const;
 
+/** How Level141 answers each starting question — wording from the Website Structure document (process steps, Growth Architecture and IGF™). */
+export const startingAnswers = [
+  "We examine the person, organization, market, positioning, growth infrastructure and existing performance signals.",
+  "We establish the positioning, priorities, growth architecture, systems and roadmap required to move forward.",
+  "We identify where growth is being constrained, architect what needs to change, and establish the governance required to keep the organization moving.",
+  "The strategy is translated into clearly defined initiatives, ownership, priorities and execution requirements.",
+  "IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment between them.",
+] as const;
+
 export const mayBeNecessary = [
   "A website",
   "Content",

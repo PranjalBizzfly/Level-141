@@ -18,6 +18,7 @@ import {
   levelProcess,
   lqOutputs,
   mayBeNecessary,
+  startingAnswers,
   startingQuestions,
   transformationFrame,
   whatWeDo,
@@ -111,7 +112,7 @@ export default function HowPage() {
             label="The starting point is the growth problem"
             title="Level141 first identifies:"
             text="Only then do we architect the solution."
-            items={startingQuestions.map((q, i) => ({ name: q, image: questionImages[i % questionImages.length] }))}
+            items={startingQuestions.map((q, i) => ({ name: q, answer: startingAnswers[i], image: questionImages[i % questionImages.length] }))}
           />
         </section>
 

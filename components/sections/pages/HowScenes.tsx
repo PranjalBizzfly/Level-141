@@ -88,7 +88,7 @@ export function QuestionFocus({
   label: string;
   title: ReactNode;
   text?: ReactNode;
-  items: readonly { name: string; image: string }[];
+  items: readonly { name: string; image: string; answer?: string }[];
 }) {
   const [active, setActive] = useState(0);
   const [seen, setSeen] = useState<Set<number>>(() => new Set());
@@ -163,6 +163,8 @@ export function QuestionFocus({
                 <h3 className="mt-4 overflow-hidden font-display text-[clamp(2rem,4.4vw,4rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                   <span className="qf-rise block">{q.name}</span>
                 </h3>
+                {/* How Level141 answers the question. */}
+                {q.answer ? <p className="mt-5 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">{q.answer}</p> : null}
               </li>
             ))}
           </ol>
