@@ -31,9 +31,26 @@ export function CountryPicker({
   const button = useRef<HTMLButtonElement>(null);
   const listId = `${id}-country-list`;
 
-  const q = query.trim().toLowerCase().replace(/^\+/, "");
+  // Search by name (accents ignored), ISO code or dialling code. Best matches
+  // come first: a name starting with the query, then a word in the name
+  // starting with it, an exact code, then anything else that contains it.
+  const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const q = plain(query.trim()).replace(/^\+/, "");
+  const rank = (c: (typeof countries)[number]) => {
+    const name = plain(c.name);
+    if (c.iso.toLowerCase() === q || c.dial === q) return 0;
+    if (name.startsWith(q)) return 1;
+    if (name.split(/[\s(),-]+/).some((w) => w.startsWith(q))) return 2;
+    if (c.dial.startsWith(q)) return 3;
+    if (name.includes(q)) return 4;
+    return -1;
+  };
   const results = q
-    ? countries.filter((c) => c.name.toLowerCase().includes(q) || c.iso.toLowerCase() === q || c.dial.startsWith(q))
+    ? countries
+        .map((c, i) => ({ c, i, r: rank(c) }))
+        .filter((x) => x.r >= 0)
+        .sort((a, b) => a.r - b.r || a.i - b.i)
+        .map((x) => x.c)
     : countries;
 
   const openList = () => {
@@ -116,7 +133,7 @@ export function CountryPicker({
         <div
           // Solid panel: explicit background so the glass styles never make it see-through.
           className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-[min(20rem,calc(100vw-3rem))] overflow-hidden rounded-[0.75rem] shadow-[0_0_0_1px_var(--color-line-strong),0_24px_48px_-16px_rgb(0_0_0/0.45)]"
-          style={{ backgroundColor: "var(--color-surface)", backdropFilter: "none" }}
+          style={{ backgroundColor: "var(--color-paper)", backdropFilter: "none" }}
         >
           <div className="flex items-center gap-2 border-b border-line px-3">
             <Search aria-hidden className="size-4 shrink-0 text-muted" />
@@ -141,7 +158,7 @@ export function CountryPicker({
               className="min-h-11 w-full bg-transparent py-2.5 text-base text-ink placeholder:text-muted/60 focus:outline-none"
             />
           </div>
-          <ul ref={list} id={listId} role="listbox" aria-label="Countries" className="max-h-64 overflow-y-auto py-1">
+          <ul ref={list} id={listId} role="listbox" aria-label="Countries" className="max-h-[min(24rem,50vh)] overflow-y-auto overscroll-contain py-1">
             {results.length ? (
               results.map((c, i) => (
                 <li
