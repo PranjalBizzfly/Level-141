@@ -100,13 +100,20 @@ export function SpotlightText({ text, accent, sub }: { text: string; accent?: st
       {text} {accent ? <span className="opacity-60">{accent}</span> : null}
     </>
   );
-  const cls = "font-display max-w-5xl text-[clamp(2rem,4.8vw,4.6rem)] font-medium leading-[1.05] tracking-[-0.04em]";
+  const cls = "font-display text-[clamp(1.9rem,3.7vw,3.75rem)] font-medium leading-[1.08] tracking-[-0.035em]";
   return (
-    <div className="bg-black py-20 text-white sm:py-24 lg:py-24">
-      <div className="container-x">
+    <div className="bg-black py-20 text-white sm:py-24 lg:py-28">
+      {/* Editorial split: the label introduces the statement from the left; the statement runs wide on the right. */}
+      <div className="container-x grid gap-8 lg:grid-cols-12 lg:gap-16">
+        {sub ? (
+          <div className="lg:col-span-3">
+            <span aria-hidden className="block h-px w-12 bg-white/50" />
+            <div className="mt-5 text-sm uppercase tracking-[0.22em] text-white/70">{sub}</div>
+          </div>
+        ) : null}
         <div
           ref={ref}
-          className="relative"
+          className={"relative " + (sub ? "lg:col-span-9" : "lg:col-span-12")}
           onPointerMove={(e) => {
             if (reduced || e.pointerType !== "mouse" || !ref.current) return;
             const r = ref.current.getBoundingClientRect();
@@ -129,7 +136,6 @@ export function SpotlightText({ text, accent, sub }: { text: string; accent?: st
             </p>
           ) : null}
         </div>
-        {sub ? <div className="mt-12 text-sm uppercase tracking-[0.22em] text-white/70">{sub}</div> : null}
       </div>
     </div>
   );

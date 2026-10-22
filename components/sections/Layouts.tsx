@@ -125,11 +125,25 @@ export function Cascade({ lines }: { lines: readonly { lead: ReactNode; rest?: R
 export function Strike({ items, conclusion }: { items: readonly string[]; conclusion?: ReactNode }) {
   return (
     <div className="mt-12 sm:mt-16">
-      <ul className="space-y-1 sm:space-y-2">
-        {items.map((t) => (
-          <li key={t} className="font-display text-[clamp(1.5rem,4.2vw,3.75rem)] font-medium leading-[1.12] tracking-[-0.03em]">
-            <span className="strike relative inline">
-              <span className="strike-text">{t}</span>
+      {/* A two-column register: a hairline, a × mark and number, and each claim struck through as it scrolls in. */}
+      <ul className="grid border-t border-current/15 sm:grid-cols-2 sm:gap-x-12 lg:gap-x-16">
+        {items.map((t, i) => (
+          <li
+            key={t}
+            className={
+              "flex items-start gap-5 border-b border-current/15 py-6 sm:py-8" +
+              // An odd last item spans both columns, so the register ends on a full row.
+              (i === items.length - 1 && items.length % 2 ? " sm:col-span-2" : "")
+            }
+          >
+            <span aria-hidden className="flex shrink-0 items-center gap-3 pt-1.5 text-sm tabular-nums opacity-60">
+              <span className="text-base leading-none">×</span>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="font-display text-[clamp(1.35rem,2.2vw,2rem)] font-medium leading-[1.2] tracking-[-0.025em]">
+              <span className="strike relative inline">
+                <span className="strike-text">{t}</span>
+              </span>
             </span>
           </li>
         ))}
