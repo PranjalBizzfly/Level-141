@@ -176,7 +176,7 @@ export function Triptych({
     <div className="bg-paper py-20 text-ink sm:py-24 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Head label={label} title={title} />
-        <div className="mt-12 flex flex-col gap-2 md:h-[26rem] md:flex-row">
+        <div className="mt-12 flex flex-col gap-2 lg:h-[26rem] lg:flex-row">
           {items.map((it, i) => {
             const on = open === i;
             return (
@@ -190,10 +190,10 @@ export function Triptych({
                 className={
                   "group relative flex min-w-0 flex-col justify-end overflow-hidden rounded-[1.25rem] border p-8 text-left outline-none transition-[flex-grow,background-color,color] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 motion-reduce:transition-none sm:p-10 " +
                   (it.image
-                    ? "photo-tone min-h-[16rem] border-white/15 bg-black text-white md:min-h-0 " + (on ? "md:grow-[3]" : "md:grow")
+                    ? "photo-tone min-h-[16rem] border-white/15 bg-black text-white lg:min-h-0 " + (on ? "lg:grow-[3]" : "lg:grow")
                     : on
-                      ? "border-ink bg-ink text-paper md:grow-[3]"
-                      : "border-current/15 bg-paper md:grow")
+                      ? "border-ink bg-ink text-paper lg:grow-[3]"
+                      : "border-current/15 bg-paper lg:grow")
                 }
                 style={{ flexBasis: 0 }}
               >
@@ -204,7 +204,7 @@ export function Triptych({
                       src={it.image}
                       alt={altFor(it.image)}
                       fill
-                      sizes="(min-width: 768px) 50vw, 100vw"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
                       className="object-cover object-[50%_30%] grayscale transition-[opacity,scale] duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
                       style={{ opacity: on ? 0.85 : 0.5 }}
                     />

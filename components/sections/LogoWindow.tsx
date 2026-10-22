@@ -36,10 +36,10 @@ const images = [
 ];
 
 /** Track progress (0–1) at which each phase begins. */
-const AT_L1 = 0.08;
-const AT_L2 = 0.28;
-const AT_L3 = 0.48;
-const AT_SETTLE = 0.78; // frame closes back onto the baseline, then the stage is released
+const AT_L1 = 0.03;
+const AT_L2 = 0.27;
+const AT_L3 = 0.51;
+const AT_SETTLE = 0.8; // frame closes back onto the baseline, then the stage is released
 
 const RM = "(prefers-reduced-motion: reduce)";
 const subscribeRM = (cb: () => void) => {
@@ -113,7 +113,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
     <section
       ref={track}
       aria-label="Level141"
-      className={reduced ? "bg-black text-white" : "relative z-10 h-[400lvh]"}
+      className={reduced ? "bg-black text-white" : "relative z-10 h-[300lvh]"}
     >
       <div
         className={

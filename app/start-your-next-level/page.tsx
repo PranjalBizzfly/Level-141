@@ -30,7 +30,7 @@ export default async function ContactPage({ searchParams }: Props) {
         Mobile order: intro → form → supporting information, so the form starts within the first screen.
         Desktop: one strong dark left panel (intro, process, notes); a spacious form on the right.
       */}
-      <div className="grid lg:min-h-screen lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
+      <div className="grid grid-cols-[minmax(0,1fr)] lg:min-h-screen lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
         {/* Desktop: one photograph behind the whole left column (intro + supporting information). */}
         <div aria-hidden className="true-tone photo-tone relative hidden overflow-hidden bg-black lg:col-span-5 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:block">
           <Image src={backdrop} alt={altFor(backdrop)} fill sizes="42vw" priority className="object-cover object-[38%_50%] grayscale" />

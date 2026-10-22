@@ -85,7 +85,7 @@ export function VibeExplorer() {
               <span className="flex flex-col sm:mt-2">
                 <span
                   className={cx(
-                    "text-sm font-medium uppercase tracking-[0.12em] sm:text-base sm:normal-case sm:tracking-[-0.01em] lg:text-lg",
+                    "text-[0.7rem] font-medium uppercase tracking-[0.05em] max-[359px]:text-[0.6rem] max-[359px]:tracking-normal min-[400px]:text-xs min-[400px]:tracking-[0.08em] sm:text-base sm:normal-case sm:tracking-[-0.01em] lg:text-lg",
                     selected ? "text-paper" : "text-paper-muted",
                   )}
                 >

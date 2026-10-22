@@ -90,7 +90,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
     <form noValidate onSubmit={onSubmit} onFocus={markStarted} className="relative space-y-10 sm:space-y-12" aria-describedby="form-required-note">
       {/* Live progress through the required answers. */}
       <div>
-        <div className="flex items-baseline justify-between gap-4">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <p id="form-required-note" className="text-sm text-muted">
             Fields marked <span className="text-gold-ink">*</span> are required.
           </p>
@@ -110,7 +110,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
         <legend className="text-[0.95rem] font-medium text-ink">
           I am interested in<span aria-hidden className="ml-1 text-gold-ink">*</span>
         </legend>
-        <div className="mt-4 grid gap-3 lg:gap-x-8 sm:grid-cols-2">
+        <div className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-3 lg:gap-x-8 sm:grid-cols-2">
           {interestOptions.map((o) => {
             const checked = values.interest === o.value;
             return (
@@ -169,7 +169,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
         ) : null}
       </fieldset>
 
-      <div className="grid gap-x-6 gap-y-7 sm:grid-cols-2 sm:gap-y-8">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-7 sm:grid-cols-2 sm:gap-y-8">
         <Field id="name" label="Name" required error={allErrors.name}>
           <input
             {...fieldA11y("name", allErrors.name)}
