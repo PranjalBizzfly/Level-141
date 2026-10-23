@@ -257,7 +257,8 @@ export function Bridge({
                   </span>
                   <span className="text-base tabular-nums text-white/85 lg:mt-4">{n2(i)}</span>
                   <div className="lg:mt-2">
-                    <h3 className="font-display text-[1.4rem] font-medium leading-tight tracking-[-0.02em]">{s.name}</h3>
+                    {/* Seven columns: between lg and ~1440px the name scales down so the longest fits its column. */}
+                    <h3 className="font-display text-[1.4rem] font-medium leading-tight tracking-[-0.02em] lg:text-[clamp(1.05rem,1.55vw,1.4rem)]">{s.name}</h3>
                     <p className="mt-2 text-base text-white/90">{s.body}</p>
                     <p className="mt-4 text-sm uppercase tracking-[0.12em] text-white/85">{s.meta}</p>
                   </div>

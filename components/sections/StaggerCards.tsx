@@ -29,24 +29,35 @@ const n2 = (i: number) => String(i + 1).padStart(2, "0");
 export function StaggerCards({
   head,
   compact,
+  side,
   items,
 }: {
   head?: ReactNode;
   /** Smaller tile titles, for longer ones such as quotations. */
   compact?: boolean;
+  /** The heading stands beside every row (centred on them) and the tiles keep to its right in a plain grid. */
+  side?: boolean;
   items: readonly Item[];
 }) {
   const ref = useRef<HTMLOListElement>(null);
   const [seen, setSeen] = useState<ReadonlySet<number>>(new Set());
   // The heading takes the first `span` columns of the top row; tiles fill the
-  // rest of it, then whole rows from the left. Rows alternate the side they
-  // arrive from: odd rows from the right, even rows from the left.
+  // rest of it, then whole rows from the left (or, beside the heading, rows
+  // to its right only). Rows alternate the side they arrive from: odd rows
+  // from the right, even rows from the left.
   const place = (i: number, cols: number, span: number) => {
     const top = cols - span;
+    if (side) {
+      const row = Math.floor(i / top) + 1;
+      return { col: span + 1 + (i % top), row, side: row % 2 ? 1 : -1 };
+    }
     const j = i - top;
     const row = i < top ? 1 : 2 + Math.floor(j / cols);
     return { col: i < top ? span + 1 + i : (j % cols) + 1, row, side: row % 2 ? 1 : -1 };
   };
+  const lgCols = compact ? 4 : 3;
+  const xlCols = compact ? 6 : 5;
+  const rows = (cols: number, span: number) => Math.ceil(items.length / (cols - span));
 
   useEffect(() => {
     const el = ref.current;
@@ -69,8 +80,12 @@ export function StaggerCards({
   return (
     <ol
       ref={ref}
-      className={"stagger-cards relative grid gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-16 lg:gap-y-40 " + (compact ? "lg:grid-cols-4 2xl:gap-x-4" : "lg:grid-cols-3")}
-      style={{ "--xl-cols": compact ? 6 : 5 } as CSSProperties}
+      className={
+        "stagger-cards relative grid gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-16 " +
+        (side ? "stagger-side lg:gap-y-5 " : "lg:gap-y-40 ") +
+        (compact ? "lg:grid-cols-4 2xl:gap-x-4" : "lg:grid-cols-3")
+      }
+      style={{ "--xl-cols": xlCols, "--rows-lg": rows(lgCols, 1), "--rows-xl": rows(xlCols, 2) } as CSSProperties}
     >
       {head ? (
         <li className="stagger-head list-none pb-10 sm:col-span-2 lg:[grid-area:1/1/2/2] lg:pb-0 lg:pr-10 2xl:[grid-area:1/1/2/3]">
@@ -78,8 +93,8 @@ export function StaggerCards({
         </li>
       ) : null}
       {items.map((it, i) => {
-        const lg = place(i, compact ? 4 : 3, 1); // three columns (four when compact)
-        const xl = place(i, compact ? 6 : 5, 2); // five columns edge to edge (six when compact)
+        const lg = place(i, lgCols, 1); // three columns (four when compact)
+        const xl = place(i, xlCols, 2); // five columns edge to edge (six when compact)
         const dark = i % 2 === 1;
         return (
           <li

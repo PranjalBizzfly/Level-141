@@ -141,12 +141,12 @@ export function Header() {
         >
           Skip to content
         </a>
-        <div className="container-x flex h-16 items-center justify-between gap-4 sm:h-20">
+        <div className="container-x flex h-16 items-center justify-between gap-4 max-[359px]:gap-2 sm:h-20">
           <Link href="/" aria-label="Level141 home" className="logo-split relative z-10 flex min-h-11 shrink-0 items-center">
-            <LogoLockupSplit className="h-[30px] w-auto overflow-visible" title="Level141" />
+            <LogoLockupSplit className="h-[30px] w-auto overflow-visible max-[359px]:h-[24px]" title="Level141" />
           </Link>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 max-[359px]:gap-0.5 sm:gap-3">
             <ThemeToggle className="relative z-10 shrink-0" />
             <Link
               href={site.primaryCta.href}

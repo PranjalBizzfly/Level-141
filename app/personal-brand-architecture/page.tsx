@@ -3,13 +3,14 @@ import { VibeExplorer } from "@/components/diagrams/VibeExplorer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import {
   CinemaHero,
+  CompareSlider,
   FullBleed,
   Ledger,
 } from "@/components/sections/Editorial";
 import { Layers } from "@/components/sections/HomeInteractive";
 import { Marquee } from "@/components/sections/Layouts";
 import { CadenceGrid, Checklist, OutlineFill, Ring3D, ScanRows, SpotlightText } from "@/components/sections/pages/PersonalParts";
-import { IsNotCollage, MetricsMosaic, PhotoCompare, VibeStairs } from "@/components/sections/pages/PremiumParts";
+import { IsNotCollage, MetricsMosaic, VibeStairs } from "@/components/sections/pages/PremiumParts";
 import { RefIntro, RefSection } from "@/components/sections/Ref";
 import { StaggerCards } from "@/components/sections/StaggerCards";
 import { ButtonLink, Reveal } from "@/components/ui/primitives";
@@ -287,9 +288,8 @@ export default function PersonalBrandPage() {
 
         {/* Before / after */}
         <section>
-          <PhotoCompare
-            beforeImage="/images/about-atrium-levels-muted.webp"
-            afterImage="/images/home-hero-staircase-muted.webp"
+          <CompareSlider
+            dark
             before="Valuable but fragmented expertise, inconsistent positioning, disconnected visibility and unpredictable opportunity."
             after="A clearly positioned leader with an evidence-backed narrative, coherent presence, recognizable intellectual territory, trusted impact, deliberate opportunity pathways and a roadmap for continuous evolution."
           />

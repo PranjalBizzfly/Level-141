@@ -318,3 +318,15 @@
 @media (min-width: 1024px) {
   .stair-step { margin-bottom: calc(var(--rise) * clamp(2.5rem, 4vw, 4.5rem)); }
 }
+
+/* StaggerCards "side": the heading spans every row, centred on them; the tiles keep a plain grid to its right. */
+@media (min-width: 1024px) {
+  .stagger-side .stagger-head { grid-row: 1 / span var(--rows-lg); align-self: center; }
+  .stagger-side .stagger-card { translate: none; }
+}
+@media (min-width: 1536px) {
+  .stagger-side .stagger-head { grid-row: 1 / span var(--rows-xl); }
+  .stagger-side .stagger-head > *,
+  .stagger-side .stagger-head > * > div { height: auto; }
+  .stagger-side .stagger-head > * > div { gap: 2.5rem; }
+}

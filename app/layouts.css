@@ -216,35 +216,27 @@
 
 /* ---------------------------------------------------------------- Marquee */
 
-.marquee-rev {
-  margin-left: -30%;
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .marquee-row {
-      animation: l141-drift linear both;
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
-    }
-    .marquee-rev {
-      animation-name: l141-drift-rev;
-    }
+/* Two rows drift continuously in opposite directions and loop seamlessly
+   (each row holds the names twice; one copy's width is exactly half). Pointing
+   at the band pauses it. */
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-row {
+    animation: l141-marquee 46s linear infinite;
+  }
+  .marquee-rev {
+    animation-direction: reverse;
+    animation-duration: 52s;
+  }
+  .marquee:hover .marquee-row {
+    animation-play-state: paused;
   }
 }
-@keyframes l141-drift {
+@keyframes l141-marquee {
   from {
-    translate: 5% 0;
+    translate: 0 0;
   }
   to {
-    translate: -30% 0;
-  }
-}
-@keyframes l141-drift-rev {
-  from {
-    translate: -5% 0;
-  }
-  to {
-    translate: 25% 0;
+    translate: -50% 0;
   }
 }
 

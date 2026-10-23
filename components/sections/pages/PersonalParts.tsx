@@ -397,6 +397,10 @@ export function Ring3D({
   const step = 360 / n;
   const turn = auto.pos * step;
   const front = auto.active;
+  // Manual turning alongside autoplay: drag or swipe the ring, use the arrow
+  // keys or the arrow buttons, or click a side card to bring it round. A drag
+  // swallows the click that ends it.
+  const drag = useRef<{ x: number; moved: boolean } | null>(null);
 
   if (reduced) {
     return (
@@ -424,14 +428,44 @@ export function Ring3D({
         </div>
         {/* The ring: --w is a card's width, the radius fits n cards edge to edge. */}
         <div
-          className="relative flex flex-1 items-center justify-center [--w:min(78vw,24rem)] [perspective:1600px]"
+          role="group"
+          aria-roledescription="carousel"
+          aria-label={typeof title === "string" ? title : label}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowRight") auto.next();
+            else if (e.key === "ArrowLeft") auto.prev();
+            else return;
+            e.preventDefault();
+          }}
+          onPointerDown={(e) => {
+            drag.current = { x: e.clientX, moved: false };
+          }}
+          onDragStart={(e) => e.preventDefault()}
+          onPointerUp={(e) => {
+            const d = drag.current;
+            if (!d) return;
+            const dx = e.clientX - d.x;
+            if (Math.abs(dx) > 40) {
+              d.moved = true;
+              if (dx < 0) auto.next();
+              else auto.prev();
+            }
+          }}
+          className="relative flex flex-1 touch-pan-y select-none items-center justify-center outline-none [--w:min(78vw,24rem)] [perspective:1600px] focus-visible:ring-1 focus-visible:ring-current/30"
           style={{ "--r": `calc(var(--w) / 2 / ${Math.tan(Math.PI / n).toFixed(4)} + 1.5rem)` } as CSSProperties}
         >
-          <ol {...bind} className="relative h-[min(60lvh,29rem)] cursor-pointer w-[var(--w)] [transform-style:preserve-3d]" style={{ transform: `translateZ(calc(var(--r) * -1)) rotateY(${-turn}deg)` }}>
+          <ol className="relative h-[min(60lvh,29rem)] w-[var(--w)] cursor-grab [transform-style:preserve-3d] active:cursor-grabbing" style={{ transform: `translateZ(calc(var(--r) * -1)) rotateY(${-turn}deg)` }}>
             {items.map((x, i) => (
               <li
                 key={x.name}
-                className="absolute inset-0 flex flex-col justify-between gap-4 rounded-[1.25rem] border p-5 transition-[background-color,border-color,color] duration-500 [backface-visibility:hidden] sm:p-6"
+                aria-current={i === front || undefined}
+                onClick={() => {
+                  if (drag.current?.moved) return;
+                  if (i === front) bind.onClick();
+                  else auto.show(i);
+                }}
+                className="absolute inset-0 flex cursor-pointer flex-col justify-between gap-4 rounded-[1.25rem] border p-5 transition-[background-color,border-color,color] duration-500 [backface-visibility:hidden] sm:p-6"
                 style={{
                   transform: `rotateY(${i * step}deg) translateZ(var(--r))`,
                   background: i === front ? fg : bg,
@@ -454,9 +488,29 @@ export function Ring3D({
             ))}
           </ol>
         </div>
-        <div className="container-x mx-auto w-full max-w-3xl"><StepBars names={items.map((x) => x.name)} {...auto} /></div>
+        <div className="container-x mx-auto flex w-full max-w-3xl items-center gap-5">
+          <RingArrow dir={-1} onClick={auto.prev} />
+          <StepBars className="flex-1" names={items.map((x) => x.name)} {...auto} />
+          <RingArrow dir={1} onClick={auto.next} />
+        </div>
       </div>
     </div>
+  );
+}
+
+/** A round previous/next button for the ring. */
+function RingArrow({ dir, onClick }: { dir: 1 | -1; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-label={dir > 0 ? "Next" : "Previous"}
+      onClick={onClick}
+      className="grid size-11 shrink-0 place-items-center rounded-full border border-current/25 transition-colors duration-300 hover:bg-current/10"
+    >
+      <svg aria-hidden viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d={dir > 0 ? "M9 5l7 7-7 7" : "M15 5l-7 7 7 7"} />
+      </svg>
+    </button>
   );
 }
 

@@ -193,6 +193,7 @@ export default function AboutPage() {
         <Layer pattern="split">
           <RefSection>
             <StaggerCards
+              side
               head={
                 <RefIntro
                   label="How Level141 works"

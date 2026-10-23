@@ -262,7 +262,9 @@ export function Layers({ children, page }: { children: ReactNode; page?: LayerPa
         // Earlier sections stay in front, so an arriving one turns in from behind them.
         el.style.zIndex = String(layers.length - i);
         // Lands by the time its top edge reaches the middle of the screen (no long, empty in-between).
-        const inn = settled.current?.has(el) ? 1 : clamp((vh - el.getBoundingClientRect().top) / (vh * 0.55));
+        // Measured from the layout, not the layer's own (transformed) box: its arrival turn
+        // moves that box, which would feed back into --in and make it flicker frame to frame.
+        const inn = settled.current?.has(el) ? 1 : clamp((vh - layerTop(layers, i)) / (vh * 0.55));
         el.style.setProperty("--in", inn.toFixed(4));
         el.toggleAttribute("data-landed", inn >= 0.999);
       });
@@ -287,12 +289,13 @@ export function Layers({ children, page }: { children: ReactNode; page?: LayerPa
   );
 }
 
-/** A layer's natural top on screen (its own sticky offset would hide it). */
+/**
+ * A layer's natural top on screen, from the layout: its own box is moved by
+ * its sticky offset and by its arrival transform, so it is never measured.
+ */
 function layerTop(layers: HTMLElement[], i: number) {
   const el = layers[i];
-  const prev = layers[i - 1];
-  if (!prev) return el.getBoundingClientRect().top;
-  // Layers are in normal flow: this one starts right where the previous one ends.
+  // Layers are in normal flow: each starts right where the previous one ends.
   const root = el.parentElement!.getBoundingClientRect().top;
   let y = root;
   for (let k = 0; k < i; k++) y += layers[k].offsetHeight;

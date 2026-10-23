@@ -155,13 +155,13 @@ export function Strike({ items, conclusion }: { items: readonly string[]; conclu
 
 /* ---------------------------------------------------------------- Marquee */
 
-/** Short labels set huge and drifting sideways with the scroll. */
+/** Short labels set huge and drifting sideways without end, the two rows in opposite directions. */
 export function Marquee({ items, label }: { items: readonly string[]; label: string }) {
   // Row one solid, row two drawn in outline; names separated by a small open ring.
   const row = (rev: boolean) => (
-    <div aria-hidden className={"marquee-row flex w-max gap-[0.6em] whitespace-nowrap " + (rev ? "marquee-rev" : "")}>
+    <div aria-hidden className={"marquee-row flex w-max whitespace-nowrap " + (rev ? "marquee-rev" : "")}>
       {[...items, ...items].map((t, i) => (
-        <span key={i} className="flex items-center gap-[0.6em]">
+        <span key={i} className="flex items-center gap-[0.6em] pr-[0.6em]">
           <span style={rev ? { WebkitTextStroke: "1.2px currentColor", WebkitTextFillColor: "transparent" } : undefined}>{t}</span>
           <span className="inline-block size-[0.16em] rounded-full border border-current opacity-50" />
         </span>

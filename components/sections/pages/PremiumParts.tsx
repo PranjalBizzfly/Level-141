@@ -1,18 +1,17 @@
 "use client";
 
 import { altFor } from "@/lib/image-alts";
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
-import { useReducedMotion } from "@/components/sections/HomeInteractive";
 import { useAutoSteps } from "@/components/sections/useAutoSteps";
 
 /**
  * Editorial, photograph-led section patterns: stages as a staircase
  * (VibeStairs), an audience index with a photograph (AudienceIndex), a
- * photographic before/after slider (PhotoCompare), a black-and-white collage
- * (IsNotCollage) and an edge-to-edge mosaic (MetricsMosaic). Photographs keep real black and white
- * in both themes (true-tone); all text stays in the DOM, and reduced motion
- * shows everything at rest.
+ * black-and-white collage (IsNotCollage) and an edge-to-edge mosaic
+ * (MetricsMosaic). Photographs keep real black and white in both themes
+ * (true-tone); all text stays in the DOM, and reduced motion shows everything
+ * at rest.
  */
 
 function Head({ label, title }: { label?: string; title?: ReactNode }) {
@@ -148,128 +147,6 @@ export function AudienceIndex({ items, images }: { items: readonly string[]; ima
         <span aria-hidden className="absolute bottom-6 left-6 right-6 h-px bg-white/25">
           <span key={auto.active} className="quote-bar block h-full origin-left bg-white" data-state={auto.paused ? "hold" : "run"} style={{ animationDuration: `${auto.holdMs}ms` }} />
         </span>
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------ PhotoCompare */
-
-/**
- * Before and after as two photographs under one drag handle: the before muted
- * and soft, the after crisp. Each side carries its label as a pill and its
- * text on a frosted panel; on first sight the handle sways once to show it
- * moves.
- */
-export function PhotoCompare({
-  before,
-  after,
-  beforeImage,
-  afterImage,
-}: {
-  before: ReactNode;
-  after: ReactNode;
-  beforeImage: string;
-  afterImage: string;
-}) {
-  const reduced = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const touched = useRef(false);
-  const [x, setX] = useState(50);
-  const move = (clientX: number) => {
-    touched.current = true;
-    const r = ref.current?.getBoundingClientRect();
-    if (r) setX(Math.min(94, Math.max(6, ((clientX - r.left) / r.width) * 100)));
-  };
-
-  // A single sway on first sight: 50 → 40 → 60 → 50, unless someone got there first.
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || reduced) return;
-    let raf = 0;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting) return;
-        io.disconnect();
-        const t0 = performance.now();
-        const tick = (t: number) => {
-          if (touched.current) return;
-          const k = Math.min(1, (t - t0) / 2200);
-          setX(50 - 10 * Math.sin(k * Math.PI * 2) * (1 - k * 0.3) * (k < 1 ? 1 : 0));
-          if (k < 1) raf = requestAnimationFrame(tick);
-        };
-        raf = requestAnimationFrame(tick);
-      },
-      { threshold: 0.6 },
-    );
-    io.observe(el);
-    return () => {
-      io.disconnect();
-      cancelAnimationFrame(raf);
-    };
-  }, [reduced]);
-
-  const pill = "absolute top-5 rounded-full px-5 py-2.5 text-sm font-medium backdrop-blur-md sm:top-7";
-  const panel = "absolute bottom-20 hidden max-w-[min(25rem,40%)] rounded-2xl p-6 text-[0.98rem] leading-relaxed backdrop-blur-xl sm:block lg:p-7";
-  return (
-    <div className="bg-black py-20 text-white sm:py-28">
-      <div className="container-x">
-        <div
-          ref={ref}
-          className="true-tone photo-tone relative h-[clamp(26rem,74svh,46rem)] touch-pan-y select-none overflow-hidden rounded-[1.75rem] bg-[#222] shadow-[0_60px_120px_-50px_rgb(0_0_0/0.8)] ring-1 ring-white/10"
-          onPointerMove={(e) => e.buttons === 1 && move(e.clientX)}
-          onPointerDown={(e) => move(e.clientX)}
-        >
-          <div className="absolute inset-0">
-            <Image src={beforeImage} alt={altFor(beforeImage)} fill sizes="(min-width: 1024px) 80vw, 100vw" className="object-cover brightness-[0.85] contrast-[0.75] grayscale" />
-            <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/20" />
-            <span className={pill + " left-5 bg-black/55 text-white ring-1 ring-white/15 sm:left-7"}>Before</span>
-            <p className={panel + " left-7 bg-white/70 text-black"}>{before}</p>
-          </div>
-          <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${x}%)` }}>
-            <Image src={afterImage} alt={altFor(afterImage)} fill sizes="(min-width: 1024px) 80vw, 100vw" className="object-cover contrast-[1.12] grayscale" />
-            <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-            <span className={pill + " right-5 bg-white/85 text-black sm:right-7"}>After</span>
-            <p className={panel + " right-7 bg-black/55 text-right text-white ring-1 ring-white/10"}>{after}</p>
-          </div>
-          <span aria-hidden className="absolute inset-y-0 w-[2px] -translate-x-1/2 bg-white shadow-[0_0_24px_rgb(0_0_0/0.4)]" style={{ left: `${x}%` }} />
-          <span
-            aria-hidden
-            className="pointer-events-none absolute top-1/2 grid size-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-black shadow-[0_12px_40px_rgb(0_0_0/0.35)] ring-8 ring-white/25"
-            style={{ left: `${x}%` }}
-          >
-            <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" />
-            </svg>
-          </span>
-          <span aria-hidden className="pointer-events-none absolute bottom-6 left-1/2 inline-flex -translate-x-1/2 items-center gap-3 rounded-full bg-black/60 px-5 py-2.5 text-sm text-white ring-1 ring-white/15 backdrop-blur-md">
-            <span className="size-2 rounded-full bg-white" />
-            Drag to compare.
-          </span>
-          <input
-            type="range"
-            min={6}
-            max={94}
-            value={Math.round(x)}
-            onChange={(e) => {
-              touched.current = true;
-              setX(+e.target.value);
-            }}
-            aria-label="Compare before and after"
-            className="absolute inset-0 z-10 h-full w-full cursor-ew-resize opacity-0"
-          />
-        </div>
-        {/* Phones: the two texts under the photographs. */}
-        <div className="mt-8 grid gap-6 sm:hidden">
-          <div>
-            <p className="text-sm font-medium text-white/60">Before</p>
-            <p className="mt-2 leading-relaxed text-white/80">{before}</p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-white/60">After</p>
-            <p className="mt-2 leading-relaxed">{after}</p>
-          </div>
-        </div>
       </div>
     </div>
   );
