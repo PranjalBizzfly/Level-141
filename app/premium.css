@@ -140,7 +140,7 @@
   scale: 1;
 }
 .qf-line {
-  opacity: 0.28;
+  opacity: 0.4;
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .qf-line[data-on] {
@@ -211,6 +211,7 @@
 @media (prefers-reduced-motion: reduce) {
   .qf-img, .qf-img > img, .qf-line, .qf-rise, .spell-letter, .spell-letter::after, .spell-rise { transition: none !important; }
   .qf-rise { translate: 0 0; }
+  .qf-line { opacity: 1; }
 }
 
 /* OrbStatement: a soft monochrome glow, brightest at its core. */
@@ -261,3 +262,54 @@
 .quote-bar[data-state="run"] { animation: l141-quote-fill 5.5s linear both; }
 .quote-bar[data-state="hold"] { transform: scaleX(1); opacity: 0.6; }
 @keyframes l141-quote-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* StaggerCards: the offset grid, the tiles, and a one-time fly-in from the sides. */
+@media (min-width: 1024px) {
+  /* The rows stagger into the margins: the top one to the right, the lower to the left. */
+  .stagger-card { grid-column-start: var(--col); grid-row-start: var(--row); translate: calc(var(--side) * min(4rem, 4vw)) 0; }
+}
+/* Big screens: the gallery index of the reference — five columns edge to edge,
+   the heading over the first two (title at the top, button at the foot). */
+@media (min-width: 1536px) {
+  .stagger-cards { grid-template-columns: repeat(5, minmax(0, 1fr)); margin-inline: calc(50% - 50vw + 1rem); }
+  .stagger-card { grid-column-start: var(--col2); grid-row-start: var(--row2); translate: none; }
+  .stagger-card:not([data-in]) .stagger-fly { transform: translate3d(calc(var(--side2) * 100vw), 0, 0); }
+  .stagger-head { padding-left: clamp(1.5rem, 3vw, 4rem); }
+  .stagger-head > *, .stagger-head > * > div { height: 100%; }
+  .stagger-head > * > div { display: flex; flex-direction: column; justify-content: space-between; }
+}
+.stagger-tile {
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in oklab, var(--color-ink) 5%, transparent), transparent 60%),
+    var(--color-paper);
+  color: var(--color-ink);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--color-ink) 12%, transparent),
+    0 1px 2px rgb(0 0 0 / 0.04),
+    0 24px 48px -28px rgb(0 0 0 / 0.22);
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stagger-tile.is-dark {
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in oklab, var(--color-paper) 14%, transparent), transparent 60%),
+    var(--color-ink);
+  color: var(--color-paper);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08), 0 30px 60px -28px rgb(0 0 0 / 0.45);
+}
+.stagger-tile:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--color-ink) 18%, transparent),
+    0 2px 4px rgb(0 0 0 / 0.05),
+    0 40px 70px -30px rgb(0 0 0 / 0.3);
+}
+.stagger-tile.is-dark:hover { box-shadow: 0 2px 4px rgb(0 0 0 / 0.1), 0 44px 80px -30px rgb(0 0 0 / 0.55); }
+@media (prefers-reduced-motion: no-preference) {
+  /* A train: a row's tiles start together and keep their spacing — a gentle
+     pull away, a steady run, and a soft stop at the platform. */
+  .stagger-fly { transform: translate3d(calc(var(--side) * 100vw), 0, 0); }
+  .stagger-card[data-in] .stagger-fly {
+    transform: none;
+    transition: transform 1800ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+}

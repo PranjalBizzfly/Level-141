@@ -220,7 +220,7 @@ export function BrandsSpell({
   };
 
   return (
-    <section ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 55}lvh` }}>
+    <section ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 40}lvh` }}>
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
         <div className="container-x flex flex-1 flex-col justify-between pb-10 pt-16 sm:pt-28">
           {head}

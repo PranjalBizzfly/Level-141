@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { usePinProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
 import { altFor } from "@/lib/image-alts";
+import { useAutoSteps } from "@/components/sections/useAutoSteps";
 
 /**
  * How we architect growth — this page's own layouts (see .extract/ANIMATION-REGISTRY.md).
@@ -239,7 +240,7 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
   const turn = -pos * step;
 
   return (
-    <div ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 55}lvh` }}>
+    <div ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 40}lvh` }}>
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden pb-8 pt-16 sm:pt-28">
         <div className="container-x">
           <Head label={label} title={title} dark />
@@ -396,7 +397,9 @@ export function VerticalTabs({
   items: readonly { name: string; body: string; image?: string }[];
 }) {
   const reduced = useReducedMotion();
-  const [active, setActive] = useState(0);
+  const { ref, ...auto } = useAutoSteps(items.length, { rewind: true });
+  const active = auto.active;
+  const setActive = auto.goTo;
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const panel = useRef<HTMLDivElement>(null);
   const first = useRef(true);
@@ -432,7 +435,7 @@ export function VerticalTabs({
   const it = items[active];
 
   return (
-    <div className="py-24 sm:py-32 lg:py-40">
+    <div ref={ref} className="py-24 sm:py-32 lg:py-40">
       <div className="container-x">
         <Head label={label} title={title} />
         <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-16">

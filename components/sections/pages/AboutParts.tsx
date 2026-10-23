@@ -110,7 +110,7 @@ export function SplitStatement({
   const [ref, prog] = usePinProgress(!reduced);
   const p = reduced ? 1 : clamp(prog / 0.6);
   // Short travel so both halves stay inside the viewport mid-animation.
-  const off = (1 - p) * 8;
+  const off = (1 - p) * 4;
   const body = (
     <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
       <h2 className="font-display text-[clamp(1.7rem,3.72vw,3.35rem)] font-medium leading-[1.02] tracking-[-0.045em]">

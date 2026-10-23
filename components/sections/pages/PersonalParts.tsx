@@ -3,7 +3,8 @@
 import { altFor } from "@/lib/image-alts";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
-import { usePinProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
+import { useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
+import { useAutoSteps } from "@/components/sections/useAutoSteps";
 
 /**
  * Personal Brand Architecture — animated layouts used only on this page
@@ -223,8 +224,9 @@ export function PeelStack({
   foot?: ReactNode;
 }) {
   const reduced = useReducedMotion();
-  const [ref, p] = usePinProgress(!reduced);
   const n = items.length;
+  const { ref, bind, ...auto } = useAutoSteps(n, { rewind: true });
+  const p = auto.pos / Math.max(1, n - 1);
 
   if (reduced) {
     return (
@@ -249,13 +251,14 @@ export function PeelStack({
   // The last panel stays; every other one peels away in turn.
   const seg = 1 / Math.max(1, n - 1);
   return (
-    <div ref={ref} className="bg-black text-white" style={{ height: `${100 + (n - 1) * 70}lvh` }}>
-      <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden pb-10 pt-16 sm:pt-28">
+    <div ref={ref} className="bg-black text-white">
+      <div className="flex h-[100lvh] flex-col overflow-hidden pb-10 pt-16 sm:pt-28">
         <div className="container-x flex items-end justify-between gap-8">
           <Head label={label} title={title} dark />
           {foot ? <div className="hidden shrink-0 sm:block">{foot}</div> : null}
         </div>
         <div className="container-x relative mt-10 flex-1 [perspective:1800px]">
+          <div {...bind} className="relative mx-auto h-full max-w-6xl cursor-pointer [transform-style:preserve-3d]">
           {items.map((x, i) => {
             const k = i === n - 1 ? 0 : clamp((p - i * seg) / seg);
             const e = k * k;
@@ -279,7 +282,9 @@ export function PeelStack({
               </article>
             );
           })}
+          </div>
         </div>
+        <div className="container-x mt-8"><div className="mx-auto max-w-6xl"><StepBars names={items.map((x) => x.name)} {...auto} /></div></div>
         {foot ? <div className="container-x mt-8 sm:hidden">{foot}</div> : null}
       </div>
     </div>
@@ -384,14 +389,14 @@ export function Ring3D({
   dark?: boolean;
 }) {
   const reduced = useReducedMotion();
-  const [ref, p] = usePinProgress(!reduced);
   const n = items.length;
+  const { ref, bind, ...auto } = useAutoSteps(n);
   const fg = dark ? "var(--color-white)" : "var(--color-ink)";
   const bg = dark ? "var(--color-black)" : "var(--color-paper)";
   const shell = dark ? "bg-black text-white" : "bg-paper text-ink";
   const step = 360 / n;
-  const turn = p * step * (n - 1);
-  const front = Math.round(turn / step) % n;
+  const turn = auto.pos * step;
+  const front = auto.active;
 
   if (reduced) {
     return (
@@ -412,8 +417,8 @@ export function Ring3D({
   }
 
   return (
-    <div ref={ref} className={shell} style={{ height: `${100 + n * 35}lvh` }}>
-      <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden pt-16 sm:pt-28">
+    <div ref={ref} className={shell}>
+      <div className="flex h-[100lvh] flex-col overflow-hidden pb-10 pt-16 sm:pt-28">
         <div className="container-x">
           <Head label={label} title={title} text={text} dark={dark} />
         </div>
@@ -422,7 +427,7 @@ export function Ring3D({
           className="relative flex flex-1 items-center justify-center [--w:min(78vw,24rem)] [perspective:1600px]"
           style={{ "--r": `calc(var(--w) / 2 / ${Math.tan(Math.PI / n).toFixed(4)} + 1.5rem)` } as CSSProperties}
         >
-          <ol className="relative h-[min(60lvh,29rem)] w-[var(--w)] [transform-style:preserve-3d]" style={{ transform: `translateZ(calc(var(--r) * -1)) rotateY(${-turn}deg)` }}>
+          <ol {...bind} className="relative h-[min(60lvh,29rem)] cursor-pointer w-[var(--w)] [transform-style:preserve-3d]" style={{ transform: `translateZ(calc(var(--r) * -1)) rotateY(${-turn}deg)` }}>
             {items.map((x, i) => (
               <li
                 key={x.name}
@@ -449,8 +454,44 @@ export function Ring3D({
             ))}
           </ol>
         </div>
+        <div className="container-x mx-auto w-full max-w-3xl"><StepBars names={items.map((x) => x.name)} {...auto} /></div>
       </div>
     </div>
+  );
+}
+
+/** Clickable autoplay bars: the current one fills over the hold time, and
+ * holds while the section is paused. */
+export function StepBars({
+  names,
+  active,
+  paused,
+  goTo,
+  holdMs = 3000,
+  className = "",
+}: {
+  names: readonly string[];
+  active: number;
+  paused: boolean;
+  goTo: (i: number) => void;
+  holdMs?: number;
+  className?: string;
+}) {
+  return (
+    <span className={"flex gap-2 " + className}>
+      {names.map((name, i) => (
+        <button key={name} type="button" aria-label={name} aria-current={i === active || undefined} onClick={() => goTo(i)} className="flex h-6 flex-1 items-center">
+          <span className="h-[2px] w-full bg-current/15">
+            <span
+              key={i === active ? `on-${active}` : "off"}
+              className="quote-bar block h-full origin-left bg-current"
+              style={{ animationDuration: `${holdMs}ms` }}
+              data-state={i < active ? "done" : i === active ? (paused ? "hold" : "run") : "wait"}
+            />
+          </span>
+        </button>
+      ))}
+    </span>
   );
 }
 

@@ -64,16 +64,90 @@ export function useScrollFrame(fn: () => void, enabled: boolean) {
 }
 
 /** 0 → 1 while a tall track scrolls past its pinned, one-screen stage. */
+/** How much extra progress per second the steps gain while the visitor is scrolling. */
+const AUTO_RATE = 0.12;
+/** The visitor counts as "scrolling" for this long after their last scroll. */
+const ACTIVE_MS = 350;
+
+/**
+ * Progress (0 → 1) through a pinned, step-based section. While the visitor is
+ * actively scrolling forward inside it, the steps also glide ahead on their
+ * own (never moving the page); when they stop, the glide pauses on the step
+ * in view, and it resumes when they scroll on. Scrolling back simply follows
+ * the scroll, and leaving the section resets the glide.
+ */
 export function usePinProgress(enabled: boolean) {
   const ref = useRef<HTMLDivElement>(null);
   const [p, setP] = useState(0);
+  const scrollP = useRef(0);
+  const auto = useRef(0);
+  const lastScroll = useRef(0);
+  const lastY = useRef(0);
+
   useScrollFrame(() => {
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
     const run = r.height - window.innerHeight;
-    setP(run > 0 ? clamp(-r.top / run) : 0);
+    const s = run > 0 ? clamp(-r.top / run) : 0;
+    const y = window.scrollY;
+    const dy = y - lastY.current;
+    lastY.current = y;
+    scrollP.current = s;
+    // Outside the pin, or scrolling back: progress simply follows the scroll.
+    if (s <= 0 || s >= 1 || dy < 0) auto.current = s;
+    setP(Math.max(s, auto.current));
   }, enabled);
+
+  useEffect(() => {
+    if (!enabled) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // "Still scrolling" comes from the visitor's own input (wheel, touch, keys),
+    // so the smooth-scroll easing after a stopped gesture never counts.
+    const touchY = { v: 0 };
+    const mark = () => (lastScroll.current = performance.now());
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY > 0) mark();
+    };
+    const onTouchStart = (e: TouchEvent) => (touchY.v = e.touches[0]?.clientY ?? 0);
+    const onTouchMove = (e: TouchEvent) => {
+      const y = e.touches[0]?.clientY ?? 0;
+      if (y < touchY.v) mark();
+      touchY.v = y;
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (["ArrowDown", "PageDown", " ", "Spacebar"].includes(e.key)) mark();
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("keydown", onKey);
+    let raf = 0;
+    let prev = performance.now();
+    const tick = (t: number) => {
+      const dt = Math.min(0.05, (t - prev) / 1000);
+      prev = t;
+      const s = scrollP.current;
+      const active = t - lastScroll.current < ACTIVE_MS;
+      if (active && s > 0 && s < 1) {
+        const next = Math.min(1, Math.max(auto.current, s) + AUTO_RATE * dt);
+        if (next !== auto.current) {
+          auto.current = next;
+          setP(Math.max(s, next));
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [enabled]);
+
   return [ref, p] as const;
 }
 

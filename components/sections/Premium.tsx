@@ -111,7 +111,7 @@ export function Mosaic({ items, kicker }: { items: readonly string[]; kicker: st
             key={t}
             className={
               "mosaic-tile flex min-h-[13rem] flex-col justify-between rounded-[1.25rem] p-9 sm:p-10 " +
-              (i % 3 === 1 ? "bg-black text-white dark:bg-white dark:text-black" : "border border-current/15")
+              (i % 3 === 1 ? "bg-ink text-paper" : "border border-current/15")
             }
             style={{ "--mx": `${x}%`, "--my": `${y}%`, "--mz": `${z}px`, "--mr": `${r}deg` } as CSSProperties}
           >

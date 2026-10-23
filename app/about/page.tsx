@@ -10,7 +10,7 @@ import {
 } from "@/components/sections/pages/AboutParts";
 import { BeliefDeck, Layer, Layers } from "@/components/sections/HomeInteractive";
 import { WhySplit } from "@/components/sections/HomeEditorial";
-import { StackCards } from "@/components/sections/Layouts";
+import { StaggerCards } from "@/components/sections/StaggerCards";
 import { RefIntro, RefSection, RefStatement } from "@/components/sections/Ref";
 import { ScrubText } from "@/components/motion/ScrubText";
 import { ButtonLink } from "@/components/ui/primitives";
@@ -172,7 +172,7 @@ export default function AboutPage() {
         {/* What we actually sell (moved from home, keeps its pattern) */}
         <Layer pattern="doors">
           <RefSection tone="ink">
-            <div className="flex min-h-[70svh] items-center justify-center">
+            <div className="flex min-h-[45svh] items-center justify-center">
               <RefStatement
                 reveal="mask"
                 sub={
@@ -192,16 +192,18 @@ export default function AboutPage() {
         {/* How Level141 works — process as stacked cards (moved from home, keeps its pattern) */}
         <Layer pattern="split">
           <RefSection>
-            <RefIntro
-              label="How Level141 works"
-              title={
-                <>
-                  We don&apos;t start with deliverables. <span className="serif-accent">We start with the level you&apos;re trying to reach</span>
-                </>
+            <StaggerCards
+              head={
+                <RefIntro
+                  label="How Level141 works"
+                  title={
+                    <>
+                      We don&apos;t start with deliverables. <span className="serif-accent">We start with the level you&apos;re trying to reach</span>
+                    </>
+                  }
+                  action={{ label: "How we architect growth", href: routes.how }}
+                />
               }
-              action={{ label: "How we architect growth", href: routes.how }}
-            />
-            <StackCards
               items={levelProcess.map((s) => ({ n: s.n, name: s.name, line: s.line, body: s.body, aside: s.question }))}
             />
           </RefSection>
