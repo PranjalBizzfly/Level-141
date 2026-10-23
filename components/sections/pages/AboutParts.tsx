@@ -80,12 +80,6 @@ export function CounterHero({
         <Image src={image} alt={altFor(image)} fill priority sizes="100vw" className="object-cover grayscale" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/55" />
       </div>
-      <p
-        aria-hidden
-        className="font-display pointer-events-none absolute inset-x-0 top-[12svh] select-none text-center text-[clamp(5.95rem,23.8vw,21rem)] font-medium leading-none tracking-[-0.07em] tabular-nums text-white [text-shadow:0_8px_60px_rgb(0_0_0/0.55)]"
-      >
-        {value}
-      </p>
       <div className="mx-auto w-full max-w-7xl px-5 pb-14 sm:px-8 sm:pb-20">
         <p className="text-sm text-white/60">{eyebrow}</p>
         <h1 className="font-display mt-6 text-[clamp(2.21rem,4.34vw,3.72rem)] font-medium leading-[0.98] tracking-[-0.045em]">{title}</h1>
