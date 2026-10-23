@@ -42,13 +42,13 @@ export default async function InsightArticle({ params }: Props) {
           {category ? <p className="eyebrow mt-10 text-gold sm:mt-10">{category.name}</p> : null}
           <h1 className="display mt-6 text-[2.02rem] sm:mt-6 sm:text-4xl lg:text-5xl">{article.title}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-paper/70 sm:mt-6 sm:text-xl">{article.summary}</p>
-          <p className="mt-10 text-sm text-paper/50">
+          <p className="mt-10 text-sm text-paper/70">
             {article.author ? `${article.author} · ` : null}
             <time dateTime={article.publishedAt}>{dateFmt.format(new Date(article.publishedAt))}</time>
           </p>
         </div>
       </header>
-      <div className="bg-paper py-24 sm:py-32 lg:py-40">
+      <div className="bg-paper py-20 sm:py-24 lg:py-28">
         <div className="container-x max-w-4xl space-y-5 text-base leading-[1.75] text-ink/85 sm:space-y-6 sm:text-lg">
           {article.body.map((block, i) => {
             switch (block.type) {

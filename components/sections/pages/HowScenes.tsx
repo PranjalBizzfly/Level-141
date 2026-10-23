@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { usePinProgress, useReducedMotion } from "../HomeInteractive";
+import { useArriveProgress, usePinProgress, useReducedMotion } from "../HomeInteractive";
 import { altFor } from "@/lib/image-alts";
 
 /**
@@ -32,7 +32,8 @@ const clamp = (v: number) => Math.min(1, Math.max(0, v));
  */
 export function OrbStatement({ text, accent, sub }: { text: string; accent?: string; sub?: ReactNode }) {
   const reduced = useReducedMotion();
-  const [ref, p] = usePinProgress(!reduced);
+  // Plays as the section scrolls into view (not pinned).
+  const [ref, p] = useArriveProgress(!reduced);
   const ease = (v: number) => 1 - (1 - v) * (1 - v) * (1 - v);
   const grow = reduced ? 1 : ease(clamp(p / 0.6));
   const lit = reduced ? 1 : ease(clamp((p - 0.18) / 0.4));
@@ -57,8 +58,8 @@ export function OrbStatement({ text, accent, sub }: { text: string; accent?: str
   if (reduced) return <section className="relative bg-black py-20 text-white sm:py-24 lg:py-24">{body}</section>;
 
   return (
-    <section ref={ref} className="relative bg-black text-white" style={{ height: "220lvh" }}>
-      <div className="sticky top-0 flex h-[100lvh] items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative bg-black text-white">
+      <div className="relative flex min-h-[100lvh] items-center justify-center overflow-hidden py-20">
         {/* The light: grows from a point to fill the frame. */}
         <div
           aria-hidden
@@ -144,7 +145,7 @@ export function QuestionFocus({
               </span>
             </div>
           </div>
-          <ol className="lg:col-span-6 lg:col-start-7">
+          <ol className="swipe-sm lg:col-span-6 lg:col-start-7">
             {items.map((q, i) => (
               <li
                 key={q.name}
@@ -220,7 +221,7 @@ export function BrandsSpell({
   };
 
   return (
-    <section ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 40}lvh` }}>
+    <section ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 25}lvh` }}>
       <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
         <div className="container-x flex flex-1 flex-col justify-between pb-10 pt-16 sm:pt-28">
           {head}

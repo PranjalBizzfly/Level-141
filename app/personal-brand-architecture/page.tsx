@@ -124,7 +124,7 @@ export default function PersonalBrandPage() {
               <>
                 <p>
                   Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived
-                  experience into a structured personal growth asset. It is designed to help accomplished people become
+                  experience into a structured personal growth asset. The product is designed to help accomplished people become
                   clearer, more credible, more influential and more commercially relevant without manufacturing a
                   persona.
                 </p>
@@ -146,7 +146,7 @@ export default function PersonalBrandPage() {
                 Many accomplished leaders have more value than visibility
               </>
             }
-            text="Others have visibility without a coherent reputation system. The market therefore sees fragments rather than a clear leadership proposition."
+            text="Others have visibility without a coherent reputation system. Their expertise sits across years of work, disconnected profiles, speeches, media mentions, relationships and achievements. The market therefore sees fragments rather than a clear leadership proposition."
             items={pbaPains.map((p) => ({ name: p.pain, body: p.looks, meta: p.cost }))}
           />
         </section>
@@ -157,10 +157,10 @@ export default function PersonalBrandPage() {
             label="VIBE™ — The four dimensions of Personal Brand Architecture"
             title={
               <>
-                Architected through our proprietary <span className="serif-accent">VIBE™ Framework</span>
+                That&apos;s why we architect personal brands through our proprietary <span className="serif-accent">VIBE™ Framework</span>
               </>
             }
-            text="VIBE™ answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
+            text="VIBE™ is the organizing logic of the product. It answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
           />
           <div className="mt-16 sm:mt-24">
             <VibeExplorer />
@@ -260,10 +260,10 @@ export default function PersonalBrandPage() {
         {/* Principles — a ledger */}
         <section className="bg-paper text-ink">
           <Ledger
-            label="Guiding principles"
+            label="Personal Brand Architecture™"
             title={
               <>
-                Truth before theatre. Authority before vanity
+                Guiding Principles
               </>
             }
             items={pbaPrinciples.map((p) => ({ name: p.name, body: p.body }))}

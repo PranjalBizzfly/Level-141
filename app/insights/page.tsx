@@ -72,7 +72,7 @@ export default function InsightsPage() {
         {/* Articles (shown only once real, approved articles exist) — a static editorial list */}
         {articles.length ? (
           <section aria-labelledby="latest-title" className="bg-black text-white">
-            <div className="container-x py-24 sm:py-32 lg:py-40">
+            <div className="container-x py-20 sm:py-24 lg:py-28">
               <h2 id="latest-title" className="sr-only">
                 Insights
               </h2>

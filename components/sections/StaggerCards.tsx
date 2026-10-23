@@ -78,17 +78,20 @@ export function StaggerCards({
   }, []);
 
   return (
+    <>
+    {/* Phones: the heading sits above the tiles, which swipe sideways in one row. */}
+    {head ? <div className="pb-10 sm:hidden">{head}</div> : null}
     <ol
       ref={ref}
       className={
-        "stagger-cards relative grid gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-16 " +
+        "stagger-cards swipe-sm relative grid gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-16 " +
         (side ? "stagger-side lg:gap-y-5 " : "lg:gap-y-40 ") +
         (compact ? "lg:grid-cols-4 2xl:gap-x-4" : "lg:grid-cols-3")
       }
       style={{ "--xl-cols": xlCols, "--rows-lg": rows(lgCols, 1), "--rows-xl": rows(xlCols, 2) } as CSSProperties}
     >
       {head ? (
-        <li className="stagger-head list-none pb-10 sm:col-span-2 lg:[grid-area:1/1/2/2] lg:pb-0 lg:pr-10 2xl:[grid-area:1/1/2/3]">
+        <li className="stagger-head list-none max-sm:hidden sm:col-span-2 sm:pb-10 lg:[grid-area:1/1/2/2] lg:pb-0 lg:pr-10 2xl:[grid-area:1/1/2/3]">
           {head}
         </li>
       ) : null}
@@ -153,5 +156,6 @@ export function StaggerCards({
         );
       })}
     </ol>
+    </>
   );
 }

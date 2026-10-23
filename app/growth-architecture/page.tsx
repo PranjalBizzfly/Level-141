@@ -74,7 +74,7 @@ export default function GrowthArchitecturePage() {
         title={
           <>
             <span className="block">Your business</span>
-            <span className="block text-white/55">doesn&apos;t need more</span>
+            <span className="block text-white/70">doesn&apos;t need more</span>
             <span className="block">disconnected</span>
             <span className="block">growth initiatives.</span>
           </>
@@ -142,7 +142,7 @@ export default function GrowthArchitecturePage() {
                 Core operating <span className="serif-accent">logic</span>
               </>
             }
-            text="Level141 does not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
+            text="Level141 is a Growth Architecture Company. We do not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
           />
           <div className="mt-16 sm:mt-24">
             <FlowChain items={gaOperatingLogic} highlight={["Current Level", "Next Level", "Scale"]} />
@@ -152,7 +152,7 @@ export default function GrowthArchitecturePage() {
         {/* PEAK — the signature ascent, on black */}
         <RefSection id="peak" tone="ink">
           <RefIntro
-            label="PEAK™: From presence to momentum"
+            label="PEAK™"
             title={
               <>
                 From being present in the market to <span className="serif-accent">self-reinforcing growth</span>
@@ -174,7 +174,7 @@ export default function GrowthArchitecturePage() {
                 The operating architecture <span className="serif-accent">beneath PEAK™</span>
               </>
             }
-            text="BRANDS™ ensures the major market-facing growth levers are not managed as separate campaigns. Customer & Market is a cross-cutting foundation: every lever is built around the defined ICP, buying context and market reality."
+            text="BRANDS™ is the operating architecture beneath PEAK™. It ensures that the major market-facing growth levers are not managed as separate campaigns. Customer & Market is a cross-cutting foundation across all six BRANDS™ levers. It is not a separate campaign; every lever must be built around the defined ICP, buying context and market reality."
           />
           <div className="mt-16 sm:mt-24">
             <BrandsSystem detailed tone="light" />
@@ -189,13 +189,13 @@ export default function GrowthArchitecturePage() {
         {/* Growth gap — the bridge, one stage at a time */}
         <section>
           <Bridge
-            label="Growth gap architecture"
+            label="Growth Architecture™"
             title={
               <>
-                Not a list of recommendations. A prioritized bridge
+                Growth Gap Architecture
               </>
             }
-            text="The central deliverable is a prioritized bridge between Current Level and Next Level."
+            text="The central deliverable is not a list of recommendations. It is a prioritized bridge between Current Level and Next Level."
             items={gaGapSteps.map((s) => ({ name: s.name, body: s.q, meta: s.out }))}
           />
         </section>
@@ -226,7 +226,7 @@ export default function GrowthArchitecturePage() {
             label="Trigger events"
             title={
               <>
-                When a company needs <span className="text-white/50">Growth Architecture</span>
+                When a company needs <span className="text-white/70">Growth Architecture</span>
               </>
             }
             items={gaTriggers.map((t, i) => ({ name: t.name, body: t.why, image: triggerImages[i % triggerImages.length] }))}
@@ -243,7 +243,7 @@ export default function GrowthArchitecturePage() {
               </>
             }
             steps={gaImpactChain}
-            foot="Level141 connects architecture to business movement without claiming that marketing alone controls revenue. Every client dashboard should separate activity metrics, leading indicators, pipeline metrics and business outcomes."
+            foot="Level141 must connect architecture to business movement without claiming that marketing alone controls revenue. Every client dashboard should separate activity metrics, leading indicators, pipeline metrics and business outcomes."
           />
         </section>
 

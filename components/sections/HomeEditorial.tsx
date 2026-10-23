@@ -127,7 +127,7 @@ export function Relay({
 
   const headBlock = (
     <div className="max-w-xl">
-      <p className="text-sm text-white/55">{label}</p>
+      <p className="text-sm text-white/70">{label}</p>
       <h2 className="font-display mt-3 text-[clamp(1.5rem,2.34vw,2.16rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
     </div>
   );
@@ -238,7 +238,7 @@ export function WhySplit({
     };
   }, [go]);
   return (
-    <div className="container-x py-24 sm:py-32 lg:py-40">
+    <div className="container-x py-20 sm:py-24 lg:py-28">
       <div className="max-w-2xl">
         <p className="text-sm text-muted">{label}</p>
         <h2 className="font-display mt-4 text-[clamp(1.5rem,2.34vw,2.16rem)] font-medium leading-[1.1] tracking-[-0.03em]">{title}</h2>
@@ -292,7 +292,7 @@ export function WhySplit({
                       type="button"
                       onFocus={() => go(i)}
                       aria-pressed={on}
-                      className="text-left outline-none focus-visible:underline focus-visible:underline-offset-4"
+                      className="text-left focus-visible:underline focus-visible:underline-offset-4"
                     >
                       {x.name.replace(/\.$/, "")}
                     </button>
@@ -382,7 +382,7 @@ export function InsightGallery({
 
   if (!pin) {
     return (
-      <div className="py-24 sm:py-32 lg:py-40">
+      <div className="py-20 sm:py-24 lg:py-28">
         <div className="container-x">{head}</div>
         <div className="mt-12 pl-[max(1.25rem,calc((100vw-80rem)/2))] sm:mt-14">{cards}</div>
       </div>

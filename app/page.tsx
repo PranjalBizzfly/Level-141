@@ -28,7 +28,7 @@ const frameworks = [
     id: "igf",
     name: "IGF™",
     full: "Integrated Growth Framework",
-    list: ["Connect the growth engine", "Growth rarely comes from one function", "Creates alignment between interconnected drivers"],
+    list: ["Connect the growth engine", "Growth rarely comes from one function", "IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment between them"],
   },
   { id: "brands", name: "BRANDS™", full: "Six dimensions of growth", list: brandsLevers.map((l) => l.name) },
   { id: "peak", name: "PEAK™", full: "From presence to momentum", list: peakStages.map((p) => p.name) },
@@ -115,7 +115,7 @@ export default function HomePage() {
               label="The Level141 difference"
               title={
                 <>
-                  Most businesses manage growth in departments. <span className="text-white/50">We see one architecture</span>
+                  Most businesses manage growth in departments. <span className="text-white/70">We see one architecture</span>
                 </>
               }
               chain={growthChain}

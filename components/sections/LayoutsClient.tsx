@@ -44,7 +44,7 @@ export function BigList({ items }: {
               </span>
             </>
           );
-          const cls = "biglist-item flex flex-col gap-4 py-12 outline-none sm:flex-row sm:items-center sm:justify-between sm:gap-16 sm:py-24 lg:py-28";
+          const cls = "biglist-item flex flex-col gap-4 py-12 sm:flex-row sm:items-center sm:justify-between sm:gap-16 sm:py-24 lg:py-28";
           return (
             <li
               key={it.key}

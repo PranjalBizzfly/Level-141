@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
+import { MarqueePause } from "@/components/sections/MarqueePause";
 
 /**
  * Section layouts, each chosen for what its content is rather than one row
@@ -169,7 +170,8 @@ export function Marquee({ items, label }: { items: readonly string[]; label: str
     </div>
   );
   return (
-    // Full bleed (edge to edge of the screen), fading out at both sides instead of a hard cut.
+    <>
+    {/* Full bleed (edge to edge of the screen), fading out at both sides instead of a hard cut. */}
     <div className="marquee relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden py-2 font-display text-[clamp(1.78rem,3.22vw,2.94rem)] font-medium leading-[1.12] tracking-[-0.04em] [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)] sm:mt-16">
       <ul className="sr-only" aria-label={label}>
         {items.map((t) => (
@@ -179,6 +181,8 @@ export function Marquee({ items, label }: { items: readonly string[]; label: str
       {row(false)}
       {row(true)}
     </div>
+    <MarqueePause />
+    </>
   );
 }
 

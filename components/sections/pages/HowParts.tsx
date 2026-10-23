@@ -5,6 +5,8 @@ import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 
 import { usePinProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
 import { altFor } from "@/lib/image-alts";
 import { useAutoSteps } from "@/components/sections/useAutoSteps";
+import { PauseButton } from "@/components/ui/PauseButton";
+import { StepBars } from "@/components/sections/pages/PersonalParts";
 
 /**
  * How we architect growth — this page's own layouts (see .extract/ANIMATION-REGISTRY.md).
@@ -15,16 +17,6 @@ const n2 = (i: number) => String(i + 1).padStart(2, "0");
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
 /** Scroll the page so a pinned track shows step i of n. */
-function scrollToStep(track: HTMLElement | null, i: number, n: number) {
-  if (!track) return;
-  const r = track.getBoundingClientRect();
-  const run = r.height - window.innerHeight;
-  const y = window.scrollY + r.top + run * (n > 1 ? i / (n - 1) : 0) * 0.98;
-  const lenis = (window as unknown as { __lenis?: { scrollTo: (y: number) => void } }).__lenis;
-  if (lenis) lenis.scrollTo(y);
-  else window.scrollTo({ top: y, behavior: "smooth" });
-}
-
 function Head({ label, title, text, dark }: { label?: string; title?: ReactNode; text?: ReactNode; dark?: boolean }) {
   return (
     <div className="@container w-full">
@@ -99,7 +91,7 @@ export function PortalHero({
               <p className="animate-fade text-sm uppercase tracking-[0.22em] text-white/60">{eyebrow}</p>
               <h1
                 data-split="load"
-                className="font-display mt-8 text-[clamp(1.95rem,3.72vw,3.72rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
+                className="font-display mt-8 text-[clamp(1.95rem,3.72vw,3.72rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/70"
               >
                 {title}
               </h1>
@@ -208,8 +200,10 @@ type Stage = { name: string; line: string; body: string; question: string };
 /** Stages round a circle that turns with scroll; the stage at the top speaks from the centre. */
 export function Orbit({ label, title, stages, foot }: { label?: string; title?: ReactNode; stages: readonly Stage[]; foot?: ReactNode }) {
   const reduced = useReducedMotion();
-  const [ref, p] = usePinProgress(!reduced);
   const n = stages.length;
+  // Turns by itself (not pinned): each stage comes to the top in turn; clicking
+  // a stage brings it round, clicking the panel holds it.
+  const { ref, bind, ...auto } = useAutoSteps(n, { holdMs: 4200 });
   const step = 360 / n;
 
   if (reduced) {
@@ -234,14 +228,13 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
     );
   }
 
-  const pos = p * (n - 1);
-  const active = Math.round(pos);
+  const active = auto.active;
   const s = stages[active];
-  const turn = -pos * step;
+  const turn = -auto.pos * step;
 
   return (
-    <div ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 40}lvh` }}>
-      <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden pb-8 pt-16 sm:pt-28">
+    <div ref={ref} className="bg-black text-white">
+      <div className="flex min-h-[100lvh] flex-col overflow-hidden pb-12 pt-16 sm:pt-28">
         <div className="container-x">
           <Head label={label} title={title} dark />
         </div>
@@ -257,7 +250,7 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
                 <button
                   key={x.name}
                   type="button"
-                  onClick={() => scrollToStep(ref.current, i, n)}
+                  onClick={() => auto.show(i)}
                   aria-current={on ? "step" : undefined}
                   className="absolute flex min-h-10 -translate-x-1/2 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border px-3.5 text-[0.95rem] font-medium sm:text-base"
                   style={{
@@ -282,11 +275,16 @@ export function Orbit({ label, title, stages, foot }: { label?: string; title?: 
               </p>
             </div>
           </div>
-          <div className="min-h-[9.5rem] lg:col-span-6" aria-live="polite">
-            <h3 className="font-display text-[clamp(1.6rem,2.88vw,2.72rem)] font-medium leading-[1.02] tracking-[-0.04em]">{s.name}</h3>
-            <p className="mt-4 text-[1.0625rem] text-white sm:text-lg">{s.line}</p>
-            <p className="mt-2 max-w-xl text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{s.body}</p>
-            {foot && active === n - 1 ? <p className="mt-6 border-t border-white/15 pt-4 text-base text-white/85">{foot}</p> : null}
+          <div {...bind} className="min-h-[9.5rem] cursor-pointer lg:col-span-6" aria-live="polite">
+            <div key={active} className="relay-in">
+              <h3 className="font-display text-[clamp(1.6rem,2.88vw,2.72rem)] font-medium leading-[1.02] tracking-[-0.04em]">{s.name}</h3>
+              <p className="mt-4 text-[1.0625rem] text-white sm:text-lg">{s.line}</p>
+              <p className="mt-2 max-w-xl text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{s.body}</p>
+            </div>
+            <div className="mt-8 max-w-xl">
+              <StepBars names={stages.map((x) => x.name)} {...auto} />
+            </div>
+            {foot ? <p className="mt-6 border-t border-white/15 pt-4 text-base text-white/85">{foot}</p> : null}
           </div>
         </div>
       </div>
@@ -435,9 +433,12 @@ export function VerticalTabs({
   const it = items[active];
 
   return (
-    <div ref={ref} className="py-24 sm:py-32 lg:py-40">
+    <div ref={ref} className="py-20 sm:py-24 lg:py-28">
       <div className="container-x">
-        <Head label={label} title={title} />
+        <div className="flex items-end justify-between gap-6">
+          <Head label={label} title={title} />
+          {!reduced ? <PauseButton paused={auto.paused} onToggle={auto.toggle} label="the tabs" /> : null}
+        </div>
         <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div role="tablist" aria-orientation="vertical" aria-label={label} onKeyDown={onKey} className="border-t border-line-strong lg:col-span-5">
             {items.map((x, i) => {

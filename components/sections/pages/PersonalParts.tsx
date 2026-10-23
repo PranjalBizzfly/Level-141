@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import Image from "next/image";
 import { useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
 import { useAutoSteps } from "@/components/sections/useAutoSteps";
+import { PauseButton } from "@/components/ui/PauseButton";
 
 /**
  * Personal Brand Architecture — animated layouts used only on this page
@@ -103,7 +104,7 @@ export function SpotlightText({ text, accent, sub }: { text: string; accent?: st
   );
   const cls = "font-display text-[clamp(1.75rem,2.96vw,3rem)] font-medium leading-[1.08] tracking-[-0.035em]";
   return (
-    <div className="bg-black py-20 text-white sm:py-28 sm:py-32 lg:py-40">
+    <div className="bg-black py-20 text-white sm:py-20 sm:py-24 lg:py-28">
       {/* Editorial split: the label introduces the statement from the left; the statement runs wide on the right. */}
       <div className="container-x grid gap-8 lg:grid-cols-12 lg:gap-16">
         {sub ? (
@@ -404,7 +405,7 @@ export function Ring3D({
 
   if (reduced) {
     return (
-      <div className={shell + " py-24 sm:py-32 lg:py-40"}>
+      <div className={shell + " py-20 sm:py-24 lg:py-28"}>
         <div className="container-x">
           <Head label={label} title={title} text={text} dark={dark} />
           <ol className="mt-12 grid gap-3 lg:gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -521,6 +522,7 @@ export function StepBars({
   active,
   paused,
   goTo,
+  toggle,
   holdMs = 3000,
   className = "",
 }: {
@@ -528,11 +530,14 @@ export function StepBars({
   active: number;
   paused: boolean;
   goTo: (i: number) => void;
+  /** When given, a pause / play button leads the bars. */
+  toggle?: () => void;
   holdMs?: number;
   className?: string;
 }) {
   return (
-    <span className={"flex gap-2 " + className}>
+    <span className={"flex items-center gap-2 " + className}>
+      {toggle ? <PauseButton paused={paused} onToggle={toggle} className="mr-2" /> : null}
       {names.map((name, i) => (
         <button key={name} type="button" aria-label={name} aria-current={i === active || undefined} onClick={() => goTo(i)} className="flex h-6 flex-1 items-center">
           <span className="h-[2px] w-full bg-current/15">

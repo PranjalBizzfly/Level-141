@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { usePinProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
+import { useArriveProgress, useReducedMotion, useScrollFrame } from "@/components/sections/HomeInteractive";
 import { altFor } from "@/lib/image-alts";
 
 /**
@@ -107,7 +107,8 @@ export function SplitStatement({
   aside?: ReactNode;
 }) {
   const reduced = useReducedMotion();
-  const [ref, prog] = usePinProgress(!reduced);
+  // Plays as the statement scrolls into view (not pinned).
+  const [ref, prog] = useArriveProgress(!reduced);
   const p = reduced ? 1 : clamp(prog / 0.6);
   // Short travel so both halves stay inside the viewport mid-animation.
   const off = (1 - p) * 4;
@@ -148,8 +149,8 @@ export function SplitStatement({
   );
   if (reduced) return <div className="overflow-hidden bg-black py-20 text-white sm:py-24 lg:py-24">{body}</div>;
   return (
-    <div ref={ref} className="relative h-[220lvh] bg-black text-white">
-      <div className="sticky top-0 flex h-[100lvh] items-center overflow-hidden">{body}</div>
+    <div ref={ref} className="relative bg-black text-white">
+      <div className="flex min-h-[100lvh] items-center overflow-hidden py-20 sm:py-24">{body}</div>
     </div>
   );
 }

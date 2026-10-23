@@ -14,6 +14,7 @@ import { cx } from "@/components/ui/primitives";
 export function VibeExplorer() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState<"forward" | "back">("forward");
+  const [focusOpen, setFocusOpen] = useState(false);
   const select = (i: number) => {
     setDirection(i >= active ? "forward" : "back");
     setActive(i);
@@ -36,10 +37,6 @@ export function VibeExplorer() {
   return (
     <div>
       {/* The four pillars as framed cards: number, name, tag, serif letter and arrow. */}
-      <div aria-hidden className="mb-6 flex items-center gap-8">
-        <span className="eyebrow tracking-[0.3em] text-paper-muted">The 4 pillars</span>
-        <span className="h-px w-36 bg-paper/25" />
-      </div>
       <div
         role="tablist"
         aria-label="VIBE™ dimensions"
@@ -81,7 +78,7 @@ export function VibeExplorer() {
                 aria-hidden
                 className={cx(
                   "vibe-letter serif-accent order-last mt-auto flex w-full items-end justify-between text-5xl leading-[0.85] sm:text-6xl",
-                  selected ? "text-paper/80" : "text-paper/45",
+                  selected ? "text-paper/80" : "text-paper/70",
                 )}
               >
                 {d.letter}
@@ -117,7 +114,7 @@ export function VibeExplorer() {
             hidden={i !== active}
             tabIndex={0}
             className={cx(
-              "grid gap-16 outline-none lg:grid-cols-12 lg:gap-x-8",
+              "grid gap-16 lg:grid-cols-12 lg:gap-x-8",
               direction === "forward" ? "animate-slide-from-right" : "animate-slide-from-left",
             )}
           >
@@ -130,8 +127,19 @@ export function VibeExplorer() {
               </h3>
               <p className="measure mt-8 text-lg leading-relaxed text-paper/75">{d.body}</p>
 
-              <p className="eyebrow mt-12 border-t border-paper/15 pt-8 tracking-[0.3em] text-paper-muted">Architecture focus</p>
-              <ul className="mt-8 grid gap-x-12 gap-y-2 sm:grid-cols-2">
+              <p className="eyebrow mt-12 border-t border-paper/15 pt-8 tracking-[0.3em] text-paper-muted max-sm:hidden">Architecture focus</p>
+              {/* Phones: the focus list folds behind its own label, so the pillar reads in one screen. */}
+              <button
+                type="button"
+                aria-expanded={focusOpen}
+                aria-controls={`${uid}-focus`}
+                onClick={() => setFocusOpen((v) => !v)}
+                className="eyebrow mt-10 flex w-full items-center justify-between border-t border-paper/15 pt-6 tracking-[0.3em] text-paper-muted sm:hidden"
+              >
+                Architecture focus
+                <span aria-hidden className={cx("text-base transition-transform duration-300", focusOpen && "rotate-45")}>+</span>
+              </button>
+              <ul id={`${uid}-focus`} className={cx("mt-8 grid gap-x-12 gap-y-2 sm:grid-cols-2", !focusOpen && "max-sm:hidden")}>
                 {d.focus.map((f) => (
                   <li
                     key={f}

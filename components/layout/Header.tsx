@@ -205,7 +205,7 @@ export function Header() {
                     aria-current={active ? "page" : undefined}
                     className={cx(
                       "font-display block py-1 text-[clamp(1.9rem,3.6vw,3.25rem)] font-medium leading-[1.1] tracking-[-0.035em] transition-colors duration-300",
-                      active ? "text-white" : "text-white/50 hover:text-white",
+                      active ? "text-white" : "text-white/70 hover:text-white",
                     )}
                   >
                     {item.label}
@@ -240,7 +240,7 @@ export function Header() {
             ))}
           </div>
         </nav>
-        <div className="container-x flex flex-col gap-2 pb-10 text-sm text-white/55 sm:flex-row sm:justify-between">
+        <div className="container-x flex flex-col gap-2 pb-10 text-sm text-white/70 sm:flex-row sm:justify-between">
           <p>{site.brandLine}</p>
           <p>
             Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}

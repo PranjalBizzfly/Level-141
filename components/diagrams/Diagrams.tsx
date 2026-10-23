@@ -290,7 +290,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
 
       <ol
         className={cx(
-          "grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:col-span-7",
+          "swipe-sm grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:col-span-7 max-sm:rounded-none max-sm:border-0 max-sm:bg-transparent",
           dark ? "border-line-dark bg-line-dark" : "border-line bg-line",
         )}
       >
@@ -299,7 +299,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
             as="li"
             key={l.letter}
             delay={i * 70}
-            className={dark ? "bg-ink" : "bg-surface"}
+            className={(dark ? "bg-ink" : "bg-surface") + " max-sm:rounded-2xl max-sm:border " + (dark ? "max-sm:border-line-dark" : "max-sm:border-line")}
           >
             <div
               data-lever-item={l.letter}

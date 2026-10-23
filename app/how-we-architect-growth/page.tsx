@@ -2,7 +2,7 @@ import { PeakAscent } from "@/components/diagrams/Diagrams";
 import { IgfConnect, LqLevels } from "@/components/diagrams/FrameworkVisuals";
 import { FrameworkNav } from "@/components/sections/FrameworkNav";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { RefIntro, RefSection, RefStatement } from "@/components/sections/Ref";
+import { RefIntro, RefSection } from "@/components/sections/Ref";
 import { Timeline } from "@/components/sections/Layouts";
 import {
   ExpandRows,
@@ -177,24 +177,30 @@ export default function HowPage() {
 
           {/* IGF */}
           <RefSection id="igf" tone="ink">
-            <RefStatement
-              sub={
+            {/* Same opening as the other frameworks: label (from the document), title, text. */}
+            <RefIntro
+              label="IGF™ — Integrated Growth Framework"
+              title={
+                <>
+                  Connect the growth engine. <span className="serif-accent">Growth rarely comes from one function</span>
+                </>
+              }
+              text={
                 <>
                   <p>
                     IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment
                     between them.
                   </p>
-                  <p className="mt-6 text-paper">
+                  <p className="mt-4">
                     Instead of optimizing individual activities, we architect how the entire growth ecosystem works
                     together.
                   </p>
                 </>
               }
-            >
-              IGF™: Connect the growth engine.{" "}
-              <span className="serif-accent">Growth rarely comes from one function</span>
-            </RefStatement>
-            <IgfConnect />
+            />
+            <div className="mt-16 sm:mt-24">
+              <IgfConnect />
+            </div>
           </RefSection>
 
           {/* BRANDS */}

@@ -108,7 +108,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-24 sm:py-32 lg:py-40", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-20 sm:py-24 lg:py-28", tones[tone], className)}>
       {children}
     </section>
   );

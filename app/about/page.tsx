@@ -75,7 +75,7 @@ export default function AboutPage() {
         {/* A simple belief — a statement on black */}
         <section>
           <SplitStatement
-            left="Businesses need clarity about what their"
+            left="They need clarity about what their"
             right="next level requires"
             sub={
               <>

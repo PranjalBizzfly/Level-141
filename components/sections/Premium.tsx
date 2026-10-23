@@ -67,7 +67,7 @@ export function StoriesList({
               }}
               className="grid min-h-[60lvh] scroll-mt-28 content-center gap-5 lg:gap-x-10 md:grid-cols-12"
             >
-              <span aria-hidden className="text-sm tabular-nums text-white/55 md:col-span-1">
+              <span aria-hidden className="text-sm tabular-nums text-white/70 md:col-span-1">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="md:col-span-8">
@@ -103,7 +103,7 @@ const SCATTER = [
 
 export function Mosaic({ items, kicker }: { items: readonly string[]; kicker: string }) {
   return (
-    <ol className="mosaic mt-12 grid gap-3 lg:gap-x-8 [perspective:1400px] sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
+    <ol className="mosaic swipe-sm mt-12 grid gap-3 lg:gap-x-8 [perspective:1400px] sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((t, i) => {
         const [x, y, z, r] = SCATTER[i % SCATTER.length];
         return (
@@ -148,7 +148,7 @@ export function DetailsPanel({ rows }: { rows: readonly { label: string; value: 
     <dl className="mt-12 grid gap-px overflow-hidden rounded-[1.25rem] bg-white/15 text-white [background:rgb(255_255_255/0.14)]">
       {rows.map((r) => (
         <div key={r.label} className="grid gap-2 bg-black p-8 sm:grid-cols-[8rem_1fr] sm:p-7 dark:bg-black">
-          <dt className="text-sm text-white/55">{r.label}</dt>
+          <dt className="text-sm text-white/70">{r.label}</dt>
           <dd className="text-[0.95rem] leading-relaxed">{r.value}</dd>
         </div>
       ))}

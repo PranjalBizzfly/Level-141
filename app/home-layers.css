@@ -607,3 +607,21 @@
     scale: 0.985;
   }
 }
+
+/* Inner pages: a calm sheet sets its pattern aside (see Layers in HomeInteractive)
+   and its content simply rises gently into place — never hidden or faded, so
+   no blank frames; it is settled once its top reaches the middle of the screen. */
+@media (prefers-reduced-motion: no-preference) {
+  .layers--flat > .layer[data-calm] {
+    transform: none !important;
+    clip-path: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+  /* A rise only — no fade — so text is always at full contrast, even mid-arrival. */
+  .layers--flat > .layer[data-calm] > * {
+    translate: 0 calc((1 - var(--in, 1)) * 2.5rem);
+  }
+}

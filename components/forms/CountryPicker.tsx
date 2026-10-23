@@ -122,7 +122,7 @@ export function CountryPicker({
             openList();
           }
         }}
-        className="flex min-h-[3.5rem] items-center gap-1.5 rounded-l-xl border-r border-line pl-4 pr-3 text-base focus:outline-none"
+        className="flex min-h-[3.5rem] items-center gap-1.5 rounded-l-xl border-r border-line pl-4 pr-3 text-base"
       >
         <span className="text-sm font-medium tracking-[0.04em] text-muted">{selected.iso}</span>
         <span className="tabular-nums">+{selected.dial}</span>

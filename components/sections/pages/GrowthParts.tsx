@@ -125,7 +125,7 @@ export function LineStatement({ lines, accent, sub }: { lines: readonly string[]
             return (
               <span key={i} className="block overflow-hidden pb-[0.08em]">
                 <span
-                  className={"block will-change-transform " + (x.a ? "text-white/55" : "")}
+                  className={"block will-change-transform " + (x.a ? "text-white/70" : "")}
                   style={{ transform: `translateY(${(1 - local) * 105}%)` }}
                 >
                   {x.t}
@@ -167,7 +167,7 @@ export function SpotlightGrid({
     el.style.setProperty("--on", "1");
   };
   return (
-    <div className="container-x py-24 sm:py-32 lg:py-40">
+    <div className="container-x py-20 sm:py-24 lg:py-28">
       <Head label={label} title={title} />
       <ul
         ref={grid}
@@ -448,7 +448,7 @@ export function ToggleCompare({ before, after }: { before: ReactNode; after: Rea
   const layer = (show: boolean) =>
     "col-start-1 row-start-1 transition-[opacity,filter] duration-700 " + (show ? "opacity-100 blur-0" : "pointer-events-none opacity-0 blur-md");
   return (
-    <div className="container-x py-24 sm:py-32 lg:py-40">
+    <div className="container-x py-20 sm:py-24 lg:py-28">
       <div
         className={
           "true-tone rounded-[1.25rem] p-9 transition-colors duration-700 sm:p-14 " + (isAfter ? "bg-black text-white" : "bg-paper text-ink ring-1 ring-line")

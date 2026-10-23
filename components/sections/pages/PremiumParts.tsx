@@ -1,9 +1,11 @@
 "use client";
 
 import { altFor } from "@/lib/image-alts";
-import { type CSSProperties, type ReactNode } from "react";
+import { useRef, type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
 import { useAutoSteps } from "@/components/sections/useAutoSteps";
+import { PauseButton } from "@/components/ui/PauseButton";
+import { StepBars } from "@/components/sections/pages/PersonalParts";
 
 /**
  * Editorial, photograph-led section patterns: stages as a staircase
@@ -50,7 +52,7 @@ export function VibeStairs({
           <Head label={label} title={title} />
           {foot ? <div className="shrink-0">{foot}</div> : null}
         </div>
-        <ol className="mt-14 grid gap-4 sm:mt-20 sm:grid-cols-2 lg:grid-cols-5 lg:items-end">
+        <ol className="swipe-sm mt-14 grid gap-4 sm:mt-20 sm:grid-cols-2 lg:grid-cols-5 lg:items-end">
           {items.map((x, i) => {
             const on = i === auto.active;
             return (
@@ -77,7 +79,7 @@ export function VibeStairs({
                     />
                   </span>
                   <span className="flex flex-1 flex-col p-6">
-                    <span className={"text-sm tabular-nums " + (on ? "text-black/55" : "text-white/50")}>{x.n}</span>
+                    <span className={"text-sm tabular-nums " + (on ? "text-black/70" : "text-white/70")}>{x.n}</span>
                     <span className="serif-accent mt-3 block text-[1.55rem] !leading-[1.08] tracking-[-0.01em]">{x.name}</span>
                     <span className={"mt-3 block text-[0.92rem] leading-relaxed " + (on ? "text-black/70" : "text-white/60")}>{x.body}</span>
                   </span>
@@ -86,6 +88,10 @@ export function VibeStairs({
             );
           })}
         </ol>
+        {/* The shared control strip of the framework sections: pause / play and the stage rail. */}
+        <div className="mt-10 max-w-3xl max-sm:mt-6">
+          <StepBars names={items.map((x) => x.name)} {...auto} />
+        </div>
       </div>
     </div>
   );
@@ -101,10 +107,19 @@ export function VibeStairs({
  */
 export function AudienceIndex({ items, images }: { items: readonly string[]; images: readonly string[] }) {
   const { ref, ...auto } = useAutoSteps(items.length, { rewind: true, holdMs: 3000 });
+  // A hover holds an audience only while the pointer is on the list; a click or the
+  // pause button holds it until played again.
+  const hoverHeld = useRef(false);
   const img = (i: number) => images[i % images.length];
   return (
     <div ref={ref} className="mt-16 grid gap-10 sm:mt-24 lg:grid-cols-12 lg:gap-16">
-      <ol className="border-t border-current/15 lg:col-span-7" onPointerLeave={(e) => e.pointerType === "mouse" && auto.resume()}>
+      <ol
+        className="border-t border-current/15 lg:col-span-7"
+        onPointerLeave={(e) => {
+          if (e.pointerType === "mouse" && hoverHeld.current) auto.resume();
+          hoverHeld.current = false;
+        }}
+      >
         {items.map((t, i) => {
           const on = i === auto.active;
           return (
@@ -112,14 +127,21 @@ export function AudienceIndex({ items, images }: { items: readonly string[]; ima
               <button
                 type="button"
                 aria-current={on || undefined}
-                onClick={() => auto.goTo(i)}
-                onPointerEnter={(e) => e.pointerType === "mouse" && !on && auto.goTo(i)}
+                onClick={() => {
+                  hoverHeld.current = false;
+                  auto.goTo(i);
+                }}
+                onPointerEnter={(e) => {
+                  if (e.pointerType !== "mouse" || on || (auto.paused && !hoverHeld.current)) return;
+                  hoverHeld.current = true;
+                  auto.goTo(i);
+                }}
                 className="group flex w-full items-baseline gap-6 py-4 text-left sm:py-5"
               >
                 <span className="w-8 shrink-0 text-sm tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
                 <span
                   className="serif-accent text-[clamp(1.6rem,2.8vw,2.7rem)] !leading-[1.08] tracking-[-0.015em] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  style={{ opacity: on ? 1 : 0.28, transform: on ? "translateX(0.4rem)" : "none" }}
+                  style={{ opacity: on ? 1 : 0.45, transform: on ? "translateX(0.4rem)" : "none" }}
                 >
                   {t}
                 </span>
@@ -130,8 +152,18 @@ export function AudienceIndex({ items, images }: { items: readonly string[]; ima
             </li>
           );
         })}
+        <li className="flex justify-end pt-5">
+          <PauseButton
+            paused={auto.paused}
+            label="the list"
+            onToggle={() => {
+              hoverHeld.current = false;
+              auto.toggle();
+            }}
+          />
+        </li>
       </ol>
-      <div className="photo-tone relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-black lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
+      <div className="photo-tone relative aspect-[16/10] overflow-hidden sm:aspect-[4/5] rounded-[1.25rem] bg-black lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
         {items.map((t, i) => (
           <Image
             key={t}

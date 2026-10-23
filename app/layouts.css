@@ -513,3 +513,8 @@
 :where(img, video) {
   filter: grayscale(1);
 }
+
+/* Marquee paused with its button. */
+.marquee[data-paused] .marquee-row {
+  animation-play-state: paused;
+}

@@ -81,7 +81,7 @@ export function IgfConnect() {
           key={f}
           data-node={i}
           tabIndex={0}
-          className="igf-node absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-black/20 bg-white px-3 py-1.5 text-xs font-medium text-black outline-none sm:text-sm dark:border-white/25 dark:bg-black dark:text-white"
+          className="igf-node absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-black/20 bg-white px-3 py-1.5 text-xs font-medium text-black sm:text-sm dark:border-white/25 dark:bg-black dark:text-white"
           style={{ left: `${pos[i].x}%`, top: `${pos[i].y}%` }}
         >
           {f}

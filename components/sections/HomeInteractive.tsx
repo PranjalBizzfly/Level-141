@@ -2,11 +2,13 @@
 
 import {
   Children,
+  cloneElement,
   isValidElement,
   useEffect,
   useRef,
   useState,
   useSyncExternalStore,
+  type ReactElement,
   type ReactNode,
 } from "react";
 
@@ -76,6 +78,23 @@ const ACTIVE_MS = 350;
  * in view, and it resumes when they scroll on. Scrolling back simply follows
  * the scroll, and leaving the section resets the glide.
  */
+/**
+ * Arrival progress for a section that is not pinned: 0 as its top edge enters
+ * at the bottom of the screen, 1 once that edge reaches the top, so a scene
+ * plays while the section scrolls into full view — no holding, no extra track.
+ */
+export function useArriveProgress(enabled: boolean) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [p, setP] = useState(enabled ? 0 : 1);
+  useScrollFrame(() => {
+    const el = ref.current;
+    if (!el) return;
+    const vh = window.innerHeight;
+    setP(clamp((vh - el.getBoundingClientRect().top) / vh));
+  }, enabled);
+  return [ref, enabled ? p : 1] as const;
+}
+
 export function usePinProgress(enabled: boolean) {
   const ref = useRef<HTMLDivElement>(null);
   const [p, setP] = useState(0);
@@ -197,14 +216,20 @@ function pageBlock(page: LayerPage) {
   return [];
 }
 
-/** One sheet in the stack, with the way it arrives over the one before. */
-export function Layer({ pattern, children }: { pattern?: LayerPattern; children: ReactNode }) {
+/**
+ * One sheet in the stack, with the way it arrives over the one before. A calm
+ * sheet sets its pattern aside and simply rises softly into place.
+ */
+export function Layer({ pattern, calm, children }: { pattern?: LayerPattern; calm?: boolean; children: ReactNode }) {
   return (
-    <div className="layer" data-pattern={pattern}>
+    <div className="layer" data-pattern={pattern} data-calm={calm || undefined}>
       {children}
     </div>
   );
 }
+
+/** Arrivals too forceful for an inner page's signature moment (steep 3D turns). */
+const FORCEFUL: ReadonlySet<string> = new Set(["cube", "cubeup", "flipup", "tumble", "orbit", "pivot", "recline", "spiral", "spin", "vortex", "telescope"]);
 
 /**
  * Give each child its pattern: on home, each <Layer pattern> names its own;
@@ -223,11 +248,18 @@ function assignPatterns(children: ReactNode, page?: LayerPage) {
   if (process.env.NODE_ENV !== "production" && page && unnamed > block.length) {
     console.error(`Layers: page "${page}" has ${unnamed} sections but a block of ${block.length} patterns.`);
   }
+  // Inner pages keep two signature arrivals — the first section and one mid-page —
+  // and every other section rises in calmly, so motion marks moments instead of
+  // repeating on every section. Home keeps its stacked sheets as they are.
+  const mid = Math.floor(kids.length / 2);
   let slot = 0;
   return kids.map((c, i) => {
-    if (isNamed(c)) return c;
+    const named = isNamed(c);
+    const pattern = named ? ((c.props as { pattern?: LayerPattern }).pattern as LayerPattern) : block[slot++];
+    const calm = !!page && (!(i === 0 || i === mid) || FORCEFUL.has(pattern));
+    if (named) return calm ? cloneElement(c as ReactElement<{ calm?: boolean }>, { calm }) : c;
     return (
-      <Layer key={c.key ?? i} pattern={block[slot++]}>
+      <Layer key={c.key ?? i} pattern={pattern} calm={calm}>
         {c}
       </Layer>
     );
@@ -317,7 +349,7 @@ export function BeliefDeck({ items, head, foot }: { items: readonly string[]; he
 
   return (
     <div ref={ref} style={reduced ? undefined : { height: `${100 + n * 35}lvh` }}>
-      <div className={reduced ? "py-24 sm:py-32 lg:py-40" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
+      <div className={reduced ? "py-20 sm:py-24 lg:py-28" : "sticky top-0 flex h-[100lvh] flex-col justify-center"}>
         <div className="container-x">
           {head}
           <ul className="mt-10 grid grid-cols-2 gap-2 [perspective:1600px] sm:mt-12 sm:gap-3 lg:grid-cols-3">

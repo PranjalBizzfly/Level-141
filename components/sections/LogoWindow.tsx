@@ -196,14 +196,14 @@ export function LogoWindow({ caption }: { caption?: string }) {
               <LogoWordHalf part="141" className="block h-[1em] w-auto" />
             </span>
           </div>
-          {caption ? <p className="mt-12 text-sm text-white/55 sm:mt-16">{caption}</p> : null}
+          {caption ? <p className="mt-12 text-sm text-white/70 sm:mt-16">{caption}</p> : null}
         </div>
 
         {/* Scroll cue: fades out as soon as the climb begins. */}
         {!reduced ? (
           <div
             aria-hidden
-            className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-white/50 transition-opacity duration-500"
+            className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-white/70 transition-opacity duration-500"
             style={{ opacity: !played && climb === 0 && progress < 0.5 ? 1 : 0 }}
           >
             Scroll

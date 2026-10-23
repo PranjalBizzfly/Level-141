@@ -330,3 +330,49 @@
   .stagger-side .stagger-head > * > div { height: auto; }
   .stagger-side .stagger-head > * > div { gap: 2.5rem; }
 }
+
+/* Phones: a long set of cards becomes one swipeable row (each card nearly full
+   width, the next peeking in), instead of a tall stack. Larger screens keep
+   their own layout. Desktop slide-in motion is switched off inside the row. */
+@media (max-width: 639px) {
+  .swipe-sm {
+    display: flex !important;
+    gap: 0.75rem;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--swipe-pad, 1.5rem);
+    margin-inline: calc(-1 * var(--swipe-pad, 1.5rem));
+    padding-inline: var(--swipe-pad, 1.5rem);
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+  .swipe-sm::-webkit-scrollbar { display: none; }
+  .swipe-sm > * {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+  .swipe-sm .stagger-fly { transform: none !important; }
+}
+/* Cards waiting off to the side of a swipe row never "enter" the screen, so
+   scroll reveals must not hide them there: inside a row they are always shown. */
+@media (max-width: 639px) {
+  html.js .swipe-sm [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+}
+@media (max-width: 639px) {
+  /* Same for scenes that light or raise items as they are read. */
+  .swipe-sm .qf-line,
+  .swipe-sm .qf-rise,
+  .swipe-sm .mosaic-tile {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    animation: none !important;
+  }
+}

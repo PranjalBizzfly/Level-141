@@ -117,7 +117,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
   };
 
   return (
-    <div className="container-x py-24 sm:py-32 lg:py-40">
+    <div className="container-x py-20 sm:py-24 lg:py-28">
       <div className="max-w-4xl">
         <p className="text-[0.95rem] font-medium text-muted">{label}</p>
         <h2 className="font-display mt-6 text-[clamp(1.75rem,2.72vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">{title}</h2>
@@ -176,7 +176,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
 export function CategoryIndex({ items }: { items: readonly { id: string; name: ReactNode; body: ReactNode }[] }) {
   return (
     <section aria-labelledby="ins-cat-title" className="bg-paper text-ink">
-      <div className="container-x py-24 sm:py-32 lg:py-40">
+      <div className="container-x py-20 sm:py-24 lg:py-28">
         <h2 id="ins-cat-title" className="sr-only">
           Insight categories
         </h2>

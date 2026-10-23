@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {/* Intro loader (first page of a visit only; pure CSS, see motion.css §13). */}
         <div aria-hidden className="l141-loader">
-          <Mark141 className="w-28 sm:w-36" textClassName="text-4xl sm:text-5xl" closeClassName="text-white" openClassName="text-white/50" />
+          <Mark141 className="w-28 sm:w-36" textClassName="text-4xl sm:text-5xl" closeClassName="text-white" openClassName="text-white/70" />
         </div>
         <Header />
         <main id="main" tabIndex={-1} className="overflow-x-clip outline-none">

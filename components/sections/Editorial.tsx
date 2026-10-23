@@ -83,7 +83,7 @@ export function CinemaHero({
           <p className="animate-fade text-sm uppercase tracking-[0.22em] text-white/60">{eyebrow}</p>
           <h1
             data-split="load"
-            className="font-display mt-8 text-[clamp(2.04rem,3.84vw,3.88rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/55"
+            className="font-display mt-8 text-[clamp(2.04rem,3.84vw,3.88rem)] font-medium leading-[0.95] tracking-[-0.045em] [&_.serif-accent]:text-white/70"
           >
             {title}
           </h1>
@@ -223,7 +223,7 @@ export function Ledger({
   items: readonly { name: ReactNode; body?: ReactNode; meta?: ReactNode }[];
 }) {
   return (
-    <div className="container-x py-24 sm:py-32 lg:py-40">
+    <div className="container-x py-20 sm:py-24 lg:py-28">
       <Head label={label} title={title} text={text} />
       <ol className="mt-12 border-t border-current/15 sm:mt-16">
         {items.map((it, i) => (
@@ -271,7 +271,7 @@ export function FlipTiles({
     ? "sm:grid-cols-2 lg:grid-cols-12"
     : { 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[cols];
   return (
-    <div className={(dark ? "bg-black text-white " : "") + "py-24 sm:py-32 lg:py-40"}>
+    <div className={(dark ? "bg-black text-white " : "") + "py-20 sm:py-24 lg:py-28"}>
       <div className="container-x">
         <Head label={label} title={title} text={text} dark={dark} wide={wide} />
         <ul className={"mt-12 grid gap-3 sm:mt-16 " + grid}>
@@ -335,7 +335,7 @@ export function CompareSlider({ before, after, dark }: { before: ReactNode; afte
   };
   return (
     <div className={dark ? "bg-black text-white" : undefined}>
-    <div className="container-x py-24 sm:py-32 lg:py-40">
+    <div className="container-x py-20 sm:py-24 lg:py-28">
       <div
         ref={ref}
         className="relative h-[clamp(22rem,56svh,30rem)] touch-pan-y select-none overflow-hidden rounded-[1.25rem] border border-current/15"
