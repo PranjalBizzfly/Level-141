@@ -3,16 +3,15 @@ import { VibeExplorer } from "@/components/diagrams/VibeExplorer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import {
   CinemaHero,
-  CompareSlider,
-  FlipTiles,
   FullBleed,
   Ledger,
-  QuoteStage,
 } from "@/components/sections/Editorial";
 import { Layers } from "@/components/sections/HomeInteractive";
-import { Marquee, Strike } from "@/components/sections/Layouts";
-import { CadenceGrid, Checklist, OutlineFill, PeelStack, Ring3D, ScanRows, SpotlightText } from "@/components/sections/pages/PersonalParts";
+import { Marquee } from "@/components/sections/Layouts";
+import { CadenceGrid, Checklist, OutlineFill, Ring3D, ScanRows, SpotlightText } from "@/components/sections/pages/PersonalParts";
+import { IsNotCollage, MetricsMosaic, PhotoCompare, VibeStairs } from "@/components/sections/pages/PremiumParts";
 import { RefIntro, RefSection } from "@/components/sections/Ref";
+import { StaggerCards } from "@/components/sections/StaggerCards";
 import { ButtonLink, Reveal } from "@/components/ui/primitives";
 import {
   pbaAudience,
@@ -47,15 +46,22 @@ const moduleImages = [
   "/images/client-executive-in-motion.webp",
   "/images/client-executive-contemplation.webp",
 ];
-/** One photograph per scorecard measure, in measure order. */
+
+/** The scorecard mosaic's photographs: the four corners and the centre. */
 const measureImages = [
   "/images/client-ceo-portrait.webp",
-  "/images/client-speaker-conference-stage.webp",
-  "/images/client-mentorship-conversation.webp",
-  "/images/client-keynote-auditorium.webp",
-  "/images/client-walk-toward-skyline.webp",
+  "/images/ga-hero-structural-node-muted.webp",
   "/images/client-executive-dubai-window.webp",
-  "/images/client-visionaries-horizon.webp",
+  "/images/home-person-notebook.webp",
+  "/images/ga-prioritised-bridge-muted.webp",
+] as const;
+/** One photograph per VIBE™ stage, in stage order. */
+const stageImages = [
+  "/images/client-executive-library.webp",
+  "/images/home-strategist-compass.webp",
+  "/images/client-keynote-auditorium.webp",
+  "/images/home-team-table.webp",
+  "/images/pba-leader-skyline.webp",
 ];
 
 const qualification = [
@@ -166,12 +172,12 @@ export default function PersonalBrandPage() {
           </Reveal>
         </RefSection>
 
-        {/* How we architect your VIBE — panels peel away one stage at a time */}
+        {/* How we architect your VIBE — the stages as a staircase */}
         <section>
-          <PeelStack
+          <VibeStairs
             label="Personal Brand Architecture™"
             title="How we architect your VIBE™"
-            items={vibeStages.map((s) => ({ n: s.n, name: s.name, body: s.body }))}
+            items={vibeStages.map((s, i) => ({ n: s.n, name: s.name, body: s.body, image: stageImages[i % stageImages.length] }))}
             foot={
               <Link href={assessmentHref} className="underline decoration-white/40 underline-offset-4 hover:decoration-white">
                 Start Your Personal Brand Assessment
@@ -214,29 +220,30 @@ export default function PersonalBrandPage() {
           />
         </section>
 
-        {/* What it is not */}
-        <RefSection tone="ink">
-          <RefIntro label="Personal Brand Architecture™" title="What it is not" />
-          <Strike items={pbaIsNot} />
-        </RefSection>
-
-        {/* Pain → Solution → Impact — each client voice, answered */}
+        {/* What it is not — an editorial collage */}
         <section>
-          <QuoteStage
-            label="Pain → Solution → Impact"
-            title={
-              <>
-                Client pain. Level141 intervention
-              </>
-            }
-            items={pbaVoices.map((v) => ({ quote: v.quote, answer: v.answer, note: `${v.effect} ${v.impact}` }))}
-            action={
-              <ButtonLink href={assessmentHref} className="!bg-white !text-black hover:!bg-white/85">
-                Start Your Personal Brand Assessment
-              </ButtonLink>
-            }
+          <IsNotCollage
+            label="Personal Brand Architecture™"
+            title="What it is not"
+            items={pbaIsNot}
+            images={["/images/client-lone-executive-skyline.webp", "/images/about-dubai-terrace.webp", "/images/contact-corridor-warm.webp"]}
           />
         </section>
+
+        {/* Pain → Solution → Impact — each client voice, answered, on an offset grid of tiles */}
+        <RefSection>
+          <StaggerCards
+            compact
+            head={
+              <RefIntro
+                label="Pain → Solution → Impact"
+                title="Client pain. Level141 intervention"
+                action={{ label: "Start Your Personal Brand Assessment", href: assessmentHref }}
+              />
+            }
+            items={pbaVoices.map((v) => ({ name: `“${v.quote}”`, line: v.answer, body: `${v.effect} ${v.impact}` }))}
+          />
+        </RefSection>
 
         {/* Modules — on a 3D ring that turns with the scroll */}
         <section>
@@ -264,13 +271,12 @@ export default function PersonalBrandPage() {
 
         {/* Measurement — scorecard tiles that turn over */}
         <section>
-          <FlipTiles
-            dark
-            wide
+          <MetricsMosaic
             label="Measurement & Success System"
             title="Visibility metrics are useful signals, but they are not the product outcome"
             text="Success should be measured through a balanced scorecard."
-            items={pbaMeasures.map((m, i) => ({ name: m.name, back: m.q, image: measureImages[i % measureImages.length] }))}
+            items={pbaMeasures}
+            images={measureImages}
           />
         </section>
 
@@ -281,8 +287,9 @@ export default function PersonalBrandPage() {
 
         {/* Before / after */}
         <section>
-          <CompareSlider
-            dark
+          <PhotoCompare
+            beforeImage="/images/about-atrium-levels-muted.webp"
+            afterImage="/images/home-hero-staircase-muted.webp"
             before="Valuable but fragmented expertise, inconsistent positioning, disconnected visibility and unpredictable opportunity."
             after="A clearly positioned leader with an evidence-backed narrative, coherent presence, recognizable intellectual territory, trusted impact, deliberate opportunity pathways and a roadmap for continuous evolution."
           />

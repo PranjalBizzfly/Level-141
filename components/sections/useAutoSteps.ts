@@ -78,7 +78,11 @@ export function useAutoSteps(n: number, { holdMs = 3000, rewind = false }: { hol
     [n, rewind, active, paused],
   );
 
+  /** Step on to the next slide and keep playing. */
+  const next = useCallback(() => setTarget((s) => (rewind ? (s + 1) % n : s + 1)), [n, rewind]);
+
   // Clicking the stage stops on the current slide; clicking again plays on.
   const bind = { onClick: () => setPaused((v) => !v) };
-  return { ref, pos: reduced ? target : pos, active, goTo, paused, bind, holdMs };
+  const resume = useCallback(() => setPaused(false), []);
+  return { ref, pos: reduced ? target : pos, active, goTo, next, resume, paused, bind, holdMs };
 }

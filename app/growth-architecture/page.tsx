@@ -10,7 +10,6 @@ import {
   PillDetails,
   SpotlightGrid,
   Staircase,
-  Ticker,
   ToggleCompare,
 } from "@/components/sections/pages/GrowthParts";
 import { RefIntro, RefSection } from "@/components/sections/Ref";
@@ -27,6 +26,7 @@ import {
 import { altFor } from "@/lib/image-alts";
 import { pageMetadata } from "@/lib/seo";
 import { DetailsPanel, RuleQuote } from "@/components/sections/Premium";
+import { AudienceIndex } from "@/components/sections/pages/PremiumParts";
 import { routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
@@ -42,6 +42,16 @@ export const metadata = pageMetadata({
  * diagrams, a drawn bridge, triggers that open in place and a contribution staircase.
  * Waitlist messaging is one CTA only: "Join the Waitlist".
  */
+/** One photograph per "Ideal for" audience, in order. */
+const audienceImages = [
+  "/images/client-executive-study-portrait.webp",
+  "/images/client-executive-portrait-woman.webp",
+  "/images/client-lone-executive-skyline.webp",
+  "/images/client-executive-study-woman.webp",
+  "/images/pba-leader-skyline.webp",
+  "/images/client-executive-dubai-window.webp",
+  "/images/client-visionaries-horizon.webp",
+];
 const triggerImages = [
   "/images/home-hero-staircase-muted.webp",
   "/images/client-walk-through-crowd.webp",
@@ -202,7 +212,7 @@ export default function GrowthArchitecturePage() {
             }
             text="The best-fit client has a real business, a credible offer, leadership ambition and sufficient organizational or financial capacity to act on the architecture."
           />
-          <Ticker label="Ideal for" items={gaAudience} />
+          <AudienceIndex items={gaAudience} images={audienceImages} />
           <div className="pb-16 sm:pb-24">
             <RuleQuote>
               When ambition changes, the architecture supporting it <span className="text-muted">must change too</span>

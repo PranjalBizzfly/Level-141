@@ -271,7 +271,7 @@
 /* Big screens: the gallery index of the reference — five columns edge to edge,
    the heading over the first two (title at the top, button at the foot). */
 @media (min-width: 1536px) {
-  .stagger-cards { grid-template-columns: repeat(5, minmax(0, 1fr)); margin-inline: calc(50% - 50vw + 1rem); }
+  .stagger-cards { grid-template-columns: repeat(var(--xl-cols, 5), minmax(0, 1fr)); margin-inline: calc(50% - 50vw + 1rem); }
   .stagger-card { grid-column-start: var(--col2); grid-row-start: var(--row2); translate: none; }
   .stagger-card:not([data-in]) .stagger-fly { transform: translate3d(calc(var(--side2) * 100vw), 0, 0); }
   .stagger-head { padding-left: clamp(1.5rem, 3vw, 4rem); }
@@ -312,4 +312,9 @@
     transform: none;
     transition: transform 1800ms cubic-bezier(0.45, 0, 0.2, 1);
   }
+}
+
+/* VibeStairs: each step stands higher than the one before (wide screens). */
+@media (min-width: 1024px) {
+  .stair-step { margin-bottom: calc(var(--rise) * clamp(2.5rem, 4vw, 4.5rem)); }
 }
