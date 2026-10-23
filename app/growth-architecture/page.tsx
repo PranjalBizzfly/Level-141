@@ -40,7 +40,7 @@ export const metadata = pageMetadata({
  * Growth Architecture — editorial redesign on the Personal Brand Architecture
  * model: curtain hero, a line-by-line statement, a spotlight grid, the signature
  * diagrams, a drawn bridge, triggers that open in place and a contribution staircase.
- * Waitlist messaging is one CTA only: "Join the Waitlist".
+ * Waitlist: the "Join the Waitlist" CTA plus the not-yet-open note in the hero (client-approved).
  */
 /** One photograph per "Ideal for" audience, in order. */
 const audienceImages = [
@@ -90,6 +90,10 @@ export default function GrowthArchitecturePage() {
           <ButtonLink href="#waitlist" className="!bg-white !text-black hover:!bg-white/85">
             Join the Waitlist
           </ButtonLink>
+          <p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-white/70">
+            Not yet open for engagements. Organizations can register their interest now and will be contacted when it
+            becomes available.
+          </p>
         </div>
       </CurtainHero>
 
