@@ -187,7 +187,7 @@ export function SpotlightGrid({
             }}
           >
             <div
-              className="relative h-full overflow-hidden rounded-[15px] bg-paper p-9 sm:p-10"
+              className="relative h-full overflow-hidden rounded-[calc(1.25rem-1px)] bg-paper p-9 sm:p-10"
               style={{
                 backgroundImage:
                   "radial-gradient(320px circle at var(--x) var(--y), rgb(0 0 0 / calc(var(--on) * 0.05)), transparent 70%)",

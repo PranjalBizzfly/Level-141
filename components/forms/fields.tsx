@@ -74,7 +74,7 @@ export function useFormSubmit(endpoint: string) {
 /* --------------------------------------------------------------- Fields */
 
 const inputBase =
-  "block min-h-[3.5rem] w-full rounded-xl border bg-surface px-5 py-6 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
+  "block min-h-[3.25rem] w-full rounded-xl border bg-surface px-5 py-3.5 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
 
 export function inputClasses(error?: string) {
   return cx(

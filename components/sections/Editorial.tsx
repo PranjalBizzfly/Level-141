@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, type ReactNode } from "react";
-import { usePinProgress, useReducedMotion, useScrollFrame } from "./HomeInteractive";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useReducedMotion, useScrollFrame } from "./HomeInteractive";
 import { altFor } from "@/lib/image-alts";
 
 /**
@@ -107,6 +107,8 @@ export function CinemaHero({
 
 /* ------------------------------------------------------------- QuoteStage */
 
+const QUOTE_MS = 5500;
+
 export function QuoteStage({
   label,
   title,
@@ -121,10 +123,17 @@ export function QuoteStage({
   action?: ReactNode;
 }) {
   const reduced = useReducedMotion();
-  const [ref, p] = usePinProgress(!reduced);
   const n = items.length;
-  const active = Math.min(n - 1, Math.floor(p * n * 0.999));
+  // Plays by itself: each voice holds for a few seconds, then the next one
+  // arrives. Hover or focus pauses it; the bars jump straight to a voice.
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   const it = items[active];
+  useEffect(() => {
+    if (reduced || paused) return;
+    const t = window.setTimeout(() => setActive((a) => (a + 1) % n), QUOTE_MS);
+    return () => window.clearTimeout(t);
+  }, [reduced, paused, active, n]);
 
   if (reduced) {
     return (
@@ -147,9 +156,15 @@ export function QuoteStage({
   }
 
   return (
-    <div ref={ref} className="bg-black text-white" style={{ height: `${100 + n * 70}lvh` }}>
-      <div className="sticky top-0 flex h-[100lvh] flex-col overflow-hidden">
-        <div className="container-x flex flex-1 flex-col justify-center pb-10 pt-16 sm:pt-28">
+    <div
+      className="bg-black text-white"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+    >
+      <div className="flex flex-col">
+        <div className="container-x flex flex-1 flex-col justify-center py-20 sm:py-24">
           <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
             <Head label={label} title={title} text={text} dark />
             {action ? <div className="shrink-0">{action}</div> : null}
@@ -158,7 +173,7 @@ export function QuoteStage({
             <span aria-hidden className="pointer-events-none absolute -left-2 top-1/2 -translate-y-[70%] font-display text-[clamp(8.5rem,21vw,18.2rem)] leading-none text-white/[0.06]">
               “
             </span>
-            <div key={active} className="relay-in relative max-w-5xl">
+            <div key={active} aria-live="polite" className="relay-in relative min-h-[16rem] max-w-5xl sm:min-h-[13rem]">
               <p className="font-display text-[clamp(1.6rem,2.73vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em]">“{it.quote}”</p>
               <div className="mt-10 grid gap-8 lg:gap-x-16 border-t border-white/15 pt-8 sm:grid-cols-2 sm:gap-10">
                 <div className="text-lg sm:text-xl">{it.answer}</div>
@@ -166,12 +181,25 @@ export function QuoteStage({
               </div>
             </div>
           </div>
-          <div aria-hidden className="mt-12 flex items-center gap-4 sm:mt-14">
+          <div className="mt-12 flex items-center gap-4 sm:mt-14">
             <span className="flex flex-1 gap-1.5">
-              {items.map((_, i) => (
-                <span key={i} className="h-[2px] flex-1 bg-white/15">
-                  <span className="block h-full origin-left bg-white" style={{ transform: `scaleX(${clamp(p * n - i)})` }} />
-                </span>
+              {items.map((x, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Show: ${x.quote}`}
+                  aria-current={i === active || undefined}
+                  onClick={() => setActive(i)}
+                  className="flex h-6 flex-1 items-center"
+                >
+                  <span className="h-[2px] w-full bg-white/15">
+                    <span
+                      key={i === active ? `on-${active}` : "off"}
+                      className="quote-bar block h-full origin-left bg-white"
+                      data-state={i < active ? "done" : i === active ? (paused ? "hold" : "run") : "wait"}
+                    />
+                  </span>
+                </button>
               ))}
             </span>
           </div>

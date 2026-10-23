@@ -55,7 +55,7 @@ export default function AboutPage() {
           </p>
         }
       >
-        <div className="flex flex-col items-start gap-3">
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
           <ButtonLink href={routes.contact} className="!bg-white !text-black hover:!bg-white/85">
             Start Your Level141 Assessment
           </ButtonLink>
@@ -103,7 +103,7 @@ export default function AboutPage() {
             label="Our purpose"
             title={
               <>
-                Architect the next level <span className="serif-accent">of growth</span>
+                <span className="sm:whitespace-nowrap">Architect the next level <span className="serif-accent">of growth</span></span>
               </>
             }
             items={[

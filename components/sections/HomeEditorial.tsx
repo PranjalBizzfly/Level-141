@@ -79,7 +79,6 @@ export function Relay({
     ...chain.map((c) => ({ lead: c.from, verb: "affects", rest: c.to })),
     { lead: last.lead, verb: "", rest: last.rest },
   ];
-  const n = steps.length;
   const shift = p * geo.dist;
 
   const cards = (
@@ -112,9 +111,6 @@ export function Relay({
                 className="object-cover opacity-85 grayscale"
               />
               <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-              <span aria-hidden className="relative mb-3 text-sm tabular-nums text-white/70">
-                {n2(i)} <span className="text-white/40">/ {String(n).padStart(2, "0")}</span>
-              </span>
               <span className="relative">
                 <span className="block font-display text-[clamp(1.61rem,2.07vw,2.16rem)] font-medium leading-[1] tracking-[-0.04em]">{x.lead}</span>
                 <span className="mt-3 flex flex-wrap items-baseline gap-x-2 text-base">

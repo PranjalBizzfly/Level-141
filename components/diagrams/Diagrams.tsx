@@ -343,7 +343,6 @@ export function FlowChain({ items, dark, highlight }: { items: readonly string[]
     <ol data-seq className={cx("grid border-t md:grid-cols-3 md:gap-x-10", dark ? "border-line-dark-strong" : "border-line-strong")}>
       {items.map((item, i) => {
         const key = highlight?.includes(item);
-        const last = i === items.length - 1;
         return (
           <li
             key={item}
@@ -355,19 +354,6 @@ export function FlowChain({ items, dark, highlight }: { items: readonly string[]
               {String(i + 1).padStart(2, "0")}
             </span>
             <span
-              aria-hidden
-              className={cx(
-                "size-2 shrink-0 rounded-full border",
-                key
-                  ? dark
-                    ? "border-gold bg-gold"
-                    : "border-ink bg-ink"
-                  : dark
-                    ? "border-line-dark-strong"
-                    : "border-line-strong",
-              )}
-            />
-            <span
               className={cx(
                 "flex-1 text-lg leading-snug tracking-[-0.015em] sm:text-xl",
                 key ? "font-medium" : dark ? "text-paper/80" : "text-ink/80",
@@ -375,9 +361,6 @@ export function FlowChain({ items, dark, highlight }: { items: readonly string[]
             >
               {item}
             </span>
-            {!last ? (
-              <ArrowRight aria-hidden className={cx("size-4 shrink-0", dark ? "text-paper/30" : "text-ink/25")} />
-            ) : null}
           </li>
         );
       })}

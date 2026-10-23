@@ -35,12 +35,16 @@ export function VibeExplorer() {
 
   return (
     <div>
-      {/* Tab strip: four equal columns, the active one marked by a solid top rule. */}
+      {/* The four pillars as framed cards: number, name, tag, serif letter and arrow. */}
+      <div aria-hidden className="mb-6 flex items-center gap-8">
+        <span className="eyebrow tracking-[0.3em] text-paper-muted">The 4 pillars</span>
+        <span className="h-px w-36 bg-paper/25" />
+      </div>
       <div
         role="tablist"
         aria-label="VIBE™ dimensions"
         aria-orientation="horizontal"
-        className="grid grid-cols-4"
+        className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8"
       >
         {vibe.map((d, i) => {
           const selected = i === active;
@@ -59,8 +63,8 @@ export function VibeExplorer() {
               onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
               className={cx(
-                "group relative flex min-h-11 flex-col items-center gap-2 overflow-hidden border-l border-paper/25 px-2 pb-4 pt-5 text-center transition-opacity duration-500 sm:min-h-[15rem] sm:items-start sm:px-4 sm:pb-2 sm:text-left lg:min-h-[18rem] lg:px-5",
-                selected ? "" : "hover:[&_.vibe-letter]:text-paper/70",
+                "group relative flex min-h-[13rem] flex-col items-start overflow-hidden rounded-lg border p-6 text-left transition-colors duration-500 sm:min-h-[17rem] sm:p-9",
+                selected ? "border-paper/45 bg-paper/[0.04]" : "border-paper/15 hover:border-paper/35",
               )}
             >
               <span
@@ -70,30 +74,30 @@ export function VibeExplorer() {
                   selected ? "scale-x-100" : "scale-x-0",
                 )}
               />
-              <span aria-hidden className="eyebrow hidden tabular-nums text-paper-muted sm:block">
+              <span aria-hidden className="eyebrow tabular-nums tracking-[0.2em] text-paper-muted">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span
                 aria-hidden
                 className={cx(
-                  "vibe-letter font-display order-last text-4xl leading-[0.85] tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-architect)] sm:mt-auto sm:text-7xl lg:text-[4.03rem]",
-                  selected ? "text-paper sm:-translate-y-3" : "translate-y-0 text-paper/55",
+                  "vibe-letter serif-accent order-last mt-auto flex w-full items-end justify-between text-5xl leading-[0.85] sm:text-6xl",
+                  selected ? "text-paper/80" : "text-paper/45",
                 )}
               >
                 {d.letter}
+                <span className="font-sans text-xl text-paper/70 transition-transform duration-500 group-hover:translate-x-1">→</span>
               </span>
-              <span className="flex flex-col sm:mt-2">
+              <span className="mt-3 flex flex-col">
                 <span
                   className={cx(
-                    "text-[0.7rem] font-medium uppercase tracking-[0.05em] max-[359px]:text-[0.6rem] max-[359px]:tracking-normal min-[400px]:text-xs min-[400px]:tracking-[0.08em] sm:text-base sm:normal-case sm:tracking-[-0.01em] lg:text-lg",
+                    "text-lg sm:text-xl lg:text-2xl",
                     selected ? "text-paper" : "text-paper-muted",
                   )}
                 >
-                  <span className="sm:hidden">{d.name.split(" ")[0]}</span>
-                  <span className="hidden sm:inline">{d.name}</span>
+                  {d.name}
                 </span>
                 {d.tag !== d.name ? (
-                  <span className="mt-1 hidden text-sm leading-snug text-paper-muted lg:block">{d.tag}</span>
+                  <span className="mt-2 hidden text-sm leading-snug text-paper-muted sm:block">{d.tag}</span>
                 ) : null}
               </span>
             </button>
@@ -103,7 +107,7 @@ export function VibeExplorer() {
 
       {/* Panel: editorial composition — story and scope on the left, a single
           feature card for the strategic question on the right. No table rules. */}
-      <div className="mt-16 sm:mt-24 lg:mt-24">
+      <div className="mt-20 sm:mt-28">
         {vibe.map((d, i) => (
           <div
             key={d.letter}
@@ -113,12 +117,12 @@ export function VibeExplorer() {
             hidden={i !== active}
             tabIndex={0}
             className={cx(
-              "grid gap-14 outline-none lg:grid-cols-12 lg:gap-16",
+              "grid gap-16 outline-none lg:grid-cols-12 lg:gap-x-8",
               direction === "forward" ? "animate-slide-from-right" : "animate-slide-from-left",
             )}
           >
-            <div className="lg:col-span-7">
-              <p className="eyebrow text-gold">
+            <div className="lg:col-span-6">
+              <p className="eyebrow tracking-[0.3em] text-paper/80">
                 {d.letter} — {d.full}
               </p>
               <h3 className="mt-6 text-3xl leading-tight tracking-[-0.025em] sm:text-[2.2rem] sm:leading-[1.1]">
@@ -126,34 +130,39 @@ export function VibeExplorer() {
               </h3>
               <p className="measure mt-8 text-lg leading-relaxed text-paper/75">{d.body}</p>
 
-              <p className="eyebrow mt-12 text-paper-muted">Architecture focus</p>
-              <ul className="mt-6 grid gap-x-8 sm:grid-cols-2">
+              <p className="eyebrow mt-12 border-t border-paper/15 pt-8 tracking-[0.3em] text-paper-muted">Architecture focus</p>
+              <ul className="mt-8 grid gap-x-12 gap-y-2 sm:grid-cols-2">
                 {d.focus.map((f) => (
                   <li
                     key={f}
-                    className="flex items-center gap-3 border-t border-paper/15 py-3 text-[0.9375rem] leading-snug text-paper/85"
+                    className="flex items-start gap-4 border-b border-paper/12 py-5 text-[0.9375rem] leading-snug text-paper/85"
                   >
-                    <span aria-hidden className="h-px w-3 shrink-0 bg-gold" />
+                    <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-full border border-paper/40"><span className="size-3 rounded-full border border-paper/70" /></span>
                     {f}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="relative overflow-hidden border-t border-paper/25 pt-10 lg:col-span-5 lg:self-start">
+            <div className="flex flex-col gap-8 lg:col-span-5 lg:col-start-8 lg:self-start">
+            <div className="relative overflow-hidden rounded-lg border border-paper/20 p-8 sm:p-12">
               <span
                 aria-hidden
-                className="font-display pointer-events-none absolute -right-2 -top-6 select-none text-[8.4rem] font-medium leading-none text-paper/[0.05] sm:text-[10.5rem]"
+                className="serif-accent pointer-events-none absolute right-8 top-4 select-none text-[6rem] leading-none !text-paper/[0.18] sm:text-[8rem]"
               >
                 {d.letter}
               </span>
-              <p className="eyebrow relative text-paper-muted">Strategic question</p>
+              <p className="eyebrow relative tracking-[0.3em] text-paper-muted">Strategic question</p>
               <p className="serif-accent relative mt-6 text-2xl leading-snug text-gold-soft sm:text-3xl">“{d.question}”</p>
               <p className="relative mt-8 leading-relaxed text-paper/70">{d.detail}</p>
-              <div className="relative mt-10 border-t border-paper/12 pt-8">
-                <p className="eyebrow text-gold">Illustrative outcomes</p>
-                <p className="mt-4 text-lg leading-snug tracking-[-0.01em] text-paper">{d.outcomes}</p>
+            </div>
+            <div className="rounded-lg border border-paper/20 p-8 sm:p-12">
+              <p className="eyebrow tracking-[0.3em] text-paper-muted">Illustrative outcomes</p>
+              <div className="mt-6 flex items-start gap-5">
+                <span aria-hidden className="grid size-12 shrink-0 place-items-center rounded-full border border-paper/60"><span className="size-4 rounded-full border border-paper/80" /></span>
+                <p className="text-lg leading-snug tracking-[-0.01em] text-paper">{d.outcomes}</p>
               </div>
+            </div>
             </div>
           </div>
         ))}
