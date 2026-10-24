@@ -71,7 +71,8 @@ export function StaggerCards({
           io.unobserve(e.target); // once in, a tile never moves again
         }
       },
-      { rootMargin: "0px 0px -15% 0px" },
+      // Wide side margins: a tile waiting off to the side still counts as in view, so it arrives.
+      { rootMargin: "0px 200% -15% 200%" },
     );
     el.querySelectorAll(".stagger-card").forEach((c) => io.observe(c));
     return () => io.disconnect();

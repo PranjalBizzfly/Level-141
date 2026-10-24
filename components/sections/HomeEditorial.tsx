@@ -114,7 +114,7 @@ export function Relay({
               <span className="relative">
                 <span className="block font-display text-[clamp(1.61rem,2.07vw,2.16rem)] font-medium leading-[1] tracking-[-0.04em]">{x.lead}</span>
                 <span className="mt-3 flex flex-wrap items-baseline gap-x-2 text-base">
-                  {x.verb ? <span className="text-[0.7rem] uppercase tracking-[0.3em] text-white/60">{x.verb}</span> : null}
+                  {x.verb ? <span className="text-xs uppercase tracking-[0.3em] text-white/60">{x.verb}</span> : null}
                   <span className="text-white/85">{x.rest}</span>
                 </span>
               </span>
@@ -292,7 +292,7 @@ export function WhySplit({
                       type="button"
                       onFocus={() => go(i)}
                       aria-pressed={on}
-                      className="text-left focus-visible:underline focus-visible:underline-offset-4"
+                      className="min-h-11 py-2.5 text-left focus-visible:underline focus-visible:underline-offset-4"
                     >
                       {x.name.replace(/\.$/, "")}
                     </button>

@@ -328,7 +328,7 @@ export function Ticker({ items, label }: { items: readonly string[]; label: stri
             aria-label={t}
             aria-current={k === i}
             onClick={() => setI(k)}
-            className="flex h-6 flex-1 items-center outline-none focus-visible:ring-2 focus-visible:ring-ink"
+            className="flex h-11 flex-1 items-center outline-none focus-visible:ring-2 focus-visible:ring-ink"
           >
             <span className={"block h-px w-full transition-colors " + (k === i ? "bg-ink" : "bg-line")} />
           </button>

@@ -203,7 +203,7 @@ export function LogoWindow({ caption }: { caption?: string }) {
         {!reduced ? (
           <div
             aria-hidden
-            className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-white/70 transition-opacity duration-500"
+            className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/70 transition-opacity duration-500"
             style={{ opacity: !played && climb === 0 && progress < 0.5 ? 1 : 0 }}
           >
             Scroll

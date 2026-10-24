@@ -539,7 +539,7 @@ export function StepBars({
     <span className={"flex items-center gap-2 " + className}>
       {toggle ? <PauseButton paused={paused} onToggle={toggle} className="mr-2" /> : null}
       {names.map((name, i) => (
-        <button key={name} type="button" aria-label={name} aria-current={i === active || undefined} onClick={() => goTo(i)} className="flex h-6 flex-1 items-center">
+        <button key={name} type="button" aria-label={name} aria-current={i === active || undefined} onClick={() => goTo(i)} className="flex h-11 flex-1 items-center">
           <span className="h-[2px] w-full bg-current/15">
             <span
               key={i === active ? `on-${active}` : "off"}

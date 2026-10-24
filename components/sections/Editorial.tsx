@@ -190,7 +190,7 @@ export function QuoteStage({
                   aria-label={`Show: ${x.quote}`}
                   aria-current={i === active || undefined}
                   onClick={() => setActive(i)}
-                  className="flex h-6 flex-1 items-center"
+                  className="flex h-11 flex-1 items-center"
                 >
                   <span className="h-[2px] w-full bg-white/15">
                     <span

@@ -506,7 +506,7 @@
   /* The section already fills a full screen here (for the opening), so its usual
      top and bottom padding would only add empty space round the centred content. */
   .stack-under__inner > section {
-    padding-block: 0;
+    padding-block: clamp(5rem, 14vh, 9rem);
   }
   /* …and the statement is set larger, to fill that screen rather than float in it. */
   .stack-under__inner h2 {

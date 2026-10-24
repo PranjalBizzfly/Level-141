@@ -180,7 +180,7 @@ export default function PersonalBrandPage() {
             title="How we architect your VIBE™"
             items={vibeStages.map((s, i) => ({ n: s.n, name: s.name, body: s.body, image: stageImages[i % stageImages.length] }))}
             foot={
-              <Link href={assessmentHref} className="underline decoration-white/40 underline-offset-4 hover:decoration-white">
+              <Link href={assessmentHref} className="inline-flex min-h-11 items-center underline decoration-white/40 underline-offset-4 hover:decoration-white">
                 Start Your Personal Brand Assessment
               </Link>
             }
