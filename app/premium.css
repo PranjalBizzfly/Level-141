@@ -376,3 +376,10 @@
     animation: none !important;
   }
 }
+
+/* StaggerCards compact: four columns from 1440px (three below, see the component). */
+@media (min-width: 1440px) and (max-width: 1535px) {
+  .stagger-cards[data-compact] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .stagger-cards[data-compact] .stagger-card { grid-column-start: var(--col4); grid-row-start: var(--row4); translate: calc(var(--side4) * min(4rem, 4vw)) 0; }
+  .stagger-cards[data-compact] .stagger-card:not([data-in]) .stagger-fly { transform: translate3d(calc(var(--side4) * 100vw), 0, 0); }
+}

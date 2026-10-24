@@ -187,7 +187,7 @@ export function ScanRows({
               const on = reduced || open === i;
               return (
                 <li key={it.name} className="border-b border-current/15">
-                  <div className="grid gap-x-6 py-8 sm:grid-cols-12 sm:py-10">
+                  <div className="grid gap-x-6 py-8 max-sm:py-6 sm:grid-cols-12 sm:py-10">
                     <h3
                       className="font-display text-[clamp(1.6rem,2.72vw,2.4rem)] font-medium leading-[1.05] tracking-[-0.035em] transition-opacity duration-500 sm:col-span-7"
                       style={{ opacity: on ? 1 : 0.6 }}

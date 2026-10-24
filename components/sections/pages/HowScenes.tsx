@@ -145,7 +145,7 @@ export function QuestionFocus({
               </span>
             </div>
           </div>
-          <ol className="swipe-sm lg:col-span-6 lg:col-start-7">
+          <ol className="swipe-sm sm:max-lg:grid sm:max-lg:grid-cols-2 sm:max-lg:gap-x-8 lg:col-span-6 lg:col-start-7">
             {items.map((q, i) => (
               <li
                 key={q.name}

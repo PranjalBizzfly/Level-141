@@ -84,7 +84,7 @@ export function Footer() {
                 aria-label="Level141 home"
                 className="inline-flex min-h-11 items-center text-black dark:text-white"
               >
-                <LogoLockup className="h-[30px] w-auto sm:h-9" />
+                <LogoLockup className="h-[30px] w-auto sm:h-9 lg:max-xl:h-[26px]" />
               </Link>
               <p className="mt-6 max-w-sm leading-relaxed text-black/70 dark:text-white/65">
                 Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}.

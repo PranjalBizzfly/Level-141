@@ -185,7 +185,7 @@ export function Triptych({
                 className={
                   "group relative flex min-w-0 flex-col justify-end overflow-hidden rounded-[1.25rem] border p-8 text-left outline-none transition-[flex-grow,background-color,color] duration-700 ease-[cubic-bezier(.2,.7,.2,1)] focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 motion-reduce:transition-none sm:p-10 " +
                   (it.image
-                    ? "photo-tone min-h-[16rem] border-white/15 bg-black text-white lg:min-h-0 " + (on ? "lg:grow-[3]" : "lg:grow")
+                    ? "photo-tone min-h-[16rem] border-white/15 bg-black text-white sm:max-lg:min-h-[13rem] sm:max-lg:p-8 lg:min-h-0 " + (on ? "lg:grow-[3]" : "lg:grow")
                     : on
                       ? "border-ink bg-ink text-paper lg:grow-[3]"
                       : "border-current/15 bg-paper lg:grow")
@@ -200,7 +200,7 @@ export function Triptych({
                       alt={altFor(it.image)}
                       fill
                       sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover object-[50%_30%] grayscale transition-[opacity,scale] duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
+                      className="object-cover object-[50%_30%] grayscale sm:max-lg:object-[50%_20%] transition-[opacity,scale] duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
                       style={{ opacity: on ? 0.85 : 0.5 }}
                     />
                     <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />

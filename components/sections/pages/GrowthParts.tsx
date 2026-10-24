@@ -514,15 +514,15 @@ export function PanImage({ image, alt }: { image: string; alt: string }) {
 // Colours follow the section (light grey in the light theme, black in the dark).
 export function PeakStatic({ stages }: { stages: readonly { letter: string; name: string; question: string }[] }) {
   return (
-    <ol className="grid border-t border-current/20 sm:grid-cols-2 lg:grid-cols-4">
+    <ol className="grid border-t border-current/20 max-sm:grid-cols-2 max-sm:gap-x-6 sm:grid-cols-2 lg:grid-cols-4">
       {stages.map((s, i) => (
         <li
           key={s.letter}
-          className="border-b border-current/20 py-12 sm:px-8 sm:py-14 sm:max-lg:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-10 lg:py-16 lg:first:border-l-0 lg:first:pl-0"
+          className="border-b border-current/20 py-12 max-sm:py-8 sm:px-8 sm:py-14 sm:max-lg:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:px-10 lg:py-16 lg:first:border-l-0 lg:first:pl-0"
         >
           <span className="text-sm tabular-nums opacity-60">{n2(i)}</span>
-          <p aria-hidden className="font-display mt-8 text-[clamp(4.25rem,7.7vw,6.65rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
-          <h3 className="font-display mt-10 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
+          <p aria-hidden className="font-display mt-8 max-sm:mt-5 text-[clamp(4.25rem,7.7vw,6.65rem)] font-medium leading-[0.8] tracking-[-0.06em]">{s.letter}</p>
+          <h3 className="font-display mt-10 max-sm:mt-6 text-2xl font-medium tracking-[-0.02em]">{s.name}</h3>
           <p className="mt-4 max-w-[19rem] text-base leading-relaxed opacity-80 sm:text-lg">{s.question}</p>
         </li>
       ))}

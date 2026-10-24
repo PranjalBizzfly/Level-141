@@ -338,7 +338,7 @@ export function CompareSlider({ before, after, dark }: { before: ReactNode; afte
     <div className="container-x py-20 sm:py-24 lg:py-28">
       <div
         ref={ref}
-        className="relative h-[clamp(22rem,56svh,30rem)] touch-pan-y select-none overflow-hidden rounded-[1.25rem] border border-current/15"
+        className="relative h-[clamp(22rem,56svh,30rem)] touch-pan-y max-sm:hidden select-none overflow-hidden rounded-[1.25rem] border border-current/15"
         onPointerMove={(e) => e.buttons === 1 && move(e.clientX)}
         onPointerDown={(e) => move(e.clientX)}
       >
@@ -368,7 +368,18 @@ export function CompareSlider({ before, after, dark }: { before: ReactNode; afte
           ⇆
         </span>
       </div>
-      <p className={"mt-6 text-sm " + (dark ? "text-white/70" : "text-muted")}>Drag to compare.</p>
+      {/* Phones: too narrow to overlay two passages, so Before and After stack as two cards. */}
+      <div className="grid gap-4 sm:hidden">
+        <div className="rounded-[1.25rem] border border-current/15 bg-paper p-7 text-ink">
+          <p className="font-display text-[2.55rem] font-medium leading-none tracking-[-0.05em] opacity-60">Before</p>
+          <p className="mt-6 text-lg leading-relaxed opacity-80">{before}</p>
+        </div>
+        <div className="rounded-[1.25rem] border border-current/15 bg-ink p-7 text-paper">
+          <p className="font-display text-[2.55rem] font-medium leading-none tracking-[-0.05em]">After</p>
+          <p className="mt-6 text-lg leading-relaxed">{after}</p>
+        </div>
+      </div>
+      <p className={"mt-6 text-sm max-sm:hidden " + (dark ? "text-white/70" : "text-muted")}>Drag to compare.</p>
     </div>
     </div>
   );

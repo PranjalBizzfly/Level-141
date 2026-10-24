@@ -218,20 +218,23 @@ export function Header() {
             className="menu-item mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
             style={{ "--d": "620ms" } as React.CSSProperties}
           >
-            <Link
-              href={site.primaryCta.href}
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white px-5 text-sm font-medium text-black"
-            >
-              {site.primaryCta.label}
-              <ArrowRight aria-hidden className="size-4" />
-            </Link>
+            {/* Phones: the action gets its own line, the page links sit centred beneath it. */}
+            <span className="max-sm:mb-4 max-sm:flex max-sm:basis-full max-sm:justify-center">
+              <Link
+                href={site.primaryCta.href}
+                className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white px-5 text-sm font-medium text-black max-sm:min-h-12 max-sm:px-7"
+              >
+                {site.primaryCta.label}
+                <ArrowRight aria-hidden className="size-4" />
+              </Link>
+            </span>
             {mainNav.filter((item) => !primaryMenu.includes(item.href)).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cx(
-                  "text-sm transition-colors",
+                  "text-sm transition-colors max-sm:inline-flex max-sm:min-h-11 max-sm:items-center",
                   isActive(pathname, item.href) ? "text-white" : "text-white/60 hover:text-white",
                 )}
               >

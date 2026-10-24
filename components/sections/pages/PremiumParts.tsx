@@ -56,13 +56,13 @@ export function VibeStairs({
           {items.map((x, i) => {
             const on = i === auto.active;
             return (
-              <li key={x.name} className="stair-step" style={{ "--rise": i } as CSSProperties}>
+              <li key={x.name} className="stair-step max-sm:flex" style={{ "--rise": i } as CSSProperties}>
                 <button
                   type="button"
                   aria-current={on || undefined}
                   onClick={() => (on ? auto.resume() : auto.goTo(i))}
                   className={
-                    "true-tone flex w-full flex-col overflow-hidden rounded-[1.25rem] text-left transition-[background-color,color,box-shadow,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] " +
+                    "true-tone flex w-full flex-col overflow-hidden rounded-[1.25rem] text-left max-sm:!translate-y-0 transition-[background-color,color,box-shadow,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] " +
                     (on
                       ? "-translate-y-2 bg-white text-black shadow-[0_40px_80px_-30px_rgb(0_0_0/0.35)] ring-1 ring-black/10"
                       : "bg-[#141414] text-white ring-1 ring-white/10 hover:bg-[#1c1c1c]")

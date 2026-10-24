@@ -81,23 +81,28 @@ export function StaggerCards({
   return (
     <>
     {/* Phones: the heading sits above the tiles, which swipe sideways in one row. */}
-    {head ? <div className="pb-10 sm:hidden">{head}</div> : null}
+    {head ? <div className="pb-10 sm:hidden [&_a]:max-w-full [&_a]:whitespace-normal [&_a]:py-3 [&_a]:text-center [&_a]:leading-snug">{head}</div> : null}
     <ol
       ref={ref}
       className={
         "stagger-cards swipe-sm relative grid gap-x-5 gap-y-5 sm:grid-cols-2 sm:gap-y-16 " +
         (side ? "stagger-side lg:gap-y-5 " : "lg:gap-y-40 ") +
-        (compact ? "lg:grid-cols-4 2xl:gap-x-4" : "lg:grid-cols-3")
+        // Compact: three columns while the screen is still narrow (1024–1439px), so the heading
+        // column keeps room for its button; four from 1440px.
+        (compact ? "lg:grid-cols-3 2xl:gap-x-4" : "lg:grid-cols-3")
       }
+      data-compact={compact || undefined}
       style={{ "--xl-cols": xlCols, "--rows-lg": rows(lgCols, 1), "--rows-xl": rows(xlCols, 2) } as CSSProperties}
     >
       {head ? (
-        <li className="stagger-head list-none max-sm:hidden sm:col-span-2 sm:pb-10 lg:[grid-area:1/1/2/2] lg:pb-0 lg:pr-10 2xl:[grid-area:1/1/2/3]">
+        // In the narrow range only, a long button may wrap rather than run under the tiles.
+        <li className="stagger-head list-none max-sm:hidden sm:col-span-2 sm:pb-10 lg:[grid-area:1/1/2/2] lg:pb-0 lg:pr-10 2xl:[grid-area:1/1/2/3] lg:max-[1439px]:[&_a]:max-w-full lg:max-[1439px]:[&_a]:whitespace-normal lg:max-[1439px]:[&_a]:py-3 lg:max-[1439px]:[&_a]:leading-snug">
           {head}
         </li>
       ) : null}
       {items.map((it, i) => {
-        const lg = place(i, lgCols, 1); // three columns (four when compact)
+        const lg = place(i, compact ? 3 : lgCols, 1); // three columns (1024–1439px when compact)
+        const lg4 = place(i, lgCols, 1); // compact only: four columns from 1440px
         const xl = place(i, xlCols, 2); // five columns edge to edge (six when compact)
         const dark = i % 2 === 1;
         return (
@@ -111,6 +116,9 @@ export function StaggerCards({
                 "--col": lg.col,
                 "--row": lg.row,
                 "--side": lg.side,
+                "--col4": lg4.col,
+                "--row4": lg4.row,
+                "--side4": lg4.side,
                 "--col2": xl.col,
                 "--row2": xl.row,
                 "--side2": xl.side,

@@ -51,10 +51,10 @@ const moduleImages = [
 /** The scorecard mosaic's photographs: the four corners and the centre. */
 const measureImages = [
   "/images/client-ceo-portrait.webp",
-  "/images/ga-hero-structural-node-muted.webp",
+  "/images/client-executive-city-lounge.webp",
   "/images/client-executive-dubai-window.webp",
   "/images/home-person-notebook.webp",
-  "/images/ga-prioritised-bridge-muted.webp",
+  "/images/client-mentorship-conversation.webp",
 ] as const;
 /** One photograph per VIBE™ stage, in stage order. */
 const stageImages = [

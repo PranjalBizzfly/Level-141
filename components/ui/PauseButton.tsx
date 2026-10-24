@@ -16,7 +16,7 @@ export function PauseButton({ paused, onToggle, label = "autoplay", className }:
       }}
       aria-label={paused ? `Play ${label}` : `Pause ${label}`}
       className={cx(
-        "grid size-9 shrink-0 place-items-center rounded-full border border-current/30 transition-colors duration-300 hover:bg-current/10",
+        "grid size-11 shrink-0 place-items-center rounded-full border border-current/30 lg:size-9 transition-colors duration-300 hover:bg-current/10",
         className,
       )}
     >
