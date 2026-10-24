@@ -70,7 +70,7 @@ export function RefIntro({
             {action ? (
               <Link
                 href={action.href}
-                className="mt-10 inline-flex min-h-12 items-center rounded-full bg-gold px-6 text-[0.95rem] font-medium text-ink"
+                className="mt-10 inline-flex min-h-12 items-center whitespace-nowrap rounded-full bg-gold px-7 text-[0.95rem] font-medium text-ink"
               >
                 {action.label}
               </Link>

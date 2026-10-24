@@ -466,7 +466,7 @@ export function Ring3D({
                   if (i === front) bind.onClick();
                   else auto.show(i);
                 }}
-                className="absolute inset-0 flex cursor-pointer flex-col justify-between gap-4 rounded-[1.25rem] border p-5 transition-[background-color,border-color,color] duration-500 [backface-visibility:hidden] sm:p-6"
+                className="absolute inset-0 flex cursor-pointer flex-col justify-between gap-5 rounded-[1.25rem] border p-6 transition-[background-color,border-color,color] duration-500 [backface-visibility:hidden] sm:p-8"
                 style={{
                   transform: `rotateY(${i * step}deg) translateZ(var(--r))`,
                   background: i === front ? fg : bg,
@@ -483,7 +483,7 @@ export function Ring3D({
                 )}
                 <span>
                   <span className="block font-display text-[1.5rem] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[1.8rem]">{x.name}</span>
-                  <span className="mt-4 block text-[0.95rem] opacity-80">{x.body}</span>
+                  <span className="mt-4 block text-[0.95rem] leading-relaxed opacity-80">{x.body}</span>
                 </span>
               </li>
             ))}

@@ -123,7 +123,7 @@ export function StaggerCards({
               <div
                 className={
                   "stagger-tile relative flex aspect-square flex-1 flex-col justify-between rounded-[1.5rem] " +
-                  (compact ? "gap-5 p-6 " : "gap-8 p-7 sm:p-8 2xl:gap-6 2xl:p-7 ") +
+                  (compact ? "gap-6 p-7 " : "gap-8 p-7 sm:p-8 2xl:gap-6 2xl:p-7 ") +
                   (dark ? "is-dark" : "")
                 }
               >
@@ -138,10 +138,10 @@ export function StaggerCards({
                     {it.name}
                   </h3>
                   {it.line ? (
-                    <p className={"font-medium opacity-90 " + (compact ? "mt-2 text-[0.9rem]" : "mt-3 2xl:mt-2")}>{it.line}</p>
+                    <p className={"font-medium opacity-90 " + (compact ? "mt-3 text-[0.95rem] leading-snug" : "mt-3 2xl:mt-2")}>{it.line}</p>
                   ) : null}
                   {it.body ? (
-                    <p className={"mt-2 opacity-65 " + (compact ? "text-[0.85rem] leading-normal" : "text-[0.95rem] leading-relaxed 2xl:text-[0.9rem] 2xl:leading-normal")}>
+                    <p className={"mt-2 opacity-65 " + (compact ? "text-[0.9rem] leading-relaxed" : "text-[0.95rem] leading-relaxed 2xl:text-[0.9rem] 2xl:leading-normal")}>
                       {it.body}
                     </p>
                   ) : null}

@@ -158,7 +158,7 @@ export function FilterTabs({ label, title, tabs, items }: { label: string; title
                 className="flex flex-col gap-8 rounded-[1.25rem] border border-current/15 p-8 sm:p-10"
               >
                 <span className="text-sm font-medium text-muted">{q.kicker}</span>
-                <span className="font-display text-xl leading-snug tracking-[-0.02em] sm:text-2xl">{q.name}</span>
+                <span className="font-display text-xl leading-[1.3] tracking-[-0.02em] sm:text-2xl">{q.name}</span>
               </li>
             );
           })}

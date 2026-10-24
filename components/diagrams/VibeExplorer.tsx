@@ -143,9 +143,9 @@ export function VibeExplorer() {
                 {d.focus.map((f) => (
                   <li
                     key={f}
-                    className="flex items-start gap-4 border-b border-paper/12 py-5 text-[0.9375rem] leading-snug text-paper/85"
+                    className="flex items-start gap-4 border-b border-paper/12 py-5 text-[0.9375rem] leading-relaxed text-paper/85"
                   >
-                    <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-full border border-paper/40"><span className="size-3 rounded-full border border-paper/70" /></span>
+                    <span aria-hidden className="mt-2 size-2 shrink-0 rounded-full bg-paper/60" />
                     {f}
                   </li>
                 ))}

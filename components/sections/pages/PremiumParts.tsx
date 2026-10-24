@@ -224,9 +224,9 @@ export function IsNotCollage({
           {/* The register, in small capitals, struck through as it arrives. */}
           <ol className="relative z-10 mt-12 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-[clamp(14rem,22vw,20rem)] lg:self-start">
             {items.map((t, i) => (
-              <li key={t} className="flex gap-4 border-t border-current/15 py-3.5 last:border-b">
+              <li key={t} className="flex gap-4 border-t border-current/15 px-1 py-4 last:border-b">
                 <span aria-hidden className="w-6 shrink-0 pt-0.5 text-xs tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-[0.92rem] font-medium uppercase leading-snug tracking-[0.06em]">
+                <span className="text-[0.92rem] font-medium uppercase leading-relaxed tracking-[0.06em]">
                   <span className="strike-text">{t}</span>
                 </span>
               </li>
