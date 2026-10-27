@@ -13,6 +13,7 @@ import {
   Reveal,
   Section,
   SectionHeader,
+  Photo,
 } from "@/components/ui/primitives";
 import {
   activityList,
@@ -31,7 +32,6 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes, site } from "@/lib/site";
-import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = {
   ...pageMetadata({
@@ -151,6 +151,7 @@ export default function HomePage() {
           <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2 lg:gap-8">
             {/* Personal Brand Architecture — active */}
             <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-8 text-paper sm:p-12 xl:p-14">
+              <Photo src="/images/client-speaker-conference-stage.webp" sizes="(min-width: 1024px) 40vw, 100vw" className="mb-10 aspect-[16/9]" />
               <div className="flex items-center justify-between gap-4">
                 <span aria-hidden className="eyebrow text-paper-muted">
                   01
@@ -188,6 +189,7 @@ export default function HomePage() {
 
             {/* Growth Architecture — waitlist */}
             <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-8 sm:p-12 xl:p-14">
+              <Photo src="/images/client-executive-dubai-window.webp" sizes="(min-width: 1024px) 40vw, 100vw" className="mb-10 aspect-[16/9]" />
               <div className="flex items-center justify-between gap-4">
                 <span className="eyebrow text-muted">02</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
@@ -489,6 +491,7 @@ export default function HomePage() {
                 Growth isn&apos;t a collection of activities.{" "}
                 <span className="serif-accent text-gold">It&apos;s a system.</span>
               </h2>
+              <Photo src="/images/client-visionaries-horizon.webp" sizes="(min-width: 1024px) 38vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12" />
             </Reveal>
             <ul className="divide-y divide-paper/10 border-y border-paper/10 lg:col-span-7">
               {beliefPairs.map((b, i) => (
@@ -615,8 +618,6 @@ export default function HomePage() {
           </ul>
         </div>
       </Section>
-
-      <PhotoGallery images={["/images/client-walk-toward-skyline.webp", "/images/client-ceo-portrait.webp", "/images/client-walk-through-crowd.webp", "/images/client-executive-dubai-window.webp", "/images/client-mentorship.webp"]} />
       <CtaBand
         eyebrow="Find your level"
         title={

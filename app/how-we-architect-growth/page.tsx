@@ -14,7 +14,6 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
-import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "How We Architect Growth",
@@ -28,7 +27,7 @@ export default function HowPage() {
   return (
     <>
       <PageHero
-        image="/images/client-mentorship-conversation.webp"
+        image="/images/client-executive-contemplation.webp"
         eyebrow="How we architect growth"
         title={
           <>
@@ -405,8 +404,6 @@ export default function HowPage() {
           </Reveal>
         </div>
       </Section>
-
-      <PhotoGallery images={["/images/client-mentorship.webp", "/images/client-executive-library.webp", "/images/client-executive-study-woman.webp", "/images/client-executive-contemplation.webp"]} />
       <CtaBand
         eyebrow="Find your level"
         title={

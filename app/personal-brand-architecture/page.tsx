@@ -8,6 +8,7 @@ import {
   Reveal,
   Section,
   SectionHeader,
+  Photo,
 } from "@/components/ui/primitives";
 import {
   pbaAudience,
@@ -22,7 +23,6 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
-import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "Personal Brand Architecture™",
@@ -37,7 +37,6 @@ export default function PersonalBrandPage() {
   return (
     <>
       <PageHero
-        image="/images/client-speaker-conference-stage.webp"
         eyebrow="Personal Brand Architecture™"
         title={
           <>
@@ -87,6 +86,7 @@ export default function PersonalBrandPage() {
               It&apos;s about aligning who you are, what you stand for, the impact you create and{" "}
               <span className="serif-accent">where you want to go.</span>
             </h2>
+            <Photo src="/images/client-executive-library.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
           <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-muted lg:col-span-5 lg:col-start-8 lg:self-end">
             <p>
@@ -521,8 +521,6 @@ export default function PersonalBrandPage() {
           </Reveal>
         </div>
       </Section>
-
-      <PhotoGallery images={["/images/client-keynote-monochrome.webp", "/images/client-executive-in-motion.webp", "/images/client-ceo-portrait.webp", "/images/client-executive-portrait-woman.webp", "/images/client-walk-toward-skyline.webp"]} />
       <CtaBand
         eyebrow="Discover your VIBE™. Architect your next level."
         title={

@@ -1,7 +1,7 @@
 import { Clock } from "lucide-react";
 import { BrandsSystem, FlowChain, PeakAscent } from "@/components/diagrams/Diagrams";
 import { WaitlistForm } from "@/components/forms/WaitlistForm";
-import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader } from "@/components/ui/primitives";
+import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, Photo } from "@/components/ui/primitives";
 import {
   gaAudience,
   gaDimensions,
@@ -12,7 +12,6 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
-import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "Growth Architecture™ — Join the Waitlist",
@@ -43,7 +42,6 @@ export default function GrowthArchitecturePage() {
   return (
     <>
       <PageHero
-        image="/images/client-visionaries-horizon.webp"
         eyebrow="Growth Architecture™ · Coming later · Waitlist open"
         title={
           <>
@@ -78,6 +76,7 @@ export default function GrowthArchitecturePage() {
               The central problem is not lack of activity.{" "}
               <span className="serif-accent">It is lack of integration.</span>
             </h2>
+            <Photo src="/images/client-mentorship.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
           <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-muted lg:col-span-5 lg:col-start-8 lg:self-end">
             <p>
@@ -340,7 +339,6 @@ export default function GrowthArchitecturePage() {
           </Reveal>
         </div>
       </section>
-      <PhotoGallery images={["/images/client-executive-dubai-window.webp", "/images/client-executive-contemplation.webp", "/images/client-executive-study-portrait.webp", "/images/client-walk-through-crowd.webp"]} />
     </>
   );
 }

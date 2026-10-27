@@ -234,9 +234,10 @@ export function PageHero({
   intro?: ReactNode;
   children?: ReactNode;
   aside?: ReactNode;
-  /** Wide client photograph shown under the hero text. */
+  /** Client photograph shown beside the hero text (used when there is no aside). */
   image?: string;
 }) {
+  if (image && !aside) aside = <Photo src={image} priority sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/3] lg:aspect-[4/5]" />;
   return (
     <section className="on-dark relative isolate overflow-hidden bg-ink pb-20 pt-32 text-paper sm:pb-24 sm:pt-40 lg:pb-32 lg:pt-44">
       <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
@@ -255,11 +256,6 @@ export function PageHero({
         </div>
         {aside ? <div className="animate-fade [animation-delay:400ms] lg:col-span-5 lg:pl-6 xl:col-span-4 xl:col-start-9 xl:pl-0">{aside}</div> : null}
       </div>
-      {image ? (
-        <div className="container-x relative mt-16 animate-fade [animation-delay:450ms] sm:mt-20 lg:mt-24">
-          <Photo src={image} priority className="aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]" />
-        </div>
-      ) : null}
     </section>
   );
 }

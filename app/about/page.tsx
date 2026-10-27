@@ -1,11 +1,10 @@
 import { BracketClose, LogoSymbol } from "@/components/brand/Logo";
 import { Mark141 } from "@/components/brand/Mark141";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, cx } from "@/components/ui/primitives";
+import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, cx, Photo } from "@/components/ui/primitives";
 import { principles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
-import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "About",
@@ -18,7 +17,6 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        image="/images/client-lone-executive-skyline.webp"
         eyebrow="About Level141"
         title={
           <>
@@ -48,6 +46,7 @@ export default function AboutPage() {
             <h2 id="belief-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
               Businesses need clarity about what their <span className="serif-accent">next level requires.</span>
             </h2>
+            <Photo src="/images/client-lone-executive-skyline.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
           <Reveal delay={120} className="lg:col-span-5 lg:col-start-8 lg:self-end">
             <p className="text-lg text-muted">Level141 was created around a simple belief:</p>
@@ -196,8 +195,6 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </Section>
-
-      <PhotoGallery images={["/images/client-executive-portrait-woman.webp", "/images/client-executive-study-woman.webp", "/images/client-walk-through-crowd.webp", "/images/client-executive-library.webp"]} />
       <CtaBand
         eyebrow="Find your level"
         title={
