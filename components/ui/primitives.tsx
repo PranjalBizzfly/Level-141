@@ -38,7 +38,7 @@ export function Reveal({ as: Tag = "div", delay = 0, variant = "rise", className
 
 /* ----------------------------------------------------------------- Buttons */
 
-type ButtonVariant = "solid" | "gold" | "outline" | "outline-light" | "ghost" | "ghost-light";
+type ButtonVariant = "solid" | "gold" | "outline" | "outline-light" | "ghost" | "ghost-light" | "link";
 
 const buttonStyles: Record<ButtonVariant, string> = {
   solid: "bg-ink text-paper hover:bg-ink-3",
@@ -47,6 +47,8 @@ const buttonStyles: Record<ButtonVariant, string> = {
   "outline-light": "border border-paper/30 text-paper hover:border-gold hover:bg-gold hover:text-ink",
   ghost: "border border-line-strong text-ink hover:border-ink",
   "ghost-light": "border border-paper/25 text-paper hover:border-paper/60",
+  // Quiet secondary action beside a solid button: text and arrow, no pill.
+  link: "!px-2 text-current underline-offset-[6px] decoration-current/40 hover:underline",
 };
 
 export const buttonBase =
@@ -109,7 +111,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-24 sm:py-32 lg:py-40", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-28 sm:py-40 lg:py-56", tones[tone], className)}>
       {children}
     </section>
   );
@@ -131,7 +133,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
   return (
     <header
       className={cx(
-        align === "split" ? "grid gap-6 sm:gap-10 lg:grid-cols-12 lg:gap-12" : "max-w-4xl",
+        align === "split" ? "grid gap-8 sm:gap-12 lg:grid-cols-12 lg:gap-16" : "max-w-4xl",
         className,
       )}
     >
@@ -149,7 +151,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         <Reveal
           delay={120}
           className={cx(
-            "measure text-base leading-relaxed sm:text-lg",
+            "measure text-base leading-[1.85] sm:text-lg",
             dark ? "text-paper/75" : "text-muted",
             align === "split" ? "lg:col-span-5 lg:self-end" : "mt-8",
           )}
@@ -219,6 +221,31 @@ export function Photo({
   );
 }
 
+/** Edge-to-edge photo at the top of a card, carrying its number and status so the card stays short. */
+export function CardBanner({ src, index, children }: { src: string; index: string; children: ReactNode }) {
+  return (
+    <div className="relative aspect-[2/1] overflow-hidden sm:aspect-[21/9]">
+      <Image
+        src={src}
+        alt={imageAlts[src] ?? ""}
+        fill
+        sizes="(min-width: 1024px) 45vw, 100vw"
+        quality={90}
+        className="object-cover grayscale transition-transform duration-[1200ms] ease-[var(--ease-architect)] hover:scale-[1.04]"
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between gap-4 p-6 sm:p-8">
+        <span aria-hidden className="eyebrow text-white/85">
+          {index}
+        </span>
+        <span className="inline-flex items-center gap-2 rounded-full bg-black/55 px-3 py-1 text-xs text-white backdrop-blur-sm">
+          {children}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 /* --------------------------------------------------------------- Page hero */
 
 export function PageHero({
@@ -257,6 +284,49 @@ export function PageHero({
         {aside ? <div className="animate-fade [animation-delay:400ms] lg:col-span-5 lg:pl-6 xl:col-span-4 xl:col-start-9 xl:pl-0">{aside}</div> : null}
       </div>
     </section>
+  );
+}
+
+/* -------------------------------------------------------------- Expandable */
+
+/**
+ * A quiet row that shows only its title; the detail opens on demand. Keeps
+ * dense reference content available without filling the page with text.
+ */
+export function Expandable({
+  summary,
+  children,
+  index,
+  dark,
+  className,
+}: {
+  summary: ReactNode;
+  children: ReactNode;
+  index?: number;
+  dark?: boolean;
+  className?: string;
+}) {
+  return (
+    <details className={cx("group border-b", dark ? "border-line-dark" : "border-line", className)}>
+      <summary className="flex min-h-16 cursor-pointer list-none items-center gap-5 py-7 sm:gap-8 sm:py-9 [&::-webkit-details-marker]:hidden">
+        {index !== undefined ? (
+          <span aria-hidden className={cx("eyebrow w-8 shrink-0 tabular-nums", dark ? "text-paper-muted" : "text-muted")}>
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        ) : null}
+        <span className="flex-1">{summary}</span>
+        <span
+          aria-hidden
+          className={cx(
+            "grid size-10 shrink-0 place-items-center rounded-full text-xl font-light leading-none transition-transform duration-500 ease-[var(--ease-architect)] group-open:rotate-45",
+            dark ? "bg-paper/8 text-paper" : "bg-ink/5 text-ink",
+          )}
+        >
+          +
+        </span>
+      </summary>
+      <div className={cx("pb-10 sm:pb-12", index !== undefined && "pl-[3.25rem] sm:pl-16")}>{children}</div>
+    </details>
   );
 }
 

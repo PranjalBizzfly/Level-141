@@ -13,6 +13,7 @@ import {
   Reveal,
   Section,
   SectionHeader,
+  CardBanner,
   Photo,
 } from "@/components/ui/primitives";
 import {
@@ -87,7 +88,7 @@ export default function HomePage() {
                 Growth doesn&apos;t need more noise
               </Eyebrow>
               <h2 id="noise-title" className="display mt-6 text-[2.6rem] sm:text-6xl lg:text-[4.75rem]">
-                It needs <span className="serif-accent">architecture.</span>
+                It needs <span className="serif-accent">architecture</span>
               </h2>
             </Reveal>
             <Reveal delay={120} className="mt-8 max-w-lg space-y-5 text-lg leading-relaxed text-muted">
@@ -142,7 +143,7 @@ export default function HomePage() {
             title={
               <>
                 Growth begins either with the <span className="serif-accent">person</span> or the{" "}
-                <span className="serif-accent">organization.</span>
+                <span className="serif-accent">organization</span>
               </>
             }
             intro="Level141 has built dedicated architectures for both."
@@ -150,26 +151,21 @@ export default function HomePage() {
 
           <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2 lg:gap-8">
             {/* Personal Brand Architecture — active */}
-            <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-8 text-paper sm:p-12 xl:p-14">
-              <Photo src="/images/client-speaker-conference-stage.webp" sizes="(min-width: 1024px) 40vw, 100vw" className="mb-10 aspect-[16/9]" />
-              <div className="flex items-center justify-between gap-4">
-                <span aria-hidden className="eyebrow text-paper-muted">
-                  01
-                </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-xs text-gold">
-                  <span className="size-1.5 rounded-full bg-gold" aria-hidden /> Now available
-                </span>
-              </div>
-              <h3 className="mt-10 text-3xl tracking-[-0.025em] sm:text-4xl">Personal Brand Architecture™</h3>
+            <Reveal as="article" spotlight className="on-dark relative flex flex-col overflow-hidden rounded-[2rem] bg-ink text-paper">
+              <CardBanner src="/images/client-speaker-conference-stage.webp" index="01">
+                <span className="size-1.5 rounded-full bg-white" aria-hidden /> Now available
+              </CardBanner>
+              <div className="flex flex-1 flex-col p-8 sm:p-10 xl:p-9 2xl:p-12">
+              <h3 className="text-3xl tracking-[-0.025em] sm:text-4xl">Personal Brand Architecture™</h3>
               <p className="serif-accent mt-4 text-2xl text-gold-soft">
                 Your achievements built your reputation. What will build your next level?
               </p>
-              <p className="mt-6 leading-relaxed text-paper/65">
+              <p className="mt-5 leading-relaxed text-paper/65">
                 At Level141, we believe a powerful personal brand is not simply about visibility. It&apos;s about
                 aligning who you are, what you stand for, the impact you create and where you want to go. That&apos;s
                 why we architect personal brands through our proprietary VIBE™ Framework.
               </p>
-              <dl className="mt-10 grid grid-cols-4 border-y border-paper/12">
+              <dl className="mt-8 grid grid-cols-4 border-y border-paper/12">
                 {vibe.map((v) => (
                   <div key={v.letter} className="border-r border-paper/12 px-1 py-5 text-center last:border-r-0">
                     <dt className="serif-accent text-4xl leading-none text-gold">{v.letter}</dt>
@@ -177,26 +173,24 @@ export default function HomePage() {
                   </div>
                 ))}
               </dl>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:px-4 xl:[&>a]:text-[0.875rem]">
+              <div className="mt-auto flex flex-col gap-4 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:gap-2 xl:[&>a]:px-4 xl:[&>a]:text-[0.8125rem]">
                 <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
                   Start Your Personal Brand Assessment
                 </ButtonLink>
-                <ButtonLink href={routes.personalBrand} variant="ghost-light">
+                <ButtonLink href={routes.personalBrand} variant="link">
                   Discover Your VIBE™
                 </ButtonLink>
+              </div>
               </div>
             </Reveal>
 
             {/* Growth Architecture — waitlist */}
-            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-8 sm:p-12 xl:p-14">
-              <Photo src="/images/client-executive-dubai-window.webp" sizes="(min-width: 1024px) 40vw, 100vw" className="mb-10 aspect-[16/9]" />
-              <div className="flex items-center justify-between gap-4">
-                <span className="eyebrow text-muted">02</span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
-                  <span className="size-1.5 rounded-full border border-muted" aria-hidden /> Coming later · Waitlist open
-                </span>
-              </div>
-              <h3 className="mt-10 text-3xl tracking-[-0.025em] sm:text-4xl">Growth Architecture™</h3>
+            <Reveal as="article" delay={120} className="flex flex-col overflow-hidden rounded-[2rem] border border-ink/12 bg-surface">
+              <CardBanner src="/images/client-executive-dubai-window.webp" index="02">
+                <span className="size-1.5 rounded-full border border-white" aria-hidden /> Coming later · Waitlist open
+              </CardBanner>
+              <div className="flex flex-1 flex-col p-8 sm:p-10 xl:p-9 2xl:p-12">
+              <h3 className="text-3xl tracking-[-0.025em] sm:text-4xl">Growth Architecture™</h3>
               <p className="serif-accent mt-4 text-2xl text-gold-ink">
                 Your business doesn&apos;t need more disconnected growth initiatives. It needs them working together.
               </p>
@@ -204,20 +198,21 @@ export default function HomePage() {
                 For growth-stage businesses, SMEs, portfolio companies and established organizations that have the
                 ambition and capability to reach a significantly higher level.
               </p>
-              <ul className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-3">
+              <ul className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-3">
                 {gaDimensions.map((d) => (
                   <li key={d.name} className="bg-surface px-4 py-4 text-sm">
-                    {d.name}.
+                    {d.name}
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:px-4 xl:[&>a]:text-[0.875rem]">
+              <div className="mt-auto flex flex-col gap-4 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:gap-2 xl:[&>a]:px-4 xl:[&>a]:text-[0.8125rem]">
                 <ButtonLink href={routes.waitlist} variant="solid">
                   Join the Waitlist
                 </ButtonLink>
-                <ButtonLink href={routes.growth} variant="ghost">
+                <ButtonLink href={routes.growth} variant="link">
                   Explore Growth Architecture
                 </ButtonLink>
+              </div>
               </div>
             </Reveal>
           </div>
@@ -236,12 +231,12 @@ export default function HomePage() {
             title={
               <>
                 Most businesses manage growth in departments.{" "}
-                <span className="serif-accent text-gold">We see one architecture.</span>
+                <span className="serif-accent text-gold">We see one architecture</span>
               </>
             }
             intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
           />
-          <div className="mt-12 sm:mt-16 lg:mt-20">
+          <div className="mt-16 sm:mt-24 lg:mt-28">
             <GrowthChainDiagram />
           </div>
         </div>
@@ -256,7 +251,7 @@ export default function HomePage() {
             eyebrow="The Level141 Growth System"
             title={
               <>
-                Growth. <span className="serif-accent">Architected.</span>
+                Growth. <span className="serif-accent">Architected</span>
               </>
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
@@ -296,7 +291,7 @@ export default function HomePage() {
             eyebrow="We don't start with deliverables"
             title={
               <>
-                We start with the <span className="serif-accent">level you&apos;re trying to reach.</span>
+                We start with the <span className="serif-accent">level you&apos;re trying to reach</span>
               </>
             }
             intro={
@@ -343,7 +338,7 @@ export default function HomePage() {
             <Reveal delay={120} className="on-dark grid rounded-[2rem] bg-ink p-7 text-paper sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
               <div className="pb-6">
                 <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
-                  The starting point is the <span className="serif-accent text-gold">growth problem.</span>
+                  The starting point is the <span className="serif-accent text-gold">growth problem</span>
                 </p>
                 <p className="eyebrow mt-5 text-paper-muted">Level141 first identifies:</p>
               </div>
@@ -379,10 +374,10 @@ export default function HomePage() {
               What we actually sell
             </Eyebrow>
             <h2 id="sell-title" className="mt-8 space-y-1 text-[2.4rem] leading-[1.05] tracking-[-0.035em] sm:text-6xl">
-              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not marketing.</span>
-              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not consulting.</span>
-              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not another strategy deck.</span>
-              <span className="serif-accent block pt-3 text-gold">Growth Architecture.</span>
+              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not marketing</span>
+              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not consulting</span>
+              <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not another strategy deck</span>
+              <span className="serif-accent block pt-3 text-gold">Growth Architecture</span>
             </h2>
           </Reveal>
           <Reveal delay={100} className="lg:col-span-5 lg:col-start-8">
@@ -414,7 +409,7 @@ export default function HomePage() {
             eyebrow="Ideal for"
             title={
               <>
-                When ambition changes, the architecture supporting it <span className="serif-accent">must change too.</span>
+                When ambition changes, the architecture supporting it <span className="serif-accent">must change too</span>
               </>
             }
           />
@@ -463,7 +458,7 @@ export default function HomePage() {
             eyebrow="Why Level141?"
             title={
               <>
-                Growth Architecture, <span className="serif-accent">not fragmented consulting.</span>
+                Growth Architecture, <span className="serif-accent">not fragmented consulting</span>
               </>
             }
           />
@@ -489,7 +484,7 @@ export default function HomePage() {
               </Eyebrow>
               <h2 id="belief-title" className="display mt-6 text-[2.6rem] sm:text-6xl">
                 Growth isn&apos;t a collection of activities.{" "}
-                <span className="serif-accent text-gold">It&apos;s a system.</span>
+                <span className="serif-accent text-gold">It&apos;s a system</span>
               </h2>
               <Photo src="/images/client-visionaries-horizon.webp" sizes="(min-width: 1024px) 38vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12" />
             </Reveal>
@@ -506,7 +501,7 @@ export default function HomePage() {
             <BracketFrame size="lg" className="mx-auto max-w-3xl text-center">
               <p className="text-3xl leading-tight tracking-[-0.025em] sm:text-5xl">
                 Growth happens when the pieces work together.{" "}
-                <span className="serif-accent text-gold">That&apos;s what we architect.</span>
+                <span className="serif-accent text-gold">That&apos;s what we architect</span>
               </p>
             </BracketFrame>
           </Reveal>
@@ -522,7 +517,7 @@ export default function HomePage() {
             eyebrow="Results"
             title={
               <>
-                Don&apos;t show what you did. <span className="serif-accent">Show what changed.</span>
+                Don&apos;t show what you did. <span className="serif-accent">Show what changed</span>
               </>
             }
           />
@@ -595,7 +590,7 @@ export default function HomePage() {
             eyebrow="Insights"
             title={
               <>
-                The <span className="serif-accent">Next Level.</span>
+                The <span className="serif-accent">Next Level</span>
               </>
             }
             intro={

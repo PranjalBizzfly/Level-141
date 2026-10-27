@@ -26,7 +26,7 @@ export default function InsightsPage() {
         eyebrow="Insights"
         title={
           <>
-            The <span className="serif-accent text-gold">Next Level.</span>
+            The <span className="serif-accent text-gold">Next Level</span>
           </>
         }
         intro={<p>Ideas for people and organizations that refuse to remain where they are.</p>}
@@ -101,7 +101,7 @@ export default function InsightsPage() {
             eyebrow="Insights"
             title={
               <>
-                Discovery <span className="serif-accent">Questions.</span>
+                Discovery <span className="serif-accent">Questions</span>
               </>
             }
           />

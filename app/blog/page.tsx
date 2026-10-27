@@ -36,7 +36,7 @@ export default async function BlogPage({ searchParams }: Props) {
         eyebrow="Blog"
         title={
           <>
-            The Level141 <span className="serif-accent text-gold">Blog.</span>
+            The Level141 <span className="serif-accent text-gold">Blog</span>
           </>
         }
         intro={<p>Articles on growth architecture, personal authority, brand, positioning and leadership.</p>}
@@ -85,7 +85,7 @@ export default async function BlogPage({ searchParams }: Props) {
             <Reveal className="mt-12 rounded-[2rem] border border-line bg-surface px-8 py-20 text-center sm:mt-16 sm:py-28">
               <p className="eyebrow text-gold-ink">{active ? categoryName(active) : "Blog"}</p>
               <p className="display mx-auto mt-6 max-w-xl text-3xl sm:text-4xl">
-                No posts <span className="serif-accent">yet.</span>
+                No posts <span className="serif-accent">yet</span>
               </p>
               <p className="mx-auto mt-5 max-w-md leading-relaxed text-muted">Articles will appear here once they are published.</p>
               {active ? (

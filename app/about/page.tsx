@@ -44,7 +44,7 @@ export default function AboutPage() {
           <Reveal className="lg:col-span-6">
             <p className="eyebrow text-gold-ink">A simple belief</p>
             <h2 id="belief-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
-              Businesses need clarity about what their <span className="serif-accent">next level requires.</span>
+              Businesses need clarity about what their <span className="serif-accent">next level requires</span>
             </h2>
             <Photo src="/images/client-lone-executive-skyline.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
@@ -59,7 +59,7 @@ export default function AboutPage() {
               and architect the interconnected systems required to get there.
             </p>
             <p className="mt-6 text-lg">
-              We call it: <span className="serif-accent text-2xl text-gold-ink">Growth Architecture.</span>
+              We call it: <span className="serif-accent text-2xl text-gold-ink">Growth Architecture</span>
             </p>
           </Reveal>
         </div>
@@ -72,7 +72,7 @@ export default function AboutPage() {
           <Reveal className="mx-auto max-w-5xl text-center">
             <p className="eyebrow text-gold">Our purpose</p>
             <h2 id="purpose-title" className="display mt-6 text-[2.5rem] sm:mt-8 sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
-              Architect the next level <span className="serif-accent text-gold">of growth.</span>
+              Architect the next level <span className="serif-accent text-gold">of growth</span>
             </h2>
           </Reveal>
           <ul className="mx-auto mt-12 grid max-w-5xl gap-px sm:mt-16 lg:mt-20 overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
@@ -102,7 +102,7 @@ export default function AboutPage() {
             eyebrow="About Level141"
             title={
               <>
-                Our <span className="serif-accent">principles.</span>
+                Our <span className="serif-accent">principles</span>
               </>
             }
           />
@@ -141,7 +141,7 @@ export default function AboutPage() {
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-gold-ink">Two ambitions. Two architectures.</p>
             <h2 id="offer-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
-              Level141 has built dedicated architectures <span className="serif-accent">for both.</span>
+              Level141 has built dedicated architectures <span className="serif-accent">for both</span>
             </h2>
             <p className="mt-8 text-lg leading-relaxed text-muted">
               Level141 is a Growth Architecture company. It does not treat branding, visibility, authority, lead

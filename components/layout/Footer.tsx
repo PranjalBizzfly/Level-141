@@ -84,7 +84,7 @@ export function Footer() {
           {/* Closing statement */}
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <p className="display text-[2.15rem] leading-[1.03] text-[#0d0d0e] sm:text-5xl lg:col-span-8 lg:text-[3.6rem] dark:text-white">
-              Growth Architecture For <span className="serif-accent">People &amp; Organizations.</span>
+              Growth Architecture For <span className="serif-accent">People &amp; Organizations</span>
             </p>
             <div className="flex flex-col items-start gap-4 lg:col-span-4 lg:items-end">
               <Link

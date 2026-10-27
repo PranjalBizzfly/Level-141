@@ -32,7 +32,7 @@ export default function HowPage() {
         title={
           <>
             We don&apos;t start with deliverables.{" "}
-            <span className="serif-accent text-gold">We start with the level you&apos;re trying to reach.</span>
+            <span className="serif-accent text-gold">We start with the level you&apos;re trying to reach</span>
           </>
         }
         intro={<p>Level141 sits between strategy and execution. The starting point is the growth problem.</p>}
@@ -65,7 +65,7 @@ export default function HowPage() {
             <Reveal>
               <Eyebrow className="text-gold-ink">The starting point</Eyebrow>
               <h2 id="start-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
-                But none of those should be <span className="serif-accent">the starting point.</span>
+                But none of those should be <span className="serif-accent">the starting point</span>
               </h2>
             </Reveal>
             <Reveal as="ul" delay={100} className="mt-10 space-y-3">
@@ -103,12 +103,12 @@ export default function HowPage() {
             eyebrow="How Level141 works"
             title={
               <>
-                Assess. Architect. Activate. Govern. <span className="serif-accent">Level up.</span>
+                Assess. Architect. Activate. Govern. <span className="serif-accent">Level up</span>
               </>
             }
             intro="Growth isn't a destination. Every new level creates another possibility."
           />
-          <ol className="mt-12 sm:mt-16 lg:mt-20 border-t border-ink/12">
+          <ol className="mt-16 sm:mt-24 lg:mt-28 border-t border-ink/12">
             {levelProcess.map((s, i) => (
               <Reveal
                 as="li"
@@ -146,12 +146,12 @@ export default function HowPage() {
             eyebrow="The Level141 Growth System"
             title={
               <>
-                Growth. <span className="serif-accent text-gold">Architected.</span>
+                Growth. <span className="serif-accent text-gold">Architected</span>
               </>
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <Reveal className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-4">
+          <Reveal className="mt-16 sm:mt-24 lg:mt-28 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-4">
             {[
               ["LQ™", "Know your level", "#lq"],
               ["IGF™", "Connect the growth engine", "#igf"],
@@ -177,7 +177,7 @@ export default function HowPage() {
               <Reveal>
                 <p className="eyebrow text-gold">LQ™ — Level Quotient</p>
                 <h2 id="lq-title" className="display mt-6 text-[2.25rem] sm:text-5xl">
-                  First, <span className="serif-accent text-gold">know your level.</span>
+                  First, <span className="serif-accent text-gold">know your level</span>
                 </h2>
                 <p className="mt-8 leading-relaxed text-paper/70">
                   Before recommending what should change, we establish where you currently stand. LQ™ provides a
@@ -238,7 +238,7 @@ export default function HowPage() {
             <Reveal>
               <p className="eyebrow text-gold-ink">IGF™ — Integrated Growth Framework</p>
               <h2 id="igf-title" className="display mt-6 text-[2.25rem] sm:text-5xl">
-                Connect the <span className="serif-accent">growth engine.</span>
+                Connect the <span className="serif-accent">growth engine</span>
               </h2>
             </Reveal>
           </div>
@@ -269,12 +269,12 @@ export default function HowPage() {
             eyebrow="BRANDS™"
             title={
               <>
-                Six dimensions <span className="serif-accent text-gold">of growth.</span>
+                Six dimensions <span className="serif-accent text-gold">of growth</span>
               </>
             }
             intro="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
           />
-          <div className="mt-12 sm:mt-16 lg:mt-20">
+          <div className="mt-16 sm:mt-24 lg:mt-28">
             <BrandsSystem />
           </div>
         </div>
@@ -288,12 +288,12 @@ export default function HowPage() {
             eyebrow="PEAK™"
             title={
               <>
-                From presence <span className="serif-accent">to momentum.</span>
+                From presence <span className="serif-accent">to momentum</span>
               </>
             }
             intro="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
-          <div className="mt-12 sm:mt-16 lg:mt-20">
+          <div className="mt-16 sm:mt-24 lg:mt-28">
             <PeakAscent dark={false} />
           </div>
         </div>
@@ -306,10 +306,10 @@ export default function HowPage() {
           <Reveal className="lg:col-span-6">
             <p className="eyebrow text-gold-ink">What we actually sell</p>
             <h2 id="sell-title" className="mt-6 space-y-1 text-[2.25rem] leading-[1.05] tracking-[-0.035em] sm:text-5xl xl:text-6xl">
-              <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not marketing.</span>
-              <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not consulting.</span>
-              <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not another strategy deck.</span>
-              <span className="serif-accent block pt-3 text-ink">Growth Architecture.</span>
+              <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not marketing</span>
+              <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not consulting</span>
+              <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not another strategy deck</span>
+              <span className="serif-accent block pt-3 text-ink">Growth Architecture</span>
             </h2>
             <Photo src="/images/client-mentorship-conversation.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
@@ -348,11 +348,11 @@ export default function HowPage() {
             eyebrow="Why Level141?"
             title={
               <>
-                Growth Architecture, <span className="serif-accent text-gold">not fragmented consulting.</span>
+                Growth Architecture, <span className="serif-accent text-gold">not fragmented consulting</span>
               </>
             }
           />
-          <ol className="mt-12 sm:mt-16 lg:mt-20 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-16 sm:mt-24 lg:mt-28 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
             {whyLevel141.map((w, i) => (
               <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-ink p-8 sm:p-10 lg:p-12">
                 <span className="eyebrow tabular-nums text-gold">{String(i + 1).padStart(2, "0")}</span>
@@ -372,11 +372,11 @@ export default function HowPage() {
             eyebrow="Results"
             title={
               <>
-                Don&apos;t show what you did. <span className="serif-accent">Show what changed.</span>
+                Don&apos;t show what you did. <span className="serif-accent">Show what changed</span>
               </>
             }
           />
-          <ol className="mt-12 sm:mt-16 lg:mt-20 grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5 lg:gap-5">
+          <ol className="mt-16 sm:mt-24 lg:mt-28 grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5 lg:gap-5">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"
@@ -410,7 +410,7 @@ export default function HowPage() {
         title={
           <>
             The first step isn&apos;t another campaign.{" "}
-            <span className="serif-accent text-gold">It&apos;s understanding your current level.</span>
+            <span className="serif-accent text-gold">It&apos;s understanding your current level</span>
           </>
         }
         primary={{ label: "Start Your Level141 Assessment", href: routes.contact }}
