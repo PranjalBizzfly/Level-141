@@ -1,7 +1,7 @@
 import { BrandsSystem, PeakAscent } from "@/components/diagrams/Diagrams";
 import { FrameworkNav } from "@/components/sections/FrameworkNav";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { BracketFrame, ButtonLink, Eyebrow, PageHero, Reveal, Section, SectionHeader, cx } from "@/components/ui/primitives";
+import { BracketFrame, ButtonLink, Eyebrow, PageHero, Reveal, Section, SectionHeader, cx, Photo } from "@/components/ui/primitives";
 import {
   levelProcess,
   lqDomains,
@@ -311,6 +311,7 @@ export default function HowPage() {
               <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not another strategy deck.</span>
               <span className="serif-accent block pt-3 text-ink">Growth Architecture.</span>
             </h2>
+            <Photo src="/images/client-mentorship-conversation.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
           <div className="lg:col-span-5 lg:col-start-8">
             <Reveal delay={100}>

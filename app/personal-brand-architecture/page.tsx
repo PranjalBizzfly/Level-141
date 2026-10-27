@@ -395,6 +395,7 @@ export default function PersonalBrandPage() {
                   standards, dependencies, review mechanism and success criteria. The product should not collapse into
                   undifferentiated execution.
                 </p>
+                <Photo src="/images/client-executive-study-portrait.webp" sizes="(min-width: 1024px) 34vw, 100vw" className="mt-10 aspect-[4/3] lg:aspect-[5/4]" />
               </Reveal>
             </div>
           </div>
@@ -432,6 +433,9 @@ export default function PersonalBrandPage() {
                     </>
                   }
                 />
+                <Reveal>
+                  <Photo src="/images/client-keynote-monochrome.webp" sizes="(min-width: 1024px) 34vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12" />
+                </Reveal>
               </div>
             </div>
             <ol className="border-t border-line-strong lg:col-span-7">

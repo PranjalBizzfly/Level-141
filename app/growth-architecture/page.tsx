@@ -332,6 +332,7 @@ export default function GrowthArchitecturePage() {
                   Explore Personal Brand Architecture
                 </ButtonLink>
               </BracketFrame>
+              <Photo src="/images/client-walk-toward-skyline.webp" sizes="(min-width: 1024px) 40vw, 100vw" className="mt-10 aspect-[16/10] sm:mt-12" />
             </Reveal>
           </div>
           <Reveal delay={80} className="rounded-[2rem] border border-ink/10 bg-surface p-8 sm:p-14 lg:p-20 lg:col-span-6 lg:col-start-7">

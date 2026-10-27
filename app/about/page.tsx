@@ -78,12 +78,13 @@ export default function AboutPage() {
           <ul className="mx-auto mt-12 grid max-w-5xl gap-px sm:mt-16 lg:mt-20 overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
             {/* Source: Website Structure, OUR PURPOSE — exact lines. */}
             {[
-              ["For people.", ""],
-              ["For businesses.", ""],
-              ["For ideas", "with the potential to become significantly bigger than they are today."],
-            ].map(([title, body], i) => (
-              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-8 sm:p-10 lg:p-12">
-                <p className="text-2xl tracking-[-0.02em]">
+              ["For people.", "", "client-executive-portrait-woman"],
+              ["For businesses.", "", "client-walk-through-crowd"],
+              ["For ideas", "with the potential to become significantly bigger than they are today.", "client-executive-study-woman"],
+            ].map(([title, body, image], i) => (
+              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-6 sm:p-8 lg:p-8">
+                <Photo src={`/images/${image}.webp`} sizes="(min-width: 768px) 30vw, 100vw" className="aspect-[4/3] md:aspect-[4/5]" />
+                <p className="mt-6 px-2 text-2xl tracking-[-0.02em] sm:mt-8">
                   {title}
                   {body ? <span className="mt-3 block text-base leading-relaxed tracking-normal text-paper/60">{body}</span> : null}
                 </p>
