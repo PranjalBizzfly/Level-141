@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getPublishedPosts } from "@/lib/blog";
 import { getPublishedInsights } from "@/lib/insights";
 import { routes, siteUrl } from "@/lib/site";
 
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: routes.how, priority: 0.8 },
     { path: routes.about, priority: 0.7 },
     { path: routes.insights, priority: 0.6 },
+    { path: routes.blog, priority: 0.6 },
     { path: routes.contact, priority: 0.7 },
   ];
   return [
@@ -17,6 +19,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getPublishedInsights().map((a) => ({
       url: `${siteUrl}${routes.insights}/${a.slug}`,
       lastModified: a.publishedAt,
+      priority: 0.5,
+    })),
+    ...getPublishedPosts().map((p) => ({
+      url: `${siteUrl}${routes.blog}/${p.slug}`,
+      lastModified: p.publishedAt,
       priority: 0.5,
     })),
   ];

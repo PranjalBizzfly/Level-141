@@ -23,6 +23,7 @@ export const routes = {
   waitlist: "/growth-architecture#waitlist",
   how: "/how-we-architect-growth",
   insights: "/insights",
+  blog: "/blog",
   about: "/about",
   contact: "/start-your-next-level",
 } as const;
@@ -34,6 +35,7 @@ export const mainNav: NavItem[] = [
   { label: "Growth Architecture", href: routes.growth },
   { label: "How We Architect Growth", href: routes.how },
   { label: "Insights", href: routes.insights },
+  { label: "Blog", href: routes.blog },
   { label: "About", href: routes.about },
   { label: "Start Your Next Level", href: routes.contact },
 ];
@@ -44,6 +46,7 @@ export const footerNav = {
     { label: "Growth Architecture™", href: routes.growth },
     { label: "How We Architect Growth", href: routes.how },
     { label: "Insights", href: routes.insights },
+    { label: "Blog", href: routes.blog },
     { label: "About", href: routes.about },
     { label: "Start Your Next Level", href: routes.contact },
   ],
