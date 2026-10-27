@@ -123,13 +123,13 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
       </figcaption>
       {/* Equal cards sized to their content; the ascent is shown by a bar that
           fills 25 → 100% across the four stages instead of empty card height. */}
-      <ol className="grid gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-4">
+      <ol className="grid gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4">
         {peakStages.map((s, i) => (
           <li key={s.letter} data-step style={step(i)}>
             <div
               data-spotlight={dark ? "" : undefined}
               className={cx(
-                "card-interactive relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 sm:p-8 lg:p-6 xl:p-7",
+                "card-interactive relative flex h-full flex-col overflow-hidden rounded-2xl border p-7 sm:p-9 lg:p-7 xl:p-8",
                 dark ? "border-line-dark-strong bg-ink-2" : "border-line bg-surface",
               )}
             >
@@ -172,7 +172,7 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
           </li>
         ))}
       </ol>
-      <div aria-hidden className={cx("mt-5 flex items-center gap-3", dark ? "text-paper-muted" : "text-muted")}>
+      <div aria-hidden className={cx("mt-10 flex items-center gap-4", dark ? "text-paper-muted" : "text-muted")}>
         <span className="eyebrow">Presence</span>
         <span
           data-seq-line

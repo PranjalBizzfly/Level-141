@@ -81,10 +81,10 @@ export default function AboutPage() {
               ["For businesses.", ""],
               ["For ideas", "with the potential to become significantly bigger than they are today."],
             ].map(([title, body], i) => (
-              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-8 sm:p-14 lg:p-20">
+              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-8 sm:p-10 lg:p-12">
                 <p className="text-2xl tracking-[-0.02em]">
                   {title}
-                  {body ? <span className="text-paper/60"> {body}</span> : null}
+                  {body ? <span className="mt-3 block text-base leading-relaxed tracking-normal text-paper/60">{body}</span> : null}
                 </p>
               </Reveal>
             ))}
@@ -111,7 +111,7 @@ export default function AboutPage() {
                 key={p.name}
                 delay={i * 80}
                 className={cx(
-                  "relative flex flex-col rounded-[2rem] p-8 sm:p-14 lg:p-20 md:min-h-[20rem]",
+                  "relative flex flex-col rounded-[2rem] p-8 sm:p-12 lg:p-16",
                   i === 0 || i === 3 ? "on-dark bg-ink text-paper" : "border border-line bg-surface",
                 )}
               >
@@ -121,7 +121,7 @@ export default function AboutPage() {
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-auto pt-12 text-3xl tracking-[-0.025em]">{p.name}</h3>
+                <h3 className="mt-12 text-3xl tracking-[-0.025em]">{p.name}</h3>
                 <p className={cx("mt-4 text-lg leading-relaxed", i === 0 || i === 3 ? "text-paper/80" : "text-muted")}>{p.body}</p>
                 <BracketClose
                   aria-hidden
@@ -148,7 +148,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <div className="grid gap-6 sm:gap-10 lg:col-span-6 lg:col-start-7">
-            <Reveal className="on-dark rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
+            <Reveal className="on-dark rounded-[2rem] bg-ink p-8 text-paper sm:p-12">
               <div className="flex items-center justify-between">
                 <p className="eyebrow text-gold">For people · VIBE™</p>
               </div>
@@ -157,11 +157,11 @@ export default function AboutPage() {
                 Converts genuine expertise, leadership credibility and lived experience into a structured personal growth
                 asset.
               </p>
-              <ButtonLink href={routes.personalBrand} variant="ghost-light" className="mt-4">
+              <ButtonLink href={routes.personalBrand} variant="ghost-light" className="mt-8">
                 Explore
               </ButtonLink>
             </Reveal>
-            <Reveal delay={100} className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20">
+            <Reveal delay={100} className="rounded-[2rem] border border-ink/12 p-8 sm:p-12">
               <div className="flex items-center justify-between">
                 <p className="eyebrow text-gold-ink">For organizations · PEAK™</p>
                 <span className="text-xs text-muted">Waitlist</span>
@@ -170,7 +170,7 @@ export default function AboutPage() {
               <p className="mt-3 leading-relaxed text-muted">
                 One integrated architecture connecting every critical growth lever to measurable business outcomes.
               </p>
-              <ButtonLink href={routes.growth} variant="ghost" className="mt-4">
+              <ButtonLink href={routes.growth} variant="ghost" className="mt-8">
                 Explore
               </ButtonLink>
             </Reveal>

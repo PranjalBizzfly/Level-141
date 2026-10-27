@@ -258,14 +258,14 @@ export default function PersonalBrandPage() {
           </Reveal>
           {/* Source: Website Structure, PERSONAL BRAND ARCHITECTURE "Ideal for" closing lines. */}
           <Reveal>
-            <p className="mt-8 max-w-3xl text-2xl leading-snug tracking-[-0.02em] sm:mt-10 sm:text-3xl">
+            <p className="mt-12 max-w-3xl text-2xl leading-snug tracking-[-0.02em] sm:mt-16 sm:text-3xl">
               Your personal brand shouldn&apos;t simply document what you&apos;ve done.{" "}
               <span className="serif-accent">It should position you for what you want to do next.</span>
             </p>
           </Reveal>
 
           {/* 3 — Fit comparison: two open columns split by a single hairline. */}
-          <div className="mt-16 grid gap-12 sm:mt-14 md:grid-cols-2 md:gap-0 md:divide-x md:divide-line">
+          <div className="mt-20 grid gap-14 sm:mt-24 md:grid-cols-2 lg:mt-28 md:gap-0 md:divide-x md:divide-line">
             <Reveal className="md:pr-12 lg:pr-16">
               <h3 className="text-3xl tracking-[-0.025em] sm:text-4xl">
                 Qualification <span className="serif-accent">signals.</span>

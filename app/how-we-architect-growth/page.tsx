@@ -352,7 +352,7 @@ export default function HowPage() {
           />
           <ol className="mt-12 sm:mt-16 lg:mt-20 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
             {whyLevel141.map((w, i) => (
-              <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-ink p-8 sm:p-14 lg:p-20">
+              <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-ink p-8 sm:p-10 lg:p-12">
                 <span className="eyebrow tabular-nums text-gold">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-8 text-2xl tracking-[-0.02em]">{w.title}</h3>
                 <p className="mt-4 leading-relaxed text-paper/75">{w.body}</p>
@@ -374,14 +374,14 @@ export default function HowPage() {
               </>
             }
           />
-          <ol className="mt-12 sm:mt-16 lg:mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+          <ol className="mt-12 sm:mt-16 lg:mt-20 grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5 lg:gap-5">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"
                 key={t.label}
                 delay={i * 80}
                 className={cx(
-                  "relative rounded-2xl border border-ink/12 p-6 sm:p-8 lg:p-6 lg:rounded-none lg:border-l-0 lg:first:rounded-l-2xl lg:first:border-l lg:last:rounded-r-2xl",
+                  "relative rounded-2xl border border-ink/12 p-6 sm:p-8 lg:p-7",
                   i === transformationFrame.length - 1 ? "on-dark bg-ink text-paper sm:col-span-2 lg:col-span-1" : "bg-paper",
                 )}
               >

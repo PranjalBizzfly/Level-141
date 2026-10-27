@@ -185,10 +185,10 @@ export default function GrowthArchitecturePage() {
             eyebrow="Growth gap architecture"
             title={
               <>
-                Not a list of recommendations. <span className="serif-accent">A pprioritized bridge.</span>
+                Not a list of recommendations. <span className="serif-accent">A prioritized bridge.</span>
               </>
             }
-            intro="The central deliverable is a pprioritized bridge between Current Level and Next Level."
+            intro="The central deliverable is a prioritized bridge between Current Level and Next Level."
           />
           {/* The bridge as a sequence of paired rows: step, the question it answers, what it delivers. */}
           <ol className="group/list mt-12 border-t border-line-strong sm:mt-16 lg:mt-20">
@@ -298,7 +298,7 @@ export default function GrowthArchitecturePage() {
             <Reveal delay={120} className="md:pl-12 lg:pl-16">
               <p className="eyebrow text-gold-ink">After</p>
               <p className="mt-6 text-xl leading-snug tracking-[-0.015em] sm:text-2xl">
-                A diagnosed and pprioritized growth system with clear market positioning, defined ICP, conversion
+                A diagnosed and prioritized growth system with clear market positioning, defined ICP, conversion
                 readiness, integrated demand and nurture, stronger trust, sales alignment, measurable KPIs and governed
                 execution.
               </p>

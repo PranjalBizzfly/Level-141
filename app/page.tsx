@@ -101,17 +101,12 @@ export default function HomePage() {
 
           <div className="lg:col-span-6">
             <Reveal className="rounded-[2rem] border border-ink/10 bg-surface p-8 sm:p-14 lg:p-20">
-              <div className="flex items-baseline justify-between gap-4">
-                <p className="eyebrow text-muted">They have</p>
-                <p aria-hidden className="eyebrow tabular-nums text-muted">
-                  {String(activityList.length).padStart(2, "0")} pieces
-                </p>
-              </div>
+              <p className="eyebrow text-muted">They have</p>
               <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Typical growth activities">
                 {activityList.map((a) => (
                   <li
                     key={a}
-                    className="flex min-h-12 items-center justify-center rounded-2xl border border-ink/10 bg-ink/[0.03] px-3 text-center text-sm text-ink/75 transition-colors duration-300 hover:border-ink/25 hover:text-ink"
+                    className="flex min-h-12 items-center justify-center rounded-2xl border border-ink/10 bg-ink/[0.03] whitespace-nowrap px-2 text-center text-sm text-ink/75 transition-colors duration-300 hover:border-ink/25 hover:text-ink"
                   >
                     {a.replace(".", "")}
                   </li>
@@ -152,9 +147,9 @@ export default function HomePage() {
             intro="Level141 has built dedicated architectures for both."
           />
 
-          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2">
+          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2 lg:gap-8">
             {/* Personal Brand Architecture — active */}
-            <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-8 text-paper sm:p-12 xl:p-16">
+            <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-8 text-paper sm:p-12 xl:p-14">
               <div className="flex items-center justify-between gap-4">
                 <span aria-hidden className="eyebrow text-paper-muted">
                   01
@@ -174,13 +169,13 @@ export default function HomePage() {
               </p>
               <dl className="mt-10 grid grid-cols-4 border-y border-paper/12">
                 {vibe.map((v) => (
-                  <div key={v.letter} className="border-r border-paper/12 py-5 text-center last:border-r-0">
+                  <div key={v.letter} className="border-r border-paper/12 px-1 py-5 text-center last:border-r-0">
                     <dt className="serif-accent text-4xl leading-none text-gold">{v.letter}</dt>
-                    <dd className="mt-2 text-[0.75rem] uppercase tracking-[0.1em] text-paper-muted">{v.name}</dd>
+                    <dd className="mt-2 text-[0.625rem] uppercase leading-snug tracking-[0.06em] sm:text-[0.75rem] sm:tracking-[0.1em] text-paper-muted">{v.name}</dd>
                   </div>
                 ))}
               </dl>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 lg:[&>a]:px-4 lg:[&>a]:whitespace-nowrap">
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:px-4 xl:[&>a]:text-[0.875rem]">
                 <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
                   Start Your Personal Brand Assessment
                 </ButtonLink>
@@ -191,7 +186,7 @@ export default function HomePage() {
             </Reveal>
 
             {/* Growth Architecture — waitlist */}
-            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-8 sm:p-12 xl:p-16">
+            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-8 sm:p-12 xl:p-14">
               <div className="flex items-center justify-between gap-4">
                 <span className="eyebrow text-muted">02</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
@@ -213,7 +208,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5">
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:px-4 xl:[&>a]:text-[0.875rem]">
                 <ButtonLink href={routes.waitlist} variant="solid">
                   Join the Waitlist
                 </ButtonLink>
@@ -314,11 +309,8 @@ export default function HomePage() {
               Two matched panels on a shared subgrid so their lists and closing lines align. */}
           <div className="mt-12 grid gap-6 sm:mt-16 lg:mt-20 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
             <Reveal className="grid rounded-[2rem] border border-line bg-surface p-7 sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
-              <div className="pb-6">
-                <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
-                  The usual starting point is the <span className="serif-accent text-muted">deliverable.</span>
-                </p>
-                <p className="eyebrow mt-5 text-muted">What may be necessary:</p>
+              <div className="flex items-end pb-6">
+                <p className="eyebrow text-muted">Deliverables</p>
               </div>
               <ul className="border-t border-line-strong">
                 {mayBeNecessary.map((m) => (
@@ -371,7 +363,7 @@ export default function HomePage() {
           </div>
 
           {/* Source: Website Structure, "HOW LEVEL141 WORKS". */}
-          <Eyebrow className="mt-12 text-gold-ink sm:mt-14">How Level141 works</Eyebrow>
+          <Eyebrow className="mt-20 text-gold-ink sm:mt-24 lg:mt-28">How Level141 works</Eyebrow>
           <ProcessTimeline steps={levelProcess} className="mt-8 sm:mt-10" />
         </div>
       </Section>
@@ -530,14 +522,14 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:mt-20 lg:grid-cols-5 lg:gap-0">
+          <ol className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:mt-20 lg:grid-cols-5 lg:gap-5">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"
                 key={t.label}
                 delay={i * 80}
                 className={
-                  "rounded-2xl border border-ink/12 p-6 lg:rounded-none lg:border-l-0 lg:first:rounded-l-2xl lg:first:border-l lg:last:rounded-r-2xl " +
+                  "rounded-2xl border border-ink/12 p-6 lg:p-7 " +
                   (i === 4 ? "on-dark bg-ink text-paper sm:col-span-2 lg:col-span-1" : "bg-surface")
                 }
               >

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Info } from "lucide-react";
+import { AlertCircle, ArrowRight, Info } from "lucide-react";
 import { useState } from "react";
 import { routes } from "@/lib/site";
 import { DEFAULT_COUNTRY } from "@/lib/forms/countries";
@@ -136,7 +136,8 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
             </p>
           </div>
         ) : allErrors.interest ? (
-          <p id="interest-error" className="mt-2 text-sm text-error">
+          <p id="interest-error" className="mt-2 flex items-start gap-2 text-sm text-error">
+            <AlertCircle aria-hidden className="mt-0.5 size-4 shrink-0" />
             {allErrors.interest}
           </p>
         ) : null}

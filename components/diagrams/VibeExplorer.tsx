@@ -129,11 +129,11 @@ export function VibeExplorer() {
               <p className="measure mt-6 text-lg leading-relaxed text-paper/75">{d.body}</p>
 
               <p className="eyebrow mt-12 text-paper-muted">Architecture focus</p>
-              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {d.focus.map((f) => (
                   <li
                     key={f}
-                    className="flex items-center gap-3 rounded-xl border border-paper/12 px-4 py-3 text-[0.9375rem] leading-snug text-paper/85 transition-colors duration-300 hover:border-paper/35"
+                    className="flex items-center gap-3 rounded-xl border border-paper/12 px-5 py-4 text-[0.9375rem] leading-snug text-paper/85 transition-colors duration-300 hover:border-paper/35"
                   >
                     <span aria-hidden className="h-px w-3 shrink-0 bg-gold" />
                     {f}

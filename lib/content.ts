@@ -523,7 +523,7 @@ export const gaTriggers = [
 export const gaGapSteps = [
   { name: "Current State", q: "What is true today?", out: "Evidence-based LQ™ baseline." },
   { name: "Next Level", q: "What specific business state are we trying to reach?", out: "Target outcomes and strategic definition." },
-  { name: "Gap", q: "What prevents movement from current to next?", out: "Pprioritized constraints, dependencies and opportunities." },
+  { name: "Gap", q: "What prevents movement from current to next?", out: "Prioritized constraints, dependencies and opportunities." },
   { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK™ / BRANDS™ blueprint." },
   { name: "Activation", q: "What must happen first, by whom and in what sequence?", out: "90-day and phased roadmap." },
   { name: "Measurement", q: "How will we know the system is moving?", out: "Leading, pipeline and outcome KPIs." },
