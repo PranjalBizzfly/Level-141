@@ -27,6 +27,7 @@ export default function HowPage() {
   return (
     <>
       <PageHero
+        image="/images/client-mentorship-conversation.webp"
         eyebrow="How we architect growth"
         title={
           <>

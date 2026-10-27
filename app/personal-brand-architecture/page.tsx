@@ -36,6 +36,7 @@ export default function PersonalBrandPage() {
   return (
     <>
       <PageHero
+        image="/images/client-speaker-conference-stage.webp"
         eyebrow="Personal Brand Architecture™"
         title={
           <>

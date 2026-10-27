@@ -17,6 +17,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        image="/images/client-lone-executive-skyline.webp"
         eyebrow="About Level141"
         title={
           <>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
-import { Reveal } from "@/components/ui/primitives";
+import { Photo, Reveal } from "@/components/ui/primitives";
 import { levelProcess } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
@@ -38,6 +38,12 @@ export default async function ContactPage({ searchParams }: Props) {
               Whether you&apos;re building your personal authority or preparing an organization for its next stage of
               growth, the first step isn&apos;t another campaign. It&apos;s understanding your current level.
             </p>
+            <Photo
+              src="/images/client-executive-city-lounge.webp"
+              priority
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="mt-10 aspect-[16/9] animate-fade [animation-delay:250ms] sm:mt-12"
+            />
           </div>
         </div>
 

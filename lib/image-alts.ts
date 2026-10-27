@@ -1,0 +1,22 @@
+/** Alt text for the client photography (same wording as the approved redesign). */
+export const imageAlts: Record<string, string> = {
+  "/images/client-hero-skyline-opening.webp": "Light falling through a tall opening in a stone interior, framing the Dubai skyline",
+  "/images/client-mentorship-conversation.webp": "A senior leader in conversation with two younger colleagues",
+  "/images/client-executive-library.webp": "An executive in glasses seated in a library, deep in thought",
+  "/images/client-executive-portrait-woman.webp": "A composed woman in a dark suit seated in a leather chair",
+  "/images/client-executive-study-woman.webp": "A thoughtful woman in a study holding a pen, looking into the distance",
+  "/images/client-keynote-monochrome.webp": "A speaker presenting to a large conference audience",
+  "/images/client-walk-through-crowd.webp": "A confident woman walking through a busy concourse",
+  "/images/client-executive-in-motion.webp": "A man in a suit striding through a crowd",
+  "/images/client-ceo-portrait.webp": "Close portrait of an executive in a suit, hand at his chin",
+  "/images/client-speaker-conference-stage.webp": "A speaker on stage addressing a full conference audience",
+  "/images/client-walk-toward-skyline.webp": "A man in a suit walking across a terrace towards a city skyline",
+  "/images/client-executive-dubai-window.webp": "An executive standing at a floor-to-ceiling window overlooking the Dubai skyline",
+  "/images/client-executive-city-lounge.webp": "An executive seated in a lounge chair, looking out over the Dubai skyline",
+  "/images/client-executive-study-portrait.webp": "A thoughtful executive in glasses seated in a study, holding a pen to his chin",
+  "/images/client-keynote-auditorium.webp": "A woman giving a keynote to a packed auditorium",
+  "/images/client-lone-executive-skyline.webp": "An executive standing alone at a tall window looking out over a city skyline",
+  "/images/client-executive-contemplation.webp": "An executive seated at a desk, deep in thought",
+  "/images/client-mentorship.webp": "An experienced leader talking with two younger colleagues",
+  "/images/client-visionaries-horizon.webp": "Three leaders looking out from a high terrace towards a misty horizon",
+};

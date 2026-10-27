@@ -22,6 +22,7 @@ export default function InsightsPage() {
   return (
     <>
       <PageHero
+        image="/images/client-keynote-auditorium.webp"
         eyebrow="Insights"
         title={
           <>

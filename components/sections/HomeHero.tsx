@@ -1,5 +1,5 @@
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
-import { ButtonLink } from "@/components/ui/primitives";
+import { ButtonLink, Photo } from "@/components/ui/primitives";
 import { site } from "@/lib/site";
 
 const built = ["A career.", "A reputation.", "A business.", "A company."];
@@ -73,6 +73,9 @@ export function HomeHero() {
             <p className="eyebrow mt-5 text-center text-paper-muted">You&apos;ve built something.</p>
           </div>
         </div>
+      </div>
+      <div className="container-x pb-20 sm:pb-24 lg:pb-32">
+        <Photo src="/images/client-hero-skyline-opening.webp" priority className="aspect-[4/3] animate-fade [animation-delay:500ms] sm:aspect-[16/9] lg:aspect-[21/9]" />
       </div>
     </section>
   );
