@@ -33,15 +33,15 @@ function FooterLink({ href, children, note }: { href: string; children: React.Re
 }
 
 /**
- * Crystal-clear glass footer: translucent, blurred over soft champagne and
- * silver light, with a crisp white rim, top highlight and a clean shadow.
+ * Crystal-clear glass footer: translucent, blurred over soft neutral
+ * silver light (neutral, no colour tint), with a crisp white rim, top highlight and a clean shadow.
  * Smoked glass in the dark theme.
  */
 export function Footer() {
   return (
     <footer
       aria-labelledby="footer-heading"
-      className="relative isolate overflow-hidden bg-[#eef0f3] px-2 pb-2 pt-2 sm:px-3 sm:pb-3 sm:pt-3 lg:px-4 lg:pb-4 lg:pt-4 dark:bg-[#09090a]"
+      className="relative isolate overflow-hidden bg-[#efefef] px-2 pb-2 pt-2 sm:px-3 sm:pb-3 sm:pt-3 lg:px-4 lg:pb-4 lg:pt-4 dark:bg-[#09090a]"
     >
       <h2 id="footer-heading" className="sr-only">
         Site footer
@@ -49,8 +49,8 @@ export function Footer() {
 
       {/* Light behind the glass */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-[10%] top-[18%] h-[26rem] w-[26rem] rounded-full bg-[#debb93]/45 blur-[90px] dark:bg-[#debb93]/[0.14]" />
-        <div className="absolute right-[-6%] top-[8%] h-[30rem] w-[30rem] rounded-full bg-[#c9d3e3]/70 blur-[100px] dark:bg-[#5d6b82]/25" />
+        <div className="absolute -left-[10%] top-[18%] h-[26rem] w-[26rem] rounded-full bg-[#d4d4d4]/45 blur-[90px] dark:bg-white/[0.06]" />
+        <div className="absolute right-[-6%] top-[8%] h-[30rem] w-[30rem] rounded-full bg-[#dcdcdc]/70 blur-[100px] dark:bg-white/[0.07]" />
         <div className="absolute bottom-[-20%] left-[38%] h-[22rem] w-[34rem] rounded-full bg-white blur-[90px] dark:bg-white/[0.05]" />
       </div>
 
