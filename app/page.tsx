@@ -31,6 +31,7 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes, site } from "@/lib/site";
+import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = {
   ...pageMetadata({
@@ -615,6 +616,7 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <PhotoGallery images={["/images/client-walk-toward-skyline.webp", "/images/client-ceo-portrait.webp", "/images/client-walk-through-crowd.webp", "/images/client-executive-dubai-window.webp", "/images/client-mentorship.webp"]} />
       <CtaBand
         eyebrow="Find your level"
         title={

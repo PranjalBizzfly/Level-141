@@ -5,6 +5,7 @@ import { insightCategories, questionsWeAsk } from "@/lib/content";
 import { getPublishedInsights } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
+import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "Insights — The Next Level",
@@ -127,6 +128,7 @@ export default function InsightsPage() {
         </div>
       </Section>
 
+      <PhotoGallery images={["/images/client-keynote-monochrome.webp", "/images/client-executive-study-portrait.webp", "/images/client-executive-in-motion.webp", "/images/client-executive-dubai-window.webp"]} />
       <CtaBand
         eyebrow="Find your level"
         title={

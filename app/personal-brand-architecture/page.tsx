@@ -22,6 +22,7 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
+import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "Personal Brand Architecture™",
@@ -521,6 +522,7 @@ export default function PersonalBrandPage() {
         </div>
       </Section>
 
+      <PhotoGallery images={["/images/client-keynote-monochrome.webp", "/images/client-executive-in-motion.webp", "/images/client-ceo-portrait.webp", "/images/client-executive-portrait-woman.webp", "/images/client-walk-toward-skyline.webp"]} />
       <CtaBand
         eyebrow="Discover your VIBE™. Architect your next level."
         title={

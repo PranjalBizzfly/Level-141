@@ -5,6 +5,7 @@ import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, cx 
 import { principles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
+import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "About",
@@ -196,6 +197,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      <PhotoGallery images={["/images/client-executive-portrait-woman.webp", "/images/client-executive-study-woman.webp", "/images/client-walk-through-crowd.webp", "/images/client-executive-library.webp"]} />
       <CtaBand
         eyebrow="Find your level"
         title={

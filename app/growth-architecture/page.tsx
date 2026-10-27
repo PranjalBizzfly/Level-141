@@ -12,6 +12,7 @@ import {
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
+import { PhotoGallery } from "@/components/ui/PhotoGallery";
 
 export const metadata = pageMetadata({
   title: "Growth Architecture™ — Join the Waitlist",
@@ -339,6 +340,7 @@ export default function GrowthArchitecturePage() {
           </Reveal>
         </div>
       </section>
+      <PhotoGallery images={["/images/client-executive-dubai-window.webp", "/images/client-executive-contemplation.webp", "/images/client-executive-study-portrait.webp", "/images/client-walk-through-crowd.webp"]} />
     </>
   );
 }

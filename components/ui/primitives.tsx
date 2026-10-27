@@ -205,8 +205,16 @@ export function Photo({
   priority?: boolean;
 }) {
   return (
-    <div className={cx("relative overflow-hidden rounded-[1.5rem] border border-line-dark-strong bg-ink-2 lg:rounded-[1.75rem]", className)}>
-      <Image src={src} alt={imageAlts[src] ?? ""} fill sizes={sizes} priority={priority} quality={90} className="object-cover" />
+    <div className={cx("group relative overflow-hidden rounded-[1.5rem] border border-line-dark-strong bg-ink-2 lg:rounded-[1.75rem]", className)}>
+      <Image
+        src={src}
+        alt={imageAlts[src] ?? ""}
+        fill
+        sizes={sizes}
+        priority={priority}
+        quality={90}
+        className="object-cover grayscale transition-transform duration-[1200ms] ease-[var(--ease-architect)] group-hover:scale-[1.04]"
+      />
     </div>
   );
 }
