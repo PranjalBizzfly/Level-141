@@ -67,9 +67,9 @@ export default function HowPage() {
                 But none of those should be <span className="serif-accent">the starting point.</span>
               </h2>
             </Reveal>
-            <Reveal as="ul" delay={100} className="mt-10 space-y-2">
+            <Reveal as="ul" delay={100} className="mt-10 space-y-3">
               {mayBeNecessary.map((m) => (
-                <li key={m} className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-3 text-lg">
+                <li key={m} className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-4 text-lg">
                   <span>{m}</span>
                   <span className="text-sm text-muted">may be necessary.</span>
                 </li>
@@ -107,7 +107,7 @@ export default function HowPage() {
             }
             intro="Growth isn't a destination. Every new level creates another possibility."
           />
-          <ol className="mt-10 sm:mt-12 lg:mt-12 border-t border-ink/12">
+          <ol className="mt-12 sm:mt-16 lg:mt-20 border-t border-ink/12">
             {levelProcess.map((s, i) => (
               <Reveal
                 as="li"
@@ -150,14 +150,14 @@ export default function HowPage() {
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <Reveal className="mt-10 sm:mt-12 lg:mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-4">
+          <Reveal className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-4">
             {[
               ["LQ™", "Know your level", "#lq"],
               ["IGF™", "Connect the growth engine", "#igf"],
               ["BRANDS™", "Six dimensions", "#brands"],
               ["PEAK™", "Presence to momentum", "#peak"],
             ].map(([name, line, href]) => (
-              <a key={href} href={href} className="group bg-ink p-6 transition-colors hover:bg-ink-2 sm:p-8">
+              <a key={href} href={href} className="group bg-ink p-7 transition-colors hover:bg-ink-2 sm:p-12">
                 <span className="block text-2xl tracking-[-0.02em] transition-colors group-hover:text-gold sm:text-3xl">{name}</span>
                 <span className="mt-2 block text-sm text-paper-muted">{line}</span>
               </a>
@@ -215,7 +215,7 @@ export default function HowPage() {
                 </Reveal>
               ))}
             </dl>
-            <Reveal className="mt-10 rounded-2xl border border-gold/30 p-6 sm:p-8">
+            <Reveal className="mt-10 rounded-2xl border border-gold/30 p-8 sm:p-14">
               <p className="eyebrow text-gold">LQ™ outputs</p>
               <ul className="mt-5 grid gap-x-8 gap-y-3 text-paper/80 sm:grid-cols-2">
                 {lqOutputs.map((o) => (
@@ -273,7 +273,7 @@ export default function HowPage() {
             }
             intro="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
           />
-          <div className="mt-10 sm:mt-12 lg:mt-12">
+          <div className="mt-12 sm:mt-16 lg:mt-20">
             <BrandsSystem />
           </div>
         </div>
@@ -292,7 +292,7 @@ export default function HowPage() {
             }
             intro="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
-          <div className="mt-10 sm:mt-12 lg:mt-12">
+          <div className="mt-12 sm:mt-16 lg:mt-20">
             <PeakAscent dark={false} />
           </div>
         </div>
@@ -350,9 +350,9 @@ export default function HowPage() {
               </>
             }
           />
-          <ol className="mt-10 sm:mt-12 lg:mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-12 sm:mt-16 lg:mt-20 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
             {whyLevel141.map((w, i) => (
-              <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-ink p-6 sm:p-8 lg:p-10">
+              <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-ink p-8 sm:p-14 lg:p-20">
                 <span className="eyebrow tabular-nums text-gold">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-8 text-2xl tracking-[-0.02em]">{w.title}</h3>
                 <p className="mt-4 leading-relaxed text-paper/75">{w.body}</p>
@@ -374,7 +374,7 @@ export default function HowPage() {
               </>
             }
           />
-          <ol className="mt-10 sm:mt-12 lg:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
+          <ol className="mt-12 sm:mt-16 lg:mt-20 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"

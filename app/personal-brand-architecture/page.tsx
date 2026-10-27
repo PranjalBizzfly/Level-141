@@ -119,7 +119,7 @@ export default function PersonalBrandPage() {
             intro="Others have visibility without a coherent reputation system. Their expertise sits across years of work, disconnected profiles, speeches, media mentions, relationships and achievements. The market therefore sees fragments rather than a clear leadership proposition."
           />
 
-          <div className="mt-10 sm:mt-12 lg:mt-12 overflow-hidden rounded-[2rem] border border-ink/10 bg-surface">
+          <div className="mt-12 sm:mt-16 lg:mt-20 overflow-hidden rounded-[2rem] border border-ink/10 bg-surface">
             <div className="hidden grid-cols-12 gap-6 border-b border-ink/10 px-8 py-4 text-muted md:grid">
               <p className="eyebrow col-span-3">Pain</p>
               <p className="eyebrow col-span-5">What it looks like</p>
@@ -182,7 +182,7 @@ export default function PersonalBrandPage() {
             }
             intro="VIBE™ answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
           />
-          <div className="mt-10 sm:mt-12 lg:mt-12">
+          <div className="mt-12 sm:mt-16 lg:mt-20">
             <VibeExplorer />
           </div>
           <Reveal className="mt-14 border-t border-paper/12 pt-10 text-center sm:mt-16">
@@ -206,7 +206,7 @@ export default function PersonalBrandPage() {
               </>
             }
           />
-          <ProcessTimeline steps={vibeStages} className="mt-10 sm:mt-12 lg:mt-12" />
+          <ProcessTimeline steps={vibeStages} className="mt-12 sm:mt-16 lg:mt-20" />
           <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-ink/10 bg-paper p-6 sm:flex-row sm:items-center sm:p-10">
             <p className="max-w-xl text-lg leading-relaxed">
               {/* Source: Website Structure, "01 — Discover Your Level". */}
@@ -225,7 +225,7 @@ export default function PersonalBrandPage() {
       <Section tone="paper" labelledBy="for-title">
         <div className="container-x">
           {/* 1 — Header: headline left, intro right. */}
-          <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
+          <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <Reveal className="lg:col-span-7">
               <p className="eyebrow text-gold-ink">Ideal for</p>
               <h2 id="for-title" className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-[3.75rem]">
@@ -243,7 +243,7 @@ export default function PersonalBrandPage() {
           </div>
 
           {/* 2 — Audience: a typographic index, not chips. */}
-          <Reveal as="ul" className="mt-10 grid grid-cols-2 border-t border-line-strong sm:mt-12 sm:grid-cols-4 lg:mt-12">
+          <Reveal as="ul" className="mt-12 grid grid-cols-2 border-t border-line-strong sm:mt-16 sm:grid-cols-4 lg:mt-20">
             {pbaAudience.map((a, n) => (
               <li
                 key={a}
@@ -318,7 +318,7 @@ export default function PersonalBrandPage() {
             }
           />
           {/* Pain → intervention, read as paired rows rather than a grid of boxes. */}
-          <div className="mt-10 sm:mt-12 lg:mt-12">
+          <div className="mt-12 sm:mt-16 lg:mt-20">
             {/* Source: Personal Brand Architecture bible §10 — all four documented columns. */}
             <div aria-hidden className="hidden grid-cols-12 gap-6 border-b border-line-dark-strong pb-4 lg:grid">
               <p className="eyebrow col-span-4 col-start-2 text-paper-muted">Client pain</p>
@@ -490,8 +490,8 @@ export default function PersonalBrandPage() {
           <h2 id="outcome-title" className="sr-only">
             Before and after Personal Brand Architecture
           </h2>
-          <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
-            <Reveal className="rounded-[2rem] border border-ink/12 p-6 sm:p-10">
+          <div className="grid gap-6 sm:gap-10 lg:grid-cols-2">
+            <Reveal className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20">
               <p className="eyebrow text-muted">Before</p>
               <p className="mt-6 text-2xl leading-snug tracking-[-0.02em] text-muted">
                 Valuable but fragmented expertise, inconsistent positioning, disconnected visibility and unpredictable

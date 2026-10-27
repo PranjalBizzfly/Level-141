@@ -101,7 +101,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                 key={o.value}
                 htmlFor={`interest-${o.value}`}
                 className={cx(
-                  "relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border bg-surface px-4 py-3 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-gold/35",
+                  "relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border bg-surface px-4 py-4 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-gold/35",
                   checked ? "border-gold-ink bg-ink/5" : "border-line-strong hover:border-ink/40",
                 )}
               >

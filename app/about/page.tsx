@@ -74,14 +74,14 @@ export default function AboutPage() {
               Architect the next level <span className="serif-accent text-gold">of growth.</span>
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-10 grid max-w-5xl gap-px sm:mt-12 lg:mt-12 overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
+          <ul className="mx-auto mt-12 grid max-w-5xl gap-px sm:mt-16 lg:mt-20 overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
             {/* Source: Website Structure, OUR PURPOSE — exact lines. */}
             {[
               ["For people.", ""],
               ["For businesses.", ""],
               ["For ideas", "with the potential to become significantly bigger than they are today."],
             ].map(([title, body], i) => (
-              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-6 sm:p-8 lg:p-10">
+              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-8 sm:p-14 lg:p-20">
                 <p className="text-2xl tracking-[-0.02em]">
                   {title}
                   {body ? <span className="text-paper/60"> {body}</span> : null}
@@ -104,14 +104,14 @@ export default function AboutPage() {
               </>
             }
           />
-          <ol className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-2 lg:mt-12">
+          <ol className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 md:grid-cols-2 lg:mt-20">
             {principles.map((p, i) => (
               <Reveal
                 as="li"
                 key={p.name}
                 delay={i * 80}
                 className={cx(
-                  "relative flex flex-col rounded-[2rem] p-6 sm:p-10 lg:p-12 md:min-h-[20rem]",
+                  "relative flex flex-col rounded-[2rem] p-8 sm:p-14 lg:p-20 md:min-h-[20rem]",
                   i === 0 || i === 3 ? "on-dark bg-ink text-paper" : "border border-line bg-surface",
                 )}
               >
@@ -147,7 +147,7 @@ export default function AboutPage() {
               credibility, influence and opportunity so that growth becomes deliberate, governed and measurable.
             </p>
           </Reveal>
-          <div className="grid gap-4 sm:gap-6 lg:col-span-6 lg:col-start-7">
+          <div className="grid gap-6 sm:gap-10 lg:col-span-6 lg:col-start-7">
             <Reveal className="on-dark rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
               <div className="flex items-center justify-between">
                 <p className="eyebrow text-gold">For people · VIBE™</p>
@@ -161,7 +161,7 @@ export default function AboutPage() {
                 Explore
               </ButtonLink>
             </Reveal>
-            <Reveal delay={100} className="rounded-[2rem] border border-ink/12 p-6 sm:p-10">
+            <Reveal delay={100} className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20">
               <div className="flex items-center justify-between">
                 <p className="eyebrow text-gold-ink">For organizations · PEAK™</p>
                 <span className="text-xs text-muted">Waitlist</span>

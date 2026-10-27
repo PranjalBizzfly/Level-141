@@ -60,7 +60,7 @@ export function CtaBand({
               </span>
             </h2>
           </Reveal>
-          <Reveal delay={120} className="mt-10 border-t border-line-dark pt-8 sm:mt-12 sm:pt-10">
+          <Reveal delay={120} className="mt-10 border-t border-line-dark pt-8 sm:mt-16 sm:pt-12">
             <Actions primary={primary} secondary={secondary} />
           </Reveal>
         </div>

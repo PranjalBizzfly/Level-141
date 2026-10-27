@@ -107,7 +107,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-14 sm:py-16 lg:py-20", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-24 sm:py-32 lg:py-40", tones[tone], className)}>
       {children}
     </section>
   );
@@ -129,7 +129,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
   return (
     <header
       className={cx(
-        align === "split" ? "grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12" : "max-w-4xl",
+        align === "split" ? "grid gap-6 sm:gap-10 lg:grid-cols-12 lg:gap-12" : "max-w-4xl",
         className,
       )}
     >
@@ -137,7 +137,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         <Eyebrow index={index} className={dark ? "text-gold" : "text-gold-ink"}>
           {eyebrow}
         </Eyebrow>
-        <h2 id={id} className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-[3.75rem]">
+        <h2 id={id} className="display mt-5 text-[2.25rem] sm:mt-7 sm:text-5xl lg:text-[3.75rem]">
           <span data-mask className="block">
             {title}
           </span>
@@ -204,7 +204,7 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="on-dark relative isolate overflow-hidden bg-ink pb-16 pt-32 text-paper sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-44">
+    <section className="on-dark relative isolate overflow-hidden bg-ink pb-20 pt-32 text-paper sm:pb-24 sm:pt-40 lg:pb-32 lg:pt-44">
       <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
       <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>
@@ -229,7 +229,7 @@ export function PageHero({
 
 export function DotList({ items, dark, className }: { items: readonly string[]; dark?: boolean; className?: string }) {
   return (
-    <ul className={cx("space-y-3", className)}>
+    <ul className={cx("space-y-4", className)}>
       {items.map((item) => (
         <li key={item} className="flex gap-4 leading-relaxed">
           <span aria-hidden className={cx("mt-[0.7em] h-px w-4 shrink-0", dark ? "bg-gold" : "bg-gold-ink")} />

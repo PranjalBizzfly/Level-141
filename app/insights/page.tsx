@@ -104,14 +104,14 @@ export default function InsightsPage() {
               </>
             }
           />
-          <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 lg:mt-12 lg:grid-cols-2">
+          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2">
             {(
               [
                 ["Personal Brand Architecture™", questionsWeAsk.people],
                 ["Growth Architecture™", questionsWeAsk.organizations],
               ] as const
             ).map(([label, qs], col) => (
-              <Reveal key={label} delay={col * 120} className="rounded-[2rem] bg-surface p-6 sm:p-10">
+              <Reveal key={label} delay={col * 120} className="rounded-[2rem] bg-surface p-8 sm:p-14 lg:p-20">
                 <p className="eyebrow text-gold-ink">{label}</p>
                 <ul className="mt-6 divide-y divide-ink/10">
                   {qs.map((q) => (

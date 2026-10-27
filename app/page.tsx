@@ -100,25 +100,34 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-6">
-            <Reveal className="rounded-[2rem] border border-ink/10 bg-surface p-6 sm:p-10">
-              <p className="eyebrow text-muted">They have</p>
-              <ul className="mt-6 flex flex-wrap gap-2.5" aria-label="Typical growth activities">
+            <Reveal className="rounded-[2rem] border border-ink/10 bg-surface p-8 sm:p-14 lg:p-20">
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="eyebrow text-muted">They have</p>
+                <p aria-hidden className="eyebrow tabular-nums text-muted">
+                  {String(activityList.length).padStart(2, "0")} pieces
+                </p>
+              </div>
+              <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Typical growth activities">
                 {activityList.map((a) => (
                   <li
                     key={a}
-                    className="rounded-full border border-line-strong px-4 py-2 text-[0.95rem] text-ink/80"
+                    className="flex min-h-12 items-center justify-center rounded-2xl border border-ink/10 bg-ink/[0.03] px-3 text-center text-sm text-ink/75 transition-colors duration-300 hover:border-ink/25 hover:text-ink"
                   >
                     {a.replace(".", "")}
                   </li>
                 ))}
               </ul>
-              <div className="my-8 flex items-center gap-4 text-gold-ink" aria-hidden>
-                <span className="h-px flex-1 bg-ink/10" />
-                <LogoSymbol className="size-6 text-ink" />
-                <span className="h-px flex-1 bg-ink/10" />
+              <div className="my-12 flex items-center gap-5" aria-hidden>
+                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-ink/20" />
+                <span className="grid size-12 place-items-center rounded-full border border-ink/15 bg-surface">
+                  <LogoSymbol className="size-5 text-ink" />
+                </span>
+                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-ink/20" />
               </div>
-              <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">Level141 connects the pieces.</p>
-              <p className="mt-4 leading-relaxed text-muted">
+              <p className="text-3xl leading-tight tracking-[-0.025em] sm:text-4xl">
+                Level141 <span className="serif-accent">connects</span> the pieces.
+              </p>
+              <p className="mt-5 max-w-md leading-relaxed text-muted">
                 We look at growth as one integrated architecture—then identify what needs to change for you to reach
                 your next level.
               </p>
@@ -143,9 +152,9 @@ export default function HomePage() {
             intro="Level141 has built dedicated architectures for both."
           />
 
-          <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 lg:mt-12 lg:grid-cols-2">
+          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2">
             {/* Personal Brand Architecture — active */}
-            <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
+            <Reveal as="article" spotlight className="on-dark relative flex flex-col rounded-[2rem] bg-ink p-8 text-paper sm:p-12 xl:p-16">
               <div className="flex items-center justify-between gap-4">
                 <span aria-hidden className="eyebrow text-paper-muted">
                   01
@@ -171,7 +180,7 @@ export default function HomePage() {
                   </div>
                 ))}
               </dl>
-              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5">
+              <div className="mt-auto flex flex-col gap-4 pt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 lg:[&>a]:px-4 lg:[&>a]:whitespace-nowrap">
                 <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
                   Start Your Personal Brand Assessment
                 </ButtonLink>
@@ -182,7 +191,7 @@ export default function HomePage() {
             </Reveal>
 
             {/* Growth Architecture — waitlist */}
-            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-6 sm:p-10">
+            <Reveal as="article" delay={120} className="flex flex-col rounded-[2rem] border border-ink/12 bg-surface p-8 sm:p-12 xl:p-16">
               <div className="flex items-center justify-between gap-4">
                 <span className="eyebrow text-muted">02</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-3 py-1 text-xs text-muted">
@@ -234,7 +243,7 @@ export default function HomePage() {
             }
             intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
           />
-          <div className="mt-10 sm:mt-12 lg:mt-12">
+          <div className="mt-12 sm:mt-16 lg:mt-20">
             <GrowthChainDiagram />
           </div>
         </div>
@@ -254,7 +263,7 @@ export default function HomePage() {
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <ol className="mt-10 border-t border-ink/12 sm:mt-12 lg:mt-12">
+          <ol className="mt-12 border-t border-ink/12 sm:mt-16 lg:mt-20">
             {frameworks.map((f, i) => (
               <Reveal as="li" key={f.id} delay={i * 80} className="border-b border-ink/12">
                 <Link
@@ -303,16 +312,19 @@ export default function HomePage() {
 
           {/* Source: Website Structure, "WE DON'T START WITH DELIVERABLES." — in document order.
               Two matched panels on a shared subgrid so their lists and closing lines align. */}
-          <div className="mt-10 grid gap-6 sm:mt-12 lg:mt-12 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
+          <div className="mt-12 grid gap-6 sm:mt-16 lg:mt-20 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
             <Reveal className="grid rounded-[2rem] border border-line bg-surface p-7 sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
-              <div className="flex items-end pb-6">
-                <p className="eyebrow text-muted">Deliverables</p>
+              <div className="pb-6">
+                <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
+                  The usual starting point is the <span className="serif-accent text-muted">deliverable.</span>
+                </p>
+                <p className="eyebrow mt-5 text-muted">What may be necessary:</p>
               </div>
               <ul className="border-t border-line-strong">
                 {mayBeNecessary.map((m) => (
                   <li
                     key={m}
-                    className="group/item flex min-h-14 cursor-default items-center justify-between gap-4 border-b border-line py-3 text-lg tracking-[-0.01em] text-muted transition-colors duration-300 hover:text-ink"
+                    className="group/item flex min-h-14 cursor-default items-center justify-between gap-4 border-b border-line py-4 text-lg tracking-[-0.01em] text-muted transition-colors duration-300 hover:text-ink"
                   >
                     <span className="bg-[linear-gradient(var(--color-gold-ink),var(--color-gold-ink))] bg-[length:0%_1.5px] bg-[position:0_55%] bg-no-repeat transition-[background-size] duration-500 ease-[var(--ease-architect)] group-hover/item:bg-[length:100%_1.5px]">
                       {m} may be necessary.
@@ -341,17 +353,11 @@ export default function HomePage() {
                 <p className="eyebrow mt-5 text-paper-muted">Level141 first identifies:</p>
               </div>
               <ol className="border-t border-line-dark-strong">
-                {startingQuestions.map((q, i) => (
+                {startingQuestions.map((q) => (
                   <li
                     key={q}
-                    className="group/q -mx-3 flex min-h-14 cursor-default items-center gap-4 rounded-xl border-b border-line-dark px-3 py-3 text-lg transition-colors duration-300 hover:bg-paper/[0.06]"
+                    className="group/q -mx-3 flex min-h-14 cursor-default items-center gap-4 rounded-xl border-b border-line-dark px-3 py-4 text-lg transition-colors duration-300 hover:bg-paper/[0.06]"
                   >
-                    <span
-                      aria-hidden
-                      className="grid size-8 shrink-0 place-items-center rounded-full border border-gold/50 text-xs tabular-nums text-gold transition-[transform,border-color,font-weight] duration-300 group-hover/q:scale-110 group-hover/q:border-current group-hover/q:font-semibold"
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                     <span className="flex-1">{q}</span>
                     <ArrowRight
                       aria-hidden
@@ -417,10 +423,10 @@ export default function HomePage() {
               </>
             }
           />
-          <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-2 lg:mt-12">
+          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 md:grid-cols-2 lg:mt-20">
             {/* Both cards share six subgrid rows from md, so headline, list, closing line
                 and link align across the pair. */}
-            <Reveal className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
+            <Reveal className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
                 For people whose capability is bigger than their current visibility.
@@ -435,7 +441,7 @@ export default function HomePage() {
                 Build My Personal Brand
               </ButtonLink>
             </Reveal>
-            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-6 sm:p-10 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
+            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Growth Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
                 For organizations whose ambition has outgrown their current growth system.
@@ -466,7 +472,7 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-10 grid gap-px overflow-hidden sm:mt-12 lg:mt-12 rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-12 grid gap-px overflow-hidden sm:mt-16 lg:mt-20 rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
             {whyLevel141.map((w, i) => (
               <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-surface p-6 sm:p-8">
                 <span className="eyebrow tabular-nums text-gold-ink">{String(i + 1).padStart(2, "0")}</span>
@@ -524,7 +530,7 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:mt-12 lg:grid-cols-5 lg:gap-0">
+          <ol className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:mt-20 lg:grid-cols-5 lg:gap-0">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"
@@ -605,7 +611,7 @@ export default function HomePage() {
               </>
             }
           />
-          <ul className="mt-10 grid gap-px overflow-hidden sm:mt-12 lg:mt-12 rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid gap-px overflow-hidden sm:mt-16 lg:mt-20 rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
             {insightCategories.map((c, i) => (
               <Reveal as="li" key={c.slug} delay={i * 60} className="bg-paper p-6 sm:p-8">
                 <p className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</p>
