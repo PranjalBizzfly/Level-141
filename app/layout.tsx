@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Fraunces, Google_Sans_Flex } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollToggle } from "@/components/layout/ScrollToggle";
@@ -13,16 +13,18 @@ import "./globals.css";
 import "./motion.css";
 import "./glass.css";
 
-const geist = Geist({
+/* Google Sans Flex for text and Fraunces (light, upright) for the accent words, as in
+   the approved redesign. Variable names are unchanged so all components follow. */
+const geist = Google_Sans_Flex({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-geist",
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
+const instrumentSerif = Fraunces({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["300", "400"],
   variable: "--font-instrument-serif",
   display: "swap",
 });
