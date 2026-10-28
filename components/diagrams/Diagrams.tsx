@@ -29,7 +29,7 @@ export function ProcessTimeline({ steps, dark, className }: { steps: readonly St
         className={cx("absolute left-0 right-0 top-[1.4rem] hidden h-px lg:block", dark ? "bg-line-dark-strong" : "bg-line-strong")}
       />
       {steps.map((s, i) => (
-        <li key={s.n} data-step style={step(i)} className="group/step relative flex gap-6 pb-12 last:pb-0 lg:row-span-5 lg:grid lg:grid-rows-subgrid lg:gap-0 lg:pb-0">
+        <li key={s.n} data-step style={step(i)} className="group/step relative flex gap-6 pb-12 last:pb-0 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:gap-0 lg:pb-0">
           {i < steps.length - 1 ? (
             <span
               aria-hidden
@@ -46,14 +46,17 @@ export function ProcessTimeline({ steps, dark, className }: { steps: readonly St
           >
             {s.n}
           </span>
-          {/* On lg the wrapper dissolves so title, line, body and question each sit on a
-              shared subgrid row and align across all five columns. */}
+          {/* On lg the wrapper dissolves so title, text and question each sit on a shared
+              subgrid row: titles and questions align across all five columns, while the
+              line and body flow together so a longer line leaves no gap under the others. */}
           <div className="lg:contents">
             <h3 className="text-xl tracking-[-0.015em] sm:text-2xl lg:mt-8">{s.name}</h3>
-            {s.line ? <p className={cx("mt-2 font-medium", dark ? "text-gold-soft" : "text-gold-ink")}>{s.line}</p> : null}
-            <p className={cx("mt-3 leading-relaxed", dark ? "text-paper/75" : "text-muted")}>{s.body}</p>
+            <div>
+              {s.line ? <p className={cx("mt-2 font-medium leading-snug", dark ? "text-gold-soft" : "text-gold-ink")}>{s.line}</p> : null}
+              <p className={cx("mt-3 leading-relaxed", dark ? "text-paper/75" : "text-muted")}>{s.body}</p>
+            </div>
             {s.question ? (
-              <p className={cx("serif-accent mt-4 text-xl", dark ? "text-paper" : "text-ink")}>{s.question}</p>
+              <p className={cx("serif-accent mt-6 text-xl", dark ? "text-paper" : "text-ink")}>{s.question}</p>
             ) : null}
           </div>
         </li>

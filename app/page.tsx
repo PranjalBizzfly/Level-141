@@ -307,9 +307,10 @@ export default function HomePage() {
               Two matched panels on a shared subgrid so their lists and closing lines align. */}
           <div className="mt-12 grid gap-6 sm:mt-16 lg:mt-20 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
             <Reveal className="grid rounded-[2rem] border border-line bg-surface p-7 sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
-              <div className="pb-6">
+              {/* Same header shape as the paired panel: a two-line title, then the label. */}
+              <div className="pb-8">
                 <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
-                  Deliverables <span className="serif-accent text-gold-ink">may be necessary</span>
+                  Deliverables <span className="serif-accent block text-gold-ink">may be necessary</span>
                 </p>
                 <p className="eyebrow mt-5 text-muted">Deliverables</p>
               </div>
@@ -339,9 +340,9 @@ export default function HomePage() {
             </div>
 
             <Reveal delay={120} className="on-dark grid rounded-[2rem] bg-ink p-7 text-paper sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
-              <div className="pb-6">
+              <div className="pb-8">
                 <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
-                  The starting point is the <span className="serif-accent text-gold">growth problem</span>
+                  The starting point is the <span className="serif-accent block text-gold">growth problem</span>
                 </p>
                 <p className="eyebrow mt-5 text-paper-muted">Level141 first identifies:</p>
               </div>
