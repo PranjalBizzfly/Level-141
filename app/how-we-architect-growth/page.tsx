@@ -72,7 +72,7 @@ export default function HowPage() {
               {mayBeNecessary.map((m) => (
                 <li key={m} className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-4 text-lg">
                   <span>{m}</span>
-                  <span className="text-sm text-muted">may be necessary.</span>
+                  <span className="text-sm text-muted">may be necessary</span>
                 </li>
               ))}
             </Reveal>
@@ -89,7 +89,7 @@ export default function HowPage() {
                   </li>
                 ))}
               </ol>
-              <p className="mt-8 text-lg">Only then do we architect the solution.</p>
+              <p className="mt-8 text-lg">Only then do we architect the solution</p>
             </Reveal>
           </div>
         </div>

@@ -307,8 +307,11 @@ export default function HomePage() {
               Two matched panels on a shared subgrid so their lists and closing lines align. */}
           <div className="mt-12 grid gap-6 sm:mt-16 lg:mt-20 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
             <Reveal className="grid rounded-[2rem] border border-line bg-surface p-7 sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
-              <div className="flex items-end pb-6">
-                <p className="eyebrow text-muted">Deliverables</p>
+              <div className="pb-6">
+                <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
+                  Deliverables <span className="serif-accent text-gold-ink">may be necessary</span>
+                </p>
+                <p className="eyebrow mt-5 text-muted">Deliverables</p>
               </div>
               <ul className="border-t border-line-strong">
                 {mayBeNecessary.map((m) => (
@@ -317,7 +320,7 @@ export default function HomePage() {
                     className="group/item flex min-h-14 cursor-default items-center justify-between gap-4 border-b border-line py-4 text-lg tracking-[-0.01em] text-muted transition-colors duration-300 hover:text-ink"
                   >
                     <span className="bg-[linear-gradient(var(--color-gold-ink),var(--color-gold-ink))] bg-[length:0%_1.5px] bg-[position:0_55%] bg-no-repeat transition-[background-size] duration-500 ease-[var(--ease-architect)] group-hover/item:bg-[length:100%_1.5px]">
-                      {m} may be necessary.
+                      {m} may be necessary
                     </span>
                     <span aria-hidden className="hidden shrink-0 text-sm text-gold-ink opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 sm:inline">
                       not the start
@@ -325,7 +328,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">But none of those should be the starting point.</p>
+              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">But none of those should be the starting point</p>
             </Reveal>
 
             {/* Bridge arrow between the panels */}
@@ -356,7 +359,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ol>
-              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">Only then do we architect the solution.</p>
+              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">Only then do we architect the solution</p>
             </Reveal>
           </div>
 
