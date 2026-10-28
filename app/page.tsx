@@ -423,10 +423,10 @@ export default function HomePage() {
             <Reveal className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
-                For people whose capability is bigger than their current visibility.
+                For people whose capability is bigger than their current visibility
               </p>
               <p className="eyebrow mt-8 text-muted">Ideal for:</p>
-              <DotList items={pbaAudience} className="mt-4 grid gap-x-6 self-start lg:grid-cols-2 lg:space-y-0 lg:gap-y-3" />
+              <DotList items={pbaAudience} className="mt-4 self-start" />
               <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
                 Your personal brand shouldn&apos;t simply document what you&apos;ve done. It should position you for
                 what you want to do next.
@@ -438,7 +438,7 @@ export default function HomePage() {
             <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
               <p className="eyebrow text-gold-ink">Growth Architecture</p>
               <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
-                For organizations whose ambition has outgrown their current growth system.
+                For organizations whose ambition has outgrown their current growth system
               </p>
               <p className="eyebrow mt-8 text-muted">Ideal for:</p>
               <DotList items={gaAudience} className="mt-4 self-start" />

@@ -69,16 +69,19 @@ export default function GrowthArchitecturePage() {
 
       {/* ---------------------------------------------------------- Problem */}
       <Section tone="paper" labelledBy="integration-title">
-        <div className="container-x grid gap-14 lg:grid-cols-12">
-          <Reveal className="lg:col-span-6">
+        {/* Headline across the top; photo and supporting text share the row beneath it. */}
+        <div className="container-x grid gap-12 sm:gap-16 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-20">
+          <Reveal className="lg:col-span-10">
             <p className="eyebrow text-gold-ink">The business problem</p>
             <h2 id="integration-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
               The central problem is not lack of activity.{" "}
               <span className="serif-accent">It is lack of integration</span>
             </h2>
-            <Photo src="/images/client-mentorship.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
-          <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-muted lg:col-span-5 lg:col-start-8 lg:self-end">
+          <Reveal className="lg:col-span-6">
+            <Photo src="/images/client-mentorship.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:aspect-[16/11]" />
+          </Reveal>
+          <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-muted lg:col-span-5 lg:col-start-8 lg:self-center">
             <p>
               Organizations often invest in branding, social media, websites, paid media, PR, sales, CRM and content
               independently. Each function may be active, yet the combined system fails to move the business to its next
@@ -310,7 +313,7 @@ export default function GrowthArchitecturePage() {
       </Section>
 
       {/* ---------------------------------------------------------- Waitlist */}
-      <section id="waitlist" aria-labelledby="waitlist-title" className="relative bg-paper-2 py-14 sm:py-16 lg:py-20">
+      <section id="waitlist" aria-labelledby="waitlist-title" className="relative bg-paper-2 py-28 sm:py-40 lg:py-48">
         <div className="container-x grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Reveal>
@@ -336,7 +339,8 @@ export default function GrowthArchitecturePage() {
               <Photo src="/images/client-walk-toward-skyline.webp" sizes="(min-width: 1024px) 40vw, 100vw" className="mt-10 aspect-[16/10] sm:mt-12" />
             </Reveal>
           </div>
-          <Reveal delay={80} className="rounded-[2rem] border border-ink/10 bg-surface p-8 sm:p-14 lg:p-20 lg:col-span-6 lg:col-start-7">
+          {/* Card fits its form and stays in view beside the taller left column. */}
+          <Reveal delay={80} className="rounded-[2rem] border border-ink/10 bg-surface p-8 sm:p-12 lg:sticky lg:top-28 lg:col-span-6 lg:col-start-7 lg:self-start xl:p-14">
             <WaitlistForm />
           </Reveal>
         </div>

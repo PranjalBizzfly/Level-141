@@ -40,15 +40,18 @@ export default function AboutPage() {
 
       {/* ---------------------------------------------------------- Belief */}
       <Section tone="paper" labelledBy="belief-title">
-        <div className="container-x grid gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-14">
-          <Reveal className="lg:col-span-6">
+        {/* Headline across the top; photo and supporting text share the row beneath it. */}
+        <div className="container-x grid gap-12 sm:gap-16 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-20">
+          <Reveal className="lg:col-span-10">
             <p className="eyebrow text-gold-ink">A simple belief</p>
             <h2 id="belief-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
               Businesses need clarity about what their <span className="serif-accent">next level requires</span>
             </h2>
-            <Photo src="/images/client-lone-executive-skyline.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
-          <Reveal delay={120} className="lg:col-span-5 lg:col-start-8 lg:self-end">
+          <Reveal className="lg:col-span-6">
+            <Photo src="/images/client-lone-executive-skyline.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:aspect-[16/11]" />
+          </Reveal>
+          <Reveal delay={120} className="lg:col-span-5 lg:col-start-8 lg:self-center">
             <p className="text-lg text-muted">Level141 was created around a simple belief:</p>
             <p className="mt-4 text-xl leading-snug tracking-[-0.01em]">
               Businesses don&apos;t necessarily need more agencies, consultants, campaigns or activity. They need clarity
@@ -76,11 +79,12 @@ export default function AboutPage() {
             </h2>
           </Reveal>
           <ul className="mx-auto mt-12 grid max-w-5xl gap-px sm:mt-16 lg:mt-20 overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
-            {/* Source: Website Structure, OUR PURPOSE — exact lines. */}
+            {/* Source: Website Structure, OUR PURPOSE. The people and businesses lines reuse the
+                approved one-line descriptions of the two architectures shown further down this page. */}
             {[
-              ["For people.", "", "client-executive-portrait-woman"],
-              ["For businesses.", "", "client-walk-through-crowd"],
-              ["For ideas", "with the potential to become significantly bigger than they are today.", "client-executive-study-woman"],
+              ["For people", "Converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset", "client-executive-portrait-woman"],
+              ["For businesses", "One integrated architecture connecting every critical growth lever to measurable business outcomes", "client-walk-through-crowd"],
+              ["For ideas", "with the potential to become significantly bigger than they are today", "client-executive-study-woman"],
             ].map(([title, body, image], i) => (
               <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-6 sm:p-8 lg:p-8">
                 <Photo src={`/images/${image}.webp`} sizes="(min-width: 768px) 30vw, 100vw" className="aspect-[4/3] md:aspect-[4/5]" />

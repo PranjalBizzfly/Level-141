@@ -127,12 +127,13 @@ export function WaitlistForm() {
       </div>
       <Honeypot />
       <StatusMessage status={status} />
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      {/* Button first, then the reassurance note at full width under a hairline. */}
+      <div className="space-y-6 pt-2">
         <SubmitButton submitting={status.state === "submitting"}>
           Join the Waitlist
           <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
         </SubmitButton>
-        <p className="max-w-xs text-sm leading-relaxed text-muted">
+        <p className="border-t border-line pt-6 text-sm leading-relaxed text-muted">
           Registering interest is not a booking or an engagement. We&apos;ll only use your details to contact you about
           availability.
         </p>

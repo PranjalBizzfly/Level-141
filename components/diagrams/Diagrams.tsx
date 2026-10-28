@@ -198,7 +198,13 @@ const brandsLinkCss = brandsLevers
       `.brands:has([data-lever-node="${l.letter}"]:hover) [data-lever-item="${l.letter}"]{box-shadow:inset 0 0 0 1px var(--brands-accent);}` +
       `.brands:has([data-lever-item="${l.letter}"]:is(:hover,:focus-within)) [data-lever-node="${l.letter}"]{scale:1.08;}`,
   )
-  .join("");
+  .join("") +
+  // Hovering the wheel pushes every lever outward along its spoke (transform, so the
+  // centring `translate` stays intact).
+  "@media (hover:hover) and (prefers-reduced-motion:no-preference){" +
+  ".brands [data-lever-node]{transition:transform .6s var(--ease-architect),border-color .3s,scale .3s}" +
+  ".brands figure:hover [data-lever-node]{transform:translate(var(--out-x),var(--out-y))}" +
+  "}";
 
 /**
  * Six levers arranged around the cross-cutting foundation (Customer & Market),
@@ -266,7 +272,14 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
                   "absolute grid size-[22%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border text-center transition-[border-color,scale] duration-300",
                   dark ? "border-line-dark-strong bg-ink-2" : "border-line-strong bg-surface",
                 )}
-                style={{ left: `${50 + Math.cos(a) * 37.5}%`, top: `${50 + Math.sin(a) * 37.5}%` }}
+                style={
+                  {
+                    left: `${50 + Math.cos(a) * 37.5}%`,
+                    top: `${50 + Math.sin(a) * 37.5}%`,
+                    "--out-x": `${(Math.cos(a) * 18).toFixed(2)}px`,
+                    "--out-y": `${(Math.sin(a) * 18).toFixed(2)}px`,
+                  } as CSSProperties
+                }
               >
                 <span data-step style={step(i)} className={cx("serif-accent text-3xl leading-none sm:text-5xl", dark ? "text-gold" : "text-gold-ink")}>
                   {l.letter}

@@ -41,8 +41,9 @@ export default function PersonalBrandPage() {
         eyebrow="Personal Brand Architecture™"
         title={
           <>
-            Your achievements built your reputation.{" "}
-            <span className="serif-accent text-gold">What will build your next level?</span>
+            {/* Each sentence on its own line so the statement and the question read as a pair. */}
+            <span className="block">Your achievements built your reputation</span>
+            <span className="serif-accent mt-2 block text-gold">What will build your next level?</span>
           </>
         }
         intro={
@@ -80,16 +81,19 @@ export default function PersonalBrandPage() {
 
       {/* ---------------------------------------------------------- Purpose */}
       <Section tone="paper" labelledBy="purpose-title">
-        <div className="container-x grid gap-14 lg:grid-cols-12">
-          <Reveal className="lg:col-span-6">
+        {/* Headline across the top; photo and supporting text share the row beneath it. */}
+        <div className="container-x grid gap-12 sm:gap-16 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-20">
+          <Reveal className="lg:col-span-10">
             <p className="eyebrow text-gold-ink">Not simply about visibility</p>
             <h2 id="purpose-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
               It&apos;s about aligning who you are, what you stand for, the impact you create and{" "}
               <span className="serif-accent">where you want to go</span>
             </h2>
-            <Photo src="/images/client-executive-library.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="mt-10 aspect-[4/3] sm:mt-12 lg:aspect-[16/11]" />
           </Reveal>
-          <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-muted lg:col-span-5 lg:col-start-8 lg:self-end">
+          <Reveal className="lg:col-span-6">
+            <Photo src="/images/client-executive-library.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:aspect-[16/11]" />
+          </Reveal>
+          <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-muted lg:col-span-5 lg:col-start-8 lg:self-center">
             <p>
               Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived
               experience into a structured personal growth asset.

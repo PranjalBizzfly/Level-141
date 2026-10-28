@@ -37,7 +37,10 @@ export default function HowPage() {
         }
         intro={<p>Level141 sits between strategy and execution. The starting point is the growth problem.</p>}
       >
-        <nav aria-label="On this page" className="flex flex-wrap gap-2">
+        {/* A quiet text index rather than a row of pills: fits one line on desktop, wraps cleanly on phones. */}
+        <nav aria-label="On this page" className="max-w-2xl border-t border-line-dark-strong pt-6">
+          <p className="eyebrow text-paper-muted">On this page</p>
+          <div className="mt-4 flex flex-wrap gap-x-7 gap-y-2">
           {[
             ["The starting point", "#starting-point"],
             ["Process", "#process"],
@@ -50,11 +53,12 @@ export default function HowPage() {
             <a
               key={href}
               href={href}
-              className="inline-flex min-h-11 items-center rounded-full border border-line-dark-strong px-4 text-sm text-paper/85 transition-colors hover:border-gold hover:text-gold"
+              className="inline-flex min-h-11 items-center text-[0.95rem] text-paper/80 underline-offset-[6px] decoration-gold/60 transition-colors hover:text-gold hover:underline"
             >
               {label}
             </a>
           ))}
+          </div>
         </nav>
       </PageHero>
 
@@ -331,7 +335,7 @@ export default function HowPage() {
             <Reveal delay={200} className="mt-8">
               <BracketFrame tone="ink" size="sm">
                 <p className="text-xl leading-snug tracking-[-0.015em]">
-                  Making sure everything is moving toward the same growth outcome.
+                  Making sure everything is moving toward the same growth outcome
                 </p>
               </BracketFrame>
             </Reveal>
