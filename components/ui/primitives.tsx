@@ -256,7 +256,7 @@ export function PageHero({
   children,
   aside,
   image,
-  size = "lg",
+  size = "md",
 }: {
   eyebrow: string;
   title: ReactNode;

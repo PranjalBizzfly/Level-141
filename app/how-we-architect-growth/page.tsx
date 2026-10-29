@@ -31,8 +31,8 @@ export default function HowPage() {
         eyebrow="How we architect growth"
         title={
           <>
-            We don&apos;t start with deliverables.{" "}
-            <span className="serif-accent text-gold">We start with the level you&apos;re trying to reach</span>
+            <span className="block">We don&apos;t start with deliverables</span>
+            <span className="serif-accent mt-3 block text-gold">We start with the level you&apos;re trying to reach</span>
           </>
         }
         intro={<p>Level141 sits between strategy and execution. The starting point is the growth problem.</p>}

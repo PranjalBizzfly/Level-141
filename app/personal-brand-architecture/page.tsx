@@ -38,7 +38,6 @@ export default function PersonalBrandPage() {
   return (
     <>
       <PageHero
-        size="md"
         eyebrow="Personal Brand Architecture™"
         title={
           <>

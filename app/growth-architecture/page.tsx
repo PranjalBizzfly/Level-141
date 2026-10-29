@@ -45,8 +45,8 @@ export default function GrowthArchitecturePage() {
         eyebrow="Growth Architecture™ · Coming later · Waitlist open"
         title={
           <>
-            Your business doesn&apos;t need more disconnected growth initiatives.{" "}
-            <span className="serif-accent text-gold">It needs them working together</span>
+            <span className="block">Your business doesn&apos;t need more disconnected growth initiatives</span>
+            <span className="serif-accent mt-3 block text-gold">It needs them working together</span>
           </>
         }
         intro={
