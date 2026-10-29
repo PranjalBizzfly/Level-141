@@ -213,6 +213,9 @@ const brandsLinkCss = brandsLevers
   // Hovering the wheel opens it outward as one piece: the outer ring grows from the
   // centre, each spoke stretches from its inner end, and each lever moves out along its
   // spoke by the same distance (`transform`, so the centring `translate` stays intact).
+  // Levers are centred with `translate`; glass.css lifts hovered bordered pills with
+  // `translate`, which would knock a hovered lever off its spoke. Keep the centring fixed.
+  ".brands [data-lever-node],.brands [data-lever-node]:hover{translate:-50% -50% !important}" +
   "@media (hover:hover) and (prefers-reduced-motion:no-preference){" +
   ".brands [data-lever-node]{transition:transform .6s var(--ease-architect),border-color .3s,scale .3s}" +
   ".brands [data-orbit]{transform-box:view-box;transition:transform .6s var(--ease-architect)}" +
