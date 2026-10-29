@@ -137,7 +137,8 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         className,
       )}
     >
-      <Reveal className={align === "split" ? "lg:col-span-7" : undefined}>
+      {/* With no intro beside it, the headline takes the full width so it sets in two lines. */}
+      <Reveal className={align === "split" ? (intro ? "lg:col-span-7" : "lg:col-span-12 lg:max-w-[68rem]") : undefined}>
         <Eyebrow index={index} className={dark ? "text-gold" : "text-gold-ink"}>
           {eyebrow}
         </Eyebrow>
