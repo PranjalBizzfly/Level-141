@@ -189,6 +189,17 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
 
 /* ---------------------------------------------------------- BRANDS™ */
 
+/* BRANDS wheel geometry, in the 400×400 SVG space. Levers sit on the outer ring
+   (radius 150 = 37.5% of the box) and are 22% of the box wide. On hover the ring
+   grows by ORBIT_OPEN; spokes and levers move out by the same distance. */
+const ORBIT_R = 150;
+const SPOKE_IN = 80;
+const SPOKE_OUT = 122;
+const ORBIT_OPEN = 1.1;
+const OPEN_BY = ORBIT_R * (ORBIT_OPEN - 1);
+const SPOKE_OPEN = +((SPOKE_OUT + OPEN_BY - SPOKE_IN) / (SPOKE_OUT - SPOKE_IN)).toFixed(3);
+const NODE_SHIFT = ((OPEN_BY / 400) * 100 * 100) / 22;
+
 /** Links hover/focus on a lever row to its letter on the ring (and back), with pure CSS. */
 const brandsLinkCss = brandsLevers
   .map(
@@ -199,10 +210,14 @@ const brandsLinkCss = brandsLevers
       `.brands:has([data-lever-item="${l.letter}"]:is(:hover,:focus-within)) [data-lever-node="${l.letter}"]{scale:1.08;}`,
   )
   .join("") +
-  // Hovering the wheel pushes every lever outward along its spoke (transform, so the
-  // centring `translate` stays intact).
+  // Hovering the wheel opens it outward as one piece: the outer ring grows from the
+  // centre, each spoke stretches from its inner end, and each lever moves out along its
+  // spoke by the same distance (`transform`, so the centring `translate` stays intact).
   "@media (hover:hover) and (prefers-reduced-motion:no-preference){" +
   ".brands [data-lever-node]{transition:transform .6s var(--ease-architect),border-color .3s,scale .3s}" +
+  ".brands [data-orbit]{transform-box:view-box;transition:transform .6s var(--ease-architect)}" +
+  `.brands figure:hover [data-orbit="ring"]{transform:scale(${ORBIT_OPEN})}` +
+  `.brands figure:hover [data-orbit="spoke"]{transform:scale(${SPOKE_OPEN})}` +
   ".brands figure:hover [data-lever-node]{transform:translate(var(--out-x),var(--out-y))}" +
   "}";
 
@@ -225,7 +240,16 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
         </figcaption>
         <div aria-hidden className={cx("relative aspect-square", dark ? "text-paper" : "text-ink")}>
           <svg viewBox="0 0 400 400" className="absolute inset-0 size-full">
-            <circle cx="200" cy="200" r="150" fill="none" stroke="currentColor" strokeOpacity={dark ? 0.15 : 0.18} />
+            <circle
+              data-orbit="ring"
+              cx="200"
+              cy="200"
+              r={ORBIT_R}
+              fill="none"
+              stroke="currentColor"
+              strokeOpacity={dark ? 0.15 : 0.18}
+              style={{ transformOrigin: "200px 200px" }}
+            />
             <circle
               cx="200"
               cy="200"
@@ -237,16 +261,19 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
             />
             {brandsLevers.map((_, i) => {
               const a = (Math.PI / 3) * i - Math.PI / 2;
+              const x1 = 200 + Math.cos(a) * SPOKE_IN;
+              const y1 = 200 + Math.sin(a) * SPOKE_IN;
               return (
                 <line
                   key={i}
                   data-draw
+                  data-orbit="spoke"
                   pathLength={1}
-                  style={step(i)}
-                  x1={200 + Math.cos(a) * 80}
-                  y1={200 + Math.sin(a) * 80}
-                  x2={200 + Math.cos(a) * 122}
-                  y2={200 + Math.sin(a) * 122}
+                  style={{ ...step(i), transformOrigin: `${x1.toFixed(2)}px ${y1.toFixed(2)}px` }}
+                  x1={x1}
+                  y1={y1}
+                  x2={200 + Math.cos(a) * SPOKE_OUT}
+                  y2={200 + Math.sin(a) * SPOKE_OUT}
                   stroke="currentColor"
                   strokeOpacity={dark ? 0.3 : 0.3}
                 />
@@ -276,8 +303,9 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
                   {
                     left: `${50 + Math.cos(a) * 37.5}%`,
                     top: `${50 + Math.sin(a) * 37.5}%`,
-                    "--out-x": `${(Math.cos(a) * 18).toFixed(2)}px`,
-                    "--out-y": `${(Math.sin(a) * 18).toFixed(2)}px`,
+                    // Move out by the ring's growth, expressed as a share of the node's own size.
+                    "--out-x": `${(Math.cos(a) * NODE_SHIFT).toFixed(2)}%`,
+                    "--out-y": `${(Math.sin(a) * NODE_SHIFT).toFixed(2)}%`,
                   } as CSSProperties
                 }
               >
