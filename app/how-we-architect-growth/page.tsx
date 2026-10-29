@@ -1,7 +1,7 @@
 import { BrandsSystem, PeakAscent } from "@/components/diagrams/Diagrams";
 import { FrameworkNav } from "@/components/sections/FrameworkNav";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { BracketFrame, ButtonLink, Eyebrow, PageHero, Reveal, Section, SectionHeader, cx, Photo } from "@/components/ui/primitives";
+import { BracketFrame, ButtonLink, Eyebrow, PageHero, Reveal, Section, SectionHeader, cx, Photo, PhotoBand } from "@/components/ui/primitives";
 import {
   levelProcess,
   lqDomains,
@@ -67,14 +67,14 @@ export default function HowPage() {
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <Reveal>
-              <Eyebrow className="text-gold-ink">The starting point</Eyebrow>
-              <h2 id="start-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
+              <Eyebrow index="01" className="text-gold-ink">The starting point</Eyebrow>
+              <h2 id="start-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 But none of those should be <span className="serif-accent">the starting point</span>
               </h2>
             </Reveal>
             <Reveal as="ul" delay={100} className="mt-10 space-y-3">
               {mayBeNecessary.map((m) => (
-                <li key={m} className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-4 text-lg">
+                <li key={m} className="flex items-baseline justify-between gap-4 border-b border-line py-4 text-lg">
                   <span>{m}</span>
                   <span className="text-sm text-muted">may be necessary</span>
                 </li>
@@ -82,14 +82,14 @@ export default function HowPage() {
             </Reveal>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <Reveal className="on-dark rounded-[2rem] bg-ink p-8 text-paper sm:p-12 lg:p-14">
-              <p className="eyebrow text-gold">The starting point is the growth problem</p>
-              <p className="mt-6 text-lg text-paper/70">Level141 first identifies:</p>
+            <Reveal className="border-t border-line-strong pt-10 sm:pt-12">
+              <p className="eyebrow text-gold-ink">The starting point is the growth problem</p>
+              <p className="mt-6 text-lg text-muted">Level141 first identifies:</p>
               <ol className="mt-6 space-y-1">
                 {startingQuestions.map((q, i) => (
-                  <li key={q} className="flex items-baseline gap-5 border-b border-paper/10 py-4 last:border-0">
-                    <span aria-hidden className="eyebrow tabular-nums text-paper-muted">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="serif-accent text-2xl sm:text-3xl">{q}</span>
+                  <li key={q} className="flex items-baseline gap-5 border-b border-line py-4 last:border-0">
+                    <span aria-hidden className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-xl font-light sm:text-2xl">{q}</span>
                   </li>
                 ))}
               </ol>
@@ -99,10 +99,13 @@ export default function HowPage() {
         </div>
       </Section>
 
+      <PhotoBand src="/images/client-executive-study-woman.webp" />
+
       {/* ---------------------------------------------------------- Process */}
       <Section id="process" tone="white" labelledBy="process-title">
         <div className="container-x">
           <SectionHeader
+            index="02"
             id="process-title"
             eyebrow="How Level141 works"
             title={
@@ -112,7 +115,7 @@ export default function HowPage() {
             }
             intro="Growth isn't a destination. Every new level creates another possibility."
           />
-          <ol className="mt-16 sm:mt-24 lg:mt-28 border-t border-ink/12">
+          <ol className="mt-20 sm:mt-28 border-t border-ink/12">
             {levelProcess.map((s, i) => (
               <Reveal
                 as="li"
@@ -123,17 +126,17 @@ export default function HowPage() {
                 <div className="flex items-baseline gap-6 lg:col-span-4">
                   <span
                     aria-hidden
-                    className="text-6xl font-light tracking-[-0.05em] text-ink/45 transition-colors duration-500 group-hover:text-gold-ink lg:text-7xl"
+                    className="text-4xl font-light tracking-[-0.04em] text-ink/45 transition-colors duration-500 group-hover:text-gold-ink lg:text-5xl"
                   >
                     {s.n}
                   </span>
-                  <h3 className="text-3xl tracking-[-0.025em] lg:text-4xl">{s.name}</h3>
+                  <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem]">{s.name}</h3>
                 </div>
                 <div className="lg:col-span-5">
                   <p className="text-xl font-medium tracking-[-0.01em]">{s.line}</p>
-                  <p className="mt-3 text-lg leading-relaxed text-muted">{s.body}</p>
+                  <p className="mt-3 leading-[1.85] text-muted sm:text-lg">{s.body}</p>
                 </div>
-                <p className="serif-accent text-2xl text-gold-ink lg:col-span-3 lg:text-right">{s.question}</p>
+                <p className="serif-accent text-xl text-gold-ink lg:col-span-3 lg:text-right">{s.question}</p>
               </Reveal>
             ))}
           </ol>
@@ -145,6 +148,7 @@ export default function HowPage() {
         <div aria-hidden className="grid-lines absolute inset-0 opacity-60" />
         <div className="container-x relative">
           <SectionHeader
+            index="03"
             id="system-title"
             dark
             eyebrow="The Level141 Growth System"
@@ -155,16 +159,16 @@ export default function HowPage() {
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <Reveal className="mt-16 sm:mt-24 lg:mt-28 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-paper/12 bg-paper/12 sm:grid-cols-4">
+          <Reveal className="mt-20 border-b border-line-dark sm:mt-28">
             {[
               ["LQ™", "Know your level", "#lq"],
               ["IGF™", "Connect the growth engine", "#igf"],
               ["BRANDS™", "Six dimensions", "#brands"],
               ["PEAK™", "Presence to momentum", "#peak"],
             ].map(([name, line, href]) => (
-              <a key={href} href={href} className="group bg-ink p-7 transition-colors hover:bg-ink-2 sm:p-12">
-                <span className="block text-2xl tracking-[-0.02em] transition-colors group-hover:text-gold sm:text-3xl">{name}</span>
-                <span className="mt-2 block text-sm text-paper-muted">{line}</span>
+              <a key={href} href={href} className="group grid gap-2 border-t border-line-dark py-8 sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-12">
+                <span className="block text-2xl tracking-[-0.02em] transition-colors group-hover:text-gold sm:text-[1.75rem] lg:col-span-5">{name}</span>
+                <span className="block text-paper-muted lg:col-span-7">{line}</span>
               </a>
             ))}
           </Reveal>
@@ -179,8 +183,8 @@ export default function HowPage() {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <Reveal>
-                <p className="eyebrow text-gold">LQ™ — Level Quotient</p>
-                <h2 id="lq-title" className="display mt-6 text-[2.25rem] sm:text-5xl">
+                <p className="eyebrow text-gold"><span aria-hidden className="tabular-nums">04 · </span>LQ™ — Level Quotient</p>
+                <h2 id="lq-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                   First, <span className="serif-accent text-gold">know your level</span>
                 </h2>
                 <p className="mt-8 leading-relaxed text-paper/70">
@@ -194,6 +198,9 @@ export default function HowPage() {
                   For people, LQ™ is assessed across the four VIBE™ dimensions. For organizations, the LQ™ Growth Audit
                   examines the domains shown here.
                 </p>
+                <ButtonLink href={routes.lq} variant="link" className="mt-6 !px-0 text-paper">
+                  Take the LQ™ Assessment
+                </ButtonLink>
               </Reveal>
             </div>
           </div>
@@ -202,29 +209,29 @@ export default function HowPage() {
               <p className="eyebrow text-paper-muted">LQ™ Growth Audit — domains</p>
             </Reveal>
             {/* Business & ambition defines what 'next level' means, so it leads; the other eleven domains follow. */}
-            <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line-dark bg-line-dark sm:grid-cols-2">
+            <dl className="mt-6 border-b border-line-dark">
               {lqDomains.map((d, i) => (
                 <Reveal
                   key={d.name}
                   delay={(i % 4) * 50}
                   variant="fade"
-                  className={i === 0 ? "bg-ink-2 p-6 sm:col-span-2 sm:p-8" : cx("group bg-ink p-6 transition-colors hover:bg-ink-2", i === lqDomains.length - 1 && "sm:col-span-2")}
+                  className="grid gap-2 border-t border-line-dark py-7 sm:grid-cols-12 sm:gap-8 sm:py-8"
                 >
-                  <dt className={i === 0 ? "flex items-baseline gap-4 text-xl font-medium" : "flex items-baseline gap-3 font-medium"}>
-                    <span aria-hidden className={i === 0 ? "serif-accent text-3xl text-gold" : "eyebrow tabular-nums text-gold"}>
+                  <dt className="flex items-baseline gap-4 font-medium sm:col-span-5">
+                    <span aria-hidden className="eyebrow tabular-nums text-gold">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {d.name}
                   </dt>
-                  <dd className={i === 0 ? "mt-3 max-w-xl leading-relaxed text-paper/80" : "mt-2 text-sm leading-relaxed text-paper-muted"}>{d.q}</dd>
+                  <dd className={cx("leading-[1.85] sm:col-span-7", i === 0 ? "text-paper/80" : "text-paper-muted")}>{d.q}</dd>
                 </Reveal>
               ))}
             </dl>
-            <Reveal className="mt-10 rounded-2xl border border-gold/30 p-8 sm:p-14">
+            <Reveal className="mt-14 sm:mt-16">
               <p className="eyebrow text-gold">LQ™ outputs</p>
-              <ul className="mt-5 grid gap-x-8 gap-y-3 text-paper/80 sm:grid-cols-2">
+              <ul className="mt-6 space-y-3 text-paper/80">
                 {lqOutputs.map((o) => (
-                  <li key={o} className="flex gap-3 text-sm leading-relaxed">
+                  <li key={o} className="flex gap-3 leading-[1.85]">
                     <span aria-hidden className="mt-[0.65em] h-px w-3 shrink-0 bg-gold" />
                     {o}
                   </li>
@@ -240,8 +247,8 @@ export default function HowPage() {
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-14 lg:items-center">
           <div className="lg:col-span-5">
             <Reveal>
-              <p className="eyebrow text-gold-ink">IGF™ — Integrated Growth Framework</p>
-              <h2 id="igf-title" className="display mt-6 text-[2.25rem] sm:text-5xl">
+              <p className="eyebrow text-gold-ink"><span aria-hidden className="tabular-nums">05 · </span>IGF™ — Integrated Growth Framework</p>
+              <h2 id="igf-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 Connect the <span className="serif-accent">growth engine</span>
               </h2>
             </Reveal>
@@ -250,7 +257,7 @@ export default function HowPage() {
               do not name IGF™'s drivers, so none are shown. */}
           <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
             <BracketFrame tone="ink" size="lg" className="space-y-6">
-              <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">Growth rarely comes from one function.</p>
+              <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">Growth rarely comes from one function.</p>
               <p className="text-lg leading-relaxed text-muted">
                 IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment
                 between them.
@@ -268,6 +275,7 @@ export default function HowPage() {
       <Section id="brands" tone="ink" labelledBy="brands-title" className="scroll-mt-12">
         <div className="container-x">
           <SectionHeader
+            index="06"
             id="brands-title"
             dark
             eyebrow="BRANDS™"
@@ -278,7 +286,7 @@ export default function HowPage() {
             }
             intro="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
           />
-          <div className="mt-16 sm:mt-24 lg:mt-28">
+          <div className="mt-20 sm:mt-28">
             <BrandsSystem />
           </div>
         </div>
@@ -288,6 +296,7 @@ export default function HowPage() {
       <Section id="peak" tone="paper-2" labelledBy="peak-title" className="scroll-mt-12">
         <div className="container-x">
           <SectionHeader
+            index="07"
             id="peak-title"
             eyebrow="PEAK™"
             title={
@@ -297,7 +306,7 @@ export default function HowPage() {
             }
             intro="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
-          <div className="mt-16 sm:mt-24 lg:mt-28">
+          <div className="mt-20 sm:mt-28">
             <PeakAscent dark={false} />
           </div>
         </div>
@@ -308,8 +317,8 @@ export default function HowPage() {
       <Section tone="paper" labelledBy="sell-title">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-6">
-            <p className="eyebrow text-gold-ink">What we actually sell</p>
-            <h2 id="sell-title" className="mt-6 space-y-1 text-[2.25rem] leading-[1.05] tracking-[-0.035em] sm:text-5xl xl:text-6xl">
+            <p className="eyebrow text-gold-ink"><span aria-hidden className="tabular-nums">08 · </span>What we actually sell</p>
+            <h2 id="sell-title" className="mt-6 space-y-1 text-[clamp(2rem,1.4rem+2vw,3rem)] font-light leading-[1.15] tracking-[-0.025em]">
               <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not marketing</span>
               <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not consulting</span>
               <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not another strategy deck</span>
@@ -320,9 +329,9 @@ export default function HowPage() {
           <div className="lg:col-span-5 lg:col-start-8">
             <Reveal delay={100}>
               <p className="text-2xl leading-snug tracking-[-0.02em]">Level141 sits between strategy and execution.</p>
-              <ul className="mt-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <ul className="mt-8 border-t border-line">
                 {whatWeDo.map((w) => (
-                  <li key={w} className="rounded-xl border border-ink/12 bg-surface px-4 py-3">
+                  <li key={w} className="border-b border-line py-4">
                     {w}
                   </li>
                 ))}
@@ -343,10 +352,13 @@ export default function HowPage() {
         </div>
       </Section>
 
+      <PhotoBand src="/images/client-visionaries-horizon.webp" />
+
       {/* ---------------------------------------------------------- Why Level141 */}
       <Section id="why" tone="ink" labelledBy="why-title">
         <div className="container-x">
           <SectionHeader
+            index="09"
             id="why-title"
             dark
             eyebrow="Why Level141?"
@@ -356,12 +368,14 @@ export default function HowPage() {
               </>
             }
           />
-          <ol className="mt-16 sm:mt-24 lg:mt-28 grid gap-px overflow-hidden rounded-[2rem] border border-paper/10 bg-paper/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-20 border-b border-line-dark sm:mt-28">
             {whyLevel141.map((w, i) => (
-              <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-ink p-8 sm:p-10 lg:p-12">
-                <span className="eyebrow tabular-nums text-gold">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-8 text-2xl tracking-[-0.02em]">{w.title}</h3>
-                <p className="mt-4 leading-relaxed text-paper/75">{w.body}</p>
+              <Reveal as="li" key={w.title} delay={i * 60} className="grid gap-4 border-t border-line-dark py-10 sm:py-14 lg:grid-cols-12 lg:items-baseline lg:gap-12">
+                <div className="flex items-baseline gap-6 lg:col-span-5">
+                  <span aria-hidden className="eyebrow tabular-nums text-gold">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem]">{w.title}</h3>
+                </div>
+                <p className="measure leading-[1.85] text-paper/75 lg:col-span-7">{w.body}</p>
               </Reveal>
             ))}
           </ol>
@@ -372,6 +386,7 @@ export default function HowPage() {
       <Section tone="white" labelledBy="shift-title">
         <div className="container-x">
           <SectionHeader
+            index="10"
             id="shift-title"
             eyebrow="Results"
             title={
@@ -380,30 +395,29 @@ export default function HowPage() {
               </>
             }
           />
-          <ol className="mt-16 sm:mt-24 lg:mt-28 grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5 lg:gap-5">
+          <ol className="mt-20 border-b border-line sm:mt-28">
             {transformationFrame.map((t, i) => (
               <Reveal
                 as="li"
                 key={t.label}
                 delay={i * 80}
-                className={cx(
-                  "relative rounded-2xl border border-ink/12 p-8 sm:p-10 lg:p-8 xl:p-10",
-                  i === transformationFrame.length - 1 ? "on-dark bg-ink text-paper sm:col-span-2 lg:col-span-1" : "bg-paper",
-                )}
+                className="grid gap-3 border-t border-line py-10 sm:py-14 lg:grid-cols-12 lg:items-baseline lg:gap-12"
               >
-                <span className={cx("eyebrow tabular-nums", i === 4 ? "text-gold" : "text-muted")}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-8 text-xl tracking-[-0.015em]">{t.label}</h3>
-                <p className={cx("mt-2 text-sm leading-relaxed", i === 4 ? "text-paper/70" : "text-muted")}>{t.question}</p>
+                <div className="flex items-baseline gap-6 lg:col-span-5">
+                  <span aria-hidden className={cx("eyebrow tabular-nums", i === transformationFrame.length - 1 ? "text-gold-ink" : "text-muted")}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem]">{t.label}</h3>
+                </div>
+                <p className="measure leading-[1.85] text-muted lg:col-span-7">{t.question}</p>
               </Reveal>
             ))}
           </ol>
           <Reveal className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-            <ButtonLink href={routes.personalBrand} variant="outline">
+            <ButtonLink href={routes.personalBrand} variant="solid">
               Personal Brand Architecture™
             </ButtonLink>
-            <ButtonLink href={routes.growth} variant="ghost">
+            <ButtonLink href={routes.growth} variant="link">
               Growth Architecture™
             </ButtonLink>
           </Reveal>

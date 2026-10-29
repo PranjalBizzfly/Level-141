@@ -154,3 +154,64 @@
     transform: scaleX(1);
   }
 }
+
+/* 7. Home opening (HomeIntro.tsx), home page only, every full load.
+      0–2.2s    the faint lockup fills from left to right, letter by letter;
+                the small loading line runs beneath it
+      2.4–3.0s  the screen fades away on the hero
+      Shown only with JS and without reduced motion; it always ends hidden. */
+.home-intro {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .home-intro {
+    display: block;
+    animation: intro-out 0.6s var(--ease-architect) 2.4s forwards;
+  }
+  .intro-fill {
+    animation: intro-fill 2.2s cubic-bezier(0.45, 0, 0.25, 1) both;
+  }
+  .intro-track {
+    animation: intro-track 2.2s cubic-bezier(0.45, 0, 0.25, 1) both;
+  }
+  /* While the opening is up the page under it does not scroll. */
+  html[data-intro-active] {
+    overflow: hidden;
+  }
+}
+@keyframes intro-out {
+  to { opacity: 0; visibility: hidden; }
+}
+@keyframes intro-fill {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes intro-track {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* 8. Photo bands (PhotoBand in primitives.tsx): the photograph opens from a
+      narrow frame as it arrives, then drifts slowly inside its frame while
+      the page scrolls. The drift uses `translate`, so the hover zoom
+      (`transform`) still composes with it. Both are off for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] [data-unveil] {
+    clip-path: inset(8% 6% 8% 6% round 1.75rem);
+    transition: clip-path 1.6s var(--ease-architect) 0.1s;
+  }
+  html.js [data-reveal].is-visible [data-unveil] {
+    clip-path: inset(0 0 0 0 round 1.75rem);
+  }
+  @supports (animation-timeline: view()) {
+    .photo-drift img {
+      scale: 1.14;
+      animation: photo-drift linear both;
+      animation-timeline: view();
+    }
+  }
+}
+@keyframes photo-drift {
+  from { translate: 0 -5%; }
+  to { translate: 0 5%; }
+}

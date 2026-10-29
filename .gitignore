@@ -31,3 +31,6 @@ npm-debug.log*
 # Raw generated image sources (optimised copies live in public/images)
 /Docs/image-sources/*
 !/Docs/image-sources/PENDING-IMAGES.md
+
+# local QA tooling
+.tools/

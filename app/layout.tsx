@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Google_Sans_Flex } from "next/font/google";
+import { Geist } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollToggle } from "@/components/layout/ScrollToggle";
@@ -13,19 +13,12 @@ import "./globals.css";
 import "./motion.css";
 import "./glass.css";
 
-/* Google Sans Flex for text and Fraunces (light, upright) for the accent words, as in
-   the approved redesign. Variable names are unchanged so all components follow. */
-const geist = Google_Sans_Flex({
+/* One typeface across the site: Geist, the brand typeface the logo is set in.
+   Weight and size carry emphasis; there is no second (serif) family. */
+const geist = Geist({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-geist",
-  display: "swap",
-});
-
-const instrumentSerif = Fraunces({
-  subsets: ["latin"],
-  weight: ["300", "400"],
-  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -72,7 +65,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
+    <html lang="en" className={geist.variable} suppressHydrationWarning>
       <head>
         {/*
           Marks JS as available so reveal animations may hide content until in view.

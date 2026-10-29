@@ -18,17 +18,17 @@ export function HomeHero() {
           <p className="eyebrow animate-fade text-gold">Growth Architecture for People &amp; Organizations</p>
           <h1
             id="hero-title"
-            className="display relative mt-8 inline-block py-[0.12em] pl-[0.16em] pr-[0.3em] text-[2.75rem] min-[400px]:text-[3.25rem] sm:text-[4.5rem] lg:text-[5rem] xl:text-[6rem] 2xl:text-[7rem]"
+            className="display relative mt-8 inline-block py-[0.12em] pl-[0.16em] pr-[0.3em] text-[clamp(2.75rem,1.9rem+3vw,4.25rem)]"
           >
             {/* Corner brackets from the Level141 symbol frame the headline block. */}
             <BracketClose className="absolute right-0 top-0 size-[0.2em] animate-fade text-gold [animation-delay:300ms]" />
-            <BracketOpen className="absolute bottom-0 left-0 size-[0.2em] animate-fade text-paper/40 [animation-delay:300ms]" />
+            <BracketOpen className="absolute bottom-0 left-0 size-[0.2em] animate-fade text-gold [animation-delay:300ms]" />
             <span className="block animate-rise [animation-delay:60ms]">What&apos;s Your</span>
             <span className="block animate-rise [animation-delay:160ms]">
               <span className="serif-accent text-gold">Level</span>?
             </span>
           </h1>
-          <div className="mt-8 max-w-xl animate-rise space-y-5 text-lg leading-relaxed text-paper/75 [animation-delay:280ms] sm:text-xl">
+          <div className="mt-10 max-w-xl animate-rise space-y-5 text-base leading-[1.85] text-paper/75 [animation-delay:280ms] sm:text-lg">
             <p>
               You&apos;ve built something.<span className="sr-only"> A career. A reputation. A business. A company.</span> But where you are today doesn&apos;t have to define where you go next.
             </p>
@@ -54,6 +54,7 @@ export function HomeHero() {
           <div className="relative mx-auto max-w-md animate-fade [animation-delay:350ms] lg:ml-auto">
             <div className="relative rounded-[1.5rem] border border-line-dark-strong bg-ink-2 px-6 py-6 sm:px-9 sm:py-9 lg:rounded-[1.75rem]">
               <BracketClose className="absolute -right-px -top-px size-7 text-gold" />
+              <BracketOpen className="absolute -bottom-px -left-px size-7 text-gold" />
               <p className="eyebrow text-gold">Next level</p>
               <p className="serif-accent mt-2 text-2xl text-paper sm:mt-3 sm:text-3xl">Where you go next.</p>
             </div>

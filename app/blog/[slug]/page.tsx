@@ -7,6 +7,7 @@ import { BracketFrame } from "@/components/ui/primitives";
 import { getPost, getPublishedPosts, readingMinutes } from "@/lib/blog";
 import { insightCategories } from "@/lib/content";
 import { imageAlts } from "@/lib/image-alts";
+import { focusStyle } from "@/lib/image-focus";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
 
@@ -56,7 +57,7 @@ export default async function BlogPostPage({ params }: Props) {
         {post.cover ? (
           <div className="container-x mt-12 max-w-5xl sm:mt-16">
             <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] border border-line-dark-strong lg:rounded-[1.75rem]">
-              <Image src={post.cover} alt={imageAlts[post.cover] ?? ""} fill priority sizes="(min-width: 1024px) 64rem, 100vw" quality={90} className="object-cover grayscale" />
+              <Image src={post.cover} alt={imageAlts[post.cover] ?? ""} style={focusStyle(post.cover)} fill priority sizes="(min-width: 1024px) 64rem, 100vw" quality={90} className="object-cover grayscale" />
             </div>
           </div>
         ) : null}

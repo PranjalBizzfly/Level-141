@@ -9,6 +9,7 @@ import {
   Section,
   SectionHeader,
   Photo,
+  PhotoBand,
   Expandable,
 } from "@/components/ui/primitives";
 import {
@@ -54,12 +55,12 @@ export default function PersonalBrandPage() {
           </p>
         }
         aside={
-          <div className="overflow-hidden rounded-[2rem] border border-paper/15 bg-ink-2">
-            <p className="eyebrow hidden border-b border-paper/10 px-10 py-6 text-paper-muted lg:block">The VIBE™ Framework</p>
+          <div className="border-t border-paper/15">
+            <p className="eyebrow hidden border-b border-paper/15 py-6 text-paper-muted lg:block">The VIBE™ Framework</p>
             <dl className="grid grid-cols-4 lg:grid-cols-1">
               {vibe.map((v) => (
-                <div key={v.letter} className="flex flex-col items-center gap-1 border-r border-paper/10 px-2 py-5 last:border-0 lg:flex-row lg:gap-6 lg:border-b lg:border-r-0 lg:px-10 lg:py-7">
-                  <dt className="serif-accent text-4xl leading-none text-gold lg:w-10 lg:text-5xl">{v.letter}</dt>
+                <div key={v.letter} className="flex flex-col items-center gap-1 border-r border-paper/15 px-2 py-5 last:border-r-0 lg:flex-row lg:gap-6 lg:border-b lg:border-r-0 lg:px-0 lg:py-7">
+                  <dt className="serif-accent text-3xl leading-none text-gold lg:w-10 lg:text-4xl">{v.letter}</dt>
                   <dd className="text-center text-[0.75rem] uppercase tracking-[0.08em] text-paper-muted lg:text-left lg:text-lg lg:normal-case lg:tracking-[-0.01em] lg:text-paper">
                     {v.full}
                   </dd>
@@ -85,7 +86,7 @@ export default function PersonalBrandPage() {
         <div className="container-x grid gap-12 sm:gap-16 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-20">
           <Reveal className="lg:col-span-10">
             <p className="eyebrow text-gold-ink">Not simply about visibility</p>
-            <h2 id="purpose-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
+            <h2 id="purpose-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
               It&apos;s about aligning who you are, what you stand for, the impact you create and{" "}
               <span className="serif-accent">where you want to go</span>
             </h2>
@@ -93,7 +94,7 @@ export default function PersonalBrandPage() {
           <Reveal className="lg:col-span-6">
             <Photo src="/images/client-executive-library.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:aspect-[16/11]" />
           </Reveal>
-          <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-muted lg:col-span-5 lg:col-start-8 lg:self-center">
+          <Reveal delay={120} className="space-y-6 text-base leading-[1.85] text-muted sm:text-lg lg:col-span-5 lg:col-start-8 lg:self-center">
             <p>
               Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived
               experience into a structured personal growth asset.
@@ -111,6 +112,8 @@ export default function PersonalBrandPage() {
           </Reveal>
         </div>
       </Section>
+
+      <PhotoBand src="/images/client-executive-portrait-woman.webp" />
 
       {/* ---------------------------------------------------------- The problem */}
       <Section tone="paper-2" labelledBy="problem-title">
@@ -162,7 +165,7 @@ export default function PersonalBrandPage() {
             }
             intro="VIBE™ answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
           />
-          <div className="mt-16 sm:mt-24 lg:mt-28">
+          <div className="mt-20 sm:mt-28">
             <VibeExplorer />
           </div>
           <Reveal className="mt-14 border-t border-paper/12 pt-10 text-center sm:mt-16">
@@ -186,8 +189,8 @@ export default function PersonalBrandPage() {
               </>
             }
           />
-          <ProcessTimeline steps={vibeStages} className="mt-16 sm:mt-24 lg:mt-28" />
-          <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-ink/10 bg-paper p-8 sm:flex-row sm:items-center sm:p-12 lg:p-14">
+          <ProcessTimeline steps={vibeStages} className="mt-20 sm:mt-28" />
+          <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 border-y border-line py-10 sm:flex-row sm:items-center sm:py-14">
             <p className="max-w-xl text-lg leading-relaxed">
               {/* Source: Website Structure, "01 — Discover Your Level". */}
               <span className="font-medium">01 — Discover Your Level</span>{" "}
@@ -208,7 +211,7 @@ export default function PersonalBrandPage() {
           <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <Reveal className="lg:col-span-7">
               <p className="eyebrow text-gold-ink">Ideal for</p>
-              <h2 id="for-title" className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-[3.75rem]">
+              <h2 id="for-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 For people whose capability is bigger than their{" "}
                 <span className="serif-accent">current visibility</span>
               </h2>
@@ -244,13 +247,13 @@ export default function PersonalBrandPage() {
             </p>
           </Reveal>
 
-          {/* 3 — Fit comparison: two open columns split by a single hairline. */}
-          <div className="mt-20 grid gap-14 sm:mt-24 md:grid-cols-2 lg:mt-28 md:gap-0 md:divide-x md:divide-line">
-            <Reveal className="md:pr-12 lg:pr-16">
-              <h3 className="text-3xl tracking-[-0.025em] sm:text-4xl">
+          {/* 3 — Fit: stacked rows, title left and list right on wide screens. */}
+          <div className="mt-20 border-t border-line sm:mt-24 lg:mt-28">
+            <Reveal className="grid gap-8 border-b border-line py-10 sm:py-14 lg:grid-cols-12 lg:gap-16">
+              <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem] lg:col-span-5">
                 Qualification <span className="serif-accent">signals</span>
               </h3>
-              <ol className="mt-8 space-y-6">
+              <ol className="space-y-6 lg:col-span-7">
                 {[
                   "Has demonstrable expertise, achievements, leadership experience or a credible body of work.",
                   "Has a defined ambition: growth, investment, influence, career transition, market leadership, board/advisory roles or legacy.",
@@ -258,7 +261,7 @@ export default function PersonalBrandPage() {
                   "Understands that authority requires consistency and cannot be outsourced entirely.",
                   "Values strategic reputation and business outcomes more than short-term follower acquisition.",
                 ].map((item, n) => (
-                  <li key={item} className="grid grid-cols-[2.5rem_1fr] text-lg leading-relaxed">
+                  <li key={item} className="grid grid-cols-[2.5rem_1fr] text-base leading-[1.85] sm:text-lg">
                     <span aria-hidden className="pt-[0.35em] text-sm tabular-nums text-gold-ink">
                       {String(n + 1).padStart(2, "0")}
                     </span>
@@ -267,11 +270,11 @@ export default function PersonalBrandPage() {
                 ))}
               </ol>
             </Reveal>
-            <Reveal delay={120} className="md:pl-12 lg:pl-16">
-              <h3 className="text-3xl tracking-[-0.025em] text-muted sm:text-4xl">
+            <Reveal className="grid gap-8 border-b border-line py-10 sm:py-14 lg:grid-cols-12 lg:gap-16">
+              <h3 className="text-2xl tracking-[-0.02em] text-muted sm:text-[1.75rem] lg:col-span-5">
                 What it is <span className="serif-accent">not</span>
               </h3>
-              <ul className="mt-8 space-y-4">
+              <ul className="space-y-4 lg:col-span-7">
                 {pbaIsNot.map((n) => (
                   <li key={n} className="grid grid-cols-[2.5rem_1fr] leading-relaxed text-muted">
                     <span aria-hidden className="text-ink/35">×</span>
@@ -298,7 +301,7 @@ export default function PersonalBrandPage() {
             }
           />
           {/* Pain → intervention, read as paired rows rather than a grid of boxes. */}
-          <div className="mt-16 sm:mt-24 lg:mt-28">
+          <div className="mt-20 sm:mt-28">
             {/* Source: Personal Brand Architecture bible §10 — all four documented columns, the quote first. */}
             <ol className="border-t border-line-dark-strong">
               {pbaVoices.map((v, i) => (
@@ -306,7 +309,7 @@ export default function PersonalBrandPage() {
                   <Expandable
                     dark
                     index={i}
-                    summary={<span className="serif-accent text-[1.6rem] leading-snug text-paper sm:text-3xl lg:text-[2.1rem]">“{v.quote}”</span>}
+                    summary={<span className="serif-accent text-xl leading-snug text-paper sm:text-2xl lg:text-[1.75rem]">“{v.quote}”</span>}
                   >
                     <dl className="grid gap-8 sm:grid-cols-3 sm:gap-12">
                       <div>
@@ -329,7 +332,7 @@ export default function PersonalBrandPage() {
 
             {/* Closing statement and action. */}
             <Reveal className="mt-12 grid gap-8 sm:mt-14 md:grid-cols-12 md:items-center md:gap-8">
-              <p className="text-2xl leading-snug tracking-[-0.02em] text-paper sm:text-3xl md:col-span-7">
+              <p className="text-xl leading-snug tracking-[-0.02em] text-paper sm:text-2xl md:col-span-7">
                 Personal Brand Architecture™ starts by locating the gap between your actual value and the market&apos;s
                 current perception of it.
               </p>
@@ -343,6 +346,8 @@ export default function PersonalBrandPage() {
         </div>
       </Section>
 
+      <PhotoBand src="/images/client-keynote-auditorium.webp" />
+
       {/* ---------------------------------------------------------- Modules */}
       <Section tone="paper" labelledBy="modules-title">
         <div className="container-x grid gap-14 lg:grid-cols-12">
@@ -350,7 +355,7 @@ export default function PersonalBrandPage() {
             <div className="lg:sticky lg:top-32">
               <Reveal>
                 <p className="eyebrow text-gold-ink">Personal Brand Architecture™</p>
-                <h2 id="modules-title" className="display mt-6 text-[2.25rem] sm:text-5xl">
+                <h2 id="modules-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                   Product Architecture <span className="serif-accent">&amp; Modules</span>
                 </h2>
                 <p className="mt-8 leading-relaxed text-muted">
@@ -420,32 +425,32 @@ export default function PersonalBrandPage() {
             </ol>
           </div>
 
-          {/* Measurement: a contrasting panel, statement left, scorecard right. */}
-          <div className="on-dark mt-12 grid gap-10 rounded-[2rem] bg-ink p-8 text-paper sm:mt-14 sm:p-12 lg:grid-cols-12 lg:gap-16 lg:p-16">
+          {/* Measurement: open hairline section, statement left, scorecard right. */}
+          <div className="mt-20 grid gap-10 border-t border-line-strong pt-14 sm:mt-28 sm:pt-20 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-5">
-              <p className="eyebrow text-gold">Measurement &amp; Success System</p>
-              <h3 className="mt-5 text-3xl leading-tight tracking-[-0.025em] sm:text-4xl">
+              <p className="eyebrow text-gold-ink">Measurement &amp; Success System</p>
+              <h3 className="mt-5 text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">
                 Visibility metrics are useful signals, <span className="serif-accent">but they are not the product outcome</span>
               </h3>
-              <p className="mt-6 leading-relaxed text-paper/70">Success should be measured through a balanced scorecard.</p>
+              <p className="mt-6 leading-[1.85] text-muted">Success should be measured through a balanced scorecard.</p>
               {/* Source: Personal Brand Architecture bible §11, Recommended Reporting Rhythm. */}
-              <p className="eyebrow mt-8 text-paper-muted">Recommended Reporting Rhythm</p>
-              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-paper/75">
+              <p className="eyebrow mt-8 text-muted">Recommended Reporting Rhythm</p>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted">
                 <li>Monthly: activity, signal and opportunity review.</li>
                 <li>Quarterly: strategic VIBE™ review and corrective actions.</li>
                 <li>Half-yearly: reputation, positioning and stakeholder perception review.</li>
                 <li>Annually: full evolution reset against next-stage ambition.</li>
               </ul>
             </Reveal>
-            <dl className="grid gap-x-10 border-t border-line-dark sm:grid-cols-2 lg:col-span-7">
+            <dl className="grid gap-x-10 border-t border-line sm:grid-cols-2 lg:col-span-7">
               {pbaMeasures.map((m, i) => (
-                <Reveal key={m.name} delay={i * 40} className="flex gap-4 border-b border-line-dark py-5 sm:last:odd:col-span-2">
-                  <span aria-hidden className="eyebrow w-6 shrink-0 pt-[0.3em] tabular-nums text-paper-muted">
+                <Reveal key={m.name} delay={i * 40} className="flex gap-4 border-b border-line py-5 sm:last:odd:col-span-2">
+                  <span aria-hidden className="eyebrow w-6 shrink-0 pt-[0.3em] tabular-nums text-muted">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <dt className="font-medium">{m.name}</dt>
-                    <dd className="mt-1 leading-relaxed text-paper/70">{m.q}</dd>
+                    <dt className="text-ink">{m.name}</dt>
+                    <dd className="mt-1 leading-relaxed text-muted">{m.q}</dd>
                   </div>
                 </Reveal>
               ))}
@@ -460,17 +465,18 @@ export default function PersonalBrandPage() {
           <h2 id="outcome-title" className="sr-only">
             Before and after Personal Brand Architecture
           </h2>
-          <div className="grid gap-6 sm:gap-10 lg:grid-cols-2">
-            <Reveal className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20">
-              <p className="eyebrow text-muted">Before</p>
-              <p className="mt-6 text-2xl leading-snug tracking-[-0.02em] text-muted">
+          {/* Before and after as two stacked rows: label left, statement right. */}
+          <div className="border-t border-line-strong">
+            <Reveal className="grid gap-4 border-b border-line py-10 sm:py-14 lg:grid-cols-12 lg:gap-16">
+              <p className="eyebrow text-muted lg:col-span-5 lg:pt-2">Before</p>
+              <p className="text-xl leading-snug tracking-[-0.02em] text-muted sm:text-2xl lg:col-span-7">
                 Valuable but fragmented expertise, inconsistent positioning, disconnected visibility and unpredictable
                 opportunity.
               </p>
             </Reveal>
-            <Reveal delay={120} className="on-dark rounded-[2rem] bg-ink p-8 text-paper sm:p-12 lg:p-14">
-              <p className="eyebrow text-gold">After</p>
-              <p className="mt-6 text-2xl leading-snug tracking-[-0.02em]">
+            <Reveal className="grid gap-4 border-b border-line-strong py-10 sm:py-14 lg:grid-cols-12 lg:gap-16">
+              <p className="eyebrow text-gold-ink lg:col-span-5 lg:pt-2">After</p>
+              <p className="text-xl leading-snug tracking-[-0.02em] sm:text-2xl lg:col-span-7">
                 A clearly positioned leader with an evidence-backed narrative, coherent presence, recognizable
                 intellectual territory, trusted impact, deliberate opportunity pathways and a roadmap for continuous
                 evolution.
@@ -480,7 +486,7 @@ export default function PersonalBrandPage() {
           <Reveal className="mx-auto mt-14 max-w-3xl sm:mt-16">
             <BracketFrame tone="ink" size="lg" className="text-center">
               <p className="eyebrow text-gold-ink">The Level141 promise</p>
-              <p className="mt-6 text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
+              <p className="mt-6 text-xl leading-snug tracking-[-0.02em] sm:text-2xl">
                 Level141 does not manufacture a personal brand. It architects the conditions through which a
                 person&apos;s real leadership, expertise and impact can be understood, trusted and translated into the
                 next level of opportunity.

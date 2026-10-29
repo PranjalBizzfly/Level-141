@@ -24,6 +24,7 @@ export const routes = {
   how: "/how-we-architect-growth",
   insights: "/insights",
   blog: "/blog",
+  lq: "/lq-assessment",
   about: "/about",
   contact: "/start-your-next-level",
 } as const;
@@ -52,6 +53,7 @@ export const footerNav = {
   ],
   frameworks: [
     { label: "LQ™", href: `${routes.how}#lq` },
+    { label: "LQ™ Assessment", href: routes.lq },
     { label: "IGF™", href: `${routes.how}#igf` },
     { label: "BRANDS™", href: `${routes.how}#brands` },
     { label: "PEAK™", href: `${routes.how}#peak` },

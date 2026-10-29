@@ -40,7 +40,8 @@
   --color-success: #1f6b3d;
 
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  /* Single family: "serif" utilities resolve to Geist too. */
+  --font-serif: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
 
   --ease-architect: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -219,18 +220,18 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
   }
-  /* Large, light and tightly set: the editorial register of the brand.
-     Serif accents inside keep their own weight. */
+  /* Light and calmly set: restrained size, open leading, room around it. */
   .display {
     font-weight: 300;
-    letter-spacing: -0.04em;
-    line-height: 0.97;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
   }
+  /* Emphasis inside a headline: same family, one step heavier. */
   .serif-accent {
-    font-family: var(--font-serif);
+    font-family: inherit;
     font-style: normal;
-    font-weight: 300;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    letter-spacing: inherit;
   }
   .container-x {
     width: 100%;

@@ -1,7 +1,7 @@
-import { BracketClose, LogoSymbol } from "@/components/brand/Logo";
+import { BracketClose, BracketOpen, LogoSymbol } from "@/components/brand/Logo";
 import { Mark141 } from "@/components/brand/Mark141";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, cx, Photo } from "@/components/ui/primitives";
+import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, Photo, PhotoBand } from "@/components/ui/primitives";
 import { principles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
@@ -32,8 +32,8 @@ export default function AboutPage() {
         aside={
           <Mark141
             className="mx-auto w-48 sm:w-64 lg:w-full lg:max-w-xs"
-            textClassName="text-6xl sm:text-7xl"
-            openClassName="text-paper/40"
+            textClassName="text-5xl sm:text-6xl"
+            openClassName="text-gold"
           />
         }
       />
@@ -44,7 +44,7 @@ export default function AboutPage() {
         <div className="container-x grid gap-12 sm:gap-16 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-20">
           <Reveal className="lg:col-span-10">
             <p className="eyebrow text-gold-ink">A simple belief</p>
-            <h2 id="belief-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
+            <h2 id="belief-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
               Businesses need clarity about what their <span className="serif-accent">next level requires</span>
             </h2>
           </Reveal>
@@ -53,16 +53,16 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={120} className="lg:col-span-5 lg:col-start-8 lg:self-center">
             <p className="text-lg text-muted">Level141 was created around a simple belief:</p>
-            <p className="mt-4 text-xl leading-snug tracking-[-0.01em]">
+            <p className="mt-4 text-lg leading-[1.85] sm:text-xl">
               Businesses don&apos;t necessarily need more agencies, consultants, campaigns or activity. They need clarity
               about what their next level requires.
             </p>
-            <p className="mt-8 text-lg leading-relaxed">
+            <p className="mt-8 text-base leading-[1.85] sm:text-lg">
               We work with ambitious people and organizations to understand where they are, define where they want to go
               and architect the interconnected systems required to get there.
             </p>
             <p className="mt-6 text-lg">
-              We call it: <span className="serif-accent text-2xl text-gold-ink">Growth Architecture</span>
+              We call it: <span className="serif-accent text-gold-ink">Growth Architecture</span>
             </p>
           </Reveal>
         </div>
@@ -70,33 +70,37 @@ export default function AboutPage() {
 
       {/* ---------------------------------------------------------- Purpose */}
       <Section tone="ink" labelledBy="purpose-title">
-        <div aria-hidden className="grid-lines absolute inset-0 opacity-60" />
+        
         <div className="container-x relative">
-          <Reveal className="mx-auto max-w-5xl text-center">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <BracketFrame tone="gold" size="lg">
             <p className="eyebrow text-gold">Our purpose</p>
-            <h2 id="purpose-title" className="display mt-6 text-[2.5rem] sm:mt-8 sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
+            <h2 id="purpose-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)] sm:mt-8">
               Architect the next level <span className="serif-accent text-gold">of growth</span>
             </h2>
+            </BracketFrame>
           </Reveal>
-          <ul className="mx-auto mt-12 grid max-w-5xl gap-px sm:mt-16 lg:mt-20 overflow-hidden rounded-[2rem] border border-paper/12 bg-paper/12 md:grid-cols-3">
+          <ul className="mx-auto mt-20 max-w-5xl border-b border-line-dark sm:mt-28">
             {/* Source: Website Structure, OUR PURPOSE. The people and businesses lines reuse the
                 approved one-line descriptions of the two architectures shown further down this page. */}
             {[
-              ["For people", "Converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset", "client-executive-portrait-woman"],
-              ["For businesses", "One integrated architecture connecting every critical growth lever to measurable business outcomes", "client-walk-through-crowd"],
-              ["For ideas", "with the potential to become significantly bigger than they are today", "client-executive-study-woman"],
-            ].map(([title, body, image], i) => (
-              <Reveal as="li" key={title} delay={i * 100} className="bg-ink p-6 sm:p-8 lg:p-8">
-                <Photo src={`/images/${image}.webp`} sizes="(min-width: 768px) 30vw, 100vw" className="aspect-[4/3] md:aspect-[4/5]" />
-                <p className="mt-6 px-2 text-2xl tracking-[-0.02em] sm:mt-8">
+              ["For people", "Converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset"],
+              ["For businesses", "One integrated architecture connecting every critical growth lever to measurable business outcomes"],
+              ["For ideas", "with the potential to become significantly bigger than they are today"],
+            ].map(([title, body], i) => (
+              <Reveal as="li" key={title} delay={i * 100} className="grid gap-4 border-t border-line-dark py-10 sm:py-14 lg:grid-cols-12 lg:items-center lg:gap-10">
+                <p className="flex items-baseline gap-5 text-2xl tracking-[-0.02em] sm:text-[1.75rem] lg:col-span-5">
+                  <span aria-hidden className="eyebrow tabular-nums text-paper-muted">{String(i + 1).padStart(2, "0")}</span>
                   {title}
-                  {body ? <span className="mt-3 block text-base leading-relaxed tracking-normal text-paper/60">{body}</span> : null}
                 </p>
+                <p className="text-base leading-[1.85] text-paper/70 sm:text-lg lg:col-span-7">{body}</p>
               </Reveal>
             ))}
           </ul>
         </div>
       </Section>
+
+      <PhotoBand src="/images/client-walk-toward-skyline.webp" />
 
       {/* ---------------------------------------------------------- Principles */}
       <Section tone="paper-2" labelledBy="principles-title">
@@ -110,29 +114,24 @@ export default function AboutPage() {
               </>
             }
           />
-          <ol className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 md:grid-cols-2 lg:mt-20">
+          <ol className="mt-20 border-b border-line sm:mt-28">
             {principles.map((p, i) => (
               <Reveal
                 as="li"
                 key={p.name}
                 delay={i * 80}
-                className={cx(
-                  "relative flex flex-col rounded-[2rem] p-8 sm:p-12 lg:p-16",
-                  i === 0 || i === 3 ? "on-dark bg-ink text-paper" : "border border-line bg-surface",
-                )}
+                className="grid gap-4 border-t border-line py-10 sm:py-14 lg:grid-cols-12 lg:items-center lg:gap-10"
               >
-                <span
-                  aria-hidden
-                  className={cx("serif-accent text-6xl leading-none", i === 0 || i === 3 ? "text-gold" : "text-gold-ink")}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-12 text-3xl tracking-[-0.025em]">{p.name}</h3>
-                <p className={cx("mt-4 text-lg leading-relaxed", i === 0 || i === 3 ? "text-paper/80" : "text-muted")}>{p.body}</p>
-                <BracketClose
-                  aria-hidden
-                  className={cx("absolute right-6 top-6 size-5 sm:right-8 sm:top-8", i === 0 || i === 3 ? "text-gold/60" : "text-gold-ink/50")}
-                />
+                <div className="flex items-center gap-5 lg:col-span-5">
+                  {/* The full symbol: both brackets, one tone. */}
+                  <span aria-hidden className="relative size-4 shrink-0 text-gold-ink">
+                    <BracketClose className="absolute right-0 top-0 size-[45%]" />
+                    <BracketOpen className="absolute bottom-0 left-0 size-[45%]" />
+                  </span>
+                  <span aria-hidden className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem]">{p.name}</h3>
+                </div>
+                <p className="text-base leading-[1.85] text-muted sm:text-lg lg:col-span-7">{p.body}</p>
               </Reveal>
             ))}
           </ol>
@@ -144,40 +143,40 @@ export default function AboutPage() {
         <div className="container-x grid gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-gold-ink">Two ambitions. Two architectures.</p>
-            <h2 id="offer-title" className="display mt-6 text-[2.25rem] sm:text-5xl lg:text-[3.75rem]">
+            <h2 id="offer-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
               Level141 has built dedicated architectures <span className="serif-accent">for both</span>
             </h2>
-            <p className="mt-8 text-lg leading-relaxed text-muted">
+            <p className="mt-8 text-base leading-[1.85] text-muted sm:text-lg">
               Level141 is a Growth Architecture company. It does not treat branding, visibility, authority, lead
               generation or positioning as isolated activities. It architects the system that connects identity,
               credibility, influence and opportunity so that growth becomes deliberate, governed and measurable.
             </p>
           </Reveal>
-          <div className="grid gap-6 sm:gap-10 lg:col-span-6 lg:col-start-7">
-            <Reveal className="on-dark grid gap-8 rounded-[2rem] bg-ink p-8 text-paper sm:grid-cols-[10rem_1fr] sm:items-center sm:gap-10 sm:p-10 lg:p-12 xl:grid-cols-[12rem_1fr]">
-              <Photo src="/images/client-ceo-portrait.webp" sizes="(min-width: 640px) 12rem, 100vw" className="aspect-[4/3] sm:aspect-[4/5]" />
+          <div className="border-b border-line lg:col-span-6 lg:col-start-7">
+            <Reveal className="grid gap-8 border-t border-line py-10 sm:py-14">
+              <Photo src="/images/client-ceo-portrait.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[16/10]" />
               <div>
               <div className="flex items-center justify-between">
-                <p className="eyebrow text-gold">For people · VIBE™</p>
+                <p className="eyebrow text-gold-ink">For people · VIBE™</p>
               </div>
-              <h3 className="mt-6 text-2xl tracking-[-0.02em]">Personal Brand Architecture™</h3>
-              <p className="mt-3 leading-relaxed text-paper/65">
+              <h3 className="mt-5 text-2xl sm:text-[1.75rem] tracking-[-0.02em]">Personal Brand Architecture™</h3>
+              <p className="mt-3 leading-relaxed text-muted">
                 Converts genuine expertise, leadership credibility and lived experience into a structured personal growth
                 asset.
               </p>
-              <ButtonLink href={routes.personalBrand} variant="ghost-light" className="mt-8">
+              <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-8">
                 Explore
               </ButtonLink>
               </div>
             </Reveal>
-            <Reveal delay={100} className="grid gap-8 rounded-[2rem] border border-ink/12 p-8 sm:grid-cols-[10rem_1fr] sm:items-center sm:gap-10 sm:p-10 lg:p-12 xl:grid-cols-[12rem_1fr]">
-              <Photo src="/images/client-executive-in-motion.webp" sizes="(min-width: 640px) 12rem, 100vw" className="aspect-[4/3] sm:aspect-[4/5]" />
+            <Reveal delay={100} className="grid gap-8 border-t border-line py-10 sm:py-14">
+              <Photo src="/images/client-mentorship-conversation.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[16/10]" />
               <div>
               <div className="flex items-center justify-between">
                 <p className="eyebrow text-gold-ink">For organizations · PEAK™</p>
                 <span className="text-xs text-muted">Waitlist</span>
               </div>
-              <h3 className="mt-6 text-2xl tracking-[-0.02em]">Growth Architecture™</h3>
+              <h3 className="mt-5 text-2xl sm:text-[1.75rem] tracking-[-0.02em]">Growth Architecture™</h3>
               <p className="mt-3 leading-relaxed text-muted">
                 One integrated architecture connecting every critical growth lever to measurable business outcomes.
               </p>

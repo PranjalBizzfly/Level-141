@@ -56,6 +56,7 @@ export function SmoothScroll() {
 
     const onWheel = (e: WheelEvent) => {
       if (e.ctrlKey || e.metaKey || e.defaultPrevented) return;
+      if (document.documentElement.dataset.motion === "off") return;
       if (document.body.style.overflow === "hidden") return;
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // horizontal gestures stay native
       if (scrollsItself(e.target, e.deltaY, e.deltaX)) return;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { PageHero, Reveal, Section, SectionHeader } from "@/components/ui/primitives";
+import { PageHero, Reveal, Section, SectionHeader, PhotoBand } from "@/components/ui/primitives";
 import { insightCategories, questionsWeAsk } from "@/lib/content";
 import { getPublishedInsights } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
@@ -77,12 +77,12 @@ export default function InsightsPage() {
               >
                 <span
                   aria-hidden
-                  className="serif-accent text-5xl leading-none text-gold tabular-nums sm:col-span-2 lg:text-6xl"
+                  className="eyebrow tabular-nums text-paper-muted sm:col-span-2"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-[1.75rem] tracking-[-0.025em] sm:col-span-10 sm:text-3xl lg:col-span-5 lg:text-[2.6rem]">{c.name}</h3>
-                <p className="measure text-lg leading-relaxed text-paper/75 sm:col-span-10 sm:col-start-3 lg:col-span-5 lg:col-start-auto">
+                <h3 className="text-2xl tracking-[-0.02em] sm:col-span-10 sm:text-[1.75rem] lg:col-span-4">{c.name}</h3>
+                <p className="measure text-base leading-[1.85] text-paper/75 sm:col-span-10 sm:col-start-3 sm:text-lg lg:col-span-6 lg:col-start-auto">
                   {c.body}
                 </p>
                 <span aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-line-dark" />
@@ -92,6 +92,8 @@ export default function InsightsPage() {
           </ol>
         </div>
       </Section>
+
+      <PhotoBand src="/images/client-speaker-conference-stage.webp" />
 
       {/* ---------------------------------------------------------- Questions */}
       <Section tone="paper-2" labelledBy="questions-title">
@@ -105,18 +107,18 @@ export default function InsightsPage() {
               </>
             }
           />
-          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2">
+          <div className="mt-20 border-b border-line sm:mt-28">
             {(
               [
                 ["Personal Brand Architecture™", questionsWeAsk.people],
                 ["Growth Architecture™", questionsWeAsk.organizations],
               ] as const
             ).map(([label, qs], col) => (
-              <Reveal key={label} delay={col * 120} className="rounded-[2rem] bg-surface p-8 sm:p-14 lg:p-20">
-                <p className="eyebrow text-gold-ink">{label}</p>
-                <ul className="mt-6 divide-y divide-ink/10">
+              <Reveal key={label} delay={col * 120} className="grid gap-6 border-t border-line py-10 sm:py-14 lg:grid-cols-12 lg:gap-10">
+                <p className="eyebrow text-gold-ink lg:col-span-5 lg:pt-5">{label}</p>
+                <ul className="divide-y divide-line lg:col-span-7">
                   {qs.map((q) => (
-                    <li key={q} className="serif-accent py-4 text-xl leading-snug sm:text-2xl">
+                    <li key={q} className="py-4 text-lg leading-snug sm:text-xl">
                       {q}
                     </li>
                   ))}

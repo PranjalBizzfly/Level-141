@@ -156,7 +156,7 @@ export function Header() {
         hidden={!open}
         className={cx(
           // Floating card under the bar: inset on phones, a right-anchored card on tablets.
-          "absolute inset-x-3 top-full mt-2 flex animate-rise flex-col overflow-hidden rounded-3xl bg-ink shadow-[0_24px_64px_-24px_rgb(0_0_0/0.55)] ring-1 ring-paper/12 [animation-duration:0.35s] sm:left-auto sm:right-8 sm:w-96 xl:hidden",
+          "absolute inset-x-3 top-full mt-2 flex animate-rise flex-col overflow-hidden rounded-3xl bg-ink ring-1 ring-paper/12 [animation-duration:0.35s] sm:left-auto sm:right-8 sm:w-96 xl:hidden",
           scrolled ? "max-h-[calc(100dvh-4.5rem)] sm:max-h-[calc(100dvh-5rem)]" : "max-h-[calc(100dvh-4.5rem)] sm:max-h-[calc(100dvh-5.5rem)]",
         )}
       >

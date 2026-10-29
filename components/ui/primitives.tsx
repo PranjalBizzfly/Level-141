@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { imageAlts } from "@/lib/image-alts";
+import { focusStyle } from "@/lib/image-focus";
 
 export function cx(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -142,7 +143,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
         <Eyebrow index={index} className={dark ? "text-gold" : "text-gold-ink"}>
           {eyebrow}
         </Eyebrow>
-        <h2 id={id} className="display mt-5 text-[2.25rem] sm:mt-7 sm:text-5xl lg:text-[3.75rem]">
+        <h2 id={id} className="display mt-6 text-[clamp(2.2rem,1.3rem+2.6vw,3.75rem)] leading-[1.04] sm:mt-8">
           <span data-mask className="block">
             {title}
           </span>
@@ -181,6 +182,7 @@ export function BracketFrame({
   tone?: "gold" | "ink" | "paper";
   size?: "sm" | "md" | "lg";
 }) {
+  // Both brackets always share one tone, so the symbol reads complete.
   const color = { gold: "text-gold", ink: "text-ink", paper: "text-paper" }[tone];
   const s = { sm: "size-4", md: "size-6 sm:size-8", lg: "size-8 sm:size-12" }[size];
   const pad = { sm: "px-6 py-5", md: "px-8 py-8 sm:px-12 sm:py-10", lg: "px-10 py-10 sm:px-16 sm:py-14" }[size];
@@ -212,6 +214,7 @@ export function Photo({
       <Image
         src={src}
         alt={imageAlts[src] ?? ""}
+        style={focusStyle(src)}
         fill
         sizes={sizes}
         priority={priority}
@@ -222,6 +225,31 @@ export function Photo({
   );
 }
 
+/**
+ * Full-width photograph between sections, with an optional caption line set
+ * beneath it. Gives long pages visual rhythm without adding more cards.
+ */
+export function PhotoBand({ src, caption, className }: { src: string; caption?: ReactNode; className?: string }) {
+  return (
+    <figure className={cx("bg-paper py-16 sm:py-24 lg:py-28", className)}>
+      <div className="container-x">
+        {/* Opens from a narrow frame as it arrives, then drifts slowly with the scroll (motion.css §8). */}
+        <Reveal variant="fade">
+          <div data-unveil>
+            <Photo src={src} sizes="(min-width: 1408px) 1408px, 100vw" className="photo-drift aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]" />
+          </div>
+        </Reveal>
+        {caption ? (
+          <figcaption className="mt-6 flex items-center gap-4 text-sm text-muted sm:mt-8">
+            <span aria-hidden className="h-px w-8 bg-current opacity-50" />
+            {caption}
+          </figcaption>
+        ) : null}
+      </div>
+    </figure>
+  );
+}
+
 /** Edge-to-edge photo at the top of a card, carrying its number and status so the card stays short. */
 export function CardBanner({ src, index, children }: { src: string; index: string; children: ReactNode }) {
   return (
@@ -229,6 +257,7 @@ export function CardBanner({ src, index, children }: { src: string; index: strin
       <Image
         src={src}
         alt={imageAlts[src] ?? ""}
+        style={focusStyle(src)}
         fill
         sizes="(min-width: 1024px) 45vw, 100vw"
         quality={90}
@@ -268,9 +297,45 @@ export function PageHero({
   /** "md" for longer two-part headlines, so each part sets in two balanced lines. */
   size?: "lg" | "md";
 }) {
-  if (image && !aside) aside = <Photo src={image} priority sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/3] lg:aspect-[4/5]" />;
+  // With a client photograph and no custom aside, the hero becomes a full-screen, cinematic opening.
+  if (image && !aside) {
+    return (
+      <section className="on-dark relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink pb-20 pt-40 text-paper sm:pb-24 lg:pb-28">
+        <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="hero-photo-in absolute inset-0">
+            <div className="hero-photo absolute inset-0">
+              <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" />
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/30 to-transparent" />
+        </div>
+        <div className="container-x relative w-full">
+          <div className="max-w-[60rem]">
+            <p className="eyebrow animate-fade text-gold">{eyebrow}</p>
+            <h1
+              className={cx(
+                "display lux-lines mt-6 animate-fade",
+                size === "md"
+                  ? "text-[2.4rem] leading-[1.04] sm:text-6xl lg:text-[4.2rem] xl:text-[4.8rem]"
+                  : "text-[2.7rem] leading-[1.02] sm:text-6xl lg:text-[5rem] xl:text-[5.75rem]",
+              )}
+            >
+              {title}
+            </h1>
+            {intro ? (
+              <div className="mt-8 max-w-2xl animate-rise text-lg leading-relaxed text-paper/80 [animation-delay:450ms] sm:text-xl">
+                {intro}
+              </div>
+            ) : null}
+            {children ? <div className="mt-10 animate-rise [animation-delay:600ms]">{children}</div> : null}
+          </div>
+        </div>
+      </section>
+    );
+  }
   return (
-    <section className="on-dark relative isolate overflow-hidden bg-ink pb-20 pt-32 text-paper sm:pb-24 sm:pt-40 lg:pb-32 lg:pt-44">
+    <section className="on-dark relative isolate overflow-hidden bg-ink pb-24 pt-36 text-paper sm:pb-32 sm:pt-44 lg:pb-40 lg:pt-52">
       <div aria-hidden className="grid-lines absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
       <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>
@@ -279,14 +344,14 @@ export function PageHero({
             className={cx(
               "display mt-6 animate-rise [animation-delay:80ms]",
               size === "md"
-                ? "text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem] xl:text-[3.9rem]"
-                : "text-[2.6rem] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem]",
+                ? "text-[clamp(2.25rem,1.6rem+2.2vw,3.25rem)]"
+                : "text-[clamp(2.5rem,1.7rem+2.8vw,4rem)]",
             )}
           >
             {title}
           </h1>
           {intro ? (
-            <div className="mt-6 max-w-2xl animate-rise text-lg leading-relaxed text-paper/75 sm:mt-8 [animation-delay:200ms] sm:text-xl">
+            <div className="mt-8 max-w-xl animate-rise text-base leading-[1.85] text-paper/75 sm:mt-10 [animation-delay:200ms] sm:text-lg">
               {intro}
             </div>
           ) : null}

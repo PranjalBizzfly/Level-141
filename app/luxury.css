@@ -1,0 +1,140 @@
+/* ---------------------------------------------------------------------------
+   Level141 luxury layer
+   Sheets that slide over one another, cinematic photo heroes, line-by-line
+   headlines. Everything degrades to a calm static page under reduced motion
+   or when the visitor pauses motion (html[data-motion="off"]).
+--------------------------------------------------------------------------- */
+
+/* 1. Sheets. LuxuryLayer.tsx sets each section's sticky `top` so it holds once
+      its end is reached; the next section then slides over it. */
+main > section.sheet {
+  position: sticky;
+  overflow: clip;
+}
+main > section.sheet + section.sheet {
+  margin-top: -2.5rem;
+  border-radius: 2.5rem 2.5rem 0 0;
+  box-shadow: 0 -30px 70px -30px rgb(0 0 0 / 0.35);
+}
+@media (max-width: 639px) {
+  main > section.sheet + section.sheet {
+    margin-top: -1.5rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+}
+[data-theme="dark"] main > section.sheet + section.sheet {
+  box-shadow: 0 -1px 0 rgb(255 255 255 / 0.1), 0 -30px 70px -30px rgb(0 0 0 / 0.9);
+}
+
+/* Rhythm: on larger screens every section after the opening is at least one
+   full screen, its content centred, with one consistent breath above and below.
+   Light sheets alternate white and soft grey so each reads as its own chapter. */
+@media (min-width: 1024px) {
+  main > section.sheet + section.sheet {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: clamp(8rem, 16vh, 11rem);
+  }
+}
+@media (max-width: 1023px) {
+  main > section.sheet + section.sheet {
+    padding-block: 6.5rem;
+  }
+}
+main > section.sheet-alt {
+  background-color: var(--color-paper-2) !important;
+}
+
+/* The covered sheet recedes: a slight scale and a soft shade as the next arrives. */
+main > section.sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #000;
+  opacity: calc(var(--cover, 0) * 0.45);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion="off"]) main > section.sheet {
+    transform: scale(calc(1 - var(--cover, 0) * 0.05));
+    transform-origin: 50% calc(100% - 50vh);
+    will-change: transform;
+  }
+}
+
+/* 2. Cinematic hero photo: full bleed, monochrome, slow zoom as it scrolls away. */
+.hero-photo img {
+  filter: grayscale(1) contrast(1.05);
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion="off"]) .hero-photo {
+      animation: l141-hero-zoom linear both;
+      animation-timeline: view(block);
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+@keyframes l141-hero-zoom {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.18) translateY(4%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion="off"]) .hero-photo-in {
+    animation: l141-photo-in 2.4s var(--ease-architect) both;
+  }
+}
+@keyframes l141-photo-in {
+  from { opacity: 0; transform: scale(1.12); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 3. Headlines rise line by line: each .block line has its own mask. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] [data-mask]:has(> .block) {
+    clip-path: none !important;
+    transform: none !important;
+  }
+  html.js [data-reveal] [data-mask] > .block {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(0.5em);
+    transition:
+      clip-path 1.2s var(--ease-architect),
+      transform 1.2s var(--ease-architect);
+  }
+  html.js [data-reveal] [data-mask] > .block:nth-child(2) { transition-delay: 0.14s; }
+  html.js [data-reveal] [data-mask] > .block:nth-child(3) { transition-delay: 0.28s; }
+  html.js [data-reveal].is-visible [data-mask] > .block {
+    clip-path: inset(-0.1em -0.1em -0.25em -0.1em);
+    transform: none;
+  }
+  .lux-lines > .block {
+    animation: l141-line 1.3s var(--ease-architect) both;
+  }
+  .lux-lines > .block:nth-child(2) { animation-delay: 0.15s; }
+  .lux-lines > .block:nth-child(3) { animation-delay: 0.3s; }
+}
+@keyframes l141-line {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(0.5em); }
+  to { clip-path: inset(-0.1em -0.1em -0.25em -0.1em); transform: none; }
+}
+
+/* 5. Paused motion: nothing moves, everything is shown. */
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+}
+html[data-motion="off"] [data-reveal],
+html[data-motion="off"] [data-reveal] [data-mask],
+html[data-motion="off"] [data-reveal] [data-mask] > .block {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}

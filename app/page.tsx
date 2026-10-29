@@ -5,6 +5,7 @@ import { Mark141 } from "@/components/brand/Mark141";
 import { GrowthChainDiagram, ProcessTimeline } from "@/components/diagrams/Diagrams";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { HomeHero } from "@/components/sections/HomeHero";
+import { HomeIntro } from "@/components/motion/HomeIntro";
 import {
   BracketFrame,
   ButtonLink,
@@ -13,8 +14,8 @@ import {
   Reveal,
   Section,
   SectionHeader,
-  CardBanner,
   Photo,
+  PhotoBand,
 } from "@/components/ui/primitives";
 import {
   activityList,
@@ -77,6 +78,7 @@ const frameworks = [
 export default function HomePage() {
   return (
     <>
+      <HomeIntro />
       <HomeHero />
 
       {/* ---------------------------------------------------- Noise vs architecture */}
@@ -87,7 +89,7 @@ export default function HomePage() {
               <Eyebrow index="01" className="text-gold-ink">
                 Growth doesn&apos;t need more noise
               </Eyebrow>
-              <h2 id="noise-title" className="display mt-6 text-[2.6rem] sm:text-6xl lg:text-[4.75rem]">
+              <h2 id="noise-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 It needs <span className="serif-accent">architecture</span>
               </h2>
             </Reveal>
@@ -99,29 +101,29 @@ export default function HomePage() {
                 moving further.
               </p>
             </Reveal>
+            {/* Busy crowd, one purposeful figure: activity versus direction. */}
+            <Reveal delay={200} className="mt-12 sm:mt-16">
+              <Photo src="/images/client-walk-through-crowd.webp" sizes="(min-width: 1024px) 42vw, 100vw" className="aspect-[4/3]" />
+            </Reveal>
           </div>
 
           <div className="lg:col-span-6">
-            <Reveal className="rounded-[2rem] border border-ink/10 bg-surface p-8 sm:p-14 lg:p-20">
+            <Reveal className="border-t border-line pt-10 lg:mt-3">
               <p className="eyebrow text-muted">They have</p>
-              <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Typical growth activities">
-                {activityList.map((a) => (
-                  <li
-                    key={a}
-                    className="flex min-h-12 items-center justify-center rounded-2xl border border-ink/10 bg-ink/[0.03] whitespace-nowrap px-2 text-center text-sm text-ink/75 transition-colors duration-300 hover:border-ink/25 hover:text-ink"
-                  >
+              <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-2 text-base leading-[1.85] text-muted sm:text-lg" aria-label="Typical growth activities">
+                {activityList.map((a, i) => (
+                  <li key={a} className="whitespace-nowrap">
                     {a.replace(".", "")}
+                    {i < activityList.length - 1 ? <span aria-hidden className="ml-3 opacity-50">·</span> : null}
                   </li>
                 ))}
               </ul>
               <div className="my-12 flex items-center gap-5" aria-hidden>
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-ink/20" />
-                <span className="grid size-12 place-items-center rounded-full border border-ink/15 bg-surface">
-                  <LogoSymbol className="size-5 text-ink" />
-                </span>
-                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-ink/20" />
+                <span className="h-px flex-1 bg-line" />
+                <LogoSymbol className="size-5 text-ink" />
+                <span className="h-px flex-1 bg-line" />
               </div>
-              <p className="text-3xl leading-tight tracking-[-0.025em] sm:text-4xl">
+              <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">
                 Level141 <span className="serif-accent">connects</span> the pieces.
               </p>
               <p className="mt-5 max-w-md leading-relaxed text-muted">
@@ -149,70 +151,82 @@ export default function HomePage() {
             intro="Level141 has built dedicated architectures for both."
           />
 
-          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-2 lg:gap-8">
+          {/* Two stacked full-width rows, photo beside text, sides alternating. */}
+          <div className="mt-20 border-t border-line sm:mt-28">
             {/* Personal Brand Architecture — active */}
-            <Reveal as="article" spotlight className="on-dark relative flex flex-col overflow-hidden rounded-[2rem] bg-ink text-paper">
-              <CardBanner src="/images/client-speaker-conference-stage.webp" index="01">
-                <span className="size-1.5 rounded-full bg-white" aria-hidden /> Now available
-              </CardBanner>
-              <div className="flex flex-1 flex-col p-8 sm:p-10 xl:p-9 2xl:p-12">
-              <h3 className="text-3xl tracking-[-0.025em] sm:text-4xl">Personal Brand Architecture™</h3>
-              <p className="serif-accent mt-4 text-2xl text-gold-soft">
-                Your achievements built your reputation. What will build your next level?
-              </p>
-              <p className="mt-5 leading-relaxed text-paper/65">
-                At Level141, we believe a powerful personal brand is not simply about visibility. It&apos;s about
-                aligning who you are, what you stand for, the impact you create and where you want to go. That&apos;s
-                why we architect personal brands through our proprietary VIBE™ Framework.
-              </p>
-              <dl className="mt-8 grid grid-cols-4 border-y border-paper/12">
-                {vibe.map((v) => (
-                  <div key={v.letter} className="border-r border-paper/12 px-1 py-5 text-center last:border-r-0">
-                    <dt className="serif-accent text-4xl leading-none text-gold">{v.letter}</dt>
-                    <dd className="mt-2 text-[0.625rem] uppercase leading-snug tracking-[0.06em] sm:text-[0.75rem] sm:tracking-[0.1em] text-paper-muted">{v.name}</dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="mt-auto flex flex-col gap-4 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:gap-2 xl:[&>a]:px-4 xl:[&>a]:text-[0.8125rem]">
-                <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
-                  Start Your Personal Brand Assessment
-                </ButtonLink>
-                <ButtonLink href={routes.personalBrand} variant="link">
-                  Discover Your VIBE™
-                </ButtonLink>
-              </div>
+            <Reveal as="article" className="grid gap-10 border-b border-line py-12 sm:py-16 lg:grid-cols-12 lg:items-center lg:gap-16 lg:py-24">
+              <Photo src="/images/client-speaker-conference-stage.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:col-span-6" />
+              <div className="lg:col-span-6">
+                <p className="eyebrow flex items-center gap-3 text-muted">
+                  <span aria-hidden className="tabular-nums">01</span>
+                  <span aria-hidden className="h-px w-8 bg-current opacity-50" />
+                  <span className="inline-flex items-center gap-2">
+                    <span className="size-1.5 rounded-full bg-ink" aria-hidden /> Now available
+                  </span>
+                </p>
+                <h3 className="mt-6 text-2xl tracking-[-0.02em] sm:text-[1.75rem]">Personal Brand Architecture™</h3>
+                <p className="serif-accent mt-4 text-lg leading-[1.6] sm:text-xl">
+                  Your achievements built your reputation. What will build your next level?
+                </p>
+                <p className="mt-5 leading-[1.85] text-muted">
+                  At Level141, we believe a powerful personal brand is not simply about visibility. It&apos;s about
+                  aligning who you are, what you stand for, the impact you create and where you want to go. That&apos;s
+                  why we architect personal brands through our proprietary VIBE™ Framework.
+                </p>
+                <dl className="mt-8 grid grid-cols-4 border-y border-line">
+                  {vibe.map((v) => (
+                    <div key={v.letter} className="border-r border-line px-1 py-5 text-center last:border-r-0">
+                      <dt className="text-3xl font-light leading-none">{v.letter}</dt>
+                      <dd className="mt-2 text-[0.625rem] uppercase leading-snug tracking-[0.06em] text-muted sm:text-[0.75rem] sm:tracking-[0.1em]">{v.name}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+                  <ButtonLink href={`${routes.contact}?interest=personal-brand-architecture`} variant="gold">
+                    Start Your Personal Brand Assessment
+                  </ButtonLink>
+                  <ButtonLink href={routes.personalBrand} variant="link">
+                    Discover Your VIBE™
+                  </ButtonLink>
+                </div>
               </div>
             </Reveal>
 
             {/* Growth Architecture — waitlist */}
-            <Reveal as="article" delay={120} className="flex flex-col overflow-hidden rounded-[2rem] border border-ink/12 bg-surface">
-              <CardBanner src="/images/client-executive-dubai-window.webp" index="02">
-                <span className="size-1.5 rounded-full border border-white" aria-hidden /> Coming later · Waitlist open
-              </CardBanner>
-              <div className="flex flex-1 flex-col p-8 sm:p-10 xl:p-9 2xl:p-12">
-              <h3 className="text-3xl tracking-[-0.025em] sm:text-4xl">Growth Architecture™</h3>
-              <p className="serif-accent mt-4 text-2xl text-gold-ink">
-                Your business doesn&apos;t need more disconnected growth initiatives. It needs them working together.
-              </p>
-              <p className="mt-6 leading-relaxed text-muted">
-                For growth-stage businesses, SMEs, portfolio companies and established organizations that have the
-                ambition and capability to reach a significantly higher level.
-              </p>
-              <ul className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-3">
-                {gaDimensions.map((d) => (
-                  <li key={d.name} className="bg-surface px-4 py-4 text-sm">
-                    {d.name}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-auto flex flex-col gap-4 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-3 [&>a]:px-5 xl:[&>a]:gap-2 xl:[&>a]:px-4 xl:[&>a]:text-[0.8125rem]">
-                <ButtonLink href={routes.waitlist} variant="solid">
-                  Join the Waitlist
-                </ButtonLink>
-                <ButtonLink href={routes.growth} variant="link">
-                  Explore Growth Architecture
-                </ButtonLink>
-              </div>
+            <Reveal as="article" className="grid gap-10 border-b border-line py-12 sm:py-16 lg:grid-cols-12 lg:items-center lg:gap-16 lg:py-24">
+              <Photo src="/images/client-executive-dubai-window.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:order-2 lg:col-span-6" />
+              <div className="lg:col-span-6">
+                <p className="eyebrow flex items-center gap-3 text-muted">
+                  <span aria-hidden className="tabular-nums">02</span>
+                  <span aria-hidden className="h-px w-8 bg-current opacity-50" />
+                  <span className="inline-flex items-center gap-2">
+                    <span className="size-1.5 rounded-full border border-ink" aria-hidden /> Coming later · Waitlist open
+                  </span>
+                </p>
+                <h3 className="mt-6 text-2xl tracking-[-0.02em] sm:text-[1.75rem]">Growth Architecture™</h3>
+                <p className="serif-accent mt-4 text-lg leading-[1.6] sm:text-xl">
+                  Your business doesn&apos;t need more disconnected growth initiatives. It needs them working together.
+                </p>
+                <p className="mt-5 leading-[1.85] text-muted">
+                  For growth-stage businesses, SMEs, portfolio companies and established organizations that have the
+                  ambition and capability to reach a significantly higher level.
+                </p>
+                <ul className="mt-8 flex flex-wrap gap-x-3 gap-y-1 border-y border-line py-5 text-sm text-muted">
+                  {gaDimensions.map((d, i) => (
+                    <li key={d.name}>
+                      {d.name}
+                      {i < gaDimensions.length - 1 ? <span aria-hidden className="ml-3 opacity-50">·</span> : null}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+                  <ButtonLink href={routes.waitlist} variant="solid">
+                    Join the Waitlist
+                  </ButtonLink>
+                  <ButtonLink href={routes.growth} variant="link">
+                    Explore Growth Architecture
+                  </ButtonLink>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -220,6 +234,8 @@ export default function HomePage() {
       </Section>
 
       {/* ---------------------------------------------------------- The difference */}
+      <PhotoBand src="/images/client-hero-skyline-opening.webp" />
+
       <Section tone="ink" labelledBy="difference-title">
         <div aria-hidden className="grid-lines absolute inset-0 opacity-70" />
         <div className="container-x relative">
@@ -236,7 +252,7 @@ export default function HomePage() {
             }
             intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
           />
-          <div className="mt-16 sm:mt-24 lg:mt-28">
+          <div className="mt-20 sm:mt-28">
             <GrowthChainDiagram />
           </div>
         </div>
@@ -256,14 +272,14 @@ export default function HomePage() {
             }
             intro="Our work is powered by proprietary frameworks designed to understand where growth stands, identify what is holding it back and architect the next level."
           />
-          <ol className="mt-12 border-t border-ink/12 sm:mt-16 lg:mt-20">
+          <ol className="mt-20 border-t border-line sm:mt-28">
             {frameworks.map((f, i) => (
-              <Reveal as="li" key={f.id} delay={i * 80} className="border-b border-ink/12">
+              <Reveal as="li" key={f.id} delay={i * 80} className="border-b border-line">
                 <Link
                   href={`${routes.how}#${f.id}`}
                   className="group relative grid gap-4 py-8 transition-colors before:absolute before:inset-x-0 before:bottom-[-1px] before:h-px before:origin-left before:scale-x-0 before:bg-gold-ink before:transition-transform before:duration-500 hover:before:scale-x-100 focus-visible:before:scale-x-100 sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-10"
                 >
-                  <span className="text-4xl tracking-[-0.03em] transition-colors group-hover:text-gold-ink sm:text-5xl lg:col-span-3">
+                  <span className="text-2xl tracking-[-0.02em] transition-colors group-hover:text-gold-ink sm:text-[1.75rem] lg:col-span-3">
                     {f.name}
                   </span>
                   <span className="lg:col-span-4">
@@ -304,63 +320,59 @@ export default function HomePage() {
           />
 
           {/* Source: Website Structure, "WE DON'T START WITH DELIVERABLES." — in document order.
-              Two matched panels on a shared subgrid so their lists and closing lines align. */}
-          <div className="mt-12 grid gap-6 sm:mt-16 lg:mt-20 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
-            <Reveal className="grid rounded-[2rem] border border-line bg-surface p-8 sm:p-12 lg:p-14 lg:row-span-3 lg:grid-rows-subgrid">
-              {/* Same header shape as the paired panel: a two-line title, then the label. */}
-              <div className="pb-8">
-                <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
-                  Deliverables <span className="serif-accent block text-gold-ink">may be necessary</span>
+              Two stacked editorial rows: title on the left, list and closing line on the right. */}
+          <div className="mt-20 border-t border-line sm:mt-28">
+            <Reveal className="grid gap-8 border-b border-line py-12 sm:py-16 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="eyebrow text-muted">Deliverables</p>
+                <p className="mt-5 text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">
+                  Deliverables <span className="serif-accent block">may be necessary</span>
                 </p>
-                <p className="eyebrow mt-5 text-muted">Deliverables</p>
               </div>
-              <ul className="border-t border-line-strong">
-                {mayBeNecessary.map((m) => (
-                  <li
-                    key={m}
-                    className="group/item flex min-h-14 cursor-default items-center justify-between gap-4 border-b border-line py-4 text-lg tracking-[-0.01em] text-muted transition-colors duration-300 hover:text-ink"
-                  >
-                    <span className="bg-[linear-gradient(var(--color-gold-ink),var(--color-gold-ink))] bg-[length:0%_1.5px] bg-[position:0_55%] bg-no-repeat transition-[background-size] duration-500 ease-[var(--ease-architect)] group-hover/item:bg-[length:100%_1.5px]">
-                      {m} may be necessary
-                    </span>
-                    <span aria-hidden className="hidden shrink-0 text-sm text-gold-ink opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 sm:inline">
-                      not the start
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">But none of those should be the starting point</p>
+              <div className="lg:col-span-7">
+                <ul className="border-t border-line-strong">
+                  {mayBeNecessary.map((m) => (
+                    <li
+                      key={m}
+                      className="group/item flex min-h-14 cursor-default items-center justify-between gap-4 border-b border-line py-4 text-base tracking-[-0.01em] text-muted transition-colors duration-300 hover:text-ink sm:text-lg"
+                    >
+                      <span className="bg-[linear-gradient(var(--color-gold-ink),var(--color-gold-ink))] bg-[length:0%_1.5px] bg-[position:0_55%] bg-no-repeat transition-[background-size] duration-500 ease-[var(--ease-architect)] group-hover/item:bg-[length:100%_1.5px]">
+                        {m} may be necessary
+                      </span>
+                      <span aria-hidden className="hidden shrink-0 text-sm text-gold-ink opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 sm:inline">
+                        not the start
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="pt-6 text-lg leading-snug tracking-[-0.015em] sm:text-xl">But none of those should be the starting point</p>
+              </div>
             </Reveal>
 
-            {/* Bridge arrow between the panels */}
-            <div aria-hidden className="hidden items-center justify-center lg:row-span-3 lg:flex">
-              <span className="grid size-12 place-items-center rounded-full border border-line-strong bg-surface text-gold-ink">
-                <ArrowRight className="size-5" />
-              </span>
-            </div>
-
-            <Reveal delay={120} className="on-dark grid rounded-[2rem] bg-ink p-8 text-paper sm:p-12 lg:p-14 lg:row-span-3 lg:grid-rows-subgrid">
-              <div className="pb-8">
-                <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
-                  The starting point is the <span className="serif-accent block text-gold">growth problem</span>
+            <Reveal delay={120} className="grid gap-8 border-b border-line py-12 sm:py-16 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="eyebrow text-muted">Level141 first identifies:</p>
+                <p className="mt-5 text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">
+                  The starting point is the <span className="serif-accent block">growth problem</span>
                 </p>
-                <p className="eyebrow mt-5 text-paper-muted">Level141 first identifies:</p>
               </div>
-              <ol className="border-t border-line-dark-strong">
-                {startingQuestions.map((q) => (
-                  <li
-                    key={q}
-                    className="group/q -mx-3 flex min-h-14 cursor-default items-center gap-4 rounded-xl border-b border-line-dark px-3 py-4 text-lg transition-colors duration-300 hover:bg-paper/[0.06]"
-                  >
-                    <span className="flex-1">{q}</span>
-                    <ArrowRight
-                      aria-hidden
-                      className="size-4 -translate-x-2 text-gold opacity-0 transition-[opacity,transform] duration-300 group-hover/q:translate-x-0 group-hover/q:opacity-100"
-                    />
-                  </li>
-                ))}
-              </ol>
-              <p className="pt-6 text-xl leading-snug tracking-[-0.015em]">Only then do we architect the solution</p>
+              <div className="lg:col-span-7">
+                <ol className="border-t border-line-strong">
+                  {startingQuestions.map((q) => (
+                    <li
+                      key={q}
+                      className="group/q flex min-h-14 cursor-default items-center gap-4 border-b border-line py-4 text-base sm:text-lg"
+                    >
+                      <span className="flex-1">{q}</span>
+                      <ArrowRight
+                        aria-hidden
+                        className="size-4 -translate-x-2 text-gold-ink opacity-0 transition-[opacity,transform] duration-300 group-hover/q:translate-x-0 group-hover/q:opacity-100"
+                      />
+                    </li>
+                  ))}
+                </ol>
+                <p className="pt-6 text-lg leading-snug tracking-[-0.015em] sm:text-xl">Only then do we architect the solution</p>
+              </div>
             </Reveal>
           </div>
 
@@ -377,7 +389,7 @@ export default function HomePage() {
             <Eyebrow index="06" className="text-gold">
               What we actually sell
             </Eyebrow>
-            <h2 id="sell-title" className="mt-8 space-y-1 text-[2.4rem] leading-[1.05] tracking-[-0.035em] sm:text-6xl">
+            <h2 id="sell-title" className="mt-8 space-y-1 text-[clamp(2rem,1.4rem+2vw,3rem)] font-light leading-[1.15] tracking-[-0.025em]">
               <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not marketing</span>
               <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not consulting</span>
               <span className="block text-paper-muted line-through decoration-gold/70 decoration-2">Not another strategy deck</span>
@@ -386,9 +398,9 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={100} className="lg:col-span-5 lg:col-start-8">
             <p className="text-2xl leading-snug tracking-[-0.02em]">Level141 sits between strategy and execution.</p>
-            <ul className="mt-8 grid gap-2 sm:grid-cols-2">
+            <ul className="mt-8 border-t border-paper/15">
               {whatWeDo.map((w) => (
-                <li key={w} className="rounded-xl border border-paper/15 px-4 py-3 text-paper/85">
+                <li key={w} className="border-b border-paper/15 py-4 text-paper/85">
                   {w}
                 </li>
               ))}
@@ -417,37 +429,44 @@ export default function HomePage() {
               </>
             }
           />
-          <div className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 md:grid-cols-2 lg:mt-20">
-            {/* Both cards share six subgrid rows from md, so headline, list, closing line
-                and link align across the pair. */}
-            <Reveal className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
-              <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
-              <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
-                For people whose capability is bigger than their current visibility
-              </p>
-              <p className="eyebrow mt-8 text-muted">Ideal for:</p>
-              <DotList items={pbaAudience} className="mt-4 self-start" />
-              <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
-                Your personal brand shouldn&apos;t simply document what you&apos;ve done. It should position you for
-                what you want to do next.
-              </p>
-              <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6 max-w-full justify-self-start sm:whitespace-normal">
-                Build My Personal Brand
-              </ButtonLink>
+          {/* Two stacked rows: who it is for on the left, the list and next step on the right. */}
+          <div className="mt-20 border-t border-line sm:mt-28">
+            <Reveal className="grid gap-8 border-b border-line py-12 sm:py-16 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
+                <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
+                  For people whose capability is bigger than their current visibility
+                </p>
+              </div>
+              <div className="lg:col-span-7">
+                <p className="eyebrow text-muted">Ideal for:</p>
+                <DotList items={pbaAudience} className="mt-4" />
+                <p className="mt-8 border-t border-line pt-6 leading-[1.85] text-muted">
+                  Your personal brand shouldn&apos;t simply document what you&apos;ve done. It should position you for
+                  what you want to do next.
+                </p>
+                <ButtonLink href={routes.personalBrand} variant="ghost" className="mt-6 max-w-full sm:whitespace-normal">
+                  Build My Personal Brand
+                </ButtonLink>
+              </div>
             </Reveal>
-            <Reveal delay={120} className="rounded-[2rem] border border-ink/12 p-8 sm:p-14 lg:p-20 md:row-span-6 md:grid md:min-w-0 md:grid-cols-[minmax(0,1fr)] md:grid-rows-subgrid md:gap-0">
-              <p className="eyebrow text-gold-ink">Growth Architecture</p>
-              <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
-                For organizations whose ambition has outgrown their current growth system
-              </p>
-              <p className="eyebrow mt-8 text-muted">Ideal for:</p>
-              <DotList items={gaAudience} className="mt-4 self-start" />
-              <p className="mt-8 border-t border-ink/10 pt-6 leading-relaxed text-muted">
-                When ambition changes, the architecture supporting it must change too.
-              </p>
-              <ButtonLink href={routes.waitlist} variant="ghost" className="mt-6 max-w-full justify-self-start sm:whitespace-normal">
-                Register your organization&apos;s interest
-              </ButtonLink>
+            <Reveal className="grid gap-8 border-b border-line py-12 sm:py-16 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="eyebrow text-gold-ink">Growth Architecture</p>
+                <p className="mt-5 text-2xl leading-snug tracking-[-0.02em]">
+                  For organizations whose ambition has outgrown their current growth system
+                </p>
+              </div>
+              <div className="lg:col-span-7">
+                <p className="eyebrow text-muted">Ideal for:</p>
+                <DotList items={gaAudience} className="mt-4" />
+                <p className="mt-8 border-t border-line pt-6 leading-[1.85] text-muted">
+                  When ambition changes, the architecture supporting it must change too.
+                </p>
+                <ButtonLink href={routes.waitlist} variant="ghost" className="mt-6 max-w-full sm:whitespace-normal">
+                  Register your organization&apos;s interest
+                </ButtonLink>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -466,12 +485,14 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-12 grid gap-px overflow-hidden sm:mt-16 lg:mt-20 rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-20 border-t border-line sm:mt-28">
             {whyLevel141.map((w, i) => (
-              <Reveal as="li" spotlight key={w.title} delay={i * 60} className="bg-surface p-6 sm:p-8">
-                <span className="eyebrow tabular-nums text-gold-ink">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-8 text-2xl tracking-[-0.02em]">{w.title}</h3>
-                <p className="mt-4 leading-relaxed text-muted">{w.body}</p>
+              <Reveal as="li" key={w.title} delay={i * 60} className="grid gap-4 border-b border-line py-10 sm:py-14 lg:grid-cols-12 lg:gap-16">
+                <div className="flex items-baseline gap-6 lg:col-span-5">
+                  <span aria-hidden className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-xl font-light tracking-[-0.015em] sm:text-2xl">{w.title}</h3>
+                </div>
+                <p className="measure leading-[1.85] text-muted lg:col-span-7">{w.body}</p>
               </Reveal>
             ))}
           </ol>
@@ -486,7 +507,7 @@ export default function HomePage() {
               <Eyebrow index="09" className="text-gold">
                 The Level141 belief
               </Eyebrow>
-              <h2 id="belief-title" className="display mt-6 text-[2.6rem] sm:text-6xl">
+              <h2 id="belief-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 Growth isn&apos;t a collection of activities.{" "}
                 <span className="serif-accent text-gold">It&apos;s a system</span>
               </h2>
@@ -503,7 +524,7 @@ export default function HomePage() {
           </div>
           <Reveal className="mt-12 lg:mt-14">
             <BracketFrame size="lg" className="mx-auto max-w-3xl text-center">
-              <p className="text-3xl leading-tight tracking-[-0.025em] sm:text-5xl">
+              <p className="text-2xl font-light leading-snug tracking-[-0.02em] sm:text-[2rem]">
                 Growth happens when the pieces work together.{" "}
                 <span className="serif-accent text-gold">That&apos;s what we architect</span>
               </p>
@@ -511,6 +532,8 @@ export default function HomePage() {
           </Reveal>
         </div>
       </Section>
+
+      <PhotoBand src="/images/client-walk-toward-skyline.webp" />
 
       {/* ---------------------------------------------------------- Results framework */}
       <Section tone="paper" labelledBy="results-title">
@@ -525,20 +548,14 @@ export default function HomePage() {
               </>
             }
           />
-          <ol className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:mt-20 lg:grid-cols-5 lg:gap-5">
+          <ol className="mt-20 border-t border-line sm:mt-28">
             {transformationFrame.map((t, i) => (
-              <Reveal
-                as="li"
-                key={t.label}
-                delay={i * 80}
-                className={
-                  "rounded-2xl border border-ink/12 p-8 sm:p-10 lg:p-8 xl:p-10 " +
-                  (i === 4 ? "on-dark bg-ink text-paper sm:col-span-2 lg:col-span-1" : "bg-surface")
-                }
-              >
-                <span className={"eyebrow tabular-nums " + (i === 4 ? "text-gold" : "text-muted")}>{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-8 text-xl tracking-[-0.015em]">{t.label}</h3>
-                <p className={"mt-2 text-sm leading-relaxed " + (i === 4 ? "text-paper/70" : "text-muted")}>{t.question}</p>
+              <Reveal as="li" key={t.label} delay={i * 80} className="grid gap-3 border-b border-line py-8 sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-16">
+                <div className="flex items-baseline gap-6 lg:col-span-5">
+                  <span aria-hidden className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-xl font-light tracking-[-0.015em] sm:text-2xl">{t.label}</h3>
+                </div>
+                <p className="leading-[1.85] text-muted lg:col-span-7">{t.question}</p>
               </Reveal>
             ))}
           </ol>
@@ -551,7 +568,7 @@ export default function HomePage() {
           <Reveal className="relative lg:col-span-5">
             <Mark141
               className="mx-auto w-full max-w-sm"
-              textClassName="text-[7rem] sm:text-[9rem]"
+              textClassName="text-[5rem] sm:text-[6.5rem]"
               closeClassName="text-ink"
               openClassName="text-ink"
             />
@@ -561,7 +578,7 @@ export default function HomePage() {
               <Eyebrow index="11" className="text-gold-ink">
                 About Level141
               </Eyebrow>
-              <h2 id="why141-title" className="display mt-6 text-[2.6rem] sm:text-6xl">
+              <h2 id="why141-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 Why <span className="serif-accent">141?</span>
               </h2>
             </Reveal>
@@ -606,12 +623,14 @@ export default function HomePage() {
               </>
             }
           />
-          <ul className="mt-12 grid gap-px overflow-hidden sm:mt-16 lg:mt-20 rounded-[2rem] border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-20 border-t border-line sm:mt-28">
             {insightCategories.map((c, i) => (
-              <Reveal as="li" key={c.slug} delay={i * 60} className="bg-paper p-6 sm:p-8">
-                <p className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="mt-8 text-2xl tracking-[-0.02em]">{c.name}</h3>
-                <p className="mt-3 leading-relaxed text-muted">{c.body}</p>
+              <Reveal as="li" key={c.slug} delay={i * 60} className="grid gap-4 border-b border-line py-10 sm:py-12 lg:grid-cols-12 lg:gap-16">
+                <div className="flex items-baseline gap-6 lg:col-span-5">
+                  <span aria-hidden className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-xl font-light tracking-[-0.015em] sm:text-2xl">{c.name}</h3>
+                </div>
+                <p className="measure leading-[1.85] text-muted lg:col-span-7">{c.body}</p>
               </Reveal>
             ))}
           </ul>

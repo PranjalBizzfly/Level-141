@@ -5,6 +5,7 @@ import { PageHero, Reveal, Section, cx } from "@/components/ui/primitives";
 import { getPublishedPosts, readingMinutes, type BlogPost } from "@/lib/blog";
 import { insightCategories } from "@/lib/content";
 import { imageAlts } from "@/lib/image-alts";
+import { focusStyle } from "@/lib/image-focus";
 import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
 
@@ -117,6 +118,7 @@ function PostCard({ post, featured }: { post: BlogPost; featured?: boolean }) {
           <Image
             src={post.cover}
             alt={imageAlts[post.cover] ?? ""}
+            style={focusStyle(post.cover)}
             fill
             sizes={featured ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 100vw"}
             quality={85}

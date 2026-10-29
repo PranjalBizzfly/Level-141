@@ -9,7 +9,7 @@ export default function NotFound() {
       <div className="container-x relative">
         <div className="relative inline-block px-6 py-8 sm:px-14 sm:py-14">
           <BracketClose className="absolute right-0 top-0 size-6 text-gold sm:size-8" />
-          <BracketOpen className="absolute bottom-0 left-0 size-6 text-paper/40 sm:size-8" />
+          <BracketOpen className="absolute bottom-0 left-0 size-6 text-gold sm:size-8" />
           <p className="eyebrow text-gold">404</p>
           {/* Functional page: no brand copy beyond the documented CTA below. */}
           <h1 className="display mt-6 text-[2.5rem] sm:text-6xl lg:text-7xl">Page not found</h1>

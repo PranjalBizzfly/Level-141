@@ -37,7 +37,7 @@ export default async function InsightArticle({ params }: Props) {
             <ArrowLeft aria-hidden className="size-4" /> All insights
           </Link>
           {category ? <p className="eyebrow mt-8 text-gold sm:mt-10">{category.name}</p> : null}
-          <h1 className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-6xl">{article.title}</h1>
+          <h1 className="display mt-5 text-[clamp(2.25rem,1.6rem+2.2vw,3.25rem)] sm:mt-6">{article.title}</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-paper/70 sm:mt-6 sm:text-xl">{article.summary}</p>
           <p className="mt-8 text-sm text-paper/50">
             {article.author ? `${article.author} · ` : null}
