@@ -55,10 +55,10 @@ export default function PersonalBrandPage() {
         }
         aside={
           <div className="overflow-hidden rounded-[2rem] border border-paper/15 bg-ink-2">
-            <p className="eyebrow hidden border-b border-paper/10 px-7 py-5 text-paper-muted lg:block">The VIBE™ Framework</p>
+            <p className="eyebrow hidden border-b border-paper/10 px-10 py-6 text-paper-muted lg:block">The VIBE™ Framework</p>
             <dl className="grid grid-cols-4 lg:grid-cols-1">
               {vibe.map((v) => (
-                <div key={v.letter} className="flex flex-col items-center gap-1 border-r border-paper/10 px-2 py-5 last:border-0 lg:flex-row lg:gap-6 lg:border-b lg:border-r-0 lg:px-7 lg:py-6">
+                <div key={v.letter} className="flex flex-col items-center gap-1 border-r border-paper/10 px-2 py-5 last:border-0 lg:flex-row lg:gap-6 lg:border-b lg:border-r-0 lg:px-10 lg:py-7">
                   <dt className="serif-accent text-4xl leading-none text-gold lg:w-10 lg:text-5xl">{v.letter}</dt>
                   <dd className="text-center text-[0.75rem] uppercase tracking-[0.08em] text-paper-muted lg:text-left lg:text-lg lg:normal-case lg:tracking-[-0.01em] lg:text-paper">
                     {v.full}
@@ -187,7 +187,7 @@ export default function PersonalBrandPage() {
             }
           />
           <ProcessTimeline steps={vibeStages} className="mt-16 sm:mt-24 lg:mt-28" />
-          <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-ink/10 bg-paper p-6 sm:flex-row sm:items-center sm:p-10">
+          <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-ink/10 bg-paper p-8 sm:flex-row sm:items-center sm:p-12 lg:p-14">
             <p className="max-w-xl text-lg leading-relaxed">
               {/* Source: Website Structure, "01 — Discover Your Level". */}
               <span className="font-medium">01 — Discover Your Level</span>{" "}
@@ -421,7 +421,7 @@ export default function PersonalBrandPage() {
           </div>
 
           {/* Measurement: a contrasting panel, statement left, scorecard right. */}
-          <div className="on-dark mt-12 grid gap-10 rounded-[2rem] bg-ink p-6 text-paper sm:mt-14 sm:p-10 lg:grid-cols-12 lg:gap-16 lg:p-14">
+          <div className="on-dark mt-12 grid gap-10 rounded-[2rem] bg-ink p-8 text-paper sm:mt-14 sm:p-12 lg:grid-cols-12 lg:gap-16 lg:p-16">
             <Reveal className="lg:col-span-5">
               <p className="eyebrow text-gold">Measurement &amp; Success System</p>
               <h3 className="mt-5 text-3xl leading-tight tracking-[-0.025em] sm:text-4xl">
@@ -468,7 +468,7 @@ export default function PersonalBrandPage() {
                 opportunity.
               </p>
             </Reveal>
-            <Reveal delay={120} className="on-dark rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
+            <Reveal delay={120} className="on-dark rounded-[2rem] bg-ink p-8 text-paper sm:p-12 lg:p-14">
               <p className="eyebrow text-gold">After</p>
               <p className="mt-6 text-2xl leading-snug tracking-[-0.02em]">
                 A clearly positioned leader with an evidence-backed narrative, coherent presence, recognizable

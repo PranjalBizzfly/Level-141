@@ -82,7 +82,7 @@ export default async function BlogPage({ searchParams }: Props) {
               ) : null}
             </>
           ) : (
-            <Reveal className="mt-12 rounded-[2rem] border border-line bg-surface px-8 py-20 text-center sm:mt-16 sm:py-28">
+            <Reveal className="mt-12 rounded-[2rem] border border-line bg-surface px-10 py-20 text-center sm:px-16 sm:mt-16 sm:py-28">
               <p className="eyebrow text-gold-ink">{active ? categoryName(active) : "Blog"}</p>
               <p className="display mx-auto mt-6 max-w-xl text-3xl sm:text-4xl">
                 No posts <span className="serif-accent">yet</span>

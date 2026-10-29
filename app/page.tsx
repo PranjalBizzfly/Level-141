@@ -306,7 +306,7 @@ export default function HomePage() {
           {/* Source: Website Structure, "WE DON'T START WITH DELIVERABLES." — in document order.
               Two matched panels on a shared subgrid so their lists and closing lines align. */}
           <div className="mt-12 grid gap-6 sm:mt-16 lg:mt-20 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_1fr_auto] lg:gap-x-6 lg:gap-y-0">
-            <Reveal className="grid rounded-[2rem] border border-line bg-surface p-7 sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
+            <Reveal className="grid rounded-[2rem] border border-line bg-surface p-8 sm:p-12 lg:p-14 lg:row-span-3 lg:grid-rows-subgrid">
               {/* Same header shape as the paired panel: a two-line title, then the label. */}
               <div className="pb-8">
                 <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
@@ -339,7 +339,7 @@ export default function HomePage() {
               </span>
             </div>
 
-            <Reveal delay={120} className="on-dark grid rounded-[2rem] bg-ink p-7 text-paper sm:p-10 lg:row-span-3 lg:grid-rows-subgrid">
+            <Reveal delay={120} className="on-dark grid rounded-[2rem] bg-ink p-8 text-paper sm:p-12 lg:p-14 lg:row-span-3 lg:grid-rows-subgrid">
               <div className="pb-8">
                 <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-3xl">
                   The starting point is the <span className="serif-accent block text-gold">growth problem</span>
@@ -532,7 +532,7 @@ export default function HomePage() {
                 key={t.label}
                 delay={i * 80}
                 className={
-                  "rounded-2xl border border-ink/12 p-6 lg:p-7 " +
+                  "rounded-2xl border border-ink/12 p-8 sm:p-10 lg:p-8 xl:p-10 " +
                   (i === 4 ? "on-dark bg-ink text-paper sm:col-span-2 lg:col-span-1" : "bg-surface")
                 }
               >

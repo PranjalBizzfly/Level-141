@@ -142,7 +142,7 @@ export function VibeExplorer() {
               </ul>
             </div>
 
-            <aside className="relative overflow-hidden rounded-[2rem] bg-ink-2 p-7 sm:p-10 lg:col-span-5 lg:self-center">
+            <aside className="relative overflow-hidden rounded-[2rem] bg-ink-2 p-8 sm:p-12 lg:p-14 lg:col-span-5 lg:self-center">
               <span
                 aria-hidden
                 className="serif-accent pointer-events-none absolute -right-4 -top-10 select-none text-[14rem] leading-none text-paper/[0.06] sm:text-[18rem]"

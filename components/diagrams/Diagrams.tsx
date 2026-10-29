@@ -132,7 +132,7 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
             <div
               data-spotlight={dark ? "" : undefined}
               className={cx(
-                "card-interactive relative flex h-full flex-col overflow-hidden rounded-2xl border p-7 sm:p-9 lg:p-7 xl:p-8",
+                "card-interactive relative flex h-full flex-col overflow-hidden rounded-2xl border p-8 sm:p-10 lg:p-8 xl:p-10",
                 dark ? "border-line-dark-strong bg-ink-2" : "border-line bg-surface",
               )}
             >

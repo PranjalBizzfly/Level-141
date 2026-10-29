@@ -154,7 +154,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <div className="grid gap-6 sm:gap-10 lg:col-span-6 lg:col-start-7">
-            <Reveal className="on-dark grid gap-8 rounded-[2rem] bg-ink p-6 text-paper sm:grid-cols-[10rem_1fr] sm:items-center sm:gap-10 sm:p-8 xl:grid-cols-[12rem_1fr]">
+            <Reveal className="on-dark grid gap-8 rounded-[2rem] bg-ink p-8 text-paper sm:grid-cols-[10rem_1fr] sm:items-center sm:gap-10 sm:p-10 lg:p-12 xl:grid-cols-[12rem_1fr]">
               <Photo src="/images/client-ceo-portrait.webp" sizes="(min-width: 640px) 12rem, 100vw" className="aspect-[4/3] sm:aspect-[4/5]" />
               <div>
               <div className="flex items-center justify-between">
@@ -170,7 +170,7 @@ export default function AboutPage() {
               </ButtonLink>
               </div>
             </Reveal>
-            <Reveal delay={100} className="grid gap-8 rounded-[2rem] border border-ink/12 p-6 sm:grid-cols-[10rem_1fr] sm:items-center sm:gap-10 sm:p-8 xl:grid-cols-[12rem_1fr]">
+            <Reveal delay={100} className="grid gap-8 rounded-[2rem] border border-ink/12 p-8 sm:grid-cols-[10rem_1fr] sm:items-center sm:gap-10 sm:p-10 lg:p-12 xl:grid-cols-[12rem_1fr]">
               <Photo src="/images/client-executive-in-motion.webp" sizes="(min-width: 640px) 12rem, 100vw" className="aspect-[4/3] sm:aspect-[4/5]" />
               <div>
               <div className="flex items-center justify-between">

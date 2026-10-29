@@ -52,7 +52,7 @@ export function HomeHero() {
 
         <div className="hero-depth lg:col-span-5" aria-hidden>
           <div className="relative mx-auto max-w-md animate-fade [animation-delay:350ms] lg:ml-auto">
-            <div className="relative rounded-[1.5rem] border border-line-dark-strong bg-ink-2 px-5 py-5 sm:px-7 sm:py-8 lg:rounded-[1.75rem]">
+            <div className="relative rounded-[1.5rem] border border-line-dark-strong bg-ink-2 px-6 py-6 sm:px-9 sm:py-9 lg:rounded-[1.75rem]">
               <BracketClose className="absolute -right-px -top-px size-7 text-gold" />
               <p className="eyebrow text-gold">Next level</p>
               <p className="serif-accent mt-2 text-2xl text-paper sm:mt-3 sm:text-3xl">Where you go next.</p>

@@ -82,7 +82,7 @@ export default function HowPage() {
             </Reveal>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <Reveal className="on-dark rounded-[2rem] bg-ink p-6 text-paper sm:p-10">
+            <Reveal className="on-dark rounded-[2rem] bg-ink p-8 text-paper sm:p-12 lg:p-14">
               <p className="eyebrow text-gold">The starting point is the growth problem</p>
               <p className="mt-6 text-lg text-paper/70">Level141 first identifies:</p>
               <ol className="mt-6 space-y-1">
@@ -387,7 +387,7 @@ export default function HowPage() {
                 key={t.label}
                 delay={i * 80}
                 className={cx(
-                  "relative rounded-2xl border border-ink/12 p-6 sm:p-8 lg:p-7",
+                  "relative rounded-2xl border border-ink/12 p-8 sm:p-10 lg:p-8 xl:p-10",
                   i === transformationFrame.length - 1 ? "on-dark bg-ink text-paper sm:col-span-2 lg:col-span-1" : "bg-paper",
                 )}
               >
