@@ -256,6 +256,7 @@ export function PageHero({
   children,
   aside,
   image,
+  size = "lg",
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -264,6 +265,8 @@ export function PageHero({
   aside?: ReactNode;
   /** Client photograph shown beside the hero text (used when there is no aside). */
   image?: string;
+  /** "md" for longer two-part headlines, so each part sets in two balanced lines. */
+  size?: "lg" | "md";
 }) {
   if (image && !aside) aside = <Photo src={image} priority sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/3] lg:aspect-[4/5]" />;
   return (
@@ -272,7 +275,14 @@ export function PageHero({
       <div className="container-x relative grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>
           <p className="eyebrow animate-fade text-gold">{eyebrow}</p>
-          <h1 className="display mt-6 animate-rise text-[2.6rem] [animation-delay:80ms] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem]">
+          <h1
+            className={cx(
+              "display mt-6 animate-rise [animation-delay:80ms]",
+              size === "md"
+                ? "text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem] xl:text-[3.9rem]"
+                : "text-[2.6rem] sm:text-6xl lg:text-[4.5rem] xl:text-[5.25rem]",
+            )}
+          >
             {title}
           </h1>
           {intro ? (

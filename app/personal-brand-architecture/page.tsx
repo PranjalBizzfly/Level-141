@@ -38,12 +38,13 @@ export default function PersonalBrandPage() {
   return (
     <>
       <PageHero
+        size="md"
         eyebrow="Personal Brand Architecture™"
         title={
           <>
             {/* Each sentence on its own line so the statement and the question read as a pair. */}
             <span className="block">Your achievements built your reputation</span>
-            <span className="serif-accent mt-2 block text-gold">What will build your next level?</span>
+            <span className="serif-accent mt-3 block text-gold">What will build your next level?</span>
           </>
         }
         intro={
