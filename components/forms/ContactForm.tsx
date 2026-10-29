@@ -112,7 +112,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                   value={o.value}
                   checked={checked}
                   onChange={set("interest")}
-                  className="size-4 accent-gold-ink"
+                  className="size-4 shrink-0 accent-gold-ink"
                 />
                 <span className="text-[0.95rem]">{o.label}</span>
                 {o.value === "growth-architecture" ? (

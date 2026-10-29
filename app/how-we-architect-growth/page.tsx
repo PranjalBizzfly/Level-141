@@ -53,7 +53,7 @@ export default function HowPage() {
             <a
               key={href}
               href={href}
-              className="inline-flex min-h-11 items-center text-[0.95rem] text-paper/80 underline-offset-[6px] decoration-gold/60 transition-colors hover:text-gold hover:underline"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center text-[0.95rem] text-paper/80 underline-offset-[6px] decoration-gold/60 transition-colors hover:text-gold hover:underline"
             >
               {label}
             </a>
