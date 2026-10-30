@@ -42,6 +42,7 @@ export default function GrowthArchitecturePage() {
   return (
     <>
       <PageHero
+        image="/images/client-executive-dubai-window.webp"
         eyebrow="Growth Architecture™ · Coming later · Waitlist open"
         title={
           <>

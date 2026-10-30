@@ -6,7 +6,9 @@ import {
   ButtonLink,
   PageHero,
   Reveal,
+  More,
   Section,
+  SplitFeature,
   SectionHeader,
   Photo,
   PhotoBand,
@@ -20,7 +22,6 @@ import {
   pbaPains,
   pbaPrinciples,
   pbaVoices,
-  vibe,
   vibeStages,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
@@ -33,12 +34,14 @@ export const metadata = pageMetadata({
   path: routes.personalBrand,
 });
 
-const assessmentHref = `${routes.contact}?interest=personal-brand-architecture`;
+const assessmentHref = routes.lq;
 
 export default function PersonalBrandPage() {
   return (
     <>
       <PageHero
+        image="/images/client-executive-portrait-woman.webp"
+        portrait
         eyebrow="Personal Brand Architecture™"
         title={
           <>
@@ -49,71 +52,34 @@ export default function PersonalBrandPage() {
         }
         intro={
           <p>
-            You&apos;ve spent years building expertise, businesses, relationships and accomplishments. But does the
-            world recognise your true value? Does your personal brand reflect your vision, influence, business ambitions
-            and the legacy you want to create?
+            Does your personal brand reflect your vision, influence, business ambitions and the legacy you want to create?
           </p>
         }
-        aside={
-          <div className="border-t border-paper/15">
-            <p className="eyebrow hidden border-b border-paper/15 py-6 text-paper-muted lg:block">The VIBE™ Framework</p>
-            <dl className="grid grid-cols-4 lg:grid-cols-1">
-              {vibe.map((v) => (
-                <div key={v.letter} className="flex flex-col items-center gap-1 border-r border-paper/15 px-2 py-5 last:border-r-0 lg:flex-row lg:gap-6 lg:border-b lg:border-r-0 lg:px-0 lg:py-7">
-                  <dt className="serif-accent text-3xl leading-none text-gold lg:w-10 lg:text-4xl">{v.letter}</dt>
-                  <dd className="text-center text-[0.75rem] uppercase tracking-[0.08em] text-paper-muted lg:text-left lg:text-lg lg:normal-case lg:tracking-[-0.01em] lg:text-paper">
-                    {v.full}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        }
       >
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
           <ButtonLink href={assessmentHref} variant="gold">
             Start Your Personal Brand Assessment
           </ButtonLink>
-          <ButtonLink href="#vibe" variant="ghost-light">
+          <ButtonLink href="#vibe" variant="link">
             Explore the VIBE™ Framework
           </ButtonLink>
         </div>
       </PageHero>
 
       {/* ---------------------------------------------------------- Purpose */}
-      <Section tone="paper" labelledBy="purpose-title">
-        {/* Headline across the top; photo and supporting text share the row beneath it. */}
-        <div className="container-x grid gap-12 sm:gap-16 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-20">
-          <Reveal className="lg:col-span-10">
-            <p className="eyebrow text-gold-ink">Not simply about visibility</p>
-            <h2 id="purpose-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
-              It&apos;s about aligning who you are, what you stand for, the impact you create and{" "}
-              <span className="serif-accent">where you want to go</span>
-            </h2>
-          </Reveal>
-          <Reveal className="lg:col-span-6">
-            <Photo src="/images/client-executive-library.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:aspect-[16/11]" />
-          </Reveal>
-          <Reveal delay={120} className="space-y-6 text-base leading-[1.85] text-muted sm:text-lg lg:col-span-5 lg:col-start-8 lg:self-center">
-            <p>
-              Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived
-              experience into a structured personal growth asset.
-            </p>
-            <p>
-              It is designed to help accomplished people become clearer, more credible, more influential and more
-              commercially relevant — without manufacturing a persona.
-            </p>
-            <BracketFrame tone="ink" size="sm" className="!mt-10">
-              <p className="text-ink">
-                We architect the personal brand behind the leader—so what you know, what you have achieved and what you
-                stand for can create the opportunities you are ready for next.
-              </p>
-            </BracketFrame>
-          </Reveal>
-        </div>
-      </Section>
-
-      <PhotoBand src="/images/client-executive-portrait-woman.webp" />
+      <SplitFeature src="/images/client-executive-library.webp" labelledBy="purpose-title">
+        <Reveal>
+          <p className="eyebrow text-gold-ink">Not simply about visibility</p>
+          <h2 id="purpose-title" className="display mt-6 text-[clamp(1.75rem,1.3rem+1.4vw,2.5rem)]">
+            It&apos;s about aligning who you are, what you stand for, the impact you create and{" "}
+            <span className="serif-accent">where you want to go</span>
+          </h2>
+          <p className="mt-8 text-base leading-[1.85] text-muted sm:text-lg">
+            We architect the personal brand behind the leader—so what you know, what you have achieved and what you
+            stand for can create the opportunities you are ready for next.
+          </p>
+        </Reveal>
+      </SplitFeature>
 
       {/* ---------------------------------------------------------- The problem */}
       <Section tone="paper-2" labelledBy="problem-title">
@@ -126,7 +92,7 @@ export default function PersonalBrandPage() {
                 Many accomplished leaders have <span className="serif-accent">more value than visibility</span>
               </>
             }
-            intro="Others have visibility without a coherent reputation system. Their expertise sits across years of work, disconnected profiles, speeches, media mentions, relationships and achievements. The market therefore sees fragments rather than a clear leadership proposition."
+            intro="Others have visibility without a coherent reputation system."
           />
 
           <ul className="mt-16 border-t border-line-strong sm:mt-24 lg:mt-28">
@@ -157,18 +123,19 @@ export default function PersonalBrandPage() {
           <SectionHeader
             id="vibe-title"
             dark
-            eyebrow="VIBE™ — The four dimensions of Personal Brand Architecture"
+            align="stack"
+            eyebrow="The four dimensions of Personal Brand Architecture"
             title={
               <>
                 Architected through our proprietary <span className="serif-accent text-gold">VIBE™ Framework</span>
               </>
             }
-            intro="VIBE™ answers four sequential questions: What leadership should this person represent? What impact should that leadership create? How should reputation translate into growth? How must the person and brand evolve next?"
+            intro="VIBE™ answers four sequential questions."
           />
           <div className="mt-20 sm:mt-28">
             <VibeExplorer />
           </div>
-          <Reveal className="mt-14 border-t border-paper/12 pt-10 text-center sm:mt-16">
+          <Reveal className="mt-24 text-center sm:mt-32">
             <p className="mx-auto max-w-3xl text-xl leading-relaxed text-paper/80 sm:text-2xl">
               Visionary Leadership that creates Impact, Impact that enables Business Growth, and Business Growth that
               fuels continuous Evolution.
@@ -248,7 +215,8 @@ export default function PersonalBrandPage() {
           </Reveal>
 
           {/* 3 — Fit: stacked rows, title left and list right on wide screens. */}
-          <div className="mt-20 border-t border-line sm:mt-24 lg:mt-28">
+<More label="Who it is for, and what it is not" className="mt-16 sm:mt-20">
+          <div className="pt-6">
             <Reveal className="grid gap-8 border-b border-line py-10 sm:py-14 lg:grid-cols-12 lg:gap-16">
               <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem] lg:col-span-5">
                 Qualification <span className="serif-accent">signals</span>
@@ -284,6 +252,7 @@ export default function PersonalBrandPage() {
               </ul>
             </Reveal>
           </div>
+</More>
         </div>
       </Section>
 
@@ -368,6 +337,7 @@ export default function PersonalBrandPage() {
               </Reveal>
             </div>
           </div>
+<More label="View the modules" className="self-start lg:col-span-7 lg:col-start-6">
           <ol className="lg:col-span-7 lg:col-start-6">
             {pbaModules.map((m, i) => (
               <Reveal
@@ -382,6 +352,7 @@ export default function PersonalBrandPage() {
               </Reveal>
             ))}
           </ol>
+</More>
         </div>
       </Section>
 
@@ -407,6 +378,7 @@ export default function PersonalBrandPage() {
                 </Reveal>
               </div>
             </div>
+<More label="Our guiding principles" className="self-start lg:col-span-7">
             <ol className="border-t border-line-strong lg:col-span-7">
               {pbaPrinciples.map((p, i) => (
                 <Reveal
@@ -423,10 +395,12 @@ export default function PersonalBrandPage() {
                 </Reveal>
               ))}
             </ol>
+</More>
           </div>
 
           {/* Measurement: open hairline section, statement left, scorecard right. */}
-          <div className="mt-20 grid gap-10 border-t border-line-strong pt-14 sm:mt-28 sm:pt-20 lg:grid-cols-12 lg:gap-16">
+<More label="Measurement & Success System" className="mt-16 sm:mt-20">
+          <div className="grid gap-10 pt-6 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-5">
               <p className="eyebrow text-gold-ink">Measurement &amp; Success System</p>
               <h3 className="mt-5 text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">
@@ -456,6 +430,7 @@ export default function PersonalBrandPage() {
               ))}
             </dl>
           </div>
+</More>
         </div>
       </Section>
 

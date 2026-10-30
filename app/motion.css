@@ -197,11 +197,11 @@
       (`transform`) still composes with it. Both are off for reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   html.js [data-reveal] [data-unveil] {
-    clip-path: inset(8% 6% 8% 6% round 1.75rem);
+    clip-path: inset(6% 4% 6% 4%);
     transition: clip-path 1.6s var(--ease-architect) 0.1s;
   }
   html.js [data-reveal].is-visible [data-unveil] {
-    clip-path: inset(0 0 0 0 round 1.75rem);
+    clip-path: inset(0 0 0 0);
   }
   @supports (animation-timeline: view()) {
     .photo-drift img {

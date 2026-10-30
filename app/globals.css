@@ -39,9 +39,9 @@
   --color-error-dark: #b42318;
   --color-success: #1f6b3d;
 
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  /* Single family: "serif" utilities resolve to Geist too. */
-  --font-serif: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Single family: "serif" utilities resolve to Google Sans Flex too. */
+  --font-serif: var(--font-google-sans), ui-sans-serif, system-ui, sans-serif;
 
   --ease-architect: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -222,11 +222,11 @@
   }
   /* Light and calmly set: restrained size, open leading, room around it. */
   .display {
-    font-weight: 300;
-    letter-spacing: -0.025em;
-    line-height: 1.12;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.06;
   }
-  /* Emphasis inside a headline: same family, one step heavier. */
+  /* Emphasis inside a headline: same family and weight. */
   .serif-accent {
     font-family: inherit;
     font-style: normal;
@@ -397,4 +397,42 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Photo sections (onPhoto tokens): white fills always carry black text, in both themes. */
+[style*="--color-gold"] :is([class~="bg-gold"], [class*="hover:bg-gold"]:hover) {
+  --color-ink: #000000 !important;
+}
+
+/* Header controls stay plain outlines while the bar sits clear over a hero. */
+header:not([data-solid]) [class*="rounded-full"][class~="border"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+body > header:not([data-solid]) {
+  border-color: transparent !important;
+  background-repeat: no-repeat !important;
+}
+
+/* One photographic tone across the site. */
+main img {
+  filter: grayscale(1) contrast(1.06) brightness(0.94);
+}
+
+/* One slow, simple hover for every button. */
+main a[class*="rounded-full"],
+main button[class*="rounded-full"] {
+  transition-duration: 500ms;
+}
+
+/* Quiet surfaces: no drawn grid behind content. */
+.grid-lines {
+  display: none;
+}
+
+/* Light theme: dark-toned sections sit on pure white, never pale grey. */
+:root:not([data-theme="dark"]) section.on-dark {
+  --color-ink: #ffffff;
 }

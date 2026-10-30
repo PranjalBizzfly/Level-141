@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Google_Sans_Flex } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollToggle } from "@/components/layout/ScrollToggle";
@@ -11,14 +11,13 @@ import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { site, siteUrl } from "@/lib/site";
 import "./globals.css";
 import "./motion.css";
-import "./glass.css";
 
-/* One typeface across the site: Geist, the brand typeface the logo is set in.
+/* One typeface across the site: Google Sans Flex.
    Weight and size carry emphasis; there is no second (serif) family. */
-const geist = Geist({
+const googleSans = Google_Sans_Flex({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
-  variable: "--font-geist",
+  variable: "--font-google-sans",
   display: "swap",
 });
 
@@ -65,7 +64,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={geist.variable} suppressHydrationWarning>
+    <html lang="en" className={googleSans.variable} suppressHydrationWarning>
       <head>
         {/*
           Marks JS as available so reveal animations may hide content until in view.

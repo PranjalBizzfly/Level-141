@@ -73,7 +73,7 @@ export function useFormSubmit(endpoint: string) {
 /* --------------------------------------------------------------- Fields */
 
 const inputBase =
-  "block w-full rounded-xl border bg-surface px-4 py-3.5 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4";
+  "block w-full border-0 border-b bg-transparent px-0 py-3.5 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-500 focus:border-b-2 focus:outline-none";
 
 export function inputClasses(error?: string) {
   return cx(
@@ -184,7 +184,7 @@ export function PhoneInput({
     ? "border-error focus-within:border-error focus-within:ring-error/15"
     : "border-line-strong hover:border-ink/40 focus-within:border-gold-ink focus-within:ring-gold/40";
   return (
-    <div className={cx("flex overflow-hidden rounded-xl border bg-surface transition-[border-color,box-shadow] duration-200 focus-within:ring-4", ring)}>
+    <div className={cx("flex overflow-hidden border-0 border-b bg-transparent transition-[border-color,box-shadow] duration-500 focus-within:border-b-2", ring)}>
       <div className="relative flex shrink-0 items-center gap-1.5 border-r border-line pl-4 pr-3 text-base">
         <span aria-hidden className="text-sm font-medium tracking-[0.04em] text-muted">{selected.iso}</span>
         <span aria-hidden className="tabular-nums">+{selected.dial}</span>

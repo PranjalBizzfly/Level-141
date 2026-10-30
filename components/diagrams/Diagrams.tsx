@@ -21,44 +21,27 @@ type Step = { n: string; name: string; body: string; line?: string; question?: s
  * accent as it scrolls into view.
  */
 export function ProcessTimeline({ steps, dark, className }: { steps: readonly Step[]; dark?: boolean; className?: string }) {
+  const rule = dark ? "border-paper/15" : "border-line";
   return (
-    <ol data-seq className={cx("relative grid gap-0 lg:grid-cols-5 lg:gap-x-6 lg:gap-y-0", className)}>
-      <span
-        aria-hidden
-        data-seq-line
-        className={cx("absolute left-0 right-0 top-[1.4rem] hidden h-px lg:block", dark ? "bg-line-dark-strong" : "bg-line-strong")}
-      />
+    <ol data-seq className={cx("border-t", rule, className)}>
       {steps.map((s, i) => (
-        <li key={s.n} data-step style={step(i)} className="group/step relative flex gap-6 pb-12 last:pb-0 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:gap-0 lg:pb-0">
-          {i < steps.length - 1 ? (
-            <span
-              aria-hidden
-              className={cx("absolute bottom-0 left-[1.4rem] top-12 w-px lg:hidden", dark ? "bg-line-dark-strong" : "bg-line-strong")}
-            />
-          ) : null}
-          <span
-            className={cx(
-              "relative z-10 grid size-11 shrink-0 place-items-center rounded-full border text-sm tabular-nums transition-[background-color,color,border-color] delay-[calc(var(--i)*110ms+300ms)] duration-500",
-              dark
-                ? "border-gold/60 bg-ink text-gold in-[.is-visible]:bg-gold in-[.is-visible]:text-ink"
-                : "border-line-strong bg-paper text-ink in-[.is-visible]:border-ink in-[.is-visible]:bg-ink in-[.is-visible]:text-paper",
-            )}
-          >
-            {s.n}
-          </span>
-          {/* On lg the wrapper dissolves so title, text and question each sit on a shared
-              subgrid row: titles and questions align across all five columns, while the
-              line and body flow together so a longer line leaves no gap under the others. */}
-          <div className="lg:contents">
-            <h3 className="text-xl tracking-[-0.015em] sm:text-2xl lg:mt-8">{s.name}</h3>
-            <div>
-              {s.line ? <p className={cx("mt-2 font-medium leading-snug", dark ? "text-gold-soft" : "text-gold-ink")}>{s.line}</p> : null}
-              <p className={cx("mt-3 leading-relaxed", dark ? "text-paper/75" : "text-muted")}>{s.body}</p>
-            </div>
-            {s.question ? (
-              <p className={cx("serif-accent mt-6 text-xl", dark ? "text-paper" : "text-ink")}>{s.question}</p>
-            ) : null}
+        <li
+          key={s.n}
+          data-step
+          style={step(i)}
+          className={cx("grid gap-5 border-b py-10 sm:py-14 lg:grid-cols-12 lg:items-baseline lg:gap-x-10 lg:py-16", rule)}
+        >
+          <span className={cx("text-sm tabular-nums lg:col-span-1", dark ? "text-paper/55" : "text-muted")}>{s.n}</span>
+          <h3 className="display text-[2.5rem] leading-[1.02] sm:text-6xl lg:col-span-4 lg:text-[3.75rem]">{s.name}</h3>
+          <div className="lg:col-span-4">
+            {s.line ? <p className={cx("text-lg font-medium leading-snug", dark ? "text-paper" : "text-ink")}>{s.line}</p> : null}
+            <p className={cx("mt-3 leading-relaxed", dark ? "text-paper/70" : "text-muted")}>{s.body}</p>
           </div>
+          {s.question ? (
+            <p className={cx("text-xl leading-snug tracking-[-0.015em] lg:col-span-3 lg:text-right", dark ? "text-paper" : "text-ink")}>
+              {s.question}
+            </p>
+          ) : null}
         </li>
       ))}
     </ol>
@@ -117,72 +100,38 @@ export function GrowthChainDiagram() {
 
 /* ------------------------------------------------------------ PEAK™ */
 
-/** Ascending staircase: Presence → Equity → Authority → Kinetic Growth. 2×2 on tablet, 4 up on desktop. */
+/** Presence → Equity → Authority → Kinetic Growth, as open full-width rows. */
 export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark?: boolean }) {
   return (
     <figure data-seq>
       <figcaption className="sr-only">
         PEAK™: Presence, then Equity, then Authority, then Kinetic Growth — from presence to momentum.
       </figcaption>
-      {/* Equal cards sized to their content; the ascent is shown by a bar that
-          fills 25 → 100% across the four stages instead of empty card height. */}
-      <ol className="grid gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4">
+      {/* Open editorial rows: one stage at a time, climbing down the page. */}
+      <ol className={cx("border-b", dark ? "border-line-dark" : "border-line")}>
         {peakStages.map((s, i) => (
-          <li key={s.letter} data-step style={step(i)}>
-            <div
-              data-spotlight={dark ? "" : undefined}
-              className={cx(
-                "card-interactive relative flex h-full flex-col overflow-hidden rounded-2xl border p-8 sm:p-10 lg:p-8 xl:p-10",
-                dark ? "border-line-dark-strong bg-ink-2" : "border-line bg-surface",
-              )}
-            >
-              <span aria-hidden className={cx("absolute inset-x-0 top-0 h-0.5", dark ? "bg-paper/10" : "bg-ink/10")}>
-                <span
-                  className={cx("block h-full", dark ? "bg-gold" : "bg-gold-ink")}
-                  style={{ width: `${((i + 1) / peakStages.length) * 100}%` }}
-                />
-              </span>
-              <div className="flex items-start justify-between gap-4">
-                <span aria-hidden className={cx("serif-accent text-6xl leading-none", dark ? "text-gold" : "text-gold-ink")}>
-                  {s.letter}
-                </span>
-                <span aria-hidden className={cx("eyebrow mt-2", dark ? "text-paper-muted" : "text-muted")}>
-                  0{i + 1}
-                </span>
-              </div>
-              <div className="mt-8">
-                <h3 className="text-2xl tracking-[-0.02em]">{s.name}</h3>
-                {detailed ? (
-                  <>
-                    <p className={cx("mt-3 text-[0.95rem] font-medium leading-snug", dark ? "text-gold-soft" : "text-gold-ink")}>
-                      {s.question}
-                    </p>
-                    <p className={cx("mt-4 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{s.focus}</p>
-                    <p
-                      className={cx(
-                        "mt-4 border-t pt-4 text-sm leading-relaxed",
-                        dark ? "border-line-dark text-paper/85" : "border-line",
-                      )}
-                    >
-                      {s.outcome}
-                    </p>
-                  </>
-                ) : (
-                  <p className={cx("mt-3 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{s.question}</p>
-                )}
-              </div>
+          <li
+            key={s.letter}
+            data-step
+            style={step(i)}
+            className={cx("grid gap-6 border-t py-12 sm:py-16 lg:grid-cols-12 lg:gap-10", dark ? "border-line-dark" : "border-line")}
+          >
+            <span aria-hidden className="text-6xl font-light leading-none lg:col-span-2 lg:text-7xl">
+              {s.letter}
+            </span>
+            <div className="lg:col-span-5">
+              <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem]">{s.name}</h3>
+              <p className={cx("mt-4 text-lg leading-snug", dark ? "text-paper/85" : "text-ink/85")}>{s.question}</p>
             </div>
+            {detailed ? (
+              <div className={cx("leading-[1.85] lg:col-span-4 lg:col-start-9", dark ? "text-paper/75" : "text-muted")}>
+                <p>{s.focus}</p>
+                <p className={cx("mt-4", dark ? "text-paper" : "text-ink")}>{s.outcome}</p>
+              </div>
+            ) : null}
           </li>
         ))}
       </ol>
-      <div aria-hidden className={cx("mt-10 flex items-center gap-4", dark ? "text-paper-muted" : "text-muted")}>
-        <span className="eyebrow">Presence</span>
-        <span
-          data-seq-line
-          className={cx("h-px flex-1", dark ? "bg-gradient-to-r from-paper/10 to-gold" : "bg-gradient-to-r from-ink/10 to-gold-ink")}
-        />
-        <span className={cx("eyebrow", dark ? "text-gold" : "text-gold-ink")}>Momentum</span>
-      </div>
     </figure>
   );
 }
@@ -232,11 +181,11 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
   const dark = tone === "dark";
   return (
     <div
-      className="brands grid gap-12 lg:grid-cols-12 lg:items-center"
+      className="brands grid gap-12 lg:grid-cols-12 lg:items-start"
       style={{ "--brands-accent": dark ? "var(--color-gold)" : "var(--color-gold-ink)" } as CSSProperties}
     >
       <style>{brandsLinkCss}</style>
-      <figure data-seq className="mx-auto w-full max-w-[30rem] lg:col-span-5">
+      <figure data-seq className="mx-auto w-full max-w-[30rem] lg:sticky lg:top-32 lg:col-span-5">
         <figcaption className="sr-only">
           BRANDS™: Branding, Conversion Readiness, Awareness, Nurture, Discover &amp; Trust and Scale, arranged around a
           shared foundation of customer and market understanding.
@@ -321,36 +270,24 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
         </div>
       </figure>
 
-      <ol
-        className={cx(
-          "grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:col-span-7",
-          dark ? "border-line-dark bg-line-dark" : "border-line bg-line",
-        )}
-      >
+      {/* Open rows beside the wheel, which stays in view on desktop. */}
+      <ol className={cx("border-b lg:col-span-6 lg:col-start-7", dark ? "border-line-dark" : "border-line")}>
         {brandsLevers.map((l, i) => (
-          <Reveal
-            as="li"
-            key={l.letter}
-            delay={i * 70}
-            className={dark ? "bg-ink" : "bg-surface"}
-          >
-            <div
-              data-lever-item={l.letter}
-              className="h-full p-6 transition-shadow duration-300 hover:shadow-[inset_0_0_0_1px_var(--brands-accent)] sm:p-8 lg:p-6 xl:p-8"
-            >
-              <p className="flex items-baseline gap-3">
-                <span aria-hidden className={cx("serif-accent text-3xl leading-none", dark ? "text-gold" : "text-gold-ink")}>
-                  {l.letter}
-                </span>
-                <span className="text-lg tracking-[-0.01em]">{l.name}</span>
-              </p>
-              <p className={cx("mt-3 font-medium", dark ? "text-gold-soft" : "text-gold-ink")}>{l.line}</p>
-              {detailed ? (
-                <>
-                  <p className={cx("mt-3 text-sm leading-relaxed", dark ? "text-paper/80" : "text-ink/80")}>{l.role}</p>
-                  <p className={cx("mt-3 text-sm leading-relaxed", dark ? "text-paper-muted" : "text-muted")}>{l.components}</p>
-                </>
-              ) : null}
+          <Reveal as="li" key={l.letter} delay={i * 70} className={cx("border-t", dark ? "border-line-dark" : "border-line")}>
+            <div data-lever-item={l.letter} className="grid grid-cols-[3.5rem_1fr] py-8 sm:py-10">
+              <span aria-hidden className="text-4xl font-light leading-none">
+                {l.letter}
+              </span>
+              <div>
+                <h3 className="text-xl tracking-[-0.015em] sm:text-2xl">{l.name}</h3>
+                <p className={cx("mt-2 text-lg leading-snug", dark ? "text-paper/85" : "text-ink/85")}>{l.line}</p>
+                {detailed ? (
+                  <>
+                    <p className={cx("mt-4 leading-[1.85]", dark ? "text-paper/75" : "text-muted")}>{l.role}</p>
+                    <p className={cx("mt-2 text-sm leading-[1.85]", dark ? "text-paper/75" : "text-muted")}>{l.components}</p>
+                  </>
+                ) : null}
+              </div>
             </div>
           </Reveal>
         ))}
@@ -376,7 +313,6 @@ export function FlowChain({ items, dark, highlight }: { items: readonly string[]
     <ol data-seq className={cx("grid border-t md:grid-cols-3 md:gap-x-10", dark ? "border-line-dark-strong" : "border-line-strong")}>
       {items.map((item, i) => {
         const key = highlight?.includes(item);
-        const last = i === items.length - 1;
         return (
           <li
             key={item}
@@ -408,9 +344,6 @@ export function FlowChain({ items, dark, highlight }: { items: readonly string[]
             >
               {item}
             </span>
-            {!last ? (
-              <ArrowRight aria-hidden className={cx("size-4 shrink-0", dark ? "text-paper/30" : "text-ink/25")} />
-            ) : null}
           </li>
         );
       })}

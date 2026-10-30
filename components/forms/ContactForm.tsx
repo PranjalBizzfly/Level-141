@@ -101,8 +101,8 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
                 key={o.value}
                 htmlFor={`interest-${o.value}`}
                 className={cx(
-                  "relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border bg-surface px-4 py-4 transition-colors has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-gold/35",
-                  checked ? "border-gold-ink bg-ink/5" : "border-line-strong hover:border-ink/40",
+                  "relative flex min-h-14 cursor-pointer items-center gap-3 border-b px-0 py-4 transition-colors duration-500 has-[:focus-visible]:border-b-2",
+                  checked ? "border-ink" : "border-line-strong hover:border-ink/40",
                 )}
               >
                 <input
@@ -125,7 +125,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
           })}
         </div>
         {gaSelected ? (
-          <div className="mt-4 flex gap-3 rounded-xl border border-gold-ink/25 bg-ink/5 p-4 text-sm leading-relaxed text-ink">
+          <div className="mt-4 flex gap-3 border-l border-ink py-1 pl-4 text-sm leading-relaxed text-ink">
             <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-gold-ink" />
             <p>
               Growth Architecture™ is not yet open for engagements. You can register your organization&apos;s interest

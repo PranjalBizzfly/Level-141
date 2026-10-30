@@ -11,7 +11,7 @@ export const site = {
     "Level141 architects the next level of growth for people and organizations — through clarity, positioning, visibility, credibility, authority and structured growth systems.",
   headquarters: "Dubai",
   ecosystem: "1XL",
-  primaryCta: { label: "Find Your Level", href: "/start-your-next-level" },
+  primaryCta: { label: "Find Your Level", href: "/lq-assessment" },
 } as const;
 
 export type NavItem = { label: string; href: string };
@@ -35,6 +35,7 @@ export const mainNav: NavItem[] = [
   { label: "Personal Brand Architecture", href: routes.personalBrand },
   { label: "Growth Architecture", href: routes.growth },
   { label: "How We Architect Growth", href: routes.how },
+  { label: "LQ™ Assessment", href: routes.lq },
   { label: "Insights", href: routes.insights },
   { label: "Blog", href: routes.blog },
   { label: "About", href: routes.about },

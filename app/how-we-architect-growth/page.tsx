@@ -1,3 +1,4 @@
+import { GrowthChainDiagram } from "@/components/diagrams/Diagrams";
 import { BrandsSystem, PeakAscent } from "@/components/diagrams/Diagrams";
 import { FrameworkNav } from "@/components/sections/FrameworkNav";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -99,7 +100,28 @@ export default function HowPage() {
         </div>
       </Section>
 
-      <PhotoBand src="/images/client-executive-study-woman.webp" />
+      <Section tone="ink" labelledBy="difference-title">
+        <div className="container-x relative">
+          <SectionHeader
+            id="difference-title"
+            dark
+            index="03"
+            eyebrow="The Level141 difference"
+            title={
+              <>
+                Most businesses manage growth in departments.{" "}
+                <span className="serif-accent text-gold">We see one architecture</span>
+              </>
+            }
+            intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
+          />
+          <div className="mt-20 sm:mt-28">
+            <GrowthChainDiagram />
+          </div>
+        </div>
+      </Section>
+
+      <PhotoBand src="/images/client-executive-library.webp" />
 
       {/* ---------------------------------------------------------- Process */}
       <Section id="process" tone="white" labelledBy="process-title">

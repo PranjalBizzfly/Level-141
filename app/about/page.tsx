@@ -17,6 +17,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        image="/images/client-executive-city-lounge.webp"
         eyebrow="About Level141"
         title={
           <>
@@ -97,6 +98,27 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </ul>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------- Belief */}
+      <Section tone="paper" labelledBy="belief-system-title">
+        <div className="container-x">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow text-muted">The Level141 belief</p>
+            <h2 id="belief-system-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
+              Growth isn&apos;t a collection of activities.{" "}
+              <span className="serif-accent">It&apos;s a system</span>
+            </h2>
+          </Reveal>
+          <Reveal className="mt-12 lg:mt-14">
+            <BracketFrame size="lg" className="mx-auto max-w-3xl text-center">
+              <p className="text-2xl font-light leading-snug tracking-[-0.02em] sm:text-[2rem]">
+                Growth happens when the pieces work together.{" "}
+                <span className="serif-accent">That&apos;s what we architect</span>
+              </p>
+            </BracketFrame>
+          </Reveal>
         </div>
       </Section>
 

@@ -1,19 +1,17 @@
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
-import { ButtonLink } from "@/components/ui/primitives";
+import Image from "next/image";
+import { ButtonLink, onPhoto } from "@/components/ui/primitives";
 import { site } from "@/lib/site";
 
-const built = ["A career.", "A reputation.", "A business.", "A company."];
-
-/**
- * Home hero. The right-hand visual reads as a building section: the four
- * things a visitor has already built are stacked as floors, with the
- * unbuilt "next level" outlined above them.
- */
+/** Home hero: the headline alone on a full-screen photograph. */
 export function HomeHero() {
   return (
-    <section className="on-dark relative isolate overflow-hidden bg-ink text-paper" aria-labelledby="hero-title">
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_30%,transparent)]" />
-      <div className="container-x grid gap-12 pb-16 pt-28 sm:gap-16 sm:pb-20 sm:pt-36 lg:min-h-[100svh] lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-24 lg:pt-36">
+    <section style={onPhoto} className="relative isolate overflow-hidden bg-ink text-paper" aria-labelledby="hero-title">
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <Image src="/images/client-hero-skyline-opening.webp" alt="" fill priority sizes="100vw" quality={90} className="object-cover grayscale" />
+        <div className="absolute inset-0 bg-black/55" />
+      </div>
+      <div className="container-x grid gap-12 pb-16 pt-28 sm:gap-16 sm:pb-20 sm:pt-36 min-h-[100svh] items-end lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-36">
         <div className="lg:col-span-7">
           <p className="eyebrow animate-fade text-gold">Growth Architecture for People &amp; Organizations</p>
           <h1
@@ -28,52 +26,19 @@ export function HomeHero() {
               <span className="serif-accent text-gold">Level</span>?
             </span>
           </h1>
-          <div className="mt-10 max-w-xl animate-rise space-y-5 text-base leading-[1.85] text-paper/75 [animation-delay:280ms] sm:text-lg">
-            <p>
-              You&apos;ve built something.<span className="sr-only"> A career. A reputation. A business. A company.</span> But where you are today doesn&apos;t have to define where you go next.
-            </p>
-            <p className="text-paper">
-              Level141 architects the next level of growth for people and organizations.
-            </p>
-            <p className="text-base text-paper-muted sm:text-lg">
-              Through clarity, positioning, visibility, credibility, authority and structured growth systems, we turn
-              ambition into an architecture for growth.
-            </p>
-          </div>
+          <p className="mt-10 max-w-xl animate-rise text-base leading-[1.85] text-paper/85 [animation-delay:280ms] sm:text-lg">
+            Level141 architects the next level of growth for people and organizations.
+          </p>
           <div className="mt-12 flex animate-rise flex-col gap-4 [animation-delay:400ms] sm:flex-row sm:items-center sm:gap-8">
             <ButtonLink href={site.primaryCta.href} variant="gold">
               {site.primaryCta.label}
             </ButtonLink>
-            <ButtonLink href="#two-architectures" variant="ghost-light">
+            <ButtonLink href="#two-architectures" variant="link">
               Explore Level141
             </ButtonLink>
           </div>
         </div>
 
-        <div className="hero-depth lg:col-span-5" aria-hidden>
-          <div className="relative mx-auto max-w-md animate-fade [animation-delay:350ms] lg:ml-auto">
-            <div className="relative rounded-[1.5rem] border border-line-dark-strong bg-ink-2 px-6 py-6 sm:px-9 sm:py-9 lg:rounded-[1.75rem]">
-              <BracketClose className="absolute -right-px -top-px size-7 text-gold" />
-              <BracketOpen className="absolute -bottom-px -left-px size-7 text-gold" />
-              <p className="eyebrow text-gold">Next level</p>
-              <p className="serif-accent mt-2 text-2xl text-paper sm:mt-3 sm:text-3xl">Where you go next.</p>
-            </div>
-            <div className="mx-auto h-6 w-px bg-line-dark-strong sm:h-10" />
-            <ol className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.5rem] border border-line-dark-strong bg-line-dark lg:grid-cols-1 lg:rounded-[1.75rem]">
-              {[...built].reverse().map((b, i) => (
-                <li
-                  key={b}
-                  className="flex animate-rise items-center justify-between gap-2 bg-ink-2 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-7 lg:py-5"
-                  style={{ animationDelay: `${380 + (built.length - i) * 80}ms` }}
-                >
-                  <span className="text-base tracking-[-0.01em] text-paper/90 sm:text-lg">{b}</span>
-                  <span className="eyebrow tabular-nums text-paper-muted">L{String(built.length - i).padStart(2, "0")}</span>
-                </li>
-              ))}
-            </ol>
-            <p className="eyebrow mt-5 text-center text-paper-muted">You&apos;ve built something.</p>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -1,13 +1,31 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { LogoLockup } from "@/components/brand/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
-import { cx } from "@/components/ui/primitives";
+import { cx, onPhoto } from "@/components/ui/primitives";
 import { mainNav, routes, site } from "@/lib/site";
+
+/** Pages that open on a dark hero, where the bar can sit clear over it. */
+const darkHeroes: string[] = [routes.home, routes.personalBrand, routes.growth, routes.how, routes.about, routes.insights, routes.blog];
+
+/** The photograph that answers each menu link. */
+const menuPhotos: Record<string, string> = {
+  [routes.home]: "/images/client-hero-skyline-opening.webp",
+  [routes.personalBrand]: "/images/client-executive-portrait-woman.webp",
+  [routes.growth]: "/images/client-executive-dubai-window.webp",
+  [routes.how]: "/images/client-executive-contemplation.webp",
+  [routes.lq]: "/images/client-mentorship-conversation.webp",
+  [routes.insights]: "/images/client-keynote-auditorium.webp",
+  [routes.blog]: "/images/client-executive-library.webp",
+  [routes.about]: "/images/client-executive-city-lounge.webp",
+  [routes.contact]: "/images/client-walk-toward-skyline.webp",
+};
+const menuDefault = "/images/client-lone-executive-skyline.webp";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -17,6 +35,7 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [preview, setPreview] = useState<string | null>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -67,14 +86,16 @@ export function Header() {
     };
   }, [open]);
 
+  const solid = !open && (scrolled || !darkHeroes.includes(pathname));
+
   return (
     <header
-      data-solid={scrolled || open || pathname === routes.contact ? "" : undefined}
+      // Clear over the dark hero and the open menu, solid once scrolled.
+      data-solid={solid ? "" : undefined}
+      style={solid ? undefined : onPhoto}
       className={cx(
-        "on-dark fixed inset-x-0 top-0 z-50 text-paper transition-[background-color,border-color,backdrop-filter] duration-500",
-        scrolled || open || pathname === routes.contact
-          ? "border-b border-paper/10 bg-ink/92 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
+        "on-dark fixed inset-x-0 top-0 z-50 border-b text-paper transition-colors duration-500",
+        solid ? "border-paper/10 bg-ink/92 backdrop-blur-md" : "border-transparent bg-gradient-to-b from-black/70 to-transparent",
       )}
     >
       <a
@@ -93,36 +114,15 @@ export function Header() {
           <LogoLockup className="h-[1.15rem] w-auto sm:h-5" title="Level141" />
         </Link>
 
-        <nav aria-label="Primary" className="hidden xl:block">
-          <ul className="flex items-center gap-0.5 2xl:gap-1">
-            {mainNav.map((item) => {
-              const active = isActive(pathname, item.href);
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    className={cx(
-                      "relative block whitespace-nowrap rounded-full px-1.5 py-2 text-[0.8rem] tracking-[0.005em] transition-colors duration-300 2xl:px-3.5 2xl:text-[0.875rem]",
-                      active ? "text-paper" : "text-paper-muted hover:text-paper",
-                    )}
-                  >
-                    {item.label}
-                    {active ? (
-                      <span aria-hidden className="absolute inset-x-2 -bottom-1 h-0.5 rounded-full bg-gold 2xl:inset-x-3" />
-                    ) : null}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <ThemeToggle className="relative z-10 shrink-0" />
           <Link
             href={site.primaryCta.href}
-            className="group hidden min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gold px-5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-gold-soft sm:inline-flex xl:hidden 2xl:inline-flex"
+            className={cx(
+              "group hidden min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gold px-5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-gold-soft sm:inline-flex",
+              open && "!hidden",
+            )}
           >
             {site.primaryCta.label}
             <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -134,57 +134,65 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="relative z-10 grid size-11 place-items-center rounded-full border border-paper/20 transition-colors hover:border-gold xl:hidden"
+            className="relative z-10 grid size-11 place-items-center rounded-full border border-paper/20 transition-colors hover:border-gold"
           >
             {open ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
           </button>
         </div>
       </div>
 
-      {/* Light backdrop behind the floating menu; tapping it closes the menu. */}
-      {open ? (
-        <div
-          aria-hidden
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 -z-10 animate-fade bg-black/25 [animation-duration:0.3s] xl:hidden"
-        />
-      ) : null}
-
       <div
         id="mobile-menu"
         ref={panelRef}
         hidden={!open}
-        className={cx(
-          // Floating card under the bar: inset on phones, a right-anchored card on tablets.
-          "absolute inset-x-3 top-full mt-2 flex animate-rise flex-col overflow-hidden rounded-3xl bg-ink ring-1 ring-paper/12 [animation-duration:0.35s] sm:left-auto sm:right-8 sm:w-96 xl:hidden",
-          scrolled ? "max-h-[calc(100dvh-4.5rem)] sm:max-h-[calc(100dvh-5rem)]" : "max-h-[calc(100dvh-4.5rem)] sm:max-h-[calc(100dvh-5.5rem)]",
-        )}
+        // Full-screen menu, black in both themes, fading in behind the bar.
+        className="fixed inset-0 -z-10 flex animate-fade flex-col overflow-y-auto bg-[#000] pb-10 pt-28 text-[#fff] [animation-duration:0.6s] sm:pt-36"
       >
-        <nav aria-label="Mobile" className="flex min-h-0 flex-col">
-          <ul className="min-h-0 overflow-y-auto overscroll-contain px-3 pt-2">
-            {mainNav.map((item) => {
+        <div aria-hidden className="absolute inset-y-0 right-0 hidden w-1/2 lg:block">
+          {open
+            ? [menuDefault, ...Object.values(menuPhotos)].map((src) => (
+                <Image
+                  key={src}
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="50vw"
+                  quality={90}
+                  className={cx(
+                    "object-cover grayscale transition-opacity duration-1000 ease-[var(--ease-architect)]",
+                    src === (preview ?? menuDefault) ? "opacity-100" : "opacity-0",
+                  )}
+                />
+              ))
+            : null}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000] via-[#000]/30 to-transparent" />
+        </div>
+        <nav aria-label="Mobile" className="container-x relative my-auto flex flex-col">
+          <ul className="group/menu w-fit" onMouseLeave={() => setPreview(null)}>
+            {mainNav.map((item, i) => {
               const active = isActive(pathname, item.href);
               return (
-                <li key={item.href} className="border-b border-paper/10 last:border-0">
+                <li key={item.href} className="animate-fade [animation-duration:0.8s]" style={{ animationDelay: `${i * 60}ms` }}>
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
+                    onMouseEnter={() => setPreview(menuPhotos[item.href] ?? null)}
+                    onFocus={() => setPreview(menuPhotos[item.href] ?? null)}
                     className={cx(
-                      "flex min-h-12 items-center justify-between gap-3 rounded-xl px-3 text-[0.95rem] font-medium tracking-[-0.005em] transition-colors",
-                      active ? "text-paper" : "text-paper/85 hover:bg-paper/5 hover:text-paper",
+                      "inline-flex min-h-12 items-center gap-4 py-0.5 text-[clamp(1.6rem,1.2rem+1.4vw,2.5rem)] font-light leading-tight tracking-[-0.02em] transition-[opacity,transform] duration-700 ease-[var(--ease-architect)] hover:translate-x-3 hover:!opacity-100 focus-visible:translate-x-3 group-hover/menu:opacity-40",
+                      active ? "opacity-100" : "opacity-70",
                     )}
                   >
                     {item.label}
-                    {active ? <span aria-hidden className="size-1.5 rounded-full bg-gold" /> : null}
                   </Link>
                 </li>
               );
             })}
           </ul>
-          <div className="border-t border-paper/10 p-3">
+          <div className="mt-12">
             <Link
               href={site.primaryCta.href}
-              className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold px-6 text-sm font-medium text-ink"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#fff] px-6 text-sm font-medium text-[#000]"
             >
               {site.primaryCta.label}
               <ArrowRight aria-hidden className="size-4" />

@@ -1,141 +1,36 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { BracketClose, BracketOpen, LogoLockup } from "@/components/brand/Logo";
+import { LogoLockup } from "@/components/brand/Logo";
 import { footerNav, routes, site } from "@/lib/site";
 
-/** Framework descriptors, as worded in the LEVEL141 WEBSITE document. */
-const frameworkNotes: Record<string, string> = {
-  "LQ™": "Level Quotient",
-  "IGF™": "Integrated Growth Framework",
-  "BRANDS™": "Six Dimensions Of Growth",
-  "PEAK™": "From Presence To Momentum",
-};
-
-const nextLevel = [
-  { label: "Start Your Personal Brand Assessment", href: `${routes.contact}?interest=personal-brand-architecture` },
-  { label: "Join The Growth Architecture™ Waitlist", href: routes.waitlist },
-];
-
-const label = "text-xs font-semibold uppercase tracking-[0.16em] text-[#6b6c72] dark:text-[#9a9ba1]";
-
-function FooterLink({ href, children, note }: { href: string; children: React.ReactNode; note?: string }) {
-  return (
-    <Link
-      href={href}
-      className="group flex min-h-11 flex-col justify-center py-1.5 text-[1.02rem] leading-snug text-[#2b2c30] transition-colors duration-300 hover:text-[#0d0d0e] dark:text-[#d4d5da] dark:hover:text-white"
-    >
-      <span className="w-fit bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-500 ease-[var(--ease-architect)] group-hover:bg-[length:100%_1px] group-focus-visible:bg-[length:100%_1px]">
-        {children}
-      </span>
-      {note ? <span className="mt-0.5 text-sm text-[#6b6c72] dark:text-[#9a9ba1]">{note}</span> : null}
-    </Link>
-  );
-}
-
-/**
- * Airy footer: plain page tone, hairline-divided columns, full logo lockup.
- */
+/** Quiet, centred sign-off on black in both themes: small logo, one row of links, one line of legal. */
 export function Footer() {
   return (
-    <footer
-      aria-labelledby="footer-heading"
-      className="relative bg-white dark:bg-black"
-    >
+    <footer aria-labelledby="footer-heading" className="bg-[#000] text-[#fff]">
       <h2 id="footer-heading" className="sr-only">
         Site footer
       </h2>
-
-      <div
-        className="relative mx-auto w-full max-w-[88rem] border-t border-[#0d0d0e]/12 dark:border-white/12"
-      >
-
-        <div className="relative px-5 pb-10 pt-20 sm:px-8 sm:pt-28 lg:px-20 lg:pb-14 lg:pt-32 2xl:px-28">
-          {/* Closing statement */}
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-            <p className="display text-[clamp(2rem,1.4rem+2vw,3rem)] text-[#0d0d0e] lg:col-span-8 dark:text-white">
-              Growth Architecture For <span className="serif-accent">People &amp; Organizations</span>
-            </p>
-            <div className="flex flex-col items-start gap-4 lg:col-span-4 lg:items-end">
-              <Link
-                href={site.primaryCta.href}
-                data-magnetic=""
-                className="group inline-flex min-h-12 items-center gap-3 whitespace-nowrap rounded-full bg-gold px-7 font-medium text-ink transition-colors duration-300 hover:bg-gold-soft"
-              >
-                {site.primaryCta.label}
-                <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-              <p className={label}>{site.brandLine}</p>
-            </div>
-          </div>
-
-          {/* Bracket hairline */}
-          <div aria-hidden className="mt-16 flex items-center gap-4 sm:mt-20">
-            <BracketOpen className="size-3.5 text-[#0d0d0e] dark:text-white" />
-            <span className="h-px flex-1 bg-[#0d0d0e]/15 dark:bg-white/12" />
-            <BracketClose className="size-3.5 text-[#0d0d0e] dark:text-white" />
-          </div>
-
-          {/* Columns */}
-          <div className="mt-16 grid gap-12 sm:mt-20 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-12 lg:gap-8">
-            <div className="sm:col-span-2 lg:col-span-3">
-              <Link
-                href="/"
-                aria-label="Level141 — Home"
-                className="inline-flex min-h-11 items-center text-[#0d0d0e] dark:text-white"
-              >
-                <LogoLockup className="h-6 w-auto" />
-              </Link>
-              <p className="mt-5 max-w-xs leading-relaxed text-[#4d4e54] dark:text-[#a9aab0]">
-                Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}.
-              </p>
-              <div className="eyebrow mt-5 text-[#4d4e54] dark:text-[#a9aab0]">
-                {site.headquarters}
-              </div>
-            </div>
-
-            <nav aria-label="Explore" className="lg:col-span-3">
-              <p className={label}>Explore</p>
-              <ul className="mt-4">
-                {footerNav.explore.map((item) => (
-                  <li key={item.href}>
-                    <FooterLink href={item.href}>{item.label}</FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <nav aria-label="Frameworks" className="lg:col-span-3">
-              <p className={label}>Frameworks</p>
-              <ul className="mt-4">
-                {footerNav.frameworks.map((item) => (
-                  <li key={item.href}>
-                    <FooterLink href={item.href} note={frameworkNotes[item.label]}>
-                      {item.label}
-                    </FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <nav aria-label="Start your next level" className="lg:col-span-3">
-              <p className={label}>Start Your Next Level</p>
-              <ul className="mt-4">
-                {nextLevel.map((item) => (
-                  <li key={item.href}>
-                    <FooterLink href={item.href}>{item.label}</FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          {/* Etched divider + copyright */}
-          <div
-            aria-hidden
-            className="mt-14 h-px bg-[#0d0d0e]/12 dark:bg-white/10"
-          />
-          <p className="mt-6 text-[0.95rem] text-[#4d4e54] dark:text-[#a9aab0]">
-            © {new Date().getFullYear()} Level141. All rights reserved.
+      <div className="mx-auto w-full max-w-[88rem] px-5 pb-12 pt-4 sm:px-8 lg:px-20 2xl:px-28">
+        <div className="flex flex-col items-center border-t border-[#fff]/15 pt-20 text-center sm:pt-28">
+          <Link href="/" aria-label="Level141 — Home" className="inline-flex min-h-11 items-center">
+            <LogoLockup className="h-6 w-auto" />
+          </Link>
+          <p className="mt-5 text-[0.95rem] text-[#fff]/70">{site.brandLine}</p>
+          <nav aria-label="Explore" className="mt-14 sm:mt-16">
+            <ul className="flex flex-wrap justify-center gap-x-8 gap-y-1">
+              {[...footerNav.explore, { label: "LQ™ Assessment", href: routes.lq }].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-11 items-center text-[0.95rem] text-[#fff]/70 transition-colors duration-500 hover:text-[#fff]"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <p className="mt-14 text-sm leading-relaxed text-[#fff]/70 sm:mt-16">
+            © {new Date().getFullYear()} Level141. Part of the {site.ecosystem} ecosystem, headquartered in {site.headquarters}.
           </p>
         </div>
       </div>

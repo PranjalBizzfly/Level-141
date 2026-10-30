@@ -82,9 +82,9 @@
     var(--glass-shadow);
 }
 
-/* Glass header once the page scrolls: a clear pane with a hairline edge. */
+/* Glass header, always on: a near-opaque pane with a hairline edge. */
 body > header[data-solid] {
-  background-color: color-mix(in oklab, var(--color-ink) 74%, transparent);
+  background-color: color-mix(in oklab, var(--color-ink) 92%, transparent);
   -webkit-backdrop-filter: blur(24px) saturate(1.8);
   backdrop-filter: blur(24px) saturate(1.8);
   box-shadow:
