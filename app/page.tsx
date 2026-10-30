@@ -48,7 +48,7 @@ export default function HomePage() {
       </Section>
 
       {/* ---------------------------------------------------------- Two architectures */}
-      <Section id="two-architectures" tone="paper" className="!pt-0" labelledBy="two-title">
+      <Section id="two-architectures" tone="paper" className="!pt-24 !pb-20 sm:!pt-32 sm:!pb-24" labelledBy="two-title">
         <div className="container-x">
           <SectionHeader
             id="two-title"

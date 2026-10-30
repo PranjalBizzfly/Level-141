@@ -8,7 +8,7 @@ export function HomeHero() {
   return (
     <section style={onPhoto} className="relative isolate overflow-hidden bg-ink text-paper" aria-labelledby="hero-title">
       <div aria-hidden className="absolute inset-0 -z-10">
-        <Image src="/images/client-hero-skyline-opening.webp" alt="" fill priority sizes="100vw" quality={90} className="object-cover grayscale" />
+        <Image src="/images/client-hero-skyline-opening.webp" alt="" fill priority sizes="100vw" quality={90} className="hero-settle object-cover grayscale" />
         <div className="absolute inset-0 bg-black/55" />
       </div>
       <div className="container-x grid gap-12 pb-16 pt-28 sm:gap-16 sm:pb-20 sm:pt-36 min-h-[100svh] items-end lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-36">

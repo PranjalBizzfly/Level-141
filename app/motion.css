@@ -215,3 +215,51 @@
   from { translate: 0 -5%; }
   to { translate: 0 5%; }
 }
+
+/* 9. Photographs settle: a very slight zoom-out as each one arrives. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] img {
+    scale: 1.05;
+    transition: scale 2.4s var(--ease-architect);
+  }
+  html.js [data-reveal].is-visible img {
+    scale: 1;
+  }
+
+  /* 10. Home hero waits behind the logo intro, then enters in sequence. */
+  .hero-settle {
+    animation: hero-settle 3.2s var(--ease-architect) both;
+  }
+  html[data-intro-active] .hero-settle,
+  html[data-intro-active] [aria-labelledby="hero-title"] :is(.animate-rise, .animate-fade) {
+    animation-play-state: paused;
+  }
+}
+@keyframes hero-settle {
+  from {
+    scale: 1.06;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+/* 11. The home hero rises out of darkness. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-settle {
+    animation: hero-rise 4.5s var(--ease-architect) both;
+  }
+  [aria-labelledby="hero-title"] .animate-rise {
+    animation-duration: 1.6s;
+  }
+}
+@keyframes hero-rise {
+  from {
+    scale: 1.2;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
