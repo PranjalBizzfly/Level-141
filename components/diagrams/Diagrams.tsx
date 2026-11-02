@@ -234,7 +234,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
           </svg>
           <div className="absolute inset-0 grid place-items-center">
             <div className="text-center">
-              <p className={cx("eyebrow text-[0.7rem]", dark ? "text-gold" : "text-gold-ink")}>Foundation</p>
+              <p className="text-sm font-medium">Foundation</p>
               <p className="mt-1 text-sm leading-tight">
                 Customer
                 <br />& Market

@@ -50,14 +50,14 @@ export function VibeExplorer() {
               onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
               className={cx(
-                "flex min-h-11 flex-col items-center gap-2 py-4 text-center transition-opacity duration-500 lg:flex-row lg:items-baseline lg:gap-8 lg:py-6 lg:text-left",
+                "flex min-h-11 min-w-0 flex-col items-center gap-2 py-4 text-center transition-opacity duration-500 lg:flex-row lg:items-baseline lg:gap-8 lg:py-6 lg:text-left",
                 selected ? "opacity-100" : "opacity-60 hover:opacity-100",
               )}
             >
               <span aria-hidden className="text-4xl font-light leading-none lg:w-12">
                 {d.letter}
               </span>
-              <span className="text-[0.75rem] uppercase tracking-[0.12em] lg:text-lg lg:normal-case lg:tracking-[-0.01em]">
+              <span className="text-[0.75rem] lg:text-lg lg:tracking-[-0.01em]">
                 <span className="lg:hidden">{d.name.split(" ")[0]}</span>
                 <span className="hidden lg:inline">{d.name}</span>
               </span>

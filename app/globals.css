@@ -436,3 +436,13 @@ main button[class*="rounded-full"] {
 :root:not([data-theme="dark"]) section.on-dark {
   --color-ink: #ffffff;
 }
+
+/* Smallest phones: grids may shrink and long words wrap, so nothing leaves the screen. */
+@media (max-width: 359px) {
+  main * {
+    min-width: 0;
+  }
+  main :is(h1, h2, h3, p, li, span, summary, button, a) {
+    overflow-wrap: anywhere;
+  }
+}

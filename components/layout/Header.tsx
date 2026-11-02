@@ -107,6 +107,8 @@ export function Header() {
       <div
         className={cx(
           "container-x flex items-center justify-between gap-6 transition-[height] duration-300 ease-[var(--ease-architect)]",
+          // Menu links scroll beneath the logo row on short screens.
+          open && "relative bg-[#000] lg:bg-transparent",
           scrolled ? "h-14 sm:h-16" : "h-14 sm:h-[4.5rem] lg:h-20",
         )}
       >
