@@ -31,6 +31,8 @@ export function ThemeToggle({ className }: { className?: string }) {
   return (
     <button
       type="button"
+      // Switching theme must not close an open picker (see CountryPicker in forms/fields.tsx).
+      data-keeps-popovers
       onClick={toggle}
       aria-label={label}
       title={label}

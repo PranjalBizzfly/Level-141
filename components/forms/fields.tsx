@@ -1,9 +1,9 @@
 "use client";
 
-import { AlertCircle, ChevronDown, Loader2 } from "lucide-react";
-import { useCallback, useRef, useState, type ReactNode } from "react";
+import { AlertCircle, Check, ChevronDown, Loader2, Search } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { cx } from "@/components/ui/primitives";
-import { countries, DEFAULT_COUNTRY, findCountry } from "@/lib/forms/countries";
+import { countries, DEFAULT_COUNTRY, findCountry, type Country } from "@/lib/forms/countries";
 import { HONEYPOT_FIELD, instantErrors, type FieldErrors, type SubmitResponse } from "@/lib/forms/validation";
 
 /* ----------------------------------------------------------- Submission */
@@ -184,29 +184,8 @@ export function PhoneInput({
     ? "border-error focus-within:border-error focus-within:ring-error/15"
     : "border-line-strong hover:border-ink/40 focus-within:border-gold-ink focus-within:ring-gold/40";
   return (
-    <div className={cx("flex overflow-hidden border-0 border-b bg-transparent transition-[border-color,box-shadow] duration-500 focus-within:border-b-2", ring)}>
-      <div className="relative flex shrink-0 items-center gap-1.5 border-r border-line pr-3 text-base">
-        <span aria-hidden className="text-sm font-medium tracking-[0.04em] text-muted">{selected.iso}</span>
-        <span aria-hidden className="tabular-nums">+{selected.dial}</span>
-        <ChevronDown aria-hidden className="size-4 text-muted" />
-        <select
-          id={`${id}-country`}
-          name={`${id}Country`}
-          aria-label="Country code"
-          autoComplete="tel-country-code"
-          value={selected.iso}
-          onChange={(e) => onCountryChange(e.target.value)}
-          onBlur={onBlur}
-          // The opened list draws its own colors, so set them for both themes.
-          className="absolute inset-0 cursor-pointer bg-paper text-ink opacity-0 [&>option]:bg-paper [&>option]:text-ink"
-        >
-          {countries.map((c) => (
-            <option key={c.iso} value={c.iso}>
-              {c.name} (+{c.dial})
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className={cx("flex border-0 border-b bg-transparent transition-[border-color,box-shadow] duration-500 focus-within:border-b-2", ring)}>
+      <CountryPicker id={`${id}-country`} selected={selected} onChange={onCountryChange} onBlur={onBlur} />
       <input
         {...fieldA11y(id, error, hint)}
         type="tel"
@@ -289,6 +268,202 @@ export function SuccessPanel({ title, children }: { title: string; children: Rea
       </svg>
       <h3 className="mt-5 text-2xl tracking-[-0.02em]">{title}</h3>
       <div className="mt-3 leading-relaxed text-muted">{children}</div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------- Country picker */
+
+const normalise = (v: string) =>
+  v
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+/**
+ * Country code picker: a button showing the chosen code that opens the full list
+ * (every country with a calling code) with a search box on top. Search matches the
+ * country name, its two-letter code or the calling code ("india", "IN", "91", "+971").
+ * Keyboard: arrows move, Enter chooses, Escape closes; focus returns to the button.
+ */
+function CountryPicker({
+  id,
+  selected,
+  onChange,
+  onBlur,
+}: {
+  id: string;
+  selected: Country;
+  onChange: (iso: string) => void;
+  onBlur?: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const matches = useMemo(() => {
+    const q = normalise(query.trim());
+    if (!q) return countries;
+    const digits = q.replace(/^\+|^00/, "");
+    const numeric = /^\d+$/.test(digits);
+    // Best match first: exact code, exact dial, name starting with the query, then the rest.
+    const rank = (c: Country) => {
+      const name = normalise(c.name);
+      if (c.iso.toLowerCase() === q) return 0;
+      if (numeric && c.dial === digits) return 1;
+      if (name.startsWith(q)) return 2;
+      if (numeric && c.dial.startsWith(digits)) return 3;
+      if (name.split(/[\s(-]+/).some((w) => w.startsWith(q))) return 4;
+      if (name.includes(q)) return 5;
+      return -1;
+    };
+    return countries
+      .map((c) => [c, rank(c)] as const)
+      .filter(([, r]) => r >= 0)
+      .sort((x, y) => x[1] - y[1])
+      .map(([c]) => c);
+  }, [query]);
+
+  const close = (refocus = true) => {
+    setOpen(false);
+    setQuery("");
+    if (refocus) buttonRef.current?.focus();
+  };
+  const choose = (c: Country) => {
+    onChange(c.iso);
+    close();
+  };
+
+  // On opening: focus the search box and start on the chosen country.
+  useEffect(() => {
+    if (!open) return;
+    searchRef.current?.focus();
+    const i = countries.findIndex((c) => c.iso === selected.iso);
+    setActive(Math.max(0, i));
+    requestAnimationFrame(() => listRef.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "center" }));
+  }, [open, selected.iso]);
+
+  // Close on a click or tap outside, except on the theme switch: the list stays open while the theme changes.
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => {
+      const target = e.target as Element;
+      if (target.closest?.("[data-keeps-popovers]")) return;
+      if (!rootRef.current?.contains(target)) close(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  // Keep the highlighted row in view while using the arrow keys.
+  useEffect(() => {
+    listRef.current?.querySelector(`[data-index="${active}"]`)?.scrollIntoView({ block: "nearest" });
+  }, [active]);
+
+  const onKey = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive((i) => Math.min(matches.length - 1, i + 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive((i) => Math.max(0, i - 1));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (matches[active]) choose(matches[active]);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      close();
+    } else if (e.key === "Tab") {
+      close(false);
+    }
+  };
+
+  const listId = `${id}-list`;
+  return (
+    <div ref={rootRef} className="relative flex shrink-0 border-r border-line">
+      <button
+        ref={buttonRef}
+        id={id}
+        type="button"
+        aria-label={`Country code: ${selected.name} +${selected.dial}`}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={open ? listId : undefined}
+        onClick={() => setOpen((v) => !v)}
+        onBlur={(e) => {
+          if (!rootRef.current?.contains(e.relatedTarget as Node)) onBlur?.();
+        }}
+        className="flex min-h-12 items-center gap-1.5 pr-3 text-base text-ink focus:outline-none focus-visible:underline"
+      >
+        <span aria-hidden className="text-sm font-medium tracking-[0.04em] text-muted">
+          {selected.iso}
+        </span>
+        <span aria-hidden className="tabular-nums">
+          +{selected.dial}
+        </span>
+        <ChevronDown aria-hidden className={cx("size-4 text-muted transition-transform duration-300", open && "rotate-180")} />
+      </button>
+
+      {open ? (
+        <div className="absolute left-0 top-full z-50 mt-2 w-[min(20rem,calc(100vw-2.5rem))] overflow-hidden rounded-[1.25rem] border border-line-strong bg-paper text-ink shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)]">
+          <div className="flex items-center gap-2 border-b border-line px-4">
+            <Search aria-hidden className="size-4 shrink-0 text-muted" />
+            <input
+              ref={searchRef}
+              type="search"
+              role="combobox"
+              aria-label="Search country or code"
+              aria-expanded="true"
+              aria-controls={listId}
+              aria-activedescendant={matches[active] ? `${id}-opt-${matches[active].iso}` : undefined}
+              autoComplete="off"
+              spellCheck={false}
+              placeholder="Search country or code"
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setActive(0);
+              }}
+              onKeyDown={onKey}
+              className="min-h-12 w-full bg-transparent text-[0.95rem] text-ink placeholder:text-muted/70 focus:outline-none"
+            />
+          </div>
+          <ul ref={listRef} id={listId} role="listbox" aria-label="Countries" className="max-h-72 overflow-y-auto overscroll-contain py-1">
+            {matches.length ? (
+              matches.map((c, i) => {
+                const chosen = c.iso === selected.iso;
+                return (
+                  <li
+                    key={c.iso}
+                    id={`${id}-opt-${c.iso}`}
+                    data-index={i}
+                    role="option"
+                    aria-selected={chosen}
+                    onPointerMove={() => setActive(i)}
+                    onClick={() => choose(c)}
+                    className={cx(
+                      "flex min-h-11 cursor-pointer items-center gap-3 px-4 text-[0.95rem]",
+                      i === active ? "bg-ink/[0.06]" : "",
+                    )}
+                  >
+                    <span className="w-7 shrink-0 text-xs font-medium tracking-[0.04em] text-muted">{c.iso}</span>
+                    <span className="min-w-0 flex-1 truncate">{c.name}</span>
+                    <span className="shrink-0 tabular-nums text-muted">+{c.dial}</span>
+                    <Check aria-hidden className={cx("size-4 shrink-0", chosen ? "opacity-100" : "opacity-0")} />
+                  </li>
+                );
+              })
+            ) : (
+              <li className="px-4 py-4 text-sm text-muted">No country matches “{query}”.</li>
+            )}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }
