@@ -9,7 +9,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Start Your Next Level",
   description:
-    "Let's architect what's next. Start a conversation with Level141 about Personal Brand Architecture™, partnerships or your next level of growth.",
+    "Contact Level141 in Dubai. Start a conversation about Personal Brand Architecture™, partnerships or your next level of growth.",
   path: routes.contact,
 });
 
@@ -66,7 +66,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 <li key={s.n} className="flex gap-4">
                   <span className="eyebrow mt-1 tabular-nums text-gold">{s.n}</span>
                   <span>
-                    <span className="font-medium">{s.name}.</span>{" "}
+                    <span className="font-medium">{s.name}</span> <span aria-hidden className="text-paper-muted">-</span>{" "}
                     <span className="text-paper-muted">{s.line}</span>
                   </span>
                 </li>
@@ -77,16 +77,15 @@ export default async function ContactPage({ searchParams }: Props) {
           <div className="relative mt-12 max-w-md px-6 py-5 text-sm leading-relaxed text-paper-muted">
             <BracketClose className="absolute right-0 top-0 size-4 text-gold" />
             <BracketOpen className="absolute bottom-0 left-0 size-4 text-gold" />
-            Interested in Growth Architecture™ for your organization? It isn&apos;t open for engagements yet —{" "}
+            Interested in Growth Architecture™ for your organization?{" "}
             <Link
               href={routes.waitlist}
               className="-my-3 inline-flex min-h-11 items-center text-paper underline underline-offset-4 hover:text-gold"
             >
-              join the waitlist
+              Join the waitlist
             </Link>
             .
           </div>
-          <p className="mt-10 text-sm text-paper-muted">Level141 is part of the 1XL ecosystem, headquartered in Dubai.</p>
         </div>
       </div>
     </section>

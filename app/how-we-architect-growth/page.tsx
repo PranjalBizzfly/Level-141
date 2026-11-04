@@ -2,7 +2,7 @@ import { GrowthChainDiagram } from "@/components/diagrams/Diagrams";
 import { BrandsSystem, PeakAscent } from "@/components/diagrams/Diagrams";
 import { FrameworkNav } from "@/components/sections/FrameworkNav";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { BracketFrame, ButtonLink, Eyebrow, PageHero, Reveal, Section, SectionHeader, cx, Photo, PhotoBand } from "@/components/ui/primitives";
+import { BracketFrame, ButtonLink, Eyebrow, PageHero, Reveal, Section, SectionHeader, cx, Photo, PhotoBand, More } from "@/components/ui/primitives";
 import {
   levelProcess,
   lqDomains,
@@ -14,12 +14,12 @@ import {
   whyLevel141,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { routes } from "@/lib/site";
+import { assessmentCta, routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "How We Architect Growth",
   description:
-    "Assess, Architect, Activate, Govern, Level Up — the Level141 approach, powered by the proprietary LQ™, IGF™, BRANDS™ and PEAK™ frameworks.",
+    "Assess, Architect, Activate, Govern, Level Up: the Level141 approach to growth, powered by the proprietary LQ™, IGF™, BRANDS™ and PEAK™ frameworks.",
   path: routes.how,
 });
 
@@ -183,13 +183,13 @@ export default function HowPage() {
           />
           <Reveal className="mt-20 border-b border-line-dark sm:mt-28">
             {[
-              ["LQ™", "Know your level", "#lq"],
-              ["IGF™", "Connect the growth engine", "#igf"],
-              ["BRANDS™", "Six dimensions", "#brands"],
-              ["PEAK™", "Presence to momentum", "#peak"],
+              ["LQ", "Know your level", "#lq"],
+              ["IGF", "Connect the growth engine", "#igf"],
+              ["BRANDS", "Six dimensions", "#brands"],
+              ["PEAK", "Presence to momentum", "#peak"],
             ].map(([name, line, href]) => (
               <a key={href} href={href} className="group grid gap-2 border-t border-line-dark py-8 sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-12">
-                <span className="block text-2xl tracking-[-0.02em] transition-colors group-hover:text-gold sm:text-[1.75rem] lg:col-span-5">{name}</span>
+                <span className="block text-2xl tracking-[-0.02em] transition-colors group-hover:text-gold sm:text-[1.75rem] lg:col-span-5">{name}</span>{" "}
                 <span className="block text-paper-muted lg:col-span-7">{line}</span>
               </a>
             ))}
@@ -205,33 +205,31 @@ export default function HowPage() {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <Reveal>
-                <p className="eyebrow text-gold"><span aria-hidden className="tabular-nums">04 · </span>LQ™ — Level Quotient</p>
+                <p className="eyebrow text-gold">LQ: Level Quotient</p>
                 <h2 id="lq-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                   First, <span className="serif-accent text-gold">know your level</span>
                 </h2>
                 <p className="mt-8 leading-relaxed text-paper/70">
-                  Before recommending what should change, we establish where you currently stand. LQ™ provides a
+                  Before recommending what should change, we establish where you currently stand. LQ provides a
                   structured assessment of the factors influencing your current growth position.
                 </p>
                 <p className="mt-5 leading-relaxed text-paper">
                   Because you cannot architect the next level without understanding the current one.
                 </p>
                 <p className="mt-5 text-sm leading-relaxed text-paper-muted">
-                  For people, LQ™ is assessed across the four VIBE™ dimensions. For organizations, the LQ™ Growth Audit
+                  For people, LQ is assessed across the four VIBE™ dimensions. For organizations, the LQ Growth Audit
                   examines the domains shown here.
                 </p>
                 <ButtonLink href={routes.lq} variant="link" className="mt-6 !px-0 text-paper">
-                  Take the LQ™ Assessment
+                  Take the LQ Assessment
                 </ButtonLink>
               </Reveal>
             </div>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
-            <Reveal>
-              <p className="eyebrow text-paper-muted">LQ™ Growth Audit — domains</p>
-            </Reveal>
+            <More dark label="The twelve LQ Growth Audit domains">
             {/* Business & ambition defines what 'next level' means, so it leads; the other eleven domains follow. */}
-            <dl className="mt-6 border-b border-line-dark">
+            <dl className="border-b border-line-dark">
               {lqDomains.map((d, i) => (
                 <Reveal
                   key={d.name}
@@ -249,8 +247,9 @@ export default function HowPage() {
                 </Reveal>
               ))}
             </dl>
+            </More>
             <Reveal className="mt-14 sm:mt-16">
-              <p className="eyebrow text-gold">LQ™ outputs</p>
+              <p className="eyebrow text-gold">LQ outputs</p>
               <ul className="mt-6 space-y-3 text-paper/80">
                 {lqOutputs.map((o) => (
                   <li key={o} className="flex gap-3 leading-[1.85]">
@@ -269,19 +268,19 @@ export default function HowPage() {
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-14 lg:items-center">
           <div className="lg:col-span-5">
             <Reveal>
-              <p className="eyebrow text-gold-ink"><span aria-hidden className="tabular-nums">05 · </span>IGF™ — Integrated Growth Framework</p>
+              <p className="eyebrow text-gold-ink">IGF: Integrated Growth Framework</p>
               <h2 id="igf-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 Connect the <span className="serif-accent">growth engine</span>
               </h2>
             </Reveal>
           </div>
           {/* Source: Website Structure, IGF™ — Integrated Growth Framework. The documents
-              do not name IGF™'s drivers, so none are shown. */}
+              do not name IGF's drivers, so none are shown. */}
           <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
             <BracketFrame tone="ink" size="lg" className="space-y-6">
               <p className="text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">Growth rarely comes from one function.</p>
               <p className="text-lg leading-relaxed text-muted">
-                IGF™ looks across the interconnected drivers influencing organizational growth and creates alignment
+                IGF looks across the interconnected drivers influencing organizational growth and creates alignment
                 between them.
               </p>
               <p className="text-lg leading-relaxed">
@@ -300,13 +299,13 @@ export default function HowPage() {
             index="06"
             id="brands-title"
             dark
-            eyebrow="BRANDS™"
+            eyebrow="BRANDS"
             title={
               <>
                 Six dimensions <span className="serif-accent text-gold">of growth</span>
               </>
             }
-            intro="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together — never as separate campaigns."
+            intro="Branding builds the foundation. Conversion Readiness prepares attention to become opportunity. Awareness, Nurture, Discover & Trust and Scale complete a system that is architected together, never as separate campaigns."
           />
           <div className="mt-20 sm:mt-28">
             <BrandsSystem />
@@ -320,13 +319,13 @@ export default function HowPage() {
           <SectionHeader
             index="07"
             id="peak-title"
-            eyebrow="PEAK™"
+            eyebrow="PEAK"
             title={
               <>
                 From presence <span className="serif-accent">to momentum</span>
               </>
             }
-            intro="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
+            intro="PEAK helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
           <div className="mt-20 sm:mt-28">
             <PeakAscent dark={false} />
@@ -339,7 +338,7 @@ export default function HowPage() {
       <Section tone="paper" labelledBy="sell-title">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-6">
-            <p className="eyebrow text-gold-ink"><span aria-hidden className="tabular-nums">08 · </span>What we actually sell</p>
+            <p className="eyebrow text-gold-ink">What we actually sell</p>
             <h2 id="sell-title" className="mt-6 space-y-1 text-[clamp(2rem,1.4rem+2vw,3rem)] font-light leading-[1.15] tracking-[-0.025em]">
               <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not marketing</span>
               <span className="block text-muted line-through decoration-gold-ink/60 decoration-2">Not consulting</span>
@@ -453,7 +452,7 @@ export default function HowPage() {
             <span className="serif-accent text-gold">It&apos;s understanding your current level</span>
           </>
         }
-        primary={{ label: "Start Your Level141 Assessment", href: routes.contact }}
+        primary={assessmentCta}
         secondary={{ label: "About Level141", href: routes.about }}
       />
     </>

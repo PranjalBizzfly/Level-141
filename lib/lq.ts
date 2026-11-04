@@ -26,7 +26,7 @@ export const roleQuestion = {
     { value: "ceo", label: "CEO or managing director", wording: "As a chief executive" },
     { value: "investor", label: "Investor", wording: "As an investor" },
     { value: "nextgen", label: "Next-generation or family-business leader", wording: "As a next-generation leader" },
-    { value: "senior", label: "Senior professional (employed, not running an organisation)", wording: "As a senior professional" },
+    { value: "senior", label: "Senior professional (employed, not running an organization)", wording: "As a senior professional" },
     { value: "expert", label: "Independent expert, consultant or adviser", wording: "As an independent expert" },
     { value: "none", label: "Prefer not to say", wording: "As a leader" },
   ] satisfies ContextOption[],
@@ -40,8 +40,8 @@ export const goalQuestion = {
     { value: "clients", label: "Win larger clients, partners or deals", flags: [3, 5, 7] },
     { value: "board", label: "Earn board, advisory or trusted-adviser roles", flags: [6, 7, 8] },
     { value: "talent", label: "Attract senior talent or build a leadership team", flags: [3, 4, 9] },
-    { value: "role", label: "Step into a bigger role or lead a larger organisation", flags: [9, 7, 6] },
-    { value: "voice", label: "Become a recognised industry voice (speaking, media, publishing)", flags: [4, 5, 10] },
+    { value: "role", label: "Step into a bigger role or lead a larger organization", flags: [9, 7, 6] },
+    { value: "voice", label: "Become a recognized industry voice (speaking, media, publishing)", flags: [4, 5, 10] },
     { value: "undefined", label: "I have not defined it yet", flags: [9] },
   ] satisfies ContextOption[],
 };
@@ -99,7 +99,7 @@ export const scoredQuestions: ScoredQuestion[] = [
     subFactor: "I1 Evidence Depth",
     title: "Are your results documented, like paying customers, client results or past achievements?",
     answers: yesPartlyNo,
-    test: "Proof of results, such as paying customers, client results or past achievements, that can be shown to someone outside the organisation.",
+    test: "Proof of results, such as paying customers, client results or past achievements, that can be shown to someone outside the organization.",
     service: "Module 5 Impact & Trust Architecture",
   },
   {

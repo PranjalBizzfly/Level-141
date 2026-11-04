@@ -112,7 +112,7 @@ export function Header() {
           scrolled ? "h-14 sm:h-16" : "h-14 sm:h-[4.5rem] lg:h-20",
         )}
       >
-        <Link href="/" aria-label="Level141 — Home" className="relative z-10 flex min-h-11 shrink-0 items-center">
+        <Link href="/" aria-label="Level141 home" className="relative z-10 flex min-h-11 shrink-0 items-center">
           <LogoLockup className="h-[1.15rem] w-auto sm:h-5" title="Level141" />
         </Link>
 
@@ -146,6 +146,9 @@ export function Header() {
       <div
         id="mobile-menu"
         ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
         hidden={!open}
         // Full-screen menu, black in both themes, fading in behind the bar.
         className="fixed inset-0 -z-10 flex animate-fade flex-col overflow-y-auto bg-[#000] pb-10 pt-28 text-[#fff] [animation-duration:0.6s] sm:pt-36"

@@ -88,15 +88,15 @@ export function VibeExplorer() {
                 <span aria-hidden className="text-xl font-light transition-transform duration-500 group-open:rotate-45">+</span>
               </summary>
               <div className="pb-8 pt-4">
-                <p className="leading-[1.85] text-paper/75">{d.detail}</p>
+                <p className="text-base leading-[1.85] text-paper/80 sm:text-lg">{d.detail}</p>
                 <p className="eyebrow mt-8 text-paper-muted">Architecture focus</p>
-                <ul className="mt-4 space-y-2 leading-[1.85] text-paper/85">
+                <ul className="mt-4 space-y-2 text-base leading-[1.85] text-paper/80 sm:text-lg">
                   {d.focus.map((x) => (
                     <li key={x}>{x}</li>
                   ))}
                 </ul>
                 <p className="eyebrow mt-8 text-paper-muted">Illustrative outcomes</p>
-                <p className="mt-3 text-lg leading-snug text-paper">{d.outcomes}</p>
+                <p className="mt-4 text-base leading-[1.85] text-paper/80 sm:text-lg">{d.outcomes}</p>
               </div>
             </details>
           </div>

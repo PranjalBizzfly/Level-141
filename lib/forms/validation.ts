@@ -52,10 +52,16 @@ function checkLength(errors: Record<string, string>, key: string, value: string,
   if (value.length > max && !errors[key]) errors[key] = `Please keep this under ${max} characters.`;
 }
 
+const NAME_CHARS = "Names can contain letters, spaces, apostrophes, hyphens and full stops only.";
+const PHONE_CHARS = "Please use digits only. The country code is selected separately.";
+const CITY_CHARS = "City names can contain letters, spaces, apostrophes, hyphens and full stops only.";
+/** Wrong-character errors: typing more can't fix them, so forms show them while typing. */
+export const instantErrors: ReadonlySet<string> = new Set([NAME_CHARS, PHONE_CHARS, CITY_CHARS]);
+
 function checkName(e: Record<string, string>, v: string) {
   if (!v) e.name = "Please enter your name.";
+  else if (!NAME_RE.test(v)) e.name = NAME_CHARS;
   else if (v.length < limits.minName) e.name = "Please enter your full name.";
-  else if (!NAME_RE.test(v)) e.name = "Names can contain letters, spaces, apostrophes, hyphens and full stops only.";
 }
 
 function checkEmail(e: Record<string, string>, v: string) {
@@ -66,6 +72,21 @@ function checkEmail(e: Record<string, string>, v: string) {
 
 function checkOptionalText(e: Record<string, string>, key: string, v: string, label: string) {
   if (v && (v.length < 2 || !HAS_WORD_RE.test(v))) e[key] = `Please enter a valid ${label}, or leave this blank.`;
+}
+
+/** Phone is optional; when given it must suit the chosen country's numbering plan. */
+function checkPhone(e: Record<string, string>, v: Pick<ContactInput, "phone" | "phoneCountry">) {
+  const country = findCountry(v.phoneCountry);
+  if (!country) e.phoneCountry = "Please choose a country code.";
+  if (v.phone) {
+    const digits = nationalDigits(v.phone, country);
+    if (!/^\d+$/.test(digits)) e.phone = PHONE_CHARS;
+    else if (country && (digits.length < country.min || digits.length > country.max))
+      e.phone =
+        country.min === country.max
+          ? `${country.name} numbers have ${country.min} digits after +${country.dial}.`
+          : `${country.name} numbers have ${country.min} to ${country.max} digits after +${country.dial}.`;
+  }
 }
 
 export function normaliseContact(raw: Record<string, unknown>): ContactInput {
@@ -85,24 +106,13 @@ export function validateContact(v: ContactInput): FieldErrors<ContactInput> {
   const e: Record<string, string> = {};
   if (!interestOptions.some((o) => o.value === v.interest)) e.interest = "Please choose what you are interested in.";
   else if (v.interest === "growth-architecture")
-    e.interest = "Growth Architecture™ is not yet open for engagements — please join the waitlist instead.";
+    e.interest = "Growth Architecture™ is not yet open for engagements. Please join the waitlist instead.";
   checkName(e, v.name);
   checkOptionalText(e, "company", v.company, "company name");
   checkOptionalText(e, "designation", v.designation, "designation");
   checkEmail(e, v.email);
 
-  // Phone is optional; when given it must suit the chosen country's numbering plan.
-  const country = findCountry(v.phoneCountry);
-  if (!country) e.phoneCountry = "Please choose a country code.";
-  if (v.phone) {
-    const digits = nationalDigits(v.phone, country);
-    if (!/^\d+$/.test(digits)) e.phone = "Please use digits only — the country code is selected separately.";
-    else if (country && (digits.length < country.min || digits.length > country.max))
-      e.phone =
-        country.min === country.max
-          ? `${country.name} numbers have ${country.min} digits after +${country.dial}.`
-          : `${country.name} numbers have ${country.min}–${country.max} digits after +${country.dial}.`;
-  }
+  checkPhone(e, v);
 
   if (!v.level) e.level = "Tell us a little about the level you're trying to reach.";
   else if (v.level.length < limits.minLevel)
@@ -144,6 +154,52 @@ export function validateWaitlist(v: WaitlistInput): FieldErrors<WaitlistInput> {
   checkLength(e, "email", v.email, limits.email);
   checkLength(e, "note", v.note, limits.long);
   return e as FieldErrors<WaitlistInput>;
+}
+
+/** Where the LQ™ report is sent: the visitor's name and email. */
+export type LqContactInput = { name: string; email: string };
+
+export function normaliseLqContact(raw: Record<string, unknown>): LqContactInput {
+  return { name: clean(raw.name), email: clean(raw.email).toLowerCase() };
+}
+
+export function validateLqContact(v: LqContactInput): FieldErrors<LqContactInput> {
+  const e: Record<string, string> = {};
+  checkName(e, v.name);
+  checkEmail(e, v.email);
+  checkLength(e, "name", v.name, limits.name);
+  checkLength(e, "email", v.email, limits.email);
+  return e as FieldErrors<LqContactInput>;
+}
+
+/** Contact Us page: name, email, optional phone and city, and a message. */
+export type MessageInput = { name: string; email: string; phoneCountry: string; phone: string; city: string; message: string };
+
+export function normaliseMessage(raw: Record<string, unknown>): MessageInput {
+  return {
+    name: clean(raw.name),
+    email: clean(raw.email).toLowerCase(),
+    phoneCountry: clean(raw.phoneCountry).toUpperCase() || DEFAULT_COUNTRY,
+    phone: clean(raw.phone),
+    city: clean(raw.city),
+    message: cleanMultiline(raw.message),
+  };
+}
+
+export function validateMessage(v: MessageInput): FieldErrors<MessageInput> {
+  const e: Record<string, string> = {};
+  checkName(e, v.name);
+  checkEmail(e, v.email);
+  checkPhone(e, v);
+  if (v.city && !NAME_RE.test(v.city)) e.city = CITY_CHARS;
+  else if (v.city.length === 1) e.city = "Please enter a valid city, e.g. Dubai, or leave this blank.";
+  checkLength(e, "city", v.city, limits.name);
+  if (!v.message) e.message = "Please write your message.";
+  else if (v.message.length < 10) e.message = "Please add a little more detail.";
+  checkLength(e, "name", v.name, limits.name);
+  checkLength(e, "email", v.email, limits.email);
+  checkLength(e, "message", v.message, limits.long);
+  return e as FieldErrors<MessageInput>;
 }
 
 /** Spam heuristics shared by both forms: a honeypot field and a minimum fill time. */

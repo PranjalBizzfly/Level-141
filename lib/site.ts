@@ -6,11 +6,12 @@ export const siteUrl = (
 export const site = {
   name: "Level141",
   tagline: "Growth Architecture for People & Organizations.",
-  brandLine: "Level141 — Growth By Design.",
+  slogan: "Growth By Design",
+  brandLine: "Level141 · Growth By Design.",
   description:
-    "Level141 architects the next level of growth for people and organizations — through clarity, positioning, visibility, credibility, authority and structured growth systems.",
+    "Level141 architects the next level of growth for people and organizations through clarity, positioning, visibility, credibility and authority.",
   headquarters: "Dubai",
-  ecosystem: "1XL",
+  parent: "1XL Holdings",
   primaryCta: { label: "Find Your Level", href: "/lq-assessment" },
 } as const;
 
@@ -27,19 +28,37 @@ export const routes = {
   lq: "/lq-assessment",
   about: "/about",
   contact: "/start-your-next-level",
+  contactUs: "/contact-us",
+  privacy: "/privacy-policy",
+  terms: "/terms-and-conditions",
 } as const;
+
+/**
+ * Official social profiles, shown in the footer. Fill in each verified URL: until then the
+ * name shows as plain text (not a link), and only entries with a URL go into the structured data.
+ */
+export const socialLinks: { label: string; href: string }[] = [
+  { label: "LinkedIn", href: "" },
+  { label: "YouTube", href: "" },
+  { label: "Instagram", href: "" },
+  { label: "X", href: "" },
+];
+
+/** The one assessment call to action. Every "Start Your Level141 Assessment" button uses it. */
+export const assessmentCta = { label: "Start Your Level141 Assessment", href: routes.lq } as const;
 
 /** Primary navigation, in the order given by the LEVEL141 WEBSITE document. */
 export const mainNav: NavItem[] = [
   { label: "Home", href: routes.home },
-  { label: "Personal Brand Architecture", href: routes.personalBrand },
-  { label: "Growth Architecture", href: routes.growth },
+  { label: "Personal Brand Architecture™", href: routes.personalBrand },
+  { label: "Growth Architecture™", href: routes.growth },
   { label: "How We Architect Growth", href: routes.how },
   { label: "LQ™ Assessment", href: routes.lq },
   { label: "Insights", href: routes.insights },
   { label: "Blog", href: routes.blog },
   { label: "About", href: routes.about },
   { label: "Start Your Next Level", href: routes.contact },
+  { label: "Contact Us", href: routes.contactUs },
 ];
 
 export const footerNav = {
@@ -47,10 +66,16 @@ export const footerNav = {
     { label: "Personal Brand Architecture™", href: routes.personalBrand },
     { label: "Growth Architecture™", href: routes.growth },
     { label: "How We Architect Growth", href: routes.how },
+    { label: "LQ™ Assessment", href: routes.lq },
     { label: "Insights", href: routes.insights },
     { label: "Blog", href: routes.blog },
     { label: "About", href: routes.about },
     { label: "Start Your Next Level", href: routes.contact },
+    { label: "Contact Us", href: routes.contactUs },
+  ],
+  legal: [
+    { label: "Privacy Policy", href: routes.privacy },
+    { label: "Terms & Conditions", href: routes.terms },
   ],
   frameworks: [
     { label: "LQ™", href: `${routes.how}#lq` },

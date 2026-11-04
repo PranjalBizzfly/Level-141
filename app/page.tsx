@@ -13,7 +13,7 @@ import {
   activityList,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { routes, site } from "@/lib/site";
+import { assessmentCta, routes, site } from "@/lib/site";
 
 export const metadata = {
   ...pageMetadata({
@@ -21,7 +21,7 @@ export const metadata = {
     description: site.description,
     path: "/",
   }),
-  title: { absolute: "Level141 — Growth Architecture for People & Organizations" },
+  title: { absolute: "Level141: Growth Architecture for People & Organizations" },
 };
 
 export default function HomePage() {
@@ -31,7 +31,7 @@ export default function HomePage() {
       <HomeHero />
 
       {/* ---------------------------------------------------- Noise vs architecture */}
-      <Section id="architecture" tone="paper" labelledBy="noise-title">
+      <Section id="architecture" tone="paper" className="!pb-16 sm:!pb-20" labelledBy="noise-title">
         <Reveal className="container-x mx-auto max-w-3xl text-center">
           <Eyebrow className="justify-center text-gold-ink">Growth doesn&apos;t need more noise</Eyebrow>
           <h2 id="noise-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
@@ -78,7 +78,7 @@ export default function HomePage() {
             <ButtonLink href={routes.lq} variant="gold">
               Start Your Personal Brand Assessment
             </ButtonLink>
-            <ButtonLink href={routes.personalBrand} variant="link">
+            <ButtonLink href={`${routes.personalBrand}#vibe`} variant="link">
               Discover Your VIBE™
             </ButtonLink>
           </div>
@@ -87,7 +87,7 @@ export default function HomePage() {
 
       <SplitFeature reverse src="/images/client-executive-dubai-window.webp" labelledBy="ga-title">
         <Reveal>
-          <p className="eyebrow text-muted">Coming later · Waitlist open</p>
+          <p className="eyebrow text-muted">Coming soon · Waitlist open</p>
           <h3 id="ga-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">Growth Architecture™</h3>
           <p className="mt-6 text-base leading-[1.85] text-muted sm:text-lg">
             Your business doesn&apos;t need more disconnected growth initiatives. It needs them working together.
@@ -108,7 +108,7 @@ export default function HomePage() {
         <Reveal>
           <p className="eyebrow text-muted">About Level141</p>
           <h2 id="why141-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
-            Why <span className="serif-accent">141?</span>
+            Why <span className="serif-accent">Level 141?</span>
           </h2>
           <p className="mt-6 text-base leading-[1.85] text-muted sm:text-lg">
             Because growth is never really about reaching a final destination. Every level changes what becomes
@@ -136,7 +136,7 @@ export default function HomePage() {
           </p>
         }
         closingLine="Find Your Level."
-        primary={{ label: "Start Your Level141 Assessment", href: routes.lq }}
+        primary={assessmentCta}
         secondary={{ label: "How we architect growth", href: routes.how }}
       />
     </>

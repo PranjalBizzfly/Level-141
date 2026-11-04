@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
   const result = await deliver({
     kind: "waitlist",
-    subject: `Growth Architecture™ waitlist — ${input.company} — ${input.name}`,
+    subject: `Growth Architecture™ waitlist: ${input.company}, ${input.name}`,
     replyTo: input.email,
     fields: {
       List: "Growth Architecture™ waitlist",

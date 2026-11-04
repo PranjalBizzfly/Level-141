@@ -69,7 +69,11 @@ export function ButtonLink({ variant = "solid", className, children, external, .
       className={cx(buttonBase, buttonStyles[variant], className)}
       {...props}
     >
-      <span>{children}</span>
+      {/* The label rolls on hover: it slides up and a copy rises in from below (motion.css §12). */}
+      <span className="btn-roll">
+        <span>{children}</span>
+        <span aria-hidden>{children}</span>
+      </span>
       <Icon
         aria-hidden
         className="size-4 shrink-0 transition-transform duration-500 ease-[var(--ease-architect)] group-hover:translate-x-1"
@@ -105,7 +109,7 @@ const tones = {
 
 export function Section({ id, tone = "paper", className, children, labelledBy }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-28 sm:py-40 lg:py-56", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cx("relative py-24 sm:py-28 lg:py-36", tones[tone], className)}>
       {children}
     </section>
   );
@@ -229,7 +233,7 @@ export function PhotoBand({ src, caption, className }: { src: string; caption?: 
         {/* Opens from a narrow frame as it arrives, then drifts slowly with the scroll (motion.css §8). */}
         <Reveal variant="fade">
           <div data-unveil>
-            <Photo src={src} sizes="100vw" className="photo-drift h-[70svh] !rounded-none !border-0 !shadow-none sm:h-[85svh]" />
+            <Photo src={src} sizes="100vw" className="photo-drift h-[45svh] !rounded-none !border-0 !shadow-none sm:h-[85svh]" />
           </div>
         </Reveal>
         {caption ? (
@@ -405,9 +409,9 @@ export function SplitFeature({ src, labelledBy, reverse, children }: { src: stri
 }
 
 /** Quiet disclosure: long detail stays on the page, one click away. */
-export function More({ label, className, children }: { label: string; className?: string; children: ReactNode }) {
+export function More({ label, className, children, dark }: { label: string; className?: string; children: ReactNode; dark?: boolean }) {
   return (
-    <details className={cx("group border-y border-line", className)}>
+    <details className={cx("group border-y", dark ? "border-line-dark" : "border-line", className)}>
       <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 text-lg [&::-webkit-details-marker]:hidden">
         {label}
         <span aria-hidden className="text-2xl font-light transition-transform duration-500 group-open:rotate-45">+</span>

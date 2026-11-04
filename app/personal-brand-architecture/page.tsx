@@ -1,6 +1,7 @@
 import { VibeExplorer } from "@/components/diagrams/VibeExplorer";
 import { ProcessTimeline } from "@/components/diagrams/Diagrams";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
 import {
   BracketFrame,
   ButtonLink,
@@ -30,7 +31,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Personal Brand Architecture™",
   description:
-    "Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset — architected through the VIBE™ Framework.",
+    "Personal Brand Architecture™ for founders and leaders: turn your expertise, credibility and experience into a personal brand that creates opportunities.",
   path: routes.personalBrand,
 });
 
@@ -39,6 +40,12 @@ const assessmentHref = routes.lq;
 export default function PersonalBrandPage() {
   return (
     <>
+      <ServiceJsonLd
+        name="Personal Brand Architecture"
+        description={String(metadata.description)}
+        path={routes.personalBrand}
+        audience="Founders, CEOs, entrepreneurs, investors, business owners and senior professionals"
+      />
       <PageHero
         image="/images/client-executive-portrait-woman.webp"
         portrait
@@ -75,7 +82,7 @@ export default function PersonalBrandPage() {
             <span className="serif-accent">where you want to go</span>
           </h2>
           <p className="mt-8 text-base leading-[1.85] text-muted sm:text-lg">
-            We architect the personal brand behind the leader—so what you know, what you have achieved and what you
+            We architect the personal brand behind the leader, so what you know, what you have achieved and what you
             stand for can create the opportunities you are ready for next.
           </p>
         </Reveal>
@@ -127,10 +134,10 @@ export default function PersonalBrandPage() {
             eyebrow="The four dimensions of Personal Brand Architecture"
             title={
               <>
-                Architected through our proprietary <span className="serif-accent text-gold">VIBE™ Framework</span>
+                Architected through our proprietary <span className="serif-accent text-gold">VIBE Framework</span>
               </>
             }
-            intro="VIBE™ answers four sequential questions."
+            intro="VIBE answers four sequential questions."
           />
           <div className="mt-20 sm:mt-28">
             <VibeExplorer />
@@ -149,10 +156,10 @@ export default function PersonalBrandPage() {
         <div className="container-x">
           <SectionHeader
             id="process-title"
-            eyebrow="Personal Brand Architecture™"
+            eyebrow="Personal Brand Architecture"
             title={
               <>
-                How we architect <span className="serif-accent">your VIBE™</span>
+                How we architect <span className="serif-accent">your VIBE</span>
               </>
             }
           />
@@ -160,9 +167,9 @@ export default function PersonalBrandPage() {
           <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 border-y border-line py-10 sm:flex-row sm:items-center sm:py-14">
             <p className="max-w-xl text-lg leading-relaxed">
               {/* Source: Website Structure, "01 — Discover Your Level". */}
-              <span className="font-medium">01 — Discover Your Level</span>{" "}
+              <span className="font-medium">01 · Discover Your Level.</span>{" "}
               <span className="text-muted">
-                We begin with an LQ™ diagnostic assessment across the four VIBE™ dimensions to understand your current
+                We begin with an LQ™ diagnostic assessment across the four VIBE dimensions to understand your current
                 personal brand position.
               </span>
             </p>
@@ -185,9 +192,8 @@ export default function PersonalBrandPage() {
             </Reveal>
             <Reveal delay={120} className="measure text-base leading-relaxed text-muted sm:text-lg lg:col-span-5">
               <p>
-                The strongest fit is not simply a person who wants to become famous. It is a person with genuine
-                substance, a meaningful next-stage objective and sufficient credibility to convert architecture into
-                authority.
+                It is built for people with genuine substance, a meaningful next-stage objective and the credibility to
+                turn architecture into authority.
               </p>
             </Reveal>
           </div>
@@ -210,7 +216,7 @@ export default function PersonalBrandPage() {
           <Reveal>
             <p className="mt-12 max-w-3xl text-2xl leading-snug tracking-[-0.02em] sm:mt-16 sm:text-3xl">
               Your personal brand shouldn&apos;t simply document what you&apos;ve done.{" "}
-              <span className="serif-accent">It should position you for what you want to do next</span>
+              <span className="serif-accent">It should position you for what you want to do next.</span>
             </p>
           </Reveal>
 
@@ -265,7 +271,7 @@ export default function PersonalBrandPage() {
             eyebrow="Pain → Solution → Impact"
             title={
               <>
-                Client pain. <span className="serif-accent text-gold">Level141 intervention</span>
+                Client pain. <span className="serif-accent text-gold">Level141 intervention.</span>
               </>
             }
           />
@@ -302,7 +308,7 @@ export default function PersonalBrandPage() {
             {/* Closing statement and action. */}
             <Reveal className="mt-12 grid gap-8 sm:mt-14 md:grid-cols-12 md:items-center md:gap-8">
               <p className="text-xl leading-snug tracking-[-0.02em] text-paper sm:text-2xl md:col-span-7">
-                Personal Brand Architecture™ starts by locating the gap between your actual value and the market&apos;s
+                Personal Brand Architecture starts by locating the gap between your actual value and the market&apos;s
                 current perception of it.
               </p>
               <div className="md:col-span-5 md:col-start-8 md:flex md:justify-end">
@@ -323,15 +329,14 @@ export default function PersonalBrandPage() {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <Reveal>
-                <p className="eyebrow text-gold-ink">Personal Brand Architecture™</p>
+                <p className="eyebrow text-gold-ink">Personal Brand Architecture</p>
                 <h2 id="modules-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                   Product Architecture <span className="serif-accent">&amp; Modules</span>
                 </h2>
                 <p className="mt-8 leading-relaxed text-muted">
-                  Level141&apos;s role is architecture, strategic direction, governance and measurement. Where execution
-                  partners, internal teams or specialist vendors are required, the architecture should define the brief,
-                  standards, dependencies, review mechanism and success criteria. The product should not collapse into
-                  undifferentiated execution.
+                  Level141 leads the architecture, strategic direction, governance and measurement. Where execution
+                  partners, your own team or specialist vendors are involved, we define the brief, standards,
+                  dependencies, reviews and success criteria, so every piece of execution serves the same architecture.
                 </p>
                 <Photo src="/images/client-executive-study-portrait.webp" sizes="(min-width: 1024px) 34vw, 100vw" className="mt-10 aspect-[4/3] lg:aspect-[5/4]" />
               </Reveal>
@@ -369,7 +374,7 @@ export default function PersonalBrandPage() {
                   eyebrow="Guiding principles"
                   title={
                     <>
-                      Truth before theatre. <span className="serif-accent">Authority before vanity</span>
+                      Truth before theatre. <span className="serif-accent">Authority before vanity.</span>
                     </>
                   }
                 />
@@ -402,18 +407,17 @@ export default function PersonalBrandPage() {
 <More label="Measurement & Success System" className="mt-16 sm:mt-20">
           <div className="grid gap-10 pt-6 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-5">
-              <p className="eyebrow text-gold-ink">Measurement &amp; Success System</p>
-              <h3 className="mt-5 text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">
+              <h3 className="text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">
                 Visibility metrics are useful signals, <span className="serif-accent">but they are not the product outcome</span>
               </h3>
-              <p className="mt-6 leading-[1.85] text-muted">Success should be measured through a balanced scorecard.</p>
-              {/* Source: Personal Brand Architecture bible §11, Recommended Reporting Rhythm. */}
-              <p className="eyebrow mt-8 text-muted">Recommended Reporting Rhythm</p>
-              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted">
-                <li>Monthly: activity, signal and opportunity review.</li>
-                <li>Quarterly: strategic VIBE™ review and corrective actions.</li>
-                <li>Half-yearly: reputation, positioning and stakeholder perception review.</li>
-                <li>Annually: full evolution reset against next-stage ambition.</li>
+              <p className="mt-6 leading-[1.85] text-muted">We measure success across seven dimensions.</p>
+              {/* Source: Personal Brand Architecture bible §11, reporting rhythm, in the client's wording. */}
+              <p className="eyebrow mt-8 text-muted">How we review progress</p>
+              <ul className="mt-4 space-y-2 leading-relaxed text-muted">
+                <li>Monthly: activity, signals and new opportunities.</li>
+                <li>Quarterly: VIBE review and refinements.</li>
+                <li>Half-yearly: reputation, positioning and stakeholder perception.</li>
+                <li>Annually: a full review against your next-level ambition.</li>
               </ul>
             </Reveal>
             <dl className="grid gap-x-10 border-t border-line sm:grid-cols-2 lg:col-span-7">
@@ -471,7 +475,7 @@ export default function PersonalBrandPage() {
         </div>
       </Section>
       <CtaBand
-        eyebrow="Discover your VIBE™. Architect your next level."
+        eyebrow="Discover your VIBE. Architect your next level."
         title={
           <>
             Don&apos;t just become more visible.{" "}
@@ -480,8 +484,8 @@ export default function PersonalBrandPage() {
         }
         body={
           <p>
-            Level141 Personal Brand Architecture™ converts genuine expertise, leadership credibility and lived experience
-            into a structured personal growth asset — architected through the VIBE™ Framework.
+            Level141 Personal Brand Architecture converts genuine expertise, leadership credibility and lived experience
+            into a structured personal growth asset, architected through the VIBE Framework.
           </p>
         }
         primary={{ label: "Start Your Personal Brand Assessment", href: assessmentHref }}

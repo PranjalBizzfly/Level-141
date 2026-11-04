@@ -2,7 +2,7 @@ import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { cx } from "@/components/ui/primitives";
 
 /**
- * "141" framed by the two brackets of the Level141 symbol.
+ * "Level 141" framed by the two brackets of the Level141 symbol.
  * The numerals are optically centred: the text box is trimmed to the digit
  * height and the negative tracking is compensated so the glyphs sit on the
  * true centre of the bracket frame. Decorative (aria-hidden).
@@ -25,11 +25,11 @@ export function Mark141({
       <span className="absolute inset-0 flex items-center justify-center">
         <span
           className={cx(
-            "block font-light leading-none tracking-[-0.06em] [margin-right:-0.06em] [text-box:trim-both_cap_alphabetic]",
+            "block whitespace-nowrap font-light leading-none tracking-[-0.04em] [margin-right:-0.04em] [text-box:trim-both_cap_alphabetic]",
             textClassName,
           )}
         >
-          141
+          Level 141
         </span>
       </span>
     </div>

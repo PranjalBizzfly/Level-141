@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { ArrowUp } from "lucide-react";
 import { cx } from "@/components/ui/primitives";
 
-// Appears once the visitor has scrolled past the first screen.
+// Appears only after two screens of scrolling, so it never sits over the opening content.
 function subscribe(onChange: () => void) {
   window.addEventListener("scroll", onChange, { passive: true });
   window.addEventListener("resize", onChange);
@@ -13,7 +13,7 @@ function subscribe(onChange: () => void) {
     window.removeEventListener("resize", onChange);
   };
 }
-const getScrolled = () => window.scrollY > window.innerHeight;
+const getScrolled = () => window.scrollY > window.innerHeight * 2;
 const getServerScrolled = () => false;
 
 export function ScrollToggle() {

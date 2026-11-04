@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   const interest = interestOptions.find((o) => o.value === input.interest)?.label ?? input.interest;
   const result = await deliver({
     kind: "contact",
-    subject: `New enquiry — ${interest} — ${input.name}`,
+    subject: `New inquiry: ${interest}, ${input.name}`,
     replyTo: input.email,
     fields: {
       "Interested in": interest,
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
 
   if (result === "not_configured")
     return json(
-      { ok: false, code: "not_configured", message: "Online enquiries are not connected yet, so your message was not sent." },
+      { ok: false, code: "not_configured", message: "Online inquiries are not connected yet, so your message was not sent." },
       503,
     );
   if (result === "failed")

@@ -1,7 +1,8 @@
 import { Clock } from "lucide-react";
 import { BrandsSystem, FlowChain, PeakAscent } from "@/components/diagrams/Diagrams";
 import { WaitlistForm } from "@/components/forms/WaitlistForm";
-import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, Photo, PhotoBand, Expandable } from "@/components/ui/primitives";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, Photo, PhotoBand, Expandable, More } from "@/components/ui/primitives";
 import {
   gaAudience,
   gaDimensions,
@@ -14,9 +15,9 @@ import { pageMetadata } from "@/lib/seo";
 import { routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: "Growth Architecture™ — Join the Waitlist",
+  title: "Growth Architecture™",
   description:
-    "Level141 Growth Architecture™ diagnoses where an organization is, defines where it needs to go, and architects the integrated growth system that bridges the gap. Not yet open — register your interest.",
+    "Growth Architecture™ diagnoses where your organization is, defines its next level and architects the growth system to bridge the gap. Join the waitlist.",
   path: routes.growth,
 });
 
@@ -41,13 +42,19 @@ function AvailabilityCard() {
 export default function GrowthArchitecturePage() {
   return (
     <>
+      <ServiceJsonLd
+        name="Growth Architecture"
+        description={String(metadata.description)}
+        path={routes.growth}
+        audience="Growth-stage companies, SMEs, portfolio companies and founder-led businesses"
+      />
       <PageHero
         image="/images/client-executive-dubai-window.webp"
-        eyebrow="Growth Architecture™ · Coming later · Waitlist open"
+        eyebrow="Growth Architecture™ · Coming soon · Waitlist open"
         title={
           <>
-            <span className="block">Your business doesn&apos;t need more disconnected growth initiatives</span>
-            <span className="serif-accent mt-3 block text-gold">It needs them working together</span>
+            <span className="block">Your business doesn&apos;t need more disconnected growth initiatives.</span>
+            <span className="serif-accent mt-3 block text-gold">It needs them working together.</span>
           </>
         }
         intro={
@@ -73,10 +80,10 @@ export default function GrowthArchitecturePage() {
         {/* Headline across the top; photo and supporting text share the row beneath it. */}
         <div className="container-x grid gap-12 sm:gap-16 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-20">
           <Reveal className="lg:col-span-10">
-            <p className="eyebrow text-gold-ink"><span aria-hidden className="tabular-nums">01 · </span>The business problem</p>
+            <p className="eyebrow text-gold-ink">The business problem</p>
             <h2 id="integration-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
               The central problem is not lack of activity.{" "}
-              <span className="serif-accent">It is lack of integration</span>
+              <span className="serif-accent">It is lack of integration.</span>
             </h2>
           </Reveal>
           <Reveal className="lg:col-span-6">
@@ -89,7 +96,7 @@ export default function GrowthArchitecturePage() {
               level.
             </p>
             <p className="text-ink">
-              Level141 Growth Architecture™ examines the complete growth environment—from brand and positioning to
+              Level141 Growth Architecture examines the complete growth environment, from brand and positioning to
               awareness, trust, conversion, sales readiness and scale. We identify where growth is being constrained,
               architect what needs to change, and establish the governance required to keep the organization moving.
             </p>
@@ -97,7 +104,8 @@ export default function GrowthArchitecturePage() {
         </div>
 
         <div className="container-x mt-20 sm:mt-28">
-          {/* Six dimensions as stacked editorial rows: number and name left, description right. */}
+          {/* Six dimensions as stacked editorial rows, one tap away: number and name left, description right. */}
+          <More label="The six dimensions we examine">
           <ol data-seq>
             {gaDimensions.map((d, i) => (
               <li
@@ -116,13 +124,20 @@ export default function GrowthArchitecturePage() {
               </li>
             ))}
           </ol>
+          </More>
           <Reveal className="mx-auto mt-24 max-w-3xl text-center sm:mt-32">
             <BracketFrame tone="ink" size="lg">
             <p className="display text-[clamp(1.75rem,1.3rem+1.4vw,2.5rem)]">
               Growth shouldn&apos;t depend on isolated initiatives.{" "}
-              <span className="serif-accent text-gold-ink">It should operate as a system</span>
+              <span className="serif-accent text-gold-ink">It should operate as a system.</span>
             </p>
             </BracketFrame>
+          </Reveal>
+          {/* Mid-page action, so the waitlist is one tap away after the first explanation. */}
+          <Reveal className="mt-14 flex justify-center sm:mt-16">
+            <ButtonLink href="#waitlist" variant="gold">
+              Join the Waitlist
+            </ButtonLink>
           </Reveal>
         </div>
       </Section>
@@ -138,7 +153,7 @@ export default function GrowthArchitecturePage() {
             eyebrow="Core operating logic"
             title={
               <>
-                From current level to <span className="serif-accent">next level</span> — in one governed sequence.
+                From current level to <span className="serif-accent">next level</span>, in one governed sequence.
               </>
             }
             intro="Level141 does not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
@@ -156,14 +171,14 @@ export default function GrowthArchitecturePage() {
             index="03"
             id="peak-title"
             dark
-            eyebrow="PEAK™ — From presence to momentum."
+            eyebrow="PEAK™: From presence to momentum"
             title={
               <>
                 From being present in the market to{" "}
                 <span className="serif-accent text-gold">self-reinforcing growth</span>
               </>
             }
-            intro="PEAK™ helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
+            intro="PEAK helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
           <div className="mt-20 sm:mt-28">
             <PeakAscent detailed />
@@ -177,13 +192,13 @@ export default function GrowthArchitecturePage() {
           <SectionHeader
             index="04"
             id="brands-title"
-            eyebrow="BRANDS™ — The integrated growth levers"
+            eyebrow="BRANDS™: The integrated growth levers"
             title={
               <>
-                The operating architecture <span className="serif-accent">beneath PEAK™</span>
+                The operating architecture <span className="serif-accent">beneath PEAK</span>
               </>
             }
-            intro="BRANDS™ ensures the major market-facing growth levers are not managed as separate campaigns. Customer & Market is a cross-cutting foundation: every lever is built around the defined ICP, buying context and market reality."
+            intro="BRANDS ensures the major market-facing growth levers are not managed as separate campaigns. Customer & Market is a cross-cutting foundation: every lever is built around the defined ICP, buying context and market reality."
           />
           <div className="mt-20 sm:mt-28">
             <BrandsSystem detailed tone="light" />
@@ -200,13 +215,14 @@ export default function GrowthArchitecturePage() {
             eyebrow="Growth gap architecture"
             title={
               <>
-                Not a list of recommendations. <span className="serif-accent">A prioritized bridge</span>
+                Not a list of recommendations. <span className="serif-accent">A prioritized bridge.</span>
               </>
             }
             intro="The central deliverable is a prioritized bridge between Current Level and Next Level."
           />
           {/* The bridge as a sequence of paired rows: step, the question it answers, what it delivers. */}
-          <ol className="group/list mt-12 border-t border-line-strong sm:mt-16 lg:mt-20">
+          <More label="The seven steps of the bridge" className="mt-12 sm:mt-16 lg:mt-20">
+          <ol className="group/list border-t border-line-strong">
             {gaGapSteps.map((s, i) => (
               <Reveal
                 as="li"
@@ -226,6 +242,7 @@ export default function GrowthArchitecturePage() {
               </Reveal>
             ))}
           </ol>
+          </More>
         </div>
       </Section>
 
@@ -235,7 +252,7 @@ export default function GrowthArchitecturePage() {
           {/* 1 — Header: headline left, best-fit statement right. */}
           <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             <Reveal className="lg:col-span-7">
-              <p className="eyebrow text-gold-ink"><span aria-hidden className="tabular-nums">06 · </span>Who it&apos;s for</p>
+              <p className="eyebrow text-gold-ink">Who it&apos;s for</p>
               <h2 id="triggers-title" className="display mt-5 text-[2.25rem] sm:mt-6 sm:text-5xl lg:text-[3.75rem]">
                 For organizations whose ambition has <span className="serif-accent">outgrown</span> their current growth
                 system.
@@ -250,10 +267,10 @@ export default function GrowthArchitecturePage() {
           </div>
 
           {/* 2 — Audience as a typographic index. */}
-          {/* Column flow (3 · 2 · 2) avoids a lone item on its own row. */}
-          <Reveal as="ul" className="mt-12 gap-x-10 border-t border-line-strong sm:mt-16 sm:columns-2 lg:mt-20 lg:columns-3">
+          {/* A grid, so every row shares one baseline and one hairline across all columns. */}
+          <Reveal as="ul" className="mt-12 grid gap-x-10 border-t border-line-strong sm:mt-16 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
             {gaAudience.map((a, n) => (
-              <li key={a} className="flex break-inside-avoid items-baseline gap-4 border-b border-line py-5 pr-6 text-lg leading-snug tracking-[-0.01em] sm:py-6">
+              <li key={a} className="flex items-baseline gap-4 border-b border-line py-5 pr-6 text-lg leading-snug tracking-[-0.01em] sm:py-6">
                 <span aria-hidden className="eyebrow shrink-0 tabular-nums text-muted">
                   {String(n + 1).padStart(2, "0")}
                 </span>
@@ -265,7 +282,7 @@ export default function GrowthArchitecturePage() {
           <Reveal className="mx-auto mt-24 max-w-3xl text-center sm:mt-32">
             <BracketFrame tone="ink" size="lg">
             <p className="display text-[clamp(1.75rem,1.3rem+1.4vw,2.5rem)]">
-              When ambition changes, the architecture supporting it <span className="serif-accent">must change too</span>
+              When ambition changes, the architecture supporting it <span className="serif-accent">must change too.</span>
             </p>
             </BracketFrame>
           </Reveal>
@@ -333,12 +350,12 @@ export default function GrowthArchitecturePage() {
         <div className="container-x grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Reveal>
-              <p className="eyebrow text-gold-ink"><span aria-hidden className="tabular-nums">08 · </span>Growth Architecture™ waitlist</p>
+              <p className="eyebrow text-gold-ink">Growth Architecture waitlist</p>
               <h2 id="waitlist-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                 Register your organization&apos;s <span className="serif-accent">interest</span>
               </h2>
               <p className="mt-8 text-base leading-[1.85] text-muted sm:text-lg">
-                Growth Architecture™ is not yet available. Join the waitlist and we&apos;ll contact you when it opens.
+                Growth Architecture is not yet available. Join the waitlist and we&apos;ll contact you when it opens.
                 Registering interest does not book or start an engagement.
               </p>
             </Reveal>

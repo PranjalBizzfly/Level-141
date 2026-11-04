@@ -4,7 +4,7 @@ import { AlertCircle, ChevronDown, Loader2 } from "lucide-react";
 import { useCallback, useRef, useState, type ReactNode } from "react";
 import { cx } from "@/components/ui/primitives";
 import { countries, DEFAULT_COUNTRY, findCountry } from "@/lib/forms/countries";
-import { HONEYPOT_FIELD, type FieldErrors, type SubmitResponse } from "@/lib/forms/validation";
+import { HONEYPOT_FIELD, instantErrors, type FieldErrors, type SubmitResponse } from "@/lib/forms/validation";
 
 /* ----------------------------------------------------------- Submission */
 
@@ -140,7 +140,7 @@ export function useVisibleErrors<T>(live: FieldErrors<T>, server: Record<string,
   const blur = useCallback((key: keyof T & string) => () => setSeen((s) => (s.has(key) ? s : new Set(s).add(key))), []);
   const visible = {} as FieldErrors<T>;
   for (const key of Object.keys(live) as Array<keyof T & string>) {
-    if (submitted || seen.has(key)) visible[key] = live[key];
+    if (submitted || seen.has(key) || instantErrors.has(live[key]!)) visible[key] = live[key];
   }
   return { errors: { ...server, ...visible } as FieldErrors<T>, blur, markSubmitted: () => setSubmitted(true) };
 }
@@ -185,7 +185,7 @@ export function PhoneInput({
     : "border-line-strong hover:border-ink/40 focus-within:border-gold-ink focus-within:ring-gold/40";
   return (
     <div className={cx("flex overflow-hidden border-0 border-b bg-transparent transition-[border-color,box-shadow] duration-500 focus-within:border-b-2", ring)}>
-      <div className="relative flex shrink-0 items-center gap-1.5 border-r border-line pl-4 pr-3 text-base">
+      <div className="relative flex shrink-0 items-center gap-1.5 border-r border-line pr-3 text-base">
         <span aria-hidden className="text-sm font-medium tracking-[0.04em] text-muted">{selected.iso}</span>
         <span aria-hidden className="tabular-nums">+{selected.dial}</span>
         <ChevronDown aria-hidden className="size-4 text-muted" />
@@ -197,7 +197,8 @@ export function PhoneInput({
           value={selected.iso}
           onChange={(e) => onCountryChange(e.target.value)}
           onBlur={onBlur}
-          className="absolute inset-0 cursor-pointer opacity-0"
+          // The opened list draws its own colors, so set them for both themes.
+          className="absolute inset-0 cursor-pointer bg-paper text-ink opacity-0 [&>option]:bg-paper [&>option]:text-ink"
         >
           {countries.map((c) => (
             <option key={c.iso} value={c.iso}>

@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { PageHero, Reveal, Section, SectionHeader, PhotoBand } from "@/components/ui/primitives";
-import { insightCategories, questionsWeAsk } from "@/lib/content";
+import { PageHero, Reveal, Section } from "@/components/ui/primitives";
+import { insightCategories } from "@/lib/content";
 import { getPublishedInsights } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
-import { routes } from "@/lib/site";
+import { assessmentCta, routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: "Insights — The Next Level",
+  title: "Insights",
   description:
-    "Ideas for people and organizations that refuse to remain where they are — on growth architecture, personal authority, brand and positioning, growth intelligence and leadership.",
+    "Ideas on growth architecture, personal authority, brand and positioning, growth intelligence and leadership, for people and organizations ready to grow.",
   path: routes.insights,
 });
 
@@ -93,41 +93,6 @@ export default function InsightsPage() {
         </div>
       </Section>
 
-      <PhotoBand src="/images/client-speaker-conference-stage.webp" />
-
-      {/* ---------------------------------------------------------- Questions */}
-      <Section tone="paper-2" labelledBy="questions-title">
-        <div className="container-x">
-          <SectionHeader
-            id="questions-title"
-            eyebrow="Insights"
-            title={
-              <>
-                Discovery <span className="serif-accent">Questions</span>
-              </>
-            }
-          />
-          <div className="mt-20 border-b border-line sm:mt-28">
-            {(
-              [
-                ["Personal Brand Architecture™", questionsWeAsk.people],
-                ["Growth Architecture™", questionsWeAsk.organizations],
-              ] as const
-            ).map(([label, qs], col) => (
-              <Reveal key={label} delay={col * 120} className="grid gap-6 border-t border-line py-10 sm:py-14 lg:grid-cols-12 lg:gap-10">
-                <p className="eyebrow text-gold-ink lg:col-span-5 lg:pt-5">{label}</p>
-                <ul className="divide-y divide-line lg:col-span-7">
-                  {qs.map((q) => (
-                    <li key={q} className="py-4 text-lg leading-snug sm:text-xl">
-                      {q}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Section>
       <CtaBand
         eyebrow="Find your level"
         title={
@@ -142,7 +107,7 @@ export default function InsightsPage() {
           </p>
         }
         closingLine="Find Your Level."
-        primary={{ label: "Start Your Level141 Assessment", href: routes.contact }}
+        primary={assessmentCta}
         secondary={{ label: "How we architect growth", href: routes.how }}
       />
     </>

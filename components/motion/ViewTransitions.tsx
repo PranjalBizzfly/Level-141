@@ -20,11 +20,18 @@ function toTop() {
   window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 }
 
+/** Bring a #section into view once the new page has laid out (it may sit below revealed content). */
+function toSection(id: string) {
+  const go = () => document.getElementById(id)?.scrollIntoView({ block: "start", behavior: "instant" });
+  requestAnimationFrame(go);
+  window.setTimeout(go, 400);
+}
+
 /**
  * Page navigation rules:
- * - Every page opens on its hero. Links to another page always land at the top
- *   (any #section on a cross-page link is dropped), and back/forward does not
- *   restore an old scroll position. Same-page #anchors still scroll in place.
+ * - Every page opens on its hero, unless the link names a #section (such as
+ *   /growth-architecture#waitlist): then it opens on that section. Back/forward
+ *   does not restore an old scroll position. Same-page #anchors scroll in place.
  * - Cross-page links play the silk curtain (PageCurtain) with the page's name,
  *   unless the visitor has asked for reduced motion. Back/forward stay instant.
  */
@@ -34,12 +41,19 @@ export function ViewTransitions() {
   const [phase, setPhase] = useState<CurtainPhase>("idle");
   const [title, setTitle] = useState("");
   const liftRef = useRef<(() => void) | null>(null);
+  const hashRef = useRef("");
 
   // On every route change (link, back or forward), open the new page on its
   // hero. Repeat on the next frame in case the router restores a position late.
   useEffect(() => {
+    // A first load with a #section: the head script removed it from the address and kept it here.
+    const initial = (window as { __l141Hash?: string }).__l141Hash;
+    const hash = hashRef.current || initial || "";
+    hashRef.current = "";
+    (window as { __l141Hash?: string }).__l141Hash = "";
     toTop();
     const raf = requestAnimationFrame(toTop);
+    if (hash) toSection(hash);
     liftRef.current?.();
     return () => cancelAnimationFrame(raf);
   }, [pathname]);
@@ -55,10 +69,11 @@ export function ViewTransitions() {
       if (url.pathname.startsWith("/api/")) return;
 
       e.preventDefault();
-      const target = url.pathname + url.search; // no #hash: the next page opens on its hero
+      const target = url.pathname + url.search + url.hash;
+      hashRef.current = url.hash.slice(1);
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        router.push(target, { scroll: true });
+        router.push(target, { scroll: false });
         return;
       }
       const started = performance.now();
@@ -76,7 +91,7 @@ export function ViewTransitions() {
       const giveUp = window.setTimeout(lift, GIVE_UP_MS);
       window.setTimeout(() => {
         liftRef.current = lift;
-        router.push(target, { scroll: true });
+        router.push(target, { scroll: false });
       }, COVER_MS);
     };
     // Capture phase: runs before next/link, which would otherwise navigate first.

@@ -263,3 +263,77 @@
     opacity: 1;
   }
 }
+
+/* 12. Button labels roll on hover: the label slides up and out while an identical copy
+   rises in from below. The copy is aria-hidden; the label never changes. */
+.btn-roll {
+  display: grid;
+  overflow: hidden;
+}
+.btn-roll > span {
+  grid-area: 1 / 1;
+}
+.btn-roll > span:last-child {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn-roll > span {
+    transition: transform 0.65s var(--ease-architect);
+  }
+  .btn-roll > span:last-child {
+    visibility: visible;
+    transform: translateY(115%);
+  }
+  .group:is(:hover, :focus-visible) > .btn-roll > span:first-child {
+    transform: translateY(-115%);
+  }
+  .group:is(:hover, :focus-visible) > .btn-roll > span:last-child {
+    transform: none;
+  }
+}
+
+/* 13. Text arrives with its section: small labels settle from wide spacing, and body
+   copy comes into focus from a soft blur, just after the headline's mask reveal. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] .eyebrow,
+  html.js [data-reveal].eyebrow {
+    letter-spacing: 0.5em;
+    opacity: 0;
+    transition:
+      letter-spacing 1.4s var(--ease-architect),
+      opacity 1.1s var(--ease-architect);
+  }
+  html.js [data-reveal].is-visible .eyebrow,
+  html.js [data-reveal].is-visible.eyebrow {
+    letter-spacing: 0.22em;
+    opacity: 1;
+  }
+  html.js [data-reveal] p:not(.eyebrow) {
+    filter: blur(6px);
+    transition: filter 1.2s var(--ease-architect) 0.25s;
+  }
+  html.js [data-reveal].is-visible p:not(.eyebrow) {
+    filter: none;
+  }
+
+  /* 14. Buttons follow the text: each comes into focus a beat after its section.
+     Opacity and blur only, so the magnetic pull (translate) and the hover lift
+     (transform) stay free; their own timings are listed here undelayed. */
+  html.js [data-reveal] a.group.rounded-full {
+    opacity: 0;
+    filter: blur(4px);
+    transition:
+      opacity 0.9s var(--ease-architect) 0.45s,
+      filter 0.9s var(--ease-architect) 0.45s,
+      translate 0.45s var(--ease-architect),
+      transform 0.5s var(--ease-architect),
+      box-shadow 0.5s var(--ease-architect),
+      background-color 0.5s,
+      color 0.5s,
+      border-color 0.5s;
+  }
+  html.js [data-reveal].is-visible a.group.rounded-full {
+    opacity: 1;
+    filter: none;
+  }
+}

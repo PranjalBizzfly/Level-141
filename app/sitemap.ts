@@ -3,6 +3,9 @@ import { getPublishedPosts } from "@/lib/blog";
 import { getPublishedInsights } from "@/lib/insights";
 import { routes, siteUrl } from "@/lib/site";
 
+/** Pages are rebuilt on every deploy, so the build date is their last-modified date. */
+const builtAt = new Date();
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     { path: routes.home, priority: 1 },
@@ -14,9 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: routes.blog, priority: 0.6 },
     { path: routes.lq, priority: 0.7 },
     { path: routes.contact, priority: 0.7 },
+    { path: routes.contactUs, priority: 0.6 },
   ];
   return [
-    ...pages.map((p) => ({ url: `${siteUrl}${p.path === "/" ? "" : p.path}`, priority: p.priority })),
+    ...pages.map((p) => ({ url: `${siteUrl}${p.path === "/" ? "" : p.path}`, lastModified: builtAt, priority: p.priority })),
     ...getPublishedInsights().map((a) => ({
       url: `${siteUrl}${routes.insights}/${a.slug}`,
       lastModified: a.publishedAt,

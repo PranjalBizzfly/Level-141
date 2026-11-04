@@ -147,13 +147,13 @@ export const brandsLevers = [
     name: "Branding",
     line: "Build the foundation",
     role: "Clarifies who the organization is, why it matters and why it is different.",
-    components: "Purpose, proposition, category, differentiation, messaging, offer architecture and brand consistency",
+    components: "Purpose, proposition, category, differentiation, messaging, offer architecture and brand consistency.",
   },
   {
     letter: "R",
     name: "Conversion Readiness",
     line: "Prepare attention to become opportunity",
-    role: "Ensures attention can become action and revenue",
+    role: "Ensures attention can become action and revenue.",
     components:
       "Journeys, websites/landing environments, proof, CTAs, lead capture, sales readiness, handoff and conversion friction.",
   },
@@ -161,22 +161,22 @@ export const brandsLevers = [
     letter: "A",
     name: "Awareness",
     line: "Become visible to the right market",
-    role: "Creates qualified first-touch visibility among priority audiences",
-    components: "Paid, earned, owned, partnerships, events, communities, social and targeted reach",
+    role: "Creates qualified first-touch visibility among priority audiences.",
+    components: "Paid, earned, owned, partnerships, events, communities, social and targeted reach.",
   },
   {
     letter: "N",
     name: "Nurture",
     line: "Build relationships before the decision",
-    role: "Moves prospects from awareness and interest toward confidence and action",
+    role: "Moves prospects from awareness and interest toward confidence and action.",
     components:
-      "CRM logic, segmentation, content journeys, follow-up, remarketing, email, education and sales enablement",
+      "CRM logic, segmentation, content journeys, follow-up, remarketing, email, education and sales enablement.",
   },
   {
     letter: "D",
     name: "Discover & Trust",
     line: "Become easier to find, understand and believe",
-    role: "Makes the organization easy to find and credible to validate",
+    role: "Makes the organization easy to find and credible to validate.",
     components:
       "Search, reviews, reputation, proof, media, case studies, authority assets, listings and trust signals.",
   },
@@ -184,7 +184,7 @@ export const brandsLevers = [
     letter: "S",
     name: "Scale",
     line: "Create systems capable of supporting growth",
-    role: "Integrates demand, pipeline, optimization and governance for repeatable growth",
+    role: "Integrates demand, pipeline, optimization and governance for repeatable growth.",
     components:
       "Lead/demand architecture, KPI system, experimentation, budget logic, partner governance, feedback loops and scale roadmap.",
   },
@@ -255,7 +255,7 @@ export const vibe = [
     name: "Vision",
     full: "Visionary Leadership",
     tag: "Visionary Leadership",
-    headline: "Be recognised for where you're going, not just where you've been",
+    headline: "Be recognized for where you're going, not just where you've been",
     body: "We architect your leadership positioning, future vision, personal narrative and thought leadership to establish what you stand for and the direction you represent.",
     question: "What should I stand for and lead?",
     detail:
@@ -285,7 +285,7 @@ export const vibe = [
     focus: [
       "Professional impact: business outcomes, transformations, innovation, teams, customers, industries and institutions",
       "Social impact: community contribution, mentoring, ecosystem development, philanthropy, advocacy or knowledge sharing where genuine",
-      "Personal impact: values, leadership behaviour, relationships, resilience, learning and the human dimension of influence",
+      "Personal impact: values, leadership behavior, relationships, resilience, learning and the human dimension of influence",
       "Evidence architecture: achievements, testimonials, case stories, credentials, milestones and third-party validation",
       "Trust architecture: consistency between what the individual says, does and is known for",
     ],
@@ -325,7 +325,7 @@ export const vibe = [
     detail:
       "Evolution protects the brand from becoming a historical snapshot. It establishes a forward-looking reputation roadmap and identifies what the individual must learn, demonstrate, enter or leave behind to reach the next level.",
     focus: [
-      "12–36 month reputation ambition",
+      "12 to 36 month reputation ambition",
       "Role and category evolution",
       "New knowledge and intellectual-property development",
       "Audience and geographic expansion",
@@ -342,11 +342,11 @@ export const vibeStages = [
   {
     n: "01",
     name: "Discover Your Level",
-    body: "We begin with an LQ™ diagnostic assessment across the four VIBE™ dimensions to understand your current personal brand position.",
+    body: "We begin with an LQ diagnostic assessment across the four VIBE dimensions to understand your current personal brand position.",
   },
   {
     n: "02",
-    name: "Architect Your VIBE™",
+    name: "Architect Your VIBE",
     body: "We develop your positioning, leadership narrative, authority strategy, impact architecture and opportunity roadmap.",
   },
   {
@@ -362,7 +362,7 @@ export const vibeStages = [
   {
     n: "05",
     name: "Measure Your Next Level",
-    body: "We reassess your LQ™ to evaluate progress against your starting position and identify the next stage of your evolution.",
+    body: "We reassess your LQ to evaluate progress against your starting position and identify the next stage of your evolution.",
   },
 ] as const;
 
@@ -436,7 +436,7 @@ export const pbaVoices = [
 ] as const;
 
 export const pbaModules = [
-  { name: "LQ™ diagnostic assessment", purpose: "Establish current-state reality and gap to ambition" },
+  { name: "LQ diagnostic assessment", purpose: "Establish current-state reality and gap to ambition" },
   { name: "Visionary Leadership Architecture", purpose: "Define what the individual should stand for" },
   { name: "Presence & Profile System", purpose: "Translate strategy into a coherent market-facing identity" },
   { name: "Thought Leadership Architecture", purpose: "Turn expertise into repeatable intellectual authority" },
@@ -471,7 +471,7 @@ export const pbaMeasures = [
   { name: "Audience quality", q: "Are the right people paying attention?" },
   { name: "Opportunity", q: "Is authority converting into useful access?" },
   { name: "Business contribution", q: "Is the personal brand supporting commercial or strategic growth?" },
-  { name: "Evolution", q: "Is the brand moving toward the next ambition?" },
+  { name: "Evolution", q: "Is the personal brand moving toward the next ambition?" },
 ] as const;
 
 /* ------------------------------------------------- Growth Architecture™ */
@@ -497,34 +497,34 @@ export const gaAudience = [
 
 export const gaOperatingLogic = [
   "Current Level",
-  "LQ™ Growth Audit",
+  "LQ Growth Audit",
   "Next Level",
   "Growth Gap",
-  "PEAK™ Architecture",
-  "BRANDS™ Growth Levers",
+  "PEAK Architecture",
+  "BRANDS Growth Levers",
   "Governed Activation",
   "Measurement",
   "Scale",
 ] as const;
 
 export const gaTriggers = [
-  { name: "Revenue plateau", why: "More of the same activity is no longer producing proportional growth" },
+  { name: "Revenue plateau", why: "More of the same activity is no longer producing proportional growth." },
   { name: "New market/geography", why: "The company must redefine audience, positioning, channels, trust and conversion for a new context." },
   { name: "New product/category", why: "The market needs to understand why the offer matters and why this company should win." },
-  { name: "Post-investment scale", why: "Capital needs to be converted into a governed value-creation roadmap" },
-  { name: "High marketing spend / low ROI", why: "The system must be diagnosed before increasing spend" },
-  { name: "Sales and marketing disconnect", why: "Demand, qualification, nurture, handoff and feedback loops require one architecture" },
-  { name: "Rebrand / repositioning", why: "Identity changes must connect to market, customer, conversion and growth outcomes" },
-  { name: "Agency proliferation", why: "Execution needs one strategic source of truth and governance layer" },
-  { name: "Founder-led selling ceiling", why: "Institutional trust, demand and conversion systems must reduce dependence on the founder" },
-  { name: "Competitive disruption", why: "The company must rebuild relevance, authority and demand in a changing market" },
+  { name: "Post-investment scale", why: "Capital needs to be converted into a governed value-creation roadmap." },
+  { name: "High marketing spend / low ROI", why: "The system must be diagnosed before increasing spend." },
+  { name: "Sales and marketing disconnect", why: "Demand, qualification, nurture, handoff and feedback loops require one architecture." },
+  { name: "Rebrand / repositioning", why: "Identity changes must connect to market, customer, conversion and growth outcomes." },
+  { name: "Agency proliferation", why: "Execution needs one strategic source of truth and governance layer." },
+  { name: "Founder-led selling ceiling", why: "Institutional trust, demand and conversion systems must reduce dependence on the founder." },
+  { name: "Competitive disruption", why: "The company must rebuild relevance, authority and demand in a changing market." },
 ] as const;
 
 export const gaGapSteps = [
-  { name: "Current State", q: "What is true today?", out: "Evidence-based LQ™ baseline" },
+  { name: "Current State", q: "What is true today?", out: "Evidence-based LQ baseline" },
   { name: "Next Level", q: "What specific business state are we trying to reach?", out: "Target outcomes and strategic definition" },
   { name: "Gap", q: "What prevents movement from current to next?", out: "Prioritized constraints, dependencies and opportunities" },
-  { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK™ / BRANDS™ blueprint" },
+  { name: "Architecture", q: "Which integrated systems must change?", out: "PEAK / BRANDS blueprint" },
   { name: "Activation", q: "What must happen first, by whom and in what sequence?", out: "90-day and phased roadmap" },
   { name: "Measurement", q: "How will we know the system is moving?", out: "Leading, pipeline and outcome KPIs" },
   { name: "Governance", q: "How will decisions, execution and corrections be managed?", out: "Operating cadence, ownership and review model" },
@@ -550,7 +550,7 @@ export const principles = [
   { name: "Governed Execution", body: "Strategy requires ownership, accountability and measurement" },
   {
     name: "Authority Reality",
-    body: "Authority must be earned through genuine capability, evidence and contribution—not manufactured perception",
+    body: "Authority must be earned through genuine capability, evidence and contribution, not manufactured perception",
   },
 ] as const;
 
@@ -571,16 +571,16 @@ export type InsightCategorySlug = (typeof insightCategories)[number]["slug"];
 export const questionsWeAsk = {
   people: [
     "What do you want to be known for three years from now?",
-    "What are you currently known for—and is that helping or limiting your next stage?",
+    "What are you currently known for, and is that helping or limiting your next stage?",
     "What expertise or achievements do you believe the market underestimates?",
     "Which opportunities should your reputation create more consistently?",
     "What evidence best proves your impact?",
   ],
   organizations: [
-    "What does the next level look like in 12–36 months?",
+    "What does the next level look like in 12 to 36 months?",
     "What has stopped the company from reaching it already?",
     "Where does the funnel lose the most value today?",
     "What creates trust before a buyer speaks to sales?",
-    "If demand doubled next month, could the organization convert and fulfil it?",
+    "If demand doubled next month, could the organization convert and fulfill it?",
   ],
 } as const;

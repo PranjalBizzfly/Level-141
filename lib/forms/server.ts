@@ -11,7 +11,7 @@ import { HONEYPOT_FIELD, MIN_FILL_MS, type SubmitResponse } from "./validation";
  */
 
 export type Submission = {
-  kind: "contact" | "waitlist";
+  kind: "contact" | "waitlist" | "lq" | "newsletter";
   subject: string;
   replyTo: string;
   fields: Record<string, string>;
@@ -28,10 +28,10 @@ const escapeHtml = (s: string) =>
 
 async function sendEmail(sub: Submission) {
   const rows = Object.entries(sub.fields)
-    .map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#5c5750;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0">${escapeHtml(v || "—").replace(/\n/g, "<br>")}</td></tr>`)
+    .map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#5c5750;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0">${escapeHtml(v || "(none)").replace(/\n/g, "<br>")}</td></tr>`)
     .join("");
   const text = Object.entries(sub.fields)
-    .map(([k, v]) => `${k}: ${v || "—"}`)
+    .map(([k, v]) => `${k}: ${v || "(none)"}`)
     .join("\n");
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -47,6 +47,31 @@ async function sendEmail(sub: Submission) {
     signal: AbortSignal.timeout(10_000),
   });
   if (!res.ok) throw new Error(`Resend responded ${res.status}`);
+}
+
+/** Sends a finished email (such as the LQ™ report) to one visitor through Resend. */
+export async function sendEmailTo(mail: { to: string; subject: string; text: string; html: string; replyTo?: string }) {
+  if (!deliveryConfigured().email) return false;
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: process.env.FORM_FROM_EMAIL,
+        to: [mail.to],
+        reply_to: mail.replyTo ?? process.env.FORM_TO_EMAIL!.split(",")[0].trim(),
+        subject: mail.subject,
+        text: mail.text,
+        html: mail.html,
+      }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!res.ok) throw new Error(`Resend responded ${res.status}`);
+    return true;
+  } catch (err) {
+    console.error("[forms] visitor email error:", err);
+    return false;
+  }
 }
 
 async function sendWebhook(sub: Submission) {

@@ -29,10 +29,10 @@ export function ProcessTimeline({ steps, dark, className }: { steps: readonly St
           key={s.n}
           data-step
           style={step(i)}
-          className={cx("grid gap-5 border-b py-10 sm:py-14 lg:grid-cols-12 lg:items-baseline lg:gap-x-10 lg:py-16", rule)}
+          className={cx("grid gap-3 border-b py-7 sm:gap-5 sm:py-14 lg:grid-cols-12 lg:items-baseline lg:gap-x-10 lg:py-16", rule)}
         >
           <span className={cx("text-sm tabular-nums lg:col-span-1", dark ? "text-paper/55" : "text-muted")}>{s.n}</span>
-          <h3 className="display text-[2.5rem] leading-[1.02] sm:text-6xl lg:col-span-4 lg:text-[3.75rem]">{s.name}</h3>
+          <h3 className="display text-[2rem] leading-[1.02] sm:text-6xl lg:col-span-4 lg:text-[3.75rem]">{s.name}</h3>
           <div className="lg:col-span-4">
             {s.line ? <p className={cx("text-lg font-medium leading-snug", dark ? "text-paper" : "text-ink")}>{s.line}</p> : null}
             <p className={cx("mt-3 leading-relaxed", dark ? "text-paper/70" : "text-muted")}>{s.body}</p>
@@ -105,7 +105,7 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
   return (
     <figure data-seq>
       <figcaption className="sr-only">
-        PEAK™: Presence, then Equity, then Authority, then Kinetic Growth — from presence to momentum.
+        PEAK™: Presence, then Equity, then Authority, then Kinetic Growth: from presence to momentum.
       </figcaption>
       {/* Open editorial rows: one stage at a time, climbing down the page. */}
       <ol className={cx("border-b", dark ? "border-line-dark" : "border-line")}>
@@ -114,9 +114,9 @@ export function PeakAscent({ detailed, dark = true }: { detailed?: boolean; dark
             key={s.letter}
             data-step
             style={step(i)}
-            className={cx("grid gap-6 border-t py-12 sm:py-16 lg:grid-cols-12 lg:gap-10", dark ? "border-line-dark" : "border-line")}
+            className={cx("grid gap-4 border-t py-8 sm:gap-6 sm:py-16 lg:grid-cols-12 lg:gap-10", dark ? "border-line-dark" : "border-line")}
           >
-            <span aria-hidden className="text-6xl font-light leading-none lg:col-span-2 lg:text-7xl">
+            <span aria-hidden className="text-5xl font-light leading-none sm:text-6xl lg:col-span-2 lg:text-7xl">
               {s.letter}
             </span>
             <div className="lg:col-span-5">
@@ -274,7 +274,7 @@ export function BrandsSystem({ detailed, tone = "dark" }: { detailed?: boolean; 
       <ol className={cx("border-b lg:col-span-6 lg:col-start-7", dark ? "border-line-dark" : "border-line")}>
         {brandsLevers.map((l, i) => (
           <Reveal as="li" key={l.letter} delay={i * 70} className={cx("border-t", dark ? "border-line-dark" : "border-line")}>
-            <div data-lever-item={l.letter} className="grid grid-cols-[3.5rem_1fr] py-8 sm:py-10">
+            <div data-lever-item={l.letter} className="grid grid-cols-[3.5rem_1fr] py-6 sm:py-10">
               <span aria-hidden className="text-4xl font-light leading-none">
                 {l.letter}
               </span>

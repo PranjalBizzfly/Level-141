@@ -1,15 +1,15 @@
-import { BracketClose, BracketOpen, LogoSymbol } from "@/components/brand/Logo";
+import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { Mark141 } from "@/components/brand/Mark141";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, Photo, PhotoBand } from "@/components/ui/primitives";
 import { principles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { routes } from "@/lib/site";
+import { assessmentCta, routes, site } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "Level141 is a Growth Architecture company — part of the 1XL ecosystem, headquartered in Dubai. Our purpose: architect the next level of growth for people, businesses and ideas.",
+    "Level141 is a Growth Architecture company in Dubai, part of 1XL Holdings. We architect the next level of growth for people, businesses and ideas.",
   path: routes.about,
 });
 
@@ -21,7 +21,7 @@ export default function AboutPage() {
         eyebrow="About Level141"
         title={
           <>
-            Why <span className="serif-accent text-gold">141?</span>
+            Why <span className="serif-accent text-gold">Level 141?</span>
           </>
         }
         intro={
@@ -33,7 +33,7 @@ export default function AboutPage() {
         aside={
           <Mark141
             className="mx-auto w-48 sm:w-64 lg:w-full lg:max-w-xs"
-            textClassName="text-5xl sm:text-6xl"
+            textClassName="text-3xl sm:text-4xl lg:text-[2.75rem]"
             openClassName="text-gold"
           />
         }
@@ -63,7 +63,7 @@ export default function AboutPage() {
               and architect the interconnected systems required to get there.
             </p>
             <p className="mt-6 text-lg">
-              We call it: <span className="serif-accent text-gold-ink">Growth Architecture</span>
+              We call it: <span className="serif-accent text-gold-ink">Growth Architecture.</span>
             </p>
           </Reveal>
         </div>
@@ -85,9 +85,9 @@ export default function AboutPage() {
             {/* Source: Website Structure, OUR PURPOSE. The people and businesses lines reuse the
                 approved one-line descriptions of the two architectures shown further down this page. */}
             {[
-              ["For people", "Converts genuine expertise, leadership credibility and lived experience into a structured personal growth asset"],
-              ["For businesses", "One integrated architecture connecting every critical growth lever to measurable business outcomes"],
-              ["For ideas", "with the potential to become significantly bigger than they are today"],
+              ["For people", "We turn your expertise, credibility and experience into a personal brand that creates opportunities."],
+              ["For businesses", "We connect every critical growth lever in one integrated architecture, measured against business outcomes."],
+              ["For ideas", "With the potential to become significantly bigger than they are today."],
             ].map(([title, body], i) => (
               <Reveal as="li" key={title} delay={i * 100} className="grid gap-4 border-t border-line-dark py-10 sm:py-14 lg:grid-cols-12 lg:items-center lg:gap-10">
                 <p className="flex items-baseline gap-5 text-2xl tracking-[-0.02em] sm:text-[1.75rem] lg:col-span-5">
@@ -108,14 +108,14 @@ export default function AboutPage() {
             <p className="eyebrow text-muted">The Level141 belief</p>
             <h2 id="belief-system-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
               Growth isn&apos;t a collection of activities.{" "}
-              <span className="serif-accent">It&apos;s a system</span>
+              <span className="serif-accent">It&apos;s a system.</span>
             </h2>
           </Reveal>
           <Reveal className="mt-12 lg:mt-14">
             <BracketFrame size="lg" className="mx-auto max-w-3xl text-center">
               <p className="text-2xl font-light leading-snug tracking-[-0.02em] sm:text-[2rem]">
                 Growth happens when the pieces work together.{" "}
-                <span className="serif-accent">That&apos;s what we architect</span>
+                <span className="serif-accent">That&apos;s what we architect.</span>
               </p>
             </BracketFrame>
           </Reveal>
@@ -166,7 +166,7 @@ export default function AboutPage() {
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-gold-ink">Two ambitions. Two architectures.</p>
             <h2 id="offer-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
-              Level141 has built dedicated architectures <span className="serif-accent">for both</span>
+              Level141 has built dedicated architectures <span className="serif-accent">for both.</span>
             </h2>
             <p className="mt-8 text-base leading-[1.85] text-muted sm:text-lg">
               Level141 is a Growth Architecture company. It does not treat branding, visibility, authority, lead
@@ -215,14 +215,11 @@ export default function AboutPage() {
       <Section tone="white" labelledBy="ecosystem-title" className="!py-10 sm:!py-12">
         <div className="container-x">
           <Reveal>
-            <BracketFrame tone="ink" size="md" className="grid gap-8 md:grid-cols-12 md:items-center">
-              <LogoSymbol className="size-14 text-ink md:col-span-1" title="Level141 symbol" />
-              <div className="md:col-span-7">
-                <h2 id="ecosystem-title" className="text-2xl tracking-[-0.02em] sm:text-3xl">
-                  Part of the 1XL ecosystem, headquartered in Dubai.
-                </h2>
-              </div>
-              <p className="eyebrow text-muted md:col-span-4 md:text-right">Level141 — Growth by Design.</p>
+            <BracketFrame tone="ink" size="md" className="grid gap-6 md:grid-cols-12 md:items-center">
+              <h2 id="ecosystem-title" className="text-2xl tracking-[-0.02em] sm:text-3xl md:col-span-8">
+                Part of {site.parent}, headquartered in {site.headquarters}.
+              </h2>
+              <p className="eyebrow text-muted md:col-span-4 md:text-right">{site.brandLine}</p>
             </BracketFrame>
           </Reveal>
         </div>
@@ -234,7 +231,7 @@ export default function AboutPage() {
             You&apos;ve reached this level. <span className="serif-accent text-gold">What&apos;s your next?</span>
           </>
         }
-        primary={{ label: "Start Your Level141 Assessment", href: routes.contact }}
+        primary={assessmentCta}
         secondary={{ label: "How we architect growth", href: routes.how }}
       />
     </>
