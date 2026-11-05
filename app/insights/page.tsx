@@ -86,7 +86,7 @@ export default function InsightsPage() {
                   {c.body}
                 </p>
                 <span aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-line-dark" />
-                <span aria-hidden data-reveal-line className="absolute bottom-0 left-0 h-px w-1/4 bg-gold" />
+                <span aria-hidden data-reveal-line className="absolute bottom-0 left-0 h-px w-full bg-gold/50" />
               </Reveal>
             ))}
           </ol>
