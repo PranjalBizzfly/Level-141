@@ -12,7 +12,7 @@ const GIVE_UP_MS = 4000; // never hold the page hostage if a route is slow
 
 function pageTitle(path: string) {
   if (path === routes.lq) return "LQ™ Assessment";
-  return mainNav.find((n) => n.href === path)?.label ?? "Level141";
+  return mainNav.find((n) => n.href === path)?.label ?? "Level 141";
 }
 
 /** Jump to the very top without the global smooth-scroll animation. */

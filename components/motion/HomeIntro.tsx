@@ -62,7 +62,7 @@ export function HomeIntro() {
               <LogoLockup title="" className="block h-9 w-auto sm:h-11" />
             </span>
           </span>
-          <p className="mt-14 text-sm text-ink">Loading Level141</p>
+          <p className="mt-14 text-sm text-ink">Loading Level 141</p>
           <span aria-hidden className="relative mt-3 block h-px w-12 overflow-hidden bg-line">
             <span className="intro-track absolute inset-0 origin-left bg-ink" />
           </span>

@@ -11,7 +11,7 @@ import { routes } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "Blog",
-  description: "Articles from Level141 on growth architecture, personal authority, brand and positioning, growth intelligence and leadership.",
+  description: "Articles from Level 141 on growth architecture, personal authority, brand and positioning, growth intelligence and leadership.",
   path: routes.blog,
 });
 
@@ -37,7 +37,7 @@ export default async function BlogPage({ searchParams }: Props) {
         eyebrow="Blog"
         title={
           <>
-            The Level141 <span className="serif-accent text-gold">Blog</span>
+            The Level 141 <span className="serif-accent text-gold">Blog</span>
           </>
         }
         intro={<p>Articles on growth architecture, personal authority, brand, positioning and leadership.</p>}

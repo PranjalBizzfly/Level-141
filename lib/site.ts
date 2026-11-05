@@ -3,16 +3,35 @@ export const siteUrl = (
   (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
 ).replace(/\/$/, "");
 
+/**
+ * The LQ™ landing page. Every "start the assessment" link on the site points here.
+ * Set NEXT_PUBLIC_LQ_URL to the separate LQ landing page's address when it is live;
+ * until then this site's own LQ page (/lq-assessment) is used.
+ */
+export const lqLanding = process.env.NEXT_PUBLIC_LQ_URL || "/lq-assessment";
+
 export const site = {
-  name: "Level141",
+  name: "Level 141",
   tagline: "Growth Architecture for People & Organizations.",
   slogan: "Growth By Design",
-  brandLine: "Level141 · Growth By Design.",
+  brandLine: "Level 141 · Growth By Design.",
   description:
-    "Level141 architects the next level of growth for people and organizations through clarity, positioning, visibility, credibility and authority.",
+    "Level 141 architects the next level of growth for people and organizations through clarity, positioning, visibility, credibility and authority.",
   headquarters: "Dubai",
+  /** Where Level 141 is, as the client gave it. */
+  location: "Burj Khalifa, Dubai",
+  /**
+   * Public contact details for the Contact Us page. Each line shows only once it has a
+   * value, so add the verified email, phone number and full address here when confirmed.
+   */
+  contact: { email: "", phone: "", address: "" } as { email: string; phone: string; address: string },
+  /**
+   * Legal details for the Privacy Policies and Terms. Each must come from Level 141; until
+   * set, the documents show "To be confirmed by Level 141" in their place.
+   */
+  legal: { entity: "", governingLaw: "", effectiveDate: "" } as { entity: string; governingLaw: string; effectiveDate: string },
   parent: "1XL Holdings",
-  primaryCta: { label: "Find Your Level", href: "/lq-assessment" },
+  primaryCta: { label: "Find Your Level", href: lqLanding },
 } as const;
 
 export type NavItem = { label: string; href: string };
@@ -44,8 +63,8 @@ export const socialLinks: { label: string; href: string }[] = [
   { label: "X", href: "" },
 ];
 
-/** The one assessment call to action. Every "Start Your Level141 Assessment" button uses it. */
-export const assessmentCta = { label: "Start Your Level141 Assessment", href: routes.lq } as const;
+/** The one assessment call to action. Every "Start Your Level 141 Assessment" button uses it. */
+export const assessmentCta = { label: "Start Your Level 141 Assessment", href: lqLanding } as const;
 
 /** Primary navigation, in the order given by the LEVEL141 WEBSITE document. */
 export const mainNav: NavItem[] = [
@@ -53,7 +72,7 @@ export const mainNav: NavItem[] = [
   { label: "Personal Brand Architecture™", href: routes.personalBrand },
   { label: "Growth Architecture™", href: routes.growth },
   { label: "How We Architect Growth", href: routes.how },
-  { label: "LQ™ Assessment", href: routes.lq },
+  { label: "LQ™ Assessment", href: lqLanding },
   { label: "Insights", href: routes.insights },
   { label: "Blog", href: routes.blog },
   { label: "About", href: routes.about },
@@ -66,7 +85,7 @@ export const footerNav = {
     { label: "Personal Brand Architecture™", href: routes.personalBrand },
     { label: "Growth Architecture™", href: routes.growth },
     { label: "How We Architect Growth", href: routes.how },
-    { label: "LQ™ Assessment", href: routes.lq },
+    { label: "LQ™ Assessment", href: lqLanding },
     { label: "Insights", href: routes.insights },
     { label: "Blog", href: routes.blog },
     { label: "About", href: routes.about },
@@ -79,7 +98,7 @@ export const footerNav = {
   ],
   frameworks: [
     { label: "LQ™", href: `${routes.how}#lq` },
-    { label: "LQ™ Assessment", href: routes.lq },
+    { label: "LQ™ Assessment", href: lqLanding },
     { label: "IGF™", href: `${routes.how}#igf` },
     { label: "BRANDS™", href: `${routes.how}#brands` },
     { label: "PEAK™", href: `${routes.how}#peak` },

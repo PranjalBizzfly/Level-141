@@ -27,7 +27,15 @@ export function SmoothScroll() {
 
     const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
 
+    // The page this glide started on. A glide must never carry over to the next page:
+    // after a link is clicked mid-glide, the new page opens on its hero (ViewTransitions).
+    let glidePath = location.pathname;
+
     const step = () => {
+      if (location.pathname !== glidePath) {
+        animating = false;
+        return;
+      }
       current += (target - current) * EASE;
       if (Math.abs(target - current) < 0.5) {
         current = target;
@@ -67,6 +75,7 @@ export function SmoothScroll() {
       target = Math.max(0, Math.min(maxScroll(), target + e.deltaY * unit));
       if (!animating) {
         animating = true;
+        glidePath = location.pathname;
         frame = requestAnimationFrame(step);
       }
     };

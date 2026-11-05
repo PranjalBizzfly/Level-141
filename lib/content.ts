@@ -37,7 +37,7 @@ export const beliefPairs = [
   "Execution without architecture becomes activity",
 ] as const;
 
-/* -------------------------------------------------------- Level141 process */
+/* -------------------------------------------------------- Level 141 process */
 
 export const levelProcess = [
   {
@@ -65,7 +65,7 @@ export const levelProcess = [
     n: "04",
     name: "Govern",
     line: "Keep growth aligned",
-    body: "Growth initiatives require measurement, accountability and course correction. Level141 establishes the governance structure required to keep the architecture working.",
+    body: "Growth initiatives require measurement, accountability and course correction. Level 141 establishes the governance structure required to keep the architecture working.",
     question: "Is everything moving together?",
   },
   {
@@ -130,11 +130,11 @@ export const whyLevel141 = [
   },
 ] as const;
 
-/** How Level141 engagements are to be presented — a structure, not a case study. */
+/** How Level 141 engagements are to be presented — a structure, not a case study. */
 export const transformationFrame = [
   { label: "The Challenge", question: "Where was the person or organization?" },
   { label: "The Constraint", question: "What was preventing the next level?" },
-  { label: "The Architecture", question: "What did Level141 redesign?" },
+  { label: "The Architecture", question: "What did Level 141 redesign?" },
   { label: "The Shift", question: "What changed?" },
   { label: "The Impact", question: "What measurable business, market or reputation outcome followed?" },
 ] as const;
@@ -562,12 +562,12 @@ export const insightCategories = [
   { slug: "brand-positioning", name: "Brand & Positioning", body: "Why being different matters more than simply being visible" },
   { slug: "growth-intelligence", name: "Growth Intelligence", body: "Observations on changing markets, customers and business models" },
   { slug: "leadership", name: "Leadership", body: "The role leaders play in shaping organizational growth" },
-  { slug: "level141-perspectives", name: "Level141 Perspectives", body: "Contrarian ideas, frameworks and observations from the Level141 team" },
+  { slug: "level141-perspectives", name: "Level 141 Perspectives", body: "Contrarian ideas, frameworks and observations from the Level 141 team" },
 ] as const;
 
 export type InsightCategorySlug = (typeof insightCategories)[number]["slug"];
 
-/** Questions drawn from the Level141 discovery playbooks. */
+/** Questions drawn from the Level 141 discovery playbooks. */
 export const questionsWeAsk = {
   people: [
     "What do you want to be known for three years from now?",

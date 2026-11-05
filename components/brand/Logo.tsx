@@ -1,5 +1,5 @@
 /**
- * Official Level141 marks, traced 1:1 from the supplied Illustrator files
+ * Official Level 141 marks, traced 1:1 from the supplied Illustrator files
  * (Docs/logo-1…6.pdf). Paths are unmodified; only the colour is inherited
  * via currentColor so the same mark serves the black and white variants.
  */
@@ -39,7 +39,7 @@ function Svg({ viewBox, className, title, children }: MarkProps & { viewBox: str
 }
 
 /** Logo 1 / 2 — symbol + wordmark lockup. */
-export function LogoLockup({ className, title = "Level141" }: MarkProps) {
+export function LogoLockup({ className, title = "Level 141" }: MarkProps) {
   return (
     <Svg viewBox="276.87 480.52 726.27 113.63" className={className} title={title}>
       {LOCKUP_D.map((d) => (
@@ -59,7 +59,7 @@ export function LogoSymbol({ className, title }: MarkProps) {
 }
 
 /** Logo 5 / 6 — wordmark only (shares glyphs with the lockup). */
-export function LogoWordmark({ className, title = "Level141" }: MarkProps) {
+export function LogoWordmark({ className, title = "Level 141" }: MarkProps) {
   return (
     <Svg viewBox="453.19 501.27 549.95 72.13" className={className} title={title}>
       {LOCKUP_D.slice(1).map((d) => (

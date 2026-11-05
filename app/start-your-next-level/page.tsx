@@ -9,7 +9,7 @@ import { routes } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Start Your Next Level",
   description:
-    "Contact Level141 in Dubai. Start a conversation about Personal Brand Architecture™, partnerships or your next level of growth.",
+    "Contact Level 141 in Dubai. Start a conversation about Personal Brand Architecture™, partnerships or your next level of growth.",
   path: routes.contact,
 });
 
@@ -60,7 +60,7 @@ export default async function ContactPage({ searchParams }: Props) {
         {/* Supporting information */}
         <div className="on-dark bg-ink px-5 py-12 text-paper sm:px-8 lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:px-14 lg:pb-20 lg:pt-14">
           <div className="animate-fade [animation-delay:300ms]">
-            <p className="eyebrow text-paper-muted">How Level141 works</p>
+            <p className="eyebrow text-paper-muted">How Level 141 works</p>
             <ol className="mt-5 space-y-4">
               {levelProcess.slice(0, 3).map((s) => (
                 <li key={s.n} className="flex gap-4">

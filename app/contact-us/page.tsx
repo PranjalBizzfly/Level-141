@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { MessageForm } from "@/components/forms/MessageForm";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero, Reveal, Section } from "@/components/ui/primitives";
@@ -8,34 +7,22 @@ import { assessmentCta, routes, site } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "Contact Us",
   description:
-    "Contact Level141 in Dubai about Personal Brand Architecture™, the Growth Architecture™ waitlist, partnerships or any other question.",
+    "Contact Level 141 in Dubai about Personal Brand Architecture™, the Growth Architecture™ waitlist, partnerships or any other question.",
   path: routes.contactUs,
 });
 
 /*
  * Contact Us, built like the other pages: photo hero, a revealed section with the
- * details beside a simple form, then the closing call to action. Add the public email,
- * phone and office address to `details` once Level141 confirms them.
+ * details beside the form, then the closing call to action. Email, phone and address
+ * appear as soon as they are set in `site.contact` (lib/site.ts).
  */
 export default function ContactUsPage() {
+  const { email, phone, address } = site.contact;
   const details: { label: string; value: React.ReactNode }[] = [
-    { label: "Headquarters", value: `${site.headquarters}, part of ${site.parent}` },
-    {
-      label: "Organizations",
-      value: (
-        <>
-          Growth Architecture™ is waitlist only. <Link href={routes.waitlist}>Join the waitlist</Link>.
-        </>
-      ),
-    },
-    {
-      label: "Your level",
-      value: (
-        <>
-          <Link href={routes.lq}>Take the free LQ™ Assessment</Link>.
-        </>
-      ),
-    },
+    { label: "Location", value: site.location },
+    ...(email ? [{ label: "Email", value: <a href={`mailto:${email}`}>{email}</a> }] : []),
+    ...(phone ? [{ label: "Phone", value: <a href={`tel:${phone.replace(/[^+\d]/g, "")}`}>{phone}</a> }] : []),
+    ...(address ? [{ label: "Address", value: address }] : []),
   ];
 
   return (
@@ -51,8 +38,8 @@ export default function ContactUsPage() {
         }
         intro={
           <p>
-            Questions about Personal Brand Architecture™, Growth Architecture™ or a partnership? Send us a message and
-            the Level141 team will reply.
+            For enquiries about Personal Brand Architecture™, Growth Architecture™, or partnership opportunities, please
+            get in touch using the form below.
           </p>
         }
       />

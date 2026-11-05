@@ -2,7 +2,7 @@
  * Country calling codes for the phone field, with the accepted length of the
  * national number (digits after the country code, without a leading trunk 0).
  * Lengths follow each country's numbering plan; `min`/`max` cover both mobile
- * and landline numbers. UAE is the default (Level141 is headquartered in Dubai).
+ * and landline numbers. UAE is the default (Level 141 is headquartered in Dubai).
  * Every country and territory with an ITU calling code is listed; where no numbering
  * plan length is recorded here, 4 to 14 digits are accepted.
  */

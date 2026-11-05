@@ -1,7 +1,12 @@
 import type { ReactNode } from "react";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero, Reveal, Section } from "@/components/ui/primitives";
-import { assessmentCta, routes } from "@/lib/site";
+import { assessmentCta, routes, site } from "@/lib/site";
+
+/** A legal detail Level 141 still has to supply: shown plainly as pending, never guessed. */
+export function pending(value: string) {
+  return value || "To be confirmed by Level 141";
+}
 
 /**
  * Privacy Policy and Terms & Conditions, built like every other page: photo hero,
@@ -35,6 +40,19 @@ export function LegalPage({
           <h2 id={labelledBy} className="sr-only">
             {eyebrow}
           </h2>
+          {/* Document details, as at the head of any formal policy. */}
+          <dl className="grid gap-6 pb-12 text-sm sm:grid-cols-3 sm:pb-14">
+            {[
+              ["Effective date", pending(site.legal.effectiveDate)],
+              ["Operated by", pending(site.legal.entity)],
+              ["Governing law", pending(site.legal.governingLaw)],
+            ].map(([k, v]) => (
+              <div key={k}>
+                <dt className="eyebrow text-muted">{k}</dt>
+                <dd className="mt-2 text-base">{v}</dd>
+              </div>
+            ))}
+          </dl>
           <ol className="border-b border-line">
             {sections.map((s, i) => (
               <Reveal

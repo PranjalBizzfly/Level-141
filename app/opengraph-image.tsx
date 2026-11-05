@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Level141: Growth Architecture for People & Organizations";
+export const alt = "Level 141: Growth Architecture for People & Organizations";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -32,7 +32,7 @@ export default async function OpengraphImage() {
           </div>
         </div>
         <div style={{ fontSize: 22, letterSpacing: 6, textTransform: "uppercase", color: "#A3A3A3" }}>
-          Level141 · Growth By Design
+          Level 141 · Growth By Design
         </div>
       </div>
     ),

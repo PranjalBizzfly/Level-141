@@ -12,14 +12,15 @@ import {
   transformationFrame,
   whatWeDo,
   whyLevel141,
+  vibe,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { assessmentCta, routes } from "@/lib/site";
+import { assessmentCta, routes, lqLanding } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "How We Architect Growth",
   description:
-    "Assess, Architect, Activate, Govern, Level Up: the Level141 approach to growth, powered by the proprietary LQ™, IGF™, BRANDS™ and PEAK™ frameworks.",
+    "Assess, Architect, Activate, Govern, Level Up: the Level 141 approach to growth, powered by the proprietary LQ™, IGF™, BRANDS™ and PEAK™ frameworks.",
   path: routes.how,
 });
 
@@ -36,7 +37,7 @@ export default function HowPage() {
             <span className="serif-accent mt-3 block text-gold">We start with the level you&apos;re trying to reach</span>
           </>
         }
-        intro={<p>Level141 sits between strategy and execution. The starting point is the growth problem.</p>}
+        intro={<p>Level 141 sits between strategy and execution. The starting point is the growth problem.</p>}
       >
         {/* A quiet text index rather than a row of pills: fits one line on desktop, wraps cleanly on phones. */}
         <nav aria-label="On this page" className="max-w-2xl border-t border-line-dark-strong pt-6">
@@ -46,10 +47,11 @@ export default function HowPage() {
             ["The starting point", "#starting-point"],
             ["Process", "#process"],
             ["LQ™", "#lq"],
+            ["VIBE™", "#vibe"],
             ["IGF™", "#igf"],
             ["BRANDS™", "#brands"],
             ["PEAK™", "#peak"],
-            ["Why Level141", "#why"],
+            ["Why Level 141", "#why"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -70,7 +72,7 @@ export default function HowPage() {
             <Reveal>
               <Eyebrow index="01" className="text-gold-ink">The starting point</Eyebrow>
               <h2 id="start-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
-                But none of those should be <span className="serif-accent">the starting point</span>
+                Each may be necessary. <span className="serif-accent">None should be the starting point.</span>
               </h2>
             </Reveal>
             <Reveal as="ul" delay={100} className="mt-10 space-y-3">
@@ -85,7 +87,7 @@ export default function HowPage() {
           <div className="lg:col-span-6 lg:col-start-7">
             <Reveal className="border-t border-line-strong pt-10 sm:pt-12">
               <p className="eyebrow text-gold-ink">The starting point is the growth problem</p>
-              <p className="mt-6 text-lg text-muted">Level141 first identifies:</p>
+              <p className="mt-6 text-lg text-muted">Level 141 first identifies:</p>
               <ol className="mt-6 space-y-1">
                 {startingQuestions.map((q, i) => (
                   <li key={q} className="flex items-baseline gap-5 border-b border-line py-4 last:border-0">
@@ -106,14 +108,14 @@ export default function HowPage() {
             id="difference-title"
             dark
             index="03"
-            eyebrow="The Level141 difference"
+            eyebrow="The Level 141 difference"
             title={
               <>
                 Most businesses manage growth in departments.{" "}
                 <span className="serif-accent text-gold">We see one architecture</span>
               </>
             }
-            intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level141."
+            intro="Treat them separately and gaps appear. Architect them together and growth begins to compound. That's the thinking behind Level 141."
           />
           <div className="mt-20 sm:mt-28">
             <GrowthChainDiagram />
@@ -129,7 +131,7 @@ export default function HowPage() {
           <SectionHeader
             index="02"
             id="process-title"
-            eyebrow="How Level141 works"
+            eyebrow="How Level 141 works"
             title={
               <>
                 Assess. Architect. Activate. Govern. <span className="serif-accent">Level up</span>
@@ -173,7 +175,7 @@ export default function HowPage() {
             index="03"
             id="system-title"
             dark
-            eyebrow="The Level141 Growth System"
+            eyebrow="The Level 141 Growth System"
             title={
               <>
                 Growth. <span className="serif-accent text-gold">Architected</span>
@@ -184,6 +186,7 @@ export default function HowPage() {
           <Reveal className="mt-20 border-b border-line-dark sm:mt-28">
             {[
               ["LQ", "Know your level", "#lq"],
+              ["VIBE", "The four dimensions of a personal brand", "#vibe"],
               ["IGF", "Connect the growth engine", "#igf"],
               ["BRANDS", "Six dimensions", "#brands"],
               ["PEAK", "Presence to momentum", "#peak"],
@@ -220,7 +223,7 @@ export default function HowPage() {
                   For people, LQ is assessed across the four VIBE™ dimensions. For organizations, the LQ Growth Audit
                   examines the domains shown here.
                 </p>
-                <ButtonLink href={routes.lq} variant="link" className="mt-6 !px-0 text-paper">
+                <ButtonLink href={lqLanding} variant="link" className="mt-6 !px-0 text-paper">
                   Take the LQ Assessment
                 </ButtonLink>
               </Reveal>
@@ -260,6 +263,43 @@ export default function HowPage() {
               </ul>
             </Reveal>
           </div>
+        </div>
+      </Section>
+
+      {/* VIBE: the people framework, as on Personal Brand Architecture. */}
+      <Section id="vibe" tone="paper-2" labelledBy="vibe-title" className="scroll-mt-12">
+        <div className="container-x">
+          <SectionHeader
+            id="vibe-title"
+            eyebrow="VIBE™: For people"
+            title={
+              <>
+                The four dimensions of <span className="serif-accent">a personal brand</span>
+              </>
+            }
+            intro="VIBE™ answers four sequential questions."
+          />
+          <ol className="mt-16 border-b border-line sm:mt-20">
+            {vibe.map((d, i) => (
+              <Reveal
+                as="li"
+                key={d.letter}
+                delay={i * 70}
+                className="grid gap-3 border-t border-line py-8 sm:py-10 lg:grid-cols-12 lg:items-baseline lg:gap-10"
+              >
+                <span aria-hidden className="text-4xl font-light leading-none lg:col-span-1">
+                  {d.letter}
+                </span>
+                <h3 className="text-2xl tracking-[-0.02em] sm:text-[1.75rem] lg:col-span-4">{d.full}</h3>
+                <p className="leading-[1.85] text-muted lg:col-span-7">{d.headline}</p>
+              </Reveal>
+            ))}
+          </ol>
+          <Reveal className="mt-10">
+            <ButtonLink href={routes.personalBrand} variant="link" className="!px-0">
+              Explore Personal Brand Architecture
+            </ButtonLink>
+          </Reveal>
         </div>
       </Section>
 
@@ -325,7 +365,7 @@ export default function HowPage() {
                 From presence <span className="serif-accent">to momentum</span>
               </>
             }
-            intro="PEAK helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
+            intro="PEAK helps us understand how an organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
           <div className="mt-20 sm:mt-28">
             <PeakAscent dark={false} />
@@ -349,7 +389,7 @@ export default function HowPage() {
           </Reveal>
           <div className="lg:col-span-5 lg:col-start-8">
             <Reveal delay={100}>
-              <p className="text-2xl leading-snug tracking-[-0.02em]">Level141 sits between strategy and execution.</p>
+              <p className="text-2xl leading-snug tracking-[-0.02em]">Level 141 sits between strategy and execution.</p>
               <ul className="mt-8 border-t border-line">
                 {whatWeDo.map((w) => (
                   <li key={w} className="border-b border-line py-4">
@@ -357,10 +397,6 @@ export default function HowPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-8 leading-relaxed text-muted">
-                Execution may involve internal teams, specialist partners, agencies or existing vendors. Our
-                responsibility is bigger:
-              </p>
             </Reveal>
             <Reveal delay={200} className="mt-8">
               <BracketFrame tone="ink" size="sm">
@@ -375,14 +411,14 @@ export default function HowPage() {
 
       <PhotoBand src="/images/client-visionaries-horizon.webp" />
 
-      {/* ---------------------------------------------------------- Why Level141 */}
+      {/* ---------------------------------------------------------- Why Level 141 */}
       <Section id="why" tone="ink" labelledBy="why-title">
         <div className="container-x">
           <SectionHeader
             index="09"
             id="why-title"
             dark
-            eyebrow="Why Level141?"
+            eyebrow="Why Level 141?"
             title={
               <>
                 Growth Architecture, <span className="serif-accent text-gold">not fragmented consulting</span>
@@ -453,7 +489,7 @@ export default function HowPage() {
           </>
         }
         primary={assessmentCta}
-        secondary={{ label: "About Level141", href: routes.about }}
+        secondary={{ label: "About Level 141", href: routes.about }}
       />
     </>
   );

@@ -2,10 +2,10 @@ import Link from "next/link";
 import { LogoLockup } from "@/components/brand/Logo";
 import { BackToTop, NewsletterForm } from "@/components/layout/FooterActions";
 import { SocialIcon } from "@/components/layout/SocialIcon";
-import { footerNav, routes, socialLinks } from "@/lib/site";
+import { footerNav, routes, socialLinks, lqLanding } from "@/lib/site";
 
 const explore = [
-  { label: "LQ™ Assessment", href: routes.lq },
+  { label: "LQ™ Assessment", href: lqLanding },
   { label: "Growth Architecture™", href: routes.growth },
   { label: "Personal Brand Architecture™", href: routes.personalBrand },
   { label: "How We Architect Growth", href: routes.how },
@@ -58,7 +58,7 @@ export function Footer() {
         <div className="grid gap-x-16 gap-y-20 pb-28 pt-36 sm:grid-cols-2 sm:pt-48 lg:pb-40 lg:pt-64 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,1.05fr)_minmax(0,0.8fr)_minmax(0,1.2fr)] xl:gap-0">
           {/* Brand */}
           <div className="xl:pr-10 2xl:pr-14">
-            <Link href="/" aria-label="Level141 home" className="inline-flex min-h-11 items-center">
+            <Link href="/" aria-label="Level 141 home" className="inline-flex min-h-11 items-center">
               <LogoLockup className="h-6 w-auto" />
             </Link>
             <p className="mt-10 whitespace-nowrap text-[1.3rem] font-light sm:text-[1.45rem] leading-[1.45] tracking-[-0.015em] text-[#fff]/80">
@@ -67,7 +67,7 @@ export function Footer() {
               Lead with greater impact.
             </p>
             <span aria-hidden className="mt-12 block h-px w-32 bg-[#fff]/40" />
-            <ul aria-label="Level141 on social media" className="mt-12 flex gap-5">
+            <ul aria-label="Level 141 on social media" className="mt-12 flex gap-5">
               {socialLinks.map((l) => (
                 <li key={l.label}>
                   {l.href ? (
@@ -75,7 +75,7 @@ export function Footer() {
                       href={l.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Level141 on ${l.label}`}
+                      aria-label={`Level 141 on ${l.label}`}
                       className={ring}
                     >
                       <SocialIcon name={l.label} className={ringIcon} />
@@ -110,7 +110,7 @@ export function Footer() {
 
         {/* Legal */}
         <div className="flex flex-col gap-4 border-t border-[#fff]/25 pb-32 pt-14 text-[0.95rem] tracking-[0.02em] sm:pb-40 lg:flex-row lg:items-center lg:justify-between">
-          <p className="text-[#fff]/65">© {new Date().getFullYear()} Level141. All rights reserved.</p>
+          <p className="text-[#fff]/65">© {new Date().getFullYear()} Level 141. All rights reserved.</p>
           <div className="flex flex-wrap items-center">
             {footerNav.legal.map((item, i) => (
               <Link

@@ -4,7 +4,7 @@ import { buildLqReport, parseLqAnswers } from "@/lib/lq-report";
 
 /**
  * LQ™ Assessment submission. The score is calculated here, never shown on the website:
- * the report is emailed to the visitor (Resend), and a copy goes to Level141 (email and/or webhook).
+ * the report is emailed to the visitor (Resend), and a copy goes to Level 141 (email and/or webhook).
  */
 export async function POST(req: Request) {
   const body = await readJson(req);
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     }),
   ]);
 
-  // Success when the visitor has the report, or Level141 has it and will send it on.
+  // Success when the visitor has the report, or Level 141 has it and will send it on.
   if (!visitor && team !== "ok")
     return json({ ok: false, code: "delivery_failed", message: "We couldn't send your report. Please try again shortly." }, 502);
   return json({ ok: true });

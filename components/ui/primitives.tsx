@@ -165,7 +165,7 @@ export function SectionHeader({ id, eyebrow, index, title, intro, dark, align = 
 /* --------------------------------------------------------------- Brackets */
 
 /**
- * Frames content with the two corner brackets from the Level141 symbol
+ * Frames content with the two corner brackets from the Level 141 symbol
  * (logo 3/4) — used as the brand's quotation / emphasis device.
  */
 export function BracketFrame({
@@ -411,7 +411,7 @@ export function SplitFeature({ src, labelledBy, reverse, children }: { src: stri
 /** Quiet disclosure: long detail stays on the page, one click away. */
 export function More({ label, className, children, dark }: { label: string; className?: string; children: ReactNode; dark?: boolean }) {
   return (
-    <details className={cx("group border-y", dark ? "border-line-dark" : "border-line", className)}>
+    <details className={cx("group border-y open:border-b-0", dark ? "border-line-dark" : "border-line", className)}>
       <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 text-lg [&::-webkit-details-marker]:hidden">
         {label}
         <span aria-hidden className="text-2xl font-light transition-transform duration-500 group-open:rotate-45">+</span>

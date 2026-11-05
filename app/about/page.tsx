@@ -1,5 +1,4 @@
 import { BracketClose, BracketOpen } from "@/components/brand/Logo";
-import { Mark141 } from "@/components/brand/Mark141";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { BracketFrame, ButtonLink, PageHero, Reveal, Section, SectionHeader, Photo, PhotoBand } from "@/components/ui/primitives";
 import { principles } from "@/lib/content";
@@ -9,7 +8,7 @@ import { assessmentCta, routes, site } from "@/lib/site";
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "Level141 is a Growth Architecture company in Dubai, part of 1XL Holdings. We architect the next level of growth for people, businesses and ideas.",
+    "Level 141 is a Growth Architecture company in Dubai, part of 1XL Holdings. We architect the next level of growth for people, businesses and ideas.",
   path: routes.about,
 });
 
@@ -18,7 +17,7 @@ export default function AboutPage() {
     <>
       <PageHero
         image="/images/client-executive-city-lounge.webp"
-        eyebrow="About Level141"
+        eyebrow="About Level 141"
         title={
           <>
             Why <span className="serif-accent text-gold">Level 141?</span>
@@ -29,13 +28,6 @@ export default function AboutPage() {
             Because growth is never really about reaching a final destination. Every level changes what becomes possible
             next.
           </p>
-        }
-        aside={
-          <Mark141
-            className="mx-auto w-48 sm:w-64 lg:w-full lg:max-w-xs"
-            textClassName="text-3xl sm:text-4xl lg:text-[2.75rem]"
-            openClassName="text-gold"
-          />
         }
       />
 
@@ -53,7 +45,7 @@ export default function AboutPage() {
             <Photo src="/images/client-lone-executive-skyline.webp" sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] lg:aspect-[16/11]" />
           </Reveal>
           <Reveal delay={120} className="lg:col-span-5 lg:col-start-8 lg:self-center">
-            <p className="text-lg text-muted">Level141 was created around a simple belief:</p>
+            <p className="text-lg text-muted">Level 141 was created around a simple belief:</p>
             <p className="mt-4 text-lg leading-[1.85] sm:text-xl">
               Businesses don&apos;t necessarily need more agencies, consultants, campaigns or activity. They need clarity
               about what their next level requires.
@@ -105,7 +97,7 @@ export default function AboutPage() {
       <Section tone="paper" labelledBy="belief-system-title">
         <div className="container-x">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow text-muted">The Level141 belief</p>
+            <p className="eyebrow text-muted">The Level 141 belief</p>
             <h2 id="belief-system-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
               Growth isn&apos;t a collection of activities.{" "}
               <span className="serif-accent">It&apos;s a system.</span>
@@ -129,7 +121,7 @@ export default function AboutPage() {
         <div className="container-x">
           <SectionHeader
             id="principles-title"
-            eyebrow="About Level141"
+            eyebrow="About Level 141"
             title={
               <>
                 Our <span className="serif-accent">principles</span>
@@ -166,10 +158,10 @@ export default function AboutPage() {
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-gold-ink">Two ambitions. Two architectures.</p>
             <h2 id="offer-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
-              Level141 has built dedicated architectures <span className="serif-accent">for both.</span>
+              Level 141 has built dedicated architectures <span className="serif-accent">for both.</span>
             </h2>
             <p className="mt-8 text-base leading-[1.85] text-muted sm:text-lg">
-              Level141 is a Growth Architecture company. It does not treat branding, visibility, authority, lead
+              Level 141 is a Growth Architecture company. It does not treat branding, visibility, authority, lead
               generation or positioning as isolated activities. It architects the system that connects identity,
               credibility, influence and opportunity so that growth becomes deliberate, governed and measurable.
             </p>

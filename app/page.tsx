@@ -13,7 +13,7 @@ import {
   activityList,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { assessmentCta, routes, site } from "@/lib/site";
+import { assessmentCta, routes, site, lqLanding } from "@/lib/site";
 
 export const metadata = {
   ...pageMetadata({
@@ -21,7 +21,7 @@ export const metadata = {
     description: site.description,
     path: "/",
   }),
-  title: { absolute: "Level141: Growth Architecture for People & Organizations" },
+  title: { absolute: "Level 141: Growth Architecture for People & Organizations" },
 };
 
 export default function HomePage() {
@@ -43,7 +43,7 @@ export default function HomePage() {
           <p className="mx-auto mt-10 max-w-2xl text-sm leading-[1.85] text-muted">
             {activityList.map((x) => x.replace(".", "")).join(" · ")}
           </p>
-          <p className="mt-10 text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">Level141 connects the pieces.</p>
+          <p className="mt-10 text-2xl leading-snug tracking-[-0.02em] sm:text-[1.75rem]">Level 141 connects the pieces.</p>
         </Reveal>
       </Section>
 
@@ -60,7 +60,7 @@ export default function HomePage() {
                 <span className="serif-accent">organization</span>
               </>
             }
-            intro="Level141 has built dedicated architectures for both."
+            intro="Level 141 has built dedicated architectures for both."
           />
 
         </div>
@@ -75,11 +75,11 @@ export default function HomePage() {
             Your achievements built your reputation. What will build your next level?
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
-            <ButtonLink href={routes.lq} variant="gold">
+            <ButtonLink href={lqLanding} variant="gold">
               Start Your Personal Brand Assessment
             </ButtonLink>
-            <ButtonLink href={`${routes.personalBrand}#vibe`} variant="link">
-              Discover Your VIBE™
+            <ButtonLink href={routes.personalBrand} variant="link">
+              Explore Personal Brand Architecture
             </ButtonLink>
           </div>
         </Reveal>
@@ -106,7 +106,7 @@ export default function HomePage() {
       {/* ---------------------------------------------------------- About teaser */}
       <SplitFeature src="/images/client-walk-toward-skyline.webp" labelledBy="why141-title">
         <Reveal>
-          <p className="eyebrow text-muted">About Level141</p>
+          <p className="eyebrow text-muted">About Level 141</p>
           <h2 id="why141-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
             Why <span className="serif-accent">Level 141?</span>
           </h2>
@@ -116,7 +116,7 @@ export default function HomePage() {
           </p>
           <div className="mt-10">
             <ButtonLink href={routes.about} variant="link" className="!px-0">
-              About Level141
+              About Level 141
             </ButtonLink>
           </div>
         </Reveal>

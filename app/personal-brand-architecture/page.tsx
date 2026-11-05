@@ -26,7 +26,7 @@ import {
   vibeStages,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { routes } from "@/lib/site";
+import { routes, lqLanding } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "Personal Brand Architecture™",
@@ -35,7 +35,7 @@ export const metadata = pageMetadata({
   path: routes.personalBrand,
 });
 
-const assessmentHref = routes.lq;
+const assessmentHref = lqLanding;
 
 export default function PersonalBrandPage() {
   return (
@@ -164,7 +164,7 @@ export default function PersonalBrandPage() {
             }
           />
           <ProcessTimeline steps={vibeStages} className="mt-20 sm:mt-28" />
-          <Reveal className="mt-16 flex flex-col items-start justify-between gap-6 border-y border-line py-10 sm:flex-row sm:items-center sm:py-14">
+          <Reveal className="flex flex-col items-start justify-between gap-6 border-b border-line py-10 sm:flex-row sm:items-center sm:py-14">
             <p className="max-w-xl text-lg leading-relaxed">
               {/* Source: Website Structure, "01 — Discover Your Level". */}
               <span className="font-medium">01 · Discover Your Level.</span>{" "}
@@ -271,7 +271,7 @@ export default function PersonalBrandPage() {
             eyebrow="Pain → Solution → Impact"
             title={
               <>
-                Client pain. <span className="serif-accent text-gold">Level141 intervention.</span>
+                Client pain. <span className="serif-accent text-gold">Level 141 intervention.</span>
               </>
             }
           />
@@ -288,7 +288,7 @@ export default function PersonalBrandPage() {
                   >
                     <dl className="grid gap-8 sm:grid-cols-3 sm:gap-12">
                       <div>
-                        <dt className="eyebrow text-paper-muted">Level141 intervention</dt>
+                        <dt className="eyebrow text-paper-muted">Level 141 intervention</dt>
                         <dd className="mt-3 font-medium text-paper">{v.answer}</dd>
                       </div>
                       <div>
@@ -333,11 +333,6 @@ export default function PersonalBrandPage() {
                 <h2 id="modules-title" className="display mt-6 text-[clamp(2rem,1.4rem+2vw,3rem)]">
                   Product Architecture <span className="serif-accent">&amp; Modules</span>
                 </h2>
-                <p className="mt-8 leading-relaxed text-muted">
-                  Level141 leads the architecture, strategic direction, governance and measurement. Where execution
-                  partners, your own team or specialist vendors are involved, we define the brief, standards,
-                  dependencies, reviews and success criteria, so every piece of execution serves the same architecture.
-                </p>
                 <Photo src="/images/client-executive-study-portrait.webp" sizes="(min-width: 1024px) 34vw, 100vw" className="mt-10 aspect-[4/3] lg:aspect-[5/4]" />
               </Reveal>
             </div>
@@ -349,7 +344,7 @@ export default function PersonalBrandPage() {
                 as="li"
                 key={m.name}
                 delay={i * 50}
-                className="grid grid-cols-[3rem_1fr] gap-4 border-b border-ink/10 py-7 first:border-t sm:grid-cols-[4rem_1fr_1fr] sm:gap-8"
+                className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-7 sm:grid-cols-[4rem_1fr_1fr] sm:gap-8"
               >
                 <span className="eyebrow pt-1 tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="text-xl tracking-[-0.015em]">{m.name}</h3>
@@ -464,9 +459,9 @@ export default function PersonalBrandPage() {
           </div>
           <Reveal className="mx-auto mt-14 max-w-3xl sm:mt-16">
             <BracketFrame tone="ink" size="lg" className="text-center">
-              <p className="eyebrow text-gold-ink">The Level141 promise</p>
+              <p className="eyebrow text-gold-ink">The Level 141 promise</p>
               <p className="mt-6 text-xl leading-snug tracking-[-0.02em] sm:text-2xl">
-                Level141 does not manufacture a personal brand. It architects the conditions through which a
+                Level 141 does not manufacture a personal brand. It architects the conditions through which a
                 person&apos;s real leadership, expertise and impact can be understood, trusted and translated into the
                 next level of opportunity.
               </p>
@@ -484,7 +479,7 @@ export default function PersonalBrandPage() {
         }
         body={
           <p>
-            Level141 Personal Brand Architecture converts genuine expertise, leadership credibility and lived experience
+            Level 141 Personal Brand Architecture converts genuine expertise, leadership credibility and lived experience
             into a structured personal growth asset, architected through the VIBE Framework.
           </p>
         }

@@ -1,18 +1,18 @@
 import Link from "next/link";
-import { LegalPage } from "@/components/sections/LegalPage";
+import { LegalPage, pending } from "@/components/sections/LegalPage";
 import { pageMetadata } from "@/lib/seo";
 import { routes, site } from "@/lib/site";
 
 /*
- * General terms for using this website only. It covers no engagement or commercial terms
- * (those are agreed separately) and names no governing law, which Level141 must supply.
- * Draft: have it reviewed before launch, then allow indexing.
+ * Website Terms & Conditions in a standard structure. Engagements are governed by their own
+ * agreements. Entity, governing law and effective date come from site.legal and must be
+ * supplied by Level 141; have the text reviewed by a qualified adviser before indexing.
  */
 export const metadata = {
   ...pageMetadata({
     title: "Terms & Conditions",
     description:
-      "The terms for using the Level141 website, including its content, the LQ™ Assessment and the contact and waitlist forms.",
+      "The terms for using the Level 141 website, including its content, the LQ™ Assessment and the contact and waitlist forms.",
     path: routes.terms,
   }),
   robots: { index: false, follow: true },
@@ -20,11 +20,19 @@ export const metadata = {
 
 const sections: { title: string; body: React.ReactNode }[] = [
   {
-    title: "Using this website",
+    title: "About these terms",
     body: (
       <p>
-        By using the {site.name} website you agree to these terms. If you do not agree, please do not use the website.
-        We may update these terms from time to time; the version on this page applies.
+        These terms govern your use of the {site.name} website, operated by {pending(site.legal.entity)} (&ldquo;
+        {site.name}&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), part of {site.parent} and based in {site.location}.
+      </p>
+    ),
+  },
+  {
+    title: "Acceptance",
+    body: (
+      <p>
+        By using this website you accept these terms. If you do not accept them, please do not use the website.
       </p>
     ),
   },
@@ -33,7 +41,8 @@ const sections: { title: string; body: React.ReactNode }[] = [
     body: (
       <p>
         The content on this website is general information about {site.name} and its services. It is not professional,
-        financial or legal advice for your situation. Any engagement with {site.name} is agreed separately, in writing.
+        financial or legal advice for your situation. Any engagement with {site.name} is agreed separately, in writing,
+        and is governed by that agreement.
       </p>
     ),
   },
@@ -42,7 +51,8 @@ const sections: { title: string; body: React.ReactNode }[] = [
     body: (
       <p>
         The LQ™ Assessment is a self-assessment based only on your own answers. Your LQ Score and report are an
-        indication, not an audit or a guarantee of any outcome.
+        indication, not an audit or a guarantee of any outcome. How your answers are used is explained in our{" "}
+        <Link href={routes.privacy}>Privacy Policy</Link>.
       </p>
     ),
   },
@@ -69,32 +79,60 @@ const sections: { title: string; body: React.ReactNode }[] = [
     title: "Acceptable use",
     body: (
       <p>
-        Please do not misuse the website, for example by submitting false information, sending automated or bulk
-        submissions, or attempting to disrupt or gain unauthorized access to it.
+        You agree not to misuse the website, for example by submitting false information, sending automated or bulk
+        submissions, or attempting to disrupt it or gain unauthorized access to it.
       </p>
     ),
   },
   {
-    title: "Your details",
+    title: "Links to other websites",
     body: (
       <p>
-        How we handle the details you share is explained in our{" "}
-        <Link href={routes.privacy}>
-          Privacy Policy
-        </Link>
-        .
+        Links to other websites, including social media, are provided for convenience. We are not responsible for their
+        content or their privacy practices.
       </p>
     ),
   },
   {
-    title: "Questions",
+    title: "Availability and accuracy",
     body: (
       <p>
-        If you have a question about these terms, please{" "}
-        <Link href={routes.contact}>
-          contact us
-        </Link>
-        .
+        We aim to keep the website available and its information accurate, but we do not guarantee that it will always
+        be available, uninterrupted or free of errors, and we may change or withdraw content at any time.
+      </p>
+    ),
+  },
+  {
+    title: "Limitation of liability",
+    body: (
+      <p>
+        To the extent permitted by law, {site.name} is not liable for any loss arising from your use of, or reliance on,
+        this website or the LQ™ Assessment. Nothing in these terms limits liability that cannot be limited by law.
+      </p>
+    ),
+  },
+  {
+    title: "Privacy",
+    body: (
+      <p>
+        How we handle your details is explained in our <Link href={routes.privacy}>Privacy Policy</Link>.
+      </p>
+    ),
+  },
+  {
+    title: "Changes to these terms",
+    body: <p>We may update these terms from time to time. The version on this page, with its effective date, applies.</p>,
+  },
+  {
+    title: "Governing law",
+    body: <p>These terms are governed by: {pending(site.legal.governingLaw)}.</p>,
+  },
+  {
+    title: "Contact",
+    body: (
+      <p>
+        For any question about these terms, please write to us through our <Link href={routes.contactUs}>Contact Us</Link>{" "}
+        page.
       </p>
     ),
   },
@@ -108,7 +146,7 @@ export default function TermsPage() {
       labelledBy="terms-title"
       title={
         <>
-            Terms of <span className="serif-accent text-gold">use</span>
+            Terms &amp; <span className="serif-accent text-gold">Conditions</span>
           </>
       }
       intro={<p>These terms cover your use of the {site.name} website.</p>}

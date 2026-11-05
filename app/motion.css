@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
-   Level141 premium motion layer
+   Level 141 premium motion layer
    Progressive: content is fully visible without JS, and every effect is
    disabled under prefers-reduced-motion. Uses tokens from globals.css.
 --------------------------------------------------------------------------- */
@@ -335,5 +335,41 @@
   html.js [data-reveal].is-visible a.group.rounded-full {
     opacity: 1;
     filter: none;
+  }
+}
+
+/* 16. Floating call to action: rises in shortly after a page opens, then a soft ring
+   pulses out from it every few seconds so it stays noticeable while it holds still. */
+@media (prefers-reduced-motion: no-preference) {
+  .floating-cta {
+    animation: cta-rise 0.9s var(--ease-architect) 0.8s both;
+  }
+  .floating-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 0 0 0 rgba(140, 140, 140, 0.55);
+    animation: cta-pulse 3.2s ease-out 2.2s infinite;
+  }
+}
+@keyframes cta-rise {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+@keyframes cta-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(140, 140, 140, 0.5);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 14px rgba(140, 140, 140, 0);
   }
 }

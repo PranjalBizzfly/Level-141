@@ -3,7 +3,7 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ---------------------------------------------------------------------------
-   Level141 design tokens — monochrome, matched to the official logo files
+   Level 141 design tokens — monochrome, matched to the official logo files
      Light: pure white #FFFFFF with the black logo and black type.
      Dark:  pure black #000000 with the white logo and white type.
    Greys are used only for borders, grid lines and secondary text. Values are

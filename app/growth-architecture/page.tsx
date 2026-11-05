@@ -30,10 +30,11 @@ function AvailabilityCard() {
         </span>
         <span className="eyebrow">Availability</span>
       </p>
-      <p className="mt-5 text-2xl leading-snug tracking-[-0.015em]">Not yet open for engagements.</p>
+      <p className="mt-5 text-xl leading-snug tracking-[-0.015em]">
+        Growth Architecture™ will be available for engagements in the near future.
+      </p>
       <p className="mt-3 leading-relaxed text-paper-muted">
-        Growth Architecture™ will open at a later date. Organizations can register their interest now and will be
-        contacted when it becomes available.
+        Organizations can register their interest now and will be contacted when it becomes available.
       </p>
     </div>
   );
@@ -96,7 +97,7 @@ export default function GrowthArchitecturePage() {
               level.
             </p>
             <p className="text-ink">
-              Level141 Growth Architecture examines the complete growth environment, from brand and positioning to
+              Level 141 Growth Architecture examines the complete growth environment, from brand and positioning to
               awareness, trust, conversion, sales readiness and scale. We identify where growth is being constrained,
               architect what needs to change, and establish the governance required to keep the organization moving.
             </p>
@@ -156,7 +157,7 @@ export default function GrowthArchitecturePage() {
                 From current level to <span className="serif-accent">next level</span>, in one governed sequence.
               </>
             }
-            intro="Level141 does not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
+            intro="Level 141 does not begin with campaigns, channels or isolated marketing activities. We begin with the organization's current level, define the next level it intends to reach, identify the structural growth gaps between the two, and architect the integrated system required to bridge that gap."
           />
           <div className="mt-20 sm:mt-28">
             <FlowChain items={gaOperatingLogic} highlight={["Current Level", "Next Level", "Scale"]} />
@@ -178,7 +179,7 @@ export default function GrowthArchitecturePage() {
                 <span className="serif-accent text-gold">self-reinforcing growth</span>
               </>
             }
-            intro="PEAK helps us understand how a person or organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
+            intro="PEAK helps us understand how an organization progresses from simply being visible to building genuine market authority and ultimately creating sustained growth momentum."
           />
           <div className="mt-20 sm:mt-28">
             <PeakAscent detailed />
@@ -317,7 +318,7 @@ export default function GrowthArchitecturePage() {
                 A chain of <span className="serif-accent">contribution</span>
               </>
             }
-            intro="Level141 connects architecture to business movement without claiming that marketing alone controls revenue. Every client dashboard should separate activity metrics, leading indicators, pipeline metrics and business outcomes."
+            intro="Level 141 connects architecture to business movement without claiming that marketing alone controls revenue. Every client dashboard should separate activity metrics, leading indicators, pipeline metrics and business outcomes."
           />
           <div className="mt-20 sm:mt-28">
             <FlowChain items={gaImpactChain} highlight={["Repeatable growth"]} />

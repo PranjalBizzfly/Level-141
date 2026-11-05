@@ -77,7 +77,7 @@ export function ContactForm({ initialInterest }: { initialInterest?: string }) {
       <SuccessPanel title="Thank you. Your message has been sent.">
         <p>
           We&apos;ve received your note about {interestOptions.find((o) => o.value === values.interest)?.label}. The
-          Level141 team will review it and reply to <strong className="text-ink">{values.email}</strong>.
+          Level 141 team will review it and reply to <strong className="text-ink">{values.email}</strong>.
         </p>
       </SuccessPanel>
     );

@@ -90,7 +90,7 @@ export function buildLqReport(name: string, input: { roles: string[]; goals: str
     r.band.reading,
     "",
     ...sections.flatMap((s) => [s.title.toUpperCase(), ...s.lines, ""]),
-    "Level141",
+    "Level 141",
   ].join("\n");
 
   const html = `<div style="font-family:system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;color:#111;max-width:620px">
@@ -105,10 +105,10 @@ ${sections
       s.lines.map((l) => `<p style="margin:0 0 8px">${esc(l)}</p>`).join(""),
   )
   .join("\n")}
-<p style="margin-top:32px">Level141</p>
+<p style="margin-top:32px">Level 141</p>
 </div>`;
 
-  // A short summary for the Level141 team's copy.
+  // A short summary for the Level 141 team's copy.
   const summary = {
     "LQ Score": `${fmt(r.lq)} (Level ${r.band.level} · ${r.band.name})`,
     Role: r.roleLabels.join(", "),

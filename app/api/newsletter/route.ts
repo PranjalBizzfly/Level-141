@@ -3,7 +3,7 @@ import { normaliseLqContact } from "@/lib/forms/validation";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i;
 
-/** "Stay Ahead" footer signup: passes the email to Level141 (email and/or webhook). */
+/** "Stay Ahead" footer signup: passes the email to Level 141 (email and/or webhook). */
 export async function POST(req: Request) {
   const body = await readJson(req);
   if (!body) return json({ ok: false, code: "bad_request", message: "Invalid request." }, 400);

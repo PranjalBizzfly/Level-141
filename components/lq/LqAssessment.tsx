@@ -82,7 +82,7 @@ function Intro({ onStart }: { onStart: () => void }) {
   return (
     <div className="grid gap-20 sm:gap-24 lg:grid-cols-12 lg:items-center lg:gap-x-12">
       <div className="lg:col-span-6">
-        <p className="eyebrow animate-fade text-gold">Level141 · Level Quotient</p>
+        <p className="eyebrow animate-fade text-gold">Level 141 · Level Quotient</p>
         <h1 className="display mt-8 animate-rise text-[2.6rem] sm:text-6xl lg:text-[4.5rem] [animation-delay:80ms]">
           LQ<span className="align-super text-[0.4em]">™</span> Assessment
         </h1>
@@ -359,8 +359,12 @@ function Details({
         Where should we send your LQ™ report?
       </h1>
       <p className="mt-4 leading-relaxed text-paper/70">
-        Your LQ Score, LQ Level and personal report are sent by email. Level141 receives a copy, so we can discuss it
-        with you if you ask.
+        Your LQ Score, LQ Level and personal report are sent by email. Level 141 receives a copy, so we can discuss it
+        with you if you ask. See the{" "}
+        <Link href={routes.privacy} className="text-paper underline underline-offset-4">
+          Privacy Policy
+        </Link>
+        .
       </p>
       <form
         noValidate

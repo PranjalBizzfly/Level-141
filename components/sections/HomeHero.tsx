@@ -18,7 +18,7 @@ export function HomeHero() {
             id="hero-title"
             className="display relative mt-8 inline-block py-[0.12em] pl-[0.16em] pr-[0.3em] text-[clamp(2.75rem,1.9rem+3vw,4.25rem)]"
           >
-            {/* Corner brackets from the Level141 symbol frame the headline block. */}
+            {/* Corner brackets from the Level 141 symbol frame the headline block. */}
             <BracketClose className="absolute right-0 top-0 size-[0.2em] animate-fade text-gold [animation-delay:300ms]" />
             <BracketOpen className="absolute bottom-0 left-0 size-[0.2em] animate-fade text-gold [animation-delay:300ms]" />
             <span className="block animate-rise [animation-delay:60ms]">What&apos;s Your</span>
@@ -27,14 +27,14 @@ export function HomeHero() {
             </span>
           </h1>
           <p className="mt-10 max-w-xl animate-rise text-base leading-[1.85] text-paper/85 [animation-delay:280ms] sm:text-lg">
-            Level141 architects the next level of growth for people and organizations.
+            Level 141 architects the next level of growth for people and organizations.
           </p>
           <div className="mt-12 flex animate-rise flex-col gap-4 [animation-delay:400ms] sm:flex-row sm:items-center sm:gap-8">
             <ButtonLink href={site.primaryCta.href} variant="gold">
               {site.primaryCta.label}
             </ButtonLink>
             <ButtonLink href="#two-architectures" variant="link">
-              Explore Level141
+              Explore Level 141
             </ButtonLink>
           </div>
         </div>

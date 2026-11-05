@@ -2,7 +2,7 @@ import { BracketClose, BracketOpen } from "@/components/brand/Logo";
 import { cx } from "@/components/ui/primitives";
 
 /**
- * "Level 141" framed by the two brackets of the Level141 symbol.
+ * "Level 141" framed by the two brackets of the Level 141 symbol.
  * The numerals are optically centred: the text box is trimmed to the digit
  * height and the negative tracking is compensated so the glyphs sit on the
  * true centre of the bracket frame. Decorative (aria-hidden).

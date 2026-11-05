@@ -33,6 +33,7 @@ function isActive(pathname: string, href: string) {
 
 export function Header() {
   const pathname = usePathname();
+  const onAssessment = pathname === routes.lq;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -112,8 +113,8 @@ export function Header() {
           scrolled ? "h-14 sm:h-16" : "h-14 sm:h-[4.5rem] lg:h-20",
         )}
       >
-        <Link href="/" aria-label="Level141 home" className="relative z-10 flex min-h-11 shrink-0 items-center">
-          <LogoLockup className="h-[1.15rem] w-auto sm:h-5" title="Level141" />
+        <Link href="/" aria-label="Level 141 home" className="relative z-10 flex min-h-11 shrink-0 items-center">
+          <LogoLockup className="h-[1.15rem] w-auto sm:h-5" title="Level 141" />
         </Link>
 
 
@@ -123,7 +124,8 @@ export function Header() {
             href={site.primaryCta.href}
             className={cx(
               "group hidden min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gold px-5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-gold-soft sm:inline-flex",
-              open && "!hidden",
+              // Not shown while the visitor is on the assessment itself.
+              (open || onAssessment) && "!hidden",
             )}
           >
             {site.primaryCta.label}
@@ -194,15 +196,17 @@ export function Header() {
               );
             })}
           </ul>
-          <div className="mt-12">
-            <Link
-              href={site.primaryCta.href}
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#fff] px-6 text-sm font-medium text-[#000]"
-            >
-              {site.primaryCta.label}
-              <ArrowRight aria-hidden className="size-4" />
-            </Link>
-          </div>
+          {onAssessment ? null : (
+            <div className="mt-12">
+              <Link
+                href={site.primaryCta.href}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#fff] px-6 text-sm font-medium text-[#000]"
+              >
+                {site.primaryCta.label}
+                <ArrowRight aria-hidden className="size-4" />
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
     </header>

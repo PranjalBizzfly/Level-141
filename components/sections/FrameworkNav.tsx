@@ -5,13 +5,14 @@ import { cx } from "@/components/ui/primitives";
 
 const items = [
   { id: "lq", label: "LQ™" },
+  { id: "vibe", label: "VIBE™" },
   { id: "igf", label: "IGF™" },
   { id: "brands", label: "BRANDS™" },
   { id: "peak", label: "PEAK™" },
 ] as const;
 
 /**
- * Sticky in-page navigation for the four frameworks on How We Architect Growth.
+ * Sticky in-page navigation for the five frameworks on How We Architect Growth.
  * Zero-height sticky wrapper, so it never shifts layout. Plain links: works
  * without JS; with JS the current section is highlighted.
  */

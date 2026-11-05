@@ -1,6 +1,6 @@
 /**
  * LQ™ Assessment — questions, scoring model and report rules.
- * Source of truth: "Claimed LQ Assessment Guide" (Level141, 27 October 2026).
+ * Source of truth: "Claimed LQ Assessment Guide" (Level 141, 27 October 2026).
  * All wording below is taken from that guide; nothing here is to be reworded
  * without a matching change to the guide.
  */
